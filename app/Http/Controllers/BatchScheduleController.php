@@ -50,6 +50,10 @@ class BatchScheduleController extends Controller
 
     public function index($schedule_id, $batch_id)
     {
+
+        $userAuth = Session::get('authUser');
+        $userRole = strtolower($userAuth['userRole']);
+
         //dd($schedule_id, $batch_id);
         $app_url = Str::finish(config('app.api_url'), '/');
 
@@ -64,7 +68,7 @@ class BatchScheduleController extends Controller
         if ($results['success'] == true && $schedule_details['success'] == true) {
             $batch = $results['data'];
 
-            return view('batch_schedule.index', ['schedule_details' => $schedule_details['data'] ?? [], 'batch' => $batch]);
+            return view('batch_schedule.index', ['schedule_details' => $schedule_details['data'] ?? [], 'batch' => $batch, 'role' => $userRole]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
