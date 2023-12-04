@@ -94,12 +94,12 @@ $userRole = $userAuth['userRole'];
                     @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.districts')"
-                            :totalBatch="$data['complete_class'] ?? 0" :icon="asset('img/new_icon/district.png')"
+                            :totalBatch="$data['complete_class'] ?? 0" :icon="asset('img/new_icon/completedclass.png')"
                             :title="__('Complete Class')" :class="'card-item purple'" />
                     </div>
                     <div>
                         <x-dashboard-card :url="route('batch-schedule.runningBatches')"
-                            :totalBatch="$data['running_class'] ?? 0" :icon="asset('img/new_icon/partner.png')"
+                            :totalBatch="$data['running_class'] ?? 0" :icon="asset('img/new_icon/livestrem.gif')"
                             :title="__('Ongoing Class')" :class="'card-item red'" />
                     </div>
                     <div>
@@ -128,7 +128,7 @@ $userRole = $userAuth['userRole'];
                     @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.partners')"
-                            :totalBatch="$data['total_vendor'] ?? 0" :icon="asset('img/new_icon/partner.png')"
+                            :totalBatch="$data['total_vendor'] ?? 0" :icon="asset('img/new_icon/developmentpartner.png')"
                             :title="__('dashboard.partner')" :class="'card-item red'" />
                     </div>
                     @endif
