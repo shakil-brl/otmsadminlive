@@ -1,0 +1,76 @@
+#top-menu {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    height: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.03);
+    .left {
+        .menu-icon {
+            transition: 0.5s;
+            user-select: none;
+            .material-symbols-outlined {
+                font-size: 25px;
+            }
+        }
+    }
+    .right {
+        .userinfo {
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            .name {
+                font-size: 15px;
+                margin: 0 10px;
+                display: inline-block;
+            }
+            .photo {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+            }
+            .avatar {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba($primary, 0.15);
+                font-size: 18px;
+                font-weight: 600;
+                color: $primary;
+            }
+            .dropdown-menu.dropdown-menu-end {
+                top: 10px;
+                padding: 0;
+                border-radius: 0 0 10px 10px;
+                border: 0;
+                overflow: hidden;
+                li {
+                    $topsize: 8px;
+                    .dropdown-item {
+                        font-size: 14px;
+                        padding: $topsize 15px;
+
+                        .material-symbols-outlined {
+                            font-size: 17px;
+                            width: 25px;
+                        }
+                        &:hover {
+                            color: $body;
+                        }
+                    }
+
+                    &:first-child .dropdown-item {
+                        padding-top: $topsize * 2;
+                    }
+                    &:last-child .dropdown-item {
+                        padding-bottom: $topsize * 2;
+                    }
+                }
+            }
+        }
+    }
+}

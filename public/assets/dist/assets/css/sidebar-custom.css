@@ -1,0 +1,10 @@
+.sidebar-menu-link.active{
+    /* background-color: transparent !important; */
+}
+.sidebar-menu-link:not(.active) {
+    opacity: 0.7 !important; 
+  }
+  .dashboard-item:not(.active) {
+    opacity: 0.8 !important; 
+  }
+  

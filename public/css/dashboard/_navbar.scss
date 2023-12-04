@@ -1,0 +1,310 @@
+.app-header {
+    background-color: $body;
+    border-bottom: 1px solid $purple100;
+}
+.app-default,
+body {
+    background-color: $body;
+}
+#kt_header_user_menu_toggle {
+    img {
+        border-radius: 50%;
+    }
+}
+
+[data-kt-app-layout="dark-sidebar"] .app-sidebar {
+    background-color: $purple950;
+}
+#kt_app_sidebar_logo {
+    background-color: $white;
+    .app-sidebar-logo-default {
+        height: 60px !important;
+    }
+}
+#kt_app_header_container {
+    background-color: $white;
+}
+.govt-logo {
+    margin-left: 10px;
+    margin-left: -15px;
+}
+#kt_app_header_container {
+    border-left: 1px solid #e9d5ff;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active {
+    background-color: transparent;
+    border-radius: 6px;
+    background: var(--purple-50, #faf5ff);
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-title {
+    color: $purple950 !important;
+    font-weight: 700;
+}
+.menu-item .menu-link {
+    padding: 12px;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-bullet .bullet {
+    background-color: $purple50;
+    color: $purple50;
+}
+
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link .menu-title {
+    color: $purple50;
+    font-weight: 600;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-heading {
+    color: $purple50 !important;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link .menu-arrow::after {
+    background-color: $purple50;
+}
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item.hover:not(.here)
+    > .menu-link:not(.disabled):not(.active):not(.here)
+    .menu-title,
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item:not(.here)
+    .menu-link:hover:not(.disabled):not(.active):not(.here)
+    .menu-title {
+    color: $purple50;
+}
+
+// hover
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item.hover:not(.here)
+    > .menu-link:not(.disabled):not(.active):not(.here)
+    .menu-bullet
+    .bullet,
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item:not(.here)
+    .menu-link:hover:not(.disabled):not(.active):not(.here)
+    .menu-bullet
+    .bullet {
+    background-color: $purple50;
+}
+//hover end
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item.hover:not(.here)
+    > .menu-link:not(.disabled):not(.active):not(.here)
+    .menu-icon,
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item.hover:not(.here)
+    > .menu-link:not(.disabled):not(.active):not(.here)
+    .menu-icon
+    .svg-icon,
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item.hover:not(.here)
+    > .menu-link:not(.disabled):not(.active):not(.here)
+    .menu-icon
+    i,
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item:not(.here)
+    .menu-link:hover:not(.disabled):not(.active):not(.here)
+    .menu-icon,
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item:not(.here)
+    .menu-link:hover:not(.disabled):not(.active):not(.here)
+    .menu-icon
+    .svg-icon,
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item:not(.here)
+    .menu-link:hover:not(.disabled):not(.active):not(.here)
+    .menu-icon
+    i {
+    color: $purple50;
+}
+.sidebar-menu-link:not(.active) {
+    opacity: 1 !important;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-icon,
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-icon .svg-icon,
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-icon i {
+    color: $nutral600;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .app-sidebar-logo {
+    border-bottom: 1px solid $purple100;
+}
+
+#kt_app_main {
+    border-left: 1px solid $purple100 !important;
+}
+
+#kt_app_sidebar_toggle {
+    display: none;
+}
+
+// #kt_app_sidebar_menu {
+//     .menu-item {
+//         &.menu-accordion {
+//             &.show {
+//                 .menu-sub {
+//                     &.menu-sub-accordion {
+//                         .sidebar-menu-link {
+//                             .menu-title {
+//                                 color: red !important;
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item.here > .menu-link .menu-title {
+    color: $purple50;
+    font-size: 16px;
+    font-weight: 600;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item.here > .menu-link .menu-icon,
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item.here > .menu-link .menu-icon .svg-icon,
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item.here > .menu-link .menu-icon i {
+    color: $purple50;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item.here > .menu-link .menu-icon,
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item.here > .menu-link .menu-icon .svg-icon,
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item.here > .menu-link .menu-icon i {
+    color: $purple50;
+}
+
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item.here > .menu-link .menu-arrow::after {
+    background-color: $purple50;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-arrow::after {
+    background-color: $purple950;
+}
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item.hover:not(.here)
+    > .menu-link:not(.disabled):not(.active):not(.here)
+    .menu-arrow::after,
+[data-kt-app-layout="dark-sidebar"]
+    .app-sidebar
+    .menu
+    .menu-item:not(.here)
+    .menu-link:hover:not(.disabled):not(.active):not(.here)
+    .menu-arrow::after {
+    background-color: $nutral600;
+    background-color: $purple50;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-title {
+    color: $purple900;
+    color: $purple50;
+}
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link .menu-icon,
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link .menu-icon .svg-icon,
+[data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link .menu-icon i {
+    color: $nutral600;
+    color: $purple50;
+}
+
+#kt_header_user_menu_toggle img {
+    // height: 30px;
+    // width: 30px;
+    margin-right: 10px;
+}
+#userInfo.username .userName {
+    color: $nutral700;
+
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+#logout-panel {
+    background-color: $white;
+    border-radius: 32px;
+    // padding: 20px;
+    .menu-item {
+        .menu-link {
+            color: #6c757d;
+            font-weight: 600 !important;
+        }
+    }
+    .logout-btn {
+        text-align: right;
+        padding: 10px 20px 7px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .logout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $purple600;
+            padding: 10px 15px;
+            font-weight: 700;
+            font-size: 14px;
+            color: $white;
+            border-radius: 150px;
+            img {
+                margin-right: 0 !important;
+            }
+        }
+    }
+}
+
+#lang {
+    .lang-header {
+        display: flex;
+        align-items: center;
+        .flag {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .label {
+            color: $purple950;
+        }
+    }
+    .menu-sub-dropdown {
+        width: 150px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: $white;
+        .lang-menu {
+            display: block;
+            color: $purple950;
+            padding: 10px 20px;
+            overflow: hidden;
+            cursor: pointer;
+            &:hover {
+                background-color: $purple50;
+            }
+            .flag {
+                height: 16px;
+                width: 16px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+            .label {
+                color: $purple950;
+            }
+        }
+    }
+}
+
+#kt_app_footer {
+    background-color: $body;
+    border-top: 1px solid $purple100;
+}

@@ -1,0 +1,31 @@
+body {
+    font-weight: 400;
+    font-size: 14px;
+    background-color: #f5f8fa;
+    font-family: "Poppins", sans-serif;
+}
+
+#admin {
+    display: flex;
+    .ml-250 {
+        margin-left: -265px;
+    }
+
+    #right {
+        transition: 0.5s;
+        flex: 1;
+        position: relative;
+    }
+}
+@media (max-width: 991px) {
+    #admin {
+        #sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .tsx-265 {
+            transform: translateX(265px);
+        }
+    }
+}

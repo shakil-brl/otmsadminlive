@@ -1,0 +1,128 @@
+#schedule-batches {
+    margin-top: 25px;
+    .batch {
+        margin-top: 16px;
+        border-radius: 5px;
+        border-bottom: 3px solid var(--purple-200, #e9d5ff);
+        background: $white;
+        padding: 24px;
+        .buttons {
+            .schedule-btn {
+                border-radius: 6px;
+                color: $white;
+                font-size: 16px;
+                font-weight: 700;
+                padding: 12px;
+                width: 100%;
+                &:hover {
+                    opacity: 0.85;
+                }
+                &.btn-create {
+                    background: #22c55e;
+                }
+                &.btn-view {
+                    background: $purple950;
+                }
+                &.btn-update {
+                    background: $purple100;
+                    color: $purple950;
+                }
+            }
+        }
+        .info {
+            .label {
+                color: #052e16;
+                font-size: 14px;
+                font-weight: 400;
+            }
+            .title {
+                color: #052e16;
+                font-size: 16px;
+                font-weight: 700;
+            }
+        }
+        .schedule {
+            margin-top: 20px;
+            .class-days-area {
+                border-radius: 16px;
+                padding: 6px;
+                border: 1px solid $purple100;
+                border-radius: 16px;
+                border: 1px solid $purple100;
+                display: flex;
+                align-items: center;
+                .left-title {
+                    display: flex;
+                    align-items: center;
+                    padding-right: 16px;
+                    border-right: 1px solid $purple200;
+                    .icon {
+                        height: 45px;
+                        width: 45px;
+                        background-color: $purple950;
+                        border-radius: 12px;
+                        font-size: 21px;
+                        color: $white;
+                        @include flexCenter;
+                        margin-right: 8px;
+                    }
+                    .tag {
+                        color: #525252;
+                        font-size: 12px;
+                        font-weight: 500;
+                    }
+                    .title {
+                        color: #052e16;
+                        font-size: 12px;
+                        font-weight: 700;
+                    }
+                }
+                .week-days {
+                    display: flex;
+                    .day {
+                        font-size: 14px;
+                        font-weight: 700;
+                        height: 48px;
+                        border-radius: 12px;
+                        margin-left: 16px;
+                        @include flexCenter;
+                        padding: 2px 12px;
+                        &.sat {
+                            background-color: #e9d5ff;
+                            color: #3b0764;
+                        }
+                        &.sun {
+                            background-color: #fecdd3;
+                            color: #4c0519;
+                        }
+                        &.mon {
+                            background-color: #99f6e4;
+                            color: #042f2e;
+                        }
+                        &.tue {
+                            background-color: #bfdbfe;
+                            color: #172554;
+                        }
+                        &.wed {
+                            background-color: #bbf7d0;
+                            color: #052e16;
+                        }
+                        &.thu {
+                            background-color: #bfdbfe;
+                        }
+                        &.fri {
+                            background-color: #fecdd3;
+                            color: #4c0519;
+                        }
+                    }
+                }
+                &.class-time {
+                    margin-left: 20px;
+                    .icon {
+                        background-color: $purple800;
+                    }
+                }
+            }
+        }
+    }
+}

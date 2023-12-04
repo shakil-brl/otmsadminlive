@@ -1,0 +1,24 @@
+@import "./variables";
+@import "./dashboard/card";
+@import "./dashboard/attendance";
+@import "./dashboard/attendance_summery";
+@import "./dashboard/attendance_chart";
+@import "./dashboard/allownce";
+@import "./dashboard/py_chart";
+
+// footer css
+#kt_app_footer {
+    background-color: $purple950;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: $white;
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 12px 24px;
+    img {
+        height: 50px;
+    }
+}
