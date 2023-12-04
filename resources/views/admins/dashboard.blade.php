@@ -14,10 +14,8 @@ $userRole = $userAuth['userRole'];
         <div class="page-content" style="background-color: transparent;">
             <div class="m-4">
 
-                {{-- @dump($data); --}}
                 <div class="row g-4 row-cols-3 cards" id="dashboard-card">
-                    @if (in_array($userRole, [
-                    'SuperAdmin',
+                    @if (in_array($userRole, [ 'SuperAdmin',
                     'superAdmin',
                     'Admin',
                     'admin',
@@ -87,18 +85,36 @@ $userRole = $userAuth['userRole'];
                     'dg',
                     ]))
                     <div>
-                        <x-dashboard-card :url="route('dashboard_details.complete_batches')" :totalBatch="0"
-                            :icon="asset('img/new_icon/completed_batch.png')" :title="__('dashboard.complete_batch')"
-                            :class="'card-item green'" />
+                        <x-dashboard-card :url="route('dashboard_details.complete_batches')"
+                            :totalBatch="$data['completed_batch']" :icon="asset('img/new_icon/completed_batch.png')"
+                            :title="__('dashboard.complete_batch')" :class="'card-item green'" />
                     </div>
                     @endif
 
                     @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.districts')"
+                            :totalBatch="$data['complete_class'] ?? 0" :icon="asset('img/new_icon/district.png')"
+                            :title="__('Complete Class')" :class="'card-item purple'" />
+                    </div>
+                    <div>
+                        <x-dashboard-card :url="route('batch-schedule.runningBatches')"
+                            :totalBatch="$data['running_class'] ?? 0" :icon="asset('img/new_icon/partner.png')"
+                            :title="__('Ongoing Class')" :class="'card-item red'" />
+                    </div>
+                    <div>
+                        <x-dashboard-card :url="route('dashboard_details.districts')"
                             :totalBatch="$data['total_district'] ?? 0" :icon="asset('img/new_icon/district.png')"
                             :title="__('dashboard.district')" :class="'card-item green-white'" />
                     </div>
+
+                    {{-- <div>
+                        <x-dashboard-card :url="route('batch-schedule.runningBatches')"
+                            :totalBatch="$data['total_district'] ?? 0" :icon="asset('img/new_icon/district.png')"
+                            :title="__('Ongoing Class')" :class="'card-item purple'" />
+                    </div> --}}
+
+
                     @endif
 
                     @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
@@ -158,7 +174,7 @@ $userRole = $userAuth['userRole'];
                                                     </div>
                                                 </div>
                                                 <div class="item">
-                                                    <div class="digit">0</div>
+                                                    <div class="digit">{{$data['total_dropout']}}</div>
                                                     <div class="label">{{ __('dashboard.dropout_trainee') }}</div>
                                                 </div>
                                             </div>
@@ -297,20 +313,24 @@ $userRole = $userAuth['userRole'];
                                                         </div>
 
                                                         <div class="item">
+                                                            <div class="digit">{{ $data['total_dropout']}}</div>
+                                                            <div class="label">
+                                                                {{ __('dashboard.dropout_trainee') }}
+                                                            </div>
                                                             {{-- <div class="digit">66%</div>
                                                             <div class="label">
                                                                 {{ __('dashboard.successful_freelancer') }}</div> --}}
                                                         </div>
                                                     </div>
 
-                                                    <div class="items">
+                                                    {{-- <div class="items">
                                                         <div class="item">
-                                                            <div class="digit">0</div>
+                                                            <div class="digit">{{ $data['total_dropout']}}</div>
                                                             <div class="label">
                                                                 {{ __('dashboard.dropout_trainee') }}
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>

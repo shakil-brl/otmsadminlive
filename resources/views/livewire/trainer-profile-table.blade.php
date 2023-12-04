@@ -6,6 +6,7 @@
             <th>{{ __('batch-list.sl') }}</th>
             <th>{{ __('Name') }}</th>
             <th>{{ __('Phone') }}</th>
+            <th>{{ __('Email') }}</th>
             <th>{{ __('Gender') }}</th>
         </thead>
         <tbody>
@@ -21,7 +22,10 @@
                 <td>{{ $item['id'] }}</td>
                 <td>{{ $item['profile']['KnownAs'] }}</td>
                 <td>{{ $item['profile']['Phone'] }}</td>
+                <td><a href="mailto:{{$item['profile']['Email'] }}">{{$item['profile']['Email'] }}</a></td>
                 <td>{{ $item['profile']['Gender'] }}</td>
+
+                {{-- @dump($item) --}}
                 <!-- Add more fields from the nested "profile" array as needed -->
             </tr>
 
