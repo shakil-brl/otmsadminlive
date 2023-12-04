@@ -15,83 +15,27 @@ $userRole = $userAuth['userRole'];
             <div class="m-4">
 
                 <div class="row g-4 row-cols-3 cards" id="dashboard-card">
-                    @if (in_array($userRole, [ 'SuperAdmin',
-                    'superAdmin',
-                    'Admin',
-                    'admin',
-                    'DC',
-                    'dc',
-                    'UNO',
-                    'uno',
-                    'Provider',
-                    'provider',
-                    'Trainer',
-                    'trainer',
-                    'DPD',
-                    'dpd',
-                    'DG',
-                    'dg',
-                    ]))
-                    <div>
 
+                    <div>
                         <x-dashboard-card :url="route('dashboard_details.total_batches')"
                             :totalBatch="$data['total_batch'] ?? 0" :icon="asset('img/new_icon/total_batch.png')"
                             :title="__('dashboard.total_batch')" :class="'card-item purple'" />
-
                     </div>
-                    @endif
 
-                    @if (in_array($userRole, [
-                    'SuperAdmin',
-                    'superAdmin',
-                    'Admin',
-                    'admin',
-                    'DC',
-                    'dc',
-                    'UNO',
-                    'uno',
-                    'Provider',
-                    'trovider',
-                    'Trainer',
-                    'prainer',
-                    'DPD',
-                    'dpd',
-                    'DG',
-                    'dg',
-                    ]))
+
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.running_batches')"
                             :totalBatch="$data['running_batch'] ?? 0" :icon="asset('img/new_icon/current_batch.png')"
                             :title="__('dashboard.running_batch')" :class="'card-item yellow'" />
                     </div>
-                    @endif
 
-                    @if (in_array($userRole, [
-                    'SuperAdmin',
-                    'superAdmin',
-                    'Admin',
-                    'admin',
-                    'DC',
-                    'dc',
-                    'UNO',
-                    'uno',
-                    'Provider',
-                    'provider',
-                    'Trainer',
-                    'trainer',
-                    'DPD',
-                    'dpd',
-                    'DG',
-                    'dg',
-                    ]))
+
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.complete_batches')"
                             :totalBatch="$data['completed_batch']" :icon="asset('img/new_icon/completed_batch.png')"
                             :title="__('dashboard.complete_batch')" :class="'card-item green'" />
                     </div>
-                    @endif
 
-                    @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.districts')"
                             :totalBatch="$data['complete_class'] ?? 0" :icon="asset('img/new_icon/district.png')"
@@ -115,27 +59,18 @@ $userRole = $userAuth['userRole'];
                     </div> --}}
 
 
-                    @endif
-
-                    @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.upazilas')"
                             :totalBatch="$data['total_upazila'] ?? 0" :icon="asset('img/new_icon/upazila.png')"
                             :title="__('dashboard.upazila')" :class="'card-item info'" />
                     </div>
-                    @endif
-
-                    @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.partners')"
                             :totalBatch="$data['total_vendor'] ?? 0" :icon="asset('img/new_icon/partner.png')"
                             :title="__('dashboard.partner')" :class="'card-item red'" />
                     </div>
-                    @endif
                 </div>
 
-                @if (in_array($userRole, ['Admin', 'admin', 'Provider', 'provider', 'Trainer', 'trainer', 'DPD',
-                'dpd']))
                 <div id="dashboard-attendance">
                     <div class="row align-items-stretch">
                         <div class="col-7">
@@ -184,7 +119,7 @@ $userRole = $userAuth['userRole'];
                             </div>
                         </div>
                         <div class="col-5">
-                            <div id="attendance-chart" class="h-100 d-none">
+                            <div id="attendance-chart d-none" class="h-100">
                                 <div class="chart-item">
                                     <div class="bar" style="height: 70%;">
                                         {{-- <span class="bar-text">75%</span> --}}
@@ -230,27 +165,9 @@ $userRole = $userAuth['userRole'];
                         </div>
                     </div>
                 </div>
-                @endif
                 <div id="allownce">
                     <div class="row  align-items-stretch">
-                        @if (in_array($userRole, [
-                        'SuperAdmin',
-                        'superAdmin',
-                        'Admin',
-                        'admin',
-                        'DC',
-                        'dc',
-                        'UNO',
-                        'uno',
-                        'Provider',
-                        'provider',
-                        'Trainer',
-                        'trainer',
-                        'DPD',
-                        'dpd',
-                        'DG',
-                        'dg',
-                        ]))
+
                         <div class="col-7">
                             <a href="{{ route('dashboard_details.trainers') }}">
                                 <div class="trainer-info">
@@ -338,28 +255,10 @@ $userRole = $userAuth['userRole'];
                                 </div>
                             </a>
                         </div>
-                        @endif
 
-                        @if (in_array($userRole, [
-                        'SuperAdmin',
-                        'superAdmin',
-                        'Admin',
-                        'admin',
-                        'DC',
-                        'dc',
-                        'UNO',
-                        'uno',
-                        'Provider',
-                        'provider',
-                        'Trainer',
-                        'trainer',
-                        'DPD',
-                        'dpd',
-                        'DG',
-                        'dg',
-                        ]))
+
                         <div class="col-5">
-                            <div id="py-chart" class="">
+                            <div id="py-chart">
                                 <div id="attendance-summery">
                                     <div>
                                         <div class="content">
@@ -369,7 +268,7 @@ $userRole = $userAuth['userRole'];
                                             <div class="attendance">
                                                 <div class="items d-block">
                                                     <div class="item">
-                                                        <div class="digit">{{ 0 }}
+                                                        <div class="digit">{{ $data['total_trainee'] ?? 0 }}
                                                         </div>
                                                         <div class="label">{{ __('dashboard.total_trainee') }}
                                                         </div>
@@ -386,7 +285,6 @@ $userRole = $userAuth['userRole'];
                                 </div>
                             </div>
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -394,81 +292,3 @@ $userRole = $userAuth['userRole'];
     </div>
 </div>
 @endsection
-
-@push('js')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    let traineePaid = "{{ __('dashboard.trainee_paid') }}";
-        let traineeUnpaid = "{{ __('dashboard.trainee_unpaid') }}";
-        let traineeAllowance = "{{ __('dashboard.trainee_allowance') }}";
-        const ctx = document.getElementById('allownceChart');
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: [
-                    traineePaid,
-                    traineeUnpaid,
-                ],
-                datasets: [{
-                    label: traineeAllowance,
-                    data: [100, 70],
-                    backgroundColor: [
-                        '#F97885',
-                        '#4ADE80',
-                    ],
-                    hoverOffset: 0
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'right', // Set the legend position to the right
-                        labels: {
-                            generateLabels: function(chart) {
-                                const data = chart.data;
-                                if (data.labels.length && data.datasets.length) {
-                                    return data.labels.map(function(label, i) {
-                                        const value = data.datasets[0].data[i];
-                                        return {
-                                            text: `${label} : ${value}`,
-                                            fillStyle: data.datasets[0].backgroundColor[i],
-                                            hidden: isNaN(value) || value === 0,
-                                            index: i
-                                        };
-                                    });
-                                }
-                                return [];
-                            }
-                        }
-                    },
-                },
-            },
-        });
-
-
-
-
-        const ctx2 = document.getElementById('attendance');
-        new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: [
-                    traineePaid,
-                    traineeUnpaid,
-                ],
-                datasets: [{
-                    label: traineeAllowance,
-                    data: [50, 100, 150, 80, 300, 25, 120, 150, 44],
-                    backgroundColor: [
-                        '#F97885',
-                        '#4ADE80',
-                    ],
-                    hoverOffset: 0
-                }]
-            },
-            // data: data,
-
-        });
-</script>
-@endpush

@@ -1,6 +1,53 @@
 <div>
 
-    <x-search-form />
+    <div>
+        <div class="row row-cols-md-3 row-cols-lg-4 row-cols-xxl-5">
+            <div>
+                <label for="">Distrcits</label>
+                <select name="" class="form-select">
+                    <option value="">Select Distrci</option>
+                    <option value="">Barisal</option>
+                    <option value="">Bhola</option>
+                    <option value="">Jhalokathi</option>
+                    <option value="">Pirojpur</option>
+                    <option value="">Patuakhali</option>
+                    <option value="">Barguna</option>
+                </select>
+            </div>
+            <div>
+                <label for="">Upazila</label>
+                <select name="" class="form-select">
+                    <option value="">Select Distrci</option>
+                    <option value="">Barishal Sadar</option>
+                    <option value="">Agailjhara</option>
+                    <option value="">Bhola</option>
+                    <option value="">Jhalokathi</option>
+                    <option value="">Pirojpur</option>
+                    <option value="">Patuakhali</option>
+                    <option value="">Barguna</option>
+                </select>
+            </div>
+            <div>
+                <label for="">Training Courses</label>
+                <select name="" class="form-select">
+                    <option value="">Select Distrci</option>
+                    <option value="">Digital Marketing</option>
+                    <option value="">Graphics Design</option>
+                    <option value="">Web Development</option>
+                    <option value="">IT Service Provider</option>
+                    <option value="">Women Call Centre Agent</option>
+                    <option value="">Women E-Commerce Professional</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for=""></label>
+                <input wire:model="search" type="text" class="form-control" placeholder="Search...">
+            </div>
+        </div>
+        <div wire:loading>
+            Processing ...
+        </div>
+    </div>
     <table class="table table-bordered bg-white" id="dataTable">
         <thead>
             <th>{{ __('batch-list.sl') }}</th>

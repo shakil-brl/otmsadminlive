@@ -18,7 +18,6 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-
         $app_url = Str::finish(config('app.api_url'), '/');
 
         $response = Http::withHeaders([
