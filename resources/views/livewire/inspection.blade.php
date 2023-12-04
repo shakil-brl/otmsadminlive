@@ -1,5 +1,5 @@
 <div>
-    <a href="{{  route('tms-inspections.create')}}"> Add</a>
+
     <x-search-form />
 
     <table class="table table-responsive align-middle table-row-dashed fs-6 gy-5" id="dataTable">
