@@ -23,8 +23,8 @@ class AdminController extends Controller
 
         $response = Http::withHeaders([
             'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'dashboard/summery');
-        // dd($response->json());
+        ])->get($app_url . 'dashboardtotal/superadmin');
+        //dd($response->json());
 
         $data = $response->json()['data'];
 
@@ -37,6 +37,8 @@ class AdminController extends Controller
             if (isset($data['message'])) {
                 return $data['message'];
             } else {
+
+                $data = $data;
 
                 return view('admins.dashboard', compact('data'));
                 return "API Server Error";
