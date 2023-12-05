@@ -14,7 +14,7 @@ class Inspection extends Component
     public $data = [];
     public function render()
     {
-        //dd($this->dateFilter);
+        //dd($this->dateFilter );
         $app_url = Str::finish(config('app.api_url'), '/');
         $response = Http::withHeaders([
             'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
