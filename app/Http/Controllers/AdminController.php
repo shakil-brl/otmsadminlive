@@ -23,7 +23,7 @@ class AdminController extends Controller
         $response = Http::withHeaders([
             'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
         ])->get($app_url . 'dashboardtotal/superadmin');
-        //dd($response->json());
+        //dd($response->json() );
 
         $data = $response->json()['data'];
 
