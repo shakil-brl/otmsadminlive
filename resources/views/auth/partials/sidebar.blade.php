@@ -152,7 +152,7 @@
                             @if (
                                 $userRole == 'SuperAdmin' || $userRole == 'superadmin' or
                                     $userRole == 'Admin' || $userRole == 'admin' or
-                                    $userRole == 'DPD' || $userRole == 'dpd')
+                                    $userRole == 'DPD' || $userRole == 'dpd' || $userRole == 'provider')
                                 <div data-kt-menu-trigger="click"
                                     class="menu-item here menu-accordion <?php if (Illuminate\Support\Facades\Route::is('users.index') || Illuminate\Support\Facades\Route::is('users.show')||Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show') ||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?> here show<?php } ?> ">
                                     <!--begin:Menu link-->
@@ -804,9 +804,9 @@
 
                                 </div>
                                 <div data-kt-menu-trigger="click"
-                                    class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')) {?>here show<?php } ?>">
+                                    class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>here show<?php } ?>">
                                     <!--begin:Menu link-->
-                                    <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')) {?>active<?php } ?>">
+                                    <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>active<?php } ?>">
                                         <span class="menu-icon">
                                             <i class="ki-duotone ki-badge fs-2 ">
                                                 <span class="path1"></span>
@@ -824,12 +824,12 @@
                                     <!--begin:Menu sub-->
                                     <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
                                         <!--begin:Menu sub-->
-                                        <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list') ) {?>here show<?php } ?>"
+                                        <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create') ) {?>here show<?php } ?>"
                                             kt-hidden-height="81" style="">
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')) {?>active<?php } ?>"
+                                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>active<?php } ?>"
                                                     href="{{ route('batch-schedule.running-class-list') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
