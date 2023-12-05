@@ -39,14 +39,14 @@
                             <li class="nav-item lang dropdown" id="lang">
                                 <a class="nav-link  dropdown-toggle" role="button" data-bs-toggle="dropdown">
                                     @if (session()->get('locale') == 'en')
-                                        <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt=""> <span
-                                            class="label">English</span>
+                                    <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt=""> <span
+                                        class="label">English</span>
                                     @elseif(session()->get('locale') == 'bn')
-                                        <img class="flag" src="{{ asset('img/icon/bd.svg') }}" alt=""> <span
-                                            class="label">বাংলা</span>
+                                    <img class="flag" src="{{ asset('img/icon/bd.svg') }}" alt=""> <span
+                                        class="label">বাংলা</span>
                                     @else
-                                        <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt=""> <span
-                                            class="label">English</span>
+                                    <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt=""> <span
+                                        class="label">English</span>
                                     @endif
                                 </a>
                                 <ul class="dropdown-menu">
@@ -68,7 +68,7 @@
                             <li class="nav-item auth">
                                 <div class="nav-link">
                                     <div class="auth-panel d-md-block d-inline-block ">
-                                        <a class="signup btn" href="{{ url('register') }}">
+                                        <a class="signup btn" href="https://training.gov.bd/signup">
                                             {{ __('login.sign_up') }}
                                         </a>
                                         <a class="login btn active" href="{{ url('login') }}">
