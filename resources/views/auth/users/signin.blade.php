@@ -8,6 +8,7 @@
 </p>
 @include('layouts.partials.messages')
 
+
 @if (request('message'))
 <div class="alert alert-info">
     {{ urldecode(request('message')) }}
