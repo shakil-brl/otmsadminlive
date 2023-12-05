@@ -202,7 +202,7 @@
 
         const isExpired = Date.now() >= jwtPayload.exp * 1000;
 
-        if (isExpired) {
+        if (isExpired && false) {
             console.log('expired');
             let url = api_baseurl + "refresh-token";
             $.ajax({
@@ -250,8 +250,7 @@
                                         rolePermission: rolePermissionInfo,
                                         '_token': CSRF_TOKEN
                                     },
-                                    success: function(response) {
-                                    }
+                                    success: function(response) {}
                                 });
                             }
                         });
@@ -335,7 +334,7 @@
     </script>
 
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/dist/assets/js/custom/call.api.js') }}"></script>
+    <script src="{{ asset('assets/dist/assets/js/custom/call.api.js?v=1') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.category.api.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.division.api.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.provider.api.js') }}"></script>
