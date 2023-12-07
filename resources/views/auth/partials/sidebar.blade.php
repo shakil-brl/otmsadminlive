@@ -5,6 +5,7 @@
     $roleRoutePermissions = Session::get('accessPermission');
     $userAuth = Session::get('authUser');
     $userRole = $userAuth['userRole'];
+    //dd($routePermissions);
 @endphp
 <div style="font-size:14px;" id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true"
     data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
@@ -152,7 +153,7 @@
                             @if (
                                 $userRole == 'SuperAdmin' || $userRole == 'superadmin' or
                                     $userRole == 'Admin' || $userRole == 'admin' or
-                                    $userRole == 'DPD' || $userRole == 'dpd' || $userRole == 'provider')
+                                    $userRole == 'DPD' || $userRole == 'dpd' || $userRole == 'provider' || $userRole == 'Provider')
                                 <div data-kt-menu-trigger="click"
                                     class="menu-item here menu-accordion <?php if (Illuminate\Support\Facades\Route::is('users.index') || Illuminate\Support\Facades\Route::is('users.show')||Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show') ||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?> here show<?php } ?> ">
                                     <!--begin:Menu link-->
