@@ -1,48 +1,196 @@
-@extends('auth.users.auth-master')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<h3 class="title text-center ">{{ __('login.login') }}</h3>
-<p class="tagline text-center">
-    {{ __('login.do_not_account') }}
-    <a href="{{ url('register') }}" class="link"> {{ __('login.sign_up') }}</a>
-</p>
-@include('layouts.partials.messages')
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ asset('img/logo-icon.svg') }}" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <title>OTMS Login</title>
+</head>
 
+<body>
+    <div id="body" style="background-image: url('{{ asset('img/login/placeholder.jpg') }}');">
+        <div id="login-page">
+            <header id="navbar">
+                <nav class="navbar navbar-expand-md navbar-light ">
+                    <a class="navbar-brand" href="#">
+                        <div class="d-flex align-items-center">
+                            <div class="logo">
+                                <img class="" src="{{ asset('img/login') }}/logo.svg" alt="">
+                            </div>
+                            <div class="govt-logo">
+                                <img class="" src="{{ asset('img/login') }}/govt-logo.png" alt="">
 
-@if (request('message'))
-<div class="alert alert-info">
-    {{ urldecode(request('message')) }}
-</div>
-@endif
-<span class="text-info form-message-error-success">
-</span>
-<span class="text-info form-message-error-error">
-</span>
-<form action="" id="kt_sign_in_form" method="POST">
-    <div class="mb-20px">
-        <label class="" for="username">{{ __('login.username') }}</label>
-        <input name="username" id="username" type="text" class="form-control"
-            placeholder="{{ __('login.username_ph') }}">
-        <span class="text-danger form-message-error-username">
-        </span>
-    </div>
-    <div class="mb-15px">
-        <div class="d-flex justify-content-between">
-            <label class="" for="password">{{ __('login.password') }}</label>
-            <a class="forget" href="https://training.gov.bd/reset-password">{{ __('login.forgot_password') }}</a>
+                            </div>
+                        </div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav menu align-items-md-center ms-auto mb-2 mb-md-0">
+                            <li class="nav-item lang dropdown">
+                                <a class="nav-link  dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                    <img class="flag" src="{{ asset('img/login') }}/bd.svg" alt=""> <span
+                                        class="label">EN</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="item">
+                                        <a class="dropdown-item" href="#">
+                                            <img class="flag" src="{{ asset('img/login') }}/bd.svg" alt="">
+                                            <span class="label">BD</span>
+                                        </a>
+                                    </li>
+                                    <li class="item">
+                                        <a class="dropdown-item" href="#">
+                                            <img class="flag" src="{{ asset('img/login') }}/us.svg" alt="">
+                                            <span class="label">EN</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item auth">
+                                <div class="nav-link pe-0">
+                                    <div class="auth-panel d-md-block d-inline-block ">
+                                        <a class="signup btn" href="#">
+                                            Sign Up
+                                        </a>
+                                        <a class="login btn active" href="#">
+                                            Login
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </nav>
+            </header>
+            <div id="login-form">
+                <div class="content">
+                    <form action="" id="kt_sign_in_form">
+                        <legend class="title">অ্যাকাউন্ট লগইন করুন</legend>
+                        <div class="form-input">
+                            <label for="">ইমেইল</label>
+                            <input name="username" id="username" type="text" class="form-control"
+                                placeholder="Enter Emeil">
+                        </div>
+                        <div class="form-input">
+                            <div class="d-flex justify-content-between">
+                                <label for="">পাসওয়ার্ড</label>
+                                <label for="">
+                                    <a href="" class="forget">পাসওয়ার্ড ভুলে গেছেন ?</a>
+                                </label>
+                            </div>
+                            <div class="password">
+                                <input id="password" name="password" type="password" class="form-control"
+                                    placeholder="Enter Password">
+                                <div class="icon">
+                                    <span type="button" class="material-icons-outlined">
+                                        visibility
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-submit">লগইন করুন</button>
+
+                        <div class="account-create">হার পাওয়ারে অ্যাকাউন্ট নাই ? <a href="">সাইন আপ</a></div>
+                    </form>
+                </div>
+            </div>
+            <footer id="footer">
+                <div class="text-md-start left">
+                    &copy;২০২৩ হার পাওয়ার প্রজেক্ট
+                </div>
+                <div class="text-center center">
+                    <img class="govt-logo" src="{{ asset('img/login') }}/footer-logo.png" alt="">
+                </div>
+                <div class="text-md-end right">
+                    তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
+                </div>
+            </footer>
         </div>
-        <div>
-            <input id="password" name="password" type="password" class="form-control"
-                placeholder="{{ __('login.password_ph') }}">
-            <span class="text-danger form-message-error-password">
-            </span>
-        </div>
-    </div>
-    <div class="d-flex align-items-center mb-20px">
-        <input type="checkbox" id="remember" class="form-check-input m-0">
-        <label for="remember" class="remember m-0 ms-2">{{ __('login.remember_me') }}</label>
     </div>
 
-    <button type="submit" class="btn submit-btn">{{ __('login.sign_in') }}</button>
-</form>
-@endsection
+
+    <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/login') }}/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/login') }}/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(".password .material-icons-outlined").click(function() {
+            let input = $(this).parent().parent().children('input');
+            let type = input.attr('type');
+            if (type == 'password') {
+                input.attr('type', 'text');
+                $(this).html('visibility_off');
+            } else {
+                input.attr('type', 'password');
+                $(this).html('visibility');
+            }
+        });
+    </script>
+
+    <script type="text/javascript" src="{{ asset('assets/dist/assets/js/custom/call.api.js') }}"></script>
+    <script>
+        let title = "{{ __('register.are_you') }}";
+        let text = "{{ __('register.submit_form') }}";
+        let confirmButtonText = "{{ __('register.yes_submitted') }}";
+        let cancelButtonText = "{{ __('register.cancel_button') }}";
+        let admin_baseurl = '{{ route('home.index') }}';
+        let api_baseurl = '{{ config('app.api_url') }}';
+        let authToken = localStorage.getItem('authToken');
+        let language = "{{ session()->get('locale') }}";
+
+        if (window.location.pathname == '/login' || window.location.pathname == '/register') {
+
+            if (authToken != null) {
+                window.open('/dashboard', '_self')
+            }
+        }
+
+        let url = "{{ route('changeLang') }}";
+
+        function changeLocale(lang) {
+            let url_link = api_baseurl + "language";
+            $.ajax({
+                type: "get",
+                url: url_link,
+                headers: {
+                    'X-localization': lang
+                },
+                data: {},
+                dataType: "JSON",
+                success: function(results) {
+                    if (results.success === true) {
+                        console.log(results.message);
+                    } else {
+                        // swal.fire("Error!", results.message, "error");
+                    }
+                },
+                error: function(response) {
+                    // alert(response);
+                },
+            });
+            window.location.href = url + "?lang=" + lang;
+        }
+        $("#lang-bd").click(function() {
+            changeLocale('bn');
+        });
+        $("#lang-us").click(function() {
+            changeLocale('en');
+        });
+    </script>
+
+</body>
+
+</html>

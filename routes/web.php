@@ -36,6 +36,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::group([], function () {
+    Route::post('set-token', function (Request $request) {
+        Session::put('accessToken', $request->accessToken);
+        Session::put('tokenType', $request->tokenType);
+        return 'success';
+    });
+});
 
 Route::get('/', function () {
     return view('welcome');
