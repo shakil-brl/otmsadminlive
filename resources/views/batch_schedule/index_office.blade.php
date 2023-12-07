@@ -3,21 +3,21 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>Batch Schedules</h3>
+        <h3>{{__('batch-schedule.batch_schedule')}}</h3>
         @isset($batch)
             <div>
-                <h4>Batch Code: {{ $batch['batchCode'] }}</h4>
-                <div>Training Title:
+                <h4>{{__('batch-schedule.batch_code')}}: {{ $batch['batchCode'] }}</h4>
+                <div>{{__('batch-schedule.course_name')}}:
                     {{ $batch['get_training'] ? ($batch['get_training']['title'] ? $batch['get_training']['title']['Name'] : '') : '' }}
                 </div>
                 <div>
-                    Start Date: {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
+                    {{__('batch-schedule.start_date')}}: {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
                 </div>
                 <div>
-                    Total Class: {{ $batch['totalTrainees'] ?? '' }}
+                    {{__('batch-schedule.total_class')}}: {{ $batch['totalTrainees'] ?? '' }} {{__('batch-schedule.days')}}
                 </div>
                 <div>
-                    Location: {{ $batch['GEOLocation'] ?? '' }}
+                    {{__('batch-schedule.location')}}: {{ $batch['GEOLocation'] ?? '' }}
                 </div>
             </div>
         @endisset
@@ -26,13 +26,13 @@
         @isset($schedule_details)
             <table class="table table-bordered bg-white">
                 <thead>
-                    <th>SL</th>
-                    <th>Date</th>
-                    <th>Day</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>{{__('batch-schedule.sl')}}</th>
+                    <th>{{__('batch-schedule.date')}}</th>
+                    <th>{{__('batch-schedule.day')}}</th>
+                    <th>{{__('batch-schedule.start_time')}}</th>
+                    <th>{{__('batch-schedule.end_time')}}</th>
+                    <th>{{__('batch-schedule.status')}}</th>
+                    <th>{{__('batch-schedule.action')}}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($schedule_details) as $schedule_detail)
@@ -52,11 +52,11 @@
                             <td>
                                 @isset($schedule_detail['status'])
                                     @if ($schedule_detail['status'] == 1)
-                                        <span class="badge bg-secondary">Not Started</span>
+                                        <span class="badge bg-secondary">{{__('batch-schedule.not_started')}}</span>
                                     @elseif ($schedule_detail['status'] == 2)
-                                        <span class="badge bg-warning">Class Running</span>
+                                        <span class="badge bg-warning">{{__('batch-schedule.class_running')}}</span>
                                     @elseif ($schedule_detail['status'] == 3)
-                                        <span class="badge bg-success">Complete</span>
+                                        <span class="badge bg-success">{{__('batch-schedule.class_completed')}}</span>
                                     @endif
                                 @endisset
                             </td>
@@ -65,11 +65,11 @@
                                     @if ($schedule_detail['status'] == 3)
                                         <a href="{{ route('attendance.schedule', [$schedule_detail['id']]) }}"
                                             class="btn btn-sm btn-info">
-                                            View
+                                            {{__('batch-schedule.view')}}
                                         </a>
                                     @else
                                         <button type="button" class="btn btn-sm btn-info" disabled>
-                                            View
+                                            {{__('batch-schedule.view')}}
                                         </button>
                                     @endif
                                 @endisset

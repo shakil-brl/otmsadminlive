@@ -47,6 +47,17 @@ return [
     'weekly_day_wed' => 'বুধবার',
     'weekly_day_thu' => 'বৃহস্পতিবার',
     'weekly_day_fri' => 'শুক্রবার',
+    'sl' => 'সিরিয়াল',
+    'date' => 'তারিখ',
+    'start_time' => 'ক্লাস শুরু হওয়ার সময়',
+    'end_time' => ' ক্লাস শেষ হওয়ার সময় ',
+    'status' => 'স্টেটাস',
+    'action' => 'অ্যাকশন',
+    'not_started' => 'এখনো শুরু হয় নি',
+    'class_running' => 'ক্লাস চলমান',
+    'class_completed' => 'সম্পন্ন হয়েছে',
+    'view' => 'দেখুন',
+
 
 
 
