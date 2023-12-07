@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Auth;
 
 class AuthUserController extends Controller
 {
@@ -28,6 +29,14 @@ class AuthUserController extends Controller
             $messge = 'AuthUser data stored successfully';
         } elseif ($flag == 'logout') {
             $request->session()->forget(['authUser']);
+            $request->session()->forget(['rolePermission']);
+            $request->session()->forget(['accessPermission']);
+
+            $request->session()->forget(['accessToken']);
+            $request->session()->forget(['tokenType']);
+
+            Session::flush();
+            Auth::logout();
             $messge = 'AuthUser data removed successfully';
         }
 
