@@ -251,7 +251,7 @@ $(function () {
                     }
                 },
                 error: function (xhr, status, error) {
-                    // Handle errors here
+                    // Handle errors here details
                     console.error(xhr, status, error);
                 },
             });
