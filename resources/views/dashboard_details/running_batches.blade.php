@@ -20,11 +20,10 @@
         <thead>
             <th>SL</th>
             <th>Batch Code</th>
-            <th>Start Date</th>
+            <th>Start Time</th>
             <th>Training Title</th>
             <th>Location</th>
             <th>Vendor Name</th>
-            <th>Action</th>
         </thead>
         <tbody>
             @foreach (collect($running_batches) as $batch)
@@ -33,35 +32,24 @@
                     {{ $loop->iteration }}
                 </td>
                 <td>
-                    {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
+                    {{ $batch['training_batch'] ? $batch['training_batch']['batchCode'] : '' }}
                 </td>
                 <td>
-                    {{ $batch['date'] ?? '' }}
+                    {{ $batch['class_time'] ?? '' }}
                 </td>
                 <td>
-                    {{ $batch['schedule']['training_batch'] ?
-                    $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
+                    {{ $batch['training_batch'] ?
+                    $batch['training_batch']['training']['title']['Name'] : '' }}
                 </td>
                 <td>
-                    {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : ''
+                    {{ $batch['training_batch'] ? $batch['training_batch']['GEOLocation'] : ''
                     }}
                 </td>
                 <td>
-                    {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] :
+                    {{ $batch['training_batch'] ? $batch['training_batch']['provider']['name'] :
                     '' }}
                 </td>
-                <td>
-                    @if ($batch['streaming_link'])
-                    <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
-                        Live Streaming
-                    </a>
-                    @endif
-                    @if ($batch['static_link'])
-                    <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}" target="_blank">
-                        Join
-                    </a>
-                    @endif
-                </td>
+             
             </tr>
             @endforeach
         </tbody>
