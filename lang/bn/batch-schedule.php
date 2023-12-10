@@ -57,6 +57,13 @@ return [
     'class_running' => 'ক্লাস চলমান',
     'class_completed' => 'সম্পন্ন হয়েছে',
     'view' => 'দেখুন',
+    'ongoing_class' => 'ক্লাস চলছে',
+    'search' => 'সার্চ করুন',
+    'search_here' => 'এখানে অনুসন্ধান করুন',
+    'development_partner' => 'ডেভেলপমেন্ট পার্টনার',
+    'live_streaming' => ' সরাসরি সম্প্রচার',
+  
+    
 
 
 

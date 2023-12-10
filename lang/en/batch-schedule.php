@@ -58,6 +58,12 @@ return [
     'class_running' => 'Class Running',
     'class_completed' => 'Completed',
     'view' => 'View',
+    'ongoing_class' => 'Ongoing Class',
+    'search' => 'Search',
+    'search_here' => 'Search Here',
+    'development_partner' => 'Development Partner',
+    'live_streaming' => ' Live Streaming',
+    
 
 
     
