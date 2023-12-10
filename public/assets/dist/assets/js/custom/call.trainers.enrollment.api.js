@@ -51,7 +51,12 @@ $(function () {
                                         <!--begin::provider details-->
                                         <div class="d-flex flex-column">
                                             <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${trainerEnroll.profile.Email}
+                                                ${
+                                                    trainerEnroll.profile
+                                                        ? trainerEnroll.profile.Email
+                                                        : ""
+                                                    
+                                                    }
                                             </a>
                                             <span></span>
                                         </div>
@@ -62,7 +67,11 @@ $(function () {
                                         <!--begin::provider details-->
                                         <div class="d-flex flex-column">
                                             <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${trainerEnroll.provider.name}
+                                                ${
+                                                    trainerEnroll.provider
+                                                        ? trainerEnroll.provider.name
+                                                        : ""
+                                                    }
                                             </a>
                                             <span></span>
                                         </div>
@@ -75,7 +84,10 @@ $(function () {
                                             <a href="#" class="text-gray-800 text-hover-primary mb-1">
                                                 ${
                                                     trainerEnroll.training_batch
+                                                        ? trainerEnroll.training_batch
                                                         .batchCode
+                                                        : ""
+                                                    
                                                 }
                                             </a>
                                             <span></span>
@@ -239,7 +251,7 @@ $(function () {
                     }
                 },
                 error: function (xhr, status, error) {
-                    // Handle errors here
+                    // Handle errors here details
                     console.error(xhr, status, error);
                 },
             });
