@@ -46,6 +46,11 @@ return [
     'total_batches' => 'Total Batches',
     'complete_batches' => 'Complete Batches',
     'batches_list' => 'Batch List',
+    'search_here' => 'Search Here',
+    'development_partner' => 'Development Partner',
+    'live_streaming' => ' Live Streaming',
+    'join_class' => ' Join Class',
+ 
     
 
 

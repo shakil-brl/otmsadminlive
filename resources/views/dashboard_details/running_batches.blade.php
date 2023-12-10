@@ -3,28 +3,27 @@
 @section('content')
 <!--begin::Content-->
 <div class="m-5">
-    <h3>Running Batches</h3>
-    <br>
+    <h3>{{__('batch-list.running_batches')}}</h3>
     <x-alert />
     @isset($running_batches)
     <div class="my-3">
         <form action="">
             <div class="w-50 d-flex gap-3">
                 <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                    placeholder="search here">
-                <input type="submit" class="form-control btn btn-primary w-25" value="Search">
+                    placeholder="{{__('batch-list.search_here')}}">
+                <input type="submit" class="form-control btn btn-primary w-25" value="{{__('batch-list.search')}}">
             </div>
         </form>
     </div>
     <table class="table table-bordered bg-white">
         <thead>
-            <th>SL</th>
-            <th>Batch Code</th>
-            <th>Start Date</th>
-            <th>Training Title</th>
-            <th>Location</th>
-            <th>Vendor Name</th>
-            <th>Action</th>
+            <th>{{__('batch-list.sl')}}</th>
+            <th>{{__('batch-list.batch_code')}}</th>
+            <th>{{__('batch-list.start_date')}}</th>
+            <th>{{__('batch-list.course_name')}}</th>
+            <th>{{__('batch-list.location')}}</th>
+            <th>{{__('batch-list.development_partner')}}</th>
+            <th>{{__('batch-list.action')}}</th>
         </thead>
         <tbody>
             @foreach (collect($running_batches) as $batch)
@@ -53,12 +52,12 @@
                 <td>
                     @if ($batch['streaming_link'])
                     <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
-                        Live Streaming
+                        {{__('batch-list.live_streaming')}}
                     </a>
                     @endif
                     @if ($batch['static_link'])
                     <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}" target="_blank">
-                        Join
+                       {{__('batch-list.join_class')}}
                     </a>
                     @endif
                 </td>
