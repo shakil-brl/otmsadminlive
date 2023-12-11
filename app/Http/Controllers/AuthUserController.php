@@ -8,6 +8,12 @@ use Auth;
 
 class AuthUserController extends Controller
 {
+    public function setToken(Request $request){
+        Session::put('accessToken', $request->accessToken);
+        Session::put('tokenType', $request->tokenType);
+        return 'success';
+
+    }
     public function storeAuthUser(Request $request)
     {
         $flag = $request->input('authStatus');
