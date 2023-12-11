@@ -45,5 +45,7 @@ return [
     'trainee_allowance' => 'Trainee Allowance',
     'trainee_paid' => 'Paid',
     'trainee_unpaid' => 'Unpaid',
+    'ongoing_class' => 'Ongoing Class',
+    'complete_class' => 'complete Class',
   
 ];

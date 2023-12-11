@@ -48,6 +48,23 @@ return [
     'weekly_day_wed' => 'Wednesday',
     'weekly_day_thu' => 'Thursday',
     'weekly_day_fri' => 'Friday',
+    'sl' => 'SL',
+    'date' => 'Date',
+    'start_time' => 'Start Time',
+    'end_time' => 'End Time',
+    'status' => 'Status',
+    'action' => 'Action',
+    'not_started' => 'Not Started',
+    'class_running' => 'Class Running',
+    'class_completed' => 'Completed',
+    'view' => 'View',
+    'ongoing_class' => 'Ongoing Class',
+    'search' => 'Search',
+    'search_here' => 'Search Here',
+    'development_partner' => 'Development Partner',
+    'live_streaming' => ' Live Streaming',
+    
+
 
     
 
