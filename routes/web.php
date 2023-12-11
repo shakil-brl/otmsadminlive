@@ -36,11 +36,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::post('set-token', function (Request $request) {
-    Session::put('accessToken', $request->accessToken);
-    Session::put('tokenType', $request->tokenType);
-    return 'success';
-});
 
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
@@ -72,6 +67,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
      */
     Route::get('/profile', [UserController::class, 'profile'])->name('profile.index');
 
+    Route::post('/set-token', [AuthUserController::class, 'setToken'])->name('setToken');
     Route::post('/store-auth-user', [AuthUserController::class, 'storeAuthUser'])->name('storeAuth');
     Route::get('/auth-error', [AuthUserController::class, 'authError'])->name('auth.error');
 

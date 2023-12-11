@@ -23,10 +23,8 @@ class AdminController extends Controller
             'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
         ])->get($app_url . 'dashboardtotal/superadmin');
 
-        // dd($app_url . 'dashboardtotal/superadmin');
 
-        // dd($response);
-        // return $response->body();
+        // return ($response->body());
 
         $data = $response->json()['data'];
 

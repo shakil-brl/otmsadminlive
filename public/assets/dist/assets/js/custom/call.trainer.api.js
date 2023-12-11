@@ -7,7 +7,7 @@ $(function () {
             // Private functions
             var demos = function () {
                 // multi select
-                $("#kt_select2_4").select2({
+                $("#kt_select2_3").select2({
                     placeholder: selectTrainer,
                 });
             };

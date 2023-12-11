@@ -199,10 +199,9 @@
         const JWT = token;
 
         const jwtPayload = JSON.parse(window.atob(JWT.split('.')[1]))
-
-        const isExpired = Date.now() >= jwtPayload.exp * 1000;
-
-        if (isExpired && false) {
+        
+        const isExpired = Date.now() >= jwtPayload.exp*1000;
+        if (isExpired == true) {
             console.log('expired');
             let url = api_baseurl + "refresh-token";
             $.ajax({

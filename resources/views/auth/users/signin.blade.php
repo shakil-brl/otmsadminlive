@@ -61,7 +61,7 @@
                             <li class="nav-item auth">
                                 <div class="nav-link pe-0">
                                     <div class="auth-panel d-md-block d-inline-block ">
-                                        <a class="signup btn" href="#">
+                                        <a class="signup btn" href="https://training.gov.bd/signup">
                                             Sign Up
                                         </a>
                                         <a class="login btn active" href="#">
@@ -88,7 +88,8 @@
                             <div class="d-flex justify-content-between">
                                 <label for="">পাসওয়ার্ড</label>
                                 <label for="">
-                                    <a href="" class="forget">পাসওয়ার্ড ভুলে গেছেন ?</a>
+                                    <a href="https://training.gov.bd/reset-password" class="forget">পাসওয়ার্ড ভুলে
+                                        গেছেন ?</a>
                                 </label>
                             </div>
                             <div class="password">
@@ -103,7 +104,8 @@
                         </div>
                         <button class="btn btn-submit">লগইন করুন</button>
 
-                        <div class="account-create">হার পাওয়ারে অ্যাকাউন্ট নাই ? <a href="">সাইন আপ</a></div>
+                        <div class="account-create">হার পাওয়ারে অ্যাকাউন্ট নাই ? <a
+                                href="https://training.gov.bd/signup">সাইন আপ</a></div>
                     </form>
                 </div>
             </div>

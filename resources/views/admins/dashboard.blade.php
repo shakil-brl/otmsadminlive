@@ -95,12 +95,12 @@ $userRole = $userAuth['userRole'];
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.districts')"
                             :totalBatch="$data['complete_class'] ?? 0" :icon="asset('img/new_icon/completedclass.png')"
-                            :title="__('Complete Class')" :class="'card-item purple'" />
+                            :title="__('dashboard.complete_class')" :class="'card-item purple'" />
                     </div>
                     <div>
                         <x-dashboard-card :url="route('batch-schedule.runningBatches')"
                             :totalBatch="$data['running_class'] ?? 0" :icon="asset('img/new_icon/livestrem.gif')"
-                            :title="__('Ongoing Class')" :class="'card-item red'" />
+                            :title="__('dashboard.ongoing_class')" :class="'card-item red'" />
                     </div>
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.districts')"

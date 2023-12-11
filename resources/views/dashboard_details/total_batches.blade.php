@@ -10,8 +10,8 @@
         <form action="">
             <div class="w-50 d-flex gap-3">
                 <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                    placeholder="search here">
-                <input type="submit" class="form-control btn btn-primary w-25" value="Search">
+                    placeholder="{{ __('batch-list.search_here') }}">
+                <input type="submit" class="form-control btn btn-primary w-25" value="{{ __('batch-list.search') }}">
             </div>
         </form>
     </div>
@@ -20,10 +20,10 @@
         <thead>
             <th>{{ __('batch-list.sl') }}</th>
             <th>{{ __('batch-list.batch_code') }}</th>
-            <th>{{ __('batch-list.training_title') }}</th>
+            <th>{{ __('batch-list.course_name') }}</th>
             <th>{{ __('batch-list.location') }}</th>
             <th>{{ __('batch-list.start_date') }}</th>
-            <th>{{ __('batch-list.class_days') }}</th>
+            <th>{{ __('batch-list.total_class') }}</th>
             <th>{{ __('batch-list.class_schedule') }}</th>
             <th>{{ __('batch-list.action') }}</th>
         </thead>
@@ -46,14 +46,14 @@
                     {{ $batch['startDate'] }}
                 </td>
                 <td>
-                    {{ $batch['duration'] }}
+                    {{ $batch['duration'] }} {{ __('batch-list.days') }}
                 </td>
                 <td>
                     {{ $batch['training_batch_schedule'] ? $batch['training_batch_schedule']['class_days'] : '' }}
                 </td>
                 <td>
                     <a href="" class="btn btn-sm btn-info">
-                        View
+                        {{ __('batch-list.view') }}
                     </a>
                 </td>
             </tr>
