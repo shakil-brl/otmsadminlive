@@ -15,7 +15,8 @@ class HomeController extends Controller
         return view('auth.users.signin');
     }
 
-    public function dashboard(){        
+    public function dashboard()
+    {
         return view('auth.users.signin');
     }
 
@@ -23,12 +24,12 @@ class HomeController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function change(Request $request)
     {
         App::setLocale($request->lang);
         session()->put('locale', $request->lang);
-  
+
         return redirect()->back();
     }
 }
