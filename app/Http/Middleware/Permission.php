@@ -39,7 +39,8 @@ class Permission
             
             
         }else{
-            return redirect()->route('login.show');
+            //return redirect()->route('login.show');
+            return redirect()->route('admins.dashboard');
         }
         return $next($request);
     }

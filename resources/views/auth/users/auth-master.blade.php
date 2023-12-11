@@ -135,12 +135,12 @@
         let authToken = localStorage.getItem('authToken');
         let language = "{{ session()->get('locale') }}";
 
-        if (window.location.pathname == '/login' || window.location.pathname == '/register') {
+        /*if (window.location.pathname == '/login' || window.location.pathname == '/register') {
 
             if (authToken != null) {
                 window.open('/dashboard', '_self')
             }
-        }
+        }*/
 
         let url = "{{ route('changeLang') }}";
 
