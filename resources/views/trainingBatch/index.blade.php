@@ -494,7 +494,7 @@
                             <label
                                 class="col-form-label text-right col-lg-3 col-sm-12">{{ __('batch-schedule.triner_list') }}</label>
                             <div class="col">
-                                <select class="form-control select2" id="kt_select2_4" multiple="multiple">
+                                <select class="form-control select2" id="kt_select2_3" multiple="multiple">
 
                                 </select>
                                 <span class="form-message-error-trainer_ids">
