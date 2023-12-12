@@ -6,18 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use App\Http\Clients\ApiHttpClient;
 
 class DashboardDetailsController extends Controller
 {
     // 
     public function totalBatches(Request $request)
     {
-        // return $request->all();
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $total_batches = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batchlist', [
+        $total_batches = ApiHttpClient::request('get', 'batchlist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
@@ -42,9 +38,9 @@ class DashboardDetailsController extends Controller
         $running_batches = Http::withHeaders([
             'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
         ])->get($app_url . 'batch/running-batch', [
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
-        ])->json();
+                    'page' => $request->page ?? 1,
+                    'search' => $request->search,
+                ])->json();
         // dd($running_batches);
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
@@ -69,13 +65,19 @@ class DashboardDetailsController extends Controller
     {
         $app_url = Str::finish(config('app.api_url'), '/');
 
-        $total_districts = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'districtslist', [
+        // $total_districts = Http::withHeaders([
+        //     'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
+        // ])->get($app_url . 'districtslist', [
+        //             'page' => $request->page ?? 1,
+        //             'search' => $request->search,
+        //         ])->json();
+
+
+        $total_districts = ApiHttpClient::request('get', 'districtslist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        // dd($total_districts);
+        //dd($total_districts);
         if ($total_districts['success'] == true) {
             $districts = $total_districts['data']['data'];
             $paginator = $this->customPaginate($total_districts, $request, route('dashboard_details.districts'));
@@ -96,9 +98,9 @@ class DashboardDetailsController extends Controller
         $total_upazilas = Http::withHeaders([
             'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
         ])->get($app_url . 'upazilaslist', [
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
-        ])->json();
+                    'page' => $request->page ?? 1,
+                    'search' => $request->search,
+                ])->json();
         // dd($total_upazilas);
         if ($total_upazilas['success'] == true) {
             $upazilas = $total_upazilas['data']['data'];
@@ -120,9 +122,9 @@ class DashboardDetailsController extends Controller
         $total_partners = Http::withHeaders([
             'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
         ])->get($app_url . 'partnerslist', [
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
-        ])->json();
+                    'page' => $request->page ?? 1,
+                    'search' => $request->search,
+                ])->json();
         // dd($total_partners);
         if ($total_partners['success'] == true) {
             $partners = $total_partners['data']['data'];

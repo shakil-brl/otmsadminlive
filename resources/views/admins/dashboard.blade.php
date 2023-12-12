@@ -6,9 +6,10 @@
 @endpush
 @section('content')
 @php
-$userAuth = Session::get('authUser');
-$userRole = $userAuth['userRole'];
+$userAuth = Session::get('access_token.authUser');
+$userRole = Session::get('access_token.role');
 @endphp
+
 <div class="m-5">
     <div id="main-content bg-warning">
         <div class="page-content" style="background-color: transparent;">
@@ -128,8 +129,9 @@ $userRole = $userAuth['userRole'];
                     @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                     <div>
                         <x-dashboard-card :url="route('dashboard_details.partners')"
-                            :totalBatch="$data['total_vendor'] ?? 0" :icon="asset('img/new_icon/developmentpartner.png')"
-                            :title="__('dashboard.partner')" :class="'card-item red'" />
+                            :totalBatch="$data['total_vendor'] ?? 0"
+                            :icon="asset('img/new_icon/developmentpartner.png')" :title="__('dashboard.partner')"
+                            :class="'card-item red'" />
                     </div>
                     @endif
                 </div>
