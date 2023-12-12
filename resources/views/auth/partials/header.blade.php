@@ -1,16 +1,3 @@
-@php
-
-/*use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
-$app_url = Str::finish(config('app.api_url'), '/');
-$response = Http::withHeaders([
-'Authorization' => Session::get('tokenType') . Session::get('accessToken'),
-])->get($app_url . 'permissions/role');
-$data = $response->json();
-if (isset($data['success'])) {
-Session::put('permissions', $data['data']);
-} */
-@endphp
 <!--begin::Header-->
 <div id="kt_app_header" class="app-header">
     <!--begin::Header container-->
@@ -91,14 +78,14 @@ Session::put('permissions', $data['data']);
 
                         <div class="lang-header">
                             @if (session()->get('locale') == 'en')
-                            <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
-                            <span class="label dropdown-toggle">English</span>
+                                <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
+                                <span class="label dropdown-toggle">English</span>
                             @elseif(session()->get('locale') == 'bn')
-                            <img class="flag" src="{{ asset('img/icon/bd.svg') }}" alt="">
-                            <span class="label dropdown-toggle">বাংলা</span>
+                                <img class="flag" src="{{ asset('img/icon/bd.svg') }}" alt="">
+                                <span class="label dropdown-toggle">বাংলা</span>
                             @else
-                            <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
-                            <span class="label dropdown-toggle">English</span>
+                                <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
+                                <span class="label dropdown-toggle">English</span>
                             @endif
                         </div>
 
@@ -144,7 +131,8 @@ Session::put('permissions', $data['data']);
                             <div class="menu-content d-flex align-items-center">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}"
+                                    <img alt="Logo"
+                                        src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}"
                                         alt="image" />
                                 </div>
                                 <!--end::Avatar-->
@@ -154,7 +142,8 @@ Session::put('permissions', $data['data']);
                                         <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
                                         </span>
                                     </div>
-                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7 userEmail"></a>
+                                    <a href="#"
+                                        class="fw-semibold text-muted text-hover-primary fs-7 userEmail"></a>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -179,7 +168,7 @@ Session::put('permissions', $data['data']);
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="separator my-2"></div>
-                        <form action="{{url('/logout')}}" method="POST" class="logout-btn">
+                        <form action="{{ url('/logout') }}" method="POST" class="logout-btn">
                             @csrf
                             <button class="logout btn">
                                 <img src="{{ asset('img/icon/logout.svg') }}">

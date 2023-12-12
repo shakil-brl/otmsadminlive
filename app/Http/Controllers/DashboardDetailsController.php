@@ -33,15 +33,10 @@ class DashboardDetailsController extends Controller
     // 
     public function runningBatches(Request $request)
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $running_batches = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batch/running-batch', [
-                    'page' => $request->page ?? 1,
-                    'search' => $request->search,
-                ])->json();
-        // dd($running_batches);
+        $running_batches = ApiHttpClient::request('get', 'batch/running-batch', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
             $paginator = $this->customPaginate($running_batches, $request, route('dashboard_details.running_batches'));
@@ -63,21 +58,10 @@ class DashboardDetailsController extends Controller
     // 
     public function districts(Request $request)
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        // $total_districts = Http::withHeaders([
-        //     'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        // ])->get($app_url . 'districtslist', [
-        //             'page' => $request->page ?? 1,
-        //             'search' => $request->search,
-        //         ])->json();
-
-
         $total_districts = ApiHttpClient::request('get', 'districtslist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        //dd($total_districts);
         if ($total_districts['success'] == true) {
             $districts = $total_districts['data']['data'];
             $paginator = $this->customPaginate($total_districts, $request, route('dashboard_details.districts'));
@@ -93,15 +77,10 @@ class DashboardDetailsController extends Controller
     // 
     public function upazilas(Request $request)
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $total_upazilas = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'upazilaslist', [
-                    'page' => $request->page ?? 1,
-                    'search' => $request->search,
-                ])->json();
-        // dd($total_upazilas);
+        $total_upazilas = ApiHttpClient::request('get', 'upazilaslist', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
         if ($total_upazilas['success'] == true) {
             $upazilas = $total_upazilas['data']['data'];
             $paginator = $this->customPaginate($total_upazilas, $request, route('dashboard_details.upazilas'));
@@ -117,15 +96,10 @@ class DashboardDetailsController extends Controller
     // 
     public function partners(Request $request)
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $total_partners = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'partnerslist', [
-                    'page' => $request->page ?? 1,
-                    'search' => $request->search,
-                ])->json();
-        // dd($total_partners);
+        $total_partners = ApiHttpClient::request('get', 'partnerslist', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
         if ($total_partners['success'] == true) {
             $partners = $total_partners['data']['data'];
             $paginator = $this->customPaginate($total_partners, $request, route('dashboard_details.partners'));
