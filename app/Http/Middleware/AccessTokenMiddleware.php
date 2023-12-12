@@ -11,15 +11,19 @@ class AccessTokenMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (session()->has('access_token')) {
-            $tokenData = session('access_token');
-            $expirationTime = Carbon::parse($tokenData['expires_at']);
+
+        //dd(session('access_token.expires_at'));
+        if (session('access_token.access_token')) {
+            // $tokenData = session('access_token.access_token');
+
+            $expirationTime = Carbon::parse(session('access_token.expires_at'));
             // dd($expirationTime->isPast());
             if ($expirationTime->isPast()) {
-                session()->forget('access_token');
+                session()->flush();
                 return redirect('/login');
             }
         } else {
+            session()->flush();
             return redirect('/login');
         }
         return $next($request);
