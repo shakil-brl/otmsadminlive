@@ -33,11 +33,10 @@ class ApiController extends Controller
         $password = $request->input('password');
         try {
             $client = new Client();
-            $loginApiEndpoint = 'http://127.0.0.1:8080/tms-api/login';
-            $roleApiEndpoint = 'http://127.0.0.1:8080/tms-api/permissions';
-            // Update with your actual role endpoint
-            //$apiEndpoint = 'http://127.0.0.1:8080/tms-api/login';
-            // Step 1: Make the login API call
+            $app_url = \Str::finish(config('app.api_url'), '/');
+            $loginApiEndpoint = $app_url . 'login';
+            $roleApiEndpoint = $app_url . 'permissions';
+
             $loginOptions = [
                 'multipart' => [
                     ['name' => 'email', 'contents' => $email],
