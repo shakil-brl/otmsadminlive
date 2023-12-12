@@ -17,7 +17,7 @@
     </div>
     <table class="table table-bordered bg-white">
         <thead>
-            <th>S/N</th>
+            <th>SL</th>
             <th>Code</th>
             <th>Name</th>
             <th>Name (Bangla)</th>

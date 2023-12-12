@@ -40,6 +40,8 @@ return [
     'upazila_list' => 'Upazila List',
     'upazila_name' => 'Upazila Name',
     'upazila_code' => 'Upazila Code',
+    'search_here' => 'Search Here',
+    'search' => 'Search',
 
 
     

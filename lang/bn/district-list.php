@@ -40,6 +40,8 @@ return [
     'upazila_list' => 'উপজেলার তালিকা',
     'upazila_name' => 'উপজেলার নাম',
     'upazila_code' => 'উপজেলার কোড',
+    'search_here' => 'এখানে অনুসন্ধান করুন',
+    'search' => 'অনুসন্ধান করুন',
 
    
 
