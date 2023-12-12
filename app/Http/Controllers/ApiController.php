@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,6 @@ class ApiController extends Controller
         if (session('access_token.access_token')) {
             return redirect()->route('admins.dashboard');
         }
-
 
         //return view('token-form');
         return view('auth.users.signin');
@@ -99,4 +99,25 @@ class ApiController extends Controller
             return redirect()->route('login.show')->with('error', 'Please check your credentials and try again.');
         }
     }
+
+    public function logout()
+    {
+        try {
+            $response = ApiHttpClient::request('post', 'logout');
+            $responseData = $response->json();
+
+            if ($responseData['success'] == true) {
+                session()->flush();
+                return redirect('/')->with('success', 'Logout successful');
+            } else {
+                session()->flush();
+                return redirect('/')->with('error', 'Logout successful');
+            }
+        } catch (\Throwable $th) {
+            session()->flush();
+            return redirect('/')->with('error', 'Logout successful');
+        }
+
+    }
+
 }

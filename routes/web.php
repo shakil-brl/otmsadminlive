@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/token-form', [ApiController::class, 'showTokenForm']);
 Route::post('/get-token', [ApiController::class, 'getToken']);
+Route::post('/logout', [ApiController::class, 'logout']);
 
 // // Route::group(['middleware' => ['access.token']], function () {
 // //     Route::get('/', [HomeController::class, 'index'])->name('home.index');
