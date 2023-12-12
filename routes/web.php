@@ -38,12 +38,12 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/token-form', [ApiController::class, 'showTokenForm']);
+// Route::get('/token-form', [ApiController::class, 'showTokenForm']);
 Route::post('/get-token', [ApiController::class, 'getToken']);
 
-// Route::group(['middleware' => ['access.token']], function () {
-//     Route::get('/', [HomeController::class, 'index'])->name('home.index');
-// });
+// // Route::group(['middleware' => ['access.token']], function () {
+// //     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+// // });
 
 
 /**
