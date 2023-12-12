@@ -1,5 +1,5 @@
 $(function () {
-    let authToken = localStorage.getItem("authToken");
+    // let authToken = authToken;
     $(document).ready(function () {
         let selectValues;
         // Class definition
@@ -7,7 +7,7 @@ $(function () {
             // Private functions
             var demos = function () {
                 // multi select
-                $("#kt_select2_4").select2({
+                $("#kt_select2_3").select2({
                     placeholder: selectTrainer,
                 });
             };
@@ -147,7 +147,7 @@ $(function () {
                 processData: false,
                 url: link,
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                     "X-localization": language,
                 },
                 success: function (results) {
@@ -248,7 +248,7 @@ $(function () {
                 type: "GET",
                 data: {},
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                     "X-localization": language,
                 },
                 success: function (item) {
@@ -309,7 +309,7 @@ $(function () {
                         processData: false,
                         url: link,
                         headers: {
-                            Authorization: localStorage.getItem("authToken"),
+                            Authorization: authToken,
                             "X-localization": language,
                         },
                         success: function (results) {
@@ -440,7 +440,7 @@ $(function () {
                         type: "get",
                         url: url_link,
                         headers: {
-                            Authorization: localStorage.getItem("authToken"),
+                            Authorization: authToken,
                             "X-localization": language,
                         },
                         success: function (results) {

@@ -182,7 +182,7 @@ $(function () {
         let username = $("#kt_sign_in_form [name=username]").val();
         let password = $("#kt_sign_in_form [name=password]").val();
 
-        fd.append("username", username);
+        fd.append("email", username);
         fd.append("password", password);
         fd.append("_token", CSRF_TOKEN);
 
@@ -190,7 +190,7 @@ $(function () {
         localStorage.removeItem("authUser");
         localStorage.removeItem("rolePermission");
         localStorage.removeItem("token");
-
+        
         $.ajax({
             type: "post",
             data: fd,
@@ -205,7 +205,7 @@ $(function () {
                 if (results.success === true) {
                     const user = {
                         userId: results.user.id,
-                        fullName: results.user.fname + " " + results.user.lname,
+                        fullName: results.user.name,
                         username: results.user.username,
                         userEmail: results.user.email,
                         profileId: results.userType.ProfileId,
@@ -228,27 +228,21 @@ $(function () {
                     let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
                     let authStatus = 'login';
 
-                    $.ajax({
-                        type: 'POST',
-                        url: "/set-token",
-                        data: { '_token': CSRF_TOKEN, "accessToken": results.access_token, "tokenType": results.token_type },
-                        success: function (res) {
-                        }
-                    });
+                  
 
 
-                    $.ajax({
-                        type: 'post',
-                        url: "/store-auth-user",
-                        data: { authUser: authUserInfo, authStatus: authStatus, rolePermission: rolePermissionInfo, '_token': CSRF_TOKEN },
-                        success: function (response) {
-                            if (response.user.userRole == 'Trainee' || response.user.userRole == 'trainee') {
-                                window.open("/profile", "_self");
-                            } else {
-                                window.open("/admins/dashboard", "_self");
-                            }
-                        }
-                    });
+                    // $.ajax({
+                    //     type: 'post',
+                    //     url: "/store-auth-user",
+                    //     data: { authUser: authUserInfo, authStatus: authStatus, rolePermission: rolePermissionInfo, '_token': CSRF_TOKEN },
+                    //     success: function (response) {
+                    //         if (response.user.userRole == 'Trainee' || response.user.userRole == 'trainee') {
+                    //             window.open("/profile", "_self");
+                    //         } else {
+                    //             window.open("/admins/dashboard", "_self");
+                    //         }
+                    //     }
+                    // });
 
                 } else {
                     if (results.success === false && results.error === true) {
@@ -340,7 +334,7 @@ $(function () {
                     data: {},
                     dataType: "JSON",
                     success: function (results) {
-                        if (results.success === true) {
+                        if (results.message) {
                             swal.fire("!", results.message);
                             localStorage.removeItem("authToken");
                             localStorage.removeItem("authUser");

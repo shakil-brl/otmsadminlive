@@ -1,5 +1,5 @@
 $(function () {
-    let authToken = localStorage.getItem("authToken");
+    // let authToken = authToken;
     $(document).ready(function () {
         // Permission Create api call
         $("#create_permission").submit(function (e) {
@@ -27,7 +27,7 @@ $(function () {
                 processData: false,
                 url: link,
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                     "X-localization": language,
                 },
                 success: function (results) {
@@ -113,7 +113,7 @@ $(function () {
                 type: "GET",
                 data: {},
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                     "X-localization": language,
                 },
                 success: function (item) {
@@ -174,7 +174,7 @@ $(function () {
                         processData: false,
                         url: link,
                         headers: {
-                            Authorization: localStorage.getItem("authToken"),
+                            Authorization: authToken,
                             "X-localization": language,
                         },
                         success: function (results) {
@@ -305,7 +305,7 @@ $(function () {
                         type: "get",
                         url: url_link,
                         headers: {
-                            Authorization: localStorage.getItem("authToken"),
+                            Authorization: authToken,
                             "X-localization": language,
                         },
                         success: function (results) {
@@ -342,7 +342,7 @@ $(function () {
                 type: "GET",
                 data: {},
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                     "X-localization": language,
                 },
                 success: function (item) {
@@ -409,7 +409,7 @@ $(function () {
                         processData: false,
                         url: link,
                         headers: {
-                            Authorization: localStorage.getItem("authToken"),
+                            Authorization: authToken,
                             "X-localization": language,
                         },
                         success: function (results) {
