@@ -8,7 +8,8 @@ use Auth;
 
 class AuthUserController extends Controller
 {
-    public function setToken(Request $request){
+    public function setToken(Request $request)
+    {
         Session::put('accessToken', $request->accessToken);
         Session::put('tokenType', $request->tokenType);
         return 'success';
@@ -34,12 +35,12 @@ class AuthUserController extends Controller
             session(['accessPermission' => $accessArr]);
             $messge = 'AuthUser data stored successfully';
         } elseif ($flag == 'logout') {
-            $request->session()->forget(['authUser']);
-            $request->session()->forget(['rolePermission']);
-            $request->session()->forget(['accessPermission']);
+            // $request->session()->forget(['authUser']);
+            // $request->session()->forget(['rolePermission']);
+            // $request->session()->forget(['accessPermission']);
 
-            $request->session()->forget(['accessToken']);
-            $request->session()->forget(['tokenType']);
+            // $request->session()->forget(['accessToken']);
+            // $request->session()->forget(['tokenType']);
 
             Session::flush();
             Auth::logout();
