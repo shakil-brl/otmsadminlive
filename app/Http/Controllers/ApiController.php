@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ApiController extends Controller
 {
     public function showTokenForm()
     {
         //dd(Auth::check());
-        // dd(session()->all());
+        // Session::flush();
         if (session('access_token.access_token')) {
             return redirect()->route('admins.dashboard');
         }

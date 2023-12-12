@@ -65,13 +65,19 @@ class DashboardDetailsController extends Controller
     {
         $app_url = Str::finish(config('app.api_url'), '/');
 
-        $total_districts = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'districtslist', [
-                    'page' => $request->page ?? 1,
-                    'search' => $request->search,
-                ])->json();
-        // dd($total_districts);
+        // $total_districts = Http::withHeaders([
+        //     'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
+        // ])->get($app_url . 'districtslist', [
+        //             'page' => $request->page ?? 1,
+        //             'search' => $request->search,
+        //         ])->json();
+
+
+        $total_districts = ApiHttpClient::request('get', 'districtslist', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        //dd($total_districts);
         if ($total_districts['success'] == true) {
             $districts = $total_districts['data']['data'];
             $paginator = $this->customPaginate($total_districts, $request, route('dashboard_details.districts'));
