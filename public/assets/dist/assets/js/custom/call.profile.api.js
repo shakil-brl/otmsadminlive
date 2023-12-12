@@ -1,12 +1,12 @@
 $(function () {
     // profile data get api call
-    let authToken = localStorage.getItem("authToken");
+    // let authToken = authToken;
     let link = api_baseurl + "profile";
     $.ajax({
         type: "get",
         url: link,
         headers: {
-            Authorization: localStorage.getItem("authToken"),
+            Authorization: authToken,
         },
         data: {},
         dataType: "JSON",
@@ -137,7 +137,7 @@ $(function () {
                 type: "get",
                 url: district_api_link,
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                 },
                 data: {},
                 dataType: "JSON",
@@ -286,7 +286,7 @@ $(function () {
                 type: "get",
                 url: category_api_link,
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                 },
                 data: {},
                 dataType: "JSON",

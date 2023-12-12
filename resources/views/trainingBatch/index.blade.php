@@ -1,537 +1,536 @@
 @extends('layouts.auth-master')
 @section('content')
-    <!--begin::Content wrapper-->
-    <div class="d-flex flex-column flex-column-fluid">
-        <!--begin::Toolbar-->
-        <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-            <!--begin::Toolbar container-->
-            <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
-                <!--begin::Page title-->
-                <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                    <!--begin::Title-->
-                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                        {{ __('trainer-enrollment-list.trainer_batch_link_list') }}</h1>
-                    <!--end::Title-->
-                    <!--begin::Breadcrumb-->
-                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('home.index') }}"
-                                class="text-muted text-hover-primary">{{ __('division-list.home') }}</a>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted"> {{ __('batch-schedule.enroll_management') }}</li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Items-->
-                        <li class="breadcrumb-item text-muted">
-                            <a href=""class="text-muted text-hover-primary">
-                                {{ __('batch-schedule.batch_schedule') }}</a>
-                        </li>
-                        <!--end::Items-->
-                    </ul>
-                    <!--end::Breadcrumb-->
-                </div>
-                <!--end::Page title-->
-                <!--begin::Actions-->
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
+<!--begin::Content wrapper-->
+<div class="d-flex flex-column flex-column-fluid">
+    <!--begin::Toolbar-->
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+        <!--begin::Toolbar container-->
+        <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                <!--begin::Title-->
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                    {{ __('trainer-enrollment-list.trainer_batch_link_list') }}</h1>
+                <!--end::Title-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                        <a href="{{ route('home.index') }}" class="text-muted text-hover-primary">{{
+                            __('division-list.home') }}</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted"> {{ __('batch-schedule.enroll_management') }}</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Items-->
+                    <li class="breadcrumb-item text-muted">
+                        <a href="" class="text-muted text-hover-primary">
+                            {{ __('batch-schedule.batch_schedule') }}</a>
+                    </li>
+                    <!--end::Items-->
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page title-->
+            <!--begin::Actions-->
+            <div class="d-flex align-items-center gap-2 gap-lg-3">
 
-                </div>
-                <!--end::Actions-->
             </div>
-            <!--end::Toolbar container-->
+            <!--end::Actions-->
         </div>
-        <!--end::Toolbar-->
-        <!--begin::Content-->
-        <div id="kt_app_content" class="app-content flex-column-fluid">
-            <!--begin::Content container-->
-            <div id="kt_app_content_container" class="app-container container-xxl">
-                @include('layouts.partials.messages')
-                <!--begin::Card-->
-                <div class="card">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 pt-6">
-                        <!--begin::Card title-->
-                        <div class="card-title">
-                            <!--begin::Search-->
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                <form action="">
-                                    <input type="text" data-kt-user-order-filter="search"
-                                        class="form-control form-control-solid w-260px ps-13"
-                                        placeholder=" {{ __('batch-schedule.search_batch_schedule') }}" name="search"
-                                        value="{{ request('search') }}" />
-                                </form>
-                                {{-- <input type="text" data-kt-user-table-filter="search"
-                                    class="form-control form-control-solid w-250px ps-13" placeholder="Search user" /> --}}
-                                <!--begin::Export buttons-->
-                                <div id="kt_user_report_views_export" class="d-none"></div>
-                                <!--end::Export buttons-->
-                            </div>
-                            <!--end::Search-->
-                        </div>
-                        <!--begin::Card title-->
-                        <!--begin::Card toolbar-->
-                        <div class="card-toolbar">
-                            <!--begin::Export dropdown-->
-                            <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
-                                data-kt-menu-placement="bottom-end">
-                                <i class="ki-duotone ki-exit-up fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>{{ __('division-list.export_report') }}</button>
-                            <!--begin::Menu-->
-                            <div id="kt_user_report_views_export_menu"
-                                class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4"
-                                data-kt-menu="true">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="copy">{{ __('division-list.copy_clipboard') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="excel">{{ __('division-list.export_excel') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="csv">{{ __('division-list.export_csv') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="pdf">{{ __('division-list.export_pdf') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                            <!--begin::Toolbar-->
-                            <div class="d-flex justify-content-end px-3" data-kt-user-table-toolbar="base">
-                                <!--begin::Add Division-->
-                                <a href="" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#create_division">
-                                    <i class="ki-duotone ki-plus fs-2"></i>
-                                    {{ __('batch-schedule.add_batch_schedule') }}</a>
-                                <!--end::Add Division-->
-                            </div>
-                            <!--end::Toolbar-->
-                        </div>
-                        <!--end::Card toolbar-->
-                    </div>
-                    <!--end::Card header-->
-                    <!--begin::Card body-->
-                    <div class="card-body py-4" id="batch-container">
-                        <!--begin::Row-->
-                        <div class="row g-6 g-xl-9" id="batch-items-row">
-                        </div>
-                        <!--end::Row-->
-                    </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card-->
-            </div>
-            <!--end::Content container-->
-        </div>
-        <!--end::Content-->
+        <!--end::Toolbar container-->
     </div>
-    <!--End::Content wrapper-->
-
-    <!--begin::Modal - Create Batch Schedule-->
-    <div class="modal fade" id="kt_modal_traning_schedule" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-950px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <!--begin::Form-->
-                <form class="form" action="" id="kt_modal_store_batch_schedule_form">
-                    <input type="hidden" name="training_batch_id">
-                    <input type="hidden" name="provider_id">
-                    <input type="hidden" name="training_id">
-                    <!--begin::Modal header-->
-                    <div class="modal-header" id="kt_modal_update_user_header">
-                        <!--begin::Modal title-->
-                        <h2 class="fw-bold">{{ __('batch-schedule.create_class_schedule') }}</h2>
-                        <!--end::Modal title-->
-                        <!--begin::Close-->
-                        <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                            <i class="ki-duotone ki-cross fs-1">
+    <!--end::Toolbar-->
+    <!--begin::Content-->
+    <div id="kt_app_content" class="app-content flex-column-fluid">
+        <!--begin::Content container-->
+        <div id="kt_app_content_container" class="app-container container-xxl">
+            @include('layouts.partials.messages')
+            <!--begin::Card-->
+            <div class="card">
+                <!--begin::Card header-->
+                <div class="card-header border-0 pt-6">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <!--begin::Search-->
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>
+                            <form action="">
+                                <input type="text" data-kt-user-order-filter="search"
+                                    class="form-control form-control-solid w-260px ps-13"
+                                    placeholder=" {{ __('batch-schedule.search_batch_schedule') }}" name="search"
+                                    value="{{ request('search') }}" />
+                            </form>
+                            {{-- <input type="text" data-kt-user-table-filter="search"
+                                class="form-control form-control-solid w-250px ps-13" placeholder="Search user" /> --}}
+                            <!--begin::Export buttons-->
+                            <div id="kt_user_report_views_export" class="d-none"></div>
+                            <!--end::Export buttons-->
                         </div>
-                        <!--end::Close-->
+                        <!--end::Search-->
                     </div>
-                    <!--end::Modal header-->
-                    <!--begin::Modal body-->
-                    <div class="modal-body py-10 px-lg-17">
-                        <!--begin::Scroll-->
-                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_user_scroll"
-                            data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
-                            data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_user_header"
-                            data-kt-scroll-wrappers="#kt_modal_update_user_scroll" data-kt-scroll-offset="300px">
-                            <!--begin::Address toggle-->
-                            <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
-                                href="#kt_modal_traning_schedule_time" role="button" aria-expanded="false"
-                                aria-controls="kt_modal_course_location">{{ __('batch-schedule.class_schedule_time') }}
-                                <span class="ms-2 rotate-180">
-                                    <i class="ki-duotone ki-down fs-3"></i>
-                                </span>
+                    <!--begin::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                        <!--begin::Export dropdown-->
+                        <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
+                            data-kt-menu-placement="bottom-end">
+                            <i class="ki-duotone ki-exit-up fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>{{ __('division-list.export_report') }}</button>
+                        <!--begin::Menu-->
+                        <div id="kt_user_report_views_export_menu"
+                            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4"
+                            data-kt-menu="true">
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3" data-kt-user-export="copy">{{
+                                    __('division-list.copy_clipboard') }}</a>
                             </div>
-                            <!--end::Address toggle-->
-                            <!--begin::User form-->
-                            <div id="kt_modal_traning_schedule_time" class="collapse show">
-                                <!--begin::Input group-->
-                                <div class="row g-9 mb-8">
-                                    <!-- begin:: Class Time Col -->
-                                    <div class="fv-row col-md-6">
-                                        <label class="fs-6 fw-semibold mb-2">{{ __('batch-schedule.class_time') }}</label>
-                                        <input name="class_time" class="form-control form-control-solid ps-12"
-                                            placeholder="{{ __('batch-schedule.pick_class_time') }}"
-                                            id="kt_datepicker_8" />
-                                        <span class="text-danger form-message-error-class_time">
+                            <!--end::Menu item-->
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3" data-kt-user-export="excel">{{
+                                    __('division-list.export_excel') }}</a>
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3" data-kt-user-export="csv">{{
+                                    __('division-list.export_csv') }}</a>
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="#" class="menu-link px-3" data-kt-user-export="pdf">{{
+                                    __('division-list.export_pdf') }}</a>
+                            </div>
+                            <!--end::Menu item-->
+                        </div>
+                        <!--end::Menu-->
+                        <!--begin::Toolbar-->
+                        <div class="d-flex justify-content-end px-3" data-kt-user-table-toolbar="base">
+                            <!--begin::Add Division-->
+                            <a href="" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#create_division">
+                                <i class="ki-duotone ki-plus fs-2"></i>
+                                {{ __('batch-schedule.add_batch_schedule') }}</a>
+                            <!--end::Add Division-->
+                        </div>
+                        <!--end::Toolbar-->
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body py-4" id="batch-container">
+                    <!--begin::Row-->
+                    <div class="row g-6 g-xl-9" id="batch-items-row">
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Content container-->
+    </div>
+    <!--end::Content-->
+</div>
+<!--End::Content wrapper-->
 
-                                        </span>
-                                    </div>
-                                    <!--end: Class Time Col -->
-                                    <!-- begin:: Duration Col -->
-                                    <div class="col-md-6 fv-row">
-                                        <label
-                                            class="fs-6 fw-semibold mb-2">{{ __('batch-schedule.class_duration') }}</label>
-                                        <input type="text" class="form-control form-control-solid"
-                                            placeholder="{{ __('batch-schedule.class_duration_minute') }}"
-                                            name="class_duration">
-                                        <span class="form-message-error-class_duration">
-
-                                        </span>
-                                    </div>
-                                    <!--end: Duration Col -->
-                                </div>
-                                <!--end::Input group-->
-                            </div>
-                            <!--End::User form-->
-                            <!--begin::Days toggle-->
-                            <div class="fw-bolder fs-3 rotate collapsible mb-3" data-bs-toggle="collapse"
-                                href="#kt_modal_course_weekly_day" role="button" aria-expanded="false"
-                                aria-controls="kt_modal_course_weekly_day">
-                                {{ __('batch-schedule.weekly_class_schedule') }}
-                                <span class="ms-2 rotate-180">
-                                    <i class="ki-duotone ki-down fs-3"></i>
-                                </span>
-                            </div>
-                            <!--end::Days toggle-->
+<!--begin::Modal - Create Batch Schedule-->
+<div class="modal fade" id="kt_modal_traning_schedule" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-950px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Form-->
+            <form class="form" action="" id="kt_modal_store_batch_schedule_form">
+                <input type="hidden" name="training_batch_id">
+                <input type="hidden" name="provider_id">
+                <input type="hidden" name="training_id">
+                <!--begin::Modal header-->
+                <div class="modal-header" id="kt_modal_update_user_header">
+                    <!--begin::Modal title-->
+                    <h2 class="fw-bold">{{ __('batch-schedule.create_class_schedule') }}</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--end::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body py-10 px-lg-17">
+                    <!--begin::Scroll-->
+                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_user_scroll"
+                        data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+                        data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_user_header"
+                        data-kt-scroll-wrappers="#kt_modal_update_user_scroll" data-kt-scroll-offset="300px">
+                        <!--begin::Address toggle-->
+                        <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
+                            href="#kt_modal_traning_schedule_time" role="button" aria-expanded="false"
+                            aria-controls="kt_modal_course_location">{{ __('batch-schedule.class_schedule_time') }}
+                            <span class="ms-2 rotate-180">
+                                <i class="ki-duotone ki-down fs-3"></i>
+                            </span>
+                        </div>
+                        <!--end::Address toggle-->
+                        <!--begin::User form-->
+                        <div id="kt_modal_traning_schedule_time" class="collapse show">
                             <!--begin::Input group-->
-                            <div id="kt_modal_course_weekly_day" class="collapse show">
-                                <!--begin::Input group-->
-                                <div class="row">
-                                    <!--begin::Roles-->
-                                    <!--begin::Input row-->
-                                    <div class='separator separator-dashed my-3'></div>
-                                    <div class="fv-row col-md-2 my-2">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <!--begin::Input-->
-                                            <input class="form-check-input me-3" name="saturday" type="checkbox"
-                                                value="Saturday" id="kt_modal_update_role_option_0" />
-                                            <!--end::Input-->
-                                            <!--begin::Label-->
-                                            <label class="form-check-label" for="kt_modal_update_role_option_0">
-                                                <div class="fw-bold text-gray-900">
-                                                    {{ __('batch-schedule.weekly_day_sat') }}</div>
-                                            </label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                    <!--end::Input row-->
-                                    <!--begin::Input row-->
-                                    <div class="fv-row col-md-2 my-2">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <!--begin::Input-->
-                                            <input class="form-check-input me-3" name="sunday" type="checkbox"
-                                                value="Sunday" id="kt_modal_update_role_option_1" />
-                                            <!--end::Input-->
-                                            <!--begin::Label-->
-                                            <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                                <div class="fw-bold text-gray-800">
-                                                    {{ __('batch-schedule.weekly_day_sun') }}</div>
-                                            </label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                    <!--end::Input row-->
-                                    <!--begin::Input row-->
-                                    <div class="fv-row col-md-2 my-2">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <!--begin::Input-->
-                                            <input class="form-check-input me-3" name="monday" type="checkbox"
-                                                value="Monday" id="kt_modal_update_role_option_1" />
-                                            <!--end::Input-->
-                                            <!--begin::Label-->
-                                            <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                                <div class="fw-bold text-gray-800">
-                                                    {{ __('batch-schedule.weekly_day_mon') }}</div>
-                                            </label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                    <!--end::Input row-->
-                                    <!--begin::Input row-->
-                                    <div class="fv-row col-md-2 my-2">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <!--begin::Input-->
-                                            <input class="form-check-input me-3" name="tuesday" type="checkbox"
-                                                value="Tuesday" id="kt_modal_update_role_option_1" />
-                                            <!--end::Input-->
-                                            <!--begin::Label-->
-                                            <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                                <div class="fw-bold text-gray-800">
-                                                    {{ __('batch-schedule.weekly_day_tue') }}</div>
-                                            </label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                    <!--end::Input row-->
-                                    <!--begin::Input row-->
-                                    <div class="fv-row col-md-2 my-2">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <!--begin::Input-->
-                                            <input class="form-check-input me-3" name="wednesday" type="checkbox"
-                                                value="Wednesday" id="kt_modal_update_role_option_1" />
-                                            <!--end::Input-->
-                                            <!--begin::Label-->
-                                            <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                                <div class="fw-bold text-gray-800">
-                                                    {{ __('batch-schedule.weekly_day_wed') }}</div>
-                                            </label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                    <!--end::Input row-->
-                                    <!--begin::Input row-->
-                                    <div class="fv-row col-md-2 my-2">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <!--begin::Input-->
-                                            <input class="form-check-input me-3" name="thursday" type="checkbox"
-                                                value="Thursday" id="kt_modal_update_role_option_1" />
-                                            <!--end::Input-->
-                                            <!--begin::Label-->
-                                            <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                                <div class="fw-bold text-gray-800">
-                                                    {{ __('batch-schedule.weekly_day_thu') }}</div>
-                                            </label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                    <!--end::Input row-->
-                                    <!--begin::Input row-->
-                                    <div class="fv-row col-md-2 my-2">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <!--begin::Input-->
-                                            <input class="form-check-input me-3" name="friday" type="checkbox"
-                                                value="Friday" id="kt_modal_update_role_option_1" />
-                                            <!--end::Input-->
-                                            <!--begin::Label-->
-                                            <label class="form-check-label" for="kt_modal_update_role_option_1">
-                                                <div class="fw-bold text-gray-800">
-                                                    {{ __('batch-schedule.weekly_day_fri') }}</div>
-                                            </label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                    <!--end::Input row-->
-                                    <div class='separator separator-dashed my-2'></div>
-                                </div>
-                                <!--end::Roles-->
-                                <span class="text-danger form-message-error-class_days">
+                            <div class="row g-9 mb-8">
+                                <!-- begin:: Class Time Col -->
+                                <div class="fv-row col-md-6">
+                                    <label class="fs-6 fw-semibold mb-2">{{ __('batch-schedule.class_time') }}</label>
+                                    <input name="class_time" class="form-control form-control-solid ps-12"
+                                        placeholder="{{ __('batch-schedule.pick_class_time') }}" id="kt_datepicker_8" />
+                                    <span class="text-danger form-message-error-class_time">
 
-                                </span>
+                                    </span>
+                                </div>
+                                <!--end: Class Time Col -->
+                                <!-- begin:: Duration Col -->
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-semibold mb-2">{{ __('batch-schedule.class_duration')
+                                        }}</label>
+                                    <input type="text" class="form-control form-control-solid"
+                                        placeholder="{{ __('batch-schedule.class_duration_minute') }}"
+                                        name="class_duration">
+                                    <span class="form-message-error-class_duration">
+
+                                    </span>
+                                </div>
+                                <!--end: Duration Col -->
                             </div>
                             <!--end::Input group-->
                         </div>
-                        <!--end::Scroll-->
-                    </div>
-                    <!--end::Modal body-->
-                    <!--begin::Modal footer-->
-                    <div class="modal-footer flex-center">
-                        <!--begin::Button-->
-                        <button type="reset" class="btn btn-light me-3"
-                            data-bs-dismiss="modal">{{ __('batch-schedule.discard') }}</button>
-                        <!--end::Button-->
-                        <!--begin::Button-->
-                        <button type="submit" id="addCourseScheduleBtn" class="btn btn-primary"
-                            data-kt-users-modal-action="submit">
-                            <span class="indicator-label">{{ __('batch-schedule.submit') }}</span>
-                            <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                        <!--end::Button-->
-                    </div>
-                    <!--end::Modal footer-->
-                </form>
-                <!--end::Form-->
-            </div>
-        </div>
-    </div>
-    <!--end::Modal - Create Batch Schedule-->
-    <!--begin::Modal - link trainers-->
-    <div class="modal fade" id="link_trainers_batches" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-950px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <div class="modal-header" id="kt_modal_update_trainer_header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bold">{{ __('batch-schedule.tariner_link_batch') }}</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                    <!--end::Close-->
-                </div>
-                <!--begin::Provider added Form-->
-                <form id="link_trainers_form" method="post" class="form m-7" action="">
-                    @csrf
-                    <!--begin::Scroll-->
-                    <div class="d-flex flex-column scroll-y me-n7 pe-7">
-                        <input type="hidden" name="batch-id">
-                        <input type="hidden" name="provider-id">
-                        <!--start::Input group-->
-                        <div class="fv-row mb-7">
-                            <label
-                                class="col-form-label text-right col-lg-3 col-sm-12">{{ __('batch-schedule.triner_list') }}</label>
-                            <div class="col">
-                                <select class="form-control select2" id="kt_select2_3" multiple="multiple">
-
-                                </select>
-                                <span class="form-message-error-trainer_ids">
-
-                                </span>
+                        <!--End::User form-->
+                        <!--begin::Days toggle-->
+                        <div class="fw-bolder fs-3 rotate collapsible mb-3" data-bs-toggle="collapse"
+                            href="#kt_modal_course_weekly_day" role="button" aria-expanded="false"
+                            aria-controls="kt_modal_course_weekly_day">
+                            {{ __('batch-schedule.weekly_class_schedule') }}
+                            <span class="ms-2 rotate-180">
+                                <i class="ki-duotone ki-down fs-3"></i>
+                            </span>
+                        </div>
+                        <!--end::Days toggle-->
+                        <!--begin::Input group-->
+                        <div id="kt_modal_course_weekly_day" class="collapse show">
+                            <!--begin::Input group-->
+                            <div class="row">
+                                <!--begin::Roles-->
+                                <!--begin::Input row-->
+                                <div class='separator separator-dashed my-3'></div>
+                                <div class="fv-row col-md-2 my-2">
+                                    <!--begin::Radio-->
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <!--begin::Input-->
+                                        <input class="form-check-input me-3" name="saturday" type="checkbox"
+                                            value="Saturday" id="kt_modal_update_role_option_0" />
+                                        <!--end::Input-->
+                                        <!--begin::Label-->
+                                        <label class="form-check-label" for="kt_modal_update_role_option_0">
+                                            <div class="fw-bold text-gray-900">
+                                                {{ __('batch-schedule.weekly_day_sat') }}</div>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Radio-->
+                                </div>
+                                <!--end::Input row-->
+                                <!--begin::Input row-->
+                                <div class="fv-row col-md-2 my-2">
+                                    <!--begin::Radio-->
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <!--begin::Input-->
+                                        <input class="form-check-input me-3" name="sunday" type="checkbox"
+                                            value="Sunday" id="kt_modal_update_role_option_1" />
+                                        <!--end::Input-->
+                                        <!--begin::Label-->
+                                        <label class="form-check-label" for="kt_modal_update_role_option_1">
+                                            <div class="fw-bold text-gray-800">
+                                                {{ __('batch-schedule.weekly_day_sun') }}</div>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Radio-->
+                                </div>
+                                <!--end::Input row-->
+                                <!--begin::Input row-->
+                                <div class="fv-row col-md-2 my-2">
+                                    <!--begin::Radio-->
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <!--begin::Input-->
+                                        <input class="form-check-input me-3" name="monday" type="checkbox"
+                                            value="Monday" id="kt_modal_update_role_option_1" />
+                                        <!--end::Input-->
+                                        <!--begin::Label-->
+                                        <label class="form-check-label" for="kt_modal_update_role_option_1">
+                                            <div class="fw-bold text-gray-800">
+                                                {{ __('batch-schedule.weekly_day_mon') }}</div>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Radio-->
+                                </div>
+                                <!--end::Input row-->
+                                <!--begin::Input row-->
+                                <div class="fv-row col-md-2 my-2">
+                                    <!--begin::Radio-->
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <!--begin::Input-->
+                                        <input class="form-check-input me-3" name="tuesday" type="checkbox"
+                                            value="Tuesday" id="kt_modal_update_role_option_1" />
+                                        <!--end::Input-->
+                                        <!--begin::Label-->
+                                        <label class="form-check-label" for="kt_modal_update_role_option_1">
+                                            <div class="fw-bold text-gray-800">
+                                                {{ __('batch-schedule.weekly_day_tue') }}</div>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Radio-->
+                                </div>
+                                <!--end::Input row-->
+                                <!--begin::Input row-->
+                                <div class="fv-row col-md-2 my-2">
+                                    <!--begin::Radio-->
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <!--begin::Input-->
+                                        <input class="form-check-input me-3" name="wednesday" type="checkbox"
+                                            value="Wednesday" id="kt_modal_update_role_option_1" />
+                                        <!--end::Input-->
+                                        <!--begin::Label-->
+                                        <label class="form-check-label" for="kt_modal_update_role_option_1">
+                                            <div class="fw-bold text-gray-800">
+                                                {{ __('batch-schedule.weekly_day_wed') }}</div>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Radio-->
+                                </div>
+                                <!--end::Input row-->
+                                <!--begin::Input row-->
+                                <div class="fv-row col-md-2 my-2">
+                                    <!--begin::Radio-->
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <!--begin::Input-->
+                                        <input class="form-check-input me-3" name="thursday" type="checkbox"
+                                            value="Thursday" id="kt_modal_update_role_option_1" />
+                                        <!--end::Input-->
+                                        <!--begin::Label-->
+                                        <label class="form-check-label" for="kt_modal_update_role_option_1">
+                                            <div class="fw-bold text-gray-800">
+                                                {{ __('batch-schedule.weekly_day_thu') }}</div>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Radio-->
+                                </div>
+                                <!--end::Input row-->
+                                <!--begin::Input row-->
+                                <div class="fv-row col-md-2 my-2">
+                                    <!--begin::Radio-->
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <!--begin::Input-->
+                                        <input class="form-check-input me-3" name="friday" type="checkbox"
+                                            value="Friday" id="kt_modal_update_role_option_1" />
+                                        <!--end::Input-->
+                                        <!--begin::Label-->
+                                        <label class="form-check-label" for="kt_modal_update_role_option_1">
+                                            <div class="fw-bold text-gray-800">
+                                                {{ __('batch-schedule.weekly_day_fri') }}</div>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Radio-->
+                                </div>
+                                <!--end::Input row-->
+                                <div class='separator separator-dashed my-2'></div>
                             </div>
+                            <!--end::Roles-->
+                            <span class="text-danger form-message-error-class_days">
+
+                            </span>
                         </div>
                         <!--end::Input group-->
-                        <div class='separator separator-dashed my-2'></div>
                     </div>
                     <!--end::Scroll-->
-                    <!--begin::Actions-->
-                    <div class="text-center pt-15">
-                        <a href="#" type="reset" data-bs-dismiss="modal" class="btn btn-light me-3"
-                            data-kt-users-modal-action="cancel">{{ __('provider-list.discard') }}</a>
-                        <button type="submit" class="btn btn-primary">
-                            <span class="indicator-label">{{ __('provider-list.submit') }}</span>
-                            <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>
-                    <!--end::Actions-->
-                </form>
-                <!--Provider added end::Form-->
-            </div>
-        </div>
-    </div>
-    <!--end::Modal - link trainers-->
-    <!--begin::Modal - link coordinator-->
-    <div class="modal fade" id="link_coordinator_batch" tabindex="-1" aria-hidden="true">
-        <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-950px">
-            <!--begin::Modal content-->
-            <div class="modal-content">
-                <div class="modal-header" id="kt_modal_update_trainer_header">
-                    <!--begin::Modal title-->
-                    <h2 class="fw-bold">{{ __('batch-schedule.tariner_link_batch') }}</h2>
-                    <!--end::Modal title-->
-                    <!--begin::Close-->
-                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </div>
-                    <!--end::Close-->
                 </div>
-                <!--begin::Provider added Form-->
-                <form id="link_coordinator_form" method="post" class="form m-7" action="">
-                    @csrf
-                    <!--begin::Scroll-->
-                    <div class="d-flex flex-column scroll-y me-n7 pe-7">
-                        <input type="hidden" name="batch-id">
-                        <input type="hidden" name="provider-id">
-                        <!--start::Input group-->
-                        <div class="fv-row mb-7">
-                            <label
-                                class="col-form-label text-right col-lg-3 col-sm-12">{{ __('batch-schedule.triner_list') }}</label>
-                            <div class="col">
-                                <select class="form-control select2" id="kt_select2_3" multiple="multiple">
-
-                                </select>
-                                <span class="form-message-error-trainer_ids">
-
-                                </span>
-                            </div>
-                        </div>
-                        <!--end::Input group-->
-                        <div class='separator separator-dashed my-2'></div>
-                    </div>
-                    <!--end::Scroll-->
-                    <!--begin::Actions-->
-                    <div class="text-center pt-15">
-                        <a href="#" type="reset" data-bs-dismiss="modal" class="btn btn-light me-3"
-                            data-kt-users-modal-action="cancel">{{ __('provider-list.discard') }}</a>
-                        <button type="submit" class="btn btn-primary">
-                            <span class="indicator-label">{{ __('provider-list.submit') }}</span>
-                            <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>
-                    <!--end::Actions-->
-                </form>
-                <!--Provider added end::Form-->
-            </div>
+                <!--end::Modal body-->
+                <!--begin::Modal footer-->
+                <div class="modal-footer flex-center">
+                    <!--begin::Button-->
+                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">{{
+                        __('batch-schedule.discard') }}</button>
+                    <!--end::Button-->
+                    <!--begin::Button-->
+                    <button type="submit" id="addCourseScheduleBtn" class="btn btn-primary"
+                        data-kt-users-modal-action="submit">
+                        <span class="indicator-label">{{ __('batch-schedule.submit') }}</span>
+                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                    <!--end::Button-->
+                </div>
+                <!--end::Modal footer-->
+            </form>
+            <!--end::Form-->
         </div>
     </div>
-    <!--end::Modal - link trainers-->
+</div>
+<!--end::Modal - Create Batch Schedule-->
+<!--begin::Modal - link trainers-->
+<div class="modal fade" id="link_trainers_batches" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-950px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" id="kt_modal_update_trainer_header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bold">{{ __('batch-schedule.tariner_link_batch') }}</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Provider added Form-->
+            <form id="link_trainers_form" method="post" class="form m-7" action="">
+                @csrf
+                <!--begin::Scroll-->
+                <div class="d-flex flex-column scroll-y me-n7 pe-7">
+                    <input type="hidden" name="batch-id">
+                    <input type="hidden" name="provider-id">
+                    <!--start::Input group-->
+                    <div class="fv-row mb-7">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12">{{ __('batch-schedule.triner_list')
+                            }}</label>
+                        <div class="col">
+                            <select class="form-control select2" id="kt_select2_3" multiple="multiple">
+
+                            </select>
+                            <span class="form-message-error-trainer_ids">
+
+                            </span>
+                        </div>
+                    </div>
+                    <!--end::Input group-->
+                    <div class='separator separator-dashed my-2'></div>
+                </div>
+                <!--end::Scroll-->
+                <!--begin::Actions-->
+                <div class="text-center pt-15">
+                    <a href="#" type="reset" data-bs-dismiss="modal" class="btn btn-light me-3"
+                        data-kt-users-modal-action="cancel">{{ __('provider-list.discard') }}</a>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="indicator-label">{{ __('provider-list.submit') }}</span>
+                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                </div>
+                <!--end::Actions-->
+            </form>
+            <!--Provider added end::Form-->
+        </div>
+    </div>
+</div>
+<!--end::Modal - link trainers-->
+<!--begin::Modal - link coordinator-->
+<div class="modal fade" id="link_coordinator_batch" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-950px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" id="kt_modal_update_trainer_header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bold">{{ __('batch-schedule.tariner_link_batch') }}</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Provider added Form-->
+            <form id="link_coordinator_form" method="post" class="form m-7" action="">
+                @csrf
+                <!--begin::Scroll-->
+                <div class="d-flex flex-column scroll-y me-n7 pe-7">
+                    <input type="hidden" name="batch-id">
+                    <input type="hidden" name="provider-id">
+                    <!--start::Input group-->
+                    <div class="fv-row mb-7">
+                        <label class="col-form-label text-right col-lg-3 col-sm-12">{{ __('batch-schedule.triner_list')
+                            }}</label>
+                        <div class="col">
+                            <select class="form-control select2" id="kt_select2_3" multiple="multiple">
+
+                            </select>
+                            <span class="form-message-error-trainer_ids">
+
+                            </span>
+                        </div>
+                    </div>
+                    <!--end::Input group-->
+                    <div class='separator separator-dashed my-2'></div>
+                </div>
+                <!--end::Scroll-->
+                <!--begin::Actions-->
+                <div class="text-center pt-15">
+                    <a href="#" type="reset" data-bs-dismiss="modal" class="btn btn-light me-3"
+                        data-kt-users-modal-action="cancel">{{ __('provider-list.discard') }}</a>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="indicator-label">{{ __('provider-list.submit') }}</span>
+                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                </div>
+                <!--end::Actions-->
+            </form>
+            <!--Provider added end::Form-->
+        </div>
+    </div>
+</div>
+<!--end::Modal - link trainers-->
 @section('scripts')
-    <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/apps/user-management/users/list/export-users.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/pages/user/general.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/call.training.schedule.api.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/call.trainer.api.js') }}"></script>
-    <script>
-        let batchContainer = $("#batch-container");
+<!--begin::Custom Javascript(used for this page only)-->
+<script src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="{{ asset('assets/dist/assets/js/custom/apps/user-management/users/list/export-users.js') }}"></script>
+<script src="{{ asset('assets/dist/assets/js/custom/pages/user/general.js') }}"></script>
+<script src="{{ asset('assets/dist/assets/js/custom/call.training.schedule.api.js') }}"></script>
+<script src="{{ asset('assets/dist/assets/js/custom/call.trainer.api.js') }}"></script>
+<script>
+    let batchContainer = $("#batch-container");
         let batchItemsRow = $("#batch-items-row");
         let training = " {{ __('batch-schedule.training') }}";
         let trainingLocation = " {{ __('batch-schedule.training_location') }}";
@@ -559,7 +558,7 @@
             axios
                 .get(link, {
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                     },
                 })
                 .then((response) => {
@@ -795,6 +794,6 @@
                 }
             );
         });
-    </script>
+</script>
 @endsection
 @endsection

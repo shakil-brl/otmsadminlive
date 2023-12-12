@@ -22,7 +22,7 @@ $(function () {
             processData: false,
             url: link,
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (results) {
                 if (results.success === true) {
@@ -73,7 +73,7 @@ $(function () {
             type: "GET",
             data: {},
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (item) {
                 console.log(item);
@@ -124,7 +124,7 @@ $(function () {
                     processData: false,
                     url: link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                     },
                     success: function (results) {
                         if (results.success === true) {
@@ -189,7 +189,7 @@ $(function () {
                     type: "get",
                     url: url_link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                     },
                     success: function (results) {
                         if (results.success === true) {
@@ -226,7 +226,7 @@ $(function () {
             type: "GET",
             data: {},
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (results) {
                 if (results.success === true) {
@@ -274,7 +274,7 @@ $(function () {
             processData: false,
             url: link,
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (results) {
                 if (results.success === true) {
@@ -339,7 +339,7 @@ $(function () {
             type: "GET",
             data: {},
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (item) {
                 let allDivisions = item.data.divisions;
@@ -412,7 +412,7 @@ $(function () {
                     processData: false,
                     url: link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                     },
                     success: function (results) {
                         if (results.success === true) {
@@ -493,7 +493,7 @@ $(function () {
                     type: "get",
                     url: url_link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                     },
                     success: function (results) {
                         if (results.success === true) {
@@ -531,7 +531,7 @@ $(function () {
             type: "GET",
             data: {},
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (results) {
                 if (results.success === true) {
@@ -578,7 +578,7 @@ $(function () {
             processData: false,
             url: link,
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (results) {
                 if (results.success === true) {
@@ -643,7 +643,7 @@ $(function () {
             type: "GET",
             data: {},
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (item) {
                 let allDistricts = item.data.districts;
@@ -716,7 +716,7 @@ $(function () {
                     processData: false,
                     url: link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                     },
                     success: function (results) {
                         if (results.success === true) {
@@ -797,7 +797,7 @@ $(function () {
                     type: "get",
                     url: url_link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                     },
                     success: function (results) {
                         if (results.success === true) {

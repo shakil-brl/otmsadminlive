@@ -1,5 +1,5 @@
 $(function () {
-    let authToken = localStorage.getItem("authToken");
+    // let authToken = authToken;
     let localUserAvatarUrl =
         api_assets_baseurl + "assets/dist/assets/media/svg/avatars/blank.svg";
     let userTbody = $("#user-tbody");
@@ -123,7 +123,7 @@ $(function () {
         $("#open-create-user-modal").on("click", function () {
             let roleSelector = $("#kt_modal_add_admin_form #role_id");
             let role_api_link = api_baseurl + "role";
-            let authToken = localStorage.getItem("authToken");
+            // let authToken = authToken;
             //console.log(roleSelector);
             populateRoleOptions(authToken, role_api_link, roleSelector);
 
@@ -218,7 +218,7 @@ $(function () {
                     );
                     if (userData.role_id) {
                         let role_api_link = api_baseurl + "role";
-                        let authToken = localStorage.getItem("authToken");
+                        // let authToken = authToken;
                         let selectedOptionId = userData.role_id;
 
                         populateRoleOptions(
@@ -260,7 +260,7 @@ $(function () {
                         }
                     } else {
                         let role_api_link = api_baseurl + "role";
-                        let authToken = localStorage.getItem("authToken");
+                        // let authToken = authToken;
 
                         populateRoleOptions(
                             authToken,

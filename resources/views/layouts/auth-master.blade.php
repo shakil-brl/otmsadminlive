@@ -48,6 +48,15 @@
     </style>
     <!--end::Global Stylesheets Bundle-->
 
+    {{-- @dump( Session::get('access_token.access_token')); --}}
+    @if(Session::get('access_token.access_token'))
+    <script>
+        // Store the access token in a JavaScript variable
+var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+//alert( accessToken);
+    </script>
+    @endif
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -184,84 +193,17 @@
         let admin_baseurl = '{{ route('home.index') }}';
         let api_baseurl = '{{ config('app.api_url') }}';
         let api_assets_baseurl = '{{ config('app.api_asset_url') }}';
-        let authToken = localStorage.getItem('authToken');
-        let token = localStorage.getItem('token');
-        if (authToken == null) {
-            window.open('/', '_self')
-        }
+        // let authToken = localStorage.getItem('authToken');
+        // let token = localStorage.getItem('token');
+        // if (authToken == null) {
+        //     window.open('/', '_self')
+        // }
 
         let url = "{{ route('changeLang') }}";
         let language = "{{ session()->get('locale') }}";
         let selectDivision = "{{ __('district-list.select_division') }}";
         let selectCourseCategory = "{{ __('sub-categorie-list.select_category') }}";
         let selectDistrict = "{{ __('upazila-list.select_district') }}";
-
-        const JWT = token;
-
-        const jwtPayload = JSON.parse(window.atob(JWT.split('.')[1]))
-        
-        const isExpired = Date.now() >= jwtPayload.exp*1000;
-        if (isExpired == true) {
-            console.log('expired');
-            let url = api_baseurl + "refresh-token";
-            $.ajax({
-                type: "get",
-                url: url,
-                headers: {
-                    'Authorization': authToken
-                },
-                data: {},
-                dataType: "JSON",
-                success: function(results) {
-                    console.log(results);
-                    if (results.success === true) {
-
-                        localStorage.removeItem("authToken");
-                        localStorage.removeItem("token");
-                        localStorage.setItem(
-                            "authToken",
-                            results.token_type + " " + results.access_token
-                        );
-                        localStorage.setItem(
-                            "token",
-                            results.access_token
-                        );
-                        let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-                        let authUserInfo = JSON.parse(localStorage.getItem('authUser'));
-                        let rolePermissionInfo = JSON.parse(localStorage.getItem('rolePermission'));
-                        let authStatus = 'login';
-                        $.ajax({
-                            type: 'POST',
-                            url: "/set-token",
-                            data: {
-                                '_token': CSRF_TOKEN,
-                                "accessToken": results.access_token,
-                                "tokenType": results.token_type
-                            },
-                            success: function(res) {
-                                console.log('expired too');
-                                $.ajax({
-                                    type: 'post',
-                                    url: "/store-auth-user",
-                                    data: {
-                                        authUser: authUserInfo,
-                                        authStatus: authStatus,
-                                        rolePermission: rolePermissionInfo,
-                                        '_token': CSRF_TOKEN
-                                    },
-                                    success: function(response) {}
-                                });
-                            }
-                        });
-                    } else {
-                        // error occured!
-                    }
-                },
-                error: function(response) {
-                    // alert(response);
-                },
-            });
-        }
 
         function changeLocale(lang) {
             let url_link = api_baseurl + "language";

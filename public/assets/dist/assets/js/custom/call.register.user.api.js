@@ -1,5 +1,5 @@
 $(function () {
-    let authToken = localStorage.getItem("authToken");
+    // let authToken = authToken;
     let localUserAvatarUrl =
         api_assets_baseurl + "assets/dist/assets/media/svg/avatars/blank.svg";
     let userTbody = $("#user-tbody");
