@@ -46,17 +46,18 @@
             display: none !important;
         }
     </style>
-    <!--end::Global Stylesheets Bundle-->
 
-    {{-- @dump( Session::get('access_token.access_token')); --}}
+
     @if(Session::get('access_token.access_token'))
+
     <script>
-        // Store the access token in a JavaScript variable
-var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+        var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
 var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
-//alert( accessToken);
     </script>
     @endif
+
+
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->

@@ -48,9 +48,6 @@ class BatchScheduleController extends Controller
     public function index($schedule_id, $batch_id)
     {
 
-        $userAuth = Session::get('authUser');
-        $userRole = strtolower($userAuth['userRole']);
-
         $results = ApiHttpClient::request('get', 'batch/' . $batch_id . '/show')
             ->json();
         $schedule_details = ApiHttpClient::request('get', 'all-schedule/' . $schedule_id)
