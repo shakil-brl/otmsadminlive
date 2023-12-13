@@ -123,8 +123,6 @@
     <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/login') }}/js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="{{ asset('assets/login') }}/js/bootstrap.bundle.min.js"></script>
-
-    <script type="text/javascript" src="{{ asset('assets/dist/assets/js/custom/call.api.js') }}"></script>
     <script>
         let title = "{{ __('register.are_you') }}";
         let text = "{{ __('register.submit_form') }}";

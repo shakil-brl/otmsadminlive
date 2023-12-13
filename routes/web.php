@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/token-form', [ApiController::class, 'showTokenForm']);
 Route::post('/get-token', [ApiController::class, 'getToken']);
+Route::post('/logout', [ApiController::class, 'logout']);
 
 // // Route::group(['middleware' => ['access.token']], function () {
 // //     Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -252,6 +253,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/total_batches', [DashboardDetailsController::class, 'totalBatches'])->name('dashboard_details.total_batches');
         Route::get('/running_batches', [DashboardDetailsController::class, 'runningBatches'])->name('dashboard_details.running_batches');
         Route::get('/complete_batches', [DashboardDetailsController::class, 'completeBatches'])->name('dashboard_details.complete_batches');
+        Route::get('/ongoing_classes', [DashboardDetailsController::class, 'ongoingClasses'])->name('dashboard_details.ongoing_classes');
+        Route::get('/complete_classes', [DashboardDetailsController::class, 'completeClasses'])->name('dashboard_details.complete_classes');
         Route::get('/districts', [DashboardDetailsController::class, 'districts'])->name('dashboard_details.districts');
         Route::get('/upazilas', [DashboardDetailsController::class, 'upazilas'])->name('dashboard_details.upazilas');
         Route::get('/partners', [DashboardDetailsController::class, 'partners'])->name('dashboard_details.partners');
@@ -262,6 +265,4 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::group(['prefix' => 'provider'], function () {
         Route::get('/all-trainers', [ProviderController::class, 'allTrainer'])->name('provider.all-trainer');
     });
-
 });
-

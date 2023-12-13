@@ -19,13 +19,6 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-
-        //dd('sss');
-        // $app_url = Str::finish(config('app.api_url'), '/');
-        // $response = Http::withHeaders([
-        //     'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        // ])->get($app_url . '');
-
         $response = ApiHttpClient::request('get', 'dashboardtotal/superadmin');
         $data = $response->json()['data'];
         if (isset($data['success'])) {
