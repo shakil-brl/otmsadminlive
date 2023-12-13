@@ -5,10 +5,6 @@
     rel="stylesheet">
 @endpush
 @section('content')
-@php
-$userAuth = Session::get('authUser');
-$userRole = $userAuth['userRole'];
-@endphp
 <div class="m-5">
     <div id="main-content bg-warning">
         <div class="page-content" style="background-color: transparent;">

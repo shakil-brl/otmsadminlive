@@ -1,23 +1,5 @@
 <!--begin::Sidebar-->
-@php
 
-use Illuminate\Support\Facades\Route;
-
-$routePermissions = Session::get('access_token.rolePermission');
-//dd($routePermissions );
-$roleRoutePermissions = Session::get('access_token.rolePermission');
-
-// $userAuth = Session::get('authUser');
-// if ($userAuth) {
-$userRole = Session::get('access_token.role');
-
-
-// }
-
-//dd($routePermissions);
-
-
-@endphp
 <div style="font-size:14px;" id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true"
     data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
     data-kt-drawer-width="225px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
