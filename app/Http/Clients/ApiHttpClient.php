@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class ApiHttpClient
 {
-    public static function request($method, $url, $options = [])
+    public static function request(string $method, string $url, array $options = [])
     {
         $app_url = Str::finish(config('app.api_url'), '/');
         $accessToken = session('access_token');

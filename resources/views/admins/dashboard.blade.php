@@ -5,10 +5,6 @@
     rel="stylesheet">
 @endpush
 @section('content')
-@php
-$userAuth = Session::get('access_token.authUser');
-$userRole = Session::get('access_token.role');
-@endphp
 
 <div class="m-5">
     <div id="main-content bg-warning">

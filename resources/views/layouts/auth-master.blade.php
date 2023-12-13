@@ -46,17 +46,18 @@
             display: none !important;
         }
     </style>
-    <!--end::Global Stylesheets Bundle-->
 
-    {{-- @dump( Session::get('access_token.access_token')); --}}
+
     @if(Session::get('access_token.access_token'))
+
     <script>
-        // Store the access token in a JavaScript variable
-var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+        var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
 var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
-//alert( accessToken);
     </script>
     @endif
+
+
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -67,8 +68,6 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
     <!--begin::Theme mode setup on page load-->
     <script>
-        let authUser = JSON.parse(localStorage.getItem('authUser'));
-        let userId = authUser.userId;
         var defaultThemeMode = "light";
         let areYouSure = "{{ __('sign-out.are_you') }}";
         let wantLogout = "{{ __('sign-out.want_logout') }}";
@@ -275,7 +274,6 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
     </script>
 
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/dist/assets/js/custom/call.api.js?v=1') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.category.api.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.division.api.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.provider.api.js') }}"></script>

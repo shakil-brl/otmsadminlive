@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Clients\ApiHttpClient;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -15,10 +16,7 @@ class TrainerProfileTable extends Component
 
     public function render()
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-        $response = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'trainerslist', [
+        $response = ApiHttpClient::request('get', 'trainerslist', [
             'search' => $this->search,
             'date_filter' => $this->dateFilter,
         ]);
