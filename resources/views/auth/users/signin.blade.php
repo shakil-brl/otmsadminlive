@@ -77,12 +77,31 @@
             </header>
             <div id="login-form">
                 <div class="content">
-                    <form action="" id="kt_sign_in_form">
-                        <legend class="title">অ্যাকাউন্ট লগইন করুন</legend>
+                    <legend class="title">অ্যাকাউন্ট লগইন করুন</legend>
+                    @if(session('error'))
+                    <div style="color: red;">
+                        {{ session('error') }}
+                    </div>
+                    @endif
+
+                    @if($errors->any())
+                    <div style="color: rgb(255, 255, 255); ">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+
+
+                    <form action="{{ url('/get-token') }}" method="post">
+                        @csrf
+
                         <div class="form-input">
-                            <label for="">ইমেইল</label>
-                            <input name="username" id="username" type="text" class="form-control"
-                                placeholder="Enter Emeil">
+                            <label for="emailid">ইমেইল</label>
+                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Emeil">
                         </div>
                         <div class="form-input">
                             <div class="d-flex justify-content-between">
@@ -142,7 +161,6 @@
         });
     </script>
 
-    <script type="text/javascript" src="{{ asset('assets/dist/assets/js/custom/call.api.js') }}"></script>
     <script>
         let title = "{{ __('register.are_you') }}";
         let text = "{{ __('register.submit_form') }}";

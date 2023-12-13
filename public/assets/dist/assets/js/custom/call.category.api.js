@@ -22,7 +22,7 @@ $(function () {
             processData: false,
             url: link,
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
                 "X-localization": language,
             },
             success: function (results) {
@@ -74,7 +74,7 @@ $(function () {
             type: "GET",
             data: {},
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (item) {
                 console.log(item);
@@ -127,7 +127,7 @@ $(function () {
                     processData: false,
                     url: link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                         "X-localization": language,
                     },
                     success: function (results) {
@@ -193,7 +193,7 @@ $(function () {
                     type: "get",
                     url: url_link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                         "X-localization": language,
                     },
                     success: function (results) {
@@ -230,7 +230,7 @@ $(function () {
             type: "GET",
             data: {},
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
                 "X-localization": language,
             },
             success: function (results) {
@@ -278,7 +278,7 @@ $(function () {
             processData: false,
             url: link,
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
                 "X-localization": language,
             },
             success: function (results) {
@@ -343,7 +343,7 @@ $(function () {
             type: "GET",
             data: {},
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
                 "X-localization": language,
             },
             success: function (item) {
@@ -418,7 +418,7 @@ $(function () {
                     processData: false,
                     url: link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                         "X-localization": language,
                     },
                     success: function (results) {
@@ -500,7 +500,7 @@ $(function () {
                     type: "get",
                     url: url_link,
                     headers: {
-                        Authorization: localStorage.getItem("authToken"),
+                        Authorization: authToken,
                         "X-localization": language,
                     },
                     success: function (results) {

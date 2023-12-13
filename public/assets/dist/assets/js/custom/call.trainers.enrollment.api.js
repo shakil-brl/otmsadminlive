@@ -1,5 +1,5 @@
 $(function () {
-    let authToken = localStorage.getItem("authToken");
+    // let authToken = authToken;
     $(document).ready(function () {
         let trainerEnrollTbody = $("#trainers-enroll-tbody");
         let selectedValues;
@@ -9,7 +9,7 @@ $(function () {
             type: "GET",
             url: link,
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
             },
             success: function (results) {
                 // Handle the successful response here

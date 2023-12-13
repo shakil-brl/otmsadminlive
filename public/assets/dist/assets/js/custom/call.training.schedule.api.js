@@ -1,6 +1,6 @@
 $(function () {
     $(document).ready(function () {
-        let authToken = localStorage.getItem("authToken");
+        // let authToken = authToken;
         $("#kt_modal_store_batch_schedule_form").submit(function (e) {
             e.preventDefault();
             Swal.fire({

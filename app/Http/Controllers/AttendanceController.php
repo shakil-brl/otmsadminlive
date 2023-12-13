@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -21,12 +22,11 @@ class AttendanceController extends Controller
 
     public function start(Request $request, $id)
     {
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->post($this->app_url . 'attendance/start-class', [
+        $results = ApiHttpClient::request('post', 'attendance/start-class', [
             'schedule_detail_id' => $id,
             ...$request->only('streaming_link', 'static_link'),
         ])->json();
+
         if (isset($results['success'])) {
             if ($results['success'] == true) {
                 return redirect()->route('attendance.form', $id);
@@ -40,13 +40,8 @@ class AttendanceController extends Controller
     }
     public function attendanceForm($id, $batchId = null)
     {
-        // $batch_results = Http::withHeaders([
-        //     'Authorization' => Session::get('tokenType') . Session::get('accessToken'),
-        // ])->get($this->app_url . 'batch/' . $batchId . '/show')->json();
-
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($this->app_url . "attendance/$id/student-list")->json();
+        $results = ApiHttpClient::request('get', 'attendance/' . $id . '/student-list')
+            ->json();
 
         if (isset($results['success'])) {
             if ($results['success'] == true) {
@@ -62,9 +57,8 @@ class AttendanceController extends Controller
 
     public function showAttendance($schedule_details_id)
     {
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($this->app_url . "attendance/show/$schedule_details_id")->json();
+        $results = ApiHttpClient::request('get', 'attendance/show/' . $schedule_details_id)
+            ->json();
 
         if (isset($results['success'])) {
             if ($results['success'] == true) {
@@ -88,13 +82,10 @@ class AttendanceController extends Controller
 
         if ($request->submit == 'attendance') {
 
-            $results = Http::withHeaders([
-                'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-            ])->post($this->app_url . "attendance/take", [
+            $results = ApiHttpClient::request('post', 'attendance/take', [
                 'trainees' => $request->attendance,
                 'batch_schedule_detail_id' => $id,
             ])->json();
-
 
             if (isset($results['success'])) {
                 if ($results['success'] == true) {
@@ -111,9 +102,7 @@ class AttendanceController extends Controller
                 return view('attendance.attendance_form');
             }
         } else {
-            $results = Http::withHeaders([
-                'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-            ])->post($this->app_url . "attendance/end-class", [
+            $results = ApiHttpClient::request('post', 'attendance/end-class', [
                 'schedule_detail_id' => $id,
             ])->json();
 

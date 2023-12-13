@@ -6,18 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use App\Http\Clients\ApiHttpClient;
 
 class DashboardDetailsController extends Controller
 {
     // 
     public function totalBatches(Request $request)
     {
-        // return $request->all();
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $total_batches = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batchlist', [
+        $total_batches = ApiHttpClient::request('get', 'batchlist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
@@ -37,11 +33,7 @@ class DashboardDetailsController extends Controller
     // 
     public function runningBatches(Request $request)
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $running_batches = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batch/running-batch', [
+        $running_batches = ApiHttpClient::request('get', 'detail/running-batch', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
@@ -59,23 +51,75 @@ class DashboardDetailsController extends Controller
     }
 
     // 
-    public function completeBatches()
+    public function completeBatches(Request $request)
     {
+        $complete_batches = ApiHttpClient::request('get', 'detail/complete-batch', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        // dd($complete_batches);
+        if ($complete_batches['success'] == true) {
+            $batches = $complete_batches['data']['data'];
+            $paginator = $this->customPaginate($complete_batches, $request, route('dashboard_details.complete_batches'));
+
+            return view('dashboard_details.complete_batches', ['complete_batches' => $batches, 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+        return view('dashboard_details.complete_batches');
+    }
+
+    // 
+    public function ongoingClasses(Request $request)
+    {
+        $ongoing_classes = ApiHttpClient::request('get', 'detail/class-running', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        // dd($ongoing_classes);
+        if ($ongoing_classes['success'] == true) {
+            $batches = $ongoing_classes['data']['data'];
+            $paginator = $this->customPaginate($ongoing_classes, $request, route('dashboard_details.ongoing_classes'));
+
+            return view('dashboard_details.ongoing_classes', ['ongoing_classes' => $batches, 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+        return view('dashboard_details.complete_batches');
+    }
+
+    // 
+    public function completeClasses(Request $request)
+    {
+        $complete_classes = ApiHttpClient::request('get', 'detail/class-complete', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        // dd($complete_classes);
+        if ($complete_classes['success'] == true) {
+            $batches = $complete_classes['data']['data'];
+            $paginator = $this->customPaginate($complete_classes, $request, route('dashboard_details.complete_classes'));
+
+            return view('dashboard_details.complete_classes', ['complete_classes' => $batches, 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
         return view('dashboard_details.complete_batches');
     }
 
     // 
     public function districts(Request $request)
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $total_districts = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'districtslist', [
+        $total_districts = ApiHttpClient::request('get', 'districtslist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        // dd($total_districts);
         if ($total_districts['success'] == true) {
             $districts = $total_districts['data']['data'];
             $paginator = $this->customPaginate($total_districts, $request, route('dashboard_details.districts'));
@@ -91,15 +135,10 @@ class DashboardDetailsController extends Controller
     // 
     public function upazilas(Request $request)
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $total_upazilas = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'upazilaslist', [
+        $total_upazilas = ApiHttpClient::request('get', 'upazilaslist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        // dd($total_upazilas);
         if ($total_upazilas['success'] == true) {
             $upazilas = $total_upazilas['data']['data'];
             $paginator = $this->customPaginate($total_upazilas, $request, route('dashboard_details.upazilas'));
@@ -115,15 +154,10 @@ class DashboardDetailsController extends Controller
     // 
     public function partners(Request $request)
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $total_partners = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'partnerslist', [
+        $total_partners = ApiHttpClient::request('get', 'partnerslist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        // dd($total_partners);
         if ($total_partners['success'] == true) {
             $partners = $total_partners['data']['data'];
             $paginator = $this->customPaginate($total_partners, $request, route('dashboard_details.partners'));

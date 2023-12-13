@@ -1,5 +1,16 @@
 $(function () {
-    let authToken = localStorage.getItem("authToken");
+
+ 
+
+    if (typeof accessToken !== 'undefined') {
+        // Use the access token in your JavaScript code
+        console.log('Access Token:', accessToken);
+    } else {
+        console.error('Access Token is not defined.');
+    }
+    alert();
+
+    // let authToken = authToken;
     let localUserAvatar =
         api_assets_baseurl + "assets/dist/assets/media/svg/avatars/blank.svg";
     $(document).ready(function () {
@@ -144,7 +155,7 @@ $(function () {
                     );
                     if (userData.role_id) {
                         let role_api_link = api_baseurl + "role";
-                        let authToken = localStorage.getItem("authToken");
+                        // let authToken = authToken;
                         let selectedOptionId = userData.role_id;
 
                         populateRoleOptions(
@@ -187,7 +198,7 @@ $(function () {
                         }
                     } else {
                         let role_api_link = api_baseurl + "role";
-                        let authToken = localStorage.getItem("authToken");
+                        // let authToken = authToken;
 
                         populateRoleOptions(
                             authToken,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Clients\ApiHttpClient;
 use Livewire\Component;
 use Http;
 use Session;
@@ -14,14 +15,10 @@ class Inspection extends Component
     public $data = [];
     public function render()
     {
-        //dd($this->dateFilter  );
-        $app_url = Str::finish(config('app.api_url'), '/');
-        $response = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'inspection', [
-                    'search' => $this->search,
-                    'date_filter' => $this->dateFilter,
-                ]);
+        $response = ApiHttpClient::request('get', 'inspection', [
+            'search' => $this->search,
+            'date_filter' => $this->dateFilter,
+        ]);
         $this->data = $response->json()['data'];
         return view('livewire.inspection');
     }

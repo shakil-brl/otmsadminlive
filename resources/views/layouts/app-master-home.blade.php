@@ -66,7 +66,6 @@
     <script src="{{ asset('assets/dist/assets/plugins/custom/typedjs/typedjs.bundle.js') }}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/dist/assets/js/custom/call.api.js') }}"></script>
 
     <script>
         let title = "{{ __('register.are_you') }}";

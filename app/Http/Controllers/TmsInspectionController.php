@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 use Http;
 use Ramsey\Uuid\Rfc4122\TimeTrait;
@@ -37,15 +38,10 @@ class TmsInspectionController extends Controller
      */
     public function store(Request $request)
     {
-
         $all = request()->validate(TmsInspection::$rules);
-
-
-        $response = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->post($this->app_url . 'inspection', $request->all());
-
-        $data = $response->json();
+        $response = ApiHttpClient::request('post', 'inspection', [
+            $request->all()
+        ]);
         $data = $response->json();
 
         if (isset($data['error'])) {
@@ -62,8 +58,6 @@ class TmsInspectionController extends Controller
             session()->flash('message', $data['message'] ?? 'Schedule created succesfully');
             return to_route('inspaction.index');
         }
-
-
     }
 
     /**
@@ -74,13 +68,7 @@ class TmsInspectionController extends Controller
      */
     public function show($id)
     {
-        $tmsInspection = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])
-            ->get($this->app_url . "inspection/$id")
-            ->json();
-
-        // dd($tmsInspection);
+        $tmsInspection = ApiHttpClient::request('get', 'inspection/' . $id)->json();
 
         return view('tms-inspection.show', compact('tmsInspection'));
     }

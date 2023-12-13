@@ -1,5 +1,5 @@
 $(function () {
-    let authToken = localStorage.getItem("authToken");
+    // let authToken = authToken;
     $(document).ready(function () {
         let providerTbody = $("#provider-tbody");
         let selectedValues;
@@ -9,7 +9,7 @@ $(function () {
             type: "GET",
             url: link,
             headers: {
-                Authorization: localStorage.getItem("authToken"),
+                Authorization: authToken,
                 "X-localization": language,
             },
             success: function (results) {
@@ -77,7 +77,7 @@ $(function () {
                                     <td class="text-end">
                                         <a href="#" id="link-with-batches-modal" class="btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2" 
                                         data-provider-id="${provider.id}" data-bs-toggle="modal" data-bs-target="#link_batches">
-                                         ${linkBatch}
+                                            Link Batch 
                                         </a>
                                         <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 show-action" 
                                         data-provider-id="${provider.id}" data-provider-name="${provider.name}" data-bs-toggle="modal" id="view_provider-modal" data-bs-target="#view_provider">
@@ -182,6 +182,7 @@ $(function () {
                     "X-localization": language,
                 },
                 success: function (results) {
+                    // console.log(results);
                     let providerData = results.data;
                     $("#provider-email").html(providerData.email ?? "");
                     $("#provider-name").html(providerData.name ?? "");
@@ -357,7 +358,7 @@ $(function () {
                 processData: false,
                 url: link,
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                     "X-localization": language,
                 },
                 success: function (results) {
@@ -441,7 +442,7 @@ $(function () {
                 type: "GET",
                 data: {},
                 headers: {
-                    Authorization: localStorage.getItem("authToken"),
+                    Authorization: authToken,
                     "X-localization": language,
                 },
                 success: function (item) {
@@ -502,7 +503,7 @@ $(function () {
                         processData: false,
                         url: link,
                         headers: {
-                            Authorization: localStorage.getItem("authToken"),
+                            Authorization: authToken,
                             "X-localization": language,
                         },
                         success: function (results) {
@@ -617,7 +618,7 @@ $(function () {
                         type: "get",
                         url: url_link,
                         headers: {
-                            Authorization: localStorage.getItem("authToken"),
+                            Authorization: authToken,
                             "X-localization": language,
                         },
                         success: function (results) {

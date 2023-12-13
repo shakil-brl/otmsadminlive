@@ -1,16 +1,3 @@
-@php
-
-    /*use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
-$app_url = Str::finish(config('app.api_url'), '/');
-$response = Http::withHeaders([
-        'Authorization' => Session::get('tokenType') . Session::get('accessToken'),
-    ])->get($app_url . 'permissions/role');
-    $data = $response->json();
-    if (isset($data['success'])) {
-        Session::put('permissions', $data['data']);
-    } */
-@endphp
 <!--begin::Header-->
 <div id="kt_app_header" class="app-header">
     <!--begin::Header container-->
@@ -181,12 +168,13 @@ $response = Http::withHeaders([
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="separator my-2"></div>
-                        <div class="logout-btn">
-                            <a href="" class="logout">
-                                <img src="{{ asset('img/icon/logout.svg') }}" alt="">
+                        <form action="{{ url('/logout') }}" method="POST" class="logout-btn">
+                            @csrf
+                            <button class="logout btn">
+                                <img src="{{ asset('img/icon/logout.svg') }}">
                                 {{ __('dashboard-header.sign_out') }}
-                            </a>
-                        </div>
+                            </button>
+                        </form>
                         <!--end::Menu item-->
                     </div>
                     <!--end::User account menu-->

@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use App\Http\Clients\ApiHttpClient;
 
 class AdminController extends Controller
 {
-    // admin users view files
+
 
     public function index()
     {
@@ -18,17 +19,8 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $app_url = Str::finish(config('app.api_url'), '/');
-        $response = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'dashboardtotal/superadmin');
-
-      
-        // return ($response->body());
-
+        $response = ApiHttpClient::request('get', 'dashboardtotal/superadmin');
         $data = $response->json()['data'];
-
-
         if (isset($data['success'])) {
             if ($data['success'] !== true) {
                 abort(403, 'Unauthorized');
