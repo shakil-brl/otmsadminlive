@@ -127,7 +127,7 @@ class BatchScheduleController extends Controller
     // running batches
     public function runningBatches(Request $request)
     {
-        $running_batches = ApiHttpClient::request('get', 'batch/running-batch', [
+        $running_batches = ApiHttpClient::request('get', 'detail/running-batch', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
@@ -146,7 +146,7 @@ class BatchScheduleController extends Controller
 
     public function runningClassList(Request $request)
     {
-        $running_batches = ApiHttpClient::request('get', 'batch/running-batch', [
+        $running_batches = ApiHttpClient::request('get', 'detail/running-batch', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
