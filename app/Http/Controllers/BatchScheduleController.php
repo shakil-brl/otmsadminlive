@@ -91,9 +91,7 @@ class BatchScheduleController extends Controller
         if ($request->class_days != null) {
             $data['class_days'] = implode(',', $request->class_days);
         }
-        $data = ApiHttpClient::request('post', 'schedule/create', [
-            $data
-        ])->json();
+        $data = ApiHttpClient::request('post', 'schedule/create', $data)->json();
 
         if (isset($data['error'])) {
             if ($data['error'] == true) {
