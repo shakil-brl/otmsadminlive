@@ -33,10 +33,11 @@ class DashboardDetailsController extends Controller
     // 
     public function runningBatches(Request $request)
     {
-        $running_batches = ApiHttpClient::request('get', 'batch/running-batch', [
+        $running_batches = ApiHttpClient::request('get', 'detail/running-batch', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
+        // dd($running_batches);
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
             $paginator = $this->customPaginate($running_batches, $request, route('dashboard_details.running_batches'));
@@ -50,8 +51,65 @@ class DashboardDetailsController extends Controller
     }
 
     // 
-    public function completeBatches()
+    public function completeBatches(Request $request)
     {
+        $complete_batches = ApiHttpClient::request('get', 'detail/complete-batch', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        // dd($complete_batches);
+        if ($complete_batches['success'] == true) {
+            $batches = $complete_batches['data']['data'];
+            $paginator = $this->customPaginate($complete_batches, $request, route('dashboard_details.complete_batches'));
+
+            return view('dashboard_details.complete_batches', ['complete_batches' => $batches, 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+        return view('dashboard_details.complete_batches');
+    }
+
+    // 
+    public function ongoingClasses(Request $request)
+    {
+        $ongoing_classes = ApiHttpClient::request('get', 'detail/class-running', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        // dd($ongoing_classes);
+        if ($ongoing_classes['success'] == true) {
+            $batches = $ongoing_classes['data']['data'];
+            $paginator = $this->customPaginate($ongoing_classes, $request, route('dashboard_details.ongoing_classes'));
+
+            return view('dashboard_details.ongoing_classes', ['ongoing_classes' => $batches, 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+        return view('dashboard_details.complete_batches');
+    }
+
+    // 
+    public function completeClasses(Request $request)
+    {
+        $complete_classes = ApiHttpClient::request('get', 'detail/class-complete', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        // dd($complete_classes);
+        if ($complete_classes['success'] == true) {
+            $batches = $complete_classes['data']['data'];
+            $paginator = $this->customPaginate($complete_classes, $request, route('dashboard_details.complete_classes'));
+
+            return view('dashboard_details.complete_classes', ['complete_classes' => $batches, 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
         return view('dashboard_details.complete_batches');
     }
 
