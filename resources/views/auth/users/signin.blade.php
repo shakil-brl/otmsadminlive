@@ -161,7 +161,6 @@
         });
     </script>
 
-    <script type="text/javascript" src="{{ asset('assets/dist/assets/js/custom/call.api.js') }}"></script>
     <script>
         let title = "{{ __('register.are_you') }}";
         let text = "{{ __('register.submit_form') }}";

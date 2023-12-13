@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -14,9 +15,8 @@ class BatchScheduleController extends Controller
     {
         $page = request('page', 1);
         $app_url = Str::finish(config('app.api_url'), '/');
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batch/list?page=' . $page)->json();
+        $results = ApiHttpClient::request('get', 'batch/list?page=' . $page)
+            ->json();
 
         if ($results['success'] == true) {
             return view('batches.index', ['results' => $results['data']]);
@@ -31,11 +31,8 @@ class BatchScheduleController extends Controller
     {
         $page = request('page', 1);
 
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'attendance/batch-list')->json();
+        $results = ApiHttpClient::request('get', 'attendance/batch-list')
+            ->json();
 
         if ($results['success']) {
             return view('batches.trainer_batch', ['results' => $results['data']]);
@@ -54,16 +51,10 @@ class BatchScheduleController extends Controller
         $userAuth = Session::get('authUser');
         $userRole = strtolower($userAuth['userRole']);
 
-        //dd($schedule_id, $batch_id);
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batch/' . $batch_id . '/show')->json();
-
-        $schedule_details = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'all-schedule/' . $schedule_id)->json();
+        $results = ApiHttpClient::request('get', 'batch/' . $batch_id . '/show')
+            ->json();
+        $schedule_details = ApiHttpClient::request('get', 'all-schedule/' . $schedule_id)
+            ->json();
 
         if ($results['success'] == true && $schedule_details['success'] == true) {
             $batch = $results['data'];
@@ -80,11 +71,8 @@ class BatchScheduleController extends Controller
     public function create($batch_id)
     {
         $error = session('error') ?? '';
-        $app_url = Str::finish(config('app.api_url'), '/');
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batch/' . $batch_id . '/show')->json();
-
+        $results = ApiHttpClient::request('get', 'batch/' . $batch_id . '/show')
+            ->json();
         if ($results['success'] == true) {
             $batch = $results['data'];
             return view('batch_schedule.create', compact(['batch', 'error']));
@@ -103,12 +91,9 @@ class BatchScheduleController extends Controller
         if ($request->class_days != null) {
             $data['class_days'] = implode(',', $request->class_days);
         }
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $response = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->post($app_url . 'schedule/create', $data);
-
+        $response = ApiHttpClient::request('post', 'schedule/create', [
+            $data
+        ])->json();
         $data = $response->json();
 
         if (isset($data['error'])) {
@@ -129,17 +114,10 @@ class BatchScheduleController extends Controller
     // show batch schedule
     public function show($schedule_id, $batch_id)
     {
-        //dd($schedule_id, $batch_id);
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batches/' . $batch_id . '/show')->json();
-
-        $schedule_details = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'all-schedule/' . $schedule_id)->json();
-
+        $results = ApiHttpClient::request('get', 'batches/' . $batch_id . '/show')
+            ->json();
+        $schedule_details = ApiHttpClient::request('get', 'all-schedule/' . $schedule_id)
+            ->json();
         if ($results['success'] == true && $schedule_details['success'] == true) {
             $batch = $results['data'];
 
@@ -154,15 +132,10 @@ class BatchScheduleController extends Controller
     // running batches
     public function runningBatches(Request $request)
     {
-        // return $request->all();
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $running_batches = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batch/running-batch', [
-                    'page' => $request->page ?? 1,
-                    'search' => $request->search,
-                ])->json();
+        $running_batches = ApiHttpClient::request('get', 'batch/running-batch', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
         // dd($running_batches);
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
@@ -178,16 +151,10 @@ class BatchScheduleController extends Controller
 
     public function runningClassList(Request $request)
     {
-        // return $request->all();
-        $app_url = Str::finish(config('app.api_url'), '/');
-
-        $running_batches = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') . ' ' . Session::get('accessToken'),
-        ])->get($app_url . 'batch/running-batch', [
-                    'page' => $request->page ?? 1,
-                    'search' => $request->search,
-                ])->json();
-        // dd($running_batches);
+        $running_batches = ApiHttpClient::request('get', 'batch/running-batch', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
             $paginator = $this->customPaginate($running_batches, $request, route('batch-schedule.runningBatches'));

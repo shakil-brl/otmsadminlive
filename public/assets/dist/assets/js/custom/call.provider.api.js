@@ -77,7 +77,7 @@ $(function () {
                                     <td class="text-end">
                                         <a href="#" id="link-with-batches-modal" class="btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2" 
                                         data-provider-id="${provider.id}" data-bs-toggle="modal" data-bs-target="#link_batches">
-                                         ${linkBatch}
+                                            Link Batch 
                                         </a>
                                         <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 show-action" 
                                         data-provider-id="${provider.id}" data-provider-name="${provider.name}" data-bs-toggle="modal" id="view_provider-modal" data-bs-target="#view_provider">
@@ -182,6 +182,7 @@ $(function () {
                     "X-localization": language,
                 },
                 success: function (results) {
+                    // console.log(results);
                     let providerData = results.data;
                     $("#provider-email").html(providerData.email ?? "");
                     $("#provider-name").html(providerData.name ?? "");

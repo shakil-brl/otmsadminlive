@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -22,14 +23,10 @@ class BatchController extends Controller
         $app_url = Str::finish(config('app.api_url'), '/');
         if ($request['batch_search']) {
             $search_batch = $request['batch_search'] ?? '';
-            // dd($search_batch);
-            $results = Http::withHeaders([
-                'Authorization' => Session::get('tokenType') .' '. Session::get('accessToken'),
-            ])->get($app_url . 'batches/all?batch=' . $search_batch . '&page=' . $page)->json();
+
+            $results = ApiHttpClient::request('get', 'batches/all?batch=' . $search_batch . '&page=' . $page)->json();
         } else {
-            $results = Http::withHeaders([
-                'Authorization' => Session::get('tokenType') .' '. Session::get('accessToken'),
-            ])->get($app_url . 'batches/all?page=' . $page)->json();
+            $results = ApiHttpClient::request('get', 'batches/all?page=' . $page)->json();
         }
 
         if ($results['success'] == true) {
@@ -47,9 +44,8 @@ class BatchController extends Controller
     {
         $app_url = Str::finish(config('app.api_url'), '/');
 
-        $results = Http::withHeaders([
-            'Authorization' => Session::get('tokenType') .' '. Session::get('accessToken'),
-        ])->get($app_url . 'batches/' . $batch_id . '/show')->json();
+        $results = ApiHttpClient::request('get', 'batches/' . $batch_id . '/show')
+            ->json();
 
         return 1;
     }
