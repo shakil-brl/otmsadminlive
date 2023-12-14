@@ -28,7 +28,6 @@ class GlobalVariableServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', function ($view) {
-
             $userAuth = Session::get('access_token.authUser') ?? 0;
             $userRole = Session::get('access_token.role') ?? 0;
             $routePermissions = Session::get('access_token.rolePermission') ?? 0;
