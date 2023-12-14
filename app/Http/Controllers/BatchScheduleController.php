@@ -154,6 +154,7 @@ class BatchScheduleController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
+        // dd($running_batches);
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
             $paginator = $this->customPaginate($running_batches, $request, route('batch-schedule.runningBatches'));
