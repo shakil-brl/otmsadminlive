@@ -3,26 +3,26 @@
 @section('content')
 <!--begin::Content -->
 <div class="m-5">
-    <h3>Upazilas List</h3>
+    <h3>{{__('upazila-list.upazila_list')}}</h3>
     <x-alert />
     @isset($total_upazilas)
     <div class="my-3">
         <form action="">
             <div class="w-50 d-flex gap-3">
                 <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                    placeholder="search here">
-                <input type="submit" class="form-control btn btn-primary w-25" value="Search">
+                    placeholder="{{__('upazila-list.search_here')}}">
+                <input type="submit" class="form-control btn btn-primary w-25" value="{{__('upazila-list.search')}}">
             </div>
         </form>
     </div>
     <table class="table table-bordered bg-white">
         <thead>
-            <th>S/N</th>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Name (Bangla)</th>
-            <th>District</th>
-            <th>Actions</th>
+            <th>{{__('upazila-list.sl')}}</th>
+            <th>{{__('upazila-list.upazila_code')}}</th>
+            <th>{{__('upazila-list.upazila_name_english')}}</th>
+            <th>{{__('upazila-list.upazila_name_bangla')}}</th>
+            <th>{{__('upazila-list.district_name')}}</th>
+            <th>{{__('upazila-list.action')}}</th>
         </thead>
         <tbody>
             @foreach (collect($total_upazilas) as $upazilas)
@@ -44,7 +44,7 @@
                 </td>
                 <td>
                     <a href="" class="btn btn-sm btn-info">
-                        View
+                        {{__('upazila-list.view')}}
                     </a>
                 </td>
             </tr>

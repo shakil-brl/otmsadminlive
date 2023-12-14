@@ -38,4 +38,11 @@ return [
     'upazila_edit' => 'উপজেলা সম্পাদনা করুন',
     'districts' => 'জেলাসমূহ',
     'update' => 'আপডেট করুন',
+    'sl' => 'সিরিয়াল',
+    'search_here' => 'এখানে অনুসন্ধান করুন',
+    'search' => 'অনুসন্ধান করুন',
+    'upazila_name_english' => ' উপজেলার নাম ইংরেজি',
+    'upazila_name_bangla' => ' উপজেলার নাম বাংলা',
+    'view' => 'দেখুন',
+    
 ];

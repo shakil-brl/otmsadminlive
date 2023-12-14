@@ -3,25 +3,25 @@
 @section('content')
 <!--begin::Content -->
 <div class="m-5">
-    <h3>{{ __('provider-list.provider_list') }}</h3>
+    <h3>{{ __('provider-list.development_partner') }}</h3>
     <x-alert />
     @isset($total_partners)
     <div class="my-3">
         <form action="">
             <div class="w-50 d-flex gap-3">
                 <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                    placeholder="search here">
-                <input type="submit" class="form-control btn btn-primary w-25" value="Search">
+                    placeholder="{{ __('provider-list.search_here') }}">
+                <input type="submit" class="form-control btn btn-primary w-25" value="{{ __('provider-list.search') }}">
             </div>
         </form>
     </div>
     <table class="table table-bordered bg-white">
         <thead>
-            <th>SN</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Phone</th>
+            <th>{{ __('provider-list.sl') }}</th>
+            <th>{{ __('provider-list.name') }}</th>
+            <th>{{ __('provider-list.address') }}</th>
+            <th>{{ __('provider-list.email') }}</th>
+            <th>{{ __('provider-list.phone') }}</th>
             <th>{{ __('batch-list.action') }}</th>
         </thead>
         <tbody>

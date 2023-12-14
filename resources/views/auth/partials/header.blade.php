@@ -155,7 +155,7 @@
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="" class="menu-link px-5">
+                            <a href="{{ route('admins.profile') }}" class="menu-link px-5">
                                 <img src="{{ asset('img/icon/person.svg') }}" alt="">
                                 {{ __('dashboard-header.my_account') }}
                             </a>
@@ -163,7 +163,7 @@
                         <div class="menu-item px-5">
                             <a href="" class="menu-link px-5">
                                 <img src="{{ asset('img/icon/feedback.svg') }}" alt="">
-                                Send Feedback
+                                {{ __('dashboard-header.send_feedback') }}
                             </a>
                         </div>
                         <!--end::Menu item-->
