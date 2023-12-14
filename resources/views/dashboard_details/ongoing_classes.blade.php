@@ -3,7 +3,7 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>Ongoing Classes</h3>
+        <h3>{{__('batch-schedule.ongoing_class')}}</h3>
         <br>
         <x-alert />
         @isset($ongoing_classes)
@@ -11,20 +11,20 @@
                 <form action="">
                     <div class="w-50 d-flex gap-3">
                         <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                            placeholder="search here">
-                        <input type="submit" class="form-control btn btn-primary w-25" value="Search">
+                            placeholder="{{__('batch-schedule.search_here')}}">
+                        <input type="submit" class="form-control btn btn-primary w-25" value="{{__('batch-schedule.search')}}">
                     </div>
                 </form>
             </div>
             <table class="table table-bordered bg-white">
                 <thead>
-                    <th>SL</th>
-                    <th>Batch Code</th>
-                    <th>Start Time</th>
-                    <th>Training Title</th>
-                    <th>Location</th>
-                    <th>Vendor Name</th>
-                    <th>Action</th>
+                    <th>{{__('batch-schedule.sl')}}</th>
+                    <th>{{__('batch-schedule.batch_code')}}</th>
+                    <th>{{__('batch-schedule.start_time')}}</th>
+                    <th>{{__('batch-schedule.course_name')}}</th>
+                    <th>{{__('batch-schedule.location')}}</th>
+                    <th>{{__('batch-schedule.development_partner')}}</th>
+                    <th>{{__('batch-schedule.action')}}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($ongoing_classes) as $batch)
@@ -50,13 +50,13 @@
                             <td>
                                 @if ($batch['streaming_link'])
                                     <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
-                                        Live Streaming
+                                        {{__('batch-schedule.live_streaming')}}
                                     </a>
                                 @endif
                                 @if ($batch['static_link'])
                                     <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}"
                                         target="_blank">
-                                        Join
+                                        {{__('batch-schedule.join_class')}}
                                     </a>
                                 @endif
                             </td>

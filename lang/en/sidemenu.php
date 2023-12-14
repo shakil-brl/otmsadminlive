@@ -21,7 +21,7 @@ return [
     'pages' => 'Pages',
     'user_management' => 'User Management',
     'register_user' => 'Register User',
-    'admin_user' => 'Admin User',
+    'admin_user' => 'Admin User List',
     'roles_permission' => 'Roles And Permissions',
     'role_list' => 'Roles List',
     'permission_list' => 'Permission List',

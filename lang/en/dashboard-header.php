@@ -21,6 +21,7 @@ return [
     'view_all' => 'View All',
     'my_account' => 'My Account',
     'sign_out' => 'Sign Out',
+    'send_feedback' => 'Send Feedback',
 
 
   
