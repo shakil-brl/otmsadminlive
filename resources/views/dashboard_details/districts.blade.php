@@ -10,18 +10,18 @@
         <form action="">
             <div class="w-50 d-flex gap-3">
                 <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                    placeholder="search here">
-                <input type="submit" class="form-control btn btn-primary w-25" value="Search">
+                    placeholder="{{__('district-list.search_here')}}">
+                <input type="submit" class="form-control btn btn-primary w-25" value="{{__('district-list.search')}}">
             </div>
         </form>
     </div>
     <table class="table table-bordered bg-white">
         <thead>
-            <th>SL</th>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Name (Bangla)</th>
-            <th>Actions</th>
+            <th>{{__('district-list.sl')}}</th>
+            <th>{{__('district-list.district_code')}}</th>
+            <th>{{__('district-list.district_name_english')}}</th>
+            <th>{{__('district-list.district_name_bangla')}}</th>
+            <th>{{__('district-list.action')}}</th>
         </thead>
         <tbody>
             @foreach (collect($total_districts) as $district)
@@ -40,7 +40,7 @@
                 </td>
                 <td>
                     <a href="" class="btn btn-sm btn-info">
-                        View
+                        {{__('district-list.view')}}
                     </a>
                 </td>
             </tr>

@@ -42,6 +42,9 @@ return [
     'upazila_code' => 'Upazila Code',
     'search_here' => 'Search Here',
     'search' => 'Search',
+    'district_name_english' => 'District Name English',
+    'district_name_bangla' => 'District Name Bangla',
+    'view' => 'View',
 
 
     

@@ -42,6 +42,9 @@ return [
     'upazila_code' => 'উপজেলার কোড',
     'search_here' => 'এখানে অনুসন্ধান করুন',
     'search' => 'অনুসন্ধান করুন',
+    'district_name_english' => 'জেলার নাম ইংরেজি',
+    'district_name_bangla' => 'জেলার নাম বাংলা',
+    'view' => 'দেখুন',
 
    
 

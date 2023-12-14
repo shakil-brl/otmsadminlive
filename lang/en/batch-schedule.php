@@ -63,6 +63,7 @@ return [
     'search_here' => 'Search Here',
     'development_partner' => 'Development Partner',
     'live_streaming' => ' Live Streaming',
+    'view_attendence' => '  View Attendance',
     
 
 
