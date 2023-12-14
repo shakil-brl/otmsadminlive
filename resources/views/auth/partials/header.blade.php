@@ -163,7 +163,7 @@
                         <div class="menu-item px-5">
                             <a href="" class="menu-link px-5">
                                 <img src="{{ asset('img/icon/feedback.svg') }}" alt="">
-                                Send Feedback
+                                {{ __('dashboard-header.send_feedback') }}
                             </a>
                         </div>
                         <!--end::Menu item-->
