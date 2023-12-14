@@ -3,7 +3,7 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>{{ __('batch-list.running_batches') }}</h3>
+        <h3>Complete Batches</h3>
         <x-alert />
         @isset($complete_batches)
             <div class="my-3">
@@ -23,6 +23,7 @@
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.development_partner') }}</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     @foreach (collect($complete_batches) as $batch)
@@ -34,7 +35,7 @@
                                 {{ $batch['training_batch'] ? $batch['training_batch']['batchCode'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['class_time'] ?? '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['startDate'] : '' }}
                             </td>
                             <td>
                                 {{ $batch['training_batch'] ? $batch['training_batch']['training']['title']['Name'] : '' }}
@@ -44,6 +45,11 @@
                             </td>
                             <td>
                                 {{ $batch['training_batch'] ? $batch['training_batch']['provider']['name'] : '' }}
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-info">
+                                    {{ __('batch-list.view') }}
+                                </a>
                             </td>
                         </tr>
                     @endforeach
