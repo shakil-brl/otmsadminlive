@@ -69,7 +69,7 @@ Route::get('/login', [ApiController::class, 'showTokenForm'])->name('login.show'
 /**
  * user dashboard Routes
  */
-Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+//Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
 /**
  * user dashboard Routes

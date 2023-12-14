@@ -40,8 +40,11 @@ class AttendanceController extends Controller
     }
     public function attendanceForm($id, $batchId = null)
     {
-        $results = ApiHttpClient::request('get', 'attendance/' . $id . '/student-list')
+
+        // dd($id);
+        $results = ApiHttpClient::request('get', "attendance/$id/student-list")
             ->json();
+        //dd($results);
 
         if (isset($results['success'])) {
             if ($results['success'] == true) {

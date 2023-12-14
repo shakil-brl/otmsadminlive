@@ -127,13 +127,17 @@ class BatchScheduleController extends Controller
     // running batches
     public function runningBatches(Request $request)
     {
+
+        //dd('dd');
         $running_batches = ApiHttpClient::request('get', 'detail/running-batch', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        // dd($running_batches);
+        //dd($running_batches);
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
+
+            //dd($batches);
             $paginator = $this->customPaginate($running_batches, $request, route('batch-schedule.runningBatches'));
 
             return view('batch_schedule.running_batch', ['running_batches' => $batches, 'paginator' => $paginator]);
@@ -150,6 +154,7 @@ class BatchScheduleController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
+        // dd($running_batches);
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
             $paginator = $this->customPaginate($running_batches, $request, route('batch-schedule.runningBatches'));

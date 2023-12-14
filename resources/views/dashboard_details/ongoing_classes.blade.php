@@ -3,7 +3,7 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>Running Batches</h3>
+        <h3>Ongoing Classes</h3>
         <br>
         <x-alert />
         @isset($ongoing_classes)
@@ -20,7 +20,7 @@
                 <thead>
                     <th>SL</th>
                     <th>Batch Code</th>
-                    <th>Start Date</th>
+                    <th>Start Time</th>
                     <th>Training Title</th>
                     <th>Location</th>
                     <th>Vendor Name</th>
@@ -36,7 +36,7 @@
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['date'] ?? '' }}
+                                {{ $batch['start_time'] ?? '' }}
                             </td>
                             <td>
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
