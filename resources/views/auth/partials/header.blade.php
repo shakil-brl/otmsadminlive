@@ -78,14 +78,14 @@
 
                         <div class="lang-header">
                             @if (session()->get('locale') == 'en')
-                                <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
-                                <span class="label dropdown-toggle">English</span>
+                            <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
+                            <span class="label dropdown-toggle">English</span>
                             @elseif(session()->get('locale') == 'bn')
-                                <img class="flag" src="{{ asset('img/icon/bd.svg') }}" alt="">
-                                <span class="label dropdown-toggle">বাংলা</span>
+                            <img class="flag" src="{{ asset('img/icon/bd.svg') }}" alt="">
+                            <span class="label dropdown-toggle">বাংলা</span>
                             @else
-                                <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
-                                <span class="label dropdown-toggle">English</span>
+                            <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
+                            <span class="label dropdown-toggle">English</span>
                             @endif
                         </div>
 
@@ -131,10 +131,11 @@
                             <div class="menu-content d-flex align-items-center">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo"
-                                        src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}"
-                                        alt="image" />
+                                    <img alt="Logo" src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}"
+                                        alt="{{$role}}" title="{{$role}}" />
                                 </div>
+
+
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column" id="userInfo">
@@ -143,7 +144,7 @@
                                         </span>
                                     </div>
                                     <a href="#"
-                                        class="fw-semibold text-muted text-hover-primary fs-7 userEmail"></a>
+                                        class="fw-semibold text-muted text-hover-primary fs-7 userEmail">{{$userAuth['fname']}}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>

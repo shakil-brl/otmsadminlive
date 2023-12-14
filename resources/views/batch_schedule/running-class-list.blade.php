@@ -33,24 +33,24 @@
                                 {{ $loop->iteration }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['batchCode'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['date'] ?? '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['startDate'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['training']['title']['Name'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['GEOLocation'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['provider']['name'] : '' }}
                             </td>
                             <td>
                                 @php
                                     $inspection_pm = [
-                                        'batch_id' => $batch['schedule']['training_batch']['id'],
+                                        'batch_id' => $batch['training_batch']['id'],
                                         'schedule_detail_id' => $batch['id'],
                                     ];
                                 @endphp

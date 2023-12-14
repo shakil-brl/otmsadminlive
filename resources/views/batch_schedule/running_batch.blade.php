@@ -3,28 +3,27 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>Running Batches</h3>
+        <h3>{{ __('batch-list.running_batches') }}</h3>
         <x-alert />
         @isset($running_batches)
             <div class="my-3">
                 <form action="">
                     <div class="w-50 d-flex gap-3">
                         <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                            placeholder="{{ __('batch-schedule.search_here') }}">
-                        <input type="submit" class="form-control btn btn-primary w-25"
-                            value="{{ __('batch-schedule.search') }}">
+                            placeholder="{{ __('batch-list.search_here') }}">
+                        <input type="submit" class="form-control btn btn-primary w-25" value="{{ __('batch-list.search') }}">
                     </div>
                 </form>
             </div>
             <table class="table table-bordered bg-white">
                 <thead>
-                    <th>{{ __('batch-schedule.sl') }}</th>
-                    <th>{{ __('batch-schedule.batch_code') }}</th>
-                    <th>{{ __('batch-schedule.start_date') }}</th>
-                    <th>{{ __('batch-schedule.course_name') }}</th>
-                    <th>{{ __('batch-schedule.location') }}</th>
-                    <th>{{ __('batch-schedule.development_partner') }}</th>
-                    <th>{{ __('batch-schedule.action') }}</th>
+                    <th>{{ __('batch-list.sl') }}</th>
+                    <th>{{ __('batch-list.batch_code') }}</th>
+                    <th>{{ __('batch-list.start_date') }}</th>
+                    <th>{{ __('batch-list.course_name') }}</th>
+                    <th>{{ __('batch-list.location') }}</th>
+                    <th>{{ __('batch-list.development_partner') }}</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     @foreach (collect($running_batches) as $batch)
@@ -33,38 +32,29 @@
                                 {{ $loop->iteration }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['batchCode'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['date'] ?? '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['startDate'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['training']['title']['Name'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['GEOLocation'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
+                                {{ $batch['training_batch'] ? $batch['training_batch']['provider']['name'] : '' }}
                             </td>
                             <td>
-                                @if ($batch['streaming_link'])
-                                    <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
-                                        {{ __('batch-schedule.live_streaming') }}
-                                    </a>
-                                @endif
-                                @if ($batch['static_link'])
-                                    <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}"
-                                        target="_blank">
-                                        {{ __('batch-schedule.join_class') }}
-                                    </a>
-                                @endif
+                                <a href="" class="btn btn-sm btn-info">
+                                    {{ __('batch-list.view') }}
+                                </a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-
             {!! $paginator->links() !!}
         @endisset
     </div>

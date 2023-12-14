@@ -1,9 +1,9 @@
 @extends('layouts.auth-master')
-{{-- @dd($complete_classes); --}}
+{{-- @dd($running_batches); --}}
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>Running Batches</h3>
+        <h3>Complete Classes</h3>
         <br>
         <x-alert />
         @isset($complete_classes)
@@ -20,7 +20,7 @@
                 <thead>
                     <th>SL</th>
                     <th>Batch Code</th>
-                    <th>Start Date</th>
+                    <th>End Time</th>
                     <th>Training Title</th>
                     <th>Location</th>
                     <th>Vendor Name</th>
@@ -36,7 +36,7 @@
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['date'] ?? '' }}
+                                {{ $batch['end_time'] ?? '' }}
                             </td>
                             <td>
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
@@ -48,7 +48,9 @@
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
                             </td>
                             <td>
-                                view
+                                <a class="btn btn-sm btn-danger" href="" target="_blank">
+                                    View Attendance
+                                </a>
                             </td>
                         </tr>
                     @endforeach
