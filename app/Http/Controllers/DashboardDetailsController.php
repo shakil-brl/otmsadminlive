@@ -68,7 +68,7 @@ class DashboardDetailsController extends Controller
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return back();
         }
-        return view('dashboard_details.complete_batches');
+        //return view('dashboard_details.complete_batches');
     }
 
     // 
@@ -89,7 +89,7 @@ class DashboardDetailsController extends Controller
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return back();
         }
-        return view('dashboard_details.complete_batches');
+        //return view('dashboard_details.complete_batches');
     }
 
     // 
@@ -110,7 +110,7 @@ class DashboardDetailsController extends Controller
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return back();
         }
-        return view('dashboard_details.complete_batches');
+        //return view('dashboard_details.complete_batches');
     }
 
     // 
