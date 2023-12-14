@@ -62,6 +62,7 @@ return [
     'search_here' => 'এখানে অনুসন্ধান করুন',
     'development_partner' => 'ডেভেলপমেন্ট পার্টনার',
     'live_streaming' => ' সরাসরি সম্প্রচার',
+    'view_attendence' => ' উপস্থিতি দেখুন',
   
     
 

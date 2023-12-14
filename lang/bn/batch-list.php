@@ -48,7 +48,7 @@ return [
     'total_batches' => 'সকল ব্যাচগুলি',
     'complete_batches' => 'সম্পন্ন ব্যাচ গুলি',
     'batches_list' => 'ব্যাচের তালিকা',
-    'search_here' => 'এখানে অনুসন্ধান করুন',
+    'search_here' => 'এখানে সার্চ করুন',
     'development_partner' => 'ডেভেলপমেন্ট পার্টনার',
     'live_streaming' => ' সরাসরি সম্প্রচার',
     'join_class' => ' ক্লাসে জয়েন করুন',

@@ -3,7 +3,7 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>Complete Batches</h3>
+        <h3>{{ __('batch-list.complete_batches') }}</h3>
         <x-alert />
         @isset($complete_batches)
             <div class="my-3">
@@ -23,7 +23,7 @@
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.development_partner') }}</th>
-                    <th>Actions</th>
+                    <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($complete_batches) as $batch)

@@ -38,8 +38,12 @@ return [
     'upazila_edit' => 'Upazila Edit',
     'districts' => 'Districts',
     'update' => 'Update',
-
-
+    'sl' => 'SL',
+    'search_here' => 'Search Here',
+    'search' => 'Search',
+    'upazila_name_english' => ' Upazila Name English',
+    'upazila_name_bangla' => ' Upazila Name Bangla',
+    'view' => 'View',
    
   
 ];

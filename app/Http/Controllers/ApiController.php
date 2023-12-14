@@ -54,15 +54,21 @@ class ApiController extends Controller
                     'Authorization' => 'Bearer ' . $loginData['access_token'],
                 ],
             ];
+
+            $profileId = $loginData['userType']['ProfileId'];
+            $roleApiEndpoint = $app_url . "role-permissions/$profileId";
+            // dd($profileId, $roleApiEndpoint);
             $roleResponse = $client->get($roleApiEndpoint, $roleOptions);
             $roleData = json_decode($roleResponse->getBody(), true);
 
             $permissionNames = [];
-            foreach ($roleData['data'] as $permission) {
-                $permissionName = $permission['name'];
-                //$permissionNames[] = $permissionName;
-                $permissionNames = array_unique(array_column($roleData['data'], 'name'));
+            foreach ($roleData['accessPermissions']['permissions'] as $permission) {
+                $permissionNames[] = $permission['name'];
             }
+
+            // If you want to remove duplicates, use array_unique
+            //$permissionNames = array_unique($permissionNames);
+            //dd($permissionNames);
 
             // $timestamp = 1702931558;
             // $dateTime = date("Y-m-d H:i:s", $timestamp);
@@ -76,7 +82,7 @@ class ApiController extends Controller
                 'userType' => $loginData['userType'],
                 'role' => $loginData['userType']['role']['name'],
                 'expires_at' => now()->addMinutes($loginData['expires_in']),
-                'rolePermission' => $permissionNames ?? [], // Assuming permissions are in 'data' key
+                'rolePermission' => array_unique($permissionNames) ?? [], // Assuming permissions are in 'data' key
             ];
             session()->put('access_token', $tokenData);
 
