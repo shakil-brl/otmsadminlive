@@ -29,6 +29,7 @@ class GlobalVariableServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $userAuth = Session::get('access_token.authUser') ?? 0;
+            $authProfile = Session::get('access_token.authProfile') ?? 0;
             $userRole = Session::get('access_token.role') ?? 0;
             $routePermissions = Session::get('access_token.rolePermission') ?? 0;
             $roleRoutePermissions = Session::get('access_token.rolePermission') ?? 0;
@@ -36,6 +37,7 @@ class GlobalVariableServiceProvider extends ServiceProvider
             $authToken = Session::get('access_token.access_token');
             $view->with([
                 'userAuth' => $userAuth,
+                'authProfile' => $authProfile,
                 'userRole' => $userRole,
                 'routePermissions' => $routePermissions,
                 'roleRoutePermissions' => $roleRoutePermissions,
