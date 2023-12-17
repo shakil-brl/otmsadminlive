@@ -89,7 +89,7 @@
                     </form>
                     @else
                     <!-- User is not authenticated -->
-                    <a href="https://otms.herpower.gov.bd/">Login</a>
+                    <a class="btn btn-submit" href="https://otms.herpower.gov.bd/">Login</a>
                     @endif
 
                 </div>
