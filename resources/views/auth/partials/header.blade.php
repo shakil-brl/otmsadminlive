@@ -139,12 +139,12 @@
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column" id="userInfo">
-                                    <div class="fw-bold d-flex align-items-center fs-5 userName">
+                                    <div class="fw-bold d-flex align-items-center fs-5">
                                         <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
                                         </span>
                                     </div>
                                     <a href="#"
-                                        class="fw-semibold text-muted text-hover-primary fs-7 userEmail">{{$userAuth['name']}}</a>
+                                        class="fw-semibold text-muted text-hover-primary fs-7">{{$userAuth['name']}}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
