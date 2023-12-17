@@ -76,7 +76,7 @@
                 </nav>
             </header>
             <div id="login-form">
-                <div class="content" style="background:#d2d2d2">
+                <div class="content">
 
 
                     <h1>Apologies, but you currently lack the necessary access.</h1>
