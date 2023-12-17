@@ -2,7 +2,7 @@
 
 @if(session('access_token.access_token'))
 <!-- User is authenticated -->
-<form action="{{ route('logout') }}" method="post">
+<form action="{{ url('/logout') }}" method="POST" class="logout-btn">
     @csrf
     <button type="submit">Logout</button>
 </form>
