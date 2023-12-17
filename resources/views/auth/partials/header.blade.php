@@ -144,7 +144,7 @@
                                         </span>
                                     </div>
                                     <a href="#"
-                                        class="fw-semibold text-muted text-hover-primary fs-7 userEmail">{{$userAuth['fname']}}</a>
+                                        class="fw-semibold text-muted text-hover-primary fs-7 userEmail">{{$userAuth['name']}}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>
