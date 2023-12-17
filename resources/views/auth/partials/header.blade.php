@@ -117,8 +117,8 @@
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                         data-kt-menu-placement="bottom-end">
                         <img src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}" alt="user" />
-                        <span class="username" id="userInfo">
-                            <div class="fw-bold fs-5 userName">
+                        <span class="" id="userInfo">
+                            <div class="fw-bold fs-5 ">
                             </div>
                         </span>
                     </div>
@@ -201,14 +201,3 @@
     <!--end::Header container-->
 </div>
 <!--end::Header-->
-<script>
-    window.onload = function() {
-        let userObj = JSON.parse(localStorage.getItem('authUser'));
-        sessionStorage.setItem("userData", 'sayed al momin');
-        if (userObj) {
-            //console.log(userObj.fullName);
-            $("#userInfo .userName").text(userObj.fullName);
-            $("#userInfo .userEmail").text(userObj.userEmail);
-        }
-    }
-</script>
