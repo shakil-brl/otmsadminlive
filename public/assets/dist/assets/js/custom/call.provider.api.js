@@ -77,7 +77,7 @@ $(function () {
                                     <td class="text-end">
                                         <a href="#" id="link-with-batches-modal" class="btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2" 
                                         data-provider-id="${provider.id}" data-bs-toggle="modal" data-bs-target="#link_batches">
-                                            Link Batch 
+                                            ${linkBatch}
                                         </a>
                                         <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 show-action" 
                                         data-provider-id="${provider.id}" data-provider-name="${provider.name}" data-bs-toggle="modal" id="view_provider-modal" data-bs-target="#view_provider">
