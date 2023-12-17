@@ -13,11 +13,11 @@ class DashboardDetailsController extends Controller
     // 
     public function totalBatches(Request $request)
     {
-        $total_batches = ApiHttpClient::request('get', 'batchlist', [
+        $total_batches = ApiHttpClient::request('get', 'detail/total-batch', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-
+        // dd($total_batches);
         if ($total_batches['success'] == true) {
             $batches = $total_batches['data']['data'];
             // dd($batches);
