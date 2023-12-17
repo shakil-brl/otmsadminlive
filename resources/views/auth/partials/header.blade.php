@@ -78,14 +78,14 @@
 
                         <div class="lang-header">
                             @if (session()->get('locale') == 'en')
-                            <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
-                            <span class="label dropdown-toggle">English</span>
+                                <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
+                                <span class="label dropdown-toggle">English</span>
                             @elseif(session()->get('locale') == 'bn')
-                            <img class="flag" src="{{ asset('img/icon/bd.svg') }}" alt="">
-                            <span class="label dropdown-toggle">বাংলা</span>
+                                <img class="flag" src="{{ asset('img/icon/bd.svg') }}" alt="">
+                                <span class="label dropdown-toggle">বাংলা</span>
                             @else
-                            <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
-                            <span class="label dropdown-toggle">English</span>
+                                <img class="flag" src="{{ asset('img/icon/us.svg') }}" alt="">
+                                <span class="label dropdown-toggle">English</span>
                             @endif
                         </div>
 
@@ -117,8 +117,9 @@
                         data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                         data-kt-menu-placement="bottom-end">
                         <img src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}" alt="user" />
-                        <span class="username" id="userInfo">
-                            <div class="fw-bold fs-5 userName">
+                        {{ $authProfile['KnownAs'] ?? '' }}
+                        <span class="" id="userInfo">
+                            <div class="fw-bold fs-5 ">
                             </div>
                         </span>
                     </div>
@@ -131,20 +132,22 @@
                             <div class="menu-content d-flex align-items-center">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}"
-                                        alt="{{$role}}" title="{{$role}}" />
+                                    <img alt="Logo"
+                                        src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}"
+                                        alt="{{ $role }}" title="{{ $role }}" />
                                 </div>
 
 
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column" id="userInfo">
-                                    <div class="fw-bold d-flex align-items-center fs-5 userName">
+                                    {{ $authProfile['KnownAs'] ?? '' }}
+                                    <div class="fw-bold d-flex align-items-center fs-5">
                                         <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
                                         </span>
                                     </div>
-                                    <a href="#"
-                                        class="fw-semibold text-muted text-hover-primary fs-7 userEmail">{{$userAuth['fname']}}</a>
+                                    <span
+                                        class="fw-semibold text-muted text-hover-primary fs-7">{{ $authProfile['Email'] ?? '' }}</span>
                                 </div>
                                 <!--end::Username-->
                             </div>
@@ -160,12 +163,12 @@
                                 {{ __('dashboard-header.my_account') }}
                             </a>
                         </div>
-                        <div class="menu-item px-5">
+                        {{-- <div class="menu-item px-5">
                             <a href="" class="menu-link px-5">
                                 <img src="{{ asset('img/icon/feedback.svg') }}" alt="">
                                 {{ __('dashboard-header.send_feedback') }}
                             </a>
-                        </div>
+                        </div> --}}
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="separator my-2"></div>
@@ -201,14 +204,3 @@
     <!--end::Header container-->
 </div>
 <!--end::Header-->
-<script>
-    window.onload = function() {
-        let userObj = JSON.parse(localStorage.getItem('authUser'));
-        sessionStorage.setItem("userData", 'sayed al momin');
-        if (userObj) {
-            //console.log(userObj.fullName);
-            $("#userInfo .userName").text(userObj.fullName);
-            $("#userInfo .userEmail").text(userObj.userEmail);
-        }
-    }
-</script>
