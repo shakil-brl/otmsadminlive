@@ -1,6 +1,6 @@
 <h1>Apologies, but you currently lack the necessary access.</h1>
 
-@if(Auth::check())
+@if(session('access_token.access_token'))
 <!-- User is authenticated -->
 <form action="{{ route('logout') }}" method="post">
     @csrf
