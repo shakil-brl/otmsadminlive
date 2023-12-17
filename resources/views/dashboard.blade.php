@@ -8,5 +8,5 @@
 </form>
 @else
 <!-- User is not authenticated -->
-<a href="{{ route('login') }}">Login</a>
+<a href="https://otms.herpower.gov.bd/">Login</a>
 @endif
