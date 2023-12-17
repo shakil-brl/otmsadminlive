@@ -25,8 +25,8 @@ class DashboardDetailsController extends Controller
             return view('dashboard_details.total_batches', ['total_batches' => $batches, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', $total_batches['message'] ?? 'Something went wrong');
+            return redirect()->back();
         }
     }
 
@@ -45,8 +45,8 @@ class DashboardDetailsController extends Controller
             return view('dashboard_details.running_batches', ['running_batches' => $batches, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', $running_batches['message'] ?? 'Something went wrong');
+            return redirect()->back();
         }
     }
 
@@ -65,8 +65,8 @@ class DashboardDetailsController extends Controller
             return view('dashboard_details.complete_batches', ['complete_batches' => $batches, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', $complete_batches['message'] ?? 'Something went wrong');
+            return redirect()->back();
         }
         //return view('dashboard_details.complete_batches');
     }
@@ -86,8 +86,8 @@ class DashboardDetailsController extends Controller
             return view('dashboard_details.ongoing_classes', ['ongoing_classes' => $batches, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', $ongoing_classes['message'] ?? 'Something went wrong');
+            return redirect()->back();
         }
         //return view('dashboard_details.complete_batches');
     }
@@ -107,8 +107,8 @@ class DashboardDetailsController extends Controller
             return view('dashboard_details.complete_classes', ['complete_classes' => $batches, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', $complete_classes['message'] ?? 'Something went wrong');
+            return redirect()->back();
         }
         //return view('dashboard_details.complete_batches');
     }
@@ -127,8 +127,8 @@ class DashboardDetailsController extends Controller
             return view('dashboard_details.districts', ['total_districts' => $districts, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', $total_districts['message'] ?? 'Something went wrong');
+            return redirect()->back();
         }
     }
 
@@ -146,8 +146,8 @@ class DashboardDetailsController extends Controller
             return view('dashboard_details.upazilas', ['total_upazilas' => $upazilas, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', $total_upazilas['message'] ?? 'Something went wrong');
+            return redirect()->back();
         }
     }
 
@@ -165,8 +165,8 @@ class DashboardDetailsController extends Controller
             return view('dashboard_details.partners', ['total_partners' => $partners, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', $total_partners['message'] ?? 'Something went wrong');
+            return redirect()->back();
         }
     }
 
