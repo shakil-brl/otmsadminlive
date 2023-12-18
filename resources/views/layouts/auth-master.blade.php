@@ -169,8 +169,8 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/dist/assets/js/custom/pages/user-profile/general.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script> --}}
     <!-- Add this line to include Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-K5RQGRlKStPpXrf7lKPSMA8aYTO9t6r0PxIvY07z+ht0Ca9UG/Xw1ZlGy1lJ1l+ebHv5FxA+2hc8LNVamRQXUw=="
