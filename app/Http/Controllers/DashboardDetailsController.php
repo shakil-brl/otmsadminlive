@@ -15,14 +15,14 @@ class DashboardDetailsController extends Controller
     {
         $total_batches = ApiHttpClient::request('get', 'detail/total-batch', [
             ...$request->all(),
-            'page' => $request->page ?? 1,           
+            'page' => $request->page ?? 1,
         ])->json();
 
         if ($total_batches['success'] == true) {
             $batches = $total_batches['data']['data'];
             // dd($batches);
             $paginator = $this->customPaginate($total_batches, $request, route('dashboard_details.total_batches'));
-            return view('dashboard_details.total_batches', ['total_batches' => $batches, 'paginator' => $paginator]);
+            return view('dashboard_details.total_batches', ['total_batches' => $batches, 'paginator' => $paginator, 'from_no' => $total_batches['data']['from']]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $total_batches['message'] ?? 'Something went wrong');
