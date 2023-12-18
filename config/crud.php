@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'layout' => 'layouts.app',
+    'layout' => 'front.layouts.app',
 
     'model' => [
         'namespace' => 'App\Models',
