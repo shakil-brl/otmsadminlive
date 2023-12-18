@@ -1,0 +1,107 @@
+#logout-panel {
+    color: $nutral700;
+    font-size: 14px;
+    font-weight: 600;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    .name {
+        margin: 0 10px;
+        display: inline-block;
+    }
+    .photo {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+    .avatar {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $purple100;
+        font-size: 18px;
+        font-weight: 600;
+        color: $purple950;
+    }
+    .dropdown-menu {
+        border-radius: 32px;
+        border-bottom: 1px solid #edf0f2;
+        box-shadow: 0px 60px 80px -1px rgba(0, 0, 0, 0.14);
+        background-color: $white;
+        border: 0;
+        padding: 20px;
+        width: 320px;
+        top: 19px !important;
+        .identity {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            grid-gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid $gray200;
+            .user-face {
+                height: 50px;
+                width: 50px;
+            }
+            .name {
+                color: #212529;
+                font-size: 13px;
+                font-weight: 700;
+                margin: 0;
+            }
+            .email {
+                color: var(--gray-600, #6c757d);
+                font-family: Poppins;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                text-transform: lowercase;
+                word-break: break-all;
+            }
+        }
+        .links {
+            border-bottom: 1px solid $gray200;
+            padding: 15px 0;
+            .link {
+                display: block;
+                text-decoration: none;
+                color: $gray600;
+                display: flex;
+                align-items: center;
+                font-size: 13px;
+                font-weight: 600;
+                padding: 10px 0;
+                .material-icons-outlined {
+                    width: 30px;
+                    font-size: 20px;
+                }
+                &:hover {
+                    color: $purple600;
+                }
+            }
+        }
+        .logout {
+            text-align: right;
+            .logout-btn {
+                margin-top: 20px;
+                border-radius: 1000px;
+                background: $purple600;
+                @include flexCenter;
+                color: $white;
+                font-size: 13px;
+                font-weight: 700;
+                padding: 10px 15px;
+                .material-icons-outlined {
+                    font-size: 18px;
+                    margin-right: 5px;
+                }
+                &:hover {
+                    background: $purple700;
+                }
+            }
+        }
+    }
+}

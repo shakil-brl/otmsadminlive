@@ -1,0 +1,96 @@
+#login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content {
+        width: 340px;
+        padding: 35px 15px;
+        .title {
+            color: $purple50;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .form-input {
+            margin-bottom: 20px;
+            label {
+                color: $purple50;
+                font-size: 14px;
+                margin-bottom: 3px;
+                font-weight: 500;
+            }
+            .form-control {
+                padding: 13px 16px;
+                border-radius: 16px;
+                border: 2px solid $purple500;
+                background: $white;
+                font-size: 15px;
+                font-weight: 500;
+                &::placeholder {
+                    color: #a3a3a3;
+                }
+            }
+            .forget {
+                color: $white;
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
+            .password {
+                position: relative;
+                .form-control {
+                    padding-right: 35px;
+                }
+                .icon {
+                    z-index: 1;
+                    position: absolute;
+                    top: 0;
+                    right: 14px;
+                    width: 20px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    .material-icons-outlined {
+                        position: absolute;
+                        color: #343a40;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+
+        .btn-submit {
+            border-radius: 16px;
+            background: #16a34a;
+            box-shadow: 0px 5px 10px 0px #581c8726;
+            padding: 13px 15px;
+            font-size: 14px;
+            font-weight: 700;
+            color: $white;
+            width: 100%;
+        }
+        .account-create {
+            text-align: center;
+            margin-top: 16px;
+            color: $purple200;
+            font-size: 14px;
+            font-weight: 600;
+            a {
+                color: $purple200;
+                font-weight: 700;
+                &:hover {
+                    color: $purple300;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #login-form {
+        .content {
+            width: 100%;
+        }
+    }
+}

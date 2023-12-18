@@ -1,0 +1,29 @@
+#body {
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: $white;
+    padding: 32px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+@media only screen and (max-width: 767px) {
+    #body {
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    #body {
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #body {
+        padding: 15px;
+    }
+}

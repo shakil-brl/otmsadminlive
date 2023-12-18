@@ -1,0 +1,60 @@
+#footer {
+    display: grid;
+    grid-template-areas: "left center right";
+    align-items: center;
+    background-color: $purple950;
+    height: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: $white;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    .govt-logo {
+        img {
+            height: 56px;
+        }
+    }
+    .left {
+        grid-area: left;
+    }
+    .center {
+        grid-area: center;
+    }
+    .right {
+        grid-area: right;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #footer {
+        grid-template-areas:
+            "left center"
+            "right center";
+        line-height: 1.6;
+        .left {
+            align-self: end;
+        }
+
+        .right {
+            align-self: start;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #footer {
+        height: auto;
+        padding: 10px 15px;
+        grid-template-areas:
+            "center"
+            "left"
+            "right";
+        line-height: 1.6;
+        text-align: center;
+        .left {
+            margin-top: 8px;
+            align-self: end;
+        }
+    }
+}

@@ -1,0 +1,158 @@
+#navbar {
+    background: $purple50;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    display: flex;
+    padding: 16px 0;
+    .navbar {
+        border-radius: 0 0 32px 32px;
+        background: $purple50;
+        width: 100%;
+        padding: 0;
+        padding-left: 16px;
+        padding-right: 16px;
+        .navbar-brand {
+            .logo {
+                border-right: 1px solid $purple200;
+                padding-right: 16px;
+                img {
+                    height: 56px;
+                }
+            }
+            .govt-logo {
+                padding-left: 16px;
+                img {
+                    height: 56px;
+                }
+            }
+        }
+    }
+    .menu {
+        .nav-item {
+            .nav-link {
+                font-size: 12px;
+                color: $purple950;
+            }
+            &.lang {
+                .nav-link {
+                    .flag {
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 50%;
+                        margin-right: 5px;
+                    }
+                    .label {
+                        font-size: 14px;
+                        color: $nutral700;
+                    }
+                }
+                .dropdown-menu {
+                    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+                    background-color: $white;
+                    padding: 0;
+                    border: 0;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    .item {
+                        &:first-child .dropdown-item {
+                            padding-top: 7px;
+                        }
+                        &:last-child .dropdown-item {
+                            padding-bottom: 7px;
+                        }
+                        .dropdown-item {
+                            .flag {
+                                width: 16px;
+                                height: 16px;
+                                border-radius: 50%;
+                                margin-right: 5px;
+                            }
+                            .label {
+                                color: $nutral700;
+                                font-size: 14px;
+                            }
+                            &:hover {
+                                background-color: $purple100;
+                            }
+                        }
+                    }
+                }
+            }
+            &.auth {
+                .nav-link {
+                    .auth-panel {
+                        border-radius: 500px;
+                        padding: 4px;
+                        border: 1px solid $purple200;
+                        .btn {
+                            padding: 10px 16px;
+                            font-size: 14px;
+                            font-weight: 600;
+                            border-radius: 500px;
+                            color: $purple950;
+                            transition: 0.2s;
+                            &.active {
+                                background-color: $purple950;
+                                border: 0;
+                                color: $purple50;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #navbar {
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+}
+@media only screen and (max-width: 575px) {
+    #navbar {
+        padding: 10px 0;
+        .navbar {
+            .navbar-brand {
+                margin-right: 5px;
+            }
+            border-radius: 0 0 24px 24px;
+        }
+    }
+}
+@media only screen and (max-width: 435px) {
+    #navbar {
+        .navbar {
+            .navbar-brand {
+                .logo {
+                    padding-right: 10px;
+                    img {
+                        height: 55px;
+                    }
+                }
+                .govt-logo {
+                    padding-left: 10px;
+                    img {
+                        height: 55px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #navbar {
+        .navbar {
+            .navbar-brand {
+                .logo {
+                    border-right: 0;
+                }
+                .govt-logo {
+                    display: none;
+                }
+            }
+        }
+    }
+}
