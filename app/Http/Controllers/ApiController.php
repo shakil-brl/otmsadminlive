@@ -75,9 +75,9 @@ class ApiController extends Controller
             // echo $dateTime;
             // dd($loginData['expires_in']);
             // $permissionNames = array_unique(array_column($permissionResponse['data'], 'name'));
-
             $tokenData = [
                 'access_token' => $loginData['access_token'],
+                'authProfile' => $loginData['userType']['profile'],
                 'authUser' => $loginData['user'],
                 'userType' => $loginData['userType'],
                 'role' => $loginData['userType']['role']['name'],

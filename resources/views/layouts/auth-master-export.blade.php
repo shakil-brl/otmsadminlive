@@ -25,7 +25,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/bootstrap-tagsinput.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/toastr.css') }}">
-    
+
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -70,8 +70,8 @@
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/dist/assets/js/custom/pages/user-profile/general.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script> --}}
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
     @section('scripts')
