@@ -184,6 +184,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
      * Trainers Enrollment Routes
      */
     Route::group(['prefix' => 'trainer-enrollment'], function () {
+        Route::get('/batches', [TrainerEnrollmentController::class, 'batches'])->name('trainer-enrollment.batches');
         Route::get('/', [TrainerEnrollmentController::class, 'index'])->name('trainerEnroll.index');
         Route::get('/{enrollId}', [TrainerEnrollmentController::class, 'show'])->name('trainerEnroll.show');
     });

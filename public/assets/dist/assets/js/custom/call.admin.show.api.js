@@ -1,12 +1,9 @@
 $(function () {
-
- 
-
-    if (typeof accessToken !== 'undefined') {
+    if (typeof accessToken !== "undefined") {
         // Use the access token in your JavaScript code
-        console.log('Access Token:', accessToken);
+        console.log("Access Token:", accessToken);
     } else {
-        console.error('Access Token is not defined.');
+        console.error("Access Token is not defined.");
     }
     alert();
 

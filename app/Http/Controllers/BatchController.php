@@ -11,9 +11,23 @@ use Illuminate\Support\Str;
 class BatchController extends Controller
 {
     // batches for provider for link trainers
-    public function index()
+    public function index(Request $request)
     {
-        return view('trainingBatch.index');
+        // return view('trainingBatch.index');
+        $total_batches = ApiHttpClient::request('get', 'trainer-enroll/batches', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        // dd($total_batches);
+        if ($total_batches['success'] == true) {
+            $batches = $total_batches['data']['data'];
+            $paginator = $this->customPaginate($total_batches, $request, route('dashboard_details.total_batches'));
+            return view('trainersenroll.batches', ['total_batches' => $batches, 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $total_batches['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
     }
 
     // all batches for higher authority
