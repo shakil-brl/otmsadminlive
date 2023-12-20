@@ -61,10 +61,10 @@
                             <li class="nav-item auth">
                                 <div class="nav-link pe-0">
                                     <div class="auth-panel d-md-block d-inline-block ">
-                                        <a class="signup btn" href="#">
+                                        <a class="signup btn" href="https://training.gov.bd/signup">
                                             Sign Up
                                         </a>
-                                        <a class="login btn active" href="#">
+                                        <a class="login btn active" href="https://training.gov.bd">
                                             Login
                                         </a>
                                     </div>
@@ -77,21 +77,43 @@
             </header>
             <div id="login-form">
                 <div class="content">
-                    <form action="">
-                        <legend class="title">অ্যাকাউন্ট লগইন করুন</legend>
+
+                    @csrf
+                    <legend class="title">অ্যাকাউন্ট লগইন করুন</legend>
+                    @if(session('error'))
+                    <div style="color: red;">
+                        {{ session('error') }}
+                    </div>
+                    @endif
+
+                    @if($errors->any())
+                    <div style="color: rgb(255, 255, 255); ">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+                    <form action="{{ url('/get-token') }}" method="post">
+                        @csrf
+
                         <div class="form-input">
-                            <label for="">ইমেইল</label>
-                            <input type="text" class="form-control" placeholder="Enter Emeil">
+                            <label for="emailid">ইমেইল</label>
+                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Emeil">
                         </div>
                         <div class="form-input">
                             <div class="d-flex justify-content-between">
                                 <label for="">পাসওয়ার্ড</label>
                                 <label for="">
-                                    <a href="" class="forget">পাসওয়ার্ড ভুলে গেছেন ?</a>
+                                    <a href="https://training.gov.bd/reset-password" class="forget">পাসওয়ার্ড ভুলে
+                                        গেছেন ?</a>
                                 </label>
                             </div>
                             <div class="password">
-                                <input type="password" class="form-control" placeholder="Enter Password">
+                                <input id="password" name="password" type="password" class="form-control"
+                                    placeholder="Enter Password">
                                 <div class="icon">
                                     <span type="button" class="material-icons-outlined">
                                         visibility
@@ -101,7 +123,8 @@
                         </div>
                         <button class="btn btn-submit">লগইন করুন</button>
 
-                        <div class="account-create">হার পাওয়ারে অ্যাকাউন্ট নাই ? <a href="">সাইন আপ</a></div>
+                        <div class="account-create">হার পাওয়ারে অ্যাকাউন্ট নাই ? <a
+                                href="https://training.gov.bd/signup">সাইন আপ</a></div>
                     </form>
                 </div>
             </div>

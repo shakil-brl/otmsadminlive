@@ -15,6 +15,79 @@
                 Dashboard
             </a>
         </li>
+        @php
+        $routeNames = [
+        'development-partner',
+        'development-partner-empoly',
+        'geodistrict',
+        'geodivision',
+        'geoupazilas',
+        'profile',
+        'tms-batch-schedule-detail',
+        'tms-categorie',
+        'class-attendance',
+        'class-document',
+        'tms-course',
+        'evaluation-student',
+        'evaluation-for-trainer',
+        'tms-holly-day',
+        'tms-inspections',
+        'role-permision',
+        'provider',
+        'providers-batche',
+        'providers-trainer',
+        'role',
+        'batch-schedule',
+        'user-type',
+        'trainer-profile',
+        'training-applicant',
+        'training-batche',
+        'training-title',
+        'batch-group',
+        ];
+        @endphp
+        //@php
+        // $routeIcons = [
+        // 'development-partner' => 'building',
+        // 'development-partner-empoly' => 'users',
+        // 'geodistrict' => 'map-marker',
+        // 'geodivision' => 'map',
+        // 'geoupazilas' => 'map-signs',
+        // 'profile' => 'user',
+        // 'tms-batch-schedule-detail' => 'calendar-alt',
+        // 'tms-categorie' => 'folder',
+        // 'class-attendance' => 'clipboard-list',
+        // 'class-document' => 'file-alt',
+        // 'tms-course' => 'book',
+        // 'evaluation-student' => 'user-check',
+        // 'evaluation-for-trainer' => 'user-tie',
+        // 'tms-holly-day' => 'glass-cheers',
+        // 'tms-inspections' => 'clipboard-check',
+        // 'role-permision' => 'shield-alt',
+        // 'provider' => 'industry',
+        // 'providers-batche' => 'users-cog',
+        // 'providers-trainer' => 'user-cog',
+        // 'role' => 'user-lock',
+        // 'batch-schedule' => 'calendar-week',
+        // 'user-type' => 'users',
+        // 'trainer-profile' => 'user-tie',
+        // 'training-applicant' => 'user-clock',
+        // 'training-batche' => 'users',
+        // 'training-title' => 'certificate',
+        // 'batch-group' => 'users-class',
+        // ];
+        // @endphp
+        @foreach ($routeNames as $routeName)
+        <li class="nav-item">
+            <a href="{{ route($routeName . '.index') }}"
+                class="nav-link {{ request()->routeIs($routeName . '*') ? 'active' : '' }}">
+                <span class="material-icons-outlined">
+                    dynamic_form
+                </span>
+                {{ ucfirst(str_replace('-', ' ', $routeName)) }}
+            </a>
+        </li>
+        @endforeach
 
         <li class="nav-item">
             <a href="#" class="nav-link active">
