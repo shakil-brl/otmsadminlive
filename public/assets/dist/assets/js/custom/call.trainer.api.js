@@ -240,184 +240,184 @@ $(function () {
             });
         });
 
-        $(document).on("click", ".editProvider", function () {
-            let id = $(this).attr("data-provider-id");
-            let url_link = api_baseurl + "providers/" + id + "/edit";
-            $.ajax({
-                url: url_link,
-                type: "GET",
-                data: {},
-                headers: {
-                    Authorization: authToken,
-                    "X-localization": language,
-                },
-                success: function (item) {
-                    let providers = item.data;
+        // $(document).on("click", ".editProvider", function () {
+        //     let id = $(this).attr("data-provider-id");
+        //     let url_link = api_baseurl + "providers/" + id + "/edit";
+        //     $.ajax({
+        //         url: url_link,
+        //         type: "GET",
+        //         data: {},
+        //         headers: {
+        //             Authorization: authToken,
+        //             "X-localization": language,
+        //         },
+        //         success: function (item) {
+        //             let providers = item.data;
 
-                    $("#provider_edit_form #name").val(providers["name"]);
-                    $("#provider_edit_form #email").val(providers["email"]);
-                    $("#provider_edit_form #mobile").val(providers["mobile"]);
-                    $("#provider_edit_form #web_url").val(providers["web_url"]);
-                    $("#provider_edit_form #address").val(providers["address"]);
-                    $("#provider_edit_form #provider_id").val(providers["id"]);
-                },
-            });
-        });
+        //             $("#provider_edit_form #name").val(providers["name"]);
+        //             $("#provider_edit_form #email").val(providers["email"]);
+        //             $("#provider_edit_form #mobile").val(providers["mobile"]);
+        //             $("#provider_edit_form #web_url").val(providers["web_url"]);
+        //             $("#provider_edit_form #address").val(providers["address"]);
+        //             $("#provider_edit_form #provider_id").val(providers["id"]);
+        //         },
+        //     });
+        // });
 
-        $("#provider_edit_form").submit(function (e) {
-            e.preventDefault();
-            Swal.fire({
-                title: areYouSure,
-                text: wantUpdate,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: yesUpdate,
-                cancelButtonText: noCancel,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let fd = new FormData();
-                    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr(
-                        "content"
-                    );
+        // $("#provider_edit_form").submit(function (e) {
+        //     e.preventDefault();
+        //     Swal.fire({
+        //         title: areYouSure,
+        //         text: wantUpdate,
+        //         icon: "warning",
+        //         showCancelButton: true,
+        //         confirmButtonColor: "#3085d6",
+        //         cancelButtonColor: "#d33",
+        //         confirmButtonText: yesUpdate,
+        //         cancelButtonText: noCancel,
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             let fd = new FormData();
+        //             let CSRF_TOKEN = $('meta[name="csrf-token"]').attr(
+        //                 "content"
+        //             );
 
-                    let id = $("#provider_edit_form #provider_id").val();
+        //             let id = $("#provider_edit_form #provider_id").val();
 
-                    let link = api_baseurl + "providers/" + id + "/update";
+        //             let link = api_baseurl + "providers/" + id + "/update";
 
-                    let name = $("#provider_edit_form [name=name]").val();
-                    let email = $("#provider_edit_form [name=email]").val();
-                    let mobile = $("#provider_edit_form [name=mobile]").val();
-                    let web_url = $("#provider_edit_form [name=web_url]").val();
-                    let address = $("#provider_edit_form [name=address]").val();
+        //             let name = $("#provider_edit_form [name=name]").val();
+        //             let email = $("#provider_edit_form [name=email]").val();
+        //             let mobile = $("#provider_edit_form [name=mobile]").val();
+        //             let web_url = $("#provider_edit_form [name=web_url]").val();
+        //             let address = $("#provider_edit_form [name=address]").val();
 
-                    fd.append("name", name);
-                    fd.append("email", email);
-                    fd.append("mobile", mobile);
-                    fd.append("web_url", web_url);
-                    fd.append("address", address);
-                    fd.append("_token", CSRF_TOKEN);
-                    fd.append("_method", "patch");
+        //             fd.append("name", name);
+        //             fd.append("email", email);
+        //             fd.append("mobile", mobile);
+        //             fd.append("web_url", web_url);
+        //             fd.append("address", address);
+        //             fd.append("_token", CSRF_TOKEN);
+        //             fd.append("_method", "patch");
 
-                    $.ajax({
-                        type: "post",
-                        data: fd,
-                        dataType: "JSON",
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        url: link,
-                        headers: {
-                            Authorization: authToken,
-                            "X-localization": language,
-                        },
-                        success: function (results) {
-                            if (results.success === true) {
-                                swal.fire(sucessfullyUpdated, results.data);
-                                sessionStorage.setItem(
-                                    "message",
-                                    results.message
-                                );
-                                sessionStorage.setItem("alert-type", "info");
-                                // refresh page after 2 seconds
-                                setTimeout(function () {
-                                    location.reload();
-                                }, 2000);
-                            } else {
-                                if (results.error === true) {
-                                    var errors = ValidationError;
-                                    swal.fire("", errors);
-                                }
+        //             $.ajax({
+        //                 type: "post",
+        //                 data: fd,
+        //                 dataType: "JSON",
+        //                 cache: false,
+        //                 contentType: false,
+        //                 processData: false,
+        //                 url: link,
+        //                 headers: {
+        //                     Authorization: authToken,
+        //                     "X-localization": language,
+        //                 },
+        //                 success: function (results) {
+        //                     if (results.success === true) {
+        //                         swal.fire(sucessfullyUpdated, results.data);
+        //                         sessionStorage.setItem(
+        //                             "message",
+        //                             results.message
+        //                         );
+        //                         sessionStorage.setItem("alert-type", "info");
+        //                         // refresh page after 2 seconds
+        //                         setTimeout(function () {
+        //                             location.reload();
+        //                         }, 2000);
+        //                     } else {
+        //                         if (results.error === true) {
+        //                             var errors = ValidationError;
+        //                             swal.fire("", errors);
+        //                         }
 
-                                if (results.error === true) {
-                                    if (results.message.name) {
-                                        $(
-                                            "#provider_edit_form .form-message-error-name"
-                                        )
-                                            .html(results.message.name[0])
-                                            .addClass("text-danger")
-                                            .fadeIn(5000);
-                                        setTimeout(() => {
-                                            $(
-                                                "#provider_edit_form .form-message-error-name"
-                                            )
-                                                .html("")
-                                                .removeClass("text-danger")
-                                                .fadeOut();
-                                        }, 5000);
-                                    }
-                                    if (results.message.email) {
-                                        $(
-                                            "#provider_edit_form .form-message-error-email"
-                                        )
-                                            .html(results.message.email[0])
-                                            .addClass("text-danger")
-                                            .fadeIn(5000);
-                                        setTimeout(() => {
-                                            $(
-                                                "#provider_edit_form .form-message-error-email"
-                                            )
-                                                .html("")
-                                                .removeClass("text-danger")
-                                                .fadeOut();
-                                        }, 5000);
-                                    }
-                                    if (results.message.mobile) {
-                                        $(
-                                            "#provider_edit_form .form-message-error-mobile"
-                                        )
-                                            .html(results.message.mobile[0])
-                                            .addClass("text-danger")
-                                            .fadeIn(5000);
-                                        setTimeout(() => {
-                                            $(
-                                                "#provider_edit_form .form-message-error-mobile"
-                                            )
-                                                .html("")
-                                                .removeClass("text-danger")
-                                                .fadeOut();
-                                        }, 5000);
-                                    }
-                                    if (results.message.web_url) {
-                                        $(
-                                            "#provider_edit_form .form-message-error-web_url"
-                                        )
-                                            .html(results.message.web_url[0])
-                                            .addClass("text-danger")
-                                            .fadeIn(5000);
-                                        setTimeout(() => {
-                                            $(
-                                                "#provider_edit_form .form-message-error-web_url"
-                                            )
-                                                .html("")
-                                                .removeClass("text-danger")
-                                                .fadeOut();
-                                        }, 5000);
-                                    }
-                                    if (results.message.address) {
-                                        $(
-                                            "#provider_edit_form .form-message-error-address"
-                                        )
-                                            .html(results.message.address[0])
-                                            .addClass("text-danger")
-                                            .fadeIn(5000);
-                                        setTimeout(() => {
-                                            $(
-                                                "#provider_edit_form .form-message-error-address"
-                                            )
-                                                .html("")
-                                                .removeClass("text-danger")
-                                                .fadeOut();
-                                        }, 5000);
-                                    }
-                                }
-                            }
-                        },
-                    });
-                }
-            });
-        });
+        //                         if (results.error === true) {
+        //                             if (results.message.name) {
+        //                                 $(
+        //                                     "#provider_edit_form .form-message-error-name"
+        //                                 )
+        //                                     .html(results.message.name[0])
+        //                                     .addClass("text-danger")
+        //                                     .fadeIn(5000);
+        //                                 setTimeout(() => {
+        //                                     $(
+        //                                         "#provider_edit_form .form-message-error-name"
+        //                                     )
+        //                                         .html("")
+        //                                         .removeClass("text-danger")
+        //                                         .fadeOut();
+        //                                 }, 5000);
+        //                             }
+        //                             if (results.message.email) {
+        //                                 $(
+        //                                     "#provider_edit_form .form-message-error-email"
+        //                                 )
+        //                                     .html(results.message.email[0])
+        //                                     .addClass("text-danger")
+        //                                     .fadeIn(5000);
+        //                                 setTimeout(() => {
+        //                                     $(
+        //                                         "#provider_edit_form .form-message-error-email"
+        //                                     )
+        //                                         .html("")
+        //                                         .removeClass("text-danger")
+        //                                         .fadeOut();
+        //                                 }, 5000);
+        //                             }
+        //                             if (results.message.mobile) {
+        //                                 $(
+        //                                     "#provider_edit_form .form-message-error-mobile"
+        //                                 )
+        //                                     .html(results.message.mobile[0])
+        //                                     .addClass("text-danger")
+        //                                     .fadeIn(5000);
+        //                                 setTimeout(() => {
+        //                                     $(
+        //                                         "#provider_edit_form .form-message-error-mobile"
+        //                                     )
+        //                                         .html("")
+        //                                         .removeClass("text-danger")
+        //                                         .fadeOut();
+        //                                 }, 5000);
+        //                             }
+        //                             if (results.message.web_url) {
+        //                                 $(
+        //                                     "#provider_edit_form .form-message-error-web_url"
+        //                                 )
+        //                                     .html(results.message.web_url[0])
+        //                                     .addClass("text-danger")
+        //                                     .fadeIn(5000);
+        //                                 setTimeout(() => {
+        //                                     $(
+        //                                         "#provider_edit_form .form-message-error-web_url"
+        //                                     )
+        //                                         .html("")
+        //                                         .removeClass("text-danger")
+        //                                         .fadeOut();
+        //                                 }, 5000);
+        //                             }
+        //                             if (results.message.address) {
+        //                                 $(
+        //                                     "#provider_edit_form .form-message-error-address"
+        //                                 )
+        //                                     .html(results.message.address[0])
+        //                                     .addClass("text-danger")
+        //                                     .fadeIn(5000);
+        //                                 setTimeout(() => {
+        //                                     $(
+        //                                         "#provider_edit_form .form-message-error-address"
+        //                                     )
+        //                                         .html("")
+        //                                         .removeClass("text-danger")
+        //                                         .fadeOut();
+        //                                 }, 5000);
+        //                             }
+        //                         }
+        //                     }
+        //                 },
+        //             });
+        //         }
+        //     });
+        // });
 
         // provider delete api call
         $(document).on("click", ".delete-provider", function (e) {

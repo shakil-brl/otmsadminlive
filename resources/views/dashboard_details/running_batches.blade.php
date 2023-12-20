@@ -1,5 +1,6 @@
 @extends('layouts.auth-master')
 {{-- @dd($running_batches); --}}
+{{-- @dd($running_batches[0]) --}}
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
@@ -44,7 +45,7 @@
                                 {{ $batch['training_batch'] ? $batch['training_batch']['GEOLocation'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['training_batch'] ? $batch['training_batch']['provider']['name'] : '' }}
+                                {{ $batch['training_batch']['provider']['name'] ?? '' }}
                             </td>
                             <td>
                                 <a href="" class="btn btn-sm btn-info">

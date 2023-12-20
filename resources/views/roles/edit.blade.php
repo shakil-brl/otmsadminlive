@@ -1,211 +1,211 @@
 @extends('layouts.auth-master')
 
 @section('content')
-<div class="d-flex flex-column flex-column-fluid">
-    <!--begin::Toolbar-->
-    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-        <!--begin::Toolbar container-->
-        <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
-            <!--begin::Page title-->
-            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                <!--begin::Title-->
-                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">{{
-                    __('roles-permissions.edit_role') }}
-                </h1>
-                <!--end::Title-->
-                <!--begin::Breadcrumb-->
-                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('home.index') }}" class="text-muted text-hover-primary">{{
-                            __('division-list.home') }}</a>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">{{ __('sidemenu.user_management') }}</li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted text-hover-primary"> {{ __('sidemenu.role_list') }}</a>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">
-                        <a href="" class="text-muted text-hover-primary"> {{ __('roles-permissions.edit_role') }}</a>
-                    </li>
-                    <!--end::Item-->
-                </ul>
-                <!--end::Breadcrumb-->
-            </div>
-            <!--end::Page title-->
-        </div>
-        <!--end::Toolbar container-->
-    </div>
-    <!--end::Toolbar-->
-    <!--begin::Content-->
-    <div id="kt_app_content" class="app-content flex-column-fluid">
-        <!--begin::Content container-->
-        <div id="kt_app_content_container" class="app-container container-xxl">
-            <div id="success_message"></div>
-            <!--begin::Row-->
-            <div class="row g-5 g-xl-9">
-
-                <!--begin::Col-->
-                <div class="col-md-12">
-                    <!--begin::Card-->
-                    <div class="card card-flush h-md-100">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-
-                            </div>
-                            <!--end::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-1">
-                            <div class="modal-body mx-5 my-1">
-                                @if (count($errors) > 0)
-                                <div class="alert alert-danger">
-                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
-
-                                <form id="kt_modal_update_role_form" method="POST" action="#">
-                                    @method('patch')
-                                    @csrf
-                                    <div class="d-flex flex-column me-n7 pe-7" id="kt_modal_create_role_scroll">
-                                        <!--begin::Input group-->
-                                        <div class="fv-row mb-10">
-                                            <input type="hidden" value="{{ $id }}" />
-                                            <!--begin::Label-->
-                                            <label class="fs-5 fw-bold form-label mb-2">
-                                                <span class="required">{{ __('roles-permissions.role_name') }}</span>
-                                            </label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <input class="form-control form-control-solid"
-                                                placeholder="{{ __('roles-permissions.role_name_ph') }}" name="name"
-                                                id="name" value="" required />
-                                            <span class="text-danger form-message-error-name">
-
-                                            </span>
-
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Input group-->
-                                        <!--begin::Permissions-->
-                                        <div class="fv-row">
-                                            <!--begin::Label-->
-                                            <label class="fs-5 fw-bold form-label mb-2">{{
-                                                __('roles-permissions.role_permission') }}</label>
-                                            <span class="required"></span>
-                                            <!--end::Label-->
-                                            <!--begin::Table wrapper-->
-                                            <div class="table-responsive">
-                                                <!--begin::Table-->
-                                                <table class="table align-middle table-row-dashed fs-6 gy-5">
-                                                    <!--begin::Table body-->
-                                                    <thead>
-                                                        <tr>
-                                                            <td>
-                                                                <!--begin::Checkbox-->
-                                                                <label
-                                                                    class="form-check form-check-sm form-check-custom form-check-solid me-9">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        data-kt-check="true" value=""
-                                                                        id="kt_roles_select_all"
-                                                                        data-kt-check-target="#kt_table_permissions .form-check-input"
-                                                                        name="all_permission" id="all_permission" />
-                                                                    <span class="form-check-label"
-                                                                        for="kt_roles_select_all">{{
-                                                                        __('roles-permissions.all') }}</span>
-                                                                </label>
-                                                                <!--end::Checkbox-->
-                                                            </td>
-                                                            <td class="text-gray-800">{{
-                                                                __('roles-permissions.administration_access') }}
-                                                                <span class="ms-1" data-bs-toggle="tooltip"
-                                                                    title="Allows a full access to the system">
-                                                                </span>
-                                                                <span class="ms-1 text-danger">
-                                                                    @error('permission')
-                                                                    {{ $message }}
-                                                                    @enderror
-                                                                </span>
-                                                            </td>
-                                                        </tr>
-                                                        <th scope="col" width="1%"></th>
-                                                        <th scope="col" width="20%">{{
-                                                            __('roles-permissions.access_route') }}</th>
-                                                        <th scope="col" width="20%">{{
-                                                            __('roles-permissions.route_path') }}</th>
-                                                        <th scope="col" width="1%">{{ __('roles-permissions.guard') }}
-                                                        </th>
-                                                    </thead>
-                                                    <tbody class="text-gray-600 fw-semibold" id="rolepermission">
-
-                                                    </tbody>
-                                                    <!--end::Table body-->
-                                                </table>
-                                                <!--end::Table-->
-                                            </div>
-                                            <!--end::Table wrapper-->
-                                        </div>
-                                        <!--end::Permissions-->
-                                    </div>
-                                    <!--end::Scroll-->
-                                    <!--begin::Actions-->
-                                    <div class="text-center pt-15">
-                                        <a href="{{ route('role.index') }}" class="btn btn-light me-3"
-                                            data-kt-roles-modal-action="cancel">{{ __('roles-permissions.discard')
-                                            }}</a>
-                                        <button type="submit" class="btn btn-primary" id="access-role-permission">
-                                            <span class="indicator-label">{{ __('roles-permissions.update') }}</span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!--end::Card-->
+    <div class="d-flex flex-column flex-column-fluid">
+        <!--begin::Toolbar-->
+        <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+            <!--begin::Toolbar container-->
+            <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+                <!--begin::Page title-->
+                <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                    <!--begin::Title-->
+                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                        {{ __('roles-permissions.edit_role') }}
+                    </h1>
+                    <!--end::Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            <a href="{{ route('home.index') }}"
+                                class="text-muted text-hover-primary">{{ __('division-list.home') }}</a>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">{{ __('sidemenu.user_management') }}</li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted text-hover-primary"> {{ __('sidemenu.role_list') }}</a>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted text-hover-primary">
+                                {{ __('roles-permissions.edit_role') }}</a>
+                        </li>
+                        <!--end::Item-->
+                    </ul>
+                    <!--end::Breadcrumb-->
                 </div>
-                <!--end::Col-->
+                <!--end::Page title-->
             </div>
+            <!--end::Toolbar container-->
         </div>
-        <!--end::Content container-->
+        <!--end::Toolbar-->
+        <!--begin::Content-->
+        <div id="kt_app_content" class="app-content flex-column-fluid">
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container container-xxl">
+                <div id="success_message"></div>
+                <!--begin::Row-->
+                <div class="row g-5 g-xl-9">
+
+                    <!--begin::Col-->
+                    <div class="col-md-12">
+                        <!--begin::Card-->
+                        <div class="card card-flush h-md-100">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+
+                                </div>
+                                <!--end::Card title-->
+                            </div>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-1">
+                                <div class="modal-body mx-5 my-1">
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                    <form id="kt_modal_update_role_form" method="POST" action="#">
+                                        @method('patch')
+                                        @csrf
+                                        <div class="d-flex flex-column me-n7 pe-7" id="kt_modal_create_role_scroll">
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-10">
+                                                <input type="hidden" value="{{ $id }}" />
+                                                <!--begin::Label-->
+                                                <label class="fs-5 fw-bold form-label mb-2">
+                                                    <span class="required">{{ __('roles-permissions.role_name') }}</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Input-->
+                                                <input class="form-control form-control-solid"
+                                                    placeholder="{{ __('roles-permissions.role_name_ph') }}" name="name"
+                                                    id="name" value="" required />
+                                                <span class="text-danger form-message-error-name">
+
+                                                </span>
+
+                                                <!--end::Input-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Permissions-->
+                                            <div class="fv-row">
+                                                <!--begin::Label-->
+                                                <label
+                                                    class="fs-5 fw-bold form-label mb-2">{{ __('roles-permissions.role_permission') }}</label>
+                                                <span class="required"></span>
+                                                <!--end::Label-->
+                                                <!--begin::Table wrapper-->
+                                                <div class="table-responsive">
+                                                    <!--begin::Table-->
+                                                    <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                                        <!--begin::Table body-->
+                                                        <thead>
+                                                            <tr>
+                                                                <td>
+                                                                    <!--begin::Checkbox-->
+                                                                    <label
+                                                                        class="form-check form-check-sm form-check-custom form-check-solid me-9">
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            data-kt-check="true" value=""
+                                                                            id="kt_roles_select_all"
+                                                                            data-kt-check-target="#kt_table_permissions .form-check-input"
+                                                                            name="all_permission" id="all_permission" />
+                                                                        <span class="form-check-label"
+                                                                            for="kt_roles_select_all">{{ __('roles-permissions.all') }}</span>
+                                                                    </label>
+                                                                    <!--end::Checkbox-->
+                                                                </td>
+                                                                <td class="text-gray-800">
+                                                                    {{ __('roles-permissions.administration_access') }}
+                                                                    <span class="ms-1" data-bs-toggle="tooltip"
+                                                                        title="Allows a full access to the system">
+                                                                    </span>
+                                                                    <span class="ms-1 text-danger">
+                                                                        @error('permission')
+                                                                            {{ $message }}
+                                                                        @enderror
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <th scope="col" width="1%"></th>
+                                                            <th scope="col" width="20%">
+                                                                {{ __('roles-permissions.access_route') }}</th>
+                                                            <th scope="col" width="20%">
+                                                                {{ __('roles-permissions.route_path') }}</th>
+                                                            <th scope="col" width="1%">
+                                                                {{ __('roles-permissions.guard') }}
+                                                            </th>
+                                                        </thead>
+                                                        <tbody class="text-gray-600 fw-semibold" id="rolepermission">
+
+                                                        </tbody>
+                                                        <!--end::Table body-->
+                                                    </table>
+                                                    <!--end::Table-->
+                                                </div>
+                                                <!--end::Table wrapper-->
+                                            </div>
+                                            <!--end::Permissions-->
+                                        </div>
+                                        <!--end::Scroll-->
+                                        <!--begin::Actions-->
+                                        <div class="text-center pt-15">
+                                            <a href="{{ route('role.index') }}" class="btn btn-light me-3"
+                                                data-kt-roles-modal-action="cancel">{{ __('roles-permissions.discard') }}</a>
+                                            <button type="submit" class="btn btn-primary" id="access-role-permission">
+                                                <span class="indicator-label">{{ __('roles-permissions.update') }}</span>
+                                            </button>
+                                        </div>
+                                        <!--end::Actions-->
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--end::Card-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+            </div>
+            <!--end::Content container-->
+        </div>
+        <!--end::Content-->
     </div>
-    <!--end::Content-->
-</div>
 
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function() {
             let id = {{ $id }};
             let permissionTbody = $("#rolepermission");
             let url_link = api_baseurl + "role/" + id + "/edit";
@@ -394,35 +394,43 @@
                                         "Success:",
                                         "Role and permission update Successfully!"
                                     );
+                                    // refresh page after 2 seconds
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 2000);
                                     // updated role permission in sessions
-                                    let authUserInfo = JSON.parse(localStorage.getItem('authUser'));
-                                    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-                                    let authStatus = 'login';
-                                    let profileID = authUserInfo.profileId;
-                                    let link_url = api_baseurl + "role-permissions" +"/" + profileID;
-                                    $.ajax({
-                                        type: 'GET',
-                                        url: link_url,
-                                        data: { },
-                                        success: function (res) {
-                                            if (res.success === true) {
-                                                localStorage.removeItem("rolePermission");
-                                                localStorage.setItem("rolePermission", JSON.stringify(res.accessPermissions.permissions));
+                                    // let authUserInfo = JSON.parse(localStorage.getItem('authUser'));
+                                    // let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
+                                    // let authStatus = 'login';
+                                    // let profileID = authUserInfo.profileId;
+                                    // let link_url = api_baseurl + "role-permissions" +"/" + profileID;
+                                    // $.ajax({
+                                    //     type: 'GET',
+                                    //     url: link_url,
+                                    //     data: { },
+                                    //     success: function (res) {
+                                    //         if (res.success === true) {
+                                    //             localStorage.removeItem("rolePermission");
+                                    //             localStorage.setItem("rolePermission", JSON.stringify(res.accessPermissions.permissions));
 
-                                                console.log(res.accessPermissions);
-                                            }
-                                        }
-                                    });
-                                    let rolePermissionInfo = JSON.parse(localStorage.getItem('rolePermission'));
+                                    //             console.log(res.accessPermissions);
+                                    //         }
+                                    //     }
+                                    // });
+                                    // let rolePermissionInfo = JSON.parse(localStorage.getItem('rolePermission'));
 
 
 
                                     $.ajax({
                                         type: 'post',
                                         url: "/store-auth-user",
-                                        data: { authUser: authUserInfo, authStatus: authStatus,rolePermission:rolePermissionInfo, '_token': CSRF_TOKEN },
-                                        success: function (response) {
-                                        }
+                                        data: {
+                                            authUser: authUserInfo,
+                                            authStatus: authStatus,
+                                            rolePermission: rolePermissionInfo,
+                                            '_token': CSRF_TOKEN
+                                        },
+                                        success: function(response) {}
                                     });
                                     // end code
                                     // refresh page after 2 seconds
@@ -449,5 +457,5 @@
             });
 
         });
-</script>
+    </script>
 @endsection
