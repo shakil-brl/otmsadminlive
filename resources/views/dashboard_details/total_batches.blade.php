@@ -20,24 +20,19 @@
                 <thead>
                     <th>{{ __('batch-list.sl') }}</th>
                     <th>{{ __('batch-list.batch_code') }}</th>
-                    <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.start_date') }}</th>
                     <th>{{ __('batch-list.total_class') }}</th>
-                    <th>{{ __('batch-list.class_schedule') }}</th>
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($total_batches) as $batch)
                         <tr>
                             <td>
-                                {{ $loop->iteration }}
+                                {{ $from_no + $loop->iteration - 1 }}
                             </td>
                             <td>
                                 {{ $batch['batchCode'] }}
-                            </td>
-                            <td>
-                                {{ $batch['get_training'] ? $batch['get_training']['title']['Name'] : '' }}
                             </td>
                             <td>
                                 {{ $batch['GEOLocation'] }}
@@ -47,9 +42,6 @@
                             </td>
                             <td>
                                 {{ $batch['duration'] }} {{ __('batch-list.days') }}
-                            </td>
-                            <td>
-                                {{ $batch['schedule'] ? $batch['schedule']['class_days'] : '' }}
                             </td>
                             <td>
                                 <a href="" class="btn btn-sm btn-info">
