@@ -321,9 +321,9 @@
                             <!--end::Label-->
                             <input type="hidden" name="provider_id" id="provider_id" value="" />
                             <!--begin::First Name-->
-                            <input type="text" placeholder="{{ __('provider-list.provider_name_ph') }}" type="text" id="name"
-                                name="name" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0"
-                                value="" />
+                            <input type="text" placeholder="{{ __('provider-list.provider_name_ph') }}"
+                                id="name" name="name" autocomplete="off"
+                                class="form-control form-control-solid mb-3 mb-lg-0" value="" />
                             <span class="text-danger form-message-error-name">
 
                             </span>
@@ -339,7 +339,7 @@
                             <label class="fw-semibold fs-6 mb-2">{{ __('provider-list.email') }}</label>
                             <!--end::Label-->
                             <!--begin::Email-->
-                            <input type="text" placeholder="{{ __('provider-list.email_ph') }}" type="text" id="email"
+                            <input type="text" placeholder="{{ __('provider-list.email_ph') }}" id="email"
                                 name="email" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0"
                                 value="" />
                             <span class="text-danger form-message-error-email">
@@ -357,9 +357,9 @@
                             <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.mobile_number') }}</label>
                             <!--end::Label-->
                             <!--begin::Mobile-->
-                            <input type="text" placeholder="{{ __('provider-list.mobile_number_ph') }}" type="text" id="mobile"
-                                name="mobile" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0"
-                                value="" />
+                            <input type="text" placeholder="{{ __('provider-list.mobile_number_ph') }}"
+                                id="phone" name="mobile" autocomplete="off"
+                                class="form-control form-control-solid mb-3 mb-lg-0" value="" />
                             <span class="text-danger form-message-error-mobile">
 
                             </span>
@@ -431,7 +431,8 @@
                         <input type="hidden" name="provider-id">
                         <!--start::Input group-->
                         <div class="fv-row mb-7">
-                            <label class="col-form-label text-right col-lg-3 col-sm-12">{{ __('provider-list.select_batche') }}</label>
+                            <label
+                                class="col-form-label text-right col-lg-3 col-sm-12">{{ __('provider-list.select_batche') }}</label>
                             <div class="col">
                                 <select class="form-control select2" id="kt_select2_3" multiple="multiple">
 
@@ -469,7 +470,7 @@
             <div class="modal-content">
                 <div class="modal-header" id="kt_modal_update_provider_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">{{__('provider-list.provider_batches_view')}}</h2>
+                    <h2 class="fw-bold">{{ __('provider-list.provider_batches_view') }}</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -486,15 +487,15 @@
                         <!--begin::Title-->
                         <h1 class="mt-3" id="provider-name"></h1>
                         <!--end::Title-->
-                        <div class="text-muted fw-semibold fs-5">{{__('provider-list.address')}}:
+                        <div class="text-muted fw-semibold fs-5">{{ __('provider-list.address') }}:
                             <span id="provider-address"></span>
                         </div>
-                        <div class="text-muted fw-semibold fs-5">{{__('provider-list.email')}}:
+                        <div class="text-muted fw-semibold fs-5">{{ __('provider-list.email') }}:
                             <span id="provider-email"></span>
                         </div>
-                       
+
                         <!--begin::SubTitle-->
-                        <h3 class="mb-3 text-muted">{{__('provider-list.browse_batches')}}</h3>
+                        <h3 class="mb-3 text-muted">{{ __('provider-list.browse_batches') }}</h3>
                         <!--end::SubTitle-->
                     </div>
                     <!--end::Heading-->
@@ -510,9 +511,9 @@
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
                         <a href="#" type="reset" data-bs-dismiss="modal" class="btn btn-light me-3"
-                            data-kt-users-modal-action="cancel">{{__('provider-list.discard')}}</a>
+                            data-kt-users-modal-action="cancel">{{ __('provider-list.discard') }}</a>
                         <button type="submit" class="btn btn-primary">
-                            <span class="indicator-label">{{__('provider-list.submit')}}</span>
+                            <span class="indicator-label">{{ __('provider-list.submit') }}</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>

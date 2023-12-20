@@ -77,24 +77,24 @@ $(function () {
                                     <td class="text-end">
                                         <a href="#" id="link-with-batches-modal" class="btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2" 
                                         data-provider-id="${provider.id}" data-bs-toggle="modal" data-bs-target="#link_batches">
-                                            Link Batch 
+                                            ${linkBatch}
                                         </a>
                                         <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 show-action" 
-                                        data-provider-id="${provider.id}" data-provider-name="${provider.name}" data-bs-toggle="modal" id="view_provider-modal" data-bs-target="#view_provider">
+                                        data-provider-id="${provider.id}" data-provider-name="${provider.name}" data-bs-toggle="modal" id="view_provider-modal" data-bs-target="#view_provider" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Provider Details" >
                                             <i class="ki-duotone ki-switch fs-2">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                             </i>
                                         </a>
                                         <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 editProvider" 
-                                        data-provider-id="${provider.id}" data-bs-toggle="modal" data-bs-target="#edit_provider">
+                                        data-provider-id="${provider.id}" data-bs-toggle="modal" data-bs-target="#edit_provider" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Provider Edit">
                                             <i class="ki-duotone ki-pencil fs-2">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                             </i>
                                         </a>
-                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm disabled  delete-provider" 
-                                        data-provider-id="${provider.id}" data-provider-name="${provider.name}">
+                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-provider" 
+                                        data-provider-id="${provider.id}" data-provider-name="${provider.name}" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Provider Delete">
                                             <i class="ki-duotone ki-trash fs-2">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
@@ -450,7 +450,7 @@ $(function () {
                     console.log(item.data);
                     $("#provider_edit_form #name").val(providers["name"]);
                     $("#provider_edit_form #email").val(providers["email"]);
-                    $("#provider_edit_form #mobile").val(providers["phone"]);
+                    $("#provider_edit_form #phone").val(providers["phone"]);
                     //$("#provider_edit_form #web_url").val(providers["web_url"]);
                     $("#provider_edit_form #address").val(providers["address"]);
                     $("#provider_edit_form #provider_id").val(providers["id"]);
@@ -488,7 +488,7 @@ $(function () {
 
                     fd.append("name", name);
                     fd.append("email", email);
-                    fd.append("mobile", mobile);
+                    fd.append("phone", mobile);
                     //fd.append("web_url", web_url);
                     fd.append("address", address);
                     fd.append("_token", CSRF_TOKEN);

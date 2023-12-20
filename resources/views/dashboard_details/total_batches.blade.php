@@ -1,5 +1,5 @@
 @extends('layouts.auth-master')
-
+{{-- @dump($total_batches) --}}
 @section('content')
     <!--begin::Content -->
     <div class="m-5">
