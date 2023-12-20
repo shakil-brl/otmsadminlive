@@ -145,7 +145,7 @@ function populateTrainerOption(
         dataType: "JSON",
         success: function (results) {
             let allData = results.data;
-            console.log(allData);
+            // console.log(allData);
 
             if (allData) {
                 if (selectedId !== null) {
@@ -266,6 +266,54 @@ function populateCoordinatorOption(
                             "</option>";
                     });
                 }
+            }
+
+            selector.html(htmlOption);
+        },
+        error: function (response) {
+            console.log(response);
+        },
+    });
+}
+
+function populateTrainerEnrollOption(
+    api_link,
+    authToken,
+    selector,
+    selectedId = null
+) {
+    $.ajax({
+        type: "get",
+        url: api_link,
+        headers: {
+            Authorization: authToken,
+        },
+        data: {},
+        dataType: "JSON",
+        success: function (results) {
+            let allData = results.data;
+            let htmlOption = "<option value=''></option>";
+            let selectedIds = selectedId.split(",").map((id) => id.trim());
+
+            if (allData) {
+                $.each(allData, function (index, data) {
+                    let isSelected = selectedIds.includes(
+                        data.ProfileId.toString()
+                    );
+                    htmlOption +=
+                        '<option value="' +
+                        data.ProfileId +
+                        '" ' +
+                        (isSelected ? "selected" : "") +
+                        ">" +
+                        data.profile.KnownAsBangla +
+                        " (" +
+                        data.profile.Email +
+                        ") (" +
+                        data.profile.NID +
+                        ") " +
+                        "</option>";
+                });
             }
 
             selector.html(htmlOption);

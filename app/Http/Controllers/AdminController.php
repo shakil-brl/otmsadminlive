@@ -14,7 +14,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admins.index');
+        $role = Session::get('access_token.role');
+        return view('admins.index', compact('role'));
     }
 
     public function dashboard()
