@@ -280,7 +280,7 @@ function toggleDivVisibility() {
 
   // Toggle the visibility of the div
   if (myDiv.style.display === "none" || myDiv.style.display === "") {
-    myDiv.style.display = "block";
+    myDiv.style.display = "flex";
   } else {
     myDiv.style.display = "none";
   }
