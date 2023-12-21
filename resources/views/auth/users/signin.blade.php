@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("preloader").style.display = "none";
 
     // Show the page content
-    document.getElementById("body").style.display = "block";
+    document.getElementById("body").style.display = "flex";
 });
 
     </script>
