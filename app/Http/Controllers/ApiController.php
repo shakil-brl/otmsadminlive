@@ -66,7 +66,7 @@ class ApiController extends Controller
                 'authProfile' => $loginData['userType']['profile'],
                 'authUser' => $loginData['user'],
                 'userType' => $loginData['userType'],
-                'role' => strtolower($loginData['userType']['role']['name']),
+                'role' => $loginData['userType']['role']['name'],
                 'expires_at' => now()->addMinutes($loginData['expires_in']),
                 'rolePermission' => array_unique($permissionNames) ?? [],
             ];
