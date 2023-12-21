@@ -68,7 +68,7 @@ class ApiController extends Controller
                 'userType' => $loginData['userType'],
                 'role' => strtolower($loginData['userType']['role']['name']),
                 'expires_at' => now()->addMinutes($loginData['expires_in']),
-                'rolePermission' => strtolower(array_unique($permissionNames)) ?? [],
+                'rolePermission' => array_unique($permissionNames) ?? [],
             ];
             session()->put('access_token', $tokenData);
             return redirect()->route('admins.dashboard');
