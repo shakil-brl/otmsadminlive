@@ -13,9 +13,57 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <title>OTMS Login</title>
+    <style>
+        /* styles.css */
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            /* Set the background color of your preloader */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            /* Set a high z-index to make sure it's on top of other elements */
+        }
+
+        #loader {
+            border: 8px solid #f3f3f3;
+            /* Light grey */
+            border-top: 8px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            /* Animation for spinning effect */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #page-content {
+            display: none;
+            /* Hide the page content by default */
+        }
+    </style>
 </head>
 
 <body>
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
     <div id="body" style="background-image: url('{{ asset('img/login/placeholder.jpg') }}');">
         <div id="login-page">
             <header id="navbar">
@@ -209,6 +257,17 @@
         $("#lang-us").click(function() {
             changeLocale('en');
         });
+
+        // script.js
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Hide the preloader
+    document.getElementById("preloader").style.display = "none";
+
+    // Show the page content
+    document.getElementById("page-content").style.display = "block";
+});
+
     </script>
 
 </body>
