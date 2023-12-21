@@ -53,10 +53,9 @@ class BatchScheduleController extends Controller
             ->json();
         $schedule_details = ApiHttpClient::request('get', 'all-schedule/' . $schedule_id)
             ->json();
-
+        dd($schedule_details);
         if ($results['success'] == true && $schedule_details['success'] == true) {
             $batch = $results['data'];
-
             return view('batch_schedule.index', ['schedule_details' => $schedule_details['data'] ?? [], 'batch' => $batch, 'role' => $userRole]);
         } else {
             session()->flash('type', 'Danger');

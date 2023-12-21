@@ -152,11 +152,11 @@
             <div class="button-area">
 
                 @isset($role)
-                @if ($role!='provider' )
+                @if ($role!='provider')
                 @isset($schedule_detail['status'])
                 @if ($schedule_detail['status'] == 1)
                 @if ($date <= \Carbon\Carbon::now()) <a id="{{ $schedule_detail['id'] }}"
-                    class="btn btn-detail start-class  update" title="{{ $role}}" type="button" data-bs-toggle="modal"
+                    class="btn btn-detail start-class  update" type="button" data-bs-toggle="modal"
                     data-bs-target="#classStartModal" type="button">
                     {{ __('batch-schedule.start_class') }}
                     </a>
