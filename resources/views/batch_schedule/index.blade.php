@@ -152,7 +152,7 @@
             <div class="button-area">
 
                 @isset($role)
-                @if ($role!='provider' || $role!='Provider')
+                @if ($role!='provider' )
                 @isset($schedule_detail['status'])
                 @if ($schedule_detail['status'] == 1)
                 @if ($date <= \Carbon\Carbon::now()) <a id="{{ $schedule_detail['id'] }}"
