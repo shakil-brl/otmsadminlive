@@ -53,7 +53,7 @@
             }
         }
 
-        #page-content {
+        #body {
             display: none;
             /* Hide the page content by default */
         }
@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("preloader").style.display = "none";
 
     // Show the page content
-    document.getElementById("page-content").style.display = "block";
+    document.getElementById("body").style.display = "block";
 });
 
     </script>
