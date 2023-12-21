@@ -57,10 +57,18 @@
             display: none;
             /* Hide the page content by default */
         }
+
+        .hiddenDiv {
+            display: none;
+            /* Add any additional styling for the hidden div */
+        }
     </style>
 </head>
 
 <body>
+    <div id="myDiv" class="hiddenDiv">
+        This is the content of the div.
+    </div>
     <div id="preloader">
         <div id="loader"></div>
     </div>
@@ -169,7 +177,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-submit">লগইন করুন</button>
+                        <button class="btn btn-submit" onclick="toggleDivVisibility()">লগইন করুন</button>
 
                         <div class="account-create">হার পাওয়ারে অ্যাকাউন্ট নাই ? <a
                                 href="https://training.gov.bd/signup">সাইন আপ</a></div>
@@ -267,6 +275,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Show the page content
     document.getElementById("body").style.display = "flex";
 });
+
+
+function toggleDivVisibility() {
+  var myDiv = document.getElementById("myDiv");
+
+  // Toggle the visibility of the div
+  if (myDiv.style.display === "none" || myDiv.style.display === "") {
+    myDiv.style.display = "block";
+  } else {
+    myDiv.style.display = "none";
+  }
+}
+
 
     </script>
 
