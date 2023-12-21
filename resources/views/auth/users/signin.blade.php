@@ -66,10 +66,8 @@
 </head>
 
 <body>
-    <div id="myDiv" class="hiddenDiv">
-        This is the content of the div.
-    </div>
-    <div id="preloader">
+
+    <div id="preloader" class="hiddenDiv">
         <div id="loader"></div>
     </div>
     <div id="body" style="background-image: url('{{ asset('img/login/placeholder.jpg') }}');">
@@ -278,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function toggleDivVisibility() {
-  var myDiv = document.getElementById("myDiv");
+  var myDiv = document.getElementById("preloader");
 
   // Toggle the visibility of the div
   if (myDiv.style.display === "none" || myDiv.style.display === "") {
