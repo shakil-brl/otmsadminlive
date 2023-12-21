@@ -227,36 +227,43 @@ $(function () {
                             roleSelector,
                             selectedOptionId
                         );
+                        // console.log(userData.role.name);
+                        if (
+                            (userData.role.name == "Trainer" ||
+                                userData.role.name == "Coordinator") &&
+                            userRole != "Provider"
+                        ) {
+                            if (userData.provider) {
+                                $(
+                                    "#kt_modal_update_admin_form #provider-row"
+                                ).removeClass("d-none");
 
-                        if (userData.provider) {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).removeClass("d-none");
-
-                            let providerSelector = $(
-                                '#kt_modal_update_admin_form [name="provider_id"]'
-                            );
-                            let api_link = api_baseurl + "providers";
-                            if (userData.provider_id) {
-                                // console.log(0);
-                                selectProviderId = userData.provider_id;
-                                populateProviderOptions(
-                                    authToken,
-                                    api_link,
-                                    providerSelector,
-                                    selectProviderId
+                                let providerSelector = $(
+                                    '#kt_modal_update_admin_form [name="provider_id"]'
                                 );
+                                let api_link = api_baseurl + "providers";
+                                if (userData.provider_id) {
+                                    // console.log(0);
+                                    selectProviderId = userData.provider_id;
+                                    populateProviderOptions(
+                                        authToken,
+                                        api_link,
+                                        providerSelector,
+                                        selectProviderId
+                                    );
+                                } else {
+                                    populateProviderOptions(
+                                        authToken,
+                                        api_link,
+                                        providerSelector
+                                    );
+                                }
                             } else {
-                                populateProviderOptions(
-                                    authToken,
-                                    api_link,
-                                    providerSelector
-                                );
+                                $(
+                                    "#kt_modal_update_admin_form #provider-row"
+                                ).addClass("d-none");
                             }
                         } else {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).addClass("d-none");
                         }
                     } else {
                         let role_api_link = api_baseurl + "role";
