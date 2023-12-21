@@ -230,7 +230,8 @@ $(function () {
                         // console.log(userData.role.name);
                         if (
                             (userData.role.name == "Trainer" ||
-                                userData.role.name == "Coordinator") &&
+                                userData.role.name == "Coordinator",
+                            userData.role.name == "Provider") &&
                             userRole != "Provider"
                         ) {
                             if (userData.provider) {
