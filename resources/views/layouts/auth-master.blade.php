@@ -38,6 +38,51 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/new_pages/main.css') }}">
+    <style>
+        /* styles.css */
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            /* Set the background color of your preloader */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            /* Set a high z-index to make sure it's on top of other elements */
+        }
+
+        #loader {
+            border: 8px solid #f3f3f3;
+            /* Light grey */
+            border-top: 8px solid #3498db;
+            /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            /* Animation for spinning effect */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #kt_app_root {
+            display: none;
+            /* Hide the page content by default */
+        }
+    </style>
     @stack('css')
     @livewireScripts
     @livewireStyles
@@ -66,6 +111,10 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
     data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
     data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
     <!--begin::Theme mode setup on page load-->
     <script>
         var defaultThemeMode = "light";
@@ -169,8 +218,8 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/dist/assets/js/custom/pages/user-profile/general.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script> --}}
     <!-- Add this line to include Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-K5RQGRlKStPpXrf7lKPSMA8aYTO9t6r0PxIvY07z+ht0Ca9UG/Xw1ZlGy1lJ1l+ebHv5FxA+2hc8LNVamRQXUw=="
@@ -271,6 +320,18 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
             }
 
         }
+
+        // script.js
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Hide the preloader
+    document.getElementById("preloader").style.display = "none";
+
+    // Show the page content
+    document.getElementById("kt_app_root").style.display = "block";
+});
+
+
     </script>
 
     <!--begin::Custom Javascript(used for this page only)-->

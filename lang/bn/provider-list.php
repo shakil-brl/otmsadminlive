@@ -39,7 +39,7 @@ return [
     'address_ph' => 'প্রদানকারীর ঠিকানা',
     'discard' => 'বাতিল করা',
     'submit' => 'জমা দিন',
-    'link_batch' => 'লিংক ব্যাচ',
+    'link_batch' => 'লিঙ্ক ব্যাচ',
     'provider-edit' => 'প্রদানকারী সম্পাদনা করুন',
     'update' => 'আপডেট করুন',
     'link_batche' => 'লিংক ব্যাচ',

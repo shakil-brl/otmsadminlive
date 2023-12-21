@@ -158,10 +158,10 @@ $(function () {
         selectRole.on("change", function (e) {
             let selectedOptionText = selectRole.find(":selected").html();
             if (
-                selectedOptionText == "Trainer" ||
-                selectedOptionText == "Provider" ||
-                selectedOptionText == "ProjectManager" ||
-                selectedOptionText == "Coordinator"
+                (selectedOptionText == "Trainer" ||
+                    selectedOptionText == "Provider" ||
+                    selectedOptionText == "Coordinator") &&
+                userRole != "Provider"
             ) {
                 $("#kt_modal_add_admin_form #provider").removeClass("d-none");
 
@@ -202,7 +202,7 @@ $(function () {
                 },
                 success: function (results) {
                     let userData = results.data;
-                    console.log(userData);
+                    // console.log(userData);
                     $('#kt_modal_update_admin_form [name="user_id"]').val(
                         userData.id ?? ""
                     );
@@ -227,36 +227,43 @@ $(function () {
                             roleSelector,
                             selectedOptionId
                         );
+                        // console.log(userData.role.name);
+                        if (
+                            (userData.role.name == "Trainer" ||
+                                userData.role.name == "Coordinator") &&
+                            userRole != "Provider"
+                        ) {
+                            if (userData.provider) {
+                                $(
+                                    "#kt_modal_update_admin_form #provider-row"
+                                ).removeClass("d-none");
 
-                        if (userData.provider) {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).removeClass("d-none");
-
-                            let providerSelector = $(
-                                '#kt_modal_update_admin_form [name="provider_id"]'
-                            );
-                            let api_link = api_baseurl + "providers";
-                            if (userData.provider_id) {
-                                // console.log(0);
-                                selectProviderId = userData.provider_id;
-                                populateProviderOptions(
-                                    authToken,
-                                    api_link,
-                                    providerSelector,
-                                    selectProviderId
+                                let providerSelector = $(
+                                    '#kt_modal_update_admin_form [name="provider_id"]'
                                 );
+                                let api_link = api_baseurl + "providers";
+                                if (userData.provider_id) {
+                                    // console.log(0);
+                                    selectProviderId = userData.provider_id;
+                                    populateProviderOptions(
+                                        authToken,
+                                        api_link,
+                                        providerSelector,
+                                        selectProviderId
+                                    );
+                                } else {
+                                    populateProviderOptions(
+                                        authToken,
+                                        api_link,
+                                        providerSelector
+                                    );
+                                }
                             } else {
-                                populateProviderOptions(
-                                    authToken,
-                                    api_link,
-                                    providerSelector
-                                );
+                                $(
+                                    "#kt_modal_update_admin_form #provider-row"
+                                ).addClass("d-none");
                             }
                         } else {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).addClass("d-none");
                         }
                     } else {
                         let role_api_link = api_baseurl + "role";
@@ -274,8 +281,10 @@ $(function () {
                             .find(":selected")
                             .html();
                         if (
-                            selectedOptionText == "Trainer" ||
-                            selectedOptionText == "Provider"
+                            (selectedOptionText == "Trainer" ||
+                                selectedOptionText == "Provider" ||
+                                selectedOptionText == "Coordinator") &&
+                            userRole != "Provider"
                         ) {
                             $(
                                 "#kt_modal_update_admin_form #provider-row"
@@ -443,7 +452,7 @@ $(function () {
                 dataType: "JSON",
                 success: function (results) {
                     let districts = results.data;
-                    console.log(districts);
+                    // console.log(districts);
                     if (districts) {
                         if (selectedDistrictId !== null) {
                             $.each(districts, function (index, district) {
@@ -738,45 +747,49 @@ $(function () {
                         } else {
                             if (results.error === true) {
                                 var errors = "Validation Error Occurs!!";
-                                swal.fire("", errors);
+                                if (results.type == "exits") {
+                                    swal.fire("", results.message);
+                                } else {
+                                    swal.fire("", errors);
 
-                                // function display error message
-                                function displayErrorMessage(
-                                    fieldName,
-                                    errorMessage
-                                ) {
-                                    const errorMessageSelector = `#kt_modal_add_admin_form .form-message-error-${fieldName}`;
-                                    $(errorMessageSelector)
-                                        .html(errorMessage)
-                                        .addClass("text-danger")
-                                        .fadeIn(5000);
-                                    setTimeout(() => {
+                                    // function display error message
+                                    function displayErrorMessage(
+                                        fieldName,
+                                        errorMessage
+                                    ) {
+                                        const errorMessageSelector = `#kt_modal_add_admin_form .form-message-error-${fieldName}`;
                                         $(errorMessageSelector)
-                                            .html("")
-                                            .removeClass("text-danger")
-                                            .fadeOut();
-                                    }, 50000);
-                                }
-
-                                // Define an array of field names you want to handle
-                                const fieldsToHandle = [
-                                    "email",
-                                    "role_id",
-                                    "provider_id",
-                                    "district_id",
-                                    "upazila_id",
-                                    "address",
-                                ];
-
-                                // Usage example for multiple fields
-                                fieldsToHandle.forEach((fieldName) => {
-                                    if (results.message[fieldName]) {
-                                        displayErrorMessage(
-                                            fieldName,
-                                            results.message[fieldName][0]
-                                        );
+                                            .html(errorMessage)
+                                            .addClass("text-danger")
+                                            .fadeIn(2000);
+                                        setTimeout(() => {
+                                            $(errorMessageSelector)
+                                                .html("")
+                                                .removeClass("text-danger")
+                                                .fadeOut();
+                                        }, 2000);
                                     }
-                                });
+
+                                    // Define an array of field names you want to handle
+                                    const fieldsToHandle = [
+                                        "email",
+                                        "role_id",
+                                        "provider_id",
+                                        "district_id",
+                                        "upazila_id",
+                                        "address",
+                                    ];
+
+                                    // Usage example for multiple fields
+                                    fieldsToHandle.forEach((fieldName) => {
+                                        if (results.message[fieldName]) {
+                                            displayErrorMessage(
+                                                fieldName,
+                                                results.message[fieldName][0]
+                                            );
+                                        }
+                                    });
+                                }
                             }
                         }
                     },

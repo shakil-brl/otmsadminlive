@@ -150,12 +150,12 @@
                                                     value="" name="all-users" id="all-users" />
                                             </div>
                                         </th>
-                                        <th class="min-w-125px">{{ "ProfileId" }}</th>
+                                        <th class="min-w-125px">{{ 'ProfileId' }}</th>
                                         <th class="min-w-125px">{{ __('admin-user-list.user_name') }}</th>
                                         <th class="min-w-125px">{{ __('admin-user-list.role') }}</th>
                                         <th class="min-w-125px">{{ __('admin-user-list.email') }}</th>
-                                        <th class="min-w-125px">{{ "NID"}}</th>
-                                        <th class="min-w-125px">{{ "Provider Name"}}</th>
+                                        <th class="min-w-125px">{{ 'NID' }}</th>
+                                        <th class="min-w-125px">{{ 'Provider Name' }}</th>
                                         <th class="text-end min-w-100px">{{ __('admin-user-list.action') }}</th>
                                     </tr>
                                 </thead>
@@ -202,7 +202,7 @@
                             data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                             data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_user_header"
                             data-kt-scroll-wrappers="#kt_modal_update_user_scroll" data-kt-scroll-offset="300px">
-                        
+
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -219,7 +219,7 @@
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group-->
-                         
+
                             <!--start::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -239,6 +239,8 @@
                                 <!--end::User Role-->
                             </div>
                             <!--end::Input group-->
+                            @if ($role == 'Provider')
+                            @endif
                             <!--start::Input group-->
                             <div class="fv-row mb-7 d-none" id="provider">
                                 <!--begin::Label-->
@@ -257,7 +259,7 @@
                                 <!--end::Provider-->
                             </div>
                             <!--end::Input group-->
-                     
+
                             <!--start::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -363,8 +365,8 @@
                             data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                             data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_user_header"
                             data-kt-scroll-wrappers="#kt_modal_update_user_scroll" data-kt-scroll-offset="300px">
-                              <!--begin::Input group-->
-                              <div class="fv-row mb-7">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
                                 <!--begin::Label-->
                                 <label class="required fw-semibold fs-6 mb-2">Email</label>
                                 <!--end::Label-->
@@ -508,5 +510,9 @@
         }
         firebase.initializeApp(firebaseConfig);
     </script> --}}
+
+    <script>
+        let userRole = @json($role);
+    </script>
 @endsection
 @endsection
