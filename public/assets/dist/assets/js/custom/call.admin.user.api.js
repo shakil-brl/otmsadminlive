@@ -166,14 +166,22 @@ $(function () {
                 selectedOptionText == "Provider" ||
                 selectedOptionText == "Coordinator"
             ) {
-                $("#kt_modal_add_admin_form #provider").removeClass("d-none");
+                if (userRole != "Provider") {
+                    $("#kt_modal_add_admin_form #provider").removeClass(
+                        "d-none"
+                    );
 
-                let providerSelector = $(
-                    "#kt_modal_add_admin_form #provider_id"
-                );
-                let api_link = api_baseurl + "providers";
+                    let providerSelector = $(
+                        "#kt_modal_add_admin_form #provider_id"
+                    );
+                    let api_link = api_baseurl + "providers";
 
-                populateProviderOptions(authToken, api_link, providerSelector);
+                    populateProviderOptions(
+                        authToken,
+                        api_link,
+                        providerSelector
+                    );
+                }
             } else {
                 $("#kt_modal_add_admin_form #provider").addClass("d-none");
             }
@@ -237,29 +245,31 @@ $(function () {
                             userData.role.name == "Provider"
                         ) {
                             if (userData.provider) {
-                                $(
-                                    "#kt_modal_update_admin_form #provider-row"
-                                ).removeClass("d-none");
+                                if (userRole != "Provider") {
+                                    $(
+                                        "#kt_modal_update_admin_form #provider-row"
+                                    ).removeClass("d-none");
 
-                                let providerSelector = $(
-                                    '#kt_modal_update_admin_form [name="provider_id"]'
-                                );
-                                let api_link = api_baseurl + "providers";
-                                if (userData.provider_id) {
-                                    // console.log(0);
-                                    selectProviderId = userData.provider_id;
-                                    populateProviderOptions(
-                                        authToken,
-                                        api_link,
-                                        providerSelector,
-                                        selectProviderId
+                                    let providerSelector = $(
+                                        '#kt_modal_update_admin_form [name="provider_id"]'
                                     );
-                                } else {
-                                    populateProviderOptions(
-                                        authToken,
-                                        api_link,
-                                        providerSelector
-                                    );
+                                    let api_link = api_baseurl + "providers";
+                                    if (userData.provider_id) {
+                                        // console.log(0);
+                                        selectProviderId = userData.provider_id;
+                                        populateProviderOptions(
+                                            authToken,
+                                            api_link,
+                                            providerSelector,
+                                            selectProviderId
+                                        );
+                                    } else {
+                                        populateProviderOptions(
+                                            authToken,
+                                            api_link,
+                                            providerSelector
+                                        );
+                                    }
                                 }
                             } else {
                                 $(
@@ -285,23 +295,25 @@ $(function () {
                             .html();
                         if (
                             selectedOptionText == "Trainer" ||
-                                selectedOptionText == "Provider" ||
-                                selectedOptionText == "Coordinator"
-                        ) {                            
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).removeClass("d-none");
+                            selectedOptionText == "Provider" ||
+                            selectedOptionText == "Coordinator"
+                        ) {
+                            if (userRole != "Provider") {
+                                $(
+                                    "#kt_modal_update_admin_form #provider-row"
+                                ).removeClass("d-none");
 
-                            let providerSelector = $(
-                                '#kt_modal_update_admin_form [name="provider_id"]'
-                            );
-                            let api_link = api_baseurl + "providers";
+                                let providerSelector = $(
+                                    '#kt_modal_update_admin_form [name="provider_id"]'
+                                );
+                                let api_link = api_baseurl + "providers";
 
-                            populateProviderOptions(
-                                authToken,
-                                api_link,
-                                providerSelector
-                            );
+                                populateProviderOptions(
+                                    authToken,
+                                    api_link,
+                                    providerSelector
+                                );
+                            }
                         } else {
                             $(
                                 "#kt_modal_update_admin_form #provider-row"
