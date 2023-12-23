@@ -53,17 +53,23 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-center">
-                        <a href="{{ route('provider.link-batch', $provider['id']) }}"
-                            class="btn btn-lg btn-success me-1 show-action" title="Provider Details">
-                            Edit Link Batch
-                        </a>
-                    </div>
+                    @if ($provider['training_batches'])
+                        <div class="text-center">
+                            <a href="{{ route('provider.link-batch', $provider['id']) }}"
+                                class="btn btn-lg btn-success me-1 show-action" title="Provider Details">
+                                Edit Link Batch
+                            </a>
+                        </div>
+                    @endif
                 </div>
             @endisset
         </div>
     </div>
 @section('script')
-    <script></script>
+    <script>
+        $(document).ready(function() {
+            location.reload();
+        });
+    </script>
 @endsection
 @endsection

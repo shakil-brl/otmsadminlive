@@ -53,19 +53,19 @@
                             </div>
                         </form>
                     </div>
-                    <div class="my-5 d-none" id="link-batch-section">
+                    <div class="my-5" id="link-batch-section">
                         <div class="fw-bold fs-5">Selected Batch:</div>
                         <div class="d-flex flex-wrap gap-2 border rounded p-3" id="link-batch-show">
 
                         </div>
-                        <form action="" id="link-batch-form" class="">
-                            <input type="hidden" type="text" name="link-batches" value="">
-                            <div class="text-center mt-3">
-                                <button class="btn btn-danger" id="clear-selected">Clear</button>
-                                <button class="btn btn-success" type="submit">Submit</button>
-                            </div>
-                        </form>
+                        <button class="btn btn-danger mt-3" id="clear-selected">Clear</button>
                     </div>
+                    <form action="" id="link-batch-form" class="">
+                        <input type="hidden" type="text" name="link-batches" value="">
+                        <div class="text-center mt-3">
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         @endisset
@@ -78,32 +78,33 @@
             let providerId = @json($provider['id']);
             let fromEdit = @json($from_edit);
             // alert(fromEdit);
-            if (fromEdit) {
-                let storedBatches = @json($provider['training_batches']);
-                // Initialize an empty object for selectedBatches
-                var selectedBatches = {};
+            let storedDBBatches = @json($provider['training_batches']);
+            console.log(storedDBBatches);
+            // Initialize an empty object for selectedBatches
+            var selectedBatches = {};
 
-                // Loop through storedBatches and create the selectedBatches object
-                storedBatches.forEach(function(batch) {
-                    var batchId = batch.id;
-                    var batchCode = batch.batchCode;
-                    var batchTitle = batch.training.title.Name;
+            // Loop through storedBatches and create the selectedBatches object
+            storedDBBatches.forEach(function(batch) {
+                let batchId = batch.id ?? "";
+                let batchCode = batch.batchCode ?? "";
+                let batchTitle = batch.training.title.Name ?? "";
+                let GEOLocation = batch.GEOLocation ?? "";
 
-                    // Add the batch to selectedBatches
-                    selectedBatches[batchId] = {
-                        batchCode: batchCode,
-                        title: batchTitle
-                    };
-                });
+                // Add the batch to selectedBatches
+                selectedBatches[batchId] = {
+                    batchCode: batchCode,
+                    title: batchTitle,
+                    GEOLocation: GEOLocation
+                };
+            });
 
-                // Convert selectedBatches to JSON
-                var selectedBatchesJSON = JSON.stringify(selectedBatches);
+            // Convert selectedBatches to JSON
+            var selectedBatchesJSON = JSON.stringify(selectedBatches);
 
-                localStorage.setItem('selectedBatches', selectedBatchesJSON);
+            localStorage.setItem('selectedBatches', selectedBatchesJSON);
 
-                // link-batch-form input value set
-                generateSelectedList();
-            }
+            // link-batch-form input value set adn view
+            generateSelectedList();
 
             let divisionSelectElement = $("#gioLocation-form #division_id");
             let districtSelectElement = $("#gioLocation-form #district_id");
@@ -116,7 +117,21 @@
             $("#clear-selected").on('click', function(event) {
                 event.preventDefault();
                 localStorage.removeItem('selectedBatches');
-                location.reload();
+                // location.reload();
+                batchLinkCheck.html("");
+                selectAllBox.addClass("d-none");
+                generateSelectedList();
+                districtSelectElement.html("");
+                upazilaSelectElement.html("");
+                // populate division options
+                let optionFor = "Division";
+                let division_api_link = api_baseurl + "divisions";
+                populateLocationOption(
+                    optionFor,
+                    division_api_link,
+                    authToken,
+                    divisionSelectElement
+                );
             })
             // link-batch-form input value set
             generateSelectedList();
@@ -209,7 +224,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input batch-checkbox" type="checkbox" id="${data.id}" name="batches[]"
                                                     value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${data.training.title.Name ?? ''}"
-                                                    ${isChecked ? 'checked' : ''} ${!fromEdit ? (data.provider_id ? 'disabled' : '') : ''}>
+                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${!fromEdit ? (data.provider_id ? 'disabled' : '') : ''}>
                                                 <label class="form-check-label text-dark" for="${data.id}">
                                                     ${data.batchCode} (${data.training.title.Name ?? ""})
                                                 </label>
@@ -228,12 +243,16 @@
                                             '';
                                         let batchTitle = this.getAttribute('batchTitle') ||
                                             '';
+                                        let GEOLocation = this.getAttribute(
+                                                'GEOLocation') ||
+                                            '';
 
                                         // Update the selectedBatches object
                                         if (this.checked) {
                                             selectedBatches[batchId] = {
                                                 batchCode: batchCode,
-                                                title: batchTitle
+                                                title: batchTitle,
+                                                GEOLocation: GEOLocation
                                             };
                                         } else {
                                             delete selectedBatches[batchId];
@@ -304,13 +323,13 @@
                         let batchIds = $("#link-batch-form [name=link-batches]").val();
 
                         // console.log(batchIds);
-                        if (fromEdit) {
-                            fd.append("edit", true);
-                        }
+
                         fd.append("batch_ids", batchIds);
                         fd.append("provider_id", providerId);
                         fd.append("_token", CSRF_TOKEN);
-
+                        if (fromEdit || (batchIds == '' && storedDBBatches) || storedDBBatches) {
+                            fd.append("edit", true);
+                        }
                         $.ajax({
                             type: "post",
                             data: fd,
@@ -354,7 +373,7 @@
                 linkBatchShowDiv.empty(); // Clear previous content
                 let storedBatches = JSON.parse(localStorage.getItem('selectedBatches')) || {};
                 if (Object.keys(storedBatches).length > 0) {
-                    linkBatchSection.removeClass('d-none');
+                    // linkBatchSection.removeClass('d-none');
                     let batchKeysArray = Object.keys(storedBatches);
 
                     // Set the value of the input to the array of batch keys
@@ -362,18 +381,23 @@
 
                     // Append array object items to the div with ID link-batch-show  
 
-
                     batchKeysArray.forEach(batchId => {
                         // Access the batch information from storedBatches using the batchId
                         let batchInfo = storedBatches[batchId];
 
                         // Create a pill-like element with batchCode and title and append it to the div
                         let pillElement =
-                            `<div class="badge badge-pill badge-info p-3">${batchInfo.batchCode} - ${batchInfo.title}</div>`;
+                            `<div class="badge badge-pill badge-info p-2 d-flex flex-column gap-2">
+                                <div>${batchInfo.batchCode} - ${batchInfo.title}</div>
+                                <div>(${batchInfo.GEOLocation})</div>
+                            </div>`;
                         linkBatchShowDiv.append(pillElement);
                     });
+                    $("#clear-selected").removeClass("d-none");
                 } else {
-                    linkBatchSection.addClass('d-none');
+                    // linkBatchSection.addClass('d-none');
+                    $("#clear-selected").addClass("d-none");
+                    $("#link-batch-form [name='link-batches']").val('');
                 }
             }
         });
