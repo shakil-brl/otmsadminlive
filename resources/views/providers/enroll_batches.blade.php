@@ -4,6 +4,7 @@
     <!--begin::Content -->
     <div class="m-5">
         <x-alert />
+        {{-- @dump($from_edit) --}}
         @isset($provider)
             {{-- @dd($provider) --}}
             <div class="card p-5">
@@ -75,21 +76,49 @@
         $(document).ready(function() {
             localStorage.removeItem('selectedBatches');
             let providerId = @json($provider['id']);
+            let fromEdit = @json($from_edit);
+            // alert(fromEdit);
+            if (fromEdit) {
+                let storedBatches = @json($provider['training_batches']);
+                // Initialize an empty object for selectedBatches
+                var selectedBatches = {};
+
+                // Loop through storedBatches and create the selectedBatches object
+                storedBatches.forEach(function(batch) {
+                    var batchId = batch.id;
+                    var batchCode = batch.batchCode;
+                    var batchTitle = batch.training.title.Name;
+
+                    // Add the batch to selectedBatches
+                    selectedBatches[batchId] = {
+                        batchCode: batchCode,
+                        title: batchTitle
+                    };
+                });
+
+                // Convert selectedBatches to JSON
+                var selectedBatchesJSON = JSON.stringify(selectedBatches);
+
+                localStorage.setItem('selectedBatches', selectedBatchesJSON);
+
+                // link-batch-form input value set
+                generateSelectedList();
+            }
+
             let divisionSelectElement = $("#gioLocation-form #division_id");
             let districtSelectElement = $("#gioLocation-form #district_id");
             let upazilaSelectElement = $("#gioLocation-form #upazila_id");
             let batchLinkForm = $("#add-batch-form");
             let batchLinkCheck = $("#add-batch-form #batch-checkbox");
             let selectAllBox = $("#add-batch-form #select-all");
-            // let storedBatches = JSON.parse(localStorage.getItem('selectedBatches')) || {};
-            // console.log(storedBatches);
+
             // remove stored localstoreage selectedBatches
             $("#clear-selected").on('click', function(event) {
                 event.preventDefault();
                 localStorage.removeItem('selectedBatches');
                 location.reload();
             })
-            // link-batch-form input vlue set
+            // link-batch-form input value set
             generateSelectedList();
 
             // populate division options
@@ -162,7 +191,7 @@
                             // console.log(results.data);
                             let allData = results.data;
                             let GEOCode = results.GEOCode
-                            console.log(results);
+                            // console.log(results);
                             batchLinkCheck.html("");
 
                             // Assuming you have already retrieved selectedBatches from local storage
@@ -180,7 +209,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input batch-checkbox" type="checkbox" id="${data.id}" name="batches[]"
                                                     value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${data.training.title.Name ?? ''}"
-                                                    ${isChecked ? 'checked' : ''} ${data.provider_id ? 'disabled' : ''}>
+                                                    ${isChecked ? 'checked' : ''} ${!fromEdit ? (data.provider_id ? 'disabled' : '') : ''}>
                                                 <label class="form-check-label text-dark" for="${data.id}">
                                                     ${data.batchCode} (${data.training.title.Name ?? ""})
                                                 </label>
@@ -203,7 +232,7 @@
                                         // Update the selectedBatches object
                                         if (this.checked) {
                                             selectedBatches[batchId] = {
-                                                batchCode,
+                                                batchCode: batchCode,
                                                 title: batchTitle
                                             };
                                         } else {
@@ -274,7 +303,10 @@
 
                         let batchIds = $("#link-batch-form [name=link-batches]").val();
 
-                        console.log(batchIds);
+                        // console.log(batchIds);
+                        if (fromEdit) {
+                            fd.append("edit", true);
+                        }
                         fd.append("batch_ids", batchIds);
                         fd.append("provider_id", providerId);
                         fd.append("_token", CSRF_TOKEN);
@@ -300,32 +332,13 @@
 
                                     // refresh page after 2 seconds
                                     setTimeout(function() {
-                                        location.reload();
+                                        // location.reload();
+                                        history.back();
                                     }, 2000);
                                 } else {
                                     if (results.error === true) {
                                         var errors = results.message;
                                         swal.fire(ValidationError, errors);
-                                    }
-
-                                    if (results.error === true) {
-                                        if (results.message.batch_ids) {
-                                            $(
-                                                    "#link_batches_form .form-message-error-batch-ids"
-                                                )
-                                                .html(results.message.batch_ids[0])
-                                                .addClass("text-danger")
-                                                .fadeIn(5000);
-                                            setTimeout(() => {
-                                                $(
-                                                        "#link_batches_form .form-message-error-batch-ids"
-                                                    )
-                                                    .html("")
-                                                    .removeClass("text-danger")
-                                                    .fadeOut();
-                                                Logo;
-                                            }, 5000);
-                                        }
                                     }
                                 }
                             },

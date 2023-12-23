@@ -58,13 +58,21 @@ class ProviderController extends Controller
 
     public function enrollBatch($provider_id, Request $request)
     {
+        $previousRouteUrl = url()->previous();
+        $previousRouteName = app('router')->getRoutes()->match(app('request')->create($previousRouteUrl))->getName();
+        $from_edit = false;
+        // dd($previousRouteName);
+        if ($previousRouteName == "providers.show") {
+            $from_edit = true;
+        }
+        // dd($from_edit);
         if ($provider_id) {
             $results = ApiHttpClient::request('get', 'providers/' . $provider_id . '/show')->json();
 
             if ($results['success'] == true) {
                 $provider = $results['data'];
                 // dd($provider);
-                return view('providers.enroll_batches', compact('provider'));
+                return view('providers.enroll_batches', compact('provider', 'from_edit'));
             } else {
                 session()->flash('type', 'Danger');
                 session()->flash('message', 'Something went wrong');

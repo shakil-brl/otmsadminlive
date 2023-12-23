@@ -44,12 +44,20 @@
                                             {{ $batch['startDate'] ?? '' }}
                                         </td>
                                         <td>
-
+                                            <a href=""class="btn btn-sm btn-primary" title="Provider Details">
+                                                view
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ route('provider.link-batch', $provider['id']) }}"
+                            class="btn btn-lg btn-success me-1 show-action" title="Provider Details">
+                            Edit Link Batch
+                        </a>
                     </div>
                 </div>
             @endisset
