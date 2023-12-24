@@ -55,7 +55,7 @@
                     </div>
                     <div class="my-5" id="link-batch-section">
                         <div class="fw-bold fs-5">Selected Batch:</div>
-                        <div class="d-flex flex-wrap gap-2 border rounded p-3" id="link-batch-show">
+                        <div class="d-flex flex-wrap gap-1 border rounded p-3" id="link-batch-show">
 
                         </div>
                         <button class="btn btn-danger mt-3" id="clear-selected">Clear</button>
@@ -105,6 +105,20 @@
 
             // link-batch-form input value set adn view
             generateSelectedList();
+
+            // remove item form view
+            $("#link-batch-show").on('click', function(event) {
+                let removeBatchId = $('#batchCodeHidden').val();
+                let selectedBatches = JSON.parse(localStorage.getItem('selectedBatches'));
+                if (selectedBatches && selectedBatches.hasOwnProperty(removeBatchId)) {
+                    // Remove the property from the object
+                    delete selectedBatches[removeBatchId];
+
+                    // Save the updated object back to localStorage
+                    localStorage.setItem('selectedBatches', JSON.stringify(selectedBatches));
+                }
+                generateSelectedList();
+            });
 
             let divisionSelectElement = $("#gioLocation-form #division_id");
             let districtSelectElement = $("#gioLocation-form #district_id");
@@ -387,9 +401,15 @@
 
                         // Create a pill-like element with batchCode and title and append it to the div
                         let pillElement =
-                            `<div class="badge badge-pill badge-info p-2 d-flex flex-column gap-2">
-                                <div>${batchInfo.batchCode} - ${batchInfo.title}</div>
-                                <div>(${batchInfo.GEOLocation})</div>
+                            `<div class="mb-1 me-1 d-inline-flex bg-white rounded overflow-hidden border border-secondary">
+                                <div class="px-4 py-1">
+                                    <div>${batchInfo.batchCode} - ${batchInfo.title}</div>
+                                    <div>(${batchInfo.GEOLocation})</div>
+                                    <input type="hidden" id="batchCodeHidden" value="${batchId}">
+                                </div>
+                                <div type="button" class="bg-danger lead text-light d-flex align-items-center justify-content-center px-2">
+                                    &times;
+                                </div>
                             </div>`;
                         linkBatchShowDiv.append(pillElement);
                     });

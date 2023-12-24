@@ -16,7 +16,7 @@
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="" class="d-lg-none">
-                <img alt="Logo" src="{{ asset('assets/dist/assets/media/svg/logo/Logo_3.svg') }}" class="h-40px" />
+
             </a>
         </div>
         <!--end::Mobile logo-->
