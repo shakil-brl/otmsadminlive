@@ -265,5 +265,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
     Route::group(['prefix' => 'provider'], function () {
         Route::get('/all-trainers', [ProviderController::class, 'allTrainer'])->name('provider.all-trainer');
+        Route::get('/link-batch/{providerId}', [ProviderController::class, 'enrollBatch'])->name('provider.link-batch');
+        // Route::get('/link-batch/{providerId}/edit', [ProviderController::class, 'editLinkBatch'])->name('provider.edit.link-batch');
     });
 });

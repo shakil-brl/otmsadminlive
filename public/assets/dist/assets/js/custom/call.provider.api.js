@@ -3,7 +3,7 @@ $(function () {
     $(document).ready(function () {
         let providerTbody = $("#provider-tbody");
         let selectedValues;
-
+        const routeUrl = "{{ route('trainer.enrollment.batches') }}";
         const link = api_baseurl + "providers";
         $.ajax({
             type: "GET",
@@ -79,6 +79,7 @@ $(function () {
                                         data-provider-id="${provider.id}" data-bs-toggle="modal" data-bs-target="#link_batches" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Batch Link to Provider">
                                         ${linkBatch}
                                         </a>
+                                        
                                         <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 show-action" 
                                         data-provider-id="${provider.id}" data-provider-name="${provider.name}" data-bs-toggle="modal" id="view_provider-modal" data-bs-target="#view_provider" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Provider Details" >
                                             <i class="ki-duotone ki-switch fs-2">
