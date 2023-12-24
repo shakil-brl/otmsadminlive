@@ -31,7 +31,7 @@
                     @foreach (collect($total_batches) as $batch)
                         <tr>
                             <td>
-                                {{ $loop->iteration }}
+                                {{ $page_from + $loop->iteration - 1 }}
                             </td>
                             <td>
                                 {{ $batch['batchCode'] }}
