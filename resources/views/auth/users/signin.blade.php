@@ -155,7 +155,7 @@
 
                         <div class="form-input">
                             <label for="emailid">ইমেইল</label>
-                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Emeil">
+                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Email">
                         </div>
                         <div class="form-input">
                             <div class="d-flex justify-content-between">
