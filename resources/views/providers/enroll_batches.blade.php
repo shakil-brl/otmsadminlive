@@ -108,7 +108,7 @@
             generateSelectedList();
 
             // remove item form view
-            $("#link-batch-show").on('click', '.view-item', function() {
+            $("#link-batch-show").on('click', '.remove-batch-buton', function() {
                 // Find the #batchCodeHidden within the clicked .bg-white element
                 let removeBatchId = $(this).find('#batchCodeHidden').val();
                 // alert(removeBatchId);
@@ -411,11 +411,11 @@
                             `<div class="mb-1 me-1 d-inline-flex bg-white rounded overflow-hidden border border-secondary view-item">
                                 <div class="px-4 py-1">
                                     <div>${batchInfo.batchCode} - ${batchInfo.title}</div>
-                                    <div>(${batchInfo.GEOLocation})</div>
-                                    <input type="hidden" id="batchCodeHidden" value="${batchId}">
+                                    <div>(${batchInfo.GEOLocation})</div>                                    
                                 </div>
-                                <div type="button" class="bg-danger lead text-light d-flex align-items-center justify-content-center px-2">
+                                <div type="button" class="bg-danger lead text-light d-flex align-items-center justify-content-center px-2 remove-batch-buton">
                                     &times;
+                                    <input type="hidden" id="batchCodeHidden" value="${batchId}">
                                 </div>
                             </div>`;
                         linkBatchShowDiv.append(pillElement);
