@@ -323,3 +323,75 @@ function populateTrainerEnrollOption(
         },
     });
 }
+
+// function for geoLocation
+function populateLocationOption(
+    optionFor,
+    api_link,
+    authToken,
+    selectElement,
+    selectedId = null
+) {
+    let htmlSelect =
+        "<option value=''>Select " + optionFor + "</option>";
+    $.ajax({
+        type: "get",
+        url: api_link,
+        headers: {
+            Authorization: authToken,
+        },
+        data: {},
+        dataType: "JSON",
+        success: function (result) {
+            let results = result.data;
+            // console.log(results);
+            if (results) {
+                if (selectedId !== null) {
+                    $.each(results, function (index, result) {
+                        if (result.id == selectedId) {
+                            htmlSelect +=
+                                '<option value="' +
+                                result.id +
+                                '" selected>' +
+                                result.NameEng +
+                                " (" +
+                                result.Name +
+                                " - " +
+                                result.Code +
+                                ") </option>";
+                        } else {
+                            htmlSelect +=
+                                '<option value="' +
+                                result.id +
+                                '">' +
+                                result.NameEng +
+                                " (" +
+                                result.Name +
+                                " - " +
+                                result.Code +
+                                ") </option>";
+                        }
+                    });
+                } else {
+                    $.each(results, function (index, result) {
+                        htmlSelect +=
+                            '<option value="' +
+                            result.id +
+                            '">' +
+                            result.NameEng +
+                            " (" +
+                            result.Name +
+                            " - " +
+                            result.Code +
+                            ") </option>";
+                    });
+                }
+            }
+
+            selectElement.html(htmlSelect);
+        },
+        error: function (response) {
+            console.log(response);
+        },
+    });
+}
