@@ -18,10 +18,11 @@ class ProviderController extends Controller
 
         // dd($results);
         if ($provider_results['success'] == true) {
-            $providers = $provider_results['data']['data'];
-            $paginator = $this->customPaginate($provider_results, $request, route('providers.index'));
+            $data['providers'] = $provider_results['data']['data'];
+            $data['page_from'] = $provider_results['data']['from'];
+            $data['paginator'] = $this->customPaginate($provider_results, $request, route('providers.index'));
 
-            return view('providers.index', ['providers' => $providers, 'paginator' => $paginator]);
+            return view('providers.index', $data);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', 'Something went wrong');
