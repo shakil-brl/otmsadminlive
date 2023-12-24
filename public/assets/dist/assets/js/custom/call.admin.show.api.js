@@ -5,7 +5,7 @@ $(function () {
     } else {
         console.error("Access Token is not defined.");
     }
-    alert();
+    // alert();
 
     // let authToken = authToken;
     let localUserAvatar =

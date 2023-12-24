@@ -25,6 +25,7 @@ use App\Http\Controllers\TrainerEnrollmentController;
 use App\Http\Controllers\UpazilaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TmsInspectionController;
+use App\Http\Controllers\ProviderBatchesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -265,5 +266,13 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
     Route::group(['prefix' => 'provider'], function () {
         Route::get('/all-trainers', [ProviderController::class, 'allTrainer'])->name('provider.all-trainer');
+        Route::get('/link-batch/{providerId}', [ProviderController::class, 'enrollBatch'])->name('provider.link-batch');
+        // Route::get('/link-batch/{providerId}/edit', [ProviderController::class, 'editLinkBatch'])->name('provider.edit.link-batch');
     });
+
+    Route::group(['prefix' => 'provider-batches'], function () {
+        Route::get('/', [ProviderBatchesController::class, 'index'])->name('provider-batches.index');
+        Route::get('/details/{provider_id}', [ProviderBatchesController::class, 'details'])->name('provider-batches.details');
+    });
+   
 });

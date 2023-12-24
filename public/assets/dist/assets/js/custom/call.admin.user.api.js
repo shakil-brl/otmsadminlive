@@ -128,9 +128,11 @@ $(function () {
             populateRoleOptions(authToken, role_api_link, roleSelector);
 
             // load districts
+            let optionFor = "District";
             let district_api_link = api_baseurl + "districts";
             let districtSelector = $("#kt_modal_add_admin_form #district_id");
-            populateDistrictOption(
+            populateLocationOption(
+                optionFor,
                 district_api_link,
                 authToken,
                 districtSelector
@@ -141,10 +143,12 @@ $(function () {
                 "#kt_modal_add_admin_form #district_id"
             );
             selectDistrictElement.change(function () {
+                optionFor = "Upazila";
                 let upazilaSelector = $("#kt_modal_add_admin_form #upazila_id");
                 let district_id = selectDistrictElement.val();
-                upazila_api_link = api_baseurl + "upazilas/" + district_id;
-                populateUpazilaSelect(
+                let upazila_api_link = api_baseurl + "upazilas/" + district_id;
+                populateLocationOption(
+                    optionFor,
                     upazila_api_link,
                     authToken,
                     upazilaSelector
@@ -158,19 +162,26 @@ $(function () {
         selectRole.on("change", function (e) {
             let selectedOptionText = selectRole.find(":selected").html();
             if (
-                (selectedOptionText == "Trainer" ||
-                    selectedOptionText == "Provider" ||
-                    selectedOptionText == "Coordinator") &&
-                userRole != "Provider"
+                selectedOptionText == "Trainer" ||
+                selectedOptionText == "Provider" ||
+                selectedOptionText == "Coordinator"
             ) {
-                $("#kt_modal_add_admin_form #provider").removeClass("d-none");
+                if (userRole != "Provider") {
+                    $("#kt_modal_add_admin_form #provider").removeClass(
+                        "d-none"
+                    );
 
-                let providerSelector = $(
-                    "#kt_modal_add_admin_form #provider_id"
-                );
-                let api_link = api_baseurl + "providers";
+                    let providerSelector = $(
+                        "#kt_modal_add_admin_form #provider_id"
+                    );
+                    let api_link = api_baseurl + "providers";
 
-                populateProviderOptions(authToken, api_link, providerSelector);
+                    populateProviderOptions(
+                        authToken,
+                        api_link,
+                        providerSelector
+                    );
+                }
             } else {
                 $("#kt_modal_add_admin_form #provider").addClass("d-none");
             }
@@ -229,34 +240,36 @@ $(function () {
                         );
                         // console.log(userData.role.name);
                         if (
-                            (userData.role.name == "Trainer" ||
-                                userData.role.name == "Coordinator") &&
-                            userRole != "Provider"
+                            userData.role.name == "Trainer" ||
+                            userData.role.name == "Coordinator" ||
+                            userData.role.name == "Provider"
                         ) {
                             if (userData.provider) {
-                                $(
-                                    "#kt_modal_update_admin_form #provider-row"
-                                ).removeClass("d-none");
+                                if (userRole != "Provider") {
+                                    $(
+                                        "#kt_modal_update_admin_form #provider-row"
+                                    ).removeClass("d-none");
 
-                                let providerSelector = $(
-                                    '#kt_modal_update_admin_form [name="provider_id"]'
-                                );
-                                let api_link = api_baseurl + "providers";
-                                if (userData.provider_id) {
-                                    // console.log(0);
-                                    selectProviderId = userData.provider_id;
-                                    populateProviderOptions(
-                                        authToken,
-                                        api_link,
-                                        providerSelector,
-                                        selectProviderId
+                                    let providerSelector = $(
+                                        '#kt_modal_update_admin_form [name="provider_id"]'
                                     );
-                                } else {
-                                    populateProviderOptions(
-                                        authToken,
-                                        api_link,
-                                        providerSelector
-                                    );
+                                    let api_link = api_baseurl + "providers";
+                                    if (userData.provider_id) {
+                                        // console.log(0);
+                                        selectProviderId = userData.provider_id;
+                                        populateProviderOptions(
+                                            authToken,
+                                            api_link,
+                                            providerSelector,
+                                            selectProviderId
+                                        );
+                                    } else {
+                                        populateProviderOptions(
+                                            authToken,
+                                            api_link,
+                                            providerSelector
+                                        );
+                                    }
                                 }
                             } else {
                                 $(
@@ -281,25 +294,26 @@ $(function () {
                             .find(":selected")
                             .html();
                         if (
-                            (selectedOptionText == "Trainer" ||
-                                selectedOptionText == "Provider" ||
-                                selectedOptionText == "Coordinator") &&
-                            userRole != "Provider"
+                            selectedOptionText == "Trainer" ||
+                            selectedOptionText == "Provider" ||
+                            selectedOptionText == "Coordinator"
                         ) {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).removeClass("d-none");
+                            if (userRole != "Provider") {
+                                $(
+                                    "#kt_modal_update_admin_form #provider-row"
+                                ).removeClass("d-none");
 
-                            let providerSelector = $(
-                                '#kt_modal_update_admin_form [name="provider_id"]'
-                            );
-                            let api_link = api_baseurl + "providers";
+                                let providerSelector = $(
+                                    '#kt_modal_update_admin_form [name="provider_id"]'
+                                );
+                                let api_link = api_baseurl + "providers";
 
-                            populateProviderOptions(
-                                authToken,
-                                api_link,
-                                providerSelector
-                            );
+                                populateProviderOptions(
+                                    authToken,
+                                    api_link,
+                                    providerSelector
+                                );
+                            }
                         } else {
                             $(
                                 "#kt_modal_update_admin_form #provider-row"
@@ -308,21 +322,23 @@ $(function () {
                     });
 
                     // load districts
+                    optionFor = "District";
                     let district_api_link = api_baseurl + "districts";
                     let districtSelector = $(
                         '#kt_modal_update_admin_form [name="district_id"]'
                     );
                     if (userData && userData.district_id) {
                         let selectedDistrictId = userData.district_id;
-
-                        populateDistrictOption(
+                        populateLocationOption(
+                            optionFor,
                             district_api_link,
                             authToken,
                             districtSelector,
                             selectedDistrictId
                         );
                     } else {
-                        populateDistrictOption(
+                        populateLocationOption(
+                            optionFor,
                             district_api_link,
                             authToken,
                             districtSelector
@@ -331,6 +347,7 @@ $(function () {
 
                     let selectedDistrictId = userData.district_id;
                     if (userData && selectedDistrictId) {
+                        optionFor = "Upazila";
                         let upazila_api_link =
                             api_baseurl + "upazilas/" + selectedDistrictId;
                         let upazilaSelector = $(
@@ -339,14 +356,16 @@ $(function () {
                         let selectedUpazilaId = userData.upazila_id;
 
                         if (selectedUpazilaId) {
-                            populateUpazilaSelect(
+                            populateLocationOption(
+                                optionFor,
                                 upazila_api_link,
                                 authToken,
                                 upazilaSelector,
                                 selectedUpazilaId
                             );
                         } else {
-                            populateUpazilaSelect(
+                            populateLocationOption(
+                                optionFor,
                                 upazila_api_link,
                                 authToken,
                                 upazilaSelector
@@ -367,7 +386,8 @@ $(function () {
                             '#kt_modal_update_admin_form [name="upazila_id"]'
                         );
 
-                        populateUpazilaSelect(
+                        populateLocationOption(
+                            optionFor,
                             upazila_api_link,
                             authToken,
                             upazilaSelector
@@ -433,135 +453,6 @@ $(function () {
          * Functions
          *
          */
-
-        // function for district
-        function populateDistrictOption(
-            api_link,
-            authToken,
-            districtSelector,
-            selectedDistrictId = null
-        ) {
-            let htmlDistrict = "<option value=''></option>";
-            $.ajax({
-                type: "get",
-                url: api_link,
-                headers: {
-                    Authorization: authToken,
-                },
-                data: {},
-                dataType: "JSON",
-                success: function (results) {
-                    let districts = results.data;
-                    // console.log(districts);
-                    if (districts) {
-                        if (selectedDistrictId !== null) {
-                            $.each(districts, function (index, district) {
-                                if (district.Code == selectedDistrictId) {
-                                    htmlDistrict +=
-                                        '<option value="' +
-                                        district.Code +
-                                        '" selected>' +
-                                        district.NameEng +
-                                        " (";
-                                    district.Name + ") </option>";
-                                } else {
-                                    htmlDistrict +=
-                                        '<option value="' +
-                                        district.Code +
-                                        '">' +
-                                        district.NameEng +
-                                        " (" +
-                                        district.Name +
-                                        ") </option>";
-                                }
-                            });
-                        } else {
-                            $.each(districts, function (index, district) {
-                                htmlDistrict +=
-                                    '<option value="' +
-                                    district.Code +
-                                    '">' +
-                                    district.NameEng +
-                                    " (" +
-                                    district.Name +
-                                    ") </option>";
-                            });
-                        }
-                    }
-
-                    districtSelector.html(htmlDistrict);
-                },
-                error: function (response) {
-                    console.log(response);
-                },
-            });
-        }
-
-        // function for load upazila
-        function populateUpazilaSelect(
-            apiLink,
-            authToken,
-            upazilaSelector,
-            selectedUpazilaId
-        ) {
-            let htmlUpazila = "<option value=''></option>";
-            console.log(apiLink);
-            $.ajax({
-                type: "get",
-                url: apiLink,
-                headers: {
-                    Authorization: authToken,
-                },
-                data: {},
-                dataType: "JSON",
-                success: function (results) {
-                    let upazilas = results.data;
-                    console.log(upazilas);
-
-                    if (upazilas) {
-                        if (selectedUpazilaId !== null) {
-                            $.each(upazilas, function (index, upazila) {
-                                if (upazila.Code == selectedUpazilaId) {
-                                    htmlUpazila +=
-                                        '<option value="' +
-                                        upazila.Code +
-                                        '" selected>' +
-                                        upazila.NameEng +
-                                        " (" +
-                                        upazila.Name +
-                                        ") </option>";
-                                } else {
-                                    htmlUpazila +=
-                                        '<option value="' +
-                                        upazila.Code +
-                                        '">' +
-                                        upazila.NameEng +
-                                        " (" +
-                                        upazila.Name +
-                                        ") </option>";
-                                }
-                            });
-                        } else {
-                            $.each(upazilas, function (index, upazila) {
-                                htmlUpazila +=
-                                    '<option value="' +
-                                    upazila.Code +
-                                    '">' +
-                                    upazila.NameEng +
-                                    " (" +
-                                    upazila.Name +
-                                    ") </option>";
-                            });
-                        }
-                    }
-
-                    upazilaSelector.html(htmlUpazila);
-                },
-                error: function (response) {
-                    console.log(response);
-                },
-            });
-        }
 
         // function for load Role
         function populateRoleOptions(
