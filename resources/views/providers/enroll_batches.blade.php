@@ -114,6 +114,10 @@
                 // alert(removeBatchId);
                 let selectedBatches = JSON.parse(localStorage.getItem('selectedBatches'));
                 if (selectedBatches && selectedBatches.hasOwnProperty(removeBatchId)) {
+                    let checkboxId = `#${removeBatchId}`;
+
+                    // Check or uncheck the checkbox
+                    $(checkboxId).prop('checked', false);
                     // Remove the property from the object
                     delete selectedBatches[removeBatchId];
 
