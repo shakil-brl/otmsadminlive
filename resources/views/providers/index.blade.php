@@ -40,7 +40,7 @@
                         {{-- @dump($provider) --}}
                         <tr>
                             <td>
-                                {{ $loop->iteration }}
+                                {{ $page_from + $loop->iteration - 1 }}
                             </td>
                             <td>
                                 {{ $provider['name'] ?? '' }}
