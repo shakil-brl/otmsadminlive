@@ -55,7 +55,8 @@
                     </div>
                     <div class="my-5" id="link-batch-section">
                         <div class="fw-bold fs-5">Selected Batch:</div>
-                        <div class="d-flex flex-wrap gap-1 border rounded p-3" id="link-batch-show">
+                        <div class="d-flex flex-wrap gap-1 border rounded p-3" id="link-batch-show"
+                            style="background-color: #faf5ff;">
 
                         </div>
                         <button class="btn btn-danger mt-3" id="clear-selected">Clear</button>
@@ -107,8 +108,10 @@
             generateSelectedList();
 
             // remove item form view
-            $("#link-batch-show").on('click', function(event) {
-                let removeBatchId = $('#batchCodeHidden').val();
+            $("#link-batch-show").on('click', '.view-item', function() {
+                // Find the #batchCodeHidden within the clicked .bg-white element
+                let removeBatchId = $(this).find('#batchCodeHidden').val();
+                // alert(removeBatchId);
                 let selectedBatches = JSON.parse(localStorage.getItem('selectedBatches'));
                 if (selectedBatches && selectedBatches.hasOwnProperty(removeBatchId)) {
                     // Remove the property from the object
@@ -238,7 +241,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input batch-checkbox" type="checkbox" id="${data.id}" name="batches[]"
                                                     value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${data.training.title.Name ?? ''}"
-                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${!fromEdit ? (data.provider_id ? 'disabled' : '') : ''}>
+                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${!fromEdit ? (data.provider_id && data.provider_id != providerId ? 'disabled' : '') : ''}>
                                                 <label class="form-check-label text-dark" for="${data.id}">
                                                     ${data.batchCode} (${data.training.title.Name ?? ""})
                                                 </label>
@@ -401,7 +404,7 @@
 
                         // Create a pill-like element with batchCode and title and append it to the div
                         let pillElement =
-                            `<div class="mb-1 me-1 d-inline-flex bg-white rounded overflow-hidden border border-secondary">
+                            `<div class="mb-1 me-1 d-inline-flex bg-white rounded overflow-hidden border border-secondary view-item">
                                 <div class="px-4 py-1">
                                     <div>${batchInfo.batchCode} - ${batchInfo.title}</div>
                                     <div>(${batchInfo.GEOLocation})</div>
