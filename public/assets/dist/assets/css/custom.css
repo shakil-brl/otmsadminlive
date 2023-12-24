@@ -5,6 +5,7 @@
 .inactiveTab {
     display: none;
 }
+
 #banner .title {
     font-weight: bold;
     font-size: 51px;
@@ -28,14 +29,17 @@
     margin: 0 auto;
     background: #f8f8f8;
 }
+
 .feature-item-1 .icon {
     -webkit-box-shadow: 0px 0px 25px rgba(0, 128, 0, 0.3);
     box-shadow: 0px 0px 25px rgba(0, 128, 0, 0.3);
 }
+
 .feature-item-2 .icon {
     -webkit-box-shadow: 0px 0px 25px rgba(191, 131, 255, 0.3);
     box-shadow: 0px 0px 25px rgba(191, 131, 255, 0.3);
 }
+
 .feature-item-3 .icon {
     -webkit-box-shadow: 0px 0px 25px rgba(86, 204, 242, 0.3);
     box-shadow: 0px 0px 25px rgba(86, 204, 242, 0.3);
@@ -54,13 +58,16 @@
     color: #333;
     margin-bottom: 10px;
 }
+
 .breadcrumbs p {
     font-size: 16px;
     color: #777;
 }
+
 .course-details {
     padding: 60px 0;
 }
+
 .course-details h3 {
     font-size: 24px;
     margin: 30px 0 15px 0;
@@ -169,14 +176,27 @@
     height: 70px;
     overflow-y: auto;
 }
+
 .notification-course {
     height: 20px;
     overflow-y: auto;
 }
+
 .notification-message {
     height: 160px;
     overflow-y: auto;
 }
+
+.details-report ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.details-report ul li {
+    display: inline-block;
+}
+
 @media (max-width: 992px) {
     .cource-details-tabs .nav-link {
         border: 0;
@@ -201,14 +221,17 @@
     .class-feed {
         margin-bottom: 10px !important;
     }
+
     .recommended-section {
         margin-top: 5px !important;
     }
 }
+
 @media (min-width: 0px) and (max-width: 992px) {
     .class-feed {
         margin-bottom: 10px !important;
     }
+
     .recommended-section {
         margin-top: 5px !important;
     }
