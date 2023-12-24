@@ -20,9 +20,13 @@
                             <th>Division</th>
                             <th>District</th>
                             <th>Upazila</th>
-                            <th>Total Trainee</th>
-                            <th>Running Batch</th>
-                            <th>Dropout</th>
+                            <th>Batch Id</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Trainee</th>
+                            <th>Name & Mobile</th>
+                            <th>Schedule Day</th>
+                            <th>Last Inspection & Comments</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,31 +37,79 @@
                                 Narayanganj
                             </td>
                             <td>Narayanganj Sadar</td>
-                            <td>25</td>
-                            <td>35</td>
-                            <td>4</td>
+                            <td>KSH-MIT-CCA-01</td>
+                            <td>08-11-2023</td>
+                            <td>08-03-2024</td>
+                            <td>20 out of 25</td>
+                            <td>
+                                <table class="table table-bordered mb-0">
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>'Sunday','Monday','Tuesday'</td>
+                            <td><h3>08-03-2024</h3>Esse est rem vel qui. Et aut maiores eum beatae distinctio sed ut. Numquam explicabo fuga necessitatibus libero. Voluptates aliquid voluptatem voluptate tempora aut.</td>
                         </tr>
                         <tr class="strip-color">
-                            <td>2</td>
+                            <td>1</td>
                             <td> Dhaka </td>
                             <td>
                                 Narayanganj
                             </td>
                             <td>Narayanganj Sadar</td>
-                            <td>23</td>
-                            <td>35</td>
-                            <td>4</td>
+                            <td>KSH-MIT-CCA-01</td>
+                            <td>08-11-2023</td>
+                            <td>08-03-2024</td>
+                            <td>20 out of 25</td>
+                            <td>
+                                <table class="table table-bordered mb-0">
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>'Sunday','Monday','Tuesday'</td>
+                            <td><h3>08-03-2024</h3>Esse est rem vel qui. Et aut maiores eum beatae distinctio sed ut. Numquam explicabo fuga necessitatibus libero. Voluptates aliquid voluptatem voluptate tempora aut.</td>
                         </tr>
                         <tr class="strip-color">
-                            <td>3</td>
+                            <td>1</td>
                             <td> Dhaka </td>
                             <td>
                                 Narayanganj
                             </td>
                             <td>Narayanganj Sadar</td>
-                            <td>35</td>
-                            <td>35</td>
-                            <td>4</td>
+                            <td>KSH-MIT-CCA-01</td>
+                            <td>08-11-2023</td>
+                            <td>08-03-2024</td>
+                            <td>20 out of 25</td>
+                            <td>
+                                <table class="table table-bordered mb-0">
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>কাজী আজহারুল হক (01923456781)</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>'Sunday','Monday','Tuesday'</td>
+                            <td><h3>08-03-2024</h3>Esse est rem vel qui. Et aut maiores eum beatae distinctio sed ut. Numquam explicabo fuga necessitatibus libero. Voluptates aliquid voluptatem voluptate tempora aut.</td>
                         </tr>
                         
                     </tbody>
