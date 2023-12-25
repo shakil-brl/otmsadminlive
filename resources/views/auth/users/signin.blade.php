@@ -14,67 +14,47 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <title>OTMS Login</title>
     <style>
-        /* styles.css */
-
         #preloader {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: #000000b0;
-            /* Set the background color of your preloader */
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            /* Set a high z-index to make sure it's on top of other elements */
+            backdrop-filter: blur(4px);
         }
-
 
         #body {
             display: none;
-            /* Hide the page content by default */
         }
 
         .hiddenDiv {
             display: none;
-            /* Add any additional styling for the hidden div */
         }
 
-
-        /* HTML: <div class="loadernew"></div> */
-        .loadernew {
-            width: 50px;
-            aspect-ratio: 1;
-            display: grid;
-            border: 4px solid #0000;
+        /* HTML: <div class="loader"></div> */
+        .loader {
+            --d: 22px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            border-color: #ccc #0000;
-            animation: l16 1s infinite linear;
+            color: #c5c5c5;
+            box-shadow:
+                calc(1*var(--d)) calc(0*var(--d)) 0 0,
+                calc(0.707*var(--d)) calc(0.707*var(--d)) 0 1px,
+                calc(0*var(--d)) calc(1*var(--d)) 0 2px,
+                calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+                calc(-1*var(--d)) calc(0*var(--d)) 0 4px,
+                calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+                calc(0*var(--d)) calc(-1*var(--d)) 0 6px;
+            animation: l27 1s infinite steps(8);
         }
 
-        .loadernew::before,
-        .loadernew::after {
-            content: "";
-            grid-area: 1/1;
-            margin: 2px;
-            border: inherit;
-            border-radius: 50%;
-        }
-
-        .loadernew::before {
-            border-color: #f03355 #0000;
-            animation: inherit;
-            animation-duration: .5s;
-            animation-direction: reverse;
-        }
-
-        .loadernew::after {
-            margin: 8px;
-        }
-
-        @keyframes l16 {
+        @keyframes l27 {
             100% {
                 transform: rotate(1turn)
             }
@@ -85,7 +65,7 @@
 <body>
 
     <div id="preloader" class="hiddenDiv">
-        <div class="loadernew"></div>
+        <div class="loader"></div>
     </div>
     <div id="body" style="background-image: url('{{ asset('img/login/placeholder.jpg') }}');">
         <div id="login-page">

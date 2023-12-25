@@ -57,37 +57,24 @@
         }
 
         /* HTML: <div class="loadernew"></div> */
-        .loadernew {
-            width: 50px;
-            aspect-ratio: 1;
-            display: grid;
-            border: 4px solid #0000;
+        .loader {
+            --d: 22px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            border-color: #ccc #0000;
-            animation: l16 1s infinite linear;
+            color: #c5c5c5;
+            box-shadow:
+                calc(1*var(--d)) calc(0*var(--d)) 0 0,
+                calc(0.707*var(--d)) calc(0.707*var(--d)) 0 1px,
+                calc(0*var(--d)) calc(1*var(--d)) 0 2px,
+                calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+                calc(-1*var(--d)) calc(0*var(--d)) 0 4px,
+                calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+                calc(0*var(--d)) calc(-1*var(--d)) 0 6px;
+            animation: l27 1s infinite steps(8);
         }
 
-        .loadernew::before,
-        .loadernew::after {
-            content: "";
-            grid-area: 1/1;
-            margin: 2px;
-            border: inherit;
-            border-radius: 50%;
-        }
-
-        .loadernew::before {
-            border-color: #f03355 #0000;
-            animation: inherit;
-            animation-duration: .5s;
-            animation-direction: reverse;
-        }
-
-        .loadernew::after {
-            margin: 8px;
-        }
-
-        @keyframes l16 {
+        @keyframes l27 {
             100% {
                 transform: rotate(1turn)
             }
@@ -128,7 +115,7 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
 
     <div id="preloader">
-        <div class="loadernew"></div>
+        <div class="loader"></div>
     </div>
     <!--begin::Theme mode setup on page load-->
     <script>
