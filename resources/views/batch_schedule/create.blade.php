@@ -8,7 +8,7 @@
     @isset($batch)
         @php
             if ($batch['startDate']) {
-                $start_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['startDate'])->format('Y-m-d');
+                $start_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['startDate'])->format('d/m/Y');
             }
         @endphp
         {{-- @dump($batch) --}}
@@ -224,7 +224,7 @@
             let starDate = @json($start_date) ?? '';
             $("#start_date").flatpickr({
                 dateFormat: "d/m/Y",
-                defaultDate: [starDate]
+                defaultDate: starDate,
             });
 
             $("#class_time").flatpickr({
@@ -232,8 +232,6 @@
                 enableTime: true,
                 noCalendar: true
             });
-
-
         });
     </script>
 @endsection
