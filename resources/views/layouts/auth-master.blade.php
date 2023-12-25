@@ -42,12 +42,12 @@
         /* styles.css */
 
         #preloader {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #fff;
+            background-color: #000000b0;
             /* Set the background color of your preloader */
             display: flex;
             justify-content: center;
@@ -56,25 +56,27 @@
             /* Set a high z-index to make sure it's on top of other elements */
         }
 
-        #loader {
-            border: 8px solid #f3f3f3;
-            /* Light grey */
-            border-top: 8px solid #3498db;
-            /* Blue */
+        /* HTML: <div class="loadernew"></div> */
+        .loader {
+            --d: 22px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            /* Animation for spinning effect */
+            color: #c5c5c5;
+            box-shadow:
+                calc(1*var(--d)) calc(0*var(--d)) 0 0,
+                calc(0.707*var(--d)) calc(0.707*var(--d)) 0 1px,
+                calc(0*var(--d)) calc(1*var(--d)) 0 2px,
+                calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+                calc(-1*var(--d)) calc(0*var(--d)) 0 4px,
+                calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+                calc(0*var(--d)) calc(-1*var(--d)) 0 6px;
+            animation: l27 1s infinite steps(8);
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
+        @keyframes l27 {
             100% {
-                transform: rotate(360deg);
+                transform: rotate(1turn)
             }
         }
 
@@ -113,7 +115,7 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
 
     <div id="preloader">
-        <div id="loader"></div>
+        <div class="loader"></div>
     </div>
     <!--begin::Theme mode setup on page load-->
     <script>

@@ -14,53 +14,50 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <title>OTMS Login</title>
     <style>
-        /* styles.css */
-
         #preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #fff;
-            /* Set the background color of your preloader */
+            background-color: #000000b0;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            /* Set a high z-index to make sure it's on top of other elements */
-        }
-
-        #loader {
-            border: 8px solid #f3f3f3;
-            /* Light grey */
-            border-top: 8px solid #3498db;
-            /* Blue */
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            /* Animation for spinning effect */
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            backdrop-filter: blur(4px);
         }
 
         #body {
             display: none;
-            /* Hide the page content by default */
         }
 
         .hiddenDiv {
             display: none;
-            /* Add any additional styling for the hidden div */
+        }
+
+        /* HTML: <div class="loader"></div> */
+        .loader {
+            --d: 22px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            color: #c5c5c5;
+            box-shadow:
+                calc(1*var(--d)) calc(0*var(--d)) 0 0,
+                calc(0.707*var(--d)) calc(0.707*var(--d)) 0 1px,
+                calc(0*var(--d)) calc(1*var(--d)) 0 2px,
+                calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+                calc(-1*var(--d)) calc(0*var(--d)) 0 4px,
+                calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+                calc(0*var(--d)) calc(-1*var(--d)) 0 6px;
+            animation: l27 1s infinite steps(8);
+        }
+
+        @keyframes l27 {
+            100% {
+                transform: rotate(1turn)
+            }
         }
     </style>
 </head>
@@ -68,13 +65,13 @@
 <body>
 
     <div id="preloader" class="hiddenDiv">
-        <div id="loader"></div>
+        <div class="loader"></div>
     </div>
     <div id="body" style="background-image: url('{{ asset('img/login/placeholder.jpg') }}');">
         <div id="login-page">
             <header id="navbar">
                 <nav class="navbar navbar-expand-md navbar-light ">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ URL('/')}}">
                         <div class="d-flex align-items-center">
                             <div class="logo">
                                 <img class="" src="{{ asset('img/login') }}/logo.svg" alt="">
@@ -85,6 +82,9 @@
                             </div>
                         </div>
                     </a>
+
+
+
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -93,24 +93,24 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav menu align-items-md-center ms-auto mb-2 mb-md-0">
                             <li class="nav-item lang dropdown">
-                                <a class="nav-link  dropdown-toggle" role="button" data-bs-toggle="dropdown">
+
+
+
+                                @if (session()->get('locale') == 'en'|| empty(session()->get('locale')))
+
+
+                                <a class="nav-link " href="{{ route('changeLang', ['lang' => 'bn']) }}" role="button">
                                     <img class="flag" src="{{ asset('img/login') }}/bd.svg" alt=""> <span
-                                        class="label">EN</span>
+                                        class="label">বাংলা</span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="item">
-                                        <a class="dropdown-item" href="#">
-                                            <img class="flag" src="{{ asset('img/login') }}/bd.svg" alt="">
-                                            <span class="label">BD</span>
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a class="dropdown-item" href="#">
-                                            <img class="flag" src="{{ asset('img/login') }}/us.svg" alt="">
-                                            <span class="label">EN</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                @else
+
+                                <a class="nav-link " href="{{ route('changeLang', ['lang' => 'en']) }}" role="button">
+                                    <img class="flag" src="{{ asset('img/login') }}/us.svg" alt=""> <span
+                                        class="label">English</span>
+                                </a>
+                                @endif
+
                             </li>
                             <li class="nav-item auth">
                                 <div class="nav-link pe-0">
@@ -131,7 +131,7 @@
             </header>
             <div id="login-form">
                 <div class="content">
-                    <legend class="title">অ্যাকাউন্ট লগইন করুন</legend>
+                    <legend class="title">@lang('login.login')</legend>
                     @if(session('error'))
                     <div style="color: red;">
                         {{ session('error') }}
@@ -154,15 +154,15 @@
                         @csrf
 
                         <div class="form-input">
-                            <label for="emailid">ইমেইল</label>
-                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Emeil">
+                            <label for="emailid">@lang('login.email')</label>
+                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Email">
                         </div>
                         <div class="form-input">
                             <div class="d-flex justify-content-between">
-                                <label for="">পাসওয়ার্ড</label>
+                                <label for="">@lang('login.password')</label>
                                 <label for="">
-                                    <a href="https://training.gov.bd/reset-password" class="forget">পাসওয়ার্ড ভুলে
-                                        গেছেন ?</a>
+                                    <a href="https://training.gov.bd/reset-password"
+                                        class="forget">@lang('login.forgot_password')</a>
                                 </label>
                             </div>
                             <div class="password">
@@ -175,10 +175,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-submit" onclick="toggleDivVisibility()">লগইন করুন</button>
+                        <button class="btn btn-submit" onclick="toggleDivVisibility()">@lang('login.login')</button>
 
-                        <div class="account-create">হার পাওয়ারে অ্যাকাউন্ট নাই ? <a
-                                href="https://training.gov.bd/signup">সাইন আপ</a></div>
+                        <div class="account-create"> @lang('login.do_not_account') <a
+                                href="https://training.gov.bd/signup">@lang('login.sign_up')</a></div>
                     </form>
                 </div>
             </div>
