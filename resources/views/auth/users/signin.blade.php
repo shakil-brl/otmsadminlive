@@ -74,7 +74,7 @@
         <div id="login-page">
             <header id="navbar">
                 <nav class="navbar navbar-expand-md navbar-light ">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ URL('/')}}">
                         <div class="d-flex align-items-center">
                             <div class="logo">
                                 <img class="" src="{{ asset('img/login') }}/logo.svg" alt="">
@@ -85,6 +85,9 @@
                             </div>
                         </div>
                     </a>
+
+
+
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -93,24 +96,24 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav menu align-items-md-center ms-auto mb-2 mb-md-0">
                             <li class="nav-item lang dropdown">
-                                <a class="nav-link  dropdown-toggle" role="button" data-bs-toggle="dropdown">
+
+
+
+                                @if (session()->get('locale') == 'en'|| empty(session()->get('locale')))
+
+
+                                <a class="nav-link " href="{{ route('changeLang', ['lang' => 'bn']) }}" role="button">
                                     <img class="flag" src="{{ asset('img/login') }}/bd.svg" alt=""> <span
-                                        class="label">EN</span>
+                                        class="label">বাংলা</span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="item">
-                                        <a class="dropdown-item" href="#">
-                                            <img class="flag" src="{{ asset('img/login') }}/bd.svg" alt="">
-                                            <span class="label">BD</span>
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a class="dropdown-item" href="#">
-                                            <img class="flag" src="{{ asset('img/login') }}/us.svg" alt="">
-                                            <span class="label">EN</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                @else
+
+                                <a class="nav-link " href="{{ route('changeLang', ['lang' => 'en']) }}" role="button">
+                                    <img class="flag" src="{{ asset('img/login') }}/us.svg" alt=""> <span
+                                        class="label">English</span>
+                                </a>
+                                @endif
+
                             </li>
                             <li class="nav-item auth">
                                 <div class="nav-link pe-0">
@@ -131,7 +134,7 @@
             </header>
             <div id="login-form">
                 <div class="content">
-                    <legend class="title">অ্যাকাউন্ট লগইন করুন</legend>
+                    <legend class="title">@lang('login.login')</legend>
                     @if(session('error'))
                     <div style="color: red;">
                         {{ session('error') }}
@@ -154,15 +157,15 @@
                         @csrf
 
                         <div class="form-input">
-                            <label for="emailid">ইমেইল</label>
+                            <label for="emailid">@lang('login.email')</label>
                             <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Email">
                         </div>
                         <div class="form-input">
                             <div class="d-flex justify-content-between">
-                                <label for="">পাসওয়ার্ড</label>
+                                <label for="">@lang('login.password')</label>
                                 <label for="">
-                                    <a href="https://training.gov.bd/reset-password" class="forget">পাসওয়ার্ড ভুলে
-                                        গেছেন ?</a>
+                                    <a href="https://training.gov.bd/reset-password"
+                                        class="forget">@lang('login.forgot_password')</a>
                                 </label>
                             </div>
                             <div class="password">
@@ -175,10 +178,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-submit" onclick="toggleDivVisibility()">লগইন করুন</button>
+                        <button class="btn btn-submit" onclick="toggleDivVisibility()">@lang('login.login')</button>
 
-                        <div class="account-create">হার পাওয়ারে অ্যাকাউন্ট নাই ? <a
-                                href="https://training.gov.bd/signup">সাইন আপ</a></div>
+                        <div class="account-create"> @lang('login.do_not_account') <a
+                                href="https://training.gov.bd/signup">@lang('login.sign_up')</a></div>
                     </form>
                 </div>
             </div>

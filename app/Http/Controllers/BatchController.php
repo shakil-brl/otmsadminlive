@@ -20,9 +20,10 @@ class BatchController extends Controller
         ])->json();
         // dd($total_batches);
         if ($total_batches['success'] == true) {
+            $page_from =$total_batches['data']['from'];
             $batches = $total_batches['data']['data'];
-            $paginator = $this->customPaginate($total_batches, $request, route('dashboard_details.total_batches'));
-            return view('trainersenroll.batches', ['total_batches' => $batches, 'paginator' => $paginator]);
+            $paginator = $this->customPaginate($total_batches, $request, route('batches.index'));
+            return view('trainersenroll.batches', ['total_batches' => $batches, 'paginator' => $paginator, 'page_from'=> $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $total_batches['message'] ?? 'Something went wrong');
