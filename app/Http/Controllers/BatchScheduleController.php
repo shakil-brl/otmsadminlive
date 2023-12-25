@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Clients\ApiHttpClient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -84,24 +85,36 @@ class BatchScheduleController extends Controller
     // store batch schedule
     public function store(Request $request)
     {
-        $data = $request->except('class_days');
+        // dd($request->all());
+        $request->validate([
+            'class_days' => 'required|array|min:1',
+            'start_date' => 'required|date_format:d/m/Y',
+            'class_time' => 'required|date_format:H:i',
+            'class_duration' => 'required|integer|gt:0',
+            'total_days' => 'required|integer|gt:0',
+        ]);
+
+        $schedule = $request->except('start_date', 'class_days');
 
         if ($request->class_days != null) {
-            $data['class_days'] = implode(',', $request->class_days);
+            $schedule['class_days'] = implode(',', $request->class_days);
         }
-        $data = ApiHttpClient::request('post', 'schedule/create', $data)->json();
 
-        if (isset($data['error'])) {
-            if ($data['error'] == true) {
-                $error = $data['message'];
-                return redirect()->back()->with('error', $error)->withInput();
-            }
-            session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Schedule created succesfully');
+        $schedule['start_date'] = Carbon::createFromFormat('d/m/Y', $request->start_date)
+            ->format('Y-m-d');
+
+        $data = ApiHttpClient::request('post', 'schedule/create', $schedule)->json();
+
+        if (isset($data['errors'])) {
+            $error = $data['errors'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error', $error)->withInput();
+
             return redirect('batch_schedules');
         } else {
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Schedule created succesfully');
+            session()->flash('message', $data['message'] ?? 'Created succesfully');
             return redirect('batch_schedules');
         }
     }
