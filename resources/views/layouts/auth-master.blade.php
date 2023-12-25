@@ -35,9 +35,9 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/class-custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/new_pages/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css?v=1') }}">
+    <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}">
+    <link rel="stylesheet" href="{{ asset('css/new_pages/main.css?v=1') }}">
     <style>
         /* styles.css */
 
