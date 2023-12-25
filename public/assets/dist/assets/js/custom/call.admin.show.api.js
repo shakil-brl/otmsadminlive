@@ -21,7 +21,7 @@ $(function () {
             },
             success: function (results) {
                 let data = results.data;
-                console.log(results.data);
+                // console.log(results.data);
 
                 let fullName = data.profile.KnownAs ?? "";
                 let regId = data.ProfileId ?? "";
@@ -33,9 +33,12 @@ $(function () {
                 let address = data.profile.address ?? "";
                 let districtName = data.profile.district_code ?? "";
                 let upazilaName = data.profile.upazila_id ?? "";
-                let providerName = data.provider ?? "";
+                let providerName = data.provider.name ?? "";
 
-                $("#user-avatar").attr("src", userImage);
+                $("#user-avatar").attr(
+                    "src",
+                    "/assets/dist/assets/media/svg/avatars/blank.svg"
+                );
                 $("#user-name").html(fullName);
                 $("#user-role").html(roleName);
                 $("#user-regId").html(regId);
