@@ -63,7 +63,7 @@ class HolydayController extends Controller
         $holyday['holly_bay'] = Carbon::createFromFormat('d/m/Y', $request->holly_bay)->format('Y-m-d');
 
         $data = ApiHttpClient::request('post', 'holyday/', $holyday)->json();
-        dd($data);
+        //dd($data);
         if (isset($data['error'])) {
             $error = $data['error'];
             session()->flash('type', 'Danger');
