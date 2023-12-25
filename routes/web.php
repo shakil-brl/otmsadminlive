@@ -26,6 +26,7 @@ use App\Http\Controllers\UpazilaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TmsInspectionController;
 use App\Http\Controllers\ProviderBatchesController;
+use App\Http\Controllers\ClassDocumentationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -273,6 +274,11 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::group(['prefix' => 'provider-batches'], function () {
         Route::get('/', [ProviderBatchesController::class, 'index'])->name('provider-batches.index');
         Route::get('/details/{provider_id}', [ProviderBatchesController::class, 'details'])->name('provider-batches.details');
+    });
+
+    Route::group(['prefix' => 'class-docs'], function () {
+        Route::get('/', [ClassDocumentationController::class, 'index'])->name('class-docs.index');
+        Route::get('/show/{id}', [ClassDocumentationController::class, 'show'])->name('class-docs.show');
     });
    
 });
