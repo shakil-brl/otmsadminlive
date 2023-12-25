@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Clients\ApiHttpClient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HolydayController extends Controller
@@ -12,19 +13,23 @@ class HolydayController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $results = ApiHttpClient::request('get', 'holyday')
-            ->json();
+        $results = ApiHttpClient::request('get', 'holyday', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
 
         if ($results['success'] == true) {
             $holyday = $results['data'];
-            dd($holyday);
-            return view('holyday.index', compact(['holyday']));
+            $page_from = $results['data']['from'];
+            $paginator = $this->customPaginate($results, $request, route('holydays.index'));
+            // dd($holyday);
+            return view('holyday.index', ['results' => $holyday, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return view('batch_schedule.create');
+            return back();
         }
     }
 
@@ -35,7 +40,7 @@ class HolydayController extends Controller
      */
     public function create()
     {
-        //
+        return view('holyday.create');
     }
 
     /**
@@ -46,7 +51,31 @@ class HolydayController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'day_name_en' => 'required',
+            'day_name_bn' => 'required',
+            'holly_bay' => 'required|date_format:d/m/Y'
+        ]);
+
+        $holyday = $request->except('holly_bay');
+
+        $holyday['holly_bay'] = Carbon::createFromFormat('d/m/Y', $request->holly_bay)->format('Y-m-d');
+
+        $data = ApiHttpClient::request('post', 'holyday/', $holyday)->json();
+        // dd($data);
+        if (isset($data['error'])) {
+            $error = $data['error'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error', $error)->withInput();
+
+            // return redirect()->route('holydays.index');
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Created successfully');
+            return redirect()->route('holydays.index');
+        }
     }
 
     /**
@@ -68,7 +97,16 @@ class HolydayController extends Controller
      */
     public function edit($id)
     {
-        //
+        $results = ApiHttpClient::request('get', "holyday/$id")->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $holyday = $results['data'];
+            return view('holyday.edit', ['holyday' => $holyday]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -80,7 +118,30 @@ class HolydayController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'day_name_en' => 'required',
+            'day_name_bn' => 'required',
+            'holly_bay' => 'required|date_format:d/m/Y'
+        ]);
+
+        $holyday = $request->except('holly_bay');
+
+        $holyday['holly_bay'] = Carbon::createFromFormat('d/m/Y', $request->holly_bay)->format('Y-m-d');
+
+        $data = ApiHttpClient::request('put', "holyday/$id", $holyday)->json();
+        // dd($data);
+        if (isset($data['error'])) {
+            $error = $data['error'];
+            // dd($error);
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error', $error)->withInput();
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Updated successfully');
+            return redirect()->route('holydays.index');
+        }
     }
 
     /**
@@ -91,6 +152,17 @@ class HolydayController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $results = ApiHttpClient::request('delete', "holyday/$id")->json();
+
+        if ($results['success'] == true) {
+            // dd($holyday);
+            session()->flash('type', 'Danger');
+            session()->flash('message', $data['message'] ?? 'Deleted successfully');
+            return redirect()->route('holydays.index');
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->route('holydays.index');
+        }
     }
 }

@@ -41,8 +41,9 @@ class BatchController extends Controller
 
         if ($results['success'] == true) {
             // dd($results['data']);
+            $page_from = $results['data']['from'];
             $paginator = $this->customPaginate($results, $request, route('batches.all'));
-            return view('batches.all', ['results' => $results['data'], 'paginator' => $paginator]);
+            return view('batches.all', ['results' => $results['data'], 'paginator' => $paginator, 'page_from'=> $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
