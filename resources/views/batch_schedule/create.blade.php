@@ -137,7 +137,7 @@
 
                 </div>
                 <div class="col-4">
-                    <img class="clock" src="./img/clock.png" alt="">
+                    <img class="clock" src="{{ asset('img') }}/clock.png" alt="">
                 </div>
             </div>
         </div>
