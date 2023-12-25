@@ -11,6 +11,7 @@ use App\Http\Controllers\CommitteeController;
 use App\Http\Controllers\DashboardDetailsController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MyClassController;
@@ -274,5 +275,6 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/', [ProviderBatchesController::class, 'index'])->name('provider-batches.index');
         Route::get('/details/{provider_id}', [ProviderBatchesController::class, 'details'])->name('provider-batches.details');
     });
-   
+
+    Route::resource('holydays', HolydayController::class);
 });
