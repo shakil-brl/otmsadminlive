@@ -43,7 +43,8 @@
                     @isset($userRole)
                         @empty(!$userRole)
                             @if ($userRole == 'Trainee' || $userRole == 'trainee')
-                                <span class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('profile.index') || Illuminate\Support\Facades\Route::is('dashboard')) {?>active<?php } ?>">
+                                <span
+                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('profile.index') || Illuminate\Support\Facades\Route::is('dashboard')) {?>active<?php } ?>">
                                     <span class="menu-icon">
                                         <i class="ki-duotone ki-element-7 fs-2">
                                             <i class="path1"></i>
@@ -104,7 +105,7 @@
                     @endisset
                 </div>
                 <!--end:Menu item-->
-                <!--begin:Menu item-->
+                {{-- <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
@@ -113,7 +114,7 @@
                     <!--end:Menu content-->
 
                 </div>
-                <!--end:Menu item-->
+                <!--end:Menu item--> --}}
                 @isset($userRole)
                     @empty(!$userRole)
                         @if ($userRole == 'Trainee' || $userRole == 'trainee')
@@ -144,7 +145,7 @@
                                             <!--end:Menu link-->
                                             <!--begin:Menu sub-->
                                             <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
-                                        
+
                                                 @if (in_array('admins.index', $roleRoutePermissions))
                                                     <!--begin:Menu sub-->
                                                     <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')|| Illuminate\Support\Facades\Route::is('role.index')|| Illuminate\Support\Facades\Route::is('permission.index')) {?> here show<?php } ?>"
@@ -197,8 +198,7 @@
                                                         <!--end:Menu item-->
                                                     </div>
                                                     <!--end:Menu sub-->
-
-                                                    @endif
+                                                @endif
                                                 <!--end:Menu item-->
                                             </div>
                                             <!--end:Menu sub-->
@@ -578,6 +578,198 @@
                                                 <!--end:Menu sub-->
                                             </div>
                                             <!--end:Menu sub-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-people  fs-2                      ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                            <span class="path3"></span>
+                                                            <span class="path4"></span>
+                                                            <span class="path5"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.partner_employee') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+                                            <!--start:Menu link-->
+                                            <a href=""> <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-category fs-2                     ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                            <span class="path3"></span>
+                                                            <span class="path4"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.categorie') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-some-files fs-2                        ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.course') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-user-edit  fs-2                      ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                            <span class="path3"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.class_attendence') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-document fs-2   ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.class_document') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-questionnaire-tablet  fs-2                       ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.evaluation_student') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-tablet-ok fs-2                        ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                            <span class="path3"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.evaluation_trainer') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-calendar-tick fs-2 ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                            <span class="path3"></span>
+                                                            <span class="path4"></span>
+                                                            <span class="path5"></span>
+                                                            <span class="path6"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.holly_day') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-subtitle fs-2                    ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                            <span class="path3"></span>
+                                                            <span class="path4"></span>
+                                                            <span class="path5"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.training_title') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
+
+                                        </div>
+                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+
+                                            <!--start:Menu link-->
+                                            <a href="">
+                                                <span
+                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                                                    <span class="menu-icon">
+                                                        <i class="ki-duotone ki-element-2  fs-2                   ">
+                                                            <span class="path1"></span>
+                                                            <span class="path2"></span>
+                                                        </i>
+                                                    </span>
+                                                    <span class="menu-title">{{ __('sidemenu.training_group') }}</span>
+                                                </span>
+                                            </a>
+                                            <!--end:Menu link-->
 
                                         </div>
                                     @endif

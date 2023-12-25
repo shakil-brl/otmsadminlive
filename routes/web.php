@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AttendanceRepoController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\BatchScheduleController;
@@ -277,4 +278,5 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     });
 
     Route::resource('holydays', HolydayController::class);
+    Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 });
