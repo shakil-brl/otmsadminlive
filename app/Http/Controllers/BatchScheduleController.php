@@ -18,7 +18,7 @@ class BatchScheduleController extends Controller
         $app_url = Str::finish(config('app.api_url'), '/');
         $results = ApiHttpClient::request('get', 'batch/list?page=' . $page)
             ->json();
-
+        // dd($results);
         if ($results['success'] == true) {
             return view('batches.index', ['results' => $results['data']]);
         } else {

@@ -71,6 +71,15 @@
                             @csrf
                             <input type="hidden" name="training_batch_id" value="{{ $batch['id'] }}">
                             <div class="row row-cols-2 g-4">
+                                <div class="w-100">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" name="include_holyday"
+                                            id="include_holyday" value="1">
+                                        <label class="label" for="include_holyday">
+                                            হলিডে বিবেচনা করুন
+                                        </label>
+                                    </div>
+                                </div>
                                 <div>
                                     <label class="label" for="">ক্লাসের সময়</label>
                                     <div class="input-group">

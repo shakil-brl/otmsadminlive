@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 
 class HolydayController extends Controller
@@ -13,7 +14,18 @@ class HolydayController extends Controller
      */
     public function index()
     {
-        //
+        $results = ApiHttpClient::request('get', 'holyday')
+            ->json();
+
+        if ($results['success'] == true) {
+            $holyday = $results['data'];
+            dd($holyday);
+            return view('holyday.index', compact(['holyday']));
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return view('batch_schedule.create');
+        }
     }
 
     /**
