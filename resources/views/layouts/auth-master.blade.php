@@ -42,12 +42,12 @@
         /* styles.css */
 
         #preloader {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #fff;
+            background-color: #000000b0;
             /* Set the background color of your preloader */
             display: flex;
             justify-content: center;
@@ -56,25 +56,40 @@
             /* Set a high z-index to make sure it's on top of other elements */
         }
 
-        #loader {
-            border: 8px solid #f3f3f3;
-            /* Light grey */
-            border-top: 8px solid #3498db;
-            /* Blue */
-            border-radius: 50%;
+        /* HTML: <div class="loadernew"></div> */
+        .loadernew {
             width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            /* Animation for spinning effect */
+            aspect-ratio: 1;
+            display: grid;
+            border: 4px solid #0000;
+            border-radius: 50%;
+            border-color: #ccc #0000;
+            animation: l16 1s infinite linear;
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
+        .loadernew::before,
+        .loadernew::after {
+            content: "";
+            grid-area: 1/1;
+            margin: 2px;
+            border: inherit;
+            border-radius: 50%;
+        }
 
+        .loadernew::before {
+            border-color: #f03355 #0000;
+            animation: inherit;
+            animation-duration: .5s;
+            animation-direction: reverse;
+        }
+
+        .loadernew::after {
+            margin: 8px;
+        }
+
+        @keyframes l16 {
             100% {
-                transform: rotate(360deg);
+                transform: rotate(1turn)
             }
         }
 
@@ -113,7 +128,7 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
     data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
 
     <div id="preloader">
-        <div id="loader"></div>
+        <div class="loadernew"></div>
     </div>
     <!--begin::Theme mode setup on page load-->
     <script>
