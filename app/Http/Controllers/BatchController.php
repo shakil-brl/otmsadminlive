@@ -33,23 +33,19 @@ class BatchController extends Controller
     // all batches for higher authority
     public function all(Request $request)
     {
-        $page = request('page', 1);
-        $app_url = Str::finish(config('app.api_url'), '/');
-        if ($request['batch_search']) {
-            $search_batch = $request['batch_search'] ?? '';
-
-            $results = ApiHttpClient::request('get', 'batches/all?batch=' . $search_batch . '&page=' . $page)->json();
-        } else {
-            $results = ApiHttpClient::request('get', 'batches/all?page=' . $page)->json();
-        }
+        $results = ApiHttpClient::request('get', 'detail/total-batch', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
 
         if ($results['success'] == true) {
             // dd($results['data']);
-            return view('batches.all', ['results' => $results['data']]);
+            $paginator = $this->customPaginate($results, $request, route('batches.all'));
+            return view('batches.all', ['results' => $results['data'], 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return view('batches.all');
+            return back();
         }
     }
 
