@@ -57,30 +57,30 @@
 
                                         @if (isset($extention[1]))
                                             @if ($extention[1] == 'pdf')
-                                                <img src="{{ asset('assets/dist/assets/media/svg/files/pdf.svg') }}"
+                                                <img src="{{ asset('img/file_icon/pdf.svg') }}"
                                                     class="theme-light-show" alt="" />
-                                                <img src="{{ asset('assets/dist/assets/media/svg/files/pdf-dark.svg') }}"
+                                                <img src="{{ asset('img/file_icon/pdf-dark.svg') }}"
                                                     class="theme-dark-show" alt="" />
                                             @elseif($extention[1] == 'doc')
-                                                <img src="{{ asset('assets/dist/assets/media/svg/files/doc.svg') }}"
+                                                <img src="{{ asset('img/file_icon/doc.svg') }}"
                                                     class="theme-light-show" alt="" />
-                                                <img src="{{ asset('assets/dist/assets/media/svg/files/doc-dark.svg') }}"
+                                                <img src="{{ asset('img/file_icon/doc-dark.svg') }}"
                                                     class="theme-dark-show" alt="" />
                                             @elseif($extention[1] == 'excel' && $extention[1] == 'xlsx')
-                                                <img src="{{ asset('assets/dist/assets/media/svg/files/xml.svg') }}"
+                                                <img src="{{ asset('img/file_icon/xml.svg') }}"
                                                     class="theme-light-show" alt="" />
-                                                <img src="{{ asset('assets/dist/assets/media/svg/files/xml-dark.svg') }}"
+                                                <img src="{{ asset('img/file_icon/xml-dark.svg') }}"
                                                     class="theme-dark-show" alt="" />
                                             @else
-                                                <img src="{{ asset('assets/dist/assets/media/svg/files/blank.svg') }}"
+                                                <img src="{{ asset('img/file_icon/blank.svg') }}"
                                                     class="theme-light-show" alt="" />
-                                                <img src="{{ asset('assets/dist/assets/media/svg/files/blank-dark.svg') }}"
+                                                <img src="{{ asset('img/file_icon/blank-dark.svg') }}"
                                                     class="theme-dark-show" alt="" />
                                             @endif  
                                         @else
-                                            <img src="{{ asset('assets/dist/assets/media/svg/files/blank.svg') }}"
+                                            <img src="{{ asset('img/file_icon/blank.svg') }}"
                                                 class="theme-light-show" alt="" />
-                                            <img src="{{ asset('assets/dist/assets/media/svg/files/blank-dark.svg') }}"
+                                            <img src="{{ asset('img/file_icon/blank-dark.svg') }}"
                                                 class="theme-dark-show" alt="" />
                                         @endif
 
