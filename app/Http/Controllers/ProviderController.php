@@ -12,7 +12,7 @@ class ProviderController extends Controller
     public function index(Request $request)
     {
         // dd($request->search);
-        $provider_results = ApiHttpClient::request('get', 'partnerslist', [
+        $provider_results = ApiHttpClient::request('get', 'detail/development-partner', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();

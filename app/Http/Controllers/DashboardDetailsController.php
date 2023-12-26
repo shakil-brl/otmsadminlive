@@ -154,10 +154,11 @@ class DashboardDetailsController extends Controller
     // 
     public function partners(Request $request)
     {
-        $total_partners = ApiHttpClient::request('get', 'partnerslist', [
+        $total_partners = ApiHttpClient::request('get', 'detail/development-partner', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
+
         if ($total_partners['success'] == true) {
             $partners = $total_partners['data']['data'];
             $paginator = $this->customPaginate($total_partners, $request, route('dashboard_details.partners'));

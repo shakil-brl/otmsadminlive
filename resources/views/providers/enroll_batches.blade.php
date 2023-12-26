@@ -24,17 +24,19 @@
                                 <div class="w-25">
                                     <select class="mb-3 api-call form-select" name="per_page">
                                         <option value="50">Per Page</option>
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                        <option value="200">200</option>
-                                        <option value="500">500</option>
+                                        @foreach (range(25, 525, 25) as $val)
+                                            <option value="{{ $val }}">{{ $val }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="w-75">
-                                    <input type="text" class="form-control api-call" name="search"
-                                        placeholder="Search here (Batch Code/Training Title)">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control api-call" name="search"
+                                            placeholder="Search here (Batch Code)">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row row-cols-4 g-3">
