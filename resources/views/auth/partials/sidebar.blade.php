@@ -722,7 +722,7 @@
                     <!--start:Menu link-->
                     <a href="{{ route('holydays.index')}}">
                         <span
-                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('holydays.index') ) {?>active<?php } ?>">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-calendar-tick fs-2 ">
                                     <span class="path1"></span>
