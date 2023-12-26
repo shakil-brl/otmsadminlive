@@ -49,10 +49,11 @@
             height: 100%;
             background-color: #000000b0;
             /* Set the background color of your preloader */
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            backdrop-filter: blur(4px);
             /* Set a high z-index to make sure it's on top of other elements */
         }
 
@@ -333,12 +334,17 @@
 
         // script.js
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // Hide the preloader
-            document.getElementById("preloader").style.display = "none";
-
-            // Show the page content
-            document.getElementById("kt_app_root").style.display = "block";
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     document.getElementById("preloader").style.display = "none";
+        //     document.getElementById("kt_app_root").style.display = "block";
+        // });
+        $('.show-loader').on('click', function() {
+                var myDiv = document.getElementById("preloader");
+                if (myDiv.style.display === "none" || myDiv.style.display === "") {
+                myDiv.style.display = "flex";
+                } else {
+                myDiv.style.display = "none";
+                }
         });
     </script>
 

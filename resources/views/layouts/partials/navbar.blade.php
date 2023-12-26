@@ -88,7 +88,7 @@
                     <!--begin::Toolbar-->
                     <div class="flex-equal text-end ms-1">
                         <a href="{{ route('login.show') }}"
-                            class="btn btn-success">{{ __('landing-navbar.sign_in') }}</a>
+                            class="btn btn-success show-loader">{{ __('landing-navbar.sign_in') }}</a>
                     </div>
                     <!--end::Toolbar-->
 
