@@ -84,6 +84,15 @@
             display: none;
             /* Hide the page content by default */
         }
+
+        [data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active {
+            border-left: 3px solid #FAF5FF;
+            background: linear-gradient(90deg, rgba(164, 64, 255, 0.30) 0%, rgba(164, 64, 255, 0.00) 100%);
+        }
+
+        [data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-title {
+            color: #FFF !important;
+        }
     </style>
     @stack('css')
     @livewireScripts
@@ -95,12 +104,11 @@
     </style>
 
 
-    @if(Session::get('access_token.access_token'))
-
-    <script>
-        var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
-var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
-    </script>
+    @if (Session::get('access_token.access_token'))
+        <script>
+            var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+            var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+        </script>
     @endif
 
 
@@ -325,15 +333,13 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
 
         // script.js
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Hide the preloader
-    document.getElementById("preloader").style.display = "none";
+        document.addEventListener("DOMContentLoaded", function() {
+            // Hide the preloader
+            document.getElementById("preloader").style.display = "none";
 
-    // Show the page content
-    document.getElementById("kt_app_root").style.display = "block";
-});
-
-
+            // Show the page content
+            document.getElementById("kt_app_root").style.display = "block";
+        });
     </script>
 
     <!--begin::Custom Javascript(used for this page only)-->
