@@ -108,7 +108,9 @@
                                     {{ __('batch-list.class_start') }}
                                 </div>
                                 <div class="title">
-                                    {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
+                                    @dump($batch['startDate'])
+                                    {{ \Carbon\Carbon::createFromFormat('Y-m-d
+                                    H:i:s',$batch['startDate'])->format('d-m-Y') }}
                                 </div>
                             </div>
                             <div>
