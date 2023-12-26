@@ -12,6 +12,13 @@
 // }
 
 $start_date = empty($batch['startDate']) ? '' : date('d/m/Y', strtotime($batch['startDate']));
+$default_date = null;
+if (isset($batch['startDate'])) {
+if ($batch['startDate']) {
+$default_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['startDate'] )->format('Y-m-d');
+}
+}
+
 @endphp
 {{-- @dump($batch) --}}
 <div class="mx-4 my-4">
@@ -222,10 +229,10 @@ $start_date = empty($batch['startDate']) ? '' : date('d/m/Y', strtotime($batch['
 @section('scripts')
 <script>
     $(document).ready(function() {
-            let starDate = {{$start_date}} ?? '';
+            let starDate = "{{$default_date}}";
             $("#start_date").flatpickr({
                 dateFormat: "d/m/Y",
-                defaultDate: starDate,
+                defaultDate: starDate
             });
 
             $("#class_time").flatpickr({
