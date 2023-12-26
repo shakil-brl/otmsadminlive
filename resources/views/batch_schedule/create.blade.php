@@ -6,7 +6,7 @@
 
 @section('content')
 
-@dump($batch)
+{{-- @dump($batch) --}}
 @isset($batch)
 @php
 // if ($batch['startDate']) {
