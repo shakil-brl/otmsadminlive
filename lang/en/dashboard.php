@@ -18,7 +18,7 @@ return [
     'complete_batch' => 'Completed Batch',
     'district' => 'District',
     'upazila' => 'Upazila',
-    'partner' => 'Partner',
+    'partner' => 'Vendor',
     'todays' => 'Todays',
     'weekly' => 'Weekly',
     'monthly' => 'Monthly',

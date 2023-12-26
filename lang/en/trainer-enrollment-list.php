@@ -18,7 +18,7 @@ return [
     'trainer_id' => 'TRAINER ID',
     'trainer_name' => 'TRAINER NAME',
     'trainer_email' => 'TRAINER EMAIL',
-    'provider' => 'PROVIDER NAME',
+    'vendor_name' => 'VENDOR NAME',
     'batch' => 'BATCH',
     'trainer_batch_link_list' => 'Tariner Batch Link List',
     'trainer_enroll_batch' => 'Trainer Enroll With Batch',

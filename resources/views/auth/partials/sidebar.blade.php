@@ -61,7 +61,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('dashboard')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('dashboard')) {?>active<?php } ?>"
                                 href="{{ route('dashboard') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -70,7 +70,7 @@
                             </a>
                             <!--end:Menu link-->
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('profile.index')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('profile.index')) {?>active<?php } ?>"
                                 href="{{ route('profile.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -88,7 +88,7 @@
                     <!--start:Menu link-->
                     <a href="{{ route('admins.dashboard') }}">
                         <span
-                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('admins.dashboard') ||Illuminate\Support\Facades\Route::is('dashboard_details.total_batches')||Illuminate\Support\Facades\Route::is('dashboard_details.running_batches')||Illuminate\Support\Facades\Route::is('dashboard_details.complete_batches')||Illuminate\Support\Facades\Route::is('dashboard_details.districts')||Illuminate\Support\Facades\Route::is('dashboard_details.upazilas')||Illuminate\Support\Facades\Route::is('dashboard_details.partners')||Illuminate\Support\Facades\Route::is('dashboard_details.ongoing_classes')||Illuminate\Support\Facades\Route::is('dashboard_details.complete_classes')) {?>active<?php } ?>">
+                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('admins.dashboard') ||Illuminate\Support\Facades\Route::is('dashboard_details.total_batches')||Illuminate\Support\Facades\Route::is('dashboard_details.running_batches')||Illuminate\Support\Facades\Route::is('dashboard_details.complete_batches')||Illuminate\Support\Facades\Route::is('dashboard_details.districts')||Illuminate\Support\Facades\Route::is('dashboard_details.upazilas')||Illuminate\Support\Facades\Route::is('dashboard_details.partners')||Illuminate\Support\Facades\Route::is('dashboard_details.ongoing_classes')||Illuminate\Support\Facades\Route::is('dashboard_details.complete_classes')||Illuminate\Support\Facades\Route::is('dashboard_details.trainers')) {?>active<?php } ?>">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-element-7 fs-2">
                                     <i class="path1"></i>
@@ -156,7 +156,7 @@
                             @if (in_array('admins.index', $roleRoutePermissions))
                             <div class="menu-item ">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')) {?> active<?php } ?>"
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')) {?> active<?php } ?>"
                                     href="{{ route('admins.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -172,7 +172,7 @@
                             @if (in_array('role.index', $roleRoutePermissions))
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?>active<?php } ?>"
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?>active<?php } ?>"
                                     href="{{ route('role.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -187,7 +187,7 @@
 
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('permission.index')) {?>active<?php } ?> "
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('permission.index')) {?>active<?php } ?> "
                                     href="{{ route('permission.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -211,8 +211,7 @@
                 <div data-kt-menu-trigger="click"
                     class="menu-item here menu-accordion  <?php if ( Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show') || Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')|| Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show') || Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show')|| Illuminate\Support\Facades\Route::is('provider.link-batch')) {?>here show<?php } ?>">
                     <!--begin:Menu link-->
-                    <span
-                        class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show')|| Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')|| Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show') || Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show')|| Illuminate\Support\Facades\Route::is('provider.link-batch')) {?>active<?php } ?>">
+                    <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show')|| Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')|| Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show') || Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show')|| Illuminate\Support\Facades\Route::is('provider.link-batch')) {?>active<?php } ?>">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-setting-2 fs-2">
                                 <i class="path1"></i>
@@ -229,7 +228,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show')) {?>active<?php } ?>"
                                 href="{{ route('divisions.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -243,7 +242,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')) {?>active<?php } ?>"
                                 href="{{ route('districts.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -256,7 +255,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show')) {?>active<?php } ?>"
                                 href="{{ route('upazilas.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -269,12 +268,12 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show')|| Illuminate\Support\Facades\Route::is('provider.link-batch')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show')|| Illuminate\Support\Facades\Route::is('provider.link-batch')) {?>active<?php } ?>"
                                 href="{{ route('providers.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">{{ __('sidemenu.providers_list') }}</span>
+                                <span class="menu-title">{{ __('sidemenu.vendor') }}</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
@@ -308,7 +307,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batches.index')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batches.index')) {?>active<?php } ?>"
                                 href="{{ route('batches.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -324,7 +323,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('traineeEnroll.index')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('traineeEnroll.index')) {?>active<?php } ?>"
                                 href="{{ route('traineeEnroll.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -340,7 +339,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('trainerEnroll.index')) {?>active<?php } ?>"
+                            <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('trainerEnroll.index')) {?>active<?php } ?>"
                                 href="{{ route('trainerEnroll.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -389,7 +388,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('attendance.batch-list')||Illuminate\Support\Facades\Route::is('attendance.form')||Illuminate\Support\Facades\Route::is('batch-schedule.index')) {?>active<?php } ?>"
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('attendance.batch-list')||Illuminate\Support\Facades\Route::is('attendance.form')||Illuminate\Support\Facades\Route::is('batch-schedule.index')) {?>active<?php } ?>"
                                     href="{{ route('attendance.batch-list') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -411,7 +410,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.batches')||Illuminate\Support\Facades\Route::is('batch-schedule.index')||Illuminate\Support\Facades\Route::is('batch-schedule.create')||Illuminate\Support\Facades\Route::is('attendance.form')) {?>active<?php } ?>"
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.batches')||Illuminate\Support\Facades\Route::is('batch-schedule.index')||Illuminate\Support\Facades\Route::is('batch-schedule.create')||Illuminate\Support\Facades\Route::is('attendance.form')) {?>active<?php } ?>"
                                     href="{{ route('batch-schedule.batches') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -466,7 +465,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batches.all')||Illuminate\Support\Facades\Route::is('batch-schedule.office')||Illuminate\Support\Facades\Route::is('attendance.schedule')) {?>active<?php } ?>"
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batches.all')||Illuminate\Support\Facades\Route::is('batch-schedule.office')||Illuminate\Support\Facades\Route::is('attendance.schedule')) {?>active<?php } ?>"
                                     href="{{ route('batches.all') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -508,7 +507,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.runningBatches')) {?>active<?php } ?>"
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.runningBatches')) {?>active<?php } ?>"
                                     href="{{ route('batch-schedule.runningBatches') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -553,7 +552,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>active<?php } ?>"
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>active<?php } ?>"
                                     href="{{ route('batch-schedule.running-class-list') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -568,7 +567,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>active<?php } ?>"
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>active<?php } ?>"
                                     href="{{ route('inspaction.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>

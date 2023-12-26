@@ -25,7 +25,7 @@ return [
     'user' => 'USER',
     'reg_id' => 'REG. ID',
     'role' => 'ROLE',
-    'user_name' => 'USERNAME',
+    'user_name' => 'NAME',
     'email' => 'EMAIL',
     'action' => 'ACTIONS',
     'add_user' => 'Add User',
@@ -53,6 +53,11 @@ return [
     'address' => 'Address',
     'discard' => 'Discard',
     'submit' => 'Submit',
+    'vendor_provider' => 'Vendor/Provider',
+    'vendor_select' => 'Select Vendor Name',
+    'profile_id' => 'PROFILE ID',
+    'vendor_name' => 'Vendor Name',
+    'nid' => 'NID',
 
     
 

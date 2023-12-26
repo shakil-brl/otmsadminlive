@@ -21,7 +21,7 @@
                     <th>{{ __('batch-list.batch_code') }}</th>
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
-                    <th>Provider</th>
+                    <th>{{ __('batch-list.development_partner') }}</th>
                     <th>About Class</th>
                     <th>{{ __('batch-list.class_schedule') }}</th>
                     <th>{{ __('batch-list.action') }}</th>
