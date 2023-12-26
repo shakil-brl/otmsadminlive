@@ -174,7 +174,7 @@
                         <div class="separator my-2"></div>
                         <form action="{{ url('/logout') }}" method="POST" class="logout-btn">
                             @csrf
-                            <button class="logout btn">
+                            <button class="logout btn show-loader">
                                 <img src="{{ asset('img/icon/logout.svg') }}">
                                 {{ __('dashboard-header.sign_out') }}
                             </button>

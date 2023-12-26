@@ -588,7 +588,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="">
+                    <a href="" >
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -719,7 +719,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="{{ route('holydays.index')}}">
+                    <a href="{{ route('holydays.index')}}" class="menu-link show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('holydays.index') ) {?>active<?php } ?>">
                             <span class="menu-icon">
