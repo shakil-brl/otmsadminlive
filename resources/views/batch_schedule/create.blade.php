@@ -7,12 +7,11 @@
 @section('content')
 @isset($batch)
 @php
-// if ($batch['startDate']) {
-// $start_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['startDate'])->format('d/m/Y');
-// }
+if ($batch['startDate']) {
+$start_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['startDate'])->format('d/m/Y');
+}
 
-$start_date = empty($batch['startDate']) ? '' : date('d/m/Y', strtotime($batch['startDate']));
-$default_date = null;
+$default_date = '';
 if (isset($batch['startDate'])) {
 if ($batch['startDate']) {
 $default_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['startDate'] )->format('d/m/Y');
