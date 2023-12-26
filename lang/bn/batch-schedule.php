@@ -60,7 +60,7 @@ return [
     'ongoing_class' => 'ক্লাস চলছে',
     'search' => 'সার্চ করুন',
     'search_here' => 'এখানে অনুসন্ধান করুন',
-    'development_partner' => 'ডেভেলপমেন্ট পার্টনার',
+    'development_partner' => 'ভেন্ডর',
     'live_streaming' => ' সরাসরি সম্প্রচার',
     'view_attendence' => ' উপস্থিতি দেখুন',
   

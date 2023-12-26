@@ -4,7 +4,7 @@
 @section('content')
 <!--begin::Content-->
 <div class="m-5">
-    <h3>All Providers</h3>
+    <h3>{{ __('provider-list.all_vendor') }}</h3>
     <x-alert />
     @isset($providers)
     <div class="my-3 d-flex">
@@ -22,7 +22,7 @@
             <a href="#" class="btn btn-lg btn-info me-1" data-bs-toggle="modal" data-bs-target="#create_provider"
                 data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
                 title="Provider Create">
-                Crate Provider
+                {{ __('provider-list.create_vendor') }}
             </a>
         </div>
     </div>
@@ -57,21 +57,23 @@
                 <td>
                     <div class="btn-group" role="group" aria-label="Provider Actions">
                         <a href="#" class="btn btn-sm btn-info editProvider" data-provider-id="{{ $provider['id'] }}"
-                            data-bs-toggle="modal" data-bs-target="#edit_provider" data-bs-toggle="tooltip"
-                            data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Provider Edit">
+                            data-bs-toggle="modal" data-bs-target="#edit_provider"  data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
+                            title="Vendor Edit">
                             Edit
                         </a>
                         <a href="{{ route('providers.show', $provider['id']) }}"
-                            class="btn btn-sm btn-primary show-action" title="Provider Details">
+                            class="btn btn-sm btn-primary show-action"  data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
+                            title="Vendor Details">
                             View
                         </a>
-                        <a href="{{ route('provider.link-batch', $provider['id']) }}" class="btn btn-sm btn-success">
+                        <a href="{{ route('provider.link-batch', $provider['id']) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
+                        title="Vendor Batch Link">
                             Link Batch
                         </a>
                         <a href="#" class="btn btn-sm btn-danger delete-provider"
                             data-provider-id="{{ $provider['id'] }}" data-provider-name="{{ $provider['name'] }}"
                             data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
-                            title="Provider Delete">
+                            title="Vendor Delete">
                             Delete
                         </a>
                     </div>

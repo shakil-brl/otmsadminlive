@@ -18,7 +18,7 @@ return [
     'trainer_id' => 'প্রশিক্ষকের আইডি',
     'trainer_name' => 'প্রশিক্ষকের নাম',
     'trainer_email' => 'প্রশিক্ষকের ইমেইল',
-    'provider' => 'প্রদানকারীর নাম',
+    'vendor_name' => 'ভেন্ডরের নাম',
     'batch' => 'ব্যাচ',
     'trainer_batch_link_list' => 'ট্রেইনার ব্যাচের সাথে লিংক করার তালিকা  ',
     'trainer_enroll_batch' => 'ট্রেইনার যে ব্যাচের সাথে সংযুক্ত আছে ',

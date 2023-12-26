@@ -49,7 +49,7 @@ return [
     'complete_batches' => 'সম্পন্ন ব্যাচ গুলি',
     'batches_list' => 'ব্যাচের তালিকা',
     'search_here' => 'এখানে সার্চ করুন',
-    'development_partner' => 'ডেভেলপমেন্ট পার্টনার',
+    'development_partner' => 'ভেন্ডর',
     'live_streaming' => ' সরাসরি সম্প্রচার',
     'join_class' => ' ক্লাসে জয়েন করুন',
 

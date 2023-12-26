@@ -56,7 +56,7 @@ return [
     'add_new_inspection' => 'Add Inspection',
     'running_batch' => 'Running Batch',
     'running_batch_list' => 'Running Batch List',
-    'partner_employee' => 'Partner Employee',
+    'partner_employee' => 'Vendor Employee',
     'categorie' => 'Categorie',
     'course' => 'Courses',
     'class_attendence' => 'Class Attendence',
@@ -66,5 +66,6 @@ return [
     'holly_day' => 'Holly Day',
     'training_title' => 'Training Title',
     'training_group' => 'Training Group',
+    'vendor' => 'Vendor',
 
 ];

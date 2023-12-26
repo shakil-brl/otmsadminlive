@@ -61,7 +61,7 @@ return [
     'ongoing_class' => 'Ongoing Class',
     'search' => 'Search',
     'search_here' => 'Search Here',
-    'development_partner' => 'Development Partner',
+    'development_partner' => 'Vendor',
     'live_streaming' => ' Live Streaming',
     'view_attendence' => '  View Attendance',
     
