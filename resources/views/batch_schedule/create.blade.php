@@ -15,7 +15,7 @@ $start_date = empty($batch['startDate']) ? '' : date('d/m/Y', strtotime($batch['
 $default_date = null;
 if (isset($batch['startDate'])) {
 if ($batch['startDate']) {
-$default_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['startDate'] )->format('Y-m-d');
+$default_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['startDate'] )->format('d/m/Y');
 }
 }
 
