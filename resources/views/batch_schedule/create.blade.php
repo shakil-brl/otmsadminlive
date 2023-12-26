@@ -228,11 +228,11 @@ $default_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['startDate
 @section('scripts')
 <script>
     $(document).ready(function() {
-            let starDate = "{{$default_date}}";
+            let starDate = "{{$default_date ?? ''}}";
             let dateFromatJson = {
                 dateFormat: "d/m/Y"
             };
-            
+
             @if($default_date!='')
             dateFromatJson['defaultDate'] = starDate;
             @endif
