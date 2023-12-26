@@ -5,11 +5,13 @@
 @endpush
 
 @section('content')
+
+@dump($batch)
 @isset($batch)
 @php
-if ($batch['startDate']) {
-$start_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['startDate'])->format('d/m/Y');
-}
+// if ($batch['startDate']) {
+// $start_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $batch['startDate'])->format('d/m/Y');
+// }
 
 $default_date = '';
 if (isset($batch['startDate'])) {
