@@ -110,7 +110,10 @@
                                 <div class="title">
                                     @dump($batch['startDate'])
                                     @php
+                                    $batch_start_date = null;
+                                    if ($batch['startDate']) {
                                     $batch_start_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['startDate'])->format('d-m-Y');
+                                    }
                                     @endphp
                                     {{ $batch_start_date }}
                                 </div>
