@@ -38,13 +38,18 @@
                     </div>
                     <div class="my-5">
                         <form action="" id="add-batch-form">
-                            <div class="d-none mb-3 border border-primary rounded p-3" id="select-all">
-                                <div class="form-check">
+                            <div class="d-none mb-3 border border-primary rounded p-3 d-flex justify-content-between"
+                                id="select-all">
+                                <div class="form-check d-flex align-items-center gap-2">
                                     <input class="form-check-input" type="checkbox" id="selectAllCheckbox" name=""
                                         value="">
                                     <label class="form-check-label text-dark fw-bold" for="selectAllCheckbox">
                                         Check All
                                     </label>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <label class="form-label" for="">Search:</label>
+                                    <input class="form-control" type="search" name="search" id="batchSearch">
                                 </div>
                             </div>
                             <input type="hidden" name="GEOCode">
@@ -226,7 +231,7 @@
                             // Handle the successful response here
                             // console.log(results.data);
                             let allData = results.data;
-                            let GEOCode = results.GEOCode
+                            let GEOCode = results.GEOCode;
                             // console.log(results);
                             batchLinkCheck.html("");
 
@@ -254,6 +259,27 @@
                                     `;
 
                                     batchLinkCheck.append(checkbox);
+                                });
+
+                                $("#batchSearch").on("input", function() {
+                                    let searchTerm = $(this).val().toLowerCase();
+
+                                    // Hide/show checkboxes based on the partial search term
+                                    $(".batch-checkbox").each(function() {
+                                        let batchCode = $(this).attr(
+                                            "batchCode").toLowerCase();
+                                        let batchTitle = $(this).attr(
+                                            "batchTitle").toLowerCase();
+                                        let GEOLocation = $(this).attr(
+                                            "GEOLocation").toLowerCase();
+
+                                        let isVisible = batchCode.includes(
+                                                searchTerm) || batchTitle
+                                            .includes(searchTerm) || GEOLocation
+                                            .includes(searchTerm);
+                                        $(this).closest(".col").toggle(
+                                            isVisible);
+                                    });
                                 });
 
                                 // Event listener for checkbox changes

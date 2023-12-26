@@ -11,12 +11,13 @@ class ProviderController extends Controller
     // show ui for all provider item
     public function index(Request $request)
     {
+        // dd($request->search);
         $provider_results = ApiHttpClient::request('get', 'partnerslist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
 
-        // dd($results);
+        // dd($provider_results);
         if ($provider_results['success'] == true) {
             $data['providers'] = $provider_results['data']['data'];
             $data['page_from'] = $provider_results['data']['from'];
