@@ -229,10 +229,15 @@ $default_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['startDate
 <script>
     $(document).ready(function() {
             let starDate = "{{$default_date}}";
-            $("#start_date").flatpickr({
-                dateFormat: "d/m/Y",
-                defaultDate: starDate
-            });
+            let dateFromatJson = {
+                dateFormat: "d/m/Y"
+            };
+            
+            @if($default_date!='')
+            dateFromatJson['defaultDate'] = starDate;
+            @endif
+
+            $("#start_date").flatpickr(dateFromatJson);
 
             $("#class_time").flatpickr({
                 dateFormat: "H:i",
