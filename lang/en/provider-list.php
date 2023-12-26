@@ -47,12 +47,14 @@ return [
     'provider_batches_view' => 'Provider Batches View',
     'browse_batches' => 'Browse Batches',
     'total_trainee' => 'Total Trainee',
-    'development_partner' => 'Development Partner List',
+    'development_partner' => 'Vendor List',
     'sl' => 'SL',
     'name' => 'Name',
     'view' => 'View',
     'search_here' => 'Search Here',
     'search' => 'Search',
+    'all_vendor' => 'All Vendors',
+    'create_vendor' => 'Create Vendor',
 
   
   

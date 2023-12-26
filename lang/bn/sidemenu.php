@@ -56,7 +56,7 @@ return [
     'add_new_inspection' => 'নতুন পরিদর্শন যোগ করুন',
     'running_batch' => 'চলমান ব্যাচ',
     'running_batch_list' => 'চলমান ব্যাচের তালিকা',
-    'partner_employee' => 'পার্টনার কর্মচারী',
+    'partner_employee' => 'ভেন্ডর কর্মচারী',
     'categorie' => 'ক্যাটাগরি',
     'course' => 'কোর্স সমুহ',
     'class_attendence' => 'ক্লাসে উপস্থিতি',
@@ -66,6 +66,7 @@ return [
     'holly_day' => 'ছুটির দিন',
     'training_title' => 'ট্রেনিং শিরোনাম',
     'training_group' => 'ট্রেনিং গ্রুপ',
+    'vendor' => 'ভেন্ডর',
 
 
 ];

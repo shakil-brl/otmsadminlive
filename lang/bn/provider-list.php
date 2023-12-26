@@ -47,10 +47,12 @@ return [
     'provider_batches_view' => 'প্রদানকারী ব্যাচ দেখুন',
     'browse_batches' => 'ব্যাচ ব্রাউজ করুন',
     'total_trainee' => 'মোট প্রশিক্ষণার্থী',
-    'development_partner' => 'ডেভেলপমেন্ট পার্টনারদের তালিকা ',
+    'development_partner' => 'ভেন্ডরদের তালিকা ',
     'sl' => 'সিরিয়াল ',
     'name' => 'নাম',
     'view' => 'দেখুন',
     'search_here' => 'এখানে অনুসন্ধান করুন',
     'search' => 'অনুসন্ধান করুন',
+    'all_vendor' => 'সকল ভেন্ডর',
+    'create_vendor' => 'ভেন্ডর তৈরি করুন',
 ];

@@ -150,7 +150,7 @@
                                         <th class="min-w-125px">{{ __('trainer-enrollment-list.trainer_id') }}</th>
                                         <th class="min-w-125px">{{ __('trainer-enrollment-list.trainer_name') }}</th>
                                         <th class="min-w-125px">{{ __('trainer-enrollment-list.trainer_email') }}</th>
-                                        <th class="min-w-125px">{{ __('trainer-enrollment-list.provider') }}</th>
+                                        <th class="min-w-125px">{{ __('trainer-enrollment-list.vendor_name') }}</th>
                                         <th class="min-w-125px">{{ __('trainer-enrollment-list.batch') }}</th>
                                         <th class="text-end min-w-100px">{{ __('provider-list.action') }}</th>
 
