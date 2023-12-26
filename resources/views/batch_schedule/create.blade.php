@@ -51,7 +51,7 @@ $default_date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$batch['startDate
     <div id="schedule-create">
         <div class="row">
             <div class="col-8">
-                <h2 class="main-title">সময়সূচী তৈরি করুন ( ক্লাস শুরু ০২ নভেম্বর ২০২৩)</h2>
+                <h2 class="main-title">সময়সূচী তৈরি করুন</h2>
                 <x-alert />
                 @if ($error)
                 @if (is_string($error))
