@@ -52,7 +52,7 @@
         </tbody>
     </table>
 
-    {!! $paginator->links() !!}
+    {{-- {!! $paginator->links() !!} --}}
     @endisset
 </div>
 @endsection

@@ -12,15 +12,15 @@ class ProviderController extends Controller
     public function index(Request $request)
     {
         // dd($request->search);
-        $provider_results = ApiHttpClient::request('get', 'detail/development-partner', [
+        $provider_results = ApiHttpClient::request('get', 'providerlist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
 
         // dd($provider_results);
-        if ($provider_results['success'] == true) {
-            $data['providers'] = $provider_results['data']['data'];
-            $data['page_from'] = $provider_results['data']['from'];
+        if ($provider_results['items'] == true) {
+            $data['providers'] = $provider_results['items']['data'];
+            $data['page_from'] = $provider_results['items']['from'];
             $data['paginator'] = $this->customPaginate($provider_results, $request, route('providers.index'));
 
             return view('providers.index', $data);
