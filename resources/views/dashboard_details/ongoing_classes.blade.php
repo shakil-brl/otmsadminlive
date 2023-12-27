@@ -59,6 +59,19 @@
                                         {{__('batch-schedule.join_class')}}
                                     </a>
                                 @endif
+
+                                @php
+                                $inspection_pm = [
+                                'batch_id' => $batch['training_batch']['id'],
+                                'schedule_detail_id' => $batch['id'],
+                                ];
+                                @endphp
+                                <a class="btn btn-sm btn-primary" href="{{ route('tms-inspections.create', $inspection_pm) }}"
+                                target="_blank">
+                                Inspection
+                                </a>
+
+                                
                             </td>
                         </tr>
                     @endforeach
