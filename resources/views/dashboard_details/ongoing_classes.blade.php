@@ -66,10 +66,12 @@
                                 'schedule_detail_id' => $batch['id'],
                                 ];
                                 @endphp
+                                @isset($inspection_pm)
                                 <a class="btn btn-sm btn-primary" href="{{ route('tms-inspections.create', $inspection_pm) }}"
                                 target="_blank">
                                 Inspection
                                 </a>
+                                @endisset
 
                                 
                             </td>
