@@ -77,10 +77,6 @@
         </div>
     </div>
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            location.reload();
-        });
-    </script>
+    <script></script>
 @endsection
 @endsection

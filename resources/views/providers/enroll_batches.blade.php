@@ -19,32 +19,60 @@
                 <div class="mt-5">
                     <h4>Link Batches With Provider</h4>
                     <div class="my-3">
-                        <form action="" id="gioLocation-form">
-                            <div class="row row-cols-3 g-3">
+                        <div id="gioLocation-form">
+                            <div class="d-flex justify-content-between gap-3">
+                                <div class="w-25">
+                                    <select class="mb-3 api-call form-select" name="per_page">
+                                        <option value="50">Per Page</option>
+                                        @foreach (range(25, 525, 25) as $val)
+                                            <option value="{{ $val }}">{{ $val }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="w-75">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control api-call" name="search"
+                                            placeholder="Search here (Batch Code)">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-cols-4 g-3">
                                 <div class="col">
-                                    <select class="form-select" name="division_id" id="division_id">
+                                    <select class="form-select api-call" name="division_id" id="division_id">
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <select class="col form-select" name="district_id" id="district_id">
+                                    <select class="form-select api-call" name="district_id" id="district_id">
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <select class="col form-select" name="upazila_id" id="upazila_id">
+                                    <select class="form-select api-call" name="upazila_id" id="upazila_id">
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select api-call" name="training_title_id" id="training_title_id">
                                     </select>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="my-5">
                         <form action="" id="add-batch-form">
-                            <div class="d-none mb-3 border border-primary rounded p-3" id="select-all">
-                                <div class="form-check">
+                            <div class="d-none mb-3 border border-primary rounded p-3 d-flex justify-content-between"
+                                id="select-all">
+                                <div class="form-check d-flex align-items-center gap-2">
                                     <input class="form-check-input" type="checkbox" id="selectAllCheckbox" name=""
                                         value="">
                                     <label class="form-check-label text-dark fw-bold" for="selectAllCheckbox">
                                         Check All
                                     </label>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    {{-- <label class="form-label" for="">Search:</label>
+                                    <input class="form-control" type="search" name="search" id="batchSearch"> --}}
                                 </div>
                             </div>
                             <input type="hidden" name="GEOCode">
@@ -80,7 +108,7 @@
             let fromEdit = @json($from_edit);
             // alert(fromEdit);
             let storedDBBatches = @json($provider['training_batches']);
-            console.log(storedDBBatches);
+            // console.log(storedDBBatches);
             // Initialize an empty object for selectedBatches
             var selectedBatches = {};
 
@@ -208,17 +236,59 @@
                 }
             });
 
-            // get the upazila id
-            upazilaSelectElement.change(function() {
-                selectAllBox.addClass("d-none");
+            // training title generate
+            let trainingTitleSelector = $("#training_title_id");
+            let trainingUrl = api_baseurl + "training_title";
+            let htmlOption = "<option value=''>Select Training Title</option>";
+            $.ajax({
+                type: "get",
+                url: trainingUrl,
+                headers: {
+                    Authorization: authToken,
+                },
+                data: {},
+                dataType: "JSON",
+                success: function(results) {
+                    let allData = results.data;
+                    // console.log(allData);
+
+                    if (allData) {
+                        $.each(allData, function(index, data) {
+                            htmlOption +=
+                                '<option value="' +
+                                data.id +
+                                '">' +
+                                data.title.Name +
+                                "</option>";
+                        });
+                    }
+
+                    trainingTitleSelector.html(htmlOption);
+                },
+                error: function(response) {
+                    console.log(response);
+                },
+            });
+
+            // get the checkbox value
+            $('.api-call').change(function() {
+                let val =
+                    selectAllBox.addClass("d-none");
                 $("#checkAll").prop('checked', '');
                 batchLinkCheck.html("");
-                let upazila_id = upazilaSelectElement.val();
-                if (upazila_id) {
-                    const link = api_baseurl + "batch/geo-code/" + upazila_id;
+                if (1) {
+                    const link = api_baseurl + "batch/batch-link/get-batches";
                     $.ajax({
                         type: "GET",
                         url: link,
+                        data: {
+                            division_id: $('select[name=division_id]').val(),
+                            district_id: $('select[name=district_id]').val(),
+                            upazila_id: $('select[name=upazila_id]').val(),
+                            search: $('input[name=search]').val(),
+                            per_page: $('select[name=per_page]').val(),
+                            training_title_id: $('select[name=training_title_id]').val(),
+                        },
                         headers: {
                             Authorization: authToken,
                         },
@@ -226,7 +296,7 @@
                             // Handle the successful response here
                             // console.log(results.data);
                             let allData = results.data;
-                            let GEOCode = results.GEOCode
+                            let GEOCode = results.GEOCode;
                             // console.log(results);
                             batchLinkCheck.html("");
 
@@ -255,6 +325,27 @@
 
                                     batchLinkCheck.append(checkbox);
                                 });
+
+                                // $("#batchSearch").on("input", function() {
+                                //     let searchTerm = $(this).val().toLowerCase();
+
+                                //     // Hide/show checkboxes based on the partial search term
+                                //     $(".batch-checkbox").each(function() {
+                                //         let batchCode = $(this).attr(
+                                //             "batchCode").toLowerCase();
+                                //         let batchTitle = $(this).attr(
+                                //             "batchTitle").toLowerCase();
+                                //         let GEOLocation = $(this).attr(
+                                //             "GEOLocation").toLowerCase();
+
+                                //         let isVisible = batchCode.includes(
+                                //                 searchTerm) || batchTitle
+                                //             .includes(searchTerm) || GEOLocation
+                                //             .includes(searchTerm);
+                                //         $(this).closest(".col").toggle(
+                                //             isVisible);
+                                //     });
+                                // });
 
                                 // Event listener for checkbox changes
                                 batchLinkCheck.on('change', 'input[name="batches[]"]',
