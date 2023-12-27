@@ -21,7 +21,7 @@
 
             </div>
             <div class="box-footer mt20 text-end">
-                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                <button type="submit" class="btn btn-primary  show-loader ">{{ __('Submit') }}</button>
             </div>
         </div>
     </div>

@@ -345,6 +345,10 @@
                 } else {
                 myDiv.style.display = "none";
                 }
+
+                setTimeout(function() {
+                    myDiv.style.display = "none";
+                }, 10000);
         });
     </script>
 

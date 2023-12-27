@@ -71,9 +71,7 @@
                             </td>
                             <td>
                                 @if ($schedule == null)
-                                    <button href="" class="btn btn-sm btn-info" disabled>
-                                        {{ __('batch-list.view_schedule') }}
-                                    </button>
+                                 <span class="badge bg-secondary">Not Created</span>
                                 @else
                                     <a href="{{ route('batch-schedule.office', [$schedule['id'], $batch['id']]) }}"
                                         class="btn btn-sm btn-info">

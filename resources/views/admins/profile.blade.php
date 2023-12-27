@@ -800,7 +800,7 @@
                                         <!--end::Card body-->
                                         <!--begin::Actions-->
                                         <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                            <button type="submit" class="btn btn-primary"
+                                            <button type="submit" class="btn btn-primary  show-loader "
                                                 id="kt_account_profile_details_submit">{{ __('profile.save_btn') }}</button>
                                         </div>
                                         <!--end::Actions-->

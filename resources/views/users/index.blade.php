@@ -209,7 +209,7 @@
                                 <!--begin::Toolbar-->
                                 <div class="px-3 text-center">
                                     <!--begin::Search Button-->
-                                    <button type="submit" class="btn btn-primary">{{ __('register-user-list.search') }}</button>
+                                    <button type="submit" class="btn btn-primary  show-loader ">{{ __('register-user-list.search') }}</button>
                                     <!--end::Search Button-->
                                 </div>
                                 <!--end::Toolbar-->
@@ -444,7 +444,7 @@
                     <div class="text-center pt-15">
                         <a href="" type="reset" class="btn btn-light me-3"
                             data-bs-dismiss="modal">{{ __('register-user-list.discard') }}</a>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary  show-loader ">
                             <span class="indicator-label">{{ __('register-user-list.submit') }}</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -638,7 +638,7 @@
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
                         <a href="" type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Discard</a>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary  show-loader ">
                             <span class="indicator-label">Update</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
