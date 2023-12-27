@@ -60,7 +60,7 @@
                                     </a>
                                 @endif
 
-                                @php
+                                {{-- @php
                                 $inspection_pm = [
                                 'batch_id' => $batch['training_batch']['id'],
                                 'schedule_detail_id' => $batch['id'],
@@ -71,7 +71,7 @@
                                 target="_blank">
                                 Inspection
                                 </a>
-                                @endisset
+                                @endisset --}}
 
                                 
                             </td>
