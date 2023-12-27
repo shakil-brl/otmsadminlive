@@ -85,7 +85,7 @@
                     <!-- User is authenticated -->
                     <form action="{{ url('/logout') }}" method="POST" class="logout-btn">
                         @csrf
-                        <button type="submit">Logout</button>
+                        <button type="submit" class="show-loader">Logout</button>
                     </form>
                     @else
                     <!-- User is not authenticated -->

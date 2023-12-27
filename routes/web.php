@@ -278,5 +278,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     });
 
     Route::resource('holydays', HolydayController::class);
-    Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
+   
 });
+
+Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');

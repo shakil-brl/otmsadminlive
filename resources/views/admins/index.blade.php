@@ -322,7 +322,7 @@
                         <div class="text-center pt-15">
                             <a href="" type="reset" class="btn btn-light me-3"
                                 data-bs-dismiss="modal">{{ __('admin-user-list.discard') }}</a>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary show-loader">
                                 <span class="indicator-label">{{ __('admin-user-list.submit') }}</span>
                                 <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -477,7 +477,7 @@
                         <div class="text-center pt-15">
                             <a href="" type="reset" class="btn btn-light me-3"
                                 data-bs-dismiss="modal">Discard</a>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary  show-loader ">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress">Please wait...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
