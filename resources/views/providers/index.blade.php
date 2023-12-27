@@ -86,7 +86,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{-- {!! $paginator->links() !!} --}}
+            {!! $paginator->links() !!}
         @endisset
     </div>
     <!--end::Content-->
