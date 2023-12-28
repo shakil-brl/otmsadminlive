@@ -15,6 +15,7 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LotController;
 use App\Http\Controllers\MyClassController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PreliminarySelectionController;
@@ -278,7 +279,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     });
 
     Route::resource('holydays', HolydayController::class);
-   
+
+    Route::resource('lots', LotController::class);
 });
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
