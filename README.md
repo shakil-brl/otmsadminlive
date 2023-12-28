@@ -89,15 +89,15 @@ The Online Training Monitoring System (OTMS) is a powerful tool developed by Bab
  Disaster management
 
  ## Report Requirements
- Real-time Training Category, Service Provider, and Batch-wise Attendance Report:
- Category/Batch/Service Provider/District/Upazila-wise Trainee Report
- Training Category-wise Service Provider List Report: 
- Training Category, Service Provider, and Trainer List Report
- Training Category, Service Provider, and Batch-wise Evaluation Report
- Inspection Report:
- Feedback Report
- Trainees Travel and Entertainment Allowance Report
- Links of Live Streaming for Every Batch
+ 1.Real-time Training Category, Service Provider, and Batch-wise Attendance Report:
+ 2.Category/Batch/Service Provider/District/Upazila-wise Trainee Report
+ 3.Training Category-wise Service Provider List Report: 
+ 4.Training Category, Service Provider, and Trainer List Report
+ 5.Training Category, Service Provider, and Batch-wise Evaluation Report
+ 6.Inspection Report:
+ 7.Feedback Report
+ 8.Trainees Travel and Entertainment Allowance Report
+ 9.Links of Live Streaming for Every Batch
 
 Other if required: This section should detail any additional reports that may be 
 necessary based on specific project needs or requirements not covered in the above 
