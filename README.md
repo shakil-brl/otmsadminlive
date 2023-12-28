@@ -79,6 +79,7 @@ The Online Training Monitoring System (OTMS) is a powerful tool developed by Bab
 #### Training Closing Process
  Trainees Final Evaluation .
  Online Certificate with Approval Process 
+ Trainee cartificart list 
 #### Report Requirements
 #### Additional Features of this application beside TOR
 #### Integration Requirements.
@@ -86,3 +87,19 @@ The Online Training Monitoring System (OTMS) is a powerful tool developed by Bab
  Gateway Integration 
  Integration with Payment Gateway.
  Disaster management
+
+ ## Report Requirements
+ Real-time Training Category, Service Provider, and Batch-wise Attendance Report:
+ Category/Batch/Service Provider/District/Upazila-wise Trainee Report
+ Training Category-wise Service Provider List Report: 
+ Training Category, Service Provider, and Trainer List Report
+ Training Category, Service Provider, and Batch-wise Evaluation Report
+ Inspection Report:
+ Feedback Report
+ Trainees Travel and Entertainment Allowance Report
+ Links of Live Streaming for Every Batch
+
+Other if required: This section should detail any additional reports that may be 
+necessary based on specific project needs or requirements not covered in the above 
+reports
+
