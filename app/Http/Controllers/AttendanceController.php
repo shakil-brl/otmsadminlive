@@ -106,6 +106,7 @@ class AttendanceController extends Controller
             }
         } else {
             $results = ApiHttpClient::request('post', 'attendance/end-class', [
+                'trainees' => $request->attendance,
                 'schedule_detail_id' => $id,
             ])->json();
 
