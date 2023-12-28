@@ -42,8 +42,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 // Route::get('/token-form', [ApiController::class, 'showTokenForm']);
-Route::post('/get-token', [ApiController::class, 'getToken'])->name('getToken');
-//Route::post('/ajax-get-token', [ApiController::class,'ajaxGetToken'])->name('ajax-get-token');
+Route::post('/get-token', [ApiController::class, 'getToken']);
 Route::post('/logout', [ApiController::class, 'logout']);
 
 // // Route::group(['middleware' => ['access.token']], function () {

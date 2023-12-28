@@ -28,11 +28,6 @@ class ApiController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
         try {
-            $request->validate([
-                'email' => 'required|email',
-                'password' => 'required',
-            ]);
-
             $client = new Client();
             $app_url = \Str::finish(config('app.api_url'), '/');
             $loginApiEndpoint = $app_url . 'login';
@@ -46,6 +41,7 @@ class ApiController extends Controller
             ];
             $loginResponse = $client->post($loginApiEndpoint, $loginOptions);
             $loginData = json_decode($loginResponse->getBody(), true);
+
             if (!isset($loginData['access_token'])) {
                 throw new \Exception('Login failed');
             }
@@ -75,69 +71,14 @@ class ApiController extends Controller
                 'rolePermission' => array_unique($permissionNames) ?? [],
             ];
             session()->put('access_token', $tokenData);
-            //return redirect()->route('admins.dashboard');
-            return response()->json(['success' => true, 'message' => 'Login successful']);
+            return redirect()->route('admins.dashboard');
 
 
         } catch (\Exception $e) {
-            // Log the error (optional)
-            \Log::error('Login error: ' . $e->getMessage());
-    
-            // Return an error response
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            return redirect()->route('login.show')->with('error', 'Please check your credentials and try again.');
         }
     }
 
-
-
-    //    public function ajaxGetToken(Request $request)
-    // {
-    //     try {
-    //         $request->validate([
-    //             'email' => 'required|email',
-    //             'password' => 'required',
-    //         ]);
-    
-    //         $client = new Client();
-    //         $app_url = \Str::finish(config('app.api_url'), '/');
-    //         $loginApiEndpoint = $app_url . 'login';
-    
-    //         $loginOptions = [
-    //             'multipart' => [
-    //                 ['name' => 'email', 'contents' => $request->input('email')],
-    //                 ['name' => 'password', 'contents' => $request->input('password')],
-    //             ],
-    //         ];
-    
-    //         $loginResponse = $client->post($loginApiEndpoint, $loginOptions);
-    //         $loginData = json_decode($loginResponse->getBody(), true);
-    
-         
-    
-    //         $tokenData = [
-    //             'access_token' => $loginData['access_token'],
-    //             'authProfile' => $loginData['userType']['profile'],
-    //             'authUser' => $loginData['user'],
-    //             'userType' => $loginData['userType'],
-    //             'role' => $loginData['userType']['role']['name'],
-    //             'expires_at' => now()->addMinutes($loginData['expires_in']),
-    //         ];
-    
-    //         // Store the token data in the session or other storage mechanism
-    //         session()->put('access_token', $tokenData);
-    
-    //         // You can also make additional API calls here to fetch role permissions if needed
-    
-           
-    //     } catch (\Exception $e) {
-    //         // Log the error (optional)
-    //         \Log::error('Login error: ' . $e->getMessage());
-    
-    //         // Return an error response
-    //         return response()->json(['success' => false, 'message' => $e->getMessage()]);
-    //     }
-    // }
-    
     public function logout()
     {
         try {

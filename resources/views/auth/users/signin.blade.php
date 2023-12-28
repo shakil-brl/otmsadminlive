@@ -132,11 +132,11 @@
             <div id="login-form">
                 <div class="content">
                     <legend class="title">@lang('login.login')</legend>
-                    {{-- @if(session('error'))
+                    @if(session('error'))
                     <div style="color: red;">
                         {{ session('error') }}
                     </div>
-                    @endif --}}
+                    @endif
 
                     @if($errors->any())
                     <div style="color: rgb(255, 255, 255); ">
@@ -148,9 +148,9 @@
                     </div>
                     @endif
 
-                    <div id="error-message" style="color: red;"></div>
 
-                    <form id="loginForm" action="{{ url('/get-token') }}" method="post">
+
+                    <form action="{{ url('/get-token') }}" method="post">
                         @csrf
 
                         <div class="form-input">
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-submit" onclick="loginWithAjax()">@lang('login.login')</button>
+                        <button class="btn btn-submit" onclick="toggleDivVisibility()">@lang('login.login')</button>
 
                         <div class="account-create"> @lang('login.do_not_account') <a
                                 href="https://training.gov.bd/signup">@lang('login.sign_up')</a></div>
@@ -216,9 +216,61 @@
     </script>
 
     <script>
-   
+        let title = "{{ __('register.are_you') }}";
+        let text = "{{ __('register.submit_form') }}";
+        let confirmButtonText = "{{ __('register.yes_submitted') }}";
+        let cancelButtonText = "{{ __('register.cancel_button') }}";
+        let admin_baseurl = '{{ route('home.index') }}';
+        let api_baseurl = '{{ config('app.api_url') }}';
+        let authToken = localStorage.getItem('authToken');
+        let language = "{{ session()->get('locale') }}";
+
+        if (window.location.pathname == '/login' || window.location.pathname == '/register') {
+
+            if (authToken != null) {
+                window.open('/dashboard', '_self')
+            }
+        }
+
+        let url = "{{ route('changeLang') }}";
+
+        function changeLocale(lang) {
+            let url_link = api_baseurl + "language";
+            $.ajax({
+                type: "get",
+                url: url_link,
+                headers: {
+                    'X-localization': lang
+                },
+                data: {},
+                dataType: "JSON",
+                success: function(results) {
+                    if (results.success === true) {
+                        console.log(results.message);
+                    } else {
+                        // swal.fire("Error!", results.message, "error");
+                    }
+                },
+                error: function(response) {
+                    // alert(response);
+                },
+            });
+            window.location.href = url + "?lang=" + lang;
+        }
+        $("#lang-bd").click(function() {
+            changeLocale('bn');
+        });
+        $("#lang-us").click(function() {
+            changeLocale('en');
+        });
+
+        // script.js
+
 document.addEventListener("DOMContentLoaded", function () {
+    // Hide the preloader
     document.getElementById("preloader").style.display = "none";
+
+    // Show the page content
     document.getElementById("body").style.display = "flex";
 });
 
@@ -236,40 +288,6 @@ function toggleDivVisibility() {
 
 
     </script>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-function loginWithAjax() {
-    var formData = $("#loginForm").serialize();
-
-    $.ajax({
-        url: "{{ route('getToken') }}",
-        type: "post",
-        data: formData,
-        dataType: "json",
-        beforeSend: function () {
-            $("#preloader").show();
-        },
-        success: function (response) {
-            if (response.success) {
-                // Optionally, you can redirect the user or perform other actions
-                window.location.href = "{{ route('admins.dashboard') }}";
-            } else {
-                $("#error-message").text(response.message);
-            }
-        },
-        error: function (error) {
-            console.error("AJAX Error:", error);
-            $("#error-message").text("An error occurred during login. Please try again.");
-        },
-        complete: function () {
-            $("#preloader").hide();
-        }
-    });
-}
-
-</script>
-
 
 </body>
 
