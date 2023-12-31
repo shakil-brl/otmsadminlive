@@ -186,21 +186,9 @@
             </div>
 
         </div>
-        <div class="row row-cols-md-1 g-5 mt-3 ">
-            {{ Form::label(
-            'remark',
-            "পরিদর্শনকারী কর্মকর্তার নিকট লক্ষনীয় অন্যান্য বিষয় সার্বিক মন্তব্য ও
-            নির্দেশনা।",
-            ) }}
-            {{ Form::textarea('remark', $tmsInspection->remark, [
-            'class' =>
-            'form-control' .
-            ($errors->has('remark')
-            ? '
-            is-invalid'
-            : ''),
-            'placeholder' => '',
-            ]) }}
+        <div class="row row-cols-md-1 g-5 mt-3 w-100">
+            {{ Form::label('remark', "পরিদর্শনকারী কর্মকর্তার নিকট লক্ষনীয় অন্যান্য বিষয় সার্বিক মন্তব্য ও নির্দেশনা।") }}
+            <textarea name="remark" id="remark" class="form-control  w-100 {{ $errors->has('remark') ? 'is-invalid' : '' }}" placeholder=""></textarea>
             {!! $errors->first('remark', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
