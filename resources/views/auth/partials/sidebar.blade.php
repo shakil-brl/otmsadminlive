@@ -588,7 +588,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="" >
+                    <a href="" class="show-loader" >
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -608,7 +608,7 @@
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
                     <!--start:Menu link-->
-                    <a href=""> <span
+                    <a href="" class="show-loader"> <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-category fs-2                     ">
@@ -627,7 +627,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="">
+                    <a href="" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -645,7 +645,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="">
+                    <a href="" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -664,7 +664,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="">
+                    <a href="" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -682,7 +682,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="">
+                    <a href="" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -700,7 +700,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="">
+                    <a href="" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -719,7 +719,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="{{ route('holydays.index')}}" class="menu-link">
+                    <a href="{{ route('holydays.index')}}" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('holydays.index') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -741,7 +741,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="">
+                    <a href="" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -762,7 +762,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="">
+                    <a href="" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
