@@ -115,7 +115,10 @@
             storedDBBatches.forEach(function(batch) {
                 let batchId = batch.id ?? "";
                 let batchCode = batch.batchCode ?? "";
-                let batchTitle = batch.training.title.Name ?? "";
+                let batchTitle = '';
+                if (batch.training) {
+                    batchTitle = batch.training.title.Name ?? "";
+                }
                 let GEOLocation = batch.GEOLocation ?? "";
 
                 // Add the batch to selectedBatches
@@ -308,15 +311,18 @@
                                 $("#selectAllCheckbox").prop('checked', '');
                                 $.each(allData, function(index, data) {
                                     let isChecked = selectedBatches[data.id];
-
+                                    let batchTitle = '';
+                                    if (data.training) {
+                                        batchTitle = data.training.title.Name ?? "";
+                                    }
                                     let checkbox = `
                                         <div class="col mt-5">
                                             <div class="form-check">
                                                 <input class="form-check-input batch-checkbox" type="checkbox" id="${data.id}" name="batches[]"
-                                                    value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${data.training.title.Name ?? ''}"
+                                                    value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${batchTitle ?? ''}"
                                                     GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${data.lot_id && data.lot_id != lotId ? 'disabled' : ''} >
                                                 <label class="form-check-label text-dark" for="${data.id}">
-                                                    ${data.batchCode} (${data.training.title.Name ?? ""})
+                                                    ${data.batchCode} (${batchTitle ?? ""})
                                                 </label>
                                             </div>
                                         </div>
