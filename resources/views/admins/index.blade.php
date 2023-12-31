@@ -516,3 +516,10 @@
     </script>
 @endsection
 @endsection
+
+
+@push('js')
+<script>
+$('#dataTable').DataTable();
+</script>
+@endpush
