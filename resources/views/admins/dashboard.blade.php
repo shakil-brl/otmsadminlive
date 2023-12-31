@@ -111,12 +111,13 @@
                                 <x-dashboard-card :url="route('dashboard_details.upazilas')" :totalBatch="$data['total_upazila'] ?? 0" :icon="asset('img/new_icon/upazila.png')"
                                     :title="__('dashboard.upazila')" :class="'card-item info'" />
                             </div>
-                        @endif
-
-                        @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="$data['total_vendor'] ?? 0" :icon="asset('img/new_icon/developmentpartner.png')"
                                     :title="__('dashboard.partner')" :class="'card-item red'" />
+                            </div>
+                            <div>
+                                <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="0" :icon="asset('img/new_icon/developmentpartner.png')"
+                                    :title="Today Runing" :class="'card-item red'" />
                             </div>
                         @endif
                     </div>

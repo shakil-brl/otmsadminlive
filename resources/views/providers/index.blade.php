@@ -62,7 +62,7 @@
                                         {{ __('provider-list.edit') }}
                                     </a>
                                     <a href="{{ route('providers.show', $provider['id']) }}"
-                                        class="btn btn-sm btn-primary show-action" data-bs-toggle="tooltip"
+                                        class="btn btn-sm btn-primary show-loader show-action" data-bs-toggle="tooltip"
                                         data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
                                         title="{{ __('provider-list.vendor_details') }}">
                                         {{ __('provider-list.views') }}
@@ -74,7 +74,7 @@
                                         {{ __('provider-list.delete') }}
                                     </a>
                                     <a href="{{ route('provider.link-batch', $provider['id']) }}"
-                                        class="btn btn-sm btn-success" data-bs-toggle="tooltip"
+                                        class="btn btn-sm btn-success show-loader" data-bs-toggle="tooltip"
                                         data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
                                         title="{{ __('provider-list.vendor_link_batch') }}">
                                         {{ __('provider-list.link_batche') }}
