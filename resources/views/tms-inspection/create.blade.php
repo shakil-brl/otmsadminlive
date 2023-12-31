@@ -3,7 +3,13 @@
 @section('template_title')
 {{ __('Create') }} Tms Inspection
 @endsection
-
+@push('css')
+    <style>
+        .ck.ck-reset.ck-editor.ck-rounded-corners {
+    width: 100%;
+}
+    </style>
+@endpush
 @section('content')
 <section class="content container-fluid">
     <div class="row">
@@ -26,3 +32,13 @@
     </div>
 </section>
 @endsection
+@push('js')
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#remark'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+@endpush

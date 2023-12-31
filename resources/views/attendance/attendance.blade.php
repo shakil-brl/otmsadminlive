@@ -17,7 +17,7 @@
 
     .rotated-header {
         transform: rotate(-90deg);
-        white-space: nowrap;
+        /* white-space: nowrap; */
     }
 
     .auto-height {
@@ -44,11 +44,12 @@
             <th class="auto-height">Student</th>
             <?php for ($day = 1; $day <= 20; $day++): ?>
                 <th class="rotated-header auto-height">
-                    <?= now()->addDays($day)->format('d-m-Y') ?>
+                    <span style="white-space: nowrap; font-size:10px">
+                        <?= now()->addDays($day)->format('d-m') ?></span>
                 </th>
             <?php endfor; ?>
             <th class="auto-height">Monthly %</th>
-            <th class="auto-height"># Present / # Absent</th>
+            <th class="auto-height">Present <br>Absent</th>
         </tr>
         </thead>
         <tbody>
@@ -70,7 +71,8 @@
                 $monthlyPercentage = ($presentCount / 20) * 100;
                 $absentCount = 20 - $presentCount;
                 ?>
-                <td><?= round($monthlyPercentage, 2) ?>%<br><?= $presentCount ?> / <?= $absentCount ?></td>
+                <td><?= round($monthlyPercentage, 2) ?>%</td>
+                <td><?= $presentCount ?> / <?= $absentCount ?></td>
             </tr>
         <?php endfor; ?>
         </tbody>

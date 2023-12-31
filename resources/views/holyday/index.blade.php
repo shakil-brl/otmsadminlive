@@ -54,7 +54,7 @@
                                     <form action="{{ route('holydays.destroy', $holyday['id']) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger delete-action">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -65,4 +65,29 @@
             </div>
         @endisset
     </div>
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $(document).on("click", ".delete-action", function(e) {
+                e.preventDefault();
+                const form = $(this).closest('form');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
 @endsection

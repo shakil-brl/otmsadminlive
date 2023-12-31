@@ -234,65 +234,8 @@
         </div>
     </div>
 
-
-
-    <div class="d-flex justify-content-end mt-3">
-        @php
-        $current_page = $results['current_page'];
-        $total = $results['total'];
-        $per_page = $results['per_page'];
-        $last_page = $results['last_page'];
-        $total_page = $last_page - $current_page;
-        @endphp
-        <nav aria-label="Page navigation example" class="bg-white p-2">
-            <ul class="pagination">
-
-                {{-- First Page --}}
-                @if ($current_page > 1)
-                <li class="page-item"><a class="page-link" href="{{ route('batches.index', ['page' => 1]) }}">{{
-                        __('batch-list.first') }}</a></li>
-                @else
-                <li class="page-item disabled"><span class="page-link">{{ __('batch-list.first') }}</span></li>
-                @endif
-
-                {{-- Previous Page --}}
-                @if ($current_page > 1)
-                <li class="page-item"><a class="page-link"
-                        href="{{ route('batches.index', ['page' => $current_page - 1]) }}">{{ __('batch-list.previous')
-                        }}</a>
-                </li>
-                @else
-                <li class="page-item disabled"><span class="page-link">{{ __('batch-list.previous') }}</span></li>
-                @endif
-
-                {{-- Pages --}}
-                @for ($i = max(1, $current_page - 2); $i <= min($last_page, $current_page + 2); $i++) <li
-                    class="page-item {{ $i == $current_page ? 'active' : '' }}"><a class="page-link"
-                        href="{{ route('batches.index', ['page' => $i]) }}">{{ $i }}</a></li>
-                    @endfor
-
-                    {{-- Next Page --}}
-                    @if ($current_page < $last_page) <li class="page-item"><a class="page-link"
-                            href="{{ route('batches.index', ['page' => $current_page + 1]) }}">{{ __('batch-list.next')
-                            }}</a>
-                        </li>
-                        @else
-                        <li class="page-item disabled"><span class="page-link">{{ __('batch-list.next') }}</span></li>
-                        @endif
-
-                        {{-- Last Page --}}
-                        @if ($last_page > 1)
-                        <li class="page-item"><a class="page-link"
-                                href="{{ route('batches.index', ['page' => $last_page]) }}">{{ __('batch-list.last')
-                                }}</a>
-                        </li>
-                        @else
-                        <li class="page-item disabled"><span class="page-link">{{ __('batch-list.last') }}</span></li>
-                        @endif
-
-            </ul>
-        </nav>
-    </div>
+{{$paginator->links()}}
+    
     @endisset
 </div>
 @endsection

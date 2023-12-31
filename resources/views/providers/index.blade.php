@@ -67,18 +67,19 @@
                                         title="{{ __('provider-list.vendor_details') }}">
                                         {{ __('provider-list.view') }}
                                     </a>
+                                    <a href="#" class="btn btn-sm btn-danger delete-provider d-none"
+                                        data-provider-id="{{ $provider['id'] }}" data-provider-name="{{ $provider['name'] }}"
+                                        data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse"
+                                        data-bs-placement="bottom" title="{{ __('provider-list.vendor_delete') }}">
+                                        {{ __('provider-list.delete') }}
+                                    </a>
                                     <a href="{{ route('provider.link-batch', $provider['id']) }}"
                                         class="btn btn-sm btn-success" data-bs-toggle="tooltip"
                                         data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
                                         title="{{ __('provider-list.vendor_link_batch') }}">
                                         {{ __('provider-list.link_batche') }}
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-danger delete-provider"
-                                        data-provider-id="{{ $provider['id'] }}" data-provider-name="{{ $provider['name'] }}"
-                                        data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse"
-                                        data-bs-placement="bottom" title="{{ __('provider-list.vendor_delete') }}">
-                                        {{ __('provider-list.delete') }}
-                                    </a>
+                                    
                                 </div>
                             </td>
                         </tr>

@@ -28,10 +28,6 @@
                 </thead>
                 <tbody>
                     @foreach (collect($complete_classes) as $batch)
-
-
-
-                    {{-- @dump($batch) --}}
                         <tr>
                             <td>
                                 {{ $loop->iteration }}
@@ -52,7 +48,7 @@
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-danger" href="{{  route('attendance.form',$batch['id'])}}" target="_blank">
+                                <a class="btn btn-sm btn-danger" href="" target="_blank">
                                     {{__('batch-schedule.view_attendence')}}
                                 </a>
                             </td>

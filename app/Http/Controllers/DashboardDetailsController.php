@@ -78,7 +78,7 @@ class DashboardDetailsController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        //  dd($ongoing_classes);
+       
         if ($ongoing_classes['success'] == true) {
             $batches = $ongoing_classes['data']['data'];
             $paginator = $this->customPaginate($ongoing_classes, $request, route('dashboard_details.ongoing_classes'));
