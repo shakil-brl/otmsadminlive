@@ -1,31 +1,33 @@
 <div class="row row-cols-4 g-4">
     <div class="">
-        <label for="day_name_en" class="form-label">Name (English):</label>
-        <input type="text" class="form-control" name="day_name_en" id="day_name_en"
-            value="{{ $holyday['day_name_en'] ?? old('day_name_en') }}">
-        @error('day_name_en')
+        <label for="name_en" class="form-label">Name (Bangla):</label>
+        <input type="text" class="form-control" name="name_en" id="name_en"
+            value="{{ $group['name_en'] ?? old('name_en') }}">
+        @error('name_en')
             <small class="text-danger d-block">{{ $message }}</small>
         @enderror
     </div>
     <div class="">
-        <label for="day_name_bn" class="form-label">Name (Bangla):</label>
-        <input type="text" class="form-control" name="day_name_bn" id="day_name_bn"
-            value="{{ $holyday['day_name_en'] ?? old('day_name_bn') }}">
-        @error('day_name_bn')
+        <label for="name_bn" class="form-label">Name (English):</label>
+        <input type="text" class="form-control" name="name_bn" id="name_bn"
+            value="{{ $group['name_bn'] ?? old('name_bn') }}">
+        @error('name_bn')
             <small class="text-danger d-block">{{ $message }}</small>
         @enderror
     </div>
     <div class="">
-        <label for="holly_bay" class="form-label">Date:</label>
-        <div class="input-group">
-            <span class="input-group-text">
-                <span class="material-icons-outlined">
-                    calendar_month
-                </span>
-            </span>
-            <input type="text" class="form-control" id="holly_bay" name="holly_bay">
-        </div>
-        @error('holly_bay')
+        <label for="code" class="form-label">Code:</label>
+        <input type="text" class="form-control" name="code" id="code"
+            value="{{ $group['code'] ?? old('code') }}">
+        @error('code')
+            <small class="text-danger d-block">{{ $message }}</small>
+        @enderror
+    </div>
+    <div class="">
+        <label for="remark" class="form-label">Remark:</label>
+        <input type="text" class="form-control" name="remark" id="remark"
+            value="{{ $group['remark'] ?? old('remark') }}">
+        @error('remark')
             <small class="text-danger d-block">{{ $message }}</small>
         @enderror
     </div>

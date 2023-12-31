@@ -65,10 +65,10 @@ class HolydayController extends Controller
         $data = ApiHttpClient::request('post', 'holyday/', $holyday)->json();
         //dd($data);
         if (isset($data['error'])) {
-            $error = $data['error'];
+            $error_message = $data['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
-            return redirect()->back()->with('error', $error)->withInput();
+            return redirect()->back()->with('error_message', $error_message)->withInput();
 
             // return redirect()->route('holydays.index');
         } else {
@@ -132,11 +132,10 @@ class HolydayController extends Controller
         $data = ApiHttpClient::request('put', "holyday/$id", $holyday)->json();
         // dd($data);
         if (isset($data['error'])) {
-            $error = $data['error'];
-            // dd($error);
+            $error_message = $data['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
-            return redirect()->back()->with('error', $error)->withInput();
+            return redirect()->back()->with('error_message', $error_message)->withInput();
         } else {
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Updated successfully');
@@ -156,7 +155,7 @@ class HolydayController extends Controller
 
         if ($results['success'] == true) {
             // dd($holyday);
-            session()->flash('type', 'Danger');
+            session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Deleted successfully');
             return redirect()->route('holydays.index');
         } else {

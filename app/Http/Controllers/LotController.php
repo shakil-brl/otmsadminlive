@@ -23,7 +23,7 @@ class LotController extends Controller
             $lots = $results['data'];
             $page_from = $results['data']['from'];
             $paginator = $this->customPaginate($results, $request, route('lots.index'));
-            dd($lots);
+            // dd($lots);
             return view('lot.index', ['results' => $lots, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
@@ -39,7 +39,7 @@ class LotController extends Controller
      */
     public function create()
     {
-        //
+        return view('lot.create');
     }
 
     /**
@@ -50,7 +50,29 @@ class LotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'name_bn' => 'required',
+            'name_en' => 'required',
+            'code' => 'required',
+            'remark' => 'required'
+        ]);
+
+        $lot = $request->all();
+
+
+        $data = ApiHttpClient::request('post', 'lot/', $lot)->json();
+        // dd($data['message']);
+        if (isset($data['error'])) {
+            $error_message = $data['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $error_message)->withInput();
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Created successfully');
+            return redirect()->route('lots.index');
+        }
     }
 
     /**
@@ -72,7 +94,16 @@ class LotController extends Controller
      */
     public function edit($id)
     {
-        //
+        $results = ApiHttpClient::request('get', "lot/$id")->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $group = $results['data'];
+            return view('lot.edit', ['group' => $group]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -84,7 +115,28 @@ class LotController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($id);
+        $request->validate([
+            'name_bn' => 'required',
+            'name_en' => 'required',
+            'code' => 'required',
+            'remark' => 'required'
+        ]);
+
+        $lot = $request->all();
+
+        $data = ApiHttpClient::request('put', "lot/$id", $lot)->json();
+        // dd($data);
+        if (isset($data['error'])) {
+            $error_message = $data['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $error_message)->withInput();
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Updated successfully');
+            return redirect()->route('lots.index');
+        }
     }
 
     /**
@@ -95,6 +147,17 @@ class LotController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $results = ApiHttpClient::request('delete', "lot/$id")->json();
+
+        if ($results['success'] == true) {
+            // dd($holyday);
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Deleted successfully');
+            return redirect()->route('lots.index');
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->route('lots.index');
+        }
     }
 }

@@ -11,29 +11,19 @@
         </h3>
         <x-alert />
 
-        @isset($error)
-            @if ($error)
-                @if (is_string($error))
-                    <span class="text-danger">
-                        <div class="alert close alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Error : </strong>
-                            {{ $error ?? '' }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </span>
-                @else
-                    <ul class="m-0 text-danger">
-                        @foreach ($error ?? [] as $err)
-                            @foreach ($err as $e)
-                                <li>
-                                    {{ $e }}
-                                </li>
-                            @endforeach
-                        @endforeach
-                    </ul>
-                @endif
-            @endif
-        @endisset
+        @if (session('error_message'))
+            {{-- @dump(session('error_message')) --}}
+            <ul class="m-0 text-danger">
+                @foreach (session('error_message') ?? [] as $neme => $err)
+                    @foreach ($err as $e)
+                        <li>
+                            {{ $e }}
+                        </li>
+                    @endforeach
+                @endforeach
+            </ul>
+        @endif
+
         @isset($holyday)
             @php
                 if ($holyday['holly_bay']) {
