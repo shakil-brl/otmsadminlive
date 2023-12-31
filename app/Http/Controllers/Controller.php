@@ -37,4 +37,22 @@ class Controller extends BaseController
             return false;
         }
     }
+
+    protected function customPaginate2($data, $request, $path)
+    {
+        try {
+            $currentPage = $request->page ?? 1;
+            $batch_paginate = new Collection($data['items']['data']);
+            $paginator = new LengthAwarePaginator(
+                $batch_paginate->forPage($currentPage, $data['items']['per_page']),
+                $data['items']['total'],
+                $data['items']['per_page'],
+                $currentPage
+            );
+            $paginator->setPath($path);
+            return $paginator;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
 }

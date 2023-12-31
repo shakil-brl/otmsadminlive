@@ -55,7 +55,7 @@
                     </ul>
                 </div>
             @endif
-            {{-- <x-alert /> --}}
+            <x-alert />
             <div id="students">
                 @foreach ($students as $index => $student)
                     <div class="student">
