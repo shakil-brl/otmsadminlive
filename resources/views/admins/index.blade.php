@@ -503,7 +503,7 @@
 
 @push('js')
 <script>
-$( document ).ready(function() {
+$(window).on('load', function() {
     $('#dataTable').DataTable();
 });
 </script>

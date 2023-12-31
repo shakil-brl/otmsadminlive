@@ -101,7 +101,6 @@ $(function () {
                             </tr>                            
                         `;
                 }
-                $('#dataTable').DataTable();
             },
             error: function (xhr, status, error) {
                 // Handle errors here
