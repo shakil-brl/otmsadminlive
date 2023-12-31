@@ -74,12 +74,12 @@
                                         title="Vendor Batch Link">
                                         Link Batch
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-danger delete-provider"
+                                    {{-- <a href="#" class="btn btn-sm btn-danger delete-provider"
                                         data-provider-id="{{ $provider['id'] }}" data-provider-name="{{ $provider['name'] }}"
                                         data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse"
                                         data-bs-placement="bottom" title="Vendor Delete">
                                         Delete
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </td>
                         </tr>
