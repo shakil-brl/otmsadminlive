@@ -20,20 +20,19 @@
                 </div>
                 <div class="w-100 text-end">
                     <a href="#" class="btn btn-lg btn-info me-1" data-bs-toggle="modal" data-bs-target="#create_provider"
-                        data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
-                        title="Provider Create">
+                        >
                         {{ __('provider-list.create_vendor') }}
                     </a>
                 </div>
             </div>
             <table class="table table-bordered bg-white">
                 <thead>
-                    <th>{{ __('batch-list.sl') }}</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>{{ __('batch-list.action') }}</th>
+                    <th>{{ __('provider-list.sl') }}</th>
+                    <th>{{ __('provider-list.name') }}</th>
+                    <th>{{ __('provider-list.email') }}</th>
+                    <th>{{ __('provider-list.phone') }}</th>
+                    <th>{{ __('provider-list.address') }}</th>
+                    <th>{{ __('provider-list.action') }}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($providers) as $provider)
@@ -59,27 +58,28 @@
                                     <a href="#" class="btn btn-sm btn-info editProvider"
                                         data-provider-id="{{ $provider['id'] }}" data-bs-toggle="modal"
                                         data-bs-target="#edit_provider" data-bs-toggle="tooltip"
-                                        data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="Vendor Edit">
-                                        Edit
+                                        data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom" title="{{ __('provider-list.vendor_edit') }}">
+                                        {{ __('provider-list.edit') }}
                                     </a>
                                     <a href="{{ route('providers.show', $provider['id']) }}"
-                                        class="btn btn-sm btn-primary show-action" data-bs-toggle="tooltip"
+                                        class="btn btn-sm btn-primary show-loader show-action" data-bs-toggle="tooltip"
                                         data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
-                                        title="Vendor Details">
-                                        View
+                                        title="{{ __('provider-list.vendor_details') }}">
+                                        {{ __('provider-list.views') }}
                                     </a>
-                                    <a href="{{ route('provider.link-batch', $provider['id']) }}"
-                                        class="btn btn-sm btn-success" data-bs-toggle="tooltip"
-                                        data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
-                                        title="Vendor Batch Link">
-                                        Link Batch
-                                    </a>
-                                    {{-- <a href="#" class="btn btn-sm btn-danger delete-provider"
+                                    <a href="#" class="btn btn-sm btn-danger delete-provider d-none"
                                         data-provider-id="{{ $provider['id'] }}" data-provider-name="{{ $provider['name'] }}"
                                         data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse"
-                                        data-bs-placement="bottom" title="Vendor Delete">
-                                        Delete
-                                    </a> --}}
+                                        data-bs-placement="bottom" title="{{ __('provider-list.vendor_delete') }}">
+                                        {{ __('provider-list.delete') }}
+                                    </a>
+                                    <a href="{{ route('provider.link-batch', $provider['id']) }}"
+                                        class="btn btn-sm btn-success show-loader" data-bs-toggle="tooltip"
+                                        data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
+                                        title="{{ __('provider-list.vendor_link_batch') }}">
+                                        {{ __('provider-list.link_batche') }}
+                                    </a>
+                                    
                                 </div>
                             </td>
                         </tr>
@@ -98,7 +98,7 @@
             <div class="modal-content">
                 <div class="modal-header" id="kt_modal_create_provider_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">{{ __('provider-list.add_provider') }}</h2>
+                    <h2 class="fw-bold">{{ __('provider-list.add_vendor') }}</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -117,11 +117,11 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.provider_name') }}</label>
+                            <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.vendor_name') }}</label>
                             <!--end::Label-->
 
                             <!--begin::First Name-->
-                            <input type="text" placeholder="{{ __('provider-list.provider_name_ph') }}" type="text"
+                            <input type="text" placeholder="{{ __('provider-list.vendor_name_ph') }}" type="text"
                                 id="name" name="name" autocomplete="off"
                                 class="form-control form-control-solid mb-3 mb-lg-0" value="" />
                             <span class="text-danger form-message-error-name">
@@ -139,7 +139,7 @@
                             <label class="fw-semibold fs-6 mb-2">{{ __('provider-list.email') }}</label>
                             <!--end::Label-->
                             <!--begin::Email-->
-                            <input type="text" placeholder="{{ __('provider-list.email_ph') }}" type="text"
+                            <input type="text" placeholder="{{ __('provider-list.mail_ph') }}" type="text"
                                 id="email" name="email" autocomplete="off"
                                 class="form-control form-control-solid mb-3 mb-lg-0" value="" />
                             <span class="text-danger form-message-error-email">
@@ -154,9 +154,9 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.mobile_number') }}</label>
+                            <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.phone_number') }}</label>
                             <!--end::Label-->
-                            <input type="text" placeholder="{{ __('provider-list.mobile_number_ph') }}"
+                            <input type="text" placeholder="{{ __('provider-list.phone_number_ph') }}"
                                 type="text" id="mobile" name="mobile" autocomplete="off"
                                 class="form-control form-control-solid mb-3 mb-lg-0" value="" />
                             <span class="text-danger form-message-error-mobile">
@@ -176,7 +176,7 @@
                             <!--end::Label-->
                             <!--begin::Address-->
                             <textarea class="form-control form-control-solid" rows="4" name="address"
-                                placeholder="{{ __('provider-list.address_ph') }}"></textarea>
+                                placeholder="{{ __('provider-list.addresses_ph') }}"></textarea>
                             <span class="text-danger form-message-error-address">
 
                             </span>

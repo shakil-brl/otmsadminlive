@@ -32,7 +32,7 @@
                             <div>
 
                                 <x-dashboard-card :url="route('dashboard_details.total_batches')" :totalBatch="$data['total_batch'] ?? 0" :icon="asset('img/new_icon/total_batch.png')" :title="__('dashboard.total_batch')"
-                                    :class="'card-item purple'" />
+                                    :class="'card-item purple show-loader'" />
 
                             </div>
                         @endif
@@ -57,7 +57,7 @@
                             ]))
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.running_batches')" :totalBatch="$data['running_batch'] ?? 0" :icon="asset('img/new_icon/current_batch.png')" :title="__('dashboard.running_batch')"
-                                    :class="'card-item yellow'" />
+                                    :class="'card-item yellow show-loader'" />
                             </div>
                         @endif
 
@@ -81,22 +81,22 @@
                             ]))
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.complete_batches')" :totalBatch="$data['completed_batch']" :icon="asset('img/new_icon/completed_batch.png')"
-                                    :title="__('dashboard.complete_batch')" :class="'card-item green'" />
+                                    :title="__('dashboard.complete_batch')" :class="'card-item green show-loader'" />
                             </div>
                         @endif
 
                         @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.ongoing_classes')" :totalBatch="$data['running_class'] ?? 0" :icon="asset('img/new_icon/livestrem.gif')"
-                                    :title="__('dashboard.ongoing_class')" :class="'card-item red'" />
+                                    :title="__('dashboard.ongoing_class')" :class="'card-item red show-loader'" />
                             </div>
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.complete_classes')" :totalBatch="$data['complete_class'] ?? 0" :icon="asset('img/new_icon/completedclass.png')"
-                                    :title="__('dashboard.complete_class')" :class="'card-item purple'" />
+                                    :title="__('dashboard.complete_class')" :class="'card-item purple show-loader'" />
                             </div>
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.districts')" :totalBatch="$data['total_district'] ?? 0" :icon="asset('img/new_icon/district.png')"
-                                    :title="__('dashboard.district')" :class="'card-item green-white'" />
+                                    :title="__('dashboard.district')" :class="'card-item green-white show-loader'" />
                             </div>
 
                             {{-- <div>
@@ -109,14 +109,15 @@
                         @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.upazilas')" :totalBatch="$data['total_upazila'] ?? 0" :icon="asset('img/new_icon/upazila.png')"
-                                    :title="__('dashboard.upazila')" :class="'card-item info'" />
+                                    :title="__('dashboard.upazila')" :class="'card-item info show-loader'" />
                             </div>
-                        @endif
-
-                        @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="$data['total_vendor'] ?? 0" :icon="asset('img/new_icon/developmentpartner.png')"
                                     :title="__('dashboard.partner')" :class="'card-item red'" />
+                            </div>
+                            <div>
+                                <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="0" :icon="asset('img/new_icon/developmentpartner.png')"
+                                    :title="Today Runing" :class="'card-item red show-loader'" />
                             </div>
                         @endif
                     </div>
