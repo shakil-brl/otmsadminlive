@@ -1,6 +1,6 @@
 <div class="row row-cols-4 g-4">
     <div class="">
-        <label for="name_en" class="form-label">Name (Bangla):</label>
+        <label for="name_en" class="form-label">Name (English):</label>
         <input type="text" class="form-control" name="name_en" id="name_en"
             value="{{ $group['name_en'] ?? old('name_en') }}">
         @error('name_en')
@@ -8,7 +8,7 @@
         @enderror
     </div>
     <div class="">
-        <label for="name_bn" class="form-label">Name (English):</label>
+        <label for="name_bn" class="form-label">Name (Bangla):</label>
         <input type="text" class="form-control" name="name_bn" id="name_bn"
             value="{{ $group['name_bn'] ?? old('name_bn') }}">
         @error('name_bn')

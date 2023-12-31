@@ -52,15 +52,32 @@
                                         {{ $lot['remark'] ?? '' }}
                                     </td>
                                     <td class="me-0 d-flex gap-1">
-                                        {{-- <a href="{{ route('lots.show', $lot['id']) }}" class="btn btn-sm btn-success">View</a> --}}
-                                        <a href="{{ route('lots.edit', $lot['id']) }}" class="btn btn-sm btn-info">
-                                            Edit
-                                        </a>
-                                        <form action="{{ route('lots.destroy', $lot['id']) }}" method="post" id="deleteForm">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger delete-action">Delete</button>
-                                        </form>
+                                        <div class="btn-group" role="group" aria-label="Batch Group Actions">
+                                            <a href="{{ route('lots.edit', $lot['id']) }}" class="btn btn-sm btn-info"
+                                                data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse"
+                                                data-bs-placement="bottom" title="Edit Batch Group">
+                                                Edit
+                                            </a>
+                                            <a href="{{ route('lots.show', $lot['id']) }}"
+                                                class="btn btn-sm btn-primary show-action" data-bs-toggle="tooltip"
+                                                data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
+                                                title="Batch Group Details">
+                                                View
+                                            </a>
+                                            <a href="{{ route('lots.link-batch', $lot['id']) }}" class="btn btn-sm btn-success"
+                                                data-bs-toggle="tooltip" data-bs-custom-class="tooltip-inverse"
+                                                data-bs-placement="bottom" title="Batch Link">
+                                                Link Batch
+                                            </a>
+                                            <div class="btn btn-sm btn-danger delete-action">
+                                                Delete
+                                                <form action="{{ route('lots.destroy', $lot['id']) }}" method="post"
+                                                    id="deleteForm">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -78,7 +95,7 @@
         $(document).ready(function() {
             $(document).on("click", ".delete-action", function(e) {
                 e.preventDefault();
-                const form = $(this).closest('form');
+                const form = $("#deleteForm");
 
                 Swal.fire({
                     title: "Are you sure?",

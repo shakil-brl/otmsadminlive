@@ -281,6 +281,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::resource('holydays', HolydayController::class);
 
     Route::resource('lots', LotController::class);
+
+    Route::get('/lots/link-batch/{lot_id}', [LotController::class, 'linkBatch'])->name('lots.link-batch');
 });
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');

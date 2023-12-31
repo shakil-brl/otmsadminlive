@@ -83,7 +83,16 @@ class LotController extends Controller
      */
     public function show($id)
     {
-        //
+        $results = ApiHttpClient::request('get', "lot/$id")->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $group = $results['data'];
+            return view('lot.show', ['lot' => $group]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -150,7 +159,6 @@ class LotController extends Controller
         $results = ApiHttpClient::request('delete', "lot/$id")->json();
 
         if ($results['success'] == true) {
-            // dd($holyday);
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Deleted successfully');
             return redirect()->route('lots.index');
@@ -158,6 +166,31 @@ class LotController extends Controller
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return redirect()->route('lots.index');
+        }
+    }
+
+    /**
+     * link with batch
+     */
+    public function linkBatch($id)
+    {
+        // dd($id);
+        if ($id) {
+            $results = ApiHttpClient::request('get', 'lot/' . $id)->json();
+
+            if ($results['success'] == true) {
+                $lot = $results['data'];
+                // dd($lot);
+                return view('lot.link_batches', compact('lot'));
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', 'Something went wrong');
+                return redirect()->back();
+            }
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Something went wrong');
+            return redirect()->back();
         }
     }
 }
