@@ -140,7 +140,7 @@
                         <div class="table-responsive">
                             <!--begin::Table-->
                             <table class="table table-responsive align-middle table-row-dashed fs-6 gy-5"
-                                id="kt_user_report_views_table">
+                                id="dataTable">
                                 <thead>
                                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
