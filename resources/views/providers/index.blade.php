@@ -65,7 +65,7 @@
                                         class="btn btn-sm btn-primary show-action" data-bs-toggle="tooltip"
                                         data-bs-custom-class="tooltip-inverse" data-bs-placement="bottom"
                                         title="{{ __('provider-list.vendor_details') }}">
-                                        {{ __('provider-list.view') }}
+                                        {{ __('provider-list.views') }}
                                     </a>
                                     <a href="#" class="btn btn-sm btn-danger delete-provider d-none"
                                         data-provider-id="{{ $provider['id'] }}" data-provider-name="{{ $provider['name'] }}"

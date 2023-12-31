@@ -68,6 +68,7 @@ return [
     'phone_number' => 'Phone Number',
     'phone_number_ph' => 'Enter Vendor Phone Number',
     'addresses_ph' => 'Enter Vendor Address',
+    'views' => 'View',
 
   
   

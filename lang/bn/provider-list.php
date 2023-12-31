@@ -57,7 +57,7 @@ return [
     'create_vendor' => 'ভেন্ডর তৈরি করুন',
     'edit' => 'এডিট',
     'vendor_edit' => 'ভেন্ডর এডিট করুন',
-    'vendor_details' => 'ভেন্ডরের বিবরণ দেখুন',
+    'vendor_details' => 'ভেন্ডরের বিস্তারিত দেখুন',
     'vendor_link_batch' => 'ভেন্ডরের সাথে ব্যাচ লিংক ',
     'delete' => 'ডিলিট',
     'vendor_delete' => 'ভেন্ডর ডিলিট করুন ',
@@ -68,4 +68,5 @@ return [
     'phone_number' => 'ফোন নম্বর',
     'phone_number_ph' => 'ভেন্ডরের ফোন নম্বর লিখুন ',
     'addresses_ph' => 'ভেন্ডরের ঠিকানা লিখুন ',
+    'views' => 'বিস্তারিত ',
 ];
