@@ -318,22 +318,9 @@
             </div>
         </div>
     </div>
-    <!--End::Provider Update Modal-->
-@section('script')
-    <script></script>
-@endsection
-
 @section('scripts')
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/assets/functions.js') }}"></script>
-
-    @push('js')
-    <script>
-    $(document).ready(function() { 
-        $('.table').DataTable();
-    }); 
-    </script>
-    @endpush
 @endsection
 @endsection
