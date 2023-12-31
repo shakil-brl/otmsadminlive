@@ -503,6 +503,8 @@
 
 @push('js')
 <script>
-$('#dataTable').DataTable();
+$( document ).ready(function() {
+    $('#dataTable').DataTable();
+}
 </script>
 @endpush
