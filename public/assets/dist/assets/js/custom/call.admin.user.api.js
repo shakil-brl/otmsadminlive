@@ -94,6 +94,7 @@ $(function () {
 
                         userTbody.append(userTr);
                     });
+                    $('#dataTable').DataTable();
                 } else {
                     userTbody.innerHTML = `
                             <tr>
@@ -101,6 +102,7 @@ $(function () {
                             </tr>                            
                         `;
                 }
+
             },
             error: function (xhr, status, error) {
                 // Handle errors here
