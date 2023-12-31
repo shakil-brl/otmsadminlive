@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'sign_in' => 'Sign In',
+    'sign_in' => 'Login Your Account',
     'username' => 'Username',
     'username_ph' => 'Enter Username',
     'email' => 'Email',
@@ -24,6 +24,9 @@ return [
     'login' => 'Login',
     'do_not_account' => 'Don’t have an account?',
     'remember_me' => 'Remember me',
+    'logins' => 'Login',
+    'herpower_project' => '2023 Herpower Project',
+    'ict_division' => 'ICT Division',
 
 
 ];

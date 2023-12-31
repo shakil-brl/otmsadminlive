@@ -1,7 +1,7 @@
 <div class="copyright">
-    &copy;২০২৩ হার পাওয়ার প্রজেক্ট
+    &copy;@lang('login.herpower_project')
 </div>
 <img src="{{ asset('img/doict.svg') }}" alt="">
 <div class="right">
-    তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
+    @lang('login.ict_division')
 </div>
