@@ -116,10 +116,10 @@
                                 <div class="nav-link pe-0">
                                     <div class="auth-panel d-md-block d-inline-block ">
                                         <a class="signup btn" href="https://training.gov.bd/signup">
-                                            Sign Up
+                                           @lang('login.sign_up')
                                         </a>
                                         <a class="login btn active" href="#">
-                                            Login
+                                            @lang('login.logins')
                                         </a>
                                     </div>
                                 </div>
@@ -131,7 +131,8 @@
             </header>
             <div id="login-form">
                 <div class="content">
-                    <legend class="title">@lang('login.login')</legend>
+                    <legend class=" fs-5 text-center font-weight-bold">@lang('login.sign_in')</legend>
+
                     @if(session('error'))
                     <div style="color: red;">
                         {{ session('error') }}
@@ -184,13 +185,13 @@
             </div>
             <footer id="footer">
                 <div class="text-md-start left">
-                    &copy;২০২৩ হার পাওয়ার প্রজেক্ট
+                    &copy;@lang('login.herpower_project')
                 </div>
                 <div class="text-center center">
                     <img class="govt-logo" src="{{ asset('img/login') }}/footer-logo.png" alt="">
                 </div>
                 <div class="text-md-end right">
-                    তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
+                    @lang('login.ict_division')
                 </div>
             </footer>
         </div>
