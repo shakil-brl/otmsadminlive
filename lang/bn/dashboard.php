@@ -18,7 +18,7 @@ return [
     'complete_batch' => 'কমপ্লিট ব্যাচ',
     'district' => 'জেলা',
     'upazila' => 'উপজেলা',
-    'partner' => 'পার্টনার',
+    'partner' => 'ভেন্ডর',
     'todays' => 'আজকের',
     'weekly' => 'সাপ্তাহিক',
     'monthly' => 'মাসিক',

@@ -43,6 +43,6 @@
             <label for="remember" class="remember m-0 ms-2">{{ __('login.remember_me') }}</label>
         </div>
 
-        <button type="submit" class="btn submit-btn">{{ __('login.sign_in') }}</button>
+        <button type="submit" class="btn submit-btn  show-loader ">{{ __('login.sign_in') }}</button>
     </form>
 @endsection

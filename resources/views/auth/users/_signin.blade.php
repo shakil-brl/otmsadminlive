@@ -59,7 +59,7 @@
                             <!--end::Wrapper-->
                             <!--begin::Submit button-->
                             <div class="d-grid mb-10">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary  show-loader ">
                                     <!--begin::Indicator label-->
                                     <span class="indicator-label">{{ __('login.sign_in') }}</span>
                                     <!--end::Indicator label-->

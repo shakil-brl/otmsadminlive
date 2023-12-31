@@ -35,9 +35,9 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/class-custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/new_pages/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css?v=1') }}">
+    <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}">
+    <link rel="stylesheet" href="{{ asset('css/new_pages/main.css?v=1') }}">
     <style>
         /* styles.css */
 
@@ -49,10 +49,11 @@
             height: 100%;
             background-color: #000000b0;
             /* Set the background color of your preloader */
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            backdrop-filter: blur(4px);
             /* Set a high z-index to make sure it's on top of other elements */
         }
 
@@ -84,6 +85,15 @@
             display: none;
             /* Hide the page content by default */
         }
+
+        [data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active {
+            border-left: 3px solid #FAF5FF;
+            background: linear-gradient(90deg, rgba(164, 64, 255, 0.30) 0%, rgba(164, 64, 255, 0.00) 100%);
+        }
+
+        [data-kt-app-layout="dark-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-title {
+            color: #FFF !important;
+        }
     </style>
     @stack('css')
     @livewireScripts
@@ -95,12 +105,11 @@
     </style>
 
 
-    @if(Session::get('access_token.access_token'))
-
-    <script>
-        var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
-var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
-    </script>
+    @if (Session::get('access_token.access_token'))
+        <script>
+            var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+            var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+        </script>
     @endif
 
 
@@ -325,15 +334,22 @@ var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
 
         // script.js
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Hide the preloader
-    document.getElementById("preloader").style.display = "none";
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     document.getElementById("preloader").style.display = "none";
+        //     document.getElementById("kt_app_root").style.display = "block";
+        // });
+        $('.show-loader').on('click', function() {
+                var myDiv = document.getElementById("preloader");
+                if (myDiv.style.display === "none" || myDiv.style.display === "") {
+                myDiv.style.display = "flex";
+                } else {
+                myDiv.style.display = "none";
+                }
 
-    // Show the page content
-    document.getElementById("kt_app_root").style.display = "block";
-});
-
-
+                setTimeout(function() {
+                    myDiv.style.display = "none";
+                }, 10000);
+        });
     </script>
 
     <!--begin::Custom Javascript(used for this page only)-->

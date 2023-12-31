@@ -56,6 +56,6 @@
                 </span>
             </div>
         </div>
-        <button type="submit" class="btn submit-btn">{{ __('login.sign_up') }}</button>
+        <button type="submit" class="btn submit-btn  show-loader ">{{ __('login.sign_up') }}</button>
     </form>
 @endsection

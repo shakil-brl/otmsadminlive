@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AttendanceRepoController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\BatchScheduleController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\CommitteeController;
 use App\Http\Controllers\DashboardDetailsController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MyClassController;
@@ -280,5 +282,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/', [ClassDocumentationController::class, 'index'])->name('class-docs.index');
         Route::get('/show/{id}', [ClassDocumentationController::class, 'show'])->name('class-docs.show');
     });
+    Route::resource('holydays', HolydayController::class);
    
 });
+
+Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');

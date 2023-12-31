@@ -108,7 +108,11 @@
                                     {{ __('batch-list.class_start') }}
                                 </div>
                                 <div class="title">
-                                    {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
+                                    @if ($batch['startDate'])
+                                        {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
+                                    @else
+                                        Not Defined
+                                    @endif
                                 </div>
                             </div>
                             <div>

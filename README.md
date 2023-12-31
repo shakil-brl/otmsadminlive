@@ -1,66 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Her Power Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
 
-## About Laravel
+Welcome to the Her Power Project,The Her Power Project is a collaborative initiative between Babylon Resources Ltd. and DOict, aimed at empowering individuals through targeted online training and skill development. Developed by Babylon Resources Ltd., the Online Training Monitoring System (OTMS) serves as the backbone of this transformative project, ensuring effective management, tracking, and assessment of online training activities.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Project Entities
+Babylon Resources Ltd.
+About Babylon Resources Ltd.: As the driving force behind the Her Power Project, Babylon Resources Ltd. is a technology solutions provider committed to innovation and excellence. Our expertise in developing the Online Training Monitoring System reflects our dedication to creating impactful solutions that empower and educate.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## DOict - Project Owner
+Department of Information and Communication Technology (DOict): Serving as the project owner, DOict plays a pivotal role in guiding the strategic direction of the Her Power Project. Their commitment to leveraging technology for educational empowerment aligns seamlessly with the project's overarching goals.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Purpose
+Empowering Futures, One Skill at a Time: The Her Power Project, backed by the technological prowess of Babylon Resources Ltd., strives to provide individuals with inclusive and accessible opportunities for learning. DOict's visionary leadership ensures that the project remains aligned with the broader objectives of leveraging technology for societal advancement.
+## Project Components
+## Administrative Configuration
+# Location Configuration
+Division
 
-## Learning Laravel
+division()
+District
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+distric(44)
+Upazila
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+uypozela(130)
+Training Categories
+#### Workforce (wf)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Graphic Design
+Web Design
+Digital Marketing
+#### IT Skills Program (it S.p)
+#### Call Center Agent
+#### E-commerce
 
-## Laravel Sponsors
+#### User Setup
+AP (Upazila Based)
+Programmer (District)
+Project User
+DOict User
+### Upazila and Division-wise Trainee Selection Committee Setup
+Creation and setup of committees responsible for selecting trainees from Upazila and Division levels.
+### Training Service Provider Setup
+Configuration of entities or services providing training.
+### Trainer Setup
+Configuration of trainers involved in delivering various training programs.
+### Training Evaluation Setup
+Establishment of procedures and criteria for evaluating the effectiveness of training programs.
+### Trainees' Travel and Entertainment Allowance Setup
+Configuration of allowances for travel and entertainment for trainees.
+### Payment Gateway Integration
+Setup and integration of a payment gateway for processing payments related to training services.
+This breakdown covers the key components of the administrative configuration for your training system. Depending on the specifics of your system and requirements, you may need to delve into more detailed configurations for each of these components. Ensure that your administrative setup aligns with the overall goals and workflow of your training system
+#### OTMS Overview
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+The Online Training Monitoring System (OTMS) is a powerful tool developed by Babylon Resources Ltd. It facilitates efficient training management, progress tracking, and resource organization.
 
-### Premium Partners
+## Getting Started with OTMS
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Prerequisites
+#### Administrative Configurations
+####  User Registration.
+ User Registration Process
+#### Training Configuration Processes
+ Trainee Selection Process
+ Training service provider link with Batch.
+ Trainee Enrollment in batch.
+ Trainers link with Batch .
+ Batch wise training Schedule .
+#### Training Execution Process .
+ Batch wise training Attendance.
+ Batch wise training Evaluation.
+ Trainees feedback 
+ Trainees Travel and entertainment allowance- online payment.
+ Training Inspection report .
+ Training Live Steaming .
+#### Training Closing Process
+ Trainees Final Evaluation .
+ Online Certificate with Approval Process 
+ Trainee cartificart list 
+#### Report Requirements
+#### Additional Features of this application beside TOR
+#### Integration Requirements.
+ Integration of SSL with web domain
+ Gateway Integration 
+ Integration with Payment Gateway.
+ Disaster management
 
-## Contributing
+ ## Report Requirements
+ 1.Real-time Training Category, Service Provider, and Batch-wise Attendance Report:
+ 2.Category/Batch/Service Provider/District/Upazila-wise Trainee Report
+ 3.Training Category-wise Service Provider List Report: 
+ 4.Training Category, Service Provider, and Trainer List Report
+ 5.Training Category, Service Provider, and Batch-wise Evaluation Report
+ 6.Inspection Report:
+ 7.Feedback Report
+ 8.Trainees Travel and Entertainment Allowance Report
+ 9.Links of Live Streaming for Every Batch
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Other if required: This section should detail any additional reports that may be 
+necessary based on specific project needs or requirements not covered in the above 
+reports
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
