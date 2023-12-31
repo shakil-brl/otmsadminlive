@@ -500,11 +500,3 @@
     </script>
 @endsection
 @endsection
-
-@push('js')
-<script>
-$(document).ready(function() { 
-    $('#dataTable').DataTable();
-}); 
-</script>
-@endpush

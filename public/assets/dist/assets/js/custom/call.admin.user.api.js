@@ -93,6 +93,7 @@ $(function () {
                             `;
 
                         userTbody.append(userTr);
+                        $('#dataTable').DataTable();
                     });
                 } else {
                     userTbody.innerHTML = `
