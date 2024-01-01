@@ -95,7 +95,7 @@
                                     :title="__('dashboard.complete_class')" :class="'card-item purple show-loader'" />
                             </div>
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.districts')" :totalBatch="$data['total_district'] ?? 0" :icon="asset('img/new_icon/district.png')"
+                                <x-dashboard-card :url="route('dashboard_details.districts')" :totalBatch="'44'" :icon="asset('img/new_icon/district.png')"
                                     :title="__('dashboard.district')" :class="'card-item green-white show-loader'" />
                             </div>
 
@@ -108,7 +108,7 @@
 
                         @if (in_array($userRole, ['SuperAdmin', 'superAdmin', 'Admin', 'admin', 'DPD', 'dpd', 'DG', 'dg']))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.upazilas')" :totalBatch="$data['total_upazila'] ?? 0" :icon="asset('img/new_icon/upazila.png')"
+                                <x-dashboard-card :url="route('dashboard_details.upazilas')" :totalBatch="'130'" :icon="asset('img/new_icon/upazila.png')"
                                     :title="__('dashboard.upazila')" :class="'card-item info show-loader'" />
                             </div>
                             <div>
@@ -117,7 +117,7 @@
                             </div>
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="0" :icon="asset('img/new_icon/developmentpartner.png')"
-                                    title="Today Runing Class" :class="'card-item red show-loader'" />
+                                    title="Today's Class" :class="'card-item red show-loader'" />
                             </div>
                         @endif
                     </div>
