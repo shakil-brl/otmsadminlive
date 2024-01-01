@@ -38,6 +38,27 @@ class AttendanceController extends Controller
         }
         return $data['message'] ?? 'Something went wrong';
     }
+
+    public function updateLink(Request $request)
+    {
+        $results = ApiHttpClient::request('post', 'attendance/change-live-link', [
+            ...$request->only('schedule_detail_id', 'streaming_link', 'static_link'),
+        ])->json();
+
+        if (isset($results['success'])) {
+            if ($results['success'] == true) {
+                session()->flash('type', 'Success');
+                session()->flash('message', 'Link Updated Successfully');
+                return redirect()->route('batch-schedule.index', [$request->schedule_id, $request->batch_id]);
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', $results['message'] ?? 'Something went wrong');
+                return view('batch_schedule.index');
+            }
+        }
+        return $data['message'] ?? 'Something went wrong';
+    }
+
     public function attendanceForm($id, $batchId = null)
     {
 

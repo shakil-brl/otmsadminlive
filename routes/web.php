@@ -226,6 +226,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/{scheduleDetailId}/show/schedule', [AttendanceController::class, 'showAttendance'])->name('attendance.schedule');
         Route::get('/{scheduleDetailId}/start', [AttendanceController::class, 'start'])
             ->name('attendance.start');
+        Route::get('/change-live-link', [AttendanceController::class, 'updateLink'])
+            ->name('attendance.update-link');
         Route::get('/{scheduleDetailId}/student-list/', [AttendanceController::class, 'attendanceForm'])->name('attendance.form');
         Route::post('/{scheduleDetailId}/take-attendance', [AttendanceController::class, 'takeAttendance'])->name('attendance.take-attendance');
         Route::get('/{scheduleDetailId}/end', [AttendanceController::class, 'end'])->name('attendance.end');
