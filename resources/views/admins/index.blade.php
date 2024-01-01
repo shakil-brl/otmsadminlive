@@ -140,7 +140,7 @@
                         <div class="table-responsive">
                             <!--begin::Table-->
                             <table class="table table-responsive align-middle table-row-dashed fs-6 gy-5"
-                                id="kt_user_report_views_table">
+                                id="dataTable">
                                 <thead>
                                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
@@ -492,34 +492,11 @@
     </div>
     <!--End::User Edit Modal-->
 @section('scripts')
-    <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    {{-- <script src="{{ asset('assets/dist/assets/js/custom/pages/user/general.js') }}"></script> --}}
     <script src="{{ asset('assets/dist/assets/js/custom/call.admin.user.api.js') }}"></script>
-    {{-- <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyCT_JFAPLd5hvaeU9q28pV05tQE6H3eA4c",
-            authDomain: "otms-d362d.firebaseapp.com",
-            databaseURL: "https://otms-d362d-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "otms-d362d",
-            storageBucket: "otms-d362d.appspot.com",
-            messagingSenderId: "482286616045",
-            appId: "1:482286616045:web:88611af302394d5a4ffbe4",
-            measurementId: "G-RVH6B2EE64"
-        }
-        firebase.initializeApp(firebaseConfig);
-    </script> --}}
 
     <script>
         let userRole = @json($role);
     </script>
 @endsection
 @endsection
-
-
-@push('js')
-<script>
-$('#dataTable').DataTable();
-</script>
-@endpush

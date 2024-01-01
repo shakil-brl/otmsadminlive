@@ -66,6 +66,8 @@
                                     view
                                 </a>
                             </td> --}}
+
+                            
                                     </tr>
                                 @endforeach
                             </tbody>
