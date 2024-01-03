@@ -29,6 +29,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TmsInspectionController;
 use App\Http\Controllers\ProviderBatchesController;
 use App\Http\Controllers\ClassDocumentationController;
+use App\Http\Controllers\EvaluationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -283,7 +284,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/show/{id}', [ClassDocumentationController::class, 'show'])->name('class-docs.show');
     });
     Route::resource('holydays', HolydayController::class);
+    Route::resource('evaluations', EvaluationController::class);
    
 });
 
-Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
+Route::get('/student-evaliation-report', [StudentEvaluationController::class, 'index'])->name('student-evaluation.index');
