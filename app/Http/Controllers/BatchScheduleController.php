@@ -12,15 +12,18 @@ use Illuminate\Support\Str;
 class BatchScheduleController extends Controller
 {
     // all batches
-    public function batches()
+    public function batches(Request $request)
     {
         $page = request('page', 1);
         $app_url = Str::finish(config('app.api_url'), '/');
-        $results = ApiHttpClient::request('get', 'batch/list?page=' . $page)
+        $results = ApiHttpClient::request('get', 'batch/list', $request->all())
             ->json();
 
+
         if ($results['success'] == true) {
-            return view('batches.index', ['results' => $results['data']]);
+            $from = $results['data']['from'] ?? 1;
+            $paginator = $this->customPaginate($results, $request, route('batch-schedule.batches'));
+            return view('batches.index', ['results' => $results['data'], 'from' => $from, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');

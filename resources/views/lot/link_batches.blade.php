@@ -5,19 +5,19 @@
     <div class="m-5">
         <x-alert />
         {{-- @dump($from_edit) --}}
-        @isset($provider)
-            {{-- @dd($provider) --}}
+        @isset($lot)
+            {{-- @dd($lot) --}}
             <div class="card p-5">
                 <div id="">
-                    <h3>{{ $provider['name'] ?? '' }} Details:</h3>
+                    <h3>Batch Group Details({{ $lot['name_en'] ?? '' }} ):</h3>
                     <div>
-                        <div>Phone: {{ $provider['phone'] ?? '' }}</div>
-                        <div>Email: {{ $provider['email'] ?? '' }}</div>
-                        <div>Address: {{ $provider['address'] ?? '' }}</div>
+                        <div>Name(Bangla): {{ $lot['name_bn'] ?? '' }}</div>
+                        <div>Code: {{ $lot['code'] ?? '' }}</div>
+                        <div>Remark: {{ $lot['remark'] ?? '' }}</div>
                     </div>
                 </div>
                 <div class="mt-5">
-                    <h4>Link Batches With Provider</h4>
+                    <h4>Link Batches With Batch Group</h4>
                     <div class="my-3">
                         <div id="gioLocation-form">
                             <div class="d-flex justify-content-between gap-3">
@@ -104,10 +104,9 @@
     <script>
         $(document).ready(function() {
             localStorage.removeItem('selectedBatches');
-            let providerId = @json($provider['id']);
-            let fromEdit = @json($from_edit);
+            let lotId = @json($lot['id']);
             // alert(fromEdit);
-            let storedDBBatches = @json($provider['training_batches']);
+            let storedDBBatches = @json($lot['training_batches']);
             // console.log(storedDBBatches);
             // Initialize an empty object for selectedBatches
             var selectedBatches = {};
@@ -321,7 +320,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input batch-checkbox" type="checkbox" id="${data.id}" name="batches[]"
                                                     value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${batchTitle ?? ''}"
-                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${!fromEdit ? (data.provider_id && data.provider_id != providerId ? 'disabled' : '') : ''}>
+                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${data.lot_id && data.lot_id != lotId ? 'disabled' : ''} >
                                                 <label class="form-check-label text-dark" for="${data.id}">
                                                     ${data.batchCode} (${batchTitle ?? ""})
                                                 </label>
@@ -400,7 +399,7 @@
                 }
             });
 
-            // Provider link batches form submit
+            // lot link batches form submit
             $("#link-batch-form").submit(function(e) {
                 e.preventDefault();
                 Swal.fire({
@@ -415,18 +414,16 @@
                     if (result.isConfirmed) {
                         let fd = new FormData();
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-                        let link = api_baseurl + "provider-batches/create";
+                        let link = api_baseurl + "lot/link-batch";
 
                         let batchIds = $("#link-batch-form [name=link-batches]").val();
 
-                        // console.log(batchIds);
+                        console.log(batchIds);
 
                         fd.append("batch_ids", batchIds);
-                        fd.append("provider_id", providerId);
+                        fd.append("lot_id", lotId);
                         fd.append("_token", CSRF_TOKEN);
-                        if (fromEdit || (batchIds == '' && storedDBBatches) || storedDBBatches) {
-                            fd.append("edit", true);
-                        }
+
                         $.ajax({
                             type: "post",
                             data: fd,

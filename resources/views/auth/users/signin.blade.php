@@ -116,10 +116,10 @@
                                 <div class="nav-link pe-0">
                                     <div class="auth-panel d-md-block d-inline-block ">
                                         <a class="signup btn" href="https://training.gov.bd/signup">
-                                            Sign Up
+                                           @lang('login.sign_up')
                                         </a>
                                         <a class="login btn active" href="#">
-                                            Login
+                                            @lang('login.logins')
                                         </a>
                                     </div>
                                 </div>
@@ -131,7 +131,8 @@
             </header>
             <div id="login-form">
                 <div class="content">
-                    <legend class="title">@lang('login.login')</legend>
+                    <legend class=" fs-5 text-center font-weight-bold">@lang('login.sign_in')</legend>
+
                     @if(session('error'))
                     <div style="color: red;">
                         {{ session('error') }}
@@ -184,13 +185,13 @@
             </div>
             <footer id="footer">
                 <div class="text-md-start left">
-                    &copy;২০২৩ হার পাওয়ার প্রজেক্ট
+                    &copy;@lang('login.herpower_project')
                 </div>
                 <div class="text-center center">
                     <img class="govt-logo" src="{{ asset('img/login') }}/footer-logo.png" alt="">
                 </div>
                 <div class="text-md-end right">
-                    তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
+                    @lang('login.ict_division')
                 </div>
             </footer>
         </div>
@@ -202,75 +203,17 @@
     <script type="text/javascript" src="{{ asset('assets/login') }}/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        $(".password .material-icons-outlined").click(function() {
-            let input = $(this).parent().parent().children('input');
-            let type = input.attr('type');
-            if (type == 'password') {
-                input.attr('type', 'text');
-                $(this).html('visibility_off');
-            } else {
-                input.attr('type', 'password');
-                $(this).html('visibility');
-            }
-        });
-    </script>
+$(".password .material-icons-outlined").click(function() {
+    let input = $(this).closest('.password').find('input');
+    let type = input.attr('type');
+    
+    input.attr('type', type === 'password' ? 'text' : 'password');
+    $(this).html(type === 'password' ? 'visibility_off' : 'visibility');
+});
 
-    <script>
-        let title = "{{ __('register.are_you') }}";
-        let text = "{{ __('register.submit_form') }}";
-        let confirmButtonText = "{{ __('register.yes_submitted') }}";
-        let cancelButtonText = "{{ __('register.cancel_button') }}";
-        let admin_baseurl = '{{ route('home.index') }}';
-        let api_baseurl = '{{ config('app.api_url') }}';
-        let authToken = localStorage.getItem('authToken');
-        let language = "{{ session()->get('locale') }}";
-
-        if (window.location.pathname == '/login' || window.location.pathname == '/register') {
-
-            if (authToken != null) {
-                window.open('/dashboard', '_self')
-            }
-        }
-
-        let url = "{{ route('changeLang') }}";
-
-        function changeLocale(lang) {
-            let url_link = api_baseurl + "language";
-            $.ajax({
-                type: "get",
-                url: url_link,
-                headers: {
-                    'X-localization': lang
-                },
-                data: {},
-                dataType: "JSON",
-                success: function(results) {
-                    if (results.success === true) {
-                        console.log(results.message);
-                    } else {
-                        // swal.fire("Error!", results.message, "error");
-                    }
-                },
-                error: function(response) {
-                    // alert(response);
-                },
-            });
-            window.location.href = url + "?lang=" + lang;
-        }
-        $("#lang-bd").click(function() {
-            changeLocale('bn');
-        });
-        $("#lang-us").click(function() {
-            changeLocale('en');
-        });
-
-        // script.js
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Hide the preloader
     document.getElementById("preloader").style.display = "none";
-
-    // Show the page content
     document.getElementById("body").style.display = "flex";
 });
 

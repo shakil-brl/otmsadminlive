@@ -15,6 +15,7 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LotController;
 use App\Http\Controllers\MyClassController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PreliminarySelectionController;
@@ -284,8 +285,12 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/show/{id}', [ClassDocumentationController::class, 'show'])->name('class-docs.show');
     });
     Route::resource('holydays', HolydayController::class);
+
+    Route::resource('lots', LotController::class);
+
+    Route::get('/lots/link-batch/{lot_id}', [LotController::class, 'linkBatch'])->name('lots.link-batch');
+
     Route::resource('evaluations', EvaluationController::class);
-   
 });
 
-Route::get('/student-evaliation-report', [StudentEvaluationController::class, 'index'])->name('student-evaluation.index');
+Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');

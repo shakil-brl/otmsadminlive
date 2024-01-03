@@ -28,6 +28,8 @@
                 </thead>
                 <tbody>
                     @foreach (collect($ongoing_classes) as $batch)
+
+                   
                         <tr>
                             <td>
                                 {{ $loop->iteration }}
@@ -59,11 +61,10 @@
                                         {{__('batch-schedule.join_class')}}
                                     </a>
                                 @endif
-                            
-
-                                 {{-- @php
+                               
+                                 @php
                                 $inspection_pm = [
-                                'batch_id' => $batch['training_batch']['id'],
+                                'batch_id' => $batch['schedule']['training_batch']['id'],
                                 'schedule_detail_id' => $batch['id'],
                                 ];
                                 @endphp
@@ -72,7 +73,7 @@
                                 target="_blank">
                                 Inspection
                                 </a>
-                                @endisset --}}
+                                @endisset
 
 
                             </td>

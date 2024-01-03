@@ -11,6 +11,8 @@ class Permission
 {
     public function handle(Request $request, Closure $next)
     {
+
+    
         $routeName = Route::currentRouteName();
 
         //$routePermissions = Session::get('rolePermission');
@@ -38,7 +40,7 @@ class Permission
         //     //return redirect()->route('admins.dashboard');
         // }
 
-        //dd($routeName, $rolePermission);
+        //dd($routeName, $routePermissions);
         //dd(!in_array($routeName, $rolePermission));
         if (!in_array($routeName, $routePermissions)) {
             $user = auth()->user();

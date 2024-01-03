@@ -7,7 +7,7 @@
 @section('content')
     <div class="m-5">
         <h3>
-            Create Holyday
+            Create Batch Group
         </h3>
         <x-alert />
 
@@ -25,19 +25,13 @@
         @endif
 
         <div class="card p-5 mt-3">
-            <form action="{{ route('holydays.store') }}" method="post">
+            <form action="{{ route('lots.store') }}" method="post">
                 @csrf
-                @include('holyday.form')
+                @include('lot.form')
             </form>
         </div>
     </div>
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            $("#holly_bay").flatpickr({
-                dateFormat: "d/m/Y",
-            });
-        });
-    </script>
+    <script></script>
 @endsection
 @endsection

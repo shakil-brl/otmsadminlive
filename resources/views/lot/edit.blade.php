@@ -7,7 +7,7 @@
 @section('content')
     <div class="m-5">
         <h3>
-            Update Holyday
+            Update Batch Group
         </h3>
         <x-alert />
 
@@ -24,32 +24,19 @@
             </ul>
         @endif
 
-        @isset($holyday)
-            @php
-                if ($holyday['holly_bay']) {
-                    $holly_bay = \Carbon\Carbon::createFromFormat('Y-m-d', $holyday['holly_bay'])->format('d/m/Y');
-                }
-            @endphp
+        @isset($group)
             <div class="card p-5 mt-3">
                 <div class="card p-5 mt-3">
-                    <form action="{{ route('holydays.update', $holyday['id']) }}" method="post">
+                    <form action="{{ route('lots.update', $group['id']) }}" method="post">
                         @csrf
                         @method('PUT')
-                        @include('holyday.form')
+                        @include('lot.form')
                     </form>
                 </div>
             </div>
         @endisset
     </div>
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            let storedHolyday = @json($holly_bay) ?? '';
-            $("#holly_bay").flatpickr({
-                dateFormat: "d/m/Y",
-                defaultDate: [storedHolyday]
-            });
-        });
-    </script>
+    <script></script>
 @endsection
 @endsection
