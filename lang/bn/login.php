@@ -26,7 +26,7 @@ return [
     'do_not_account' => 'আপনার কি একাউন্ট নাই ?',
     'remember_me' => 'আমাকে মনে রাখুন',
     'logins' => 'লগইন',
-    'herpower_project' => '২০২৩ হার পাওয়ার প্রজেক্ট',
+    'herpower_project' => 'হার পাওয়ার প্রজেক্ট',
     'ict_division' => 'তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ',
 
 ];
