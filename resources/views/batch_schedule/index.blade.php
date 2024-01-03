@@ -93,60 +93,66 @@
                                 {{ $date->format('d/m/Y') }}
                             </div>
                         </div>
-                        <div class="class-time-detail">
-                            <div class="left">
-                                <div class="icon">
-                                    <span class="material-icons-outlined">
-                                        schedule
-                                    </span>
+                        <div>
+                            <div class="class-time-detail mb-1">
+                                <div class="left">
+                                    <div class="icon">
+                                        <span class="material-icons-outlined">
+                                            schedule
+                                        </span>
+                                    </div>
+                                    <div class="border-right">
+                                        <div class="label">{{ __('batch-schedule.class') }}</div>
+                                        <div class="text">{{ __('batch-schedule.time') }}</div>
+                                    </div>
                                 </div>
-                                <div class="border-right">
-                                    <div class="label">{{ __('batch-schedule.class') }}</div>
-                                    <div class="text">{{ __('batch-schedule.time') }}</div>
+                                <div class="right">
+                                    <div class="time">
+                                        {{ $start_time->format('h:i:s A') }} - {{ $end_time->format('h:i:s A') ?? '' }}
+                                        {{ __('batch-schedule.time_ta') }}
+                                    </div>
+                                    <div class="d-flex">
+                                        @isset($schedule_detail['status'])
+                                            @if ($schedule_detail['status'] == 1)
+                                                <div class="icon waiting">
+                                                    <span class="material-icons-outlined">
+                                                        event
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <div class="label">{{ __('batch-schedule.class_status') }}</div>
+                                                    <div class="text">{{ __('batch-schedule.class_status_waiting') }}</div>
+                                                </div>
+                                            @elseif ($schedule_detail['status'] == 2)
+                                                <div class="icon running">
+                                                    <span class="material-icons-outlined">
+                                                        directions_run
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <div class="label">{{ __('batch-schedule.class_status') }}</div>
+                                                    <div class="text">{{ __('batch-schedule.class_status_running') }}</div>
+                                                </div>
+                                            @elseif ($schedule_detail['status'] == 3)
+                                                <div class="icon complete">
+                                                    <span class="material-icons-outlined">
+                                                        done
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <div class="label">{{ __('batch-schedule.class_status') }}</div>
+                                                    <div class="text">{{ __('batch-schedule.class_status_completed') }}</div>
+                                                </div>
+                                            @endif
+                                        @endisset
+
+
+                                    </div>
                                 </div>
                             </div>
-                            <div class="right">
-                                <div class="time">
-                                    {{ $start_time->format('h:i:s A') }} - {{ $end_time->format('h:i:s A') ?? '' }}
-                                    {{ __('batch-schedule.time_ta') }}
-                                </div>
-                                <div class="d-flex">
-                                    @isset($schedule_detail['status'])
-                                        @if ($schedule_detail['status'] == 1)
-                                            <div class="icon waiting">
-                                                <span class="material-icons-outlined">
-                                                    event
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <div class="label">{{ __('batch-schedule.class_status') }}</div>
-                                                <div class="text">{{ __('batch-schedule.class_status_waiting') }}</div>
-                                            </div>
-                                        @elseif ($schedule_detail['status'] == 2)
-                                            <div class="icon running">
-                                                <span class="material-icons-outlined">
-                                                    directions_run
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <div class="label">{{ __('batch-schedule.class_status') }}</div>
-                                                <div class="text">{{ __('batch-schedule.class_status_running') }}</div>
-                                            </div>
-                                        @elseif ($schedule_detail['status'] == 3)
-                                            <div class="icon complete">
-                                                <span class="material-icons-outlined">
-                                                    done
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <div class="label">{{ __('batch-schedule.class_status') }}</div>
-                                                <div class="text">{{ __('batch-schedule.class_status_completed') }}</div>
-                                            </div>
-                                        @endif
-                                    @endisset
-
-
-                                </div>
+                            <div>
+                                <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
+                                    class="btn btn-secondary w-100 rounded-4">Class Document</a>
                             </div>
                         </div>
                         <div class="button-area">

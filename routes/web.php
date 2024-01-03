@@ -8,7 +8,9 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\BatchScheduleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClassDocumentController;
 use App\Http\Controllers\CommitteeController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardDetailsController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
@@ -285,6 +287,14 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::resource('lots', LotController::class);
 
     Route::get('/lots/link-batch/{lot_id}', [LotController::class, 'linkBatch'])->name('lots.link-batch');
+
+    Route::resource('/courses', CourseController::class);
+
+    Route::resource('/class-documents', ClassDocumentController::class);
+
+    Route::group(['controller' => ClassDocumentController::class, 'prefix' => 'schedule-class-documents', 'as' => 'schedule-class-documents.'], function () {
+        Route::get('/{schedule_details_id}', 'scheduleDocument')->name('index');
+    });
 });
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
