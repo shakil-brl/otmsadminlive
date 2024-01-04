@@ -145,21 +145,16 @@
                                                 </div>
                                             @endif
                                         @endisset
-
-
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
-                                    class="btn btn-secondary w-100 rounded-4">Class Document</a>
-                            </div>
                         </div>
                         <div class="button-area">
-
                             @isset($role)
                                 @if (strtolower($role) == 'trainer')
                                     @isset($schedule_detail['status'])
+                                        <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
+                                            class="btn btn-secondary w-100 rounded-4 mb-1">Class Document</a>
                                         @if ($schedule_detail['status'] == 1)
                                             @if ($date <= \Carbon\Carbon::now())
                                                 <a id="{{ $schedule_detail['id'] }}" class="btn btn-detail start-class  update"
@@ -173,13 +168,6 @@
                                                 </a>
                                             @endif
                                         @elseif ($schedule_detail['status'] == 2)
-                                            <a id="{{ $schedule_detail['id'] }}" class="btn btn-detail class-link-update update mb-1"
-                                                type="button" data-bs-toggle="modal" data-bs-target="#classLinkUpdateModal"
-                                                type="button" style="background: #FBBF24"
-                                                data-streaming-link="{{ $schedule_detail['streaming_link'] }}"
-                                                data-static-link="{{ $schedule_detail['static_link'] }}">
-                                                Update Link
-                                            </a>
                                             <a href="{{ route('attendance.form', [$schedule_detail['id']]) }}" class="btn btn-detail ">
                                                 {{ __('batch-schedule.join_class') }}
                                             </a>
@@ -232,42 +220,6 @@
             </div>
         </div>
         <!--End::Start Class Modal-->
-
-        <!--Start::Update Link Modal-Content-->
-        <div class="modal fade" id="classLinkUpdateModal" tabindex="-1" aria-hidden="true">
-            <!--begin::Modal dialog-->
-            <div class="modal-dialog modal-dialog-centered">
-                <!--begin::Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header" id="kt_modal_update_permission_header">
-                        <!--begin::Modal title-->
-                        <h2 class="fw-bold">Class Link</h2>
-                        <!--end::Modal title-->
-                        <!--begin::Close-->
-                        <div type="button" class="btn-close" data-bs-dismiss="modal">
-                        </div>
-                        <!--end::Close-->
-                    </div>
-                    <!--begin::Provider added Form-->
-                    <div class="modal-body">
-                        <div class="mb-2">
-                            <label for="" class="mb-1">Streaming Link</label>
-                            <input id="streaming_link_update" type="text" class="form-control">
-                        </div>
-                        <div class="mb-2">
-                            <label for="" class="mb-1">Live Class Link</label>
-                            <input id="static_link_update" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-light">Close</button>
-                        <button id="link-update-submit" type="button" class="btn btn-danger">Update</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!--End::Update Link Modal-->
     </div>
 
 @endsection
@@ -288,28 +240,6 @@
                     window.location.href = finalUrl;
                 });
             });
-
-            $('.class-link-update').click(function() {
-                id = $(this).attr('id');
-                let schedulId = @json($schedule_details[0]['batch_schedule_id']);
-                let batchId = @json($batch['id']);
-                let stremingLink = $(this).attr('data-streaming-link');
-                let staticLink = $(this).attr('data-static-link');
-
-                $("#streaming_link_update").val(stremingLink);
-                $("#static_link_update").val(staticLink);
-
-                $('#link-update-submit').click(function() {
-                    let streaming_link = $("#streaming_link_update").val();
-                    let static_link = $("#static_link_update").val();
-
-                    let finalUrl =
-                        `${app_url}/attendance/change-live-link?schedule_id=${encodeURIComponent(schedulId)}&batch_id=${encodeURIComponent(batchId)}&schedule_detail_id=${encodeURIComponent(id)}&streaming_link=${encodeURIComponent(streaming_link)}&static_link=${encodeURIComponent(static_link)}`;
-
-                    window.location.href = finalUrl;
-                });
-            });
-
         });
     </script>
 @endpush

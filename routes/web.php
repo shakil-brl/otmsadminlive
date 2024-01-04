@@ -230,7 +230,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
             ->name('attendance.start');
         Route::get('/change-live-link', [AttendanceController::class, 'updateLink'])
             ->name('attendance.update-link');
-        Route::get('/{scheduleDetailId}/student-list/', [AttendanceController::class, 'attendanceForm'])->name('attendance.form');
+        Route::get('/{scheduleDetailId}/student-list/{batchId?}', [AttendanceController::class, 'attendanceForm'])->name('attendance.form');
         Route::post('/{scheduleDetailId}/take-attendance', [AttendanceController::class, 'takeAttendance'])->name('attendance.take-attendance');
         Route::get('/{scheduleDetailId}/end', [AttendanceController::class, 'end'])->name('attendance.end');
     });
@@ -246,6 +246,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/show/{schedule_id}/{batch_id}', [BatchScheduleController::class, 'show'])->name('batch-schedule.office');
         Route::get('/runningBatches', [BatchScheduleController::class, 'runningBatches'])->name('batch-schedule.runningBatches');
         Route::get('/running-class-list', [BatchScheduleController::class, 'runningClassList'])->name('batch-schedule.running-class-list');
+        Route::get('/destroy/{batch_id}', [BatchScheduleController::class, 'destroy'])->name('batch-schedule.destroy');
     });
 
     //Route::resource('tms-inspections', TmsInspectionController::class);

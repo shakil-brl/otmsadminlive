@@ -49,11 +49,11 @@ class AttendanceController extends Controller
             if ($results['success'] == true) {
                 session()->flash('type', 'Success');
                 session()->flash('message', 'Link Updated Successfully');
-                return redirect()->route('batch-schedule.index', [$request->schedule_id, $request->batch_id]);
+                return redirect()->back();
             } else {
                 session()->flash('type', 'Danger');
                 session()->flash('message', $results['message'] ?? 'Something went wrong');
-                return view('batch_schedule.index');
+                return redirect()->back();
             }
         }
         return $data['message'] ?? 'Something went wrong';
@@ -61,18 +61,20 @@ class AttendanceController extends Controller
 
     public function attendanceForm($id, $batchId = null)
     {
+        $schedule_details = ApiHttpClient::request('get', 'batch-schedule-details/' . $id)
+            ->json();
 
-        // dd($id);
         $results = ApiHttpClient::request('get', "attendance/$id/student-list")
             ->json();
         //dd($results);
 
-        if (isset($results['success'])) {
-            if ($results['success'] == true) {
-                return view('attendance.attendance_form', ['detail_id' => $id, 'students' => $results['data'] ?? []]);
+        if (isset($results['success']) && isset($schedule_details['success'])) {
+            if ($schedule_details['success'] == true && $results['success'] == true) {
+                // dd($schedule_details['data']);
+                return view('attendance.attendance_form', ['detail_id' => $id, 'schedule_detail' => $schedule_details['data'] ?? [], 'students' => $results['data'] ?? []]);
             } else {
                 session()->flash('type', 'Danger');
-                session()->flash('message', $results['message'] ?? 'Something went wrong');
+                session()->flash('message', 'Something went wrong');
                 return view('attendance.attendance_form');
             }
         }
