@@ -24,7 +24,6 @@ class ClassDocumentController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -86,12 +85,28 @@ class ClassDocumentController extends Controller
     /**
      * Class Document for specific schedule_details_id/class
      */
-    public function scheduleDocument($schedule_details_id)
+    public function scheduleDocument(Request $request, $schedule_details_id)
     {
-        // dd($schedule_details_id);
-        $results = ApiHttpClient::request('get', 'class-document', ['schedule_details_id' => $schedule_details_id])
+        $results = ApiHttpClient::request('get', 'class-document', [
+            'schedule_details_id' => $schedule_details_id,
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])
             ->json();
-        dd($results);
-        return view('schedule-details.class-document');
+
+        if ($results['success'] == true) {
+            $paginator = $this->customPaginate($results, $request, route('schedule-class-documents.index', $schedule_details_id));
+            // dd($results);
+            return view('schedule-details.class-document', ['schedule_details_id' => $schedule_details_id, 'results' => $results['data'], 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+    }
+
+    public function createDocument($schedule_details_id)
+    {
+        return view('class-document.create', compact('schedule_details_id'));
     }
 }

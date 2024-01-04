@@ -295,6 +295,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
     Route::group(['controller' => ClassDocumentController::class, 'prefix' => 'schedule-class-documents', 'as' => 'schedule-class-documents.'], function () {
         Route::get('/{schedule_details_id}', 'scheduleDocument')->name('index');
+        Route::get('/create/{schedule_details_id}', 'createDocument')->name('create');
     });
 });
 
