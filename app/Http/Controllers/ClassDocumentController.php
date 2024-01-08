@@ -34,7 +34,37 @@ class ClassDocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'tms_batch_schedule_detail_id' => 'required',
+            'document_title' => 'required',
+            'description' => 'required',
+            'doc_file' => 'required'
+        ]);
+
+        $document = $request->except('doc_file');
+
+        if ($request->hasFile('doc_file')) {
+            $file = $request->file('doc_file');
+            // $document['doc_type'] = $file->getClientOriginalExtension();
+            $document['doc_type'] = 1;
+            $document['document_path'] = $this->classFileUpload($file, $data['tms_batch_schedule_detail_id']);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', 'File not found.')->withInput();
+        }
+        $data = ApiHttpClient::request('post', 'class-document', $document)->json();
+
+        if ($data['success'] == false) {
+            $error_message = $data['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $error_message)->withInput();
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Created successfully');
+            return redirect()->route('schedule-class-documents.index', $request->tms_batch_schedule_detail_id);
+        }
     }
 
     /**
@@ -79,7 +109,21 @@ class ClassDocumentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $document =  ApiHttpClient::request('get', "class-document/$id")->json();
+        $results = ApiHttpClient::request('delete', "class-document/$id")->json();
+
+        if ($results['success'] == true && $document['success'] == true) {
+            $filePath = public_path($document['data']['document_path']);
+            $this->removeFile($filePath);
+
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Deleted successfully');
+            return redirect()->back();
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
     }
 
     /**

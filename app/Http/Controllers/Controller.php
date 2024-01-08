@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 
 class Controller extends BaseController
 {
@@ -54,5 +55,40 @@ class Controller extends BaseController
         } catch (\Throwable $th) {
             return false;
         }
+    }
+
+    protected function classFileUpload($file, $tmsBatchScheduleDetailId)
+    {
+        $path = null;
+
+        if ($file != null) {
+            $dateTime = now()->format('Ymd_His');
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+
+            // Generate a unique filename based on date, time, original filename, and schedule ID
+            $filename = "{$dateTime}_{$originalFilename}_{$tmsBatchScheduleDetailId}.{$file->getClientOriginalExtension()}";
+
+            $folderPath = public_path("storage/class_document");
+
+            // Check if the folder exists, create it if not
+            if (!File::isDirectory($folderPath)) {
+                File::makeDirectory($folderPath, 0777, true, true);
+            }
+
+            $file->move($folderPath, $filename);
+            $path = "storage/class_document/{$filename}";
+        }
+
+        return $path;
+    }
+
+    protected function removeFile($filePath)
+    {
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+            return true;
+        }
+
+        return false;
     }
 }

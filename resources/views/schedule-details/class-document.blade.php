@@ -3,7 +3,7 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <div class="d-flex justify-content-end align-items-center">
+        <div class="d-flex justify-content-end align-items-center mb-2">
             <a class="btn btn-lg btn-success"
                 href="{{ route('schedule-class-documents.create', $schedule_details_id) }}">Uploda Document</a>
         </div>

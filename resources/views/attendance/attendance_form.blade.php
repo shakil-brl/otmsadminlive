@@ -38,27 +38,29 @@
                     </div>
                 </div>
             </div>
-            <div class="w-100 mb-2 card p-3">
-                <div class="row row-cols-3 btn-group">
-                    @if ($schedule_detail['streaming_link'])
-                        <a class="btn btn-sm btn-danger" href="{{ $schedule_detail['streaming_link'] }}" target="_blank">
-                            {{ __('batch-schedule.live_streaming') }}
+            @if ($schedule_detail['status'] === 2)
+                <div class="w-100 mb-2 card p-3">
+                    <div class="row row-cols-3 btn-group">
+                        @if ($schedule_detail['streaming_link'])
+                            <a class="btn btn-sm btn-danger" href="{{ $schedule_detail['streaming_link'] }}" target="_blank">
+                                {{ __('batch-schedule.live_streaming') }}
+                            </a>
+                        @endif
+                        @if ($schedule_detail['static_link'])
+                            <a type="button" class="btn btn-sm btn-info" href="{{ $schedule_detail['static_link'] }}"
+                                target="_blank">
+                                {{ __('batch-schedule.join_class') }}
+                            </a>
+                        @endif
+                        <a id="{{ $schedule_detail['id'] }}" class="btn btn-sm btn-warning class-link-update" type="button"
+                            data-bs-toggle="modal" data-bs-target="#classLinkUpdateModal" type="button"
+                            data-streaming-link="{{ $schedule_detail['streaming_link'] }}"
+                            data-static-link="{{ $schedule_detail['static_link'] }}">
+                            Update Link
                         </a>
-                    @endif
-                    @if ($schedule_detail['static_link'])
-                        <a type="button" class="btn btn-sm btn-info" href="{{ $schedule_detail['static_link'] }}"
-                            target="_blank">
-                            {{ __('batch-schedule.join_class') }}
-                        </a>
-                    @endif
-                    <a id="{{ $schedule_detail['id'] }}" class="btn btn-sm btn-warning class-link-update" type="button"
-                        data-bs-toggle="modal" data-bs-target="#classLinkUpdateModal" type="button"
-                        data-streaming-link="{{ $schedule_detail['streaming_link'] }}"
-                        data-static-link="{{ $schedule_detail['static_link'] }}">
-                        Update Link
-                    </a>
+                    </div>
                 </div>
-            </div>
+            @endif
         @endisset
         <x-alert />
         @php
