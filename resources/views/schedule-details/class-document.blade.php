@@ -45,11 +45,13 @@
                                     <td>
                                         {{ $document['description'] ?? '' }}
                                     </td>
+                                    {{-- @dump($document['document_path']) --}}
                                     <td class="d-flex gap-1">
-                                        <a href="{{ route('class-documents.show', $document['id']) }}"
-                                            class="btn btn-sm btn-success">View</a>
-                                        <a href="{{ route('class-documents.edit', $document['id']) }}"
-                                            class="btn btn-sm btn-info">
+                                        <a href="{{ asset($document['document_path']) }}" target="_blank"
+                                            class="btn btn-sm btn-success">
+                                            View
+                                        </a>
+                                        <a href="{{ asset($document['document_path']) }}" download class="btn btn-sm btn-info">
                                             Download
                                         </a>
                                         <form action="{{ route('class-documents.destroy', $document['id']) }}" method="post">
