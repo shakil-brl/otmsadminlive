@@ -113,7 +113,7 @@ class ClassDocumentController extends Controller
         $results = ApiHttpClient::request('delete', "class-document/$id")->json();
 
         if ($results['success'] == true && $document['success'] == true) {
-            $filePath = public_path($document['data']['document_path']);
+            $filePath = storage_path('app/public/' . $document['data']['document_path']);
             $this->removeFile($filePath);
 
             session()->flash('type', 'Success');

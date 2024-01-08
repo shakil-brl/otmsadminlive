@@ -68,8 +68,8 @@ class Controller extends BaseController
             // Generate a unique filename based on date, time, original filename, and schedule ID
             $filename = "{$dateTime}_{$originalFilename}_{$tmsBatchScheduleDetailId}.{$file->getClientOriginalExtension()}";
 
-            $folderPath = public_path("storage/class_document");
-
+            // $folderPath = public_path("storage/class_document");
+            $folderPath = storage_path("app/public/class_document");
             // Check if the folder exists, create it if not
             if (!File::isDirectory($folderPath)) {
                 File::makeDirectory($folderPath, 0777, true, true);
