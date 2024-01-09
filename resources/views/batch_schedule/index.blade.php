@@ -69,6 +69,25 @@
         </div>
         <x-alert />
         @isset($schedule_details)
+            @php
+                $schedule_used = false;
+                $desiredKey = 'status';
+                foreach ($schedule_details as $array) {
+                    if (array_key_exists($desiredKey, $array) && ($array[$desiredKey] == 2 || $array[$desiredKey] == 3)) {
+                        $schedule_used = true;
+                        break;
+                    }
+                }
+            @endphp
+
+            @if (in_array('batch-schedule.clean', $roleRoutePermissions) && !$schedule_used)
+                <div class="text-end mt-2">
+                    <a href="" id="{{ $batch['id'] }}" class="btn btn-md btn-danger clean-schedule">
+                        Clean Schedule
+                    </a>
+                </div>
+            @endif
+
             <div id="class-days">
                 @foreach (collect($schedule_details) as $schedule_detail)
                     @php
@@ -238,6 +257,27 @@
                     let finalUrl =
                         `${app_url}/attendance/${id}/start?streaming_link=${encodeURIComponent(streaming_link)}&static_link=${encodeURIComponent(static_link)}`;
                     window.location.href = finalUrl;
+                });
+            });
+
+            $('.clean-schedule').click(function(e) {
+                e.preventDefault();
+                id = $(this).attr('id');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let finalUrl = `${app_url}/batch_schedules/clean/${id}`;
+                        window.location.href = finalUrl;
+                    }
                 });
             });
         });

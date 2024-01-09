@@ -247,6 +247,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/runningBatches', [BatchScheduleController::class, 'runningBatches'])->name('batch-schedule.runningBatches');
         Route::get('/running-class-list', [BatchScheduleController::class, 'runningClassList'])->name('batch-schedule.running-class-list');
         Route::get('/destroy/{batch_id}', [BatchScheduleController::class, 'destroy'])->name('batch-schedule.destroy');
+        Route::get('/clean/{batch_id}', [BatchScheduleController::class, 'clean'])->name('batch-schedule.clean');
     });
 
     //Route::resource('tms-inspections', TmsInspectionController::class);
