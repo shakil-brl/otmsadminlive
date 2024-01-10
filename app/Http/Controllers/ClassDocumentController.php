@@ -135,8 +135,7 @@ class ClassDocumentController extends Controller
             'schedule_details_id' => $schedule_details_id,
             'page' => $request->page ?? 1,
             'search' => $request->search,
-        ])
-            ->json();
+        ])->json();
 
         if ($results['success'] == true) {
             $paginator = $this->customPaginate($results, $request, route('schedule-class-documents.index', $schedule_details_id));
