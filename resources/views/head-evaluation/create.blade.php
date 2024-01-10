@@ -31,7 +31,7 @@
         @endisset
 
         <div class="card p-5 mt-3">
-            <form action="{{ route('evaluations.store') }}" method="post">
+            <form action="{{ route('evaluation-head.store') }}" method="post">
               
                 @csrf
                 @include('head-evaluation.form',['error'=>$errors])

@@ -33,7 +33,7 @@
         @isset($evaluation)
             <div class="card p-5 mt-3">
                 <div class="card p-5 mt-3">
-                    <form action="{{ route('evaluations.update', $evaluation['id']) }}" method="post">
+                    <form action="{{ route('evaluation-head.update', $evaluation['id']) }}" method="post">
                         @csrf
                         @method('PUT')
                         @include('head-evaluation.form')

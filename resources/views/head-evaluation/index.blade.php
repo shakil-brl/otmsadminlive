@@ -19,7 +19,7 @@
                 </div>
                 <div class="w-100 text-end">
                     <div class="d-flex justify-content-end align-items-center">
-                        <a class="btn btn-lg btn-success" href="{{ route('evaluations.create') }}">Create Head Evaluations</a>
+                        <a class="btn btn-lg btn-success" href="{{ route('evaluation-head.create') }}">Create Head Evaluations</a>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                                 {{ $item['is_bool'] == 1 ? 'yes no question' : 'others' }}
                             </td>
                             <td>
-                                {{ $item['used_for'] == 1 ? 'Student' : 'Teacher' }}
+                                {{ $item['type'] == 1 ? 'Student' : 'Teacher' }}
 
                             </td>
                             <td>
@@ -61,10 +61,10 @@
                             </td>
                             <td class="me-0 d-flex gap-1">
                                 
-                                    <a href="{{ route('evaluations.edit', $item['id']) }}" class="btn btn-sm btn-info" title="Evaludation Edit">
+                                    <a href="{{ route('evaluation-head.edit', $item['id']) }}" class="btn btn-sm btn-info" title="Evaludation Edit">
                                         Edit
                                     </a>
-                                    <form action="{{ route('evaluations.destroy', $item['id']) }}" method="post">
+                                    <form action="{{ route('evaluation-head.destroy', $item['id']) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>

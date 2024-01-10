@@ -20,9 +20,10 @@ class EvaluationController extends Controller
         ])->json();
 
         if ($results['success'] == true) {
+            $page_from = $results['data']['from'];
             $evaluation = $results['data']['data'];            
-            $paginator = $this->customPaginate($results, $request, route('evaluations.index'));
-            return view('head-evaluation.index', ['evaluation' => $evaluation, 'paginator' => $paginator]);
+            $paginator = $this->customPaginate($results, $request, route('evaluation-head.index'));
+            return view('head-evaluation.index', ['evaluation' => $evaluation, 'paginator' => $paginator, 'page_from'=> $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', 'Something went wrong');
@@ -30,91 +31,72 @@ class EvaluationController extends Controller
         }
     }
 
-    /**
-     * Call function create for form input
-     */
-
-    public function create()
-    {
-        return view('head-evaluation.create');
-    }
 
     /**
-     * Call api for storage data into database
+     * Call api for all trainer schedule details data
+     * And Display a listing of trainer schedule details data.
      */
-
-    public function store(Request $request)
+    public function trainerScheduleDetailsList(Request $request)
     {
-
-        $requestData = $request->all();
-        $data = ApiHttpClient::request('post', 'evaluation-head/', $requestData)->json();
-        if (isset($data['error'])) {
-            $error = $data['error'];
-            $errorMessage = $data['message'];
-            session()->flash('type', 'Danger');
-            session()->flash('message', 'Validation failed');
-            return redirect()->back()->withErrors(['error'=>$errorMessage]);
-
-            // return redirect()->route('holydays.index');
-        } else {
-            session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Created successfully');
-            return redirect()->route('evaluations.index');
-        }
-    }
-
-    /**
-     * Call specefic item data api for update data into database
-     */
-    public function edit($id)
-    {
-        $results = ApiHttpClient::request('get', "evaluation-head/$id")->json();       
+      
+        $results = ApiHttpClient::request('get', 'schedule-details', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
         if ($results['success'] == true) {
-            $evaluation = $results['data'];
-            return view('head-evaluation.edit', ['evaluation' => $evaluation]);
+            $page_from = $results['data']['from'];
+            $evaluation = $results['data']['data'];            
+            $paginator = $this->customPaginate($results, $request, route('trainer-schedule-details.lists'));
+            return view('evaluations.index', ['evaluation' => $evaluation, 'paginator' => $paginator, 'page_from'=> $page_from]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
+            session()->flash('message', 'Something went wrong');
+            return redirect()->back();
         }
     }
 
-    /**
-     * Call specefic item data api for update data into database
-     */
-    public function update(Request $request, $id)
+
+    public function scheduleClassStudents($id, $batchId = null)
     {
 
-        $data = ApiHttpClient::request('patch', "evaluation-head/$id", $request->all())->json();
-        if (isset($data['error'])) {
-            $error = $data['error'];
-            session()->flash('type', 'Danger');
-            session()->flash('message', 'Validation failed');
-            return redirect()->back()->with('error', $error)->withInput();
-        } else {
-            session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Updated successfully');
-            return redirect()->route('evaluations.index');
+        // dd($id);
+        $results = ApiHttpClient::request('get', "attendance/$id/student-list")
+            ->json();
+
+        if (isset($results['success'])) {
+            if ($results['success'] == true) {
+                return view('evaluations.studentList', ['detail_id' => $id, 'students' => $results['data'] ?? []]);
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', $results['message'] ?? 'Something went wrong');
+                return view('evaluations.studentList');
+            }
         }
+        return $results['message'] ?? 'Something went wrong';
     }
 
-    /**
-     * Call specefic item data api for delete data into database
-     */
-    public function destroy($id)
-    {
-        $results = ApiHttpClient::request('delete', "evaluation-head/$id")->json();
 
-        if ($results['success'] == true) {
-            session()->flash('type', 'Danger');
-            session()->flash('message', $data['message'] ?? 'Deleted successfully');
-            return redirect()->route('evaluations.index');
-        } else {
-            session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return redirect()->route('evaluations.index');
+    public function showStudentEvaluation($id){
+        $results = ApiHttpClient::request('get', "attendance/$id/student-info")
+            ->json();
+
+            $evaluation_head = ApiHttpClient::request('get', 'evaluation-head-user/' . '2')
+            ->json();
+
+
+        if (isset($results['success']) && isset($evaluation_head['success'])) {
+            $head = $evaluation_head['data'];
+            if ($results['success'] == true && $evaluation_head['success'] == true) {
+                return view('evaluations.head', ['detail_id' => $id, 'students' => $results['data'] ?? [], 'head' => $head ]);
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', $results['message'] ?? 'Something went wrong');
+                return view('evaluations.head');
+            }
         }
+        return $results['message'] ?? 'Something went wrong';
     }
+
 
     
 }

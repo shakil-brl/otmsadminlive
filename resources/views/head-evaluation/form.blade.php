@@ -40,11 +40,11 @@
         <div class="form-group row">
             <label for="type" class="col-sm-2 offset-sm-2 col-form-label g-4">Evaluation For:</label>
             <div class="col-sm-6 g-4">
-                <select name="used_for" class="form-select">
-                    <option value="1" @isset($evaluation) {{ $evaluation['used_for'] == 1 ? 'selected' : '' }} @endisset >Student</option>
-                    <option value="2" @isset($evaluation) {{ $evaluation['used_for'] == 2 ? 'selected' : '' }} @endisset >Teacher</option>
+                <select name="type" class="form-select">
+                    <option value="1" @isset($evaluation) {{ $evaluation['type'] == 1 ? 'selected' : '' }} @endisset >Student</option>
+                    <option value="2" @isset($evaluation) {{ $evaluation['type'] == 2 ? 'selected' : '' }} @endisset >Teacher</option>
                 </select>
-                @error('used_for')
+                @error('type')
                     <small class="text-danger d-block">{{ $message }}</small>
                 @enderror
             </div>

@@ -20,6 +20,7 @@ class HolydayController extends Controller
             'search' => $request->search,
         ])->json();
 
+        dd($results);
         if ($results['success'] == true) {
             $holyday = $results['data'];
             $page_from = $results['data']['from'];

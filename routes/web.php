@@ -30,6 +30,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TmsInspectionController;
 use App\Http\Controllers\ProviderBatchesController;
 use App\Http\Controllers\ClassDocumentationController;
+use App\Http\Controllers\EvaluationHeadController;
 use App\Http\Controllers\EvaluationController;
 use Illuminate\Support\Facades\Route;
 
@@ -290,7 +291,11 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
     Route::get('/lots/link-batch/{lot_id}', [LotController::class, 'linkBatch'])->name('lots.link-batch');
 
-    Route::resource('evaluations', EvaluationController::class);
+    Route::resource('evaluation-head', EvaluationHeadController::class);
+    
 });
 
+Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
+Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
+Route::get('/evaluation/{studentId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
