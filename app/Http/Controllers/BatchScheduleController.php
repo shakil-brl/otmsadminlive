@@ -183,6 +183,12 @@ class BatchScheduleController extends Controller
         }
     }
 
+    // edit
+    public function edit($batch_id)
+    {
+        dd($batch_id);
+    }
+
     // 
     public function destroy($batch_id)
     {
@@ -193,6 +199,29 @@ class BatchScheduleController extends Controller
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Deleted successfully');
             return redirect()->back();
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
+    }
+
+    // 
+    public function clean($batch_id)
+    {
+        $previousRouteUrl = url()->previous();
+        $previousRouteName = app('router')->getRoutes()->match(app('request')->create($previousRouteUrl))->getName();
+        // dd($previousRouteName);
+        $results = ApiHttpClient::request('delete', "schedule/schedule-clean/$batch_id")->json();
+
+        if ($results['success'] == true) {
+            // dd($holyday);
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Schedule Details Clean successfully');
+            if ($previousRouteName == "batch-schedule.index") {
+                return redirect()->route('batch-schedule.batches');
+            }
+            return redirect()->route('batches.all');
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
