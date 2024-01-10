@@ -38,20 +38,43 @@ class AttendanceController extends Controller
         }
         return $data['message'] ?? 'Something went wrong';
     }
+
+    public function updateLink(Request $request)
+    {
+        $results = ApiHttpClient::request('post', 'attendance/change-live-link', [
+            ...$request->only('schedule_detail_id', 'streaming_link', 'static_link'),
+        ])->json();
+
+        if (isset($results['success'])) {
+            if ($results['success'] == true) {
+                session()->flash('type', 'Success');
+                session()->flash('message', 'Link Updated Successfully');
+                return redirect()->back();
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', $results['message'] ?? 'Something went wrong');
+                return redirect()->back();
+            }
+        }
+        return $data['message'] ?? 'Something went wrong';
+    }
+
     public function attendanceForm($id, $batchId = null)
     {
+        $schedule_details = ApiHttpClient::request('get', 'batch-schedule-details/' . $id)
+            ->json();
 
-        // dd($id);
         $results = ApiHttpClient::request('get', "attendance/$id/student-list")
             ->json();
         //dd($results);
 
-        if (isset($results['success'])) {
-            if ($results['success'] == true) {
-                return view('attendance.attendance_form', ['detail_id' => $id, 'students' => $results['data'] ?? []]);
+        if (isset($results['success']) && isset($schedule_details['success'])) {
+            if ($schedule_details['success'] == true && $results['success'] == true) {
+                // dd($schedule_details['data']);
+                return view('attendance.attendance_form', ['detail_id' => $id, 'schedule_detail' => $schedule_details['data'] ?? [], 'students' => $results['data'] ?? []]);
             } else {
                 session()->flash('type', 'Danger');
-                session()->flash('message', $results['message'] ?? 'Something went wrong');
+                session()->flash('message', 'Something went wrong');
                 return view('attendance.attendance_form');
             }
         }

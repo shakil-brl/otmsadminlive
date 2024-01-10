@@ -182,4 +182,21 @@ class BatchScheduleController extends Controller
             return back();
         }
     }
+
+    // 
+    public function destroy($batch_id)
+    {
+        $results = ApiHttpClient::request('delete', "schedule/destroy/$batch_id")->json();
+
+        if ($results['success'] == true) {
+            // dd($holyday);
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Deleted successfully');
+            return redirect()->back();
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
+    }
 }

@@ -16,7 +16,7 @@
                 }
             }
         @endphp
-        <div class="alert close alert-{{ $alertType }} alert-dismissible fade show" role="alert">
+        <div class="alert close alert-{{ $alertType }} alert-dismissible fade show my-2" role="alert">
             @if (session()->has('type'))
                 <strong>{{ session('type') }} : </strong>
             @endif
