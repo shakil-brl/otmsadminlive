@@ -183,6 +183,12 @@ class BatchScheduleController extends Controller
         }
     }
 
+    // edit
+    public function edit($batch_id)
+    {
+        dd($batch_id);
+    }
+
     // 
     public function destroy($batch_id)
     {
