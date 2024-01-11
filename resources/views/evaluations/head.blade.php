@@ -9,10 +9,6 @@
             display: inline-block;
         }
 
-        .rating input {
-            display: none;
-        }
-
         .rating label {
             font-size: 30px;
             color: #ddd;
@@ -58,7 +54,8 @@
         <!--begin::Content-->
         <div id="class-days">
 
-            <form method="POST" action="" class="m-5">
+            <form method="POST" action="{{ route('trainer-schedule-details.store-student-evaluation', $class_att_id) }}"
+                class="m-5">
                 @csrf
                 <input type="hidden" name="schedule_detail_id" value="">
                 <div class="m-3">
@@ -73,6 +70,7 @@
                     @endif
                     <x-alert />
                     <div id="students">
+
                         @foreach ($head as $index => $question)
                             <div class="student">
                                 <div class="row row-cols-3 align-items-center">
@@ -90,22 +88,22 @@
                                         @if ($question['is_bool'] == 1)
                                             <div class="form-check form-switch">
                                                 <div class="label" style="padding: 0px;margin:0px;">হ্যাঁ/না</div>
-                                                <div class="text mx-13"><input name="attendance[]" class="form-check-input"
-                                                        type="checkbox" role="switch" id="student{{ $loop->iteration }}"
-                                                        value="{{ $question['id'] }}"></div>
+
+                                                <div class="text mx-13"><input name="heads[{{ $question['id'] }}]"
+                                                        class="form-check-input" type="checkbox" role="switch"
+                                                        id="student{{ $loop->iteration }}"
+                                                        value="{{ $question['mark'] }}">
+                                                </div>
                                             </div>
                                         @else
                                             <div class="rating">
-                                                <input type="radio" name="rating" value="5" id="star5">
-                                                <label for="star5">&#9733;</label>
-                                                <input type="radio" name="rating" value="4" id="star4">
-                                                <label for="star4">&#9733;</label>
-                                                <input type="radio" name="rating" value="3" id="star3">
-                                                <label for="star3">&#9733;</label>
-                                                <input type="radio" name="rating" value="2" id="star2">
-                                                <label for="star2">&#9733;</label>
-                                                <input type="radio" name="rating" value="1" id="star1">
-                                                <label for="star1">&#9733;</label>
+                                                @foreach (range(1, $question['max_value']) as $max_val)
+                                                    <input hidden type="radio" name="heads[{{ $question['id'] }}]"
+                                                        value="{{ $max_val }}"
+                                                        id="star{{ $question['id'] . $loop->iteration }}">
+                                                    <label
+                                                        for="star{{ $question['id'] . $loop->iteration }}">&#9733;</label>
+                                                @endforeach
                                             </div>
                                         @endif
                                     </div>
@@ -131,45 +129,6 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            var totalStudent = '';
-
-            function countAttendance() {
-                let att = 0;
-                $('#students .form-switch.attendance').each(function(index, element) {
-                    if ($(this).children('input').prop('checked')) {
-                        att++;
-                    }
-                });
-                let percentage = att * 100 / totalStudent;
-                $('#totalAttendance').html(att);
-                $('#success-progress').css('width', percentage + '%');
-            }
-            countAttendance();
-            $('.form-switch.attendance').change(function() {
-                countAttendance();
-            });
-
-            $("#selectAll").click(function() {
-                if ($(this).prop('checked')) {
-                    $('.attendance').prop('checked', true);
-                } else {
-                    $('.attendance').prop('checked', false);
-                }
-            });
-
-            // Check Radio-box
-            $(".rating input:radio").attr("checked", false);
-
-            $('.rating input').click(function() {
-                $(".rating span").removeClass('checked');
-                $(this).parent().addClass('checked');
-            });
-
-            $('input:radio').change(
-                function() {
-                    var userRating = this.value;
-                    alert(userRating);
-                });
 
 
         });

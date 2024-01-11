@@ -65,7 +65,7 @@
         @empty($students)
             <div class="m-4 col-12">
                 <div id="batch-header" class="d-block text-center">
-                        <h3>{{ 'এই ব্যাচের কোনো শিক্ষার্থী নেই' }}</h3>
+                    <h3>{{ 'এই ব্যাচের কোনো শিক্ষার্থী নেই' }}</h3>
                 </div>
             </div>
         @endempty

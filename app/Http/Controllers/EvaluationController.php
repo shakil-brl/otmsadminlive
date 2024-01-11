@@ -21,9 +21,9 @@ class EvaluationController extends Controller
 
         if ($results['success'] == true) {
             $page_from = $results['data']['from'];
-            $evaluation = $results['data']['data'];            
+            $evaluation = $results['data']['data'];
             $paginator = $this->customPaginate($results, $request, route('evaluation-head.index'));
-            return view('head-evaluation.index', ['evaluation' => $evaluation, 'paginator' => $paginator, 'page_from'=> $page_from]);
+            return view('head-evaluation.index', ['evaluation' => $evaluation, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', 'Something went wrong');
@@ -38,16 +38,15 @@ class EvaluationController extends Controller
      */
     public function trainerScheduleDetailsList(Request $request)
     {
-      
         $results = ApiHttpClient::request('get', 'schedule-details', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
         if ($results['success'] == true) {
             $page_from = $results['data']['from'];
-            $evaluation = $results['data']['data'];            
+            $evaluation = $results['data']['data'];
             $paginator = $this->customPaginate($results, $request, route('trainer-schedule-details.lists'));
-            return view('evaluations.index', ['evaluation' => $evaluation, 'paginator' => $paginator, 'page_from'=> $page_from]);
+            return view('evaluations.index', ['evaluation' => $evaluation, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', 'Something went wrong');
@@ -76,18 +75,19 @@ class EvaluationController extends Controller
     }
 
 
-    public function showStudentEvaluation($id){
-        $results = ApiHttpClient::request('get', "attendance/$id/student-info")
+    public function showStudentEvaluation($class_att_id)
+    {
+        $results = ApiHttpClient::request('get', "attendance/$class_att_id/student-info")
             ->json();
 
-            $evaluation_head = ApiHttpClient::request('get', 'evaluation-head-user/' . '2')
+        $evaluation_head = ApiHttpClient::request('get', 'evaluation-head-user/' . '1')
             ->json();
 
 
         if (isset($results['success']) && isset($evaluation_head['success'])) {
             $head = $evaluation_head['data'];
             if ($results['success'] == true && $evaluation_head['success'] == true) {
-                return view('evaluations.head', ['detail_id' => $id, 'students' => $results['data'] ?? [], 'head' => $head ]);
+                return view('evaluations.head', ['class_att_id' => $class_att_id, 'students' => $results['data'] ?? [], 'head' => $head]);
             } else {
                 session()->flash('type', 'Danger');
                 session()->flash('message', $results['message'] ?? 'Something went wrong');
@@ -97,6 +97,16 @@ class EvaluationController extends Controller
         return $results['message'] ?? 'Something went wrong';
     }
 
+    public function storeStudentEvaluation(Request $request, $class_att_id)
+    {
+        $request['class_att_id'] = $class_att_id;
 
-    
+
+        $results = ApiHttpClient::request('post', "store-student-evaluation/$class_att_id", $request->all())
+            ->json();
+        dd($results);
+        return $request->all();
+    }
+
+
 }

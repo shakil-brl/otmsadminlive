@@ -97,7 +97,8 @@
 
                             @isset($schedule_detail['status'])
                                 @if ($schedule_detail['status'] == 2)
-                                    <a href="{{ route('trainer-schedule-details.students', [$schedule_detail['id']]) }}" class="btn btn-detail complete">
+                                    <a href="{{ route('trainer-schedule-details.students', [$schedule_detail['id']]) }}"
+                                        class="btn btn-detail complete">
                                         {{ 'Create Evaluations' }}
                                     </a>
                                 @elseif ($schedule_detail['status'] == 3)
@@ -110,12 +111,11 @@
                         </div>
                     </div>
                 @endforeach
-                
+
             </div>
             <div class="row my-5">
-                    {!! $paginator->links() !!}
+                {!! $paginator->links() !!}
             </div>
-            
         @endisset
 
         <!--Start::Provider Update Modal-Content-->
