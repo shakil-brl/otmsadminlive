@@ -21,6 +21,119 @@
             color: #f8d301;
         }
     </style>
+
+    <style>
+        star-rating {
+            --star-rating-max-stars: 10;
+            --star-rating-star-size: 1.3;
+            --star-rating-star-color-disabled: #555;
+            --star-rating-star-color-hover: goldenrod;
+            --star-rating-star-color-selected: var(--star-rating-star-color-hover);
+            --star-rating-star-color-active: yellow;
+            --star-rating-star-color: currentColor;
+            --star-rating-star-scale-hover: 1.3;
+
+            display: grid;
+            grid-template-columns: repeat(var(--star-rating-max-stars), 1fr);
+            width: fit-content;
+
+            & label {
+                cursor: pointer;
+                display: none;
+                text-align: center;
+            }
+
+            & input {
+                appearance: none;
+                color: rgb(134, 134, 134);
+                cursor: pointer;
+                font-size: 25px;
+                grid-row: 1;
+                height: auto;
+                margin: 0;
+                padding: 0.2rem;
+                text-align: center;
+                transition: all 0.2s ease-out;
+                width: auto;
+            }
+
+            & input:after {
+                content: "\2606";
+            }
+
+            & input:hover:after {
+                color: var(--star-rating-star-color-hover);
+                content: "\2605";
+            }
+
+            & input:checked:after {
+                color: var(--star-rating-star-color-selected);
+                content: "\2605";
+            }
+
+            & input:has(~ input:hover):after,
+            & input:has(~ input:checked):after,
+            & input:has(~ input:focus):after {
+                color: var(--star-rating-star-color-selected);
+                content: "\2605";
+            }
+
+            & input:hover~input:after {
+                color: var(--star-rating-star-color);
+                content: "\2606";
+            }
+
+            @media (hover) {
+                & input:hover {
+                    transform: scale(var(--star-rating-star-scale-hover));
+                }
+
+                & input:active {
+                    transform: scale(calc(var(--star-rating-star-scale-hover) + 0.3));
+                }
+
+                & input:active:after {
+                    animation: 0.1s linear 0s forwards star-rating-active-anim;
+                }
+            }
+        }
+
+        @keyframes star-rating-active-anim {
+            from {
+                color: var(--star-rating-star-color-hover);
+            }
+
+            to {
+                color: var(--star-rating-star-color-active);
+            }
+        }
+
+        star-rating[showlabels] {
+            & label {
+                display: inline;
+            }
+
+            & input {
+                grid-row: 2;
+            }
+        }
+
+        star-rating[disabled] {
+
+            & label,
+            & input {
+                pointer-events: none;
+            }
+
+            & label,
+            & input:after,
+            & input:has(~ input:hover):after,
+            & input:has(~ input:checked):after,
+            & input:has(~ input:focus):after {
+                color: var(--star-rating-star-color-disabled);
+            }
+        }
+    </style>
 @endpush
 @section('content')
     <div class="m-4">
@@ -96,15 +209,14 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <div class="rating">
+                                            <star-rating>
                                                 @foreach (range(1, $question['max_value']) as $max_val)
-                                                    <input hidden type="radio" name="heads[{{ $question['id'] }}]"
-                                                        value="{{ $max_val }}"
-                                                        id="star{{ $question['id'] . $loop->iteration }}">
-                                                    <label
-                                                        for="star{{ $question['id'] . $loop->iteration }}">&#9733;</label>
+                                                    <label style="font-size: 14px;"
+                                                        for="{{ $question['id'] . $loop->iteration }}">{{ $max_val }}</label>
+                                                    <input type="radio" id="{{ $question['id'] . $loop->iteration }}"
+                                                        name="heads[{{ $question['id'] }}]" value="{{ $max_val }}" />
                                                 @endforeach
-                                            </div>
+                                            </star-rating>
                                         @endif
                                     </div>
                                 </div>
@@ -121,6 +233,8 @@
                             </div>
                         </div>
                     </div>
+
+
             </form>
         </div>
     </div>
