@@ -185,7 +185,7 @@
             </div>
             <footer id="footer">
                 <div class="text-md-start left">
-                    &copy;@lang('login.herpower_project')
+                    &copy; {{ digitLocale(date('Y')) }} @lang('login.herpower_project')
                 </div>
                 <div class="text-center center">
                     <img class="govt-logo" src="{{ asset('img/login') }}/footer-logo.png" alt="">

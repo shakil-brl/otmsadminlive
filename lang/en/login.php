@@ -25,7 +25,7 @@ return [
     'do_not_account' => 'Don’t have an account?',
     'remember_me' => 'Remember me',
     'logins' => 'Login',
-    'herpower_project' => '2023 Herpower Project',
+    'herpower_project' => 'Herpower Project',
     'ict_division' => 'ICT Division',
 
 
