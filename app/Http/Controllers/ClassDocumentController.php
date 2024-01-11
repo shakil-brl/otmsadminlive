@@ -48,10 +48,18 @@ class ClassDocumentController extends Controller
             // $document['doc_type'] = $file->getClientOriginalExtension();
             $document['doc_type'] = 1;
             $document['document_path'] = $this->classFileUpload($file, $data['tms_batch_schedule_detail_id']);
+
+            if (strlen($document['document_path']) > 100) {
+                $filePath = storage_path('app/public/' . $document['document_path']);
+                $this->removeFile($filePath);
+                session()->flash('type', 'Danger');
+                session()->flash('message', 'File name is too long.');
+                return redirect()->back()->withInput();
+            }
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', 'Validation failed');
-            return redirect()->back()->with('error_message', 'File not found.')->withInput();
+            session()->flash('message', 'File not found.');
+            return redirect()->back()->withInput();
         }
         $data = ApiHttpClient::request('post', 'class-document', $document)->json();
 

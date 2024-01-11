@@ -16,6 +16,8 @@
                     @endforeach
                 </ul>
             @endif
+            <x-alert />
+
             <form class="" action="{{ route('class-documents.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="tms_batch_schedule_detail_id" value="{{ $schedule_details_id }}">
