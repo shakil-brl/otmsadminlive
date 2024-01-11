@@ -47,11 +47,12 @@
                                     </td>
                                     {{-- @dump($document['document_path']) --}}
                                     <td class="d-flex gap-1">
-                                        <a href="{{ asset($document['document_path']) }}" target="_blank"
+                                        <a href="{{ asset('storage/' . $document['document_path']) }}" target="_blank"
                                             class="btn btn-sm btn-success">
                                             View
                                         </a>
-                                        <a href="{{ asset($document['document_path']) }}" download class="btn btn-sm btn-info">
+                                        <a href="{{ asset('storage/' . $document['document_path']) }}" download
+                                            class="btn btn-sm btn-info">
                                             Download
                                         </a>
                                         <form action="{{ route('class-documents.destroy', $document['id']) }}" method="post">

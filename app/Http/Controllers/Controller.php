@@ -76,7 +76,7 @@ class Controller extends BaseController
             }
 
             $file->move($folderPath, $filename);
-            $path = "storage/class_document/{$filename}";
+            $path = "class_document/{$filename}";
         }
 
         return $path;
