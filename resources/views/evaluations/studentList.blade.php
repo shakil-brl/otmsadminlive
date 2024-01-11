@@ -32,6 +32,8 @@
                 </div>
             </div>
         </div>
+
+        <x-alert />
     @endempty
     <!--begin::Content-->
     <div id="students">
@@ -50,10 +52,21 @@
                     </div>
                     <div>
                         <div class="form-check form-switch attendance">
+                            @empty(!$student['profile']['evaluation'])
                             <a href="{{ route('trainer-schedule-details.show-student-evaluation', [$student['id']]) }}"
-                                class="btn btn-primary">
-                                {{ 'Evaluations' }}
+                                class="btn btn-secondary disabled">
+                                
+                                {{ 'Evaluated' }}
+                                
                             </a>
+                            @else
+                            <a href="{{ route('trainer-schedule-details.show-student-evaluation', [$student['id']]) }}"
+                            class="btn btn-primary">
+                            
+                            {{ 'Evaluations' }}
+                            
+                        </a>
+                                @endempty
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class EvaluationController extends Controller
 {
@@ -31,7 +30,6 @@ class EvaluationController extends Controller
         }
     }
 
-
     /**
      * Call api for all trainer schedule details data
      * And Display a listing of trainer schedule details data.
@@ -54,14 +52,12 @@ class EvaluationController extends Controller
         }
     }
 
-
     public function scheduleClassStudents($id, $batchId = null)
     {
 
         // dd($id);
         $results = ApiHttpClient::request('get', "attendance/$id/student-list")
             ->json();
-
         if (isset($results['success'])) {
             if ($results['success'] == true) {
                 return view('evaluations.studentList', ['detail_id' => $id, 'students' => $results['data'] ?? []]);
@@ -74,7 +70,6 @@ class EvaluationController extends Controller
         return $results['message'] ?? 'Something went wrong';
     }
 
-
     public function showStudentEvaluation($class_att_id)
     {
         $results = ApiHttpClient::request('get', "attendance/$class_att_id/student-info")
@@ -82,7 +77,6 @@ class EvaluationController extends Controller
 
         $evaluation_head = ApiHttpClient::request('get', 'evaluation-head-user/' . '1')
             ->json();
-
 
         if (isset($results['success']) && isset($evaluation_head['success'])) {
             $head = $evaluation_head['data'];
@@ -103,8 +97,21 @@ class EvaluationController extends Controller
 
         $results = ApiHttpClient::request('post', "store-student-evaluation/$class_att_id", $request->all())
             ->json();
-        return $request->all();
+        if (isset($results['error'])) {
+            $error = $results['error'];
+            $errorMessage = $results['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->withErrors(['error' => $errorMessage]);
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $results['message'] ?? 'Created successfully');
+            if (isset($results['schedule_detail_id'])) {
+                return redirect()->route('trainer-schedule-details.students', $results['schedule_detail_id']);
+            } else {
+                return redirect()->back();
+            }
+        }
     }
-
 
 }
