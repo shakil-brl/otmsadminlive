@@ -101,10 +101,8 @@ class EvaluationController extends Controller
     {
         $request['class_att_id'] = $class_att_id;
 
-
         $results = ApiHttpClient::request('post', "store-student-evaluation/$class_att_id", $request->all())
             ->json();
-        dd($results);
         return $request->all();
     }
 

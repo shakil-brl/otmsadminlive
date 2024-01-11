@@ -53,12 +53,12 @@
         </div>
         <!--begin::Content-->
         <div id="class-days">
+            <div class="m-0">
+                <form id="formSubmit" method="POST"
+                    action="{{ route('trainer-schedule-details.store-student-evaluation', $class_att_id) }}">
+                    @csrf
+                    <input type="hidden" name="schedule_detail_id" value="" />
 
-            <form method="POST" action="{{ route('trainer-schedule-details.store-student-evaluation', $class_att_id) }}"
-                class="m-5">
-                @csrf
-                <input type="hidden" name="schedule_detail_id" value="">
-                <div class="m-3">
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -85,27 +85,35 @@
                                         </label>
                                     </div>
                                     <div>
-                                        @if ($question['is_bool'] == 1)
-                                            <div class="form-check form-switch">
-                                                <div class="label" style="padding: 0px;margin:0px;">হ্যাঁ/না</div>
 
-                                                <div class="text mx-13"><input name="heads[{{ $question['id'] }}]"
-                                                        class="form-check-input" type="checkbox" role="switch"
-                                                        id="student{{ $loop->iteration }}"
-                                                        value="{{ $question['mark'] }}">
+                                        @if ($question['is_bool'] == 1)
+                                            <label class="">
+                                                <div class="label">হ্যাঁ/না</div>
+                                                <div class="form-check form-switch my-4">
+
+                                                    <div class="text"><input name="heads[{{ $question['id'] }}]"
+                                                            class="form-check-input" type="checkbox" role="switch"
+                                                            id="student{{ $loop->iteration }}"
+                                                            value="{{ $question['mark'] }}">
+                                                    </div>
                                                 </div>
-                                            </div>
+
+                                            </label>
                                         @else
-                                            <div class="rating">
-                                                @foreach (range(1, $question['max_value']) as $max_val)
-                                                    <input hidden type="radio" name="heads[{{ $question['id'] }}]"
-                                                        value="{{ $max_val }}"
-                                                        id="star{{ $question['id'] . $loop->iteration }}">
-                                                    <label
-                                                        for="star{{ $question['id'] . $loop->iteration }}">&#9733;</label>
-                                                @endforeach
-                                            </div>
+                                            <label class="">
+                                                <div class="label">মূল্যনির্ধারণ</div>
+                                                <div class="rating">
+                                                    @foreach (range(1, $question['max_value']) as $max_val)
+                                                        <input hidden type="radio" name="heads[{{ $question['id'] }}]"
+                                                            value="{{ $max_val }}"
+                                                            id="star{{ $question['id'] . $loop->iteration }}">
+                                                        <label
+                                                            for="star{{ $question['id'] . $loop->iteration }}">&#9733;</label>
+                                                    @endforeach
+                                                </div>
+                                            </label>
                                         @endif
+
                                     </div>
                                 </div>
 
@@ -116,21 +124,21 @@
                         <div class="col-sm-2 mt-10 m-auto">
                             <div id="attendance-bottom">
                                 <div class="right">
-                                    <button class="btn btn-attendance" name="submit" value="attendance">Submit</button>
+                                    <button class="btn btn-attendance submit" name="submit" id="submit"
+                                        value="attendance">Submit</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </form>
+                </form>
+
+            </div>
         </div>
     </div>
 @endsection
 
 @push('js')
     <script>
-        $(document).ready(function() {
-
-
-        });
+       
     </script>
 @endpush

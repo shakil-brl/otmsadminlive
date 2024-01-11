@@ -7,6 +7,7 @@
     </style>
 @endpush
 @section('content')
+<div class="m-4">
     @empty(!$students)
         <div id="batch-header">
             <div>
@@ -35,7 +36,7 @@
     <!--begin::Content-->
     <div id="students">
         @foreach ($students as $index => $student)
-            <div class="student">
+            <div class="student mt-3">
                 <div class="row row-cols-3 align-items-center">
                     <div>
                         <div class="label">সিরিয়াল #</div>
@@ -71,36 +72,11 @@
         @endempty
 
     </div>
+</div>
 @endsection
 
 @push('js')
     <script>
-        $(document).ready(function() {
-            var totalStudent = {{ count($students) }};
-
-            function countAttendance() {
-                let att = 0;
-                $('#students .form-switch.attendance').each(function(index, element) {
-                    if ($(this).children('input').prop('checked')) {
-                        att++;
-                    }
-                });
-                let percentage = att * 100 / totalStudent;
-                $('#totalAttendance').html(att);
-                $('#success-progress').css('width', percentage + '%');
-            }
-            countAttendance();
-            $('.form-switch.attendance').change(function() {
-                countAttendance();
-            });
-
-            $("#selectAll").click(function() {
-                if ($(this).prop('checked')) {
-                    $('.attendance').prop('checked', true);
-                } else {
-                    $('.attendance').prop('checked', false);
-                }
-            });
-        });
+      
     </script>
 @endpush
