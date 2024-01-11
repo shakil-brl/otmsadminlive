@@ -27,9 +27,14 @@ class AttendanceController extends Controller
                 'required',
                 'url',
                 'starts_with:https',
-                'not_regex:/^(https?:\/\/)?(www\.)?(facebook\.com|youtube\.com)\//'
             ],
-            'static_link' => 'required|url|starts_with:https|different:streaming_link',
+            'static_link' => [
+                'required',
+                'url',
+                'starts_with:https',
+                'different:streaming_link',
+                'not_regex:/^(https?:\/\/)?(www\.)?(facebook\.com|youtube\.com)\//'
+            ]
         ]);
 
         $results = ApiHttpClient::request('post', 'attendance/start-class', [
@@ -56,9 +61,14 @@ class AttendanceController extends Controller
                 'required',
                 'url',
                 'starts_with:https',
-                'not_regex:/^(https?:\/\/)?(www\.)?(facebook\.com|youtube\.com)\//'
             ],
-            'static_link' => 'required|url|starts_with:https|different:streaming_link',
+            'static_link' => [
+                'required',
+                'url',
+                'starts_with:https',
+                'different:streaming_link',
+                'not_regex:/^(https?:\/\/)?(www\.)?(facebook\.com|youtube\.com)\//'
+            ]
         ]);
 
         $results = ApiHttpClient::request('post', 'attendance/change-live-link', [
