@@ -22,6 +22,11 @@ class AttendanceController extends Controller
 
     public function start(Request $request, $id)
     {
+        $request->validate([
+            'streaming_link' => 'required|url|starts_with:https',
+            'static_link' => 'required|url|starts_with:https|different:streaming_link',
+        ]);
+
         $results = ApiHttpClient::request('post', 'attendance/start-class', [
             'schedule_detail_id' => $id,
             ...$request->only('streaming_link', 'static_link'),
@@ -41,6 +46,11 @@ class AttendanceController extends Controller
 
     public function updateLink(Request $request)
     {
+        $request->validate([
+            'streaming_link' => 'required|url|starts_with:https',
+            'static_link' => 'required|url|starts_with:https|different:streaming_link',
+        ]);
+
         $results = ApiHttpClient::request('post', 'attendance/change-live-link', [
             ...$request->only('schedule_detail_id', 'streaming_link', 'static_link'),
         ])->json();
