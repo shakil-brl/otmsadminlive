@@ -71,12 +71,20 @@
                             </td>
                             <td>
                                 @if ($schedule == null)
-                                 <span class="badge bg-secondary">Not Created</span>
+                                    <span class="badge bg-secondary">Not Created</span>
                                 @else
-                                    <a href="{{ route('batch-schedule.office', [$schedule['id'], $batch['id']]) }}"
-                                        class="btn btn-sm btn-info">
-                                        {{ __('batch-list.view_schedule') }}
-                                    </a>
+                                    <div class="d-flex flex-column gap-1">
+                                        <a href="{{ route('batch-schedule.office', [$schedule['id'], $batch['id']]) }}"
+                                            class="btn btn-sm btn-info">
+                                            {{ __('batch-list.view_schedule') }}
+                                        </a>
+                                        @if (in_array('batch-schedule.destroy', $roleRoutePermissions))
+                                            <a href="" id="{{ $batch['id'] }}"
+                                                class="btn btn-sm btn-danger delete-schedule">
+                                                Delete Schedule
+                                            </a>
+                                        @endif
+                                    </div>
                                 @endif
                             </td>
                         </tr>
@@ -87,3 +95,31 @@
         @endisset
     </div>
 @endsection
+@push('js')
+    <script>
+        $(document).ready(function() {
+            var app_url = "{{ url('') }}";
+
+            $('.delete-schedule').click(function(e) {
+                e.preventDefault();
+                id = $(this).attr('id');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let finalUrl = `${app_url}/batch_schedules/destroy/${id}`;
+                        window.location.href = finalUrl;
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
