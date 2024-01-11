@@ -8,7 +8,9 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\BatchScheduleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClassDocumentController;
 use App\Http\Controllers\CommitteeController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardDetailsController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
@@ -226,7 +228,9 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/{scheduleDetailId}/show/schedule', [AttendanceController::class, 'showAttendance'])->name('attendance.schedule');
         Route::get('/{scheduleDetailId}/start', [AttendanceController::class, 'start'])
             ->name('attendance.start');
-        Route::get('/{scheduleDetailId}/student-list/', [AttendanceController::class, 'attendanceForm'])->name('attendance.form');
+        Route::get('/change-live-link', [AttendanceController::class, 'updateLink'])
+            ->name('attendance.update-link');
+        Route::get('/{scheduleDetailId}/student-list/{batchId?}', [AttendanceController::class, 'attendanceForm'])->name('attendance.form');
         Route::post('/{scheduleDetailId}/take-attendance', [AttendanceController::class, 'takeAttendance'])->name('attendance.take-attendance');
         Route::get('/{scheduleDetailId}/end', [AttendanceController::class, 'end'])->name('attendance.end');
     });
@@ -242,6 +246,9 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/show/{schedule_id}/{batch_id}', [BatchScheduleController::class, 'show'])->name('batch-schedule.office');
         Route::get('/runningBatches', [BatchScheduleController::class, 'runningBatches'])->name('batch-schedule.runningBatches');
         Route::get('/running-class-list', [BatchScheduleController::class, 'runningClassList'])->name('batch-schedule.running-class-list');
+        Route::get('/destroy/{batch_id}', [BatchScheduleController::class, 'destroy'])->name('batch-schedule.destroy');
+        Route::get('/clean/{batch_id}', [BatchScheduleController::class, 'clean'])->name('batch-schedule.clean');
+        Route::get('/edit/{batch_id}', [BatchScheduleController::class, 'edit'])->name('batch-schedule.edit');
     });
 
     //Route::resource('tms-inspections', TmsInspectionController::class);
@@ -283,6 +290,15 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::resource('lots', LotController::class);
 
     Route::get('/lots/link-batch/{lot_id}', [LotController::class, 'linkBatch'])->name('lots.link-batch');
+
+    Route::resource('/courses', CourseController::class);
+
+    Route::resource('/class-documents', ClassDocumentController::class);
+
+    Route::group(['controller' => ClassDocumentController::class, 'prefix' => 'schedule-class-documents', 'as' => 'schedule-class-documents.'], function () {
+        Route::get('/{schedule_details_id}', 'scheduleDocument')->name('index');
+        Route::get('/create/{schedule_details_id}', 'createDocument')->name('create');
+    });
 });
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
