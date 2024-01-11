@@ -145,7 +145,7 @@
                                                 <div class="attendance">
                                                     <div class="items">
                                                         <div class="item">
-                                                            <div class="digit">{{ $data['total_attend_today'] ?? 0 }}</div>
+                                                            <div class="digit">{{isset($data['total_attend_today']) ? digitLocale($data['total_attend_today']) : digitLocale(0)}}</div>
                                                             <div class="label">{{ __('dashboard.total_present') }}</div>
                                                         </div>
                                                         <div class="item">
@@ -156,12 +156,13 @@
                                                     </div>
                                                     <div class="items">
                                                         <div class="item">
-                                                            <div class="digit">{{ $data['total_trainee'] }}</div>
+                                                            <div class="digit">{{ isset($data['total_trainee']) ? digitLocale($data['total_trainee']) : digitLocale(0)}}
+                                                           </div>
                                                             <div class="label">{{ __('dashboard.average_attendance') }}
                                                             </div>
                                                         </div>
                                                         <div class="item">
-                                                            <div class="digit">{{ $data['total_dropout'] }}</div>
+                                                            <div class="digit">{{isset($data['total_dropout']) ? digitLocale($data['total_dropout']) : digitLocale(0)}}</div>
                                                             <div class="label">{{ __('dashboard.dropout_trainee') }}</div>
                                                         </div>
                                                     </div>
@@ -251,7 +252,8 @@
                                                         <div class="attendance">
                                                             <div class="items">
                                                                 <div class="item">
-                                                                    <div class="digit">{{ $data['total_trainer'] ?? 0 }}
+                                                                    <div class="digit">{{ isset($data['total_trainer']) ? digitLocale($data['total_trainer']) : digitLocale(0) }}
+
                                                                     </div>
                                                                     <div class="label">{{ __('dashboard.total_trainer') }}
                                                                     </div>
@@ -294,7 +296,7 @@
                                                         <div class="attendance">
                                                             <div class="items">
                                                                 <div class="item">
-                                                                    <div class="digit">{{ $data['total_trainee'] ?? 0 }}
+                                                                    <div class="digit">{{isset($data['total_trainee']) ? digitLocale($data['total_trainee']) : digitLocale(0)}}
                                                                     </div>
                                                                     <div class="label">
                                                                         {{ __('dashboard.total_trainee') }}
@@ -302,7 +304,9 @@
                                                                 </div>
 
                                                                 <div class="item">
-                                                                    <div class="digit">{{ $data['total_dropout'] }}</div>
+                                                                    <div class="digit">
+                                                                    {{isset($data['total_dropout']) ? digitLocale($data['total_dropout']) : digitLocale(0)}}
+                                                                    </div>
                                                                     <div class="label">
                                                                         {{ __('dashboard.dropout_trainee') }}
                                                                     </div>
@@ -359,7 +363,7 @@
                                                     <div class="attendance">
                                                         <div class="items d-block">
                                                             <div class="item">
-                                                                <div class="digit">{{ 0 }}
+                                                                <div class="digit">{{ digitLocale(0) }} 
                                                                 </div>
                                                                 <div class="label">{{ __('dashboard.total_trainee') }}
                                                                 </div>

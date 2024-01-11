@@ -31,14 +31,116 @@
     .container {
         margin-top: 50px;
     }
+
+    .reset-pm .col{
+padding: 0em;
+margin: 5px;
+text-align: center;
+    }
+
+ 
+
+
 </style>
-<title>Attendance Report</title>
 </head>
 @endpush
 @section('content')
-<div class="container bg-warning">
-    <h2>Attendance Report</h2>
-    <table class="table table-bordered mt-3">
+<div class="container bg-white shadow my-3">
+ <div class="container">
+        <div class="row">
+          <!-- Left Column (half width) -->
+          <div class="col-md-8">
+            <div class="box">
+              <h2>মাসিক উপস্থিতি রিপোর্ট</h2>
+            </div>
+          </div>
+    
+          <!-- Right Column (half width) -->
+          <div class="col-md-4">
+            <!-- Inner row with 5 columns -->
+            <div class="row reset-pm">
+              <div class="col">
+                <div class="box">
+                  <p><img src="{{ asset('img') }}/attendance/logo.png" alt=""></p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="box">
+                    <img src="{{ asset('img') }}/attendance/gov.png" alt="">
+                </div>
+              </div>
+              <div class="col">
+                <div class="box">
+                    <img src="{{ asset('img') }}/attendance/ict.png" alt="">
+                </div>
+              </div>
+              <div class="col">
+                <div class="box">
+                    <img src="{{ asset('img') }}/attendance/doict.png" alt="">
+                </div>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <div class="border my-3">
+          <div class="row p-3">
+            <div class="col">
+                <div class="box">
+                  <p>মাস</p>
+                  <b>নভেম্বর ২০২৩</b>
+                </div>
+              </div>
+              <div class="col">
+                <div class="box">
+                  <p>ব্যাচ কোড #</p>
+                   <b>নভেম্বর ২০২৩</b>
+                </div>
+              </div>
+              <div class="col">
+                <div class="box">
+                  <p>কোর্সের নাম</p>
+                   <b>নভেম্বর ২০২৩</b>
+                </div>
+              </div>
+              <div class="col">
+                <div class="box">
+                  <p>ঠিকানা</p>
+                   <b>নভেম্বর ২০২৩</b>
+                </div>
+              </div>
+              <div class="col">
+                <div class="box">
+                  <p>সময়সূচী</p>
+                   <b>নভেম্বর ২০২৩</b>
+                </div>
+              </div>              
+              <div class="col">
+                <div class="box">
+                  <p>প্রশিক্ষণার্থী</p>
+                   <b>নভেম্বর ২০২৩</b>
+                </div>
+              </div>
+            <div class="col">
+              <div class="box">
+                <p>মোট ক্লাস</p>
+                 <b>নভেম্বর ২০২৩</b>
+              </div>             
+            </div>
+            <div class="col">
+                <div class="box">
+                  <p>উপস্থিতি</p>
+                   <b>নভেম্বর ২০২৩</b>
+                </div>
+              </div>
+          
+            <!-- Repeat this block for the remaining 6 columns -->
+          </div>
+    </div>
+   <table class="table table-bordered mt-3">
         <thead>
         <tr>
             <th class="auto-height">Student</th>
@@ -77,6 +179,7 @@
         <?php endfor; ?>
         </tbody>
     </table>
+    </div>
 </div>
 
 @endsection
