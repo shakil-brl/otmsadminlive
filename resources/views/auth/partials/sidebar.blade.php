@@ -150,7 +150,7 @@
 
                         @if (in_array('admins.index', $roleRoutePermissions))
                         <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')|| Illuminate\Support\Facades\Route::is('role.index')|| Illuminate\Support\Facades\Route::is('permission.index')) {?> here show<?php } ?>"
+                        <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')|| Illuminate\Support\Facades\Route::is('role.index') || Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')) {?> here show<?php } ?>"
                             kt-hidden-height="81" style="">
                             <!--begin:Menu item-->
                             @if (in_array('admins.index', $roleRoutePermissions))
@@ -627,11 +627,11 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="" class="show-loader">
+                    <a href="{{route('courses.index')}}" class="show-loader">
                         <span
-                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create')) {?>active<?php } ?>">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-some-files fs-2                        ">
+                                <i class="ki-duotone ki-some-files fs-2 ">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
@@ -645,7 +645,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="" class="show-loader">
+                    <a href="{{route('generate-pdf')}}" class="show-loader">
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
@@ -704,7 +704,7 @@
                         <span
                             class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-tablet-ok fs-2                        ">
+                                <i class="ki-duotone ki-tablet-ok fs-2 ">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -721,7 +721,7 @@
                     <!--start:Menu link-->
                     <a href="{{ route('holydays.index')}}" class="show-loader">
                         <span
-                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('holydays.index') ) {?>active<?php } ?>">
+                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')) {?>active<?php } ?>">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-calendar-tick fs-2 ">
                                     <span class="path1"></span>
@@ -762,9 +762,9 @@
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                     <!--start:Menu link-->
-                    <a href="" class="show-loader">
+                    <a href="{{route('lots.index')}}" class="show-loader">
                         <span
-                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
+                            class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')) {?>active<?php } ?>">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-element-2  fs-2                   ">
                                     <span class="path1"></span>

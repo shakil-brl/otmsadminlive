@@ -65,7 +65,7 @@ return [
     'evaluation_trainer' => 'প্রশিক্ষক ইভালুয়েশন',
     'holly_day' => 'ছুটির দিন',
     'training_title' => 'ট্রেনিং শিরোনাম',
-    'training_group' => 'ট্রেনিং গ্রুপ',
+    'training_group' => 'এসপি গ্রুপ',
     'vendor' => 'ভেন্ডর',
 
 

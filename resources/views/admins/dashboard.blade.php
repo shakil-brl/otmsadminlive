@@ -117,7 +117,7 @@
                             </div>
                             <div>
                                 <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="0" :icon="asset('img/new_icon/developmentpartner.png')"
-                                    title="Today's Class" :class="'card-item red show-loader'" />
+                                    :title="__('dashboard.todays_class')" :class="'card-item red show-loader'" />
                             </div>
                         @endif
                     </div>
