@@ -68,8 +68,8 @@
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
-                                <form action="">
-                                    <input type="text" data-kt-user-order-filter="search"
+                                <form>
+                                    <input type="text" data-kt-user-order-filter="search" id="myInput"
                                         class="form-control form-control-solid w-250px ps-13"
                                         placeholder="{{ __('upazila-list.search_upazila') }}" name="search"
                                         value="{{ request('search') }}" />
@@ -91,7 +91,7 @@
                                         <th class="min-w-125px">S.N.</th>
                                         <th class="min-w-125px">{{ __('upazila-list.upazila_code') }}</th>
                                         <th class="min-w-125px">{{ __('upazila-list.upazila_name') }}</th>
-                                        <th class="min-w-125px">{{ __('upazila-list.district_name') }}</th>
+                                        <th class="min-w-125px text-center">{{ __('upazila-list.district_name') }}</th>
                                         <th class="min-w-125px text-end">{{ __('upazila-list.division_name') }}</th>
                                     </tr>
                                 </thead>
@@ -120,9 +120,6 @@
     <script>
         let upazilaTbody = $("#upazila-tbody");
         $(document).ready(function() {
-            //const page = 1; // Current page
-            //const pageSize = 12; // Items per page
-            //const link = `${api_baseurl}upazilas?page=${page}&pageSize=${pageSize}`; // Use template literals here
             const link = api_baseurl + "upazilas";
             $.ajax({
                 type: "GET",
@@ -140,27 +137,23 @@
                             let upazilaTr = `
                                 <tr>
                                     <td>                                        
-                                        ${index + 1}
+                                        ${index + 1}.
                                     </td>
                                     <td>                                        
                                         ${upazila.Code}
                                     </td>
-                                    <td class="d-flex align-items-center">
-                                        <!--begin::Upazila details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${upazila.Name}
-                                            </a>
-                                            <span></span>
-                                        </div>
-                                        <!--begin::upazila details-->
-                                    </td>
                                     <td>
-                                        ${upazila.district ? upazila.district.Name : ''}
+                                        ${upazila.NameEng ?? ''}
+                                        (${upazila.Name ?? ''})
+                                    </td>
+                                    <td class="text-center">
+                                        ${upazila.district ? upazila.district.NameEng : ''}
+                                        (${upazila.district ? upazila.district.Name : ''})
                                     </td>
 
                                     <td class="text-end">
-                                        ${upazila.district ? (upazila.district.division ? upazila.district.division.Name : '') : ''}
+                                        ${upazila.district ? (upazila.district.division ? upazila.district.division.NameEng : '') : ''}
+                                        (${upazila.district ? (upazila.district.division ? upazila.district.division.Name : '') : ''})
                                     </td>   
                                 </tr>
                             `;
@@ -174,12 +167,18 @@
                             </tr>                            
                         `;
                     }
+                    let table = $("#kt_upazila_report_views_table").DataTable();
+                    $('#myInput').on('keyup', function() {
+                        table.search(this.value).draw();
+                    });
                 },
                 error: function(xhr, status, error) {
                     // Handle errors here
                     console.error(xhr, status, error);
                 }
             });
+
+
         });
     </script>
 @endsection

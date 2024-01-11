@@ -68,8 +68,8 @@
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
-                                <form action="">
-                                    <input type="text" data-kt-user-order-filter="search"
+                                <form>
+                                    <input type="text" data-kt-user-order-filter="search" id="myInput"
                                         class="form-control form-control-solid w-250px ps-13"
                                         placeholder="{{ __('district-list.search_district') }}" name="search"
                                         value="{{ request('search') }}" />
@@ -142,10 +142,11 @@
                                         ${district.Code}
                                     </td>
                                     <td class="text-center">
-                                        ${district.Name}
+                                        ${district.NameEng ?? ''} (${district.Name ?? ''})
                                     </td>
                                     <td class="text-end">
-                                        ${district.division ? district.division.Name : ''}
+                                        ${district.division ? district.division.NameEng : ''}
+                                        (${district.division ? district.division.Name : ''})
                                     </td>
                                 </tr>
                             `;
@@ -159,6 +160,11 @@
                             </tr>                            
                         `;
                     }
+
+                    let table = $("#kt_district_report_views_table").DataTable();
+                    $('#myInput').on('keyup', function() {
+                        table.search(this.value).draw();
+                    });
                 },
                 error: function(xhr, status, error) {
                     // Handle errors here
