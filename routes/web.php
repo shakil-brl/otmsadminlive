@@ -302,4 +302,4 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 });
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
-Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf']);
+Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
