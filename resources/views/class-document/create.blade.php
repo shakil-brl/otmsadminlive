@@ -23,14 +23,15 @@
                 <input type="hidden" name="tms_batch_schedule_detail_id" value="{{ $schedule_details_id }}">
                 <div class="mb-3">
                     <label for="file-title" class="form-label">Title:</label>
-                    <input type="text" name="document_title" class="form-control" id="file-title"></input>
+                    <input type="text" name="document_title" class="form-control" id="file-title"
+                        value="{{ old('document_title') }}"></input>
                     @error('document_title')
                         <small class="text-danger d-block">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="file-description" class="form-label">Description:</label>
-                    <textarea class="form-control" name="description" id="file-description" rows="3"></textarea>
+                    <textarea class="form-control" name="description" id="file-description" rows="3">value="{{ old('description') }}"</textarea>
                     @error('description')
                         <small class="text-danger d-block">{{ $message }}</small>
                     @enderror

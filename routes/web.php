@@ -256,6 +256,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::get('/tms-inspections/show/{id}', [TmsInspectionController::class, 'show'])->name('tms-inspections.show');
     Route::get('/tms-inspections/create', [TmsInspectionController::class, 'create'])->name('tms-inspections.create');
     Route::post('/inspections/store', [TmsInspectionController::class, 'store'])->name('tms-inspections.store');
+    Route::get('/tms-inspections/inspect', [TmsInspectionController::class, 'inspect'])->name('tms-inspections.inspect');
     // Route::delete('/tms-inspections/edit', [TmsInspectionController::class, 'index'])->name('tms-inspections.edit');
     // Route::res
     /**
