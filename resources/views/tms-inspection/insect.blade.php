@@ -105,7 +105,7 @@
             // Initialize an empty object for selectedBatches
             var selectedBatches = {};
 
-            
+
 
             // Convert selectedBatches to JSON
             var selectedBatchesJSON = JSON.stringify(selectedBatches);
@@ -234,12 +234,14 @@
 
                     if (allData) {
                         $.each(allData, function(index, data) {
-                            htmlOption +=
-                                '<option value="' +
-                                data.id +
-                                '">' +
-                                data.title.Name +
-                                "</option>";
+                            if (data.trainingProviderOrgId == 13) {
+                                htmlOption +=
+                                    '<option value="' +
+                                    data.id +
+                                    '">' +
+                                    data.title.Name +
+                                    "</option>";
+                            }
                         });
                     }
 
