@@ -30,10 +30,10 @@
                     @foreach (collect($running_batches) as $batch)
                         <tr>
                             <td>
-                                {{ $loop->iteration }}
+                                {{ digitLocale($from + $loop->index) }}
                             </td>
                             <td>
-                                {{  $batch['training_batch']['batchCode'] ?? '' }}
+                                {{ $batch['training_batch']['batchCode'] ?? '' }}
                             </td>
                             <td>
                                 {{ $batch['training_batch']['startDate'] ?? '' }}
@@ -42,7 +42,7 @@
                                 {{ $batch['training_batch']['training']['title']['Name'] ?? '' }}
                             </td>
                             <td>
-                                {{$batch['training_batch']['GEOLocation'] ?? '' }}
+                                {{ $batch['training_batch']['GEOLocation'] ?? '' }}
                             </td>
                             <td>
                                 {{ $batch['training_batch']['provider']['name'] ?? '' }}

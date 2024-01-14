@@ -28,7 +28,7 @@
                     @foreach (collect($total_partners) as $partners)
                         <tr>
                             <td>
-                                {{ $from + $loop->index }}
+                                {{ digitLocale($from + $loop->index) }}
                             </td>
                             <td>
                                 {{ $partners['name'] }}

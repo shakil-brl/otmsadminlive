@@ -41,8 +41,9 @@ class DashboardDetailsController extends Controller
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
             $paginator = $this->customPaginate($running_batches, $request, route('dashboard_details.running_batches'));
+            $from = $running_batches['data']['from'];
 
-            return view('dashboard_details.running_batches', ['running_batches' => $batches, 'paginator' => $paginator]);
+            return view('dashboard_details.running_batches', ['running_batches' => $batches, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $running_batches['message'] ?? 'Something went wrong');
@@ -61,8 +62,9 @@ class DashboardDetailsController extends Controller
         if ($complete_batches['success'] == true) {
             $batches = $complete_batches['data']['data'];
             $paginator = $this->customPaginate($complete_batches, $request, route('dashboard_details.complete_batches'));
+            $from = $complete_batches['data']['from'];
 
-            return view('dashboard_details.complete_batches', ['complete_batches' => $batches, 'paginator' => $paginator]);
+            return view('dashboard_details.complete_batches', ['complete_batches' => $batches, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $complete_batches['message'] ?? 'Something went wrong');
@@ -82,8 +84,9 @@ class DashboardDetailsController extends Controller
         if ($ongoing_classes['success'] == true) {
             $batches = $ongoing_classes['data']['data'];
             $paginator = $this->customPaginate($ongoing_classes, $request, route('dashboard_details.ongoing_classes'));
+            $from = $ongoing_classes['data']['from'];
 
-            return view('dashboard_details.ongoing_classes', ['ongoing_classes' => $batches, 'paginator' => $paginator]);
+            return view('dashboard_details.ongoing_classes', ['ongoing_classes' => $batches, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $ongoing_classes['message'] ?? 'Something went wrong');
@@ -103,8 +106,9 @@ class DashboardDetailsController extends Controller
         if ($complete_classes['success'] == true) {
             $batches = $complete_classes['data']['data'];
             $paginator = $this->customPaginate($complete_classes, $request, route('dashboard_details.complete_classes'));
+            $from = $complete_classes['data']['from'];
 
-            return view('dashboard_details.complete_classes', ['complete_classes' => $batches, 'paginator' => $paginator]);
+            return view('dashboard_details.complete_classes', ['complete_classes' => $batches, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $complete_classes['message'] ?? 'Something went wrong');
@@ -124,7 +128,8 @@ class DashboardDetailsController extends Controller
             $districts = $total_districts['data']['data'];
             $paginator = $this->customPaginate($total_districts, $request, route('dashboard_details.districts'));
             $from = $total_districts['data']['from'];
-            return view('dashboard_details.districts', ['total_districts' => $districts, 'paginator' => $paginator,'form'=>$from ]);
+
+            return view('dashboard_details.districts', ['total_districts' => $districts, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $total_districts['message'] ?? 'Something went wrong');
@@ -142,8 +147,9 @@ class DashboardDetailsController extends Controller
         if ($total_upazilas['success'] == true) {
             $upazilas = $total_upazilas['data']['data'];
             $paginator = $this->customPaginate($total_upazilas, $request, route('dashboard_details.upazilas'));
+            $from = $total_upazilas['data']['from'];
 
-            return view('dashboard_details.upazilas', ['total_upazilas' => $upazilas, 'paginator' => $paginator]);
+            return view('dashboard_details.upazilas', ['total_upazilas' => $upazilas, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $total_upazilas['message'] ?? 'Something went wrong');
@@ -163,6 +169,7 @@ class DashboardDetailsController extends Controller
             $partners = $total_partners['items']['data'];
             $paginator = $this->customPaginate2($total_partners, $request, route('dashboard_details.partners'));
             $from = $total_partners['items']['from'];
+
             return view('dashboard_details.partners', ['total_partners' => $partners, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
