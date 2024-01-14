@@ -12,7 +12,7 @@
 
             </div>
             <div class="mt-5">
-                <h4>Link Batches With Batch Group</h4>
+                <h4>Inspection (Find Batch)</h4>
                 <div class="my-3">
                     <div id="gioLocation-form">
                         <div class="d-flex justify-content-between gap-3">
