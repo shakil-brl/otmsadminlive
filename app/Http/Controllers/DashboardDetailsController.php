@@ -123,7 +123,7 @@ class DashboardDetailsController extends Controller
         if ($total_districts['success'] == true) {
             $districts = $total_districts['data']['data'];
             $paginator = $this->customPaginate($total_districts, $request, route('dashboard_details.districts'));
-            $from = $total_districts['items']['from'];
+            $from = $total_districts['data']['from'];
             return view('dashboard_details.districts', ['total_districts' => $districts, 'paginator' => $paginator,'form'=>$from ]);
         } else {
             session()->flash('type', 'Danger');
