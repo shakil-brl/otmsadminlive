@@ -116,7 +116,7 @@ class DashboardDetailsController extends Controller
     // 
     public function districts(Request $request)
     {
-        $total_districts = ApiHttpClient::request('get', 'districtslist', [
+        $total_districts = ApiHttpClient::request('get', '/detail/district', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
