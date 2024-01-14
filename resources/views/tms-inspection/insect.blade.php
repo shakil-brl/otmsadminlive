@@ -5,130 +5,107 @@
     <div class="m-5">
         <x-alert />
         {{-- @dump($from_edit) --}}
-        @isset($provider)
-            {{-- @dd($provider) --}}
-            <div class="card p-5">
-                <div id="">
-                    <h3>{{ $provider['name'] ?? '' }} Details:</h3>
-                    <div>
-                        <div>Phone: {{ $provider['phone'] ?? '' }}</div>
-                        <div>Email: {{ $provider['email'] ?? '' }}</div>
-                        <div>Address: {{ $provider['address'] ?? '' }}</div>
+
+        {{-- @dd($lot) --}}
+        <div class="card p-5">
+            <div id="">
+
+            </div>
+            <div class="mt-5">
+                <h4>Link Batches With Batch Group</h4>
+                <div class="my-3">
+                    <div id="gioLocation-form">
+                        <div class="d-flex justify-content-between gap-3">
+                            <div class="w-25">
+                                <select class="mb-3 api-call form-select" name="per_page">
+                                    <option value="50">Per Page</option>
+                                    @foreach (range(25, 525, 25) as $val)
+                                        <option value="{{ $val }}">{{ $val }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="w-75">
+                                <div class="input-group">
+                                    <input type="text" class="form-control api-call" name="search"
+                                        placeholder="Search here (Batch Code)">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-4 g-3">
+                            <div class="col">
+                                <select class="form-select api-call" name="division_id" id="division_id">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="form-select api-call" name="district_id" id="district_id">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="form-select api-call" name="upazila_id" id="upazila_id">
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="form-select api-call" name="training_title_id" id="training_title_id">
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-5">
-                    <h4>Link Batches With Provider</h4>
-                    <div class="my-3">
-                        <div id="gioLocation-form">
-                            <div class="d-flex justify-content-between gap-3">
-                                <div class="w-25">
-                                    <select class="mb-3 api-call form-select" name="per_page">
-                                        <option value="50">Per Page</option>
-                                        @foreach (range(25, 525, 25) as $val)
-                                            <option value="{{ $val }}">{{ $val }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="w-75">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control api-call" name="search"
-                                            placeholder="Search here (Batch Code)">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-search"></i>
-                                        </span>
-                                    </div>
-                                </div>
+                <div class="my-5">
+                    <form action="" id="add-batch-form">
+                        <div class="d-none mb-3 border border-primary rounded p-3 d-flex justify-content-between"
+                            id="select-all">
+                            <div class="form-check d-flex align-items-center gap-2">
+                                <input class="form-check-input" type="checkbox" id="selectAllCheckbox" name=""
+                                    value="">
+                                <label class="form-check-label text-dark fw-bold" for="selectAllCheckbox">
+                                    Check All
+                                </label>
                             </div>
-                            <div class="row row-cols-4 g-3">
-                                <div class="col">
-                                    <select class="form-select api-call" name="division_id" id="division_id">
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <select class="form-select api-call" name="district_id" id="district_id">
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <select class="form-select api-call" name="upazila_id" id="upazila_id">
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <select class="form-select api-call" name="training_title_id" id="training_title_id">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="my-5">
-                        <form action="" id="add-batch-form">
-                            <div class="d-none mb-3 border border-primary rounded p-3 d-flex justify-content-between"
-                                id="select-all">
-                                <div class="form-check d-flex align-items-center gap-2">
-                                    <input class="form-check-input" type="checkbox" id="selectAllCheckbox" name=""
-                                        value="">
-                                    <label class="form-check-label text-dark fw-bold" for="selectAllCheckbox">
-                                        Check All
-                                    </label>
-                                </div>
-                                <div class="d-flex align-items-center gap-2">
-                                    {{-- <label class="form-label" for="">Search:</label>
+                            <div class="d-flex align-items-center gap-2">
+                                {{-- <label class="form-label" for="">Search:</label>
                                     <input class="form-control" type="search" name="search" id="batchSearch"> --}}
-                                </div>
                             </div>
-                            <input type="hidden" name="GEOCode">
-                            <div class="row row-cols-3 g-3" id="batch-checkbox">
-
-                            </div>
-                        </form>
-                    </div>
-                    <div class="my-5" id="link-batch-section">
-                        <div class="fw-bold fs-5">Selected Batch:</div>
-                        <div class="d-flex flex-wrap gap-1 border rounded p-3" id="link-batch-show"
-                            style="background-color: #faf5ff;">
-
                         </div>
-                        <button class="btn btn-danger mt-3" id="clear-selected">Clear</button>
-                    </div>
-                    <form action="" id="link-batch-form" class="">
-                        <input type="hidden" type="text" name="link-batches" value="">
-                        <div class="text-center mt-3">
-                            <button class="btn btn-success" type="submit">Submit</button>
+                        <input type="hidden" name="GEOCode">
+                        <div class="row row-cols-3 g-3" id="batch-checkbox">
+
                         </div>
                     </form>
                 </div>
+                <div class="my-5" id="link-batch-section">
+                    <div class="fw-bold fs-5">Selected Batch:</div>
+                    <div class="d-flex flex-wrap gap-1 border rounded p-3" id="link-batch-show"
+                        style="background-color: #faf5ff;">
+
+                    </div>
+                    <button class="btn btn-danger mt-3" id="clear-selected">Clear</button>
+                </div>
+                <form action="" id="link-batch-form" class="">
+                    <input type="hidden" type="text" name="link-batches" value="">
+                    <div class="text-center mt-3">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </div>
+                </form>
             </div>
-        @endisset
+        </div>
+
     </div>
 @endsection
 @section('scripts')
     <script>
         $(document).ready(function() {
             localStorage.removeItem('selectedBatches');
-            let providerId = @json($provider['id']);
-            let fromEdit = @json($from_edit);
             // alert(fromEdit);
-            let storedDBBatches = @json($provider['training_batches']);
+            let storedDBBatches = 1;
             // console.log(storedDBBatches);
             // Initialize an empty object for selectedBatches
             var selectedBatches = {};
 
-            // Loop through storedBatches and create the selectedBatches object
-            storedDBBatches.forEach(function(batch) {
-                let batchId = batch.id ?? "";
-                let batchCode = batch.batchCode ?? "";
-                let batchTitle = '';
-                if (batch.training) {
-                    batchTitle = batch.training.title.Name ?? "";
-                }
-                let GEOLocation = batch.GEOLocation ?? "";
-
-                // Add the batch to selectedBatches
-                selectedBatches[batchId] = {
-                    batchCode: batchCode,
-                    title: batchTitle,
-                    GEOLocation: GEOLocation
-                };
-            });
+            
 
             // Convert selectedBatches to JSON
             var selectedBatchesJSON = JSON.stringify(selectedBatches);
@@ -257,14 +234,12 @@
 
                     if (allData) {
                         $.each(allData, function(index, data) {
-                            if (data.trainingProviderOrgId == 13) {
-                                htmlOption +=
-                                    '<option value="' +
-                                    data.id +
-                                    '">' +
-                                    data.title.Name +
-                                    "</option>";
-                            }
+                            htmlOption +=
+                                '<option value="' +
+                                data.id +
+                                '">' +
+                                data.title.Name +
+                                "</option>";
                         });
                     }
 
@@ -323,7 +298,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input batch-checkbox" type="checkbox" id="${data.id}" name="batches[]"
                                                     value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${batchTitle ?? ''}"
-                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${fromEdit ? (data.provider_id && data.provider_id != providerId ? 'disabled' : '') : ''}>
+                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''}>
                                                 <label class="form-check-label text-dark" for="${data.id}">
                                                     ${data.batchCode} (${batchTitle ?? ""})
                                                 </label>
@@ -402,68 +377,66 @@
                 }
             });
 
-            // Provider link batches form submit
-            $("#link-batch-form").submit(function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: "Are you sure",
-                    text: "You want to submit the form?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, Submitted",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        let fd = new FormData();
-                        let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-                        let link = api_baseurl + "provider-batches/create";
+            // lot link batches form submit
+            // $("#link-batch-form").submit(function(e) {
+            //     e.preventDefault();
+            //     Swal.fire({
+            //         title: "Are you sure",
+            //         text: "You want to submit the form?",
+            //         icon: "warning",
+            //         showCancelButton: true,
+            //         confirmButtonColor: "#3085d6",
+            //         cancelButtonColor: "#d33",
+            //         confirmButtonText: "Yes, Submitted",
+            //     }).then((result) => {
+            //         if (result.isConfirmed) {
+            //             let fd = new FormData();
+            //             let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
+            //             let link = api_baseurl + "lot/link-batch";
 
-                        let batchIds = $("#link-batch-form [name=link-batches]").val();
+            //             let batchIds = $("#link-batch-form [name=link-batches]").val();
 
-                        // console.log(batchIds);
+            //             console.log(batchIds);
 
-                        fd.append("batch_ids", batchIds);
-                        fd.append("provider_id", providerId);
-                        fd.append("_token", CSRF_TOKEN);
-                        if (fromEdit || (batchIds == '' && storedDBBatches) || storedDBBatches) {
-                            fd.append("edit", true);
-                        }
-                        $.ajax({
-                            type: "post",
-                            data: fd,
-                            processData: false,
-                            contentType: false,
-                            dataType: "JSON",
-                            url: link,
-                            headers: {
-                                Authorization: authToken,
-                                "X-localization": language,
-                            },
-                            success: function(results) {
-                                console.log(results);
-                                if (results.success === true) {
-                                    swal.fire(yes, results.message);
+            //             fd.append("batch_ids", batchIds);
+            //             fd.append("lot_id", lotId);
+            //             fd.append("_token", CSRF_TOKEN);
 
-                                    sessionStorage.setItem("message", results.message);
-                                    sessionStorage.setItem("alert-type", "info");
+            //             $.ajax({
+            //                 type: "post",
+            //                 data: fd,
+            //                 processData: false,
+            //                 contentType: false,
+            //                 dataType: "JSON",
+            //                 url: link,
+            //                 headers: {
+            //                     Authorization: authToken,
+            //                     "X-localization": language,
+            //                 },
+            //                 success: function(results) {
+            //                     console.log(results);
+            //                     if (results.success === true) {
+            //                         swal.fire(yes, results.message);
 
-                                    // refresh page after 2 seconds
-                                    setTimeout(function() {
-                                        // location.reload();
-                                        history.back();
-                                    }, 2000);
-                                } else {
-                                    if (results.error === true) {
-                                        var errors = results.message;
-                                        swal.fire(ValidationError, errors);
-                                    }
-                                }
-                            },
-                        });
-                    }
-                });
-            });
+            //                         sessionStorage.setItem("message", results.message);
+            //                         sessionStorage.setItem("alert-type", "info");
+
+            //                         // refresh page after 2 seconds
+            //                         setTimeout(function() {
+            //                             // location.reload();
+            //                             history.back();
+            //                         }, 2000);
+            //                     } else {
+            //                         if (results.error === true) {
+            //                             var errors = results.message;
+            //                             swal.fire(ValidationError, errors);
+            //                         }
+            //                     }
+            //                 },
+            //             });
+            //         }
+            //     });
+            // });
 
             // function 
             function generateSelectedList() {
