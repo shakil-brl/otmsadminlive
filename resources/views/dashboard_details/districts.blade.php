@@ -27,7 +27,7 @@
                     @foreach (collect($total_districts) as $district)
                         <tr>
                             <td>
-                                {{ $from + $loop->index }}
+                                {{ digitLocale($from + $loop->index) }}
                             </td>
                             <td>
                                 {{ $district['Code'] }}

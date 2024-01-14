@@ -31,7 +31,7 @@
                     @foreach (collect($complete_classes) as $batch)
                         <tr>
                             <td>
-                                {{ $from + $loop->index }}
+                                {{ digitLocale($from + $loop->index) }}
                             </td>
                             <td>
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}

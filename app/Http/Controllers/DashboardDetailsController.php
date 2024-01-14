@@ -147,8 +147,9 @@ class DashboardDetailsController extends Controller
         if ($total_upazilas['success'] == true) {
             $upazilas = $total_upazilas['data']['data'];
             $paginator = $this->customPaginate($total_upazilas, $request, route('dashboard_details.upazilas'));
+            $from = $total_upazilas['data']['from'];
 
-            return view('dashboard_details.upazilas', ['total_upazilas' => $upazilas, 'paginator' => $paginator]);
+            return view('dashboard_details.upazilas', ['total_upazilas' => $upazilas, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $total_upazilas['message'] ?? 'Something went wrong');
