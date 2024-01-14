@@ -37,7 +37,11 @@
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['start_time'] ?? '' }}
+                                {{-- {{ $batch['start_time'] ?? '' }} --}}
+                                {{-- {{ \Carbon\Carbon::createFromFormat('H:i:s',
+                                $batch['start_time'])->format('h:i A') }} --}}
+                                {{ digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) }}
+
                             </td>
                             <td>
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
