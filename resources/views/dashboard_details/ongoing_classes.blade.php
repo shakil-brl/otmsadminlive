@@ -25,6 +25,7 @@
                     <th>{{ __('batch-schedule.course_name') }}</th>
                     <th>{{ __('batch-schedule.location') }}</th>
                     <th>{{ __('batch-schedule.development_partner') }}</th>
+                    <th>Trainer</th>
                     <th>{{ __('batch-schedule.action') }}</th>
                 </thead>
                 <tbody>
@@ -50,35 +51,51 @@
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
+                                <div>
+                                    {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
+                                </div>
+                                <div>
+                                    Phone: {{ $batch['schedule']['training_batch']['provider']['phone'] ?? '' }}
+                                </div>
                             </td>
                             <td>
-                                @if ($batch['streaming_link'])
-                                    <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
-                                        {{ __('batch-schedule.live_streaming') }}
-                                    </a>
-                                @endif
-                                @if ($batch['static_link'])
-                                    <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}"
-                                        target="_blank">
-                                        {{ __('batch-schedule.join_class') }}
-                                    </a>
-                                @endif
-
-                                @php
-                                    $inspection_pm = [
-                                        'batch_id' => $batch['schedule']['training_batch']['id'],
-                                        'schedule_detail_id' => $batch['id'],
-                                    ];
-                                @endphp
-                                @isset($inspection_pm)
-                                    <a class="btn btn-sm btn-primary" href="{{ route('tms-inspections.create', $inspection_pm) }}"
-                                        target="_blank">
-                                        Inspection
-                                    </a>
+                                @isset($batch['schedule']['training_batch']['provider_trainers'])
+                                    @foreach ($batch['schedule']['training_batch']['provider_trainers'] as $trainer)
+                                        <div>
+                                            {{ $trainer['profile']['KnownAs'] ?? '' }}
+                                        </div>
+                                        <div>
+                                            Phone: {{ $trainer['profile']['Phone'] ?? '' }}
+                                        </div>
+                                    @endforeach
                                 @endisset
-
-
+                            </td>
+                            <td>
+                                <div class="d-flex flex-wrap gap-1">
+                                    @if ($batch['streaming_link'])
+                                        <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
+                                            {{ __('batch-schedule.live_streaming') }}
+                                        </a>
+                                    @endif
+                                    @if ($batch['static_link'])
+                                        <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}"
+                                            target="_blank">
+                                            {{ __('batch-schedule.join_class') }}
+                                        </a>
+                                    @endif
+                                    @php
+                                        $inspection_pm = [
+                                            'batch_id' => $batch['schedule']['training_batch']['id'],
+                                            'schedule_detail_id' => $batch['id'],
+                                        ];
+                                    @endphp
+                                    @isset($inspection_pm)
+                                        <a class="btn btn-sm btn-primary"
+                                            href="{{ route('tms-inspections.create', $inspection_pm) }}" target="_blank">
+                                            Inspection
+                                        </a>
+                                    @endisset
+                                </div>
                             </td>
                         </tr>
                     @endforeach
