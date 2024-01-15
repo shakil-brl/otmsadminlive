@@ -105,8 +105,6 @@
         $(document).ready(function() {
             localStorage.removeItem('selectedBatches');
             let providerId = @json($provider['id']);
-            let fromEdit = @json($from_edit);
-            // alert(fromEdit);
             let storedDBBatches = @json($provider['training_batches']);
             // console.log(storedDBBatches);
             // Initialize an empty object for selectedBatches
@@ -323,7 +321,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input batch-checkbox" type="checkbox" id="${data.id}" name="batches[]"
                                                     value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${batchTitle ?? ''}"
-                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${fromEdit ? (data.provider_id && data.provider_id != providerId ? 'disabled' : '') : ''}>
+                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''} ${data.provider_id && data.provider_id != providerId ? 'disabled' : ''}>
                                                 <label class="form-check-label text-dark" for="${data.id}">
                                                     ${data.batchCode} (${batchTitle ?? ""})
                                                 </label>
@@ -426,9 +424,7 @@
                         fd.append("batch_ids", batchIds);
                         fd.append("provider_id", providerId);
                         fd.append("_token", CSRF_TOKEN);
-                        if (fromEdit || (batchIds == '' && storedDBBatches) || storedDBBatches) {
-                            fd.append("edit", true);
-                        }
+
                         $.ajax({
                             type: "post",
                             data: fd,
