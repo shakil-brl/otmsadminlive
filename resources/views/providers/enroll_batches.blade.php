@@ -9,21 +9,22 @@
             {{-- @dd($provider) --}}
             <div class="card p-5">
                 <div id="">
-                    <h3>{{ $provider['name'] ?? '' }} Details:</h3>
+                    <h1 class="text-center"> {{__('provider-list.edit_linked_batch')}}</h1>
+                    <h3>{{__('provider-list.vendor_names')}}:{{ $provider['name'] ?? '' }}</h3>
                     <div>
-                        <div>Phone: {{ $provider['phone'] ?? '' }}</div>
-                        <div>Email: {{ $provider['email'] ?? '' }}</div>
-                        <div>Address: {{ $provider['address'] ?? '' }}</div>
+                        <div>{{__('provider-list.phone_number')}}: {{ $provider['phone'] ?? '' }}</div>
+                        <div>{{__('provider-list.email')}}: {{ $provider['email'] ?? '' }}</div>
+                        <div>{{__('provider-list.address')}}:{{ $provider['address'] ?? '' }}</div>
                     </div>
                 </div>
                 <div class="mt-5">
-                    <h4>Link Batches With Provider</h4>
+                    <h4>{{__('provider-list.batch_link_vendor')}}</h4>
                     <div class="my-3">
                         <div id="gioLocation-form">
                             <div class="d-flex justify-content-between gap-3">
                                 <div class="w-25">
                                     <select class="mb-3 api-call form-select" name="per_page">
-                                        <option value="50">Per Page</option>
+                                        <option value="50">{{__('provider-list.per_page')}}</option>
                                         @foreach (range(25, 525, 25) as $val)
                                             <option value="{{ $val }}">{{ $val }}</option>
                                         @endforeach
@@ -32,7 +33,7 @@
                                 <div class="w-75">
                                     <div class="input-group">
                                         <input type="text" class="form-control api-call" name="search"
-                                            placeholder="Search here (Batch Code)">
+                                            placeholder="{{__('provider-list.search_batch_code')}}">
                                         <span class="input-group-text">
                                             <i class="fas fa-search"></i>
                                         </span>
@@ -67,7 +68,7 @@
                                     <input class="form-check-input" type="checkbox" id="selectAllCheckbox" name=""
                                         value="">
                                     <label class="form-check-label text-dark fw-bold" for="selectAllCheckbox">
-                                        Check All
+                                        {{__('provider-list.check_all')}}
                                     </label>
                                 </div>
                                 <div class="d-flex align-items-center gap-2">
@@ -82,17 +83,17 @@
                         </form>
                     </div>
                     <div class="my-5" id="link-batch-section">
-                        <div class="fw-bold fs-5">Selected Batch:</div>
+                        <div class="fw-bold fs-5">{{__('provider-list.selected_batch')}}</div>
                         <div class="d-flex flex-wrap gap-1 border rounded p-3" id="link-batch-show"
                             style="background-color: #faf5ff;">
 
                         </div>
-                        <button class="btn btn-danger mt-3" id="clear-selected">Clear</button>
+                        <button class="btn btn-danger mt-3" id="clear-selected">{{__('provider-list.clear_all')}}</button>
                     </div>
                     <form action="" id="link-batch-form" class="">
                         <input type="hidden" type="text" name="link-batches" value="">
                         <div class="text-center mt-3">
-                            <button class="btn btn-success" type="submit">Submit</button>
+                            <button class="btn btn-success" type="submit">{{__('provider-list.submit')}}</button>
                         </div>
                     </form>
                 </div>
@@ -404,7 +405,7 @@
             $("#link-batch-form").submit(function(e) {
                 e.preventDefault();
                 Swal.fire({
-                    title: "Are you sure",
+                    title: "Are you sure?",
                     text: "You want to submit the form?",
                     icon: "warning",
                     showCancelButton: true,
