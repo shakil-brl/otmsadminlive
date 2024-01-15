@@ -136,7 +136,7 @@
                             let divisionTr = `
                                 <tr>                                   
                                     <td>                                        
-                                        ${index + 1}
+                                        ${index + 1}.
                                     </td>
                                     <td class="text-center">
                                         ${division.Code}
