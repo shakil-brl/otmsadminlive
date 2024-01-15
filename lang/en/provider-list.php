@@ -69,6 +69,29 @@ return [
     'phone_number_ph' => 'Enter Vendor Phone Number',
     'addresses_ph' => 'Enter Vendor Address',
     'views' => 'View',
+    'vendor_info' => 'Vendor Details Information',
+    'vendor_names' => 'Name',
+    'edit_linked_batch' => 'Edit Linked Batch',
+    'all_batches' => 'All Batches',
+    'batch_code' => 'Batch Code',
+    'course_name' => 'Course Name',
+    'location' => 'Location',
+    'class_start_date' => ' Class Start Date',
+    'batch_link_vendor' => ' Link Batches With Vendor',
+    'per_page' => ' Per Page',
+    'search_batch_code' => ' Search here (Batch Code)',
+    'select_division' => ' Select Division',
+    'select_district' => ' Select District',
+    'select_upazila' => ' Select Upazila',
+    'select_course_name' => ' Select Course Name',
+    'check_all' => ' Check All',
+    'selected_batch' => ' Selected Batch',
+    'clear_all' => ' Clear All',
+    'clear' => ' Clear',
+    
+
+
+    
 
   
   

@@ -121,4 +121,5 @@ reports
 15.Have to Currection Dashboard Data
 16.Between All Enroll Trainer add Pagination,Search Filter and add Trainer Phone Number
 17.Between Vendor Batch should be shown Teacher Deatils and Batch Details.
+18. admin panel users view details not show only show tariners and providers view details
 

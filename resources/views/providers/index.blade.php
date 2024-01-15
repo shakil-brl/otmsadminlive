@@ -212,7 +212,7 @@
             <div class="modal-content">
                 <div class="modal-header" id="kt_modal_update_provider_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">{{ __('provider-list.provider-edit') }}</h2>
+                    <h2 class="fw-bold">{{ __('provider-list.vendor_edit') }}</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -232,11 +232,11 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.provider_name') }}</label>
+                            <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.vendor_name') }}</label>
                             <!--end::Label-->
                             <input type="hidden" name="provider_id" id="provider_id" value="" />
                             <!--begin::First Name-->
-                            <input type="text" placeholder="{{ __('provider-list.provider_name_ph') }}"
+                            <input type="text" placeholder="{{ __('provider-list.vendor_name_ph') }}"
                                 id="name" name="name" autocomplete="off"
                                 class="form-control form-control-solid mb-3 mb-lg-0" value="" />
                             <span class="text-danger form-message-error-name">
@@ -254,7 +254,7 @@
                             <label class="fw-semibold fs-6 mb-2">{{ __('provider-list.email') }}</label>
                             <!--end::Label-->
                             <!--begin::Email-->
-                            <input type="text" placeholder="{{ __('provider-list.email_ph') }}" id="email"
+                            <input type="text" placeholder="{{ __('provider-list.mail_ph') }}" id="email"
                                 name="email" autocomplete="off" class="form-control form-control-solid mb-3 mb-lg-0"
                                 value="" />
                             <span class="text-danger form-message-error-email">
@@ -269,10 +269,10 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.mobile_number') }}</label>
+                            <label class="required fw-semibold fs-6 mb-2">{{ __('provider-list.phone_number') }}</label>
                             <!--end::Label-->
                             <!--begin::Mobile-->
-                            <input type="text" placeholder="{{ __('provider-list.mobile_number_ph') }}"
+                            <input type="text" placeholder="{{ __('provider-list.phone_number_ph') }}"
                                 id="phone" name="mobile" autocomplete="off"
                                 class="form-control form-control-solid mb-3 mb-lg-0" value="" />
                             <span class="text-danger form-message-error-mobile">
@@ -291,7 +291,7 @@
                             <!--end::Label-->
                             <!--begin::Address-->
                             <textarea class="form-control form-control-solid" rows="4" name="address" id="address"
-                                placeholder="{{ __('provider-list.address_ph') }}"></textarea>
+                                placeholder="{{ __('provider-list.addresses_ph') }}"></textarea>
                             <span class="text-danger form-message-error-address">
 
                             </span>
