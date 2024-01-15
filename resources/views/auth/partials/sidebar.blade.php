@@ -184,7 +184,7 @@
                             @endif
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-
+                            @if (in_array('permission.index', $roleRoutePermissions))
                             <div class="menu-item">
                                 <!--begin:Menu link-->
                                 <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('permission.index')) {?>active<?php } ?> "
@@ -196,7 +196,7 @@
                                 </a>
                                 <!--end:Menu link-->
                             </div>
-
+                            @endif
                             <!--end:Menu item-->
                         </div>
                         <!--end:Menu sub-->
