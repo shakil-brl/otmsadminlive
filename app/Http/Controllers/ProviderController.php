@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use PDF;
 
 class ProviderController extends Controller
 {
@@ -85,5 +87,13 @@ class ProviderController extends Controller
             session()->flash('message', 'Something went wrong');
             return redirect()->back();
         }
+    }
+
+    public function providerPdf(){
+
+        $provider_results = ApiHttpClient::request('get', 'providers')->json();        
+       
+        $pdf = PDF::loadView('providers.providers_pdf', compact('provider_results'));
+        return $pdf->stream('document.pdf'); 
     }
 }

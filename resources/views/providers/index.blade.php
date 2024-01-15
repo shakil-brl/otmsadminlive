@@ -23,6 +23,9 @@
                         >
                         {{ __('provider-list.create_vendor') }}
                     </a>
+                    <a href="{{route('provider-pdf')}}" class="btn btn-lg btn-secondary me-1">
+                        {{'PDF'}}
+                    </a>
                 </div>
             </div>
             <table class="table table-bordered bg-white">

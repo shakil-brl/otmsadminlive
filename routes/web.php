@@ -318,3 +318,6 @@ Route::post('/evaluation/{classAttId}/student-info/', [EvaluationController::cla
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
+
+Route::get('/provider-pdf', [ProviderController::class, 'providerPdf'])->name('provider-pdf');
+
