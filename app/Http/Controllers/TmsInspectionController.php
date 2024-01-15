@@ -115,4 +115,9 @@ class TmsInspectionController extends Controller
         return redirect()->route('tms-inspections.index')
             ->with('success', 'TmsInspection deleted successfully');
     }
+
+    public function inspect()
+    {
+        return view('tms-inspection.insect');
+    }
 }

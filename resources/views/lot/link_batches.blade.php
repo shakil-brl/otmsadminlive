@@ -256,12 +256,14 @@
 
                     if (allData) {
                         $.each(allData, function(index, data) {
-                            htmlOption +=
-                                '<option value="' +
-                                data.id +
-                                '">' +
-                                data.title.Name +
-                                "</option>";
+                            if (data.trainingProviderOrgId == 13) {
+                                htmlOption +=
+                                    '<option value="' +
+                                    data.id +
+                                    '">' +
+                                    data.title.Name +
+                                    "</option>";
+                            }
                         });
                     }
 

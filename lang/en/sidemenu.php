@@ -65,7 +65,7 @@ return [
     'evaluation_trainer' => 'Evaluation Trainer',
     'holly_day' => 'Holly Day',
     'training_title' => 'Training Title',
-    'training_group' => 'Training Group',
+    'training_group' => 'SP Group',
     'vendor' => 'Vendor',
 
 ];

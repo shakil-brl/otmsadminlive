@@ -46,5 +46,6 @@ return [
     'trainee_paid' => 'অর্থ প্রদান',
     'trainee_unpaid' => 'পাত্তনা',
     'ongoing_class' => 'ক্লাস চলছে',
-    'complete_class' => 'কমপ্লিট ক্লাস  ',
+    'complete_class' => 'কমপ্লিট ক্লাস',
+    'todays_class' => 'আজকের ক্লাস',
 ];
