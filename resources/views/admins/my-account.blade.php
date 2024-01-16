@@ -17,8 +17,9 @@
                 </div>
                 <div class="card-body">
                     <dl class="row">
-                        <dt class="col-sm-3">{{__('admin-user-list.reg_number')}}:</dt>
-                        <dd class="col-sm-9">{{ $userAuth['reg_id'] }}</dd>
+                        <dt class="col-sm-3">{{__('admin-user-list.profile_id')}}:</dt>
+            
+                        <dd class="col-sm-9">{{ $authProfile['id'] ?? '' }}</dd>
 
                         <dt class="col-sm-3">{{__('admin-user-list.user_roles')}}:</dt>
                         <dd class="col-sm-9">{{ $userRole ?? '' }}</dd>
@@ -48,7 +49,7 @@
                         <dd class="col-sm-9">{{ $authProfile['MaritalStatus'] ?? '' }}</dd>
 
                         <dt class="col-sm-3">{{__('admin-user-list.dob')}}:</dt>
-                        <dd class="col-sm-9">{{ $authProfile['DateOfBirth'] }}</dd>
+                        <dd class="col-sm-9">{{ \Carbon\Carbon::parse($authProfile['DateOfBirth'])->format('d/m/Y') }}</dd>
 
                         <dt class="col-sm-3">{{__('admin-user-list.blood_group')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['BloodGroup'] ?? '' }}</dd>

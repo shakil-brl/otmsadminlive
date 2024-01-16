@@ -59,7 +59,6 @@ return [
     'vendor_name' => 'Vendor Name',
     'nid' => 'NID',
     'user_info' => 'User Information',
-    'reg_number' => 'Registration No',
     'user_roles' => 'User Role',
     'bangla_name' => ' Name (Bangla)',
     'english_name' => ' Name (English)',

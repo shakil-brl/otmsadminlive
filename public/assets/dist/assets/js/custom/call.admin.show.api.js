@@ -21,7 +21,7 @@ $(function () {
             },
             success: function (results) {
                 let data = results.data;
-                // console.log(results.data);
+                console.log(results.data);
 
                 let fullName = data.profile.KnownAs ?? "";
                 let regId = data.ProfileId ?? "";
@@ -31,9 +31,14 @@ $(function () {
                 let userImage = localUserAvatar;
                 let gender = data.profile.Gender ?? "";
                 let address = data.profile.address ?? "";
-                let districtName = data.profile.district_code ?? "";
-                let upazilaName = data.profile.upazila_id ?? "";
-                let providerName = data.provider.name ?? "";
+                let addressPresent = data.profile.address_present ?? "";
+                let NID = data.profile.NID ?? "";
+                // let districtName = data.profile.district_code ?? "";
+                // let upazilaName = data.profile.upazila_id ?? "";
+                providerName = "";
+                if (data.provider) {
+                    let providerName = data.provider.name ?? "";
+                }
 
                 $("#user-avatar").attr(
                     "src",
@@ -55,7 +60,7 @@ $(function () {
                                                 id="kt_table_users_login_session">
                                                 <tbody class="fs-6 fw-semibold text-gray-600">
                                                     <tr>
-                                                        <td>First Name</td>
+                                                        <td>Full Name</td>
                                                         <td>${fullName}</td>
                                                     </tr>
                                                     <tr>
@@ -71,20 +76,23 @@ $(function () {
                                                         <td>${gender}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>District</td>
-                                                        <td>${districtName}</td>
+                                                        <td>NID</td>
+                                                        <td>${NID}</td>
                                                     </tr>
+                                                    ${
+                                                        providerName ??
+                                                        `<tr>
+                                                            <td>Provider</td>
+                                                            <td>${providerName}</td>
+                                                        </tr>`
+                                                    }
                                                     <tr>
-                                                        <td>Upazila</td>
-                                                        <td>${upazilaName}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Provider</td>
-                                                        <td>${providerName}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Address</td>
+                                                        <td>Permanent Address</td>
                                                         <td>${address}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Present Address</td>
+                                                        <td>${addressPresent}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -100,222 +108,222 @@ $(function () {
             },
         });
 
-        $("#edit-user-action").click(function () {
-            let api_link = api_baseurl + "admins/" + uId + "/edit";
+        // $("#edit-user-action").click(function () {
+        //     let api_link = api_baseurl + "admins/" + uId + "/edit";
 
-            $.ajax({
-                type: "GET",
-                url: api_link,
-                headers: {
-                    Authorization: authToken,
-                },
-                success: function (results) {
-                    let userData = results.data;
-                    console.log(userData);
-                    $('#kt_modal_update_admin_form [name="user_id"]').val(
-                        userData.id ?? ""
-                    );
-                    $("#kt_modal_update_admin_form #update-user-image").css(
-                        "background-image",
-                        "url(" +
-                            (userData.user_type.image_url
-                                ? api_assets_baseurl +
-                                  "uploads/admin/images/" +
-                                  userData.user_type.image_url
-                                : localUserAvatarUrl) +
-                            ")"
-                    );
-                    $('#kt_modal_update_admin_form [name="fname"]').val(
-                        userData.fname ?? ""
-                    );
-                    $('#kt_modal_update_admin_form [name="lname"]').val(
-                        userData.lname ?? ""
-                    );
-                    $('#kt_modal_update_admin_form [name="email"]').val(
-                        userData.email ?? ""
-                    );
-                    // $('#kt_modal_update_admin_form [name="username"]').val(
-                    //     userData.username ?? ""
-                    // );
-                    $('#kt_modal_update_admin_form [name="phone_number"]').val(
-                        userData.phone_number ?? ""
-                    );
-                    $('#kt_modal_update_admin_form [name="name"]').val(
-                        userData.user_type.name ?? ""
-                    );
-                    $('#kt_modal_update_admin_form [name="designation"]').val(
-                        userData.user_type.designation ?? ""
-                    );
-                    $('#kt_modal_update_admin_form [name="address"]').val(
-                        userData.user_type.address ?? ""
-                    );
+        //     $.ajax({
+        //         type: "GET",
+        //         url: api_link,
+        //         headers: {
+        //             Authorization: authToken,
+        //         },
+        //         success: function (results) {
+        //             let userData = results.data;
+        //             console.log(userData);
+        //             $('#kt_modal_update_admin_form [name="user_id"]').val(
+        //                 userData.id ?? ""
+        //             );
+        //             $("#kt_modal_update_admin_form #update-user-image").css(
+        //                 "background-image",
+        //                 "url(" +
+        //                     (userData.user_type.image_url
+        //                         ? api_assets_baseurl +
+        //                           "uploads/admin/images/" +
+        //                           userData.user_type.image_url
+        //                         : localUserAvatarUrl) +
+        //                     ")"
+        //             );
+        //             $('#kt_modal_update_admin_form [name="fname"]').val(
+        //                 userData.fname ?? ""
+        //             );
+        //             $('#kt_modal_update_admin_form [name="lname"]').val(
+        //                 userData.lname ?? ""
+        //             );
+        //             $('#kt_modal_update_admin_form [name="email"]').val(
+        //                 userData.email ?? ""
+        //             );
+        //             // $('#kt_modal_update_admin_form [name="username"]').val(
+        //             //     userData.username ?? ""
+        //             // );
+        //             $('#kt_modal_update_admin_form [name="phone_number"]').val(
+        //                 userData.phone_number ?? ""
+        //             );
+        //             $('#kt_modal_update_admin_form [name="name"]').val(
+        //                 userData.user_type.name ?? ""
+        //             );
+        //             $('#kt_modal_update_admin_form [name="designation"]').val(
+        //                 userData.user_type.designation ?? ""
+        //             );
+        //             $('#kt_modal_update_admin_form [name="address"]').val(
+        //                 userData.user_type.address ?? ""
+        //             );
 
-                    let roleSelector = $(
-                        '#kt_modal_update_admin_form [name="role_id"]'
-                    );
-                    if (userData.role_id) {
-                        let role_api_link = api_baseurl + "role";
-                        // let authToken = authToken;
-                        let selectedOptionId = userData.role_id;
+        //             let roleSelector = $(
+        //                 '#kt_modal_update_admin_form [name="role_id"]'
+        //             );
+        //             if (userData.role_id) {
+        //                 let role_api_link = api_baseurl + "role";
+        //                 // let authToken = authToken;
+        //                 let selectedOptionId = userData.role_id;
 
-                        populateRoleOptions(
-                            authToken,
-                            role_api_link,
-                            roleSelector,
-                            selectedOptionId
-                        );
+        //                 populateRoleOptions(
+        //                     authToken,
+        //                     role_api_link,
+        //                     roleSelector,
+        //                     selectedOptionId
+        //                 );
 
-                        if (userData.role_id == 9 || userData.role_id == 11) {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).removeClass("d-none");
+        //                 if (userData.role_id == 9 || userData.role_id == 11) {
+        //                     $(
+        //                         "#kt_modal_update_admin_form #provider-row"
+        //                     ).removeClass("d-none");
 
-                            let providerSelector = $(
-                                '#kt_modal_update_admin_form [name="provider_id"]'
-                            );
-                            let api_link = api_baseurl + "providers";
-                            if (userData.user_type.provider_id) {
-                                // console.log(0);
-                                selectProviderId =
-                                    userData.user_type.provider_id;
-                                populateProviderOptions(
-                                    authToken,
-                                    api_link,
-                                    providerSelector,
-                                    selectProviderId
-                                );
-                            } else {
-                                populateProviderOptions(
-                                    authToken,
-                                    api_link,
-                                    providerSelector
-                                );
-                            }
-                        } else {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).addClass("d-none");
-                        }
-                    } else {
-                        let role_api_link = api_baseurl + "role";
-                        // let authToken = authToken;
+        //                     let providerSelector = $(
+        //                         '#kt_modal_update_admin_form [name="provider_id"]'
+        //                     );
+        //                     let api_link = api_baseurl + "providers";
+        //                     if (userData.user_type.provider_id) {
+        //                         // console.log(0);
+        //                         selectProviderId =
+        //                             userData.user_type.provider_id;
+        //                         populateProviderOptions(
+        //                             authToken,
+        //                             api_link,
+        //                             providerSelector,
+        //                             selectProviderId
+        //                         );
+        //                     } else {
+        //                         populateProviderOptions(
+        //                             authToken,
+        //                             api_link,
+        //                             providerSelector
+        //                         );
+        //                     }
+        //                 } else {
+        //                     $(
+        //                         "#kt_modal_update_admin_form #provider-row"
+        //                     ).addClass("d-none");
+        //                 }
+        //             } else {
+        //                 let role_api_link = api_baseurl + "role";
+        //                 // let authToken = authToken;
 
-                        populateRoleOptions(
-                            authToken,
-                            role_api_link,
-                            roleSelector
-                        );
-                    }
+        //                 populateRoleOptions(
+        //                     authToken,
+        //                     role_api_link,
+        //                     roleSelector
+        //                 );
+        //             }
 
-                    roleSelector.on("change", function (e) {
-                        let selectedOptionText = roleSelector
-                            .find(":selected")
-                            .html();
-                        if (
-                            selectedOptionText == "Trainer" ||
-                            selectedOptionText == "Provider"
-                        ) {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).removeClass("d-none");
+        //             roleSelector.on("change", function (e) {
+        //                 let selectedOptionText = roleSelector
+        //                     .find(":selected")
+        //                     .html();
+        //                 if (
+        //                     selectedOptionText == "Trainer" ||
+        //                     selectedOptionText == "Provider"
+        //                 ) {
+        //                     $(
+        //                         "#kt_modal_update_admin_form #provider-row"
+        //                     ).removeClass("d-none");
 
-                            let providerSelector = $(
-                                '#kt_modal_update_admin_form [name="provider_id"]'
-                            );
-                            let api_link = api_baseurl + "providers";
+        //                     let providerSelector = $(
+        //                         '#kt_modal_update_admin_form [name="provider_id"]'
+        //                     );
+        //                     let api_link = api_baseurl + "providers";
 
-                            populateProviderOptions(
-                                authToken,
-                                api_link,
-                                providerSelector
-                            );
-                        } else {
-                            $(
-                                "#kt_modal_update_admin_form #provider-row"
-                            ).addClass("d-none");
-                        }
-                    });
+        //                     populateProviderOptions(
+        //                         authToken,
+        //                         api_link,
+        //                         providerSelector
+        //                     );
+        //                 } else {
+        //                     $(
+        //                         "#kt_modal_update_admin_form #provider-row"
+        //                     ).addClass("d-none");
+        //                 }
+        //             });
 
-                    // load districts
-                    let district_api_link = api_baseurl + "districts";
-                    let districtSelector = $(
-                        '#kt_modal_update_admin_form [name="district_id"]'
-                    );
-                    if (userData.user_type && userData.user_type.district_id) {
-                        let selectedDistrictId = userData.user_type.district_id;
+        //             // load districts
+        //             let district_api_link = api_baseurl + "districts";
+        //             let districtSelector = $(
+        //                 '#kt_modal_update_admin_form [name="district_id"]'
+        //             );
+        //             if (userData.user_type && userData.user_type.district_id) {
+        //                 let selectedDistrictId = userData.user_type.district_id;
 
-                        populateDistrictOption(
-                            district_api_link,
-                            authToken,
-                            districtSelector,
-                            selectedDistrictId
-                        );
-                    } else {
-                        populateDistrictOption(
-                            district_api_link,
-                            authToken,
-                            districtSelector
-                        );
-                    }
+        //                 populateDistrictOption(
+        //                     district_api_link,
+        //                     authToken,
+        //                     districtSelector,
+        //                     selectedDistrictId
+        //                 );
+        //             } else {
+        //                 populateDistrictOption(
+        //                     district_api_link,
+        //                     authToken,
+        //                     districtSelector
+        //                 );
+        //             }
 
-                    let selectedDistrictId = userData.user_type.district_id;
-                    if (userData.user_type && selectedDistrictId) {
-                        let upazila_api_link =
-                            api_baseurl + "upazilas/" + selectedDistrictId;
-                        let upazilaSelector = $(
-                            '#kt_modal_update_admin_form [name="upazila_id"]'
-                        );
-                        let selectedUpazilaId = userData.user_type.upazila_id;
+        //             let selectedDistrictId = userData.user_type.district_id;
+        //             if (userData.user_type && selectedDistrictId) {
+        //                 let upazila_api_link =
+        //                     api_baseurl + "upazilas/" + selectedDistrictId;
+        //                 let upazilaSelector = $(
+        //                     '#kt_modal_update_admin_form [name="upazila_id"]'
+        //                 );
+        //                 let selectedUpazilaId = userData.user_type.upazila_id;
 
-                        if (selectedUpazilaId) {
-                            populateUpazilaSelect(
-                                upazila_api_link,
-                                authToken,
-                                upazilaSelector,
-                                selectedUpazilaId
-                            );
-                        } else {
-                            populateUpazilaSelect(
-                                upazila_api_link,
-                                authToken,
-                                upazilaSelector
-                            );
-                        }
-                    }
+        //                 if (selectedUpazilaId) {
+        //                     populateUpazilaSelect(
+        //                         upazila_api_link,
+        //                         authToken,
+        //                         upazilaSelector,
+        //                         selectedUpazilaId
+        //                     );
+        //                 } else {
+        //                     populateUpazilaSelect(
+        //                         upazila_api_link,
+        //                         authToken,
+        //                         upazilaSelector
+        //                     );
+        //                 }
+        //             }
 
-                    // load upazila on district change
-                    let selectDistrictElement = $(
-                        '#kt_modal_update_admin_form [name="district_id"]'
-                    );
-                    selectDistrictElement.change(function () {
-                        let district_id = selectDistrictElement.val();
-                        upazila_api_link =
-                            api_baseurl + "upazilas/" + district_id;
+        //             // load upazila on district change
+        //             let selectDistrictElement = $(
+        //                 '#kt_modal_update_admin_form [name="district_id"]'
+        //             );
+        //             selectDistrictElement.change(function () {
+        //                 let district_id = selectDistrictElement.val();
+        //                 upazila_api_link =
+        //                     api_baseurl + "upazilas/" + district_id;
 
-                        upazilaSelector = $(
-                            '#kt_modal_update_admin_form [name="upazila_id"]'
-                        );
+        //                 upazilaSelector = $(
+        //                     '#kt_modal_update_admin_form [name="upazila_id"]'
+        //                 );
 
-                        populateUpazilaSelect(
-                            upazila_api_link,
-                            authToken,
-                            upazilaSelector
-                        );
-                    });
+        //                 populateUpazilaSelect(
+        //                     upazila_api_link,
+        //                     authToken,
+        //                     upazilaSelector
+        //                 );
+        //             });
 
-                    let userTypeGender = userData.user_type.gender ?? "";
-                    let gender = $(
-                        '#kt_modal_update_admin_form [name="gender"][value="' +
-                            userTypeGender +
-                            '"]'
-                    );
-                    gender.prop("checked", true);
-                },
-                error: function (response) {
-                    console.log(response);
-                },
-            });
-        });
+        //             let userTypeGender = userData.user_type.gender ?? "";
+        //             let gender = $(
+        //                 '#kt_modal_update_admin_form [name="gender"][value="' +
+        //                     userTypeGender +
+        //                     '"]'
+        //             );
+        //             gender.prop("checked", true);
+        //         },
+        //         error: function (response) {
+        //             console.log(response);
+        //         },
+        //     });
+        // });
 
         // function for district
         function populateDistrictOption(
