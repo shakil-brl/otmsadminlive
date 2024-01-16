@@ -19,10 +19,11 @@
             <div>
                 <h4>Batch Code: {{ $batch['batchCode'] ?? '' }}</h4>
                 <div>Training Title:
-                    {{ $batch['get_training'] ?? '' ? ($batch['get_training']['title'] ? $batch['get_training']['title']['Name'] : '') : '' }}
+                    {{ isset($batch['get_training']) ?? '' ? ($batch['get_training']['title'] ? $batch['get_training']['title']['Name'] : '') : '' }}
                 </div>
                 <div>
-                    Start Date: {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
+                    Start Date:
+                    {{ isset($batch['startDate']) ? \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') : '' }}
                 </div>
                 <div>
                     Total Class: {{ $batch['totalTrainees'] ?? '' }}

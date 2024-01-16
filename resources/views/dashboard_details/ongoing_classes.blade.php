@@ -40,13 +40,13 @@
                                 {{ $batch['schedule']['training_batch']['batchCode'] ?? '' }}
                             </td>
                             <td>
-                                {{ $batch['date'] ? \Carbon\Carbon::parse($batch['date'])->format('d-m-Y') : '' }}
+                                {{ isset($batch['date']) ? \Carbon\Carbon::parse($batch['date'])->format('d-m-Y') : '' }}
                             </td>
                             <td>
                                 {{-- {{ $batch['start_time'] ?? '' }} --}}
                                 {{-- {{ \Carbon\Carbon::createFromFormat('H:i:s',
                                 $batch['start_time'])->format('h:i A') }} --}}
-                                {{ $batch['start_time'] ? digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) : '' }}
+                                {{ isset($batch['start_time']) ? digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) : '' }}
 
                             </td>
                             <td>
