@@ -7,17 +7,48 @@
         <br>
         <x-alert />
         @isset($ongoing_classes)
-            <div class="my-3">
+            <div class="card p-3">
                 <form action="">
-                    <div class="w-50 d-flex gap-3">
-                        <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                            placeholder="{{ __('batch-schedule.search_here') }}">
-                        <input type="submit" class="form-control btn btn-primary w-25"
-                            value="{{ __('batch-schedule.search') }}">
+                    <div id="search-form">
+                        <div class="row row-cols-3 g-3 mb-2">
+                            <div class="col col-span-1">
+                                <div class="input-group">
+                                    <input type="text" class="form-control api-call" name="search" placeholder="Search here"
+                                        value="{{ request('search') }}">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="">
+                                    <select class="form-select api-call" name="training_title_id" id="training_title_id">
+                                        <option value="">Select course title</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-3 g-3">
+                            <div class="col">
+                                <select class="form-select api-call" name="division_id" id="division_id">
+                                    <option value="">Select Division</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="form-select api-call" name="district_id" id="district_id">
+                                    <option value="">Select District</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="form-select api-call" name="upazila_id" id="upazila_id">
+                                    <option value="">Select Upazila</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
-            <table class="table table-bordered bg-white">
+            <table class="table table-bordered bg-white mt-3">
                 <thead>
                     <th>{{ __('batch-schedule.sl') }}</th>
                     <th>{{ __('batch-schedule.batch_code') }}</th>
