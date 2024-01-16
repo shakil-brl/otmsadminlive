@@ -40,13 +40,13 @@
                                 {{ $batch['end_time'] ?? '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
+                                {{ $batch['schedule']['training_batch']['training']['title']['Name'] ?? '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : '' }}
+                                {{ $batch['schedule']['training_batch']['GEOLocation'] ?? '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
+                                {{ $batch['schedule']['training_batch']['provider']['name'] ?? '' }}
                             </td>
                             <td>
                                 <a class="btn btn-sm btn-danger" href="{{ route('attendance.form', $batch['id']) }}"

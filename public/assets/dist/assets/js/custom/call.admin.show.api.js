@@ -21,7 +21,7 @@ $(function () {
             },
             success: function (results) {
                 let data = results.data;
-                console.log(results.data);
+                // console.log(results.data);
 
                 let fullName = data.profile.KnownAs ?? "";
                 let regId = data.ProfileId ?? "";
