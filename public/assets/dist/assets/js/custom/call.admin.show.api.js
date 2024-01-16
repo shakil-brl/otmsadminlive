@@ -33,7 +33,10 @@ $(function () {
                 let address = data.profile.address ?? "";
                 let districtName = data.profile.district_code ?? "";
                 let upazilaName = data.profile.upazila_id ?? "";
-                let providerName = data.provider.name ?? "";
+                providerName = "";
+                if (data.provider) {
+                    let providerName = data.provider.name ?? "";
+                }
 
                 $("#user-avatar").attr(
                     "src",
@@ -78,10 +81,13 @@ $(function () {
                                                         <td>Upazila</td>
                                                         <td>${upazilaName}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Provider</td>
-                                                        <td>${providerName}</td>
-                                                    </tr>
+                                                    ${
+                                                        providerName ??
+                                                        `<tr>
+                                                            <td>Provider</td>
+                                                            <td>${providerName}</td>
+                                                        </tr>`
+                                                    }
                                                     <tr>
                                                         <td>Address</td>
                                                         <td>${address}</td>

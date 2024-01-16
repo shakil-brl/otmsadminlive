@@ -17,9 +17,6 @@
                 </div>
                 <div class="card-body">
                     <dl class="row">
-                        <dt class="col-sm-3">Reg. ID:</dt>
-                        <dd class="col-sm-9">{{ $userAuth['reg_id'] }}</dd>
-
                         <dt class="col-sm-3">Role:</dt>
                         <dd class="col-sm-9">{{ $userRole ?? '' }}</dd>
 
@@ -48,7 +45,7 @@
                         <dd class="col-sm-9">{{ $authProfile['MaritalStatus'] ?? '' }}</dd>
 
                         <dt class="col-sm-3">Date of Birth:</dt>
-                        <dd class="col-sm-9">{{ $authProfile['DateOfBirth'] }}</dd>
+                        <dd class="col-sm-9">{{ \Carbon\Carbon::parse($authProfile['DateOfBirth'])->format('d/m/Y') }}</dd>
 
                         <dt class="col-sm-3">Blood Group:</dt>
                         <dd class="col-sm-9">{{ $authProfile['BloodGroup'] ?? '' }}</dd>
