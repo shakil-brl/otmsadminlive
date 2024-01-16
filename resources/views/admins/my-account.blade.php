@@ -17,6 +17,9 @@
                 </div>
                 <div class="card-body">
                     <dl class="row">
+                        <dt class="col-sm-3">Profile ID:</dt>
+                        <dd class="col-sm-9">{{ $authProfile['id'] ?? '' }}</dd>
+
                         <dt class="col-sm-3">Role:</dt>
                         <dd class="col-sm-9">{{ $userRole ?? '' }}</dd>
 
@@ -68,7 +71,7 @@
                         <dt class="col-sm-3">Religion:</dt>
                         <dd class="col-sm-9">{{ $authProfile['Religion'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Present Address:</dt>
+                        <dt class="col-sm-3">Permanent Address:</dt>
                         <dd class="col-sm-9">{{ $authProfile['address'] ?? '' }}</dd>
 
                         <dt class="col-sm-3">Present Address:</dt>
