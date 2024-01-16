@@ -10,8 +10,8 @@
             <div class="card p-3">
                 <form action="">
                     <div id="search-form">
-                        <div class="row row-cols-3 g-3 mb-2">
-                            <div class="col col-span-1">
+                        <div class="row g-3 mb-2">
+                            <div class="col-8">
                                 <div class="input-group">
                                     <input type="text" class="form-control api-call" name="search" placeholder="Search here"
                                         value="{{ request('search') }}">
@@ -20,28 +20,26 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="">
-                                    <select class="form-select api-call" name="training_title_id" id="training_title_id">
-                                        <option value="">Select course title</option>
-                                    </select>
-                                </div>
+                            <div class="col-4">
+                                <select class="form-select api-call" name="training_title_id" id="training_title_id">
+                                    <option value="">Select course title</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row row-cols-3 g-3">
                             <div class="col">
                                 <select class="form-select api-call" name="division_id" id="division_id">
-                                    <option value="">Select Division</option>
+                                    <option value="">Select division</option>
                                 </select>
                             </div>
                             <div class="col">
                                 <select class="form-select api-call" name="district_id" id="district_id">
-                                    <option value="">Select District</option>
+                                    <option value="">Select district</option>
                                 </select>
                             </div>
                             <div class="col">
                                 <select class="form-select api-call" name="upazila_id" id="upazila_id">
-                                    <option value="">Select Upazila</option>
+                                    <option value="">Select upazila</option>
                                 </select>
                             </div>
                         </div>
