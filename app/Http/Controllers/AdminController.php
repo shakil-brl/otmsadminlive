@@ -45,7 +45,8 @@ class AdminController extends Controller
 
     public function profile()
     {
-        return view('admins.profile');
+        // return view('admins.profile');
+        return view('admins.my-account');
     }
 
     public function show($userProfileId)
