@@ -17,7 +17,7 @@
                     </div>
                 </form>
             </div>
-            <table class="table table-bordered bg-white">
+            <table id="dataTableremove" class="table table-bordered bg-white">
                 <thead>
                     <th>{{ __('batch-schedule.sl') }}</th>
                     <th>{{ __('batch-schedule.batch_code') }}</th>
@@ -112,6 +112,11 @@
     </div>
     <!--end::Content-->
 @section('script')
-    <script></script>
+<script>
+    $(document).ready(function () {
+        // DataTable initialization with your table ID
+        $('#dataTableremove').DataTable();
+    });
+</script>
 @endsection
 @endsection
