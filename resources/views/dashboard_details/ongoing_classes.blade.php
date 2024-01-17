@@ -99,6 +99,11 @@
                                             href="{{ route('tms-inspections.create', $inspection_pm) }}" target="_blank">
                                             Inspection
                                         </a>
+
+                                        <a class="btn btn-sm btn-danger" href="{{ route('attendance.form', $batch['id']) }}"
+                                    target="_blank">
+                                    {{ __('batch-schedule.view_attendence') }}
+                                </a>
                                     @endisset
                                 </div>
                             </td>
