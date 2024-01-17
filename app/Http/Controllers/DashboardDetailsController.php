@@ -79,6 +79,7 @@ class DashboardDetailsController extends Controller
         $ongoing_classes = ApiHttpClient::request('get', 'detail/class-running', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
+            'per_page' => 500,
         ])->json();
         //  dd($ongoing_classes);
         if ($ongoing_classes['success'] == true) {
