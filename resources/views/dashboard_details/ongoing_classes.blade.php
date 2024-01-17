@@ -79,13 +79,15 @@
                                 <div class="d-flex flex-wrap gap-1">
                                     @if ($batch['streaming_link'])
                                         <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
-                                            {{ __('batch-schedule.live_streaming') }}
+                                            {{-- {{ __('batch-schedule.live_streaming') }} --}}
+                                            live
                                         </a>
                                     @endif
                                     @if ($batch['static_link'])
                                         <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}"
                                             target="_blank">
-                                            {{ __('batch-schedule.join_class') }}
+                                            {{-- {{ __('batch-schedule.join_class') }} --}}
+                                            join
                                         </a>
                                     @endif
                                     @php
@@ -101,8 +103,7 @@
                                         </a>
 
                                         <a class="btn btn-sm btn-danger" href="{{ route('attendance.form', $batch['id']) }}"
-                                    target="_blank">
-                                    {{ __('batch-schedule.view_attendence') }}
+                                    target="_blank">Attendence
                                 </a>
                                     @endisset
                                 </div>
