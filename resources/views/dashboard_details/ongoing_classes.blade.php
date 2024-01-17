@@ -113,6 +113,7 @@
     <!--end::Content-->
     <script>
         $(document).ready(function () {
+           console.log('dfgfdgdfgdfgdfgdfgdfg');
             // DataTable initialization with your table ID
             $('#dataTableremove').DataTable({
                 searching: true // Enable searching
