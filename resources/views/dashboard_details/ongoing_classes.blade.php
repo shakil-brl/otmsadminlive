@@ -111,14 +111,22 @@
         @endisset
     </div>
     <!--end::Content-->
+    <script>
+        $(document).ready(function () {
+            // DataTable initialization with your table ID
+            $('#dataTableremove').DataTable({
+                searching: true // Enable searching
+            });
+        });
+    </script>
 @section('script')
-<script>
+{{-- <script>
     $(document).ready(function () {
         // DataTable initialization with your table ID
         $('#dataTableremove').DataTable({
             searching: true // Enable searching
         });
     });
-</script>
+</script> --}}
 @endsection
 @endsection
