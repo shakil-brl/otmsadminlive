@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use PDF;
 
 class EvaluationController extends Controller
 {
@@ -43,8 +45,9 @@ class EvaluationController extends Controller
         if ($results['success'] == true) {
             $page_from = $results['data']['from'];
             $evaluation = $results['data']['data'];
+            $user = $results['user'];
             $paginator = $this->customPaginate($results, $request, route('trainer-schedule-details.lists'));
-            return view('evaluations.index', ['evaluation' => $evaluation, 'paginator' => $paginator, 'page_from' => $page_from]);
+            return view('evaluations.index', ['evaluation' => $evaluation,'user'=>$user, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', 'Something went wrong');
@@ -113,5 +116,16 @@ class EvaluationController extends Controller
             }
         }
     }
+
+    public function evaluationPdf($schedule_details_id){
+
+        $results = ApiHttpClient::request('get', 'student-evaluation-details/'.$schedule_details_id)->json();   
+          
+        $scheduleDetails = ApiHttpClient::request('get', 'evaluation-schedule-details/'.$schedule_details_id)->json();      
+        
+        $pdf = PDF::loadView('evaluations.evaluations_pdf', compact('results','scheduleDetails'));
+        return $pdf->stream('evaluations.pdf'); 
+    }
+    
 
 }

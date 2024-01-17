@@ -21,7 +21,6 @@
             </div>
         </div>
 
-
         @isset($evaluation)
             <div id="class-days">
                 @foreach (collect($evaluation) as $schedule_detail)
@@ -94,19 +93,18 @@
                             </div>
                         </div>
                         <div class="button-area">
-
-                            @isset($schedule_detail['status'])
-                                @if ($schedule_detail['status'] == 2)
-                                    <a href="{{ route('trainer-schedule-details.students', [$schedule_detail['id']]) }}"
-                                        class="btn btn-detail complete">
-                                        {{ 'Create Evaluations' }}
-                                    </a>
-                                @elseif ($schedule_detail['status'] == 3)
-                                    <a href="{{ route('trainer-schedule-details.students', [$schedule_detail['id']]) }}"
-                                        class="btn btn-detail complete">
-                                        {{ 'Create Evaluations' }}</a>
-                                @endif
-                            @endisset
+                            @if ($user == 'trainer')
+                                <a href="{{ route('trainer-schedule-details.students', [$schedule_detail['id']]) }}"
+                                    class="btn btn-lg complete" style="background: #3b0764; color:#fff">
+                                    {{ 'Create Evaluations' }}</a>
+                                <a href="{{ route('evaluation-pdf', [$schedule_detail['id']]) }}" class="btn btn-lg btn-secondary me-1">
+                                    {{ 'PDF' }}
+                                </a>
+                            @elseif($user == 'superadmin' || $user == 'provider')
+                                <a href="{{ route('evaluation-pdf', [$schedule_detail['id']]) }}" class="btn btn-lg btn-secondary me-1">
+                                    {{ 'PDF' }}
+                                </a>
+                            @endif
 
                         </div>
                     </div>

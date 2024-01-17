@@ -321,4 +321,5 @@ Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendan
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
 
 Route::get('/provider-pdf', [ProviderController::class, 'providerPdf'])->name('provider-pdf');
+Route::get('/evaluation-pdf/{schedule_details_id}', [EvaluationController::class, 'evaluationPdf'])->name('evaluation-pdf');
 
