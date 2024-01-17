@@ -117,7 +117,7 @@
         <script>
     $(document).ready(function () {
         // DataTable initialization with your table ID, search option, and placeholder
-        $('#your-table-id').DataTable({
+        $('#dataTableremove').DataTable({
             searching: true, // Enable searching
             language: {
                 searchPlaceholder: 'Search...' // Customize the placeholder text
@@ -125,7 +125,6 @@
         });
     });
 </script>
-
 @section('script')
 {{-- <script>
     $(document).ready(function () {
