@@ -12,7 +12,8 @@
                     <div class="row g-4 row-cols-3 cards" id="dashboard-card">
                         @if (in_array('dashboard_details.total_batches', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.total_batches')" :totalBatch="$data['total_batch'] ?? 0" :icon="asset('img/new_icon/total_batch.png')" :title="__('dashboard.total_batch')"
+                                {{-- $data['total_batch'] ?? 0 --}}
+                                <x-dashboard-card :url="route('dashboard_details.total_batches')" :totalBatch="'1213'" :icon="asset('img/new_icon/total_batch.png')" :title="__('dashboard.total_batch')"
                                     :class="'card-item purple show-loader'" />
                             </div>
                         @endif
