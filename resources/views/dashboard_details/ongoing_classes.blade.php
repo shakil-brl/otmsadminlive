@@ -111,6 +111,7 @@
         @endisset
     </div>
     <!--end::Content-->
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
         $(document).ready(function () {
            console.log('dfgfdgdfgdfgdfgdfgdfg');
