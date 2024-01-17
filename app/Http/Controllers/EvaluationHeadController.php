@@ -53,7 +53,7 @@ class EvaluationHeadController extends Controller
             $errorMessage = $data['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
-            return redirect()->back()->withErrors(['error'=>$errorMessage]);
+            return back();
 
             // return redirect()->route('holydays.index');
         } else {
