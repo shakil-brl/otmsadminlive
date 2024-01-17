@@ -21,6 +21,7 @@
                 <thead>
                     <th>{{ __('batch-schedule.sl') }}</th>
                     <th>{{ __('batch-schedule.batch_code') }}</th>
+                    <th>Date</th>
                     <th>{{ __('batch-schedule.start_time') }}</th>
                     <th>{{ __('batch-schedule.course_name') }}</th>
                     <th>{{ __('batch-schedule.location') }}</th>
@@ -30,29 +31,33 @@
                 </thead>
                 <tbody>
                     @foreach (collect($ongoing_classes) as $batch)
+                        {{-- @dump($batch) --}}
                         <tr>
                             <td>
                                 {{ digitLocale($from + $loop->index) }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
+                                {{ $batch['schedule']['training_batch']['batchCode'] ?? '' }}
+                            </td>
+                            <td>
+                                {{ isset($batch['date']) ? \Carbon\Carbon::parse($batch['date'])->format('d-m-Y') : '' }}
                             </td>
                             <td>
                                 {{-- {{ $batch['start_time'] ?? '' }} --}}
                                 {{-- {{ \Carbon\Carbon::createFromFormat('H:i:s',
                                 $batch['start_time'])->format('h:i A') }} --}}
-                                {{ digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) }}
+                                {{ isset($batch['start_time']) ? digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) : '' }}
 
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
+                                {{ $batch['schedule']['training_batch']['training']['title']['Name'] ?? '' }}
                             </td>
                             <td>
-                                {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : '' }}
+                                {{ $batch['schedule']['training_batch']['GEOLocation'] ?? '' }}
                             </td>
                             <td>
                                 <div>
-                                    {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
+                                    {{ $batch['schedule']['training_batch']['provider']['name'] ?? '' }}
                                 </div>
                                 <div>
                                     Phone: {{ $batch['schedule']['training_batch']['provider']['phone'] ?? '' }}

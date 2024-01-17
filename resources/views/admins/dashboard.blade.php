@@ -203,6 +203,7 @@
                                                                 <div class="items">
                                                                     <div class="item">
                                                                         <div class="digit">
+                                                                           
                                                                             {{ isset($data['total_trainer']) ? digitLocale($data['total_trainer']) : digitLocale(0) }}
                                                                         </div>
                                                                         <div class="label">
