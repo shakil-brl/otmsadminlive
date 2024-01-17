@@ -111,16 +111,21 @@
         @endisset
     </div>
     <!--end::Content-->
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script>
-        $(document).ready(function () {
-           console.log('dfgfdgdfgdfgdfgdfgdfg');
-            // DataTable initialization with your table ID
-            $('#dataTableremove').DataTable({
-                searching: true // Enable searching
-            });
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    
+        <script>
+    $(document).ready(function () {
+        // DataTable initialization with your table ID, search option, and placeholder
+        $('#your-table-id').DataTable({
+            searching: true, // Enable searching
+            language: {
+                searchPlaceholder: 'Search...' // Customize the placeholder text
+            }
         });
-    </script>
+    });
+</script>
+
 @section('script')
 {{-- <script>
     $(document).ready(function () {
