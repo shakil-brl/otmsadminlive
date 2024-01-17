@@ -36,7 +36,9 @@
                                 {{ $batch['training_batch']['batchCode'] ?? '' }}
                             </td>
                             <td>
-                                {{ $batch['training_batch']['startDate'] ?? '' }}
+                                {{-- {{ $batch['training_batch']['startDate'] ?? '' }} --}}
+                                {{ isset($batch['training_batch']['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['training_batch']['startDate'])->format('d-m-Y')) : digitLocale(null) }}
+
                             </td>
                             <td>
                                 {{ $batch['training_batch']['training']['title']['Name'] ?? '' }}

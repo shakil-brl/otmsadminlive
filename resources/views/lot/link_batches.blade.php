@@ -105,7 +105,6 @@
         $(document).ready(function() {
             localStorage.removeItem('selectedBatches');
             let lotId = @json($lot['id']);
-            // alert(fromEdit);
             let storedDBBatches = @json($lot['training_batches']);
             // console.log(storedDBBatches);
             // Initialize an empty object for selectedBatches
@@ -420,7 +419,7 @@
 
                         let batchIds = $("#link-batch-form [name=link-batches]").val();
 
-                        console.log(batchIds);
+                        // console.log(batchIds);
 
                         fd.append("batch_ids", batchIds);
                         fd.append("lot_id", lotId);

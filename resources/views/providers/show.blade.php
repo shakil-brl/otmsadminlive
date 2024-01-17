@@ -5,16 +5,17 @@
         <div class="card p-5">
             @isset($provider)
                 <div id="">
-                    <h3>{{ $provider['name'] ?? '' }} Details:</h3>
+                    <h1 class="text-center">{{ __('provider-list.vendor_info') }}</h1>
+                    <h3>{{__('provider-list.vendor_names')}}:{{ $provider['name'] ?? '' }} </h3>
 
                 </div>
 
                 <div class="row">
                     <div class="col-md-9">
                         <div>
-                            <div>Phone: {{ $provider['phone'] ?? '' }}</div>
-                            <div>Email: {{ $provider['email'] ?? '' }}</div>
-                            <div>Address: {{ $provider['address'] ?? '' }}</div>
+                            <div>{{__('provider-list.phone_number')}}: {{ $provider['phone'] ?? '' }}</div>
+                            <div>{{__('provider-list.email')}}: {{ $provider['email'] ?? '' }}</div>
+                            <div>{{__('provider-list.address')}}: {{ $provider['address'] ?? '' }}</div>
                         </div>
 
 
@@ -24,22 +25,22 @@
                             <div class="text-center">
                                 <a href="{{ route('provider.link-batch', $provider['id']) }}"
                                     class="btn btn-lg btn-success w-100 show-action" title="Provider Details">
-                                    Edit Link Batch
+                                    {{__('provider-list.edit_linked_batch')}}
                                 </a>
                             </div>
                         @endif
                     </div>
                 </div>
                 <div class="mt-5">
-                    <h4>All Batches</h4>
+                    <h4>{{__('provider-list.all_batches')}}</h4>
                     <div class="my-3">
                         <table class="table table-bordered bg-white">
                             <thead>
                                 <th>{{ __('batch-list.sl') }}</th>
-                                <th>Batch Code</th>
-                                <th>Course Title</th>
-                                <th>Location</th>
-                                <th>Start Date</th>
+                                <th>{{__('provider-list.batch_code')}}</th>
+                                <th>{{__('provider-list.course_name')}}</th>
+                                <th>{{__('provider-list.location')}}</th>
+                                <th>{{__('provider-list.class_start_date')}}</th>
                                 {{-- <th>{{ __('batch-list.action') }}</th> --}}
                             </thead>
                             <tbody>

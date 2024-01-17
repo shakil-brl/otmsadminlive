@@ -103,3 +103,23 @@ Other if required: This section should detail any additional reports that may be
 necessary based on specific project needs or requirements not covered in the above 
 reports
 
+### To Do List
+1.Have to add Batch Schedule  Edit Option.
+2.Have to assign Batch with SP.
+3.Have to make Batch-wise Attendence Sheet.
+4.Have to make Complete Class Attendence Sheet.
+5.Have to make Training Report.
+6.Have to make Category-wise Service Provider List Report.
+7.Have to make Trainer List Report.
+8.Have to make Evaluation Report.
+9.Have to make Inspection Report.
+10.Have to make Feedback Report.
+11.Have to make Travel and Entertainment Allowanse Report.
+12.Between Ongoing Class,Runnig Class and Old Running Class should be shown separately.
+13.Between Ongoing class table add new two column Trainer name and Phone Number.
+14.Between Inspection Menu add Batch filter and also add Inspect Officer Name and Designation.
+15.Have to Currection Dashboard Data
+16.Between All Enroll Trainer add Pagination,Search Filter and add Trainer Phone Number
+17.Between Vendor Batch should be shown Teacher Deatils and Batch Details.
+18. admin panel users view details not show only show tariners and providers view details
+
