@@ -115,7 +115,9 @@
 <script>
     $(document).ready(function () {
         // DataTable initialization with your table ID
-        $('#dataTableremove').DataTable();
+        $('#dataTableremove').DataTable({
+            searching: true // Enable searching
+        });
     });
 </script>
 @endsection
