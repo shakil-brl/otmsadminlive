@@ -180,9 +180,27 @@ class DashboardDetailsController extends Controller
     }
 
     // 
-    public function trainers()
+    public function trainers(Request $request)
     {
-        return view('dashboard_details.trainers');
+        $total_trainers = ApiHttpClient::request('get', 'detail/trainer-total', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+
+        // dd($total_trainers);
+        if ($total_trainers['success'] == true) {
+
+            $trainers = $total_trainers['data']['data'];
+            //  dd($trainers);
+            $paginator = $this->customPaginate($total_trainers, $request, route('dashboard_details.trainers'));
+            $from = $total_trainers['data']['from'];
+            // dd($from);
+            return view('dashboard_details.trainers', ['total_trainers' => $trainers, 'paginator' => $paginator, 'from' => $from]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $total_trainers['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
     }
 
     // 
