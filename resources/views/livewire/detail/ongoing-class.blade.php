@@ -1,7 +1,15 @@
 <div>
     @isset($classes)
-        <div class="my-3">
-            <div class="row row-cols-4 row-cols-xxl-5 g-2 mb-2">
+        <div id="preloader" wire:loading.class="d-flex">
+            <div class="loader"></div>
+        </div>
+        <div class="mb-3">
+            <select name="" wire:model='per_page'>
+                @foreach (range(15, 100, 15) as $j)
+                    <option>{{ $j }}</option>
+                @endforeach
+            </select>
+            <div class="row row-cols-4 mt-2 row-cols-xxl-5 g-2 mb-2">
                 <div>
                     <label for="">বিভাগ</label>
                     <select wire:model='division_code' name="" class="form-select" id="">
@@ -13,7 +21,7 @@
                 </div>
                 <div>
                     <label for="">জেলা</label>
-                    <select wire:model='distict_code' name="" class="form-select" id="">
+                    <select wire:model='district_code' name="" class="form-select" id="">
                         <option value="">Select</option>
                         @foreach ($districts as $district)
                             <option value="{{ $district['Code'] }}">{{ $district['Name'] }}</option>
@@ -40,20 +48,28 @@
                 </div>
                 <div>
                     <label for="">প্রশিক্ষণের বিষয়</label>
-                    <select wire:model='upazila_code' name="" class="form-select" id="">
+                    <select wire:model='training_id' name="" class="form-select" id="">
                         <option value="">Select</option>
-                        @foreach ($upazilas as $upazila)
-                            <option value="{{ $upazila['Code'] }}">{{ $upazila['Name'] }}</option>
+                        @foreach ($trainings as $training)
+                            <option value="{{ $training['id'] }}">{{ $training['title']['Name'] }}</option>
                         @endforeach
                     </select>
                 </div>
-            </div>
-            <form action="">
-                <div class="w-50 d-flex gap-3">
-                    <input wire:model='search' type="search" name="search" value="{{ request('search') }}"
-                        class="form-control w-75" placeholder="{{ __('batch-schedule.search_here') }}">
+                <div class="">
+                    <label for="">From Date</label>
+                    <input wire:model='from_date' type="date" class="form-control">
                 </div>
-            </form>
+                <div class="">
+                    <label for="">To Date</label>
+                    <input wire:model='to_date' type="date" class="form-control">
+                </div>
+                <div class="">
+                    <label for="">Batch Code</label>
+                    <input wire:model='search' type="search" name="search" value="{{ request('search') }}"
+                        class="form-control" placeholder="{{ __('batch-schedule.search_here') }}">
+                </div>
+            </div>
+
         </div>
         <table class="table table-bordered bg-white">
             <thead>
@@ -76,11 +92,10 @@
                             {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
                         </td>
                         <td>
-                            {{-- {{ $batch['start_time'] ?? '' }} --}}
-                            {{-- {{ \Carbon\Carbon::createFromFormat('H:i:s',
-                        $batch['start_time'])->format('h:i A') }} --}}
-                            {{ digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) }}
-
+                            {{ $batch['date'] ?? '' }}
+                            <div>
+                                {{ digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) }}
+                            </div>
                         </td>
                         <td>
                             {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}

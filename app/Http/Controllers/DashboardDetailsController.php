@@ -200,10 +200,10 @@ class DashboardDetailsController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        
-         // dd($total_trainers);
-         if ($total_trainers['success'] == true) {
-            
+
+        // dd($total_trainers);
+        if ($total_trainers['success'] == true) {
+
             $trainers = $total_trainers['data']['data'];
             //  dd($trainers);
             $paginator = $this->customPaginate($total_trainers, $request, route('dashboard_details.trainers'));
@@ -215,7 +215,7 @@ class DashboardDetailsController extends Controller
             session()->flash('message', $total_trainers['message'] ?? 'Something went wrong');
             return redirect()->back();
         }
-        
+
     }
     // 
     public function trainees()
