@@ -3,8 +3,8 @@
 if (!function_exists('digitLocale')) {
     function digitLocale($number)
     {
-        $bn = ["১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "০","এম","পি.এম","এম","পি.এম"];
-        $en = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0","am", "pm","AM", "PM",];
+        $bn = ["১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "০", "এম", "পি.এম", "এম", "পি.এম"];
+        $en = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "am", "pm", "AM", "PM",];
         if (app()->getLocale() == 'bn') {
             return str_replace($en, $bn, $number);
         }
@@ -12,3 +12,15 @@ if (!function_exists('digitLocale')) {
 
     }
 }
+
+
+if (!function_exists('dateView')) {
+    function dateView($date)
+    {
+        if ($date == null || $date == '' || $date == 0) {
+            return;
+        }
+        return date('d/m/Y', strtotime($date));
+    }
+}
+
