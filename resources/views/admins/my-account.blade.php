@@ -13,68 +13,69 @@
                 @dump($userAuth) --}}
 
                 <div class="card-header d-flex align-items-center">
-                    <h5>User Information</h5>
+                    <h3>{{__('admin-user-list.user_info')}}</h3>
                 </div>
                 <div class="card-body">
                     <dl class="row">
-                        <dt class="col-sm-3">Profile ID:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.profile_id')}}:</dt>
+            
                         <dd class="col-sm-9">{{ $authProfile['id'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Role:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.user_roles')}}:</dt>
                         <dd class="col-sm-9">{{ $userRole ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Known As (English):</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.english_name')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['KnownAs'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Known As (Bangla):</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.bangla_name')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['KnownAsBangla'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Father's Name:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.father_name')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['FatherName'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Father's Name (Bangla):</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.father_name_bangla')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['FatherNameBangla'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Mother's Name:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.mother_name')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['MotherName'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Mother's Name (Bangla):</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.mother_name_bangla')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['MotherNameBangla'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Gender:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.genders')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['Gender'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Marital Status:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.marital_status')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['MaritalStatus'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Date of Birth:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.dob')}}:</dt>
                         <dd class="col-sm-9">{{ \Carbon\Carbon::parse($authProfile['DateOfBirth'])->format('d/m/Y') }}</dd>
 
-                        <dt class="col-sm-3">Blood Group:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.blood_group')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['BloodGroup'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Email:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.mail')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['Email'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Phone:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.marital_status')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['Phone'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">NID:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.nid_no')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['NID'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Birth Registration No:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.birth_reg_no')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['BirthRegNo'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Passport No:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.passport_no')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['PassportNo'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Religion:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.religion')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['Religion'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Permanent Address:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.parmanent_address')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['address'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">Present Address:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.present_address')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['address_present'] ?? '' }}</dd>
                     </dl>
                 </div>

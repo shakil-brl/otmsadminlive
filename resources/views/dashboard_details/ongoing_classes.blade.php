@@ -46,7 +46,9 @@
                     </div>
                 </form>
             </div>
-            <table class="table table-bordered bg-white mt-3">
+
+            <table id="dataTableremove" class="table table-bordered bg-white">
+
                 <thead>
                     <th>{{ __('batch-schedule.sl') }}</th>
                     <th>{{ __('batch-schedule.batch_code') }}</th>
@@ -108,13 +110,15 @@
                                 <div class="d-flex flex-wrap gap-1">
                                     @if ($batch['streaming_link'])
                                         <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
-                                            {{ __('batch-schedule.live_streaming') }}
+                                            {{-- {{ __('batch-schedule.live_streaming') }} --}}
+                                            live
                                         </a>
                                     @endif
                                     @if ($batch['static_link'])
                                         <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}"
                                             target="_blank">
-                                            {{ __('batch-schedule.join_class') }}
+                                            {{-- {{ __('batch-schedule.join_class') }} --}}
+                                            join
                                         </a>
                                     @endif
                                     @php
@@ -128,6 +132,10 @@
                                             href="{{ route('tms-inspections.create', $inspection_pm) }}" target="_blank">
                                             Inspection
                                         </a>
+
+                                        <a class="btn btn-sm btn-danger" href="{{ route('attendance.form', $batch['id']) }}"
+                                    target="_blank">Attendence
+                                </a>
                                     @endisset
                                 </div>
                             </td>
@@ -140,7 +148,28 @@
         @endisset
     </div>
     <!--end::Content-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    
+        <script>
+    $(document).ready(function () {
+        // DataTable initialization with your table ID, search option, and placeholder
+        $('#dataTableremove').DataTable({
+            searching: true, // Enable searching
+            language: {
+                searchPlaceholder: 'Search...' // Customize the placeholder text
+            }
+        });
+    });
+</script>
 @section('script')
-    <script></script>
+{{-- <script>
+    $(document).ready(function () {
+        // DataTable initialization with your table ID
+        $('#dataTableremove').DataTable({
+            searching: true // Enable searching
+        });
+    });
+</script> --}}
 @endsection
 @endsection
