@@ -76,23 +76,24 @@ class DashboardDetailsController extends Controller
     // 
     public function ongoingClasses(Request $request)
     {
-        $ongoing_classes = ApiHttpClient::request('get', 'detail/class-running', [
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
-            'per_page' => 500,
-        ])->json();
-        //  dd($ongoing_classes);
-        if ($ongoing_classes['success'] == true) {
-            $batches = $ongoing_classes['data']['data'];
-            $paginator = $this->customPaginate($ongoing_classes, $request, route('dashboard_details.ongoing_classes'));
-            $from = $ongoing_classes['data']['from'];
+        return view('dashboard_details.ongoing_classes');
+        // $ongoing_classes = ApiHttpClient::request(
+        //     'get',
+        //     'detail/class-running',
+        //     $request->all(),
+        // )->json();
+        // //  dd($ongoing_classes);
+        // if ($ongoing_classes['success'] == true) {
+        //     $batches = $ongoing_classes['data']['data'];
+        //     $paginator = $this->customPaginate($ongoing_classes, $request, route('dashboard_details.ongoing_classes'));
+        //     $from = $ongoing_classes['data']['from'];
 
-            return view('dashboard_details.ongoing_classes', ['ongoing_classes' => $batches, 'paginator' => $paginator, 'from' => $from]);
-        } else {
-            session()->flash('type', 'Danger');
-            session()->flash('message', $ongoing_classes['message'] ?? 'Something went wrong');
-            return redirect()->back();
-        }
+        //     return view('dashboard_details.ongoing_classes', ['ongoing_classes' => $batches, 'paginator' => $paginator, 'from' => $from]);
+        // } else {
+        //     session()->flash('type', 'Danger');
+        //     session()->flash('message', $ongoing_classes['message'] ?? 'Something went wrong');
+        //     return redirect()->back();
+        // }
         //return view('dashboard_details.complete_batches');
     }
 
@@ -190,10 +191,10 @@ class DashboardDetailsController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        
-         // dd($total_trainers);
-         if ($total_trainers['success'] == true) {
-            
+
+        // dd($total_trainers);
+        if ($total_trainers['success'] == true) {
+
             $trainers = $total_trainers['data']['data'];
             //  dd($trainers);
             $paginator = $this->customPaginate($total_trainers, $request, route('dashboard_details.trainers'));
@@ -205,7 +206,7 @@ class DashboardDetailsController extends Controller
             session()->flash('message', $total_trainers['message'] ?? 'Something went wrong');
             return redirect()->back();
         }
-        
+
     }
     // 
     public function trainees()
