@@ -94,8 +94,6 @@ class DashboardDetailsController extends Controller
         //     session()->flash('message', $ongoing_classes['message'] ?? 'Something went wrong');
         //     return redirect()->back();
         // }
-
-        return view('dashboard_details.ongoing_classes_li');
     }
 
     // 
