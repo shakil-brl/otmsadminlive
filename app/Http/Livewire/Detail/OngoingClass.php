@@ -30,7 +30,6 @@ class OngoingClass extends Component
     public $to_date;
     public function updated($attr)
     {
-        $this->gotoPage(1);
 
         if ($attr == 'division_code') {
             $this->districts = ApiHttpClient::request(
@@ -43,6 +42,7 @@ class OngoingClass extends Component
             )->json()['data'];
             $this->district_code = null;
             $this->upazila_code = null;
+            $this->gotoPage(1);
         }
 
         if ($attr == 'district_code') {
@@ -80,9 +80,8 @@ class OngoingClass extends Component
             'get',
             'detail/training'
         )->json()['data'];
-        // $this->from_date = Carbon::now()->toDateString();
-        // $this->to_date = Carbon::now()->toDateString();
-
+        $this->from_date = Carbon::now()->toDateString();
+        $this->to_date = Carbon::now()->toDateString();
     }
     public function render()
     {

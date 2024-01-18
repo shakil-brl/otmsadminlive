@@ -45,14 +45,14 @@
                         @endif
                         @if (in_array('dashboard_details.districts', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.districts')" :totalBatch="'44'" :icon="asset('img/new_icon/district.png')"
+                                <x-dashboard-card :url="route('dashboard_details.districts')" :totalBatch="$data['total_district'] ?? 0" :icon="asset('img/new_icon/district.png')"
                                     :title="__('dashboard.district')" :class="'card-item green-white show-loader'" />
                             </div>
                         @endif
 
                         @if (in_array('dashboard_details.upazilas', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.upazilas')" :totalBatch="'130'" :icon="asset('img/new_icon/upazila.png')"
+                                <x-dashboard-card :url="route('dashboard_details.upazilas')" :totalBatch="$data['total_upazila'] ?? 0" :icon="asset('img/new_icon/upazila.png')"
                                     :title="__('dashboard.upazila')" :class="'card-item info show-loader'" />
                             </div>
                         @endif
