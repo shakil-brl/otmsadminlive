@@ -37,7 +37,7 @@ class DashboardDetailsController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        //  dd($running_batches);
+        // dd($running_batches);
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
             $paginator = $this->customPaginate($running_batches, $request, route('dashboard_details.running_batches'));
@@ -76,7 +76,7 @@ class DashboardDetailsController extends Controller
     // 
     public function ongoingClasses(Request $request)
     {
-        return view('dashboard_details.ongoing_classes');
+        // return view('dashboard_details.ongoing_classes');
         // $ongoing_classes = ApiHttpClient::request(
         //     'get',
         //     'detail/class-running',
@@ -95,7 +95,7 @@ class DashboardDetailsController extends Controller
         //     return redirect()->back();
         // }
 
-        // return view('dashboard_details.ongoing_classes_li');
+        return view('dashboard_details.ongoing_classes_li');
     }
 
     // 
@@ -147,11 +147,11 @@ class DashboardDetailsController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        // dd( $total_upazilas);
         if ($total_upazilas['success'] == true) {
             $upazilas = $total_upazilas['data']['data'];
             $paginator = $this->customPaginate($total_upazilas, $request, route('dashboard_details.upazilas'));
             $from = $total_upazilas['data']['from'];
+
             return view('dashboard_details.upazilas', ['total_upazilas' => $upazilas, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
@@ -167,19 +167,11 @@ class DashboardDetailsController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-<<<<<<< HEAD
         // dd($total_partners);
         if ($total_partners['data'] == true) {
             $partners = $total_partners['data']['data'];
             $paginator = $this->customPaginate($total_partners, $request, route('dashboard_details.partners'));
             $from = $total_partners['data']['from'];
-=======
-        //  dd($total_partners);
-        if ($total_partners['items'] == true) {
-            $partners = $total_partners['items']['data'];
-            $paginator = $this->customPaginate2($total_partners, $request, route('dashboard_details.partners'));
-            $from = $total_partners['items']['from'];
->>>>>>> f5d360451ed39a98d6a0ecaabf83a2de9a6c895e
 
             return view('dashboard_details.partners', ['total_partners' => $partners, 'paginator' => $paginator, 'from' => $from]);
         } else {
@@ -190,33 +182,11 @@ class DashboardDetailsController extends Controller
     }
 
     // 
-    // public function trainers()
-    // {
-    //     return view('dashboard_details.trainers');
-    // }
-    public function trainers(Request $request)
+    public function trainers()
     {
-        $total_trainers = ApiHttpClient::request('get', 'detail/trainer-total', [
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
-        ])->json();
-
-        // dd($total_trainers);
-        if ($total_trainers['success'] == true) {
-
-            $trainers = $total_trainers['data']['data'];
-            //  dd($trainers);
-            $paginator = $this->customPaginate($total_trainers, $request, route('dashboard_details.trainers'));
-            $from = $total_trainers['data']['from'];
-            // dd($from);
-            return view('dashboard_details.trainers', ['total_trainers' => $trainers, 'paginator' => $paginator, 'from' => $from]);
-        } else {
-            session()->flash('type', 'Danger');
-            session()->flash('message', $total_trainers['message'] ?? 'Something went wrong');
-            return redirect()->back();
-        }
-
+        return view('dashboard_details.trainers');
     }
+
     // 
     public function trainees()
     {
