@@ -48,5 +48,14 @@ return [
     'ongoing_class' => 'Ongoing Class',
     'complete_class' => 'complete Class',
     'todays_class' => 'Todays Class',
+    'all_trainer' => 'All Trainers',
+    'sl' => 'SL No',
+    'name' => 'Name',
+    'phone' => 'Phone Number',
+    'email' => 'Email',
+    'gender' => 'Gender',
+    'address' => 'Address',
+    'search' => 'Search',
+    'search_here' => 'Search Here',
   
 ];
