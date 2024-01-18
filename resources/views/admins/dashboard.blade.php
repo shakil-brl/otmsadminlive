@@ -60,7 +60,7 @@
                         @if (in_array('dashboard_details.partners', $roleRoutePermissions))
                             <div>
                                 {{-- $data['total_vendor']  --}}
-                                <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="'24'" :icon="asset('img/new_icon/developmentpartner.png')"
+                                <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="$data['total_vendor'] ?? 0" :icon="asset('img/new_icon/developmentpartner.png')"
                                     :title="__('dashboard.partner')" :class="'card-item red'" />
                             </div>
                         @endif

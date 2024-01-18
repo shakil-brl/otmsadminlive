@@ -21,7 +21,6 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-
         $response = ApiHttpClient::request('get', 'dashboardtotal/superadmin');
         $data = $response->json()['data'];
         // dd($data);

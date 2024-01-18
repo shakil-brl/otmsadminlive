@@ -118,7 +118,6 @@ class DashboardDetailsController extends Controller
         //return view('dashboard_details.complete_batches');
     }
 
-    // 
     public function districts(Request $request)
     {
         $total_districts = ApiHttpClient::request('get', 'detail/district', [
@@ -144,7 +143,9 @@ class DashboardDetailsController extends Controller
         $total_upazilas = ApiHttpClient::request('get', 'detail/upazila', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
+            'new_data' => 'yes',
         ])->json();
+
         if ($total_upazilas['success'] == true) {
             $upazilas = $total_upazilas['data']['data'];
             $paginator = $this->customPaginate($total_upazilas, $request, route('dashboard_details.upazilas'));
