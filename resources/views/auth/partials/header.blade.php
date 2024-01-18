@@ -142,12 +142,14 @@
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column" id="userInfo">
                                     {{ $authProfile['KnownAs'] ?? '' }}
-                                    <div class="fw-bold d-flex align-items-center fs-5">
-                                        <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
+                                    <div class="fw-bold d-flex align-items-center fs-5 my-1">
+                                        <span class="badge badge-light-success fw-bold fs-8 px-2 py-1">
+                                            {{ $userRole }}
                                         </span>
                                     </div>
-                                    <span
-                                        class="fw-semibold text-muted text-hover-primary fs-7">{{ $authProfile['Email'] ?? '' }}</span>
+                                    <span class="fw-semibold text-muted text-hover-primary fs-7">
+                                        {{ $authProfile['Email'] ?? '' }}
+                                    </span>
                                 </div>
                                 <!--end::Username-->
                             </div>

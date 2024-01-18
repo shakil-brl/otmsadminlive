@@ -29,7 +29,7 @@
                     @foreach (collect($total_batches) as $batch)
                         <tr>
                             <td>
-                                 {{ digitLocale($from_no + $loop->iteration - 1) }}
+                                {{ digitLocale($from_no + $loop->iteration - 1) }}
                             </td>
                             <td>
                                 {{ $batch['batchCode'] }}
@@ -38,12 +38,11 @@
                                 {{ $batch['GEOLocation'] }}
                             </td>
                             <td>
-                                {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y')) : digitLocale(null)}}
-
-
+                                {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y')) : digitLocale(null) }}
                             </td>
                             <td>
-                               {{isset($batch['duration']) ? digitLocale($batch['duration']) : digitLocale(0)}} {{ __('batch-list.days') }}
+                                {{ isset($batch['duration']) ? digitLocale($batch['duration']) : digitLocale(0) }}
+                                {{ __('batch-list.days') }}
                             </td>
                             <td>
                                 <a href="" class="btn btn-sm btn-info">
