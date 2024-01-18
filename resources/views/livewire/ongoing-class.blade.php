@@ -141,7 +141,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="4" class="text-danger">
+                            <td colspan="9" class="text-danger">
                                 No data found
                             </td>
                         </tr>
@@ -153,17 +153,18 @@
         </div>
     @endisset
 </div>
-
+@livewireScripts
 @push('js')
     <script>
         document.addEventListener('livewire:load', function() {
-            // Livewire.on('refreshDataTable', function() {
-            //     $('#dataTable').DataTable().destroy(); // Destroy existing DataTable instance
-            //     $('#dataTable').DataTable(); // Reinitialize DataTable
-            // });
+            loadData();
+        });
 
-            // $('#dataTable').DataTable();
+        Livewire.on('component.updated', function() {
+            loadData();
+        });
 
+        function loadData() {
             let divisionSelectElement = $("#division_id");
             let districtSelectElement = $("#district_id");
             let upazilaSelectElement = $("#upazila_id");
@@ -256,8 +257,7 @@
                     console.log(response);
                 },
             });
-
-        });
+        }
 
         $(document).ready(function() {
 

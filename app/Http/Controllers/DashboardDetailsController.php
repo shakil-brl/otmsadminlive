@@ -76,11 +76,13 @@ class DashboardDetailsController extends Controller
     // 
     public function ongoingClasses(Request $request)
     {
-        // $ongoing_classes = ApiHttpClient::request('get', 'detail/class-running', [
-        //     'page' => $request->page ?? 1,
-        //     'search' => $request->search,
-        // ])->json();
-        // dump($request->all());
+        return view('dashboard_details.ongoing_classes');
+        // $ongoing_classes = ApiHttpClient::request(
+        //     'get',
+        //     'detail/class-running',
+        //     $request->all(),
+        // )->json();
+        // //  dd($ongoing_classes);
         // if ($ongoing_classes['success'] == true) {
         //     $batches = $ongoing_classes['data']['data'];
         //     $paginator = $this->customPaginate($ongoing_classes, $request, route('dashboard_details.ongoing_classes'));
@@ -93,7 +95,7 @@ class DashboardDetailsController extends Controller
         //     return redirect()->back();
         // }
 
-        return view('dashboard_details.ongoing_classes_li');
+        // return view('dashboard_details.ongoing_classes_li');
     }
 
     // 
@@ -161,15 +163,15 @@ class DashboardDetailsController extends Controller
     // 
     public function partners(Request $request)
     {
-        $total_partners = ApiHttpClient::request('get', 'providerlist', [
+        $total_partners = ApiHttpClient::request('get', 'detail/development-partner', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-
-        if ($total_partners['items'] == true) {
-            $partners = $total_partners['items']['data'];
-            $paginator = $this->customPaginate2($total_partners, $request, route('dashboard_details.partners'));
-            $from = $total_partners['items']['from'];
+        // dd($total_partners);
+        if ($total_partners['data'] == true) {
+            $partners = $total_partners['data']['data'];
+            $paginator = $this->customPaginate($total_partners, $request, route('dashboard_details.partners'));
+            $from = $total_partners['data']['from'];
 
             return view('dashboard_details.partners', ['total_partners' => $partners, 'paginator' => $paginator, 'from' => $from]);
         } else {
