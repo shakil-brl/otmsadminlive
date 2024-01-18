@@ -16,11 +16,11 @@ class TrainerProfileTable extends Component
 
     public function render()
     {
-        $response = ApiHttpClient::request('get', 'trainerslist', [
+        $response = ApiHttpClient::request('get', 'detail/trainer-total', [
             'search' => $this->search,
             'date_filter' => $this->dateFilter,
         ]);
-        $this->data = $response->json()['items'];
+        $this->data = $response->json()['data'];
         return view('livewire.trainer-profile-table');
     }
 }

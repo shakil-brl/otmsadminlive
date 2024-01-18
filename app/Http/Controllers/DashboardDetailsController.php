@@ -141,7 +141,7 @@ class DashboardDetailsController extends Controller
     // 
     public function upazilas(Request $request)
     {
-        $total_upazilas = ApiHttpClient::request('get', 'upazilaslist', [
+        $total_upazilas = ApiHttpClient::request('get', 'detail/upazila', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
