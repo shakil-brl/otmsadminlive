@@ -38,7 +38,7 @@ class ClassDocumentController extends Controller
             'tms_batch_schedule_detail_id' => 'required',
             'document_title' => 'required',
             'description' => 'required',
-            'doc_file' => 'required'
+            'doc_file' => 'required|mimes:pdf,doc,docx,jpg,jpeg,png,gif,txt|max:5120',
         ]);
 
         $document = $request->except('doc_file');
@@ -140,11 +140,11 @@ class ClassDocumentController extends Controller
     public function scheduleDocument(Request $request, $schedule_details_id)
     {
         $results = ApiHttpClient::request('get', 'class-document', [
-            'schedule_details_id' => $schedule_details_id,
+            'schedule_detail_id' => $schedule_details_id,
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-
+        // dd($results);
         if ($results['success'] == true) {
             $paginator = $this->customPaginate($results, $request, route('schedule-class-documents.index', $schedule_details_id));
             // dd($results);
