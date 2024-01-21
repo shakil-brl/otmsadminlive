@@ -3,7 +3,21 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>Batch List</h3>
+        <h3>Attendance List:</h3>
+        @isset($trainees)
+            @php
+                $totalTrainees = count($trainees);
+                $presentTrainees = collect($trainees)
+                    ->where('is_present', 1)
+                    ->count();
+                $absentTrainees = $totalTrainees - $presentTrainees;
+            @endphp
+            <div class="d-flex gap-2">
+                <p class="text-info">Total Trainees: {{ $totalTrainees }}</p>
+                <p class="text-success">Present Trainees: {{ $presentTrainees }}</p>
+                <p class="text-danger">Absent Trainees: {{ $absentTrainees }}</p>
+            </div>
+        @endisset
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
