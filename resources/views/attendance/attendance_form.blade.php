@@ -154,11 +154,11 @@
                 <!--begin::Provider added Form-->
                 <div class="modal-body">
                     <div class="mb-2">
-                        <label for="" class="mb-1">Streaming Link</label>
+                        <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)।</label>
                         <input id="streaming_link_update" type="text" class="form-control">
                     </div>
                     <div class="mb-2">
-                        <label for="" class="mb-1">Live Class Link</label>
+                        <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক গুগল মিট বা জুম</label>
                         <input id="static_link_update" type="text" class="form-control">
                     </div>
                 </div>
@@ -234,6 +234,22 @@
                 $("#static_link_update").val(staticLink);
 
                 $('#link-update-submit').click(function() {
+
+                 // Get the input elements
+        var streamingLinkInput = document.getElementById("streaming_link_update");
+        var staticLinkInput = document.getElementById("static_link_update");
+
+        // Get the entered values
+        var streamingLink = streamingLinkInput.value.toLowerCase();
+        var staticLink = staticLinkInput.value.toLowerCase();
+
+
+        // Check if both links are not the same
+        if (streamingLink === staticLink) {
+            alert("The streaming link and live class link cannot be the same.");
+            return; // Stop execution if validation fails
+        }     
+
                     let streaming_link = $("#streaming_link_update").val();
                     let static_link = $("#static_link_update").val();
 
