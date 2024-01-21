@@ -154,7 +154,7 @@
                 <!--begin::Provider added Form-->
                 <div class="modal-body">
                     <div class="mb-2">
-                        <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)।</label>
+                        <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)</label>
                         <input id="streaming_link_update" type="text" class="form-control">
                     </div>
                     <div class="mb-2">
