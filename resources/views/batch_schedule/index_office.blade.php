@@ -1,6 +1,7 @@
 @extends('layouts.auth-master')
 
 @section('content')
+@dd('zcfzxc')
     <!--begin::Content-->
     <div class="m-5">
         <h3>{{ __('batch-schedule.batch_schedule') }}</h3>
