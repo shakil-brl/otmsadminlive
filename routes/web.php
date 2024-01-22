@@ -31,6 +31,7 @@ use App\Http\Controllers\UpazilaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TmsInspectionController;
 use App\Http\Controllers\ProviderBatchesController;
+use App\Http\Controllers\TrainingProviderPartnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -300,6 +301,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/{schedule_details_id}', 'scheduleDocument')->name('index');
         Route::get('/create/{schedule_details_id}', 'createDocument')->name('create');
     });
+
+    Route::resource('/training-provider-partners', TrainingProviderPartnerController::class);
 });
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');

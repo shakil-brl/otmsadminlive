@@ -4,9 +4,10 @@
     <!--begin::Content-->
     <div class="m-5">
         <div class="d-flex justify-content-end align-items-center">
-            <a class="btn btn-lg btn-success" href="{{ route('holydays.create') }}">Create Holyday</a>
+            <a class="btn btn-lg btn-success" href="{{ route('training-provider-partners.create') }}">Create Development
+                Partner</a>
         </div>
-        <h3>Holydays List</h3>
+        <h3>Development Partner List</h3>
         <x-alert />
 
         @isset($results['data'])
@@ -22,14 +23,15 @@
                 </div>
                 <table class="table table-bordered bg-white">
                     <thead>
-                        <th>{{ __('batch-list.sl') }}</th>
-                        <th>Name (English)</th>
-                        <th>Name (Bangla)</th>
+                        <th>S.N.</th>
+                        <th>Partner Name</th>
                         <th>Date</th>
-                        <th>{{ __('batch-list.action') }}</th>
+                        <th>Status</th>
+                        <th class="text-center">Actions</th>
                     </thead>
                     <tbody>
-                        @foreach ($results['data'] ?? [] as $index => $holyday)
+                        @foreach ($results['data'] ?? [] as $index => $partner)
+                            {{-- @dump($partner) --}}
                             @php
                                 $from = $results['from'];
                             @endphp
@@ -38,19 +40,24 @@
                                     {{ $from + $loop->iteration - 1 }}
                                 </td>
                                 <td>
-                                    {{ $holyday['day_name_en'] ?? '' }}
+                                    {{ $partner['provider']['name'] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $holyday['day_name_bn'] ?? '' }}
+                                    {{ isset($partner['onBoardDate']) ? \Carbon\Carbon::parse($partner['onBoardDate'])->format('d-m-Y') : '' }}
                                 </td>
-                                <td>
-                                    {{ isset($holyday['holly_bay']) ? \Carbon\Carbon::parse($holyday['holly_bay'])->format('d-m-Y') : '' }}
+                                <td class="">
+                                    <span
+                                        class="badge badge-{{ isset($partner['isActive']) ? ($partner['isActive'] == 1 ? 'success' : 'warning') : '' }}">
+                                        {{ isset($partner['isActive']) ? ($partner['isActive'] == 1 ? 'Active' : 'Inactive') : '' }}
+                                    </span>
                                 </td>
-                                <td class="me-0 d-flex gap-1">
-                                    <a href="{{ route('holydays.edit', $holyday['id']) }}" class="btn btn-sm btn-info">
+                                <td class="me-0 d-flex gap-1 justify-content-center">
+                                    <a href="{{ route('training-provider-partners.edit', $partner['id']) }}"
+                                        class="btn btn-sm btn-info">
                                         Edit
                                     </a>
-                                    <form action="{{ route('holydays.destroy', $holyday['id']) }}" method="post">
+                                    <form action="{{ route('training-provider-partners.destroy', $partner['id']) }}"
+                                        method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger delete-action">Delete</button>
