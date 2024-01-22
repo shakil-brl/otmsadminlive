@@ -12,16 +12,21 @@
 
         @isset($results['data'])
             <div class="my-3">
-                <div class="d-none">
+                <div class="mb-3">
                     <form action="">
                         <div class="w-50 d-flex gap-3">
-                            <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                                placeholder="Search Holyday">
-                            <input type="submit" class="form-control btn btn-primary w-25" value="Search">
+                            <div class="input-group w-75">
+                                <input type="search" name="search" value="{{ request('search') }}" class="form-control"
+                                    placeholder="Search here" id="myInput">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
-                <table class="table table-bordered bg-white">
+
+                <table class="table table-bordered bg-white" id="partner-table">
                     <thead>
                         <th>S.N.</th>
                         <th>Partner Name</th>
@@ -31,13 +36,9 @@
                     </thead>
                     <tbody>
                         @foreach ($results['data'] ?? [] as $index => $partner)
-                            {{-- @dump($partner) --}}
-                            @php
-                                $from = $results['from'];
-                            @endphp
                             <tr>
                                 <td>
-                                    {{ $from + $loop->iteration - 1 }}
+                                    {{ $index + 1 }}.
                                 </td>
                                 <td>
                                     {{ $partner['provider']['name'] ?? '' }}
@@ -67,13 +68,18 @@
                         @endforeach
                     </tbody>
                 </table>
-                {!! $paginator->links() !!}
+                {{-- {!! $paginator->links() !!} --}}
             </div>
         @endisset
     </div>
 @section('scripts')
     <script>
         $(document).ready(function() {
+            let table = $("#partner-table").DataTable();
+            $('#myInput').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+
             $(document).on("click", ".delete-action", function(e) {
                 e.preventDefault();
                 const form = $(this).closest('form');

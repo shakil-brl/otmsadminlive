@@ -25,6 +25,7 @@ class TrainingProviderPartnerController extends Controller
             $page_from = $results['data']['from'];
             $paginator = $this->customPaginate($results, $request, route('training-provider-partners.index'));
             // dd($partners);
+            return view('development_partner.index', $data);
             return view('development_partner.index', ['results' => $partners, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
