@@ -63,7 +63,7 @@ return [
     'class_document' => 'Class Document',
     'evaluation_student' => 'Evaluation Student',
     'evaluation_trainer' => 'Evaluation Trainer',
-    'holly_day' => 'Holly Day',
+    'holly_day' => 'holiday',
     'training_title' => 'Training Title',
     'training_group' => 'SP Group',
     'vendor' => 'Vendor',
