@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Api\TmsBatchPhaseController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceRepoController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\TmsPhaseController;
 use App\Http\Controllers\TraineeEnrollmentController;
 use App\Http\Controllers\TrainerEnrollmentController;
 use App\Http\Controllers\UpazilaController;
@@ -302,8 +304,15 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/create/{schedule_details_id}', 'createDocument')->name('create');
     });
 
+    Route::resource('/tms-phase', TmsPhaseController::class);
+    Route::resource('/tms-phase-batch', TmsBatchPhaseController::class);
     Route::resource('/training-provider-partners', TrainingProviderPartnerController::class);
+
+
 });
+
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
+
+
