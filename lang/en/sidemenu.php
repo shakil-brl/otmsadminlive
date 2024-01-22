@@ -56,5 +56,6 @@ return [
     'training_title' => 'Training Title',
     'training_group' => 'Training Group',
     'vendor' => 'Vendor',
+    'config' => 'Config',
 
 ];

@@ -67,6 +67,7 @@ return [
     'training_title' => 'ট্রেনিং শিরোনাম',
     'training_group' => 'এসপি গ্রুপ',
     'vendor' => 'ভেন্ডর',
+    'config' => 'কনফিগ',
 
 
 ];

@@ -525,8 +525,7 @@
                     <!--end:Menu sub-->
 
                 </div>
-                <div data-kt-menu-trigger="click"
-                    class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>here show<?php } ?>">
+                <div data-kt-menu-trigger="click" class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>here show<?php } ?>">
                     <!--begin:Menu link-->
                     <span
                         class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>active<?php } ?>">
@@ -579,6 +578,108 @@
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
+                        </div>
+                        <!--end:Menu sub-->
+                    </div>
+                    <!--end:Menu sub-->
+
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>here show<?php } ?>">
+                    <!--begin:Menu link-->
+                    <span
+                        class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>active<?php } ?>">
+                        <span class="menu-icon">
+                         <i class="ki-duotone ki-folder-added fs-2">
+                           <span class="path1"></span>
+                           <span class="path2"></span>
+                        </i>
+                        </span>
+
+                        <span class="menu-title">{{ __('sidemenu.report') }}</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
+                        <!--begin:Menu sub-->
+                        <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create') ) {?>here show<?php } ?>"
+                            kt-hidden-height="81" style="">
+                           
+                            <!--begin:Menu item-->
+                            <div class="menu-item">
+                                <!--begin:Menu link-->
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>active<?php } ?>"
+                                    href="{{ route('inspaction.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+
+
+                                    </span>
+                                    <span class="menu-title">{{ __('sidemenu.report') }}</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        </div>
+                        <!--end:Menu sub-->
+                    </div>
+                    <!--end:Menu sub-->
+
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>here show<?php } ?>">
+                    <!--begin:Menu link-->
+                    <span
+                        class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>active<?php } ?>">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-wrench  fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </span>
+                        <span class="menu-title">{{ __('sidemenu.config') }}</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
+                        <!--begin:Menu sub-->
+                        <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')||Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create') ) {?>here show<?php } ?>"
+                            kt-hidden-height="81" style="">
+                            <!--begin:Menu item-->
+                            <div class="menu-item">
+                                <!--begin:Menu link-->
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list')||Illuminate\Support\Facades\Route::is('tms-inspections.create')) {?>active<?php } ?>"
+                                    href="{{ '' }}">
+                                    <span class="menu-icon">
+                                        <i class="ki-duotone ki-subtitle fs-2                    ">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                            <span class="path4"></span>
+                                            <span class="path5"></span>
+                                        </i>
+                                    </span>
+                                    <span class="menu-title">{{ __('sidemenu.training_title') }}</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div class="menu-item">
+                                <!--begin:Menu link-->
+                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>active<?php } ?>"
+                                    href="{{ route('inspaction.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+
+
+                                    </span>
+                                    <span class="menu-title">{{ __('sidemenu.report') }}</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            
                         </div>
                         <!--end:Menu sub-->
                     </div>
