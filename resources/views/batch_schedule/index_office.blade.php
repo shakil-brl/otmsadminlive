@@ -23,10 +23,10 @@
                     {{ $batch['get_training'] ? ($batch['get_training']['title'] ? $batch['get_training']['title']['Name'] : '') : '' }}
                 </div>
                 <div>
-                    {{ __('batch-schedule.start_date') }}: {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
+                    {{ __('batch-schedule.start_date') }}: {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y')) : digitLocale(null) }}
                 </div>
                 <div>
-                    {{ __('batch-schedule.total_class') }}: {{ $batch['totalTrainees'] ?? '' }} {{ __('batch-schedule.days') }}
+                    {{ __('batch-list.total_tarinee') }}: {{ isset($batch['totalTrainees']) ? digitLocale($batch['totalTrainees']) : digitLocale(null) }} {{ __('batch-list.jon') }}
                 </div>
                 <div>
                     {{ __('batch-schedule.location') }}: {{ $batch['GEOLocation'] ?? '' }}
@@ -56,18 +56,20 @@
                 <tbody>
                     @foreach (collect($schedule_details) as $schedule_detail)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ digitLocale($loop->iteration) }}</td>
                             <td>
                                 @php
                                     $date = \Carbon\Carbon::createFromFormat('Y-m-d', $schedule_detail['date']);
                                 @endphp
-                                {{ $date->format('d/m/Y') }}
+                               
+                                {{ isset($date) ? digitLocale(\Carbon\Carbon::parse($date)->format('d/m/Y')) : digitLocale(null) }}
                             </td>
                             <td>
-                                {{ $date->format('l') }}
+                                {{ isset($date) ? digitLocale(\Carbon\Carbon::parse($date)->format('l')) : digitLocale(null) }}
                             </td>
-                            <td>{{ $schedule_detail['start_time'] ?? '' }}</td>
-                            <td>{{ $schedule_detail['end_time'] ?? '' }}</td>
+                            <td>{{ isset($schedule_detail['start_time']) ? digitLocale(\Carbon\Carbon::parse($schedule_detail['start_time'])->format('h:i A')) : digitLocale(null) }}
+                            <td>{{ isset($schedule_detail['end_time']) ? digitLocale(\Carbon\Carbon::parse($schedule_detail['end_time'])->format('h:i A')) : digitLocale(null) }}
+                            </td>
                             <td>
                                 @isset($schedule_detail['status'])
                                     @if ($schedule_detail['status'] == 1)
@@ -84,7 +86,7 @@
                                     @if ($schedule_detail['status'] == 3)
                                         <a href="{{ route('attendance.schedule', [$schedule_detail['id']]) }}"
                                             class="btn btn-sm btn-success">
-                                            View Attendance
+                                           {{__('batch-list.view_attendance')}}
                                         </a>
                                     @else
                                         @isset($schedule_detail['status'])
@@ -95,7 +97,7 @@
                                                     data-date={{ $date->format('d/m/Y') }}
                                                     data-start-time={{ $schedule_detail['start_time'] }}
                                                     data-end-time={{ $schedule_detail['end_time'] }}>
-                                                    Edit Schedule
+                                                    {{__('batch-list.edit_schedule')}}
                                                 </a>
                                             @elseif($schedule_detail['status'] == 2)
                                                 <div class="d-flex flex-wrap gap-1 justify-content-center">
@@ -133,7 +135,7 @@
         <div class="modal-dialog modal-dialog-centered mw-950px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Schedule</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('batch-list.edit_schedule')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

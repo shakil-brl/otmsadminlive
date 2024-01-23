@@ -52,8 +52,9 @@ return [
     'monitoring_batches' => 'ব্যাচগুলি',
     'all_batch_list' => 'সকল ব্যাচের তালিকা',
     'inspection' => 'পরিদর্শন',
-    'report' => 'প্রতিবেদন',
-    'add_new_inspection' => 'নতুন পরিদর্শন যোগ করুন',
+    'report' => 'রিপোর্ট',
+    'inspection_report' => 'পরিদর্শন রিপোর্ট',
+    'add_new_inspection' => 'ক্লাস পরিদর্শন করুন',
     'running_batch' => 'চলমান ব্যাচ',
     'running_batch_list' => 'চলমান ব্যাচের তালিকা',
     'partner_employee' => 'ভেন্ডর কর্মচারী',
@@ -68,6 +69,10 @@ return [
     'training_group' => 'এসপি গ্রুপ',
     'vendor' => 'ভেন্ডর',
     'config' => 'কনফিগ',
+    'org_provider' => 'Org and provider',
+    'phase' => 'ফেইজ ',
+    'phase_batch' => "ফেইজ ব্যাচ সমূহ ",
+
 
 
 ];

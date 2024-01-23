@@ -50,6 +50,13 @@ return [
     'development_partner' => 'Vendor',
     'live_streaming' => ' Live Streaming',
     'join_class' => ' Join Class',
+    'class_details' => 'Class Details',
+    'not_created-schedule' => 'Not Created Schedule',
+    'delete_schedule' => 'Delete Schedule',
+    'total_tarinee' => 'Total Trainees',
+    'jon' => '',
+    'view_attendance' => ' View Attendance',
+    'edit_schedule' => ' Edit Schedule',
  
     
 
