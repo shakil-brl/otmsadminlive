@@ -24,18 +24,13 @@
             </ul>
         @endif
 
-        @isset($holyday)
-            @php
-                if ($holyday['holly_bay']) {
-                    $holly_bay = \Carbon\Carbon::createFromFormat('Y-m-d', $holyday['holly_bay'])->format('d/m/Y');
-                }
-            @endphp
+        @isset($phase)
             <div class="card p-5 mt-3">
                 <div class="card p-5 mt-3">
-                    <form action="{{ route('holydays.update', $holyday['id']) }}" method="post">
+                    <form action="{{ route('tms-phase.update', $phase['id']) }}" method="post">
                         @csrf
                         @method('PUT')
-                        @include('holyday.form')
+                        @include('tmsphasec.form')
                     </form>
                 </div>
             </div>
@@ -43,13 +38,7 @@
     </div>
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            let storedHolyday = @json($holly_bay) ?? '';
-            $("#holly_bay").flatpickr({
-                dateFormat: "d/m/Y",
-                defaultDate: [storedHolyday]
-            });
-        });
+        $(document).ready(function() {});
     </script>
 @endsection
 @endsection

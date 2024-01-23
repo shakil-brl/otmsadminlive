@@ -235,20 +235,20 @@
 
                 $('#link-update-submit').click(function() {
 
-                 // Get the input elements
-        var streamingLinkInput = document.getElementById("streaming_link_update");
-        var staticLinkInput = document.getElementById("static_link_update");
+                    // Get the input elements
+                    var streamingLinkInput = document.getElementById("streaming_link_update");
+                    var staticLinkInput = document.getElementById("static_link_update");
 
-        // Get the entered values
-        var streamingLink = streamingLinkInput.value.toLowerCase();
-        var staticLink = staticLinkInput.value.toLowerCase();
+                    // Get the entered values
+                    var streamingLink = streamingLinkInput.value.toLowerCase();
+                    var staticLink = staticLinkInput.value.toLowerCase();
 
 
-        // Check if both links are not the same
-        if (streamingLink === staticLink) {
-            alert("The streaming link and live class link cannot be the same.");
-            return; // Stop execution if validation fails
-        }     
+                    // Check if both links are not the same
+                    if (streamingLink === staticLink) {
+                        alert("The streaming link and live class link cannot be the same.");
+                        return; // Stop execution if validation fails
+                    }     
 
                     let streaming_link = $("#streaming_link_update").val();
                     let static_link = $("#static_link_update").val();

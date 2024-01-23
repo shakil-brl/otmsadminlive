@@ -30,15 +30,10 @@
                 @include('tmsphasec.form')
             </form>
         </div>
-        <x-go-back />
     </div>
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            $("#holly_bay").flatpickr({
-                dateFormat: "d/m/Y",
-            });
-        });
+        $(document).ready(function() {});
     </script>
 @endsection
 @endsection

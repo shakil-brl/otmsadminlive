@@ -29,6 +29,7 @@
         @enderror
     </div>
 </div>
-<div class="mt-5 text-center">
+<div class="mt-5 d-flex gap-2 justify-content-center">
+    <x-go-back />
     <button type="submit" class="btn btn-md btn-success ">Submit</button>
 </div>
