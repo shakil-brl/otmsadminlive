@@ -309,6 +309,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 });
 
 Route::resource('/tms-phase', TmsPhaseController::class);
+Route::get('/tms-phase/{id}/link-batch', [TmsPhaseController::class, 'linkBatch'])->name('tms-phase.link-batch');
 Route::resource('/tms-phase-batch', TmsBatchPhaseController::class);
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');

@@ -36,6 +36,7 @@ class TmsPhaseController extends Controller
                     ->addColumn('action', function ($row) {
                         $btn = '
                         <div class="d-flex gap-1 justify-content-center">
+                            <a data-id="' . $row['id'] . '" class="link-batch btn btn-info btn-sm text-center">Link Batch</a>
                             <a data-id="' . $row['id'] . '" class="edit-action btn btn-success btn-sm text-center">Edit</a>
                             <a data-id="' . $row['id'] . '" class="delete-action btn btn-danger btn-sm text-center">Delete</a>
                         </div>';
@@ -208,5 +209,36 @@ class TmsPhaseController extends Controller
         $phase->delete();
 
         return response()->json(['message' => 'Phase deleted successfully'], 200);
+    }
+
+
+    /**
+     * link with batch
+     */
+    public function linkBatch($id)
+    {
+        if ($id) {
+            $results = ApiHttpClient::request('get', 'tms-phases/' . $id)->json();
+            $bp_results = ApiHttpClient::request('get', 'tms-batch-phases')->json();
+
+            if ($results['success'] == true && $bp_results['success'] == true) {
+                $phase = $results['data'];
+                $batch_phases = $bp_results['data'];
+                $data = [
+                    'phase' => $phase,
+                    'batch_phases' => $batch_phases
+                ];
+                // dd($batch_phases);
+                return view('tmsphasec.link_batches', $data);
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', 'Something went wrong');
+                return redirect()->back();
+            }
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Something went wrong');
+            return redirect()->back();
+        }
     }
 }

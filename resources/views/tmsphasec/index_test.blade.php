@@ -96,10 +96,11 @@
                     },
                 ],
             });
+            //search
             $('#searchInput').on('keyup', function() {
                 table.search(this.value).draw();
             });
-
+            // edit
             $(document).on("click", ".edit-action", function(e) {
                 let id = $(this).data('id');
 
@@ -108,7 +109,7 @@
 
                 window.location.href = finalUrl;
             });
-
+            // delete
             $(document).on("click", ".delete-action", function(e) {
                 let id = $(this).data('id');
                 let csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -151,6 +152,16 @@
                         });
                     }
                 });
+            });
+
+            // link batch
+            $(document).on("click", ".link-batch", function(e) {
+                let id = $(this).data('id');
+
+                let finalUrl =
+                    `${app_url}/tms-phase/${id}/link-batch`;
+
+                window.location.href = finalUrl;
             });
         });
     </script>
