@@ -34,6 +34,7 @@ use App\Http\Controllers\ProviderBatchesController;
 use App\Http\Controllers\ClassDocumentationController;
 use App\Http\Controllers\EvaluationHeadController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\BatchReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -322,4 +323,10 @@ Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendanc
 
 Route::get('/provider-pdf', [ProviderController::class, 'providerPdf'])->name('provider-pdf');
 Route::get('/evaluation-pdf/{schedule_details_id}', [EvaluationController::class, 'evaluationPdf'])->name('evaluation-pdf');
+
+Route::get('/vendor-batch-report', [BatchReportController::class, 'index'])->name('batch.report');
+Route::get('/vendor-batches/{vendorId}', [BatchReportController::class, 'vendorBatches'])->name('vendor.batches');
+Route::get('/vendor-batch-schedule/{scheduleId}', [BatchReportController::class, 'vendorBatchSchedule'])->name('vendor-batch.schedule');
+Route::get('/vendor-batch-schedule-attendance/{scheduleDetailsId}', [BatchReportController::class, 'vendorBatchScheduleAttendance'])->name('vendor-batch-schedule.attendance');
+
 
