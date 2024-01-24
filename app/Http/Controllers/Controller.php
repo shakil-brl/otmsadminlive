@@ -39,6 +39,23 @@ class Controller extends BaseController
         }
     }
 
+    public static function livewirePaginate($data, $currentPage, $path)
+    {
+        try {
+            $batch_paginate = new Collection($data['data']['data']);
+            $paginator = new LengthAwarePaginator(
+                $batch_paginate->forPage($currentPage, $data['data']['per_page']),
+                $data['data']['total'],
+                $data['data']['per_page'],
+                $currentPage
+            );
+            $paginator->setPath($path);
+            return $paginator;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
     protected function customPaginate2($data, $request, $path)
     {
         try {

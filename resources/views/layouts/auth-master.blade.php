@@ -42,18 +42,18 @@
         /* styles.css */
 
         #preloader {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             background-color: #000000b0;
             /* Set the background color of your preloader */
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(4px);
+            /* backdrop-filter: blur(2px); */
             /* Set a high z-index to make sure it's on top of other elements */
         }
 
@@ -339,16 +339,16 @@
         //     document.getElementById("kt_app_root").style.display = "block";
         // });
         $('.show-loader').on('click', function() {
-                var myDiv = document.getElementById("preloader");
-                if (myDiv.style.display === "none" || myDiv.style.display === "") {
+            var myDiv = document.getElementById("preloader");
+            if (myDiv.style.display === "none" || myDiv.style.display === "") {
                 myDiv.style.display = "flex";
-                } else {
+            } else {
                 myDiv.style.display = "none";
-                }
+            }
 
-                setTimeout(function() {
-                    myDiv.style.display = "none";
-                }, 10000);
+            setTimeout(function() {
+                myDiv.style.display = "none";
+            }, 10000);
         });
     </script>
 

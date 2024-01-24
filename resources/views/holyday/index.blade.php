@@ -44,10 +44,9 @@
                                     {{ $holyday['day_name_bn'] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $holyday['holly_bay'] ?? '' }}
+                                    {{ isset($holyday['holly_bay']) ? \Carbon\Carbon::parse($holyday['holly_bay'])->format('d-m-Y') : '' }}
                                 </td>
                                 <td class="me-0 d-flex gap-1">
-                                    {{-- <a href="{{ route('holydays.show', $holyday['id']) }}" class="btn btn-sm btn-success">View</a> --}}
                                     <a href="{{ route('holydays.edit', $holyday['id']) }}" class="btn btn-sm btn-info">
                                         Edit
                                     </a>

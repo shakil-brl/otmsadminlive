@@ -12,10 +12,10 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'sub_categorie_list' => 'Sub Categories List',
+    'sub_categorie_list' => 'Sub Category List',
     'home' => 'Home',
     'Setting_management' => 'Settings Management',
-    'sub_categorie' => 'Sub Categories',
+    'sub_categorie' => 'Sub Category',
     'search_sub_category_ph' => 'Search Sub category',
     'export_report' => 'Export Report',
     'copy_clipboard' => 'Copy to clipboard',
@@ -29,7 +29,7 @@ return [
     'categorie_name' => 'CATEGORY NAME',
     'action' => 'ACTIONS',
     'sub_categorie_add' => 'Sub Category Add',
-    'categories' => 'Categories',
+    'categories' => 'Category',
     'select_category' => 'Select course category',
     'discard' => 'Discard',
     'submit' => 'Submit',

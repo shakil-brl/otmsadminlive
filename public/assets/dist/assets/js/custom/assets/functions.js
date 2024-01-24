@@ -61,72 +61,72 @@ function populateOption(api_link, authToken, selector, selectedId = null) {
     });
 }
 
-function populateProviderOption(
-    api_link,
-    authToken,
-    selector,
-    selectedId = null
-) {
-    let htmlOption = "<option value=''></option>";
-    $.ajax({
-        type: "get",
-        url: api_link,
-        headers: {
-            Authorization: authToken,
-        },
-        data: {},
-        dataType: "JSON",
-        success: function (results) {
-            let allData = results.data;
-            console.log(allData);
+// function populateProviderOption(
+//     api_link,
+//     authToken,
+//     selector,
+//     selectedId = null
+// ) {
+//     let htmlOption = "<option value=''></option>";
+//     $.ajax({
+//         type: "get",
+//         url: api_link,
+//         headers: {
+//             Authorization: authToken,
+//         },
+//         data: {},
+//         dataType: "JSON",
+//         success: function (results) {
+//             let allData = results.data;
+//             console.log(allData);
 
-            if (allData) {
-                if (selectedId !== null) {
-                    $.each(allData, function (index, data) {
-                        if (data.id == selectedId) {
-                            htmlOption +=
-                                '<option value="' +
-                                data.id +
-                                '" selected>' +
-                                data.batchCode +
-                                " (" +
-                                data.GEOLocation +
-                                ")" +
-                                "</option>";
-                        } else {
-                            htmlOption +=
-                                '<option value="' +
-                                data.id +
-                                '">' +
-                                data.batchCode +
-                                " (" +
-                                data.GEOLocation +
-                                ")" +
-                                "</option>";
-                        }
-                    });
-                } else {
-                    $.each(allData, function (index, data) {
-                        htmlOption +=
-                            '<option value="' +
-                            data.id +
-                            '">' +
-                            data.batchCode +
-                            " (" +
-                            data.GEOLocation +
-                            ")" +
-                            "</option>";
-                    });
-                }
-            }
+//             if (allData) {
+//                 if (selectedId !== null) {
+//                     $.each(allData, function (index, data) {
+//                         if (data.id == selectedId) {
+//                             htmlOption +=
+//                                 '<option value="' +
+//                                 data.id +
+//                                 '" selected>' +
+//                                 data.batchCode +
+//                                 " (" +
+//                                 data.GEOLocation +
+//                                 ")" +
+//                                 "</option>";
+//                         } else {
+//                             htmlOption +=
+//                                 '<option value="' +
+//                                 data.id +
+//                                 '">' +
+//                                 data.batchCode +
+//                                 " (" +
+//                                 data.GEOLocation +
+//                                 ")" +
+//                                 "</option>";
+//                         }
+//                     });
+//                 } else {
+//                     $.each(allData, function (index, data) {
+//                         htmlOption +=
+//                             '<option value="' +
+//                             data.id +
+//                             '">' +
+//                             data.batchCode +
+//                             " (" +
+//                             data.GEOLocation +
+//                             ")" +
+//                             "</option>";
+//                     });
+//                 }
+//             }
 
-            selector.html(htmlOption);
-        },
-        error: function (response) {
-            console.log(response);
-        },
-    });
-}
+//             selector.html(htmlOption);
+//         },
+//         error: function (response) {
+//             console.log(response);
+//         },
+//     });
+// }
 
 function populateTrainerOption(
     api_link,
@@ -332,8 +332,7 @@ function populateLocationOption(
     selectElement,
     selectedId = null
 ) {
-    let htmlSelect =
-        "<option value=''>Select " + optionFor + "</option>";
+    let htmlSelect = "<option value=''>Select " + optionFor + "</option>";
     $.ajax({
         type: "get",
         url: api_link,
@@ -389,6 +388,65 @@ function populateLocationOption(
             }
 
             selectElement.html(htmlSelect);
+        },
+        error: function (response) {
+            console.log(response);
+        },
+    });
+}
+
+// function for providers
+function populateProviderOption(
+    authToken,
+    api_link,
+    providerSelector,
+    selectProviderId = null
+) {
+    let htmlProvider = "<option value=''>Select Provider</option>";
+
+    $.ajax({
+        type: "get",
+        url: api_link,
+        headers: {
+            Authorization: authToken,
+        },
+        data: {},
+        dataType: "JSON",
+        success: function (results) {
+            let providers = results.data;
+            // console.log(providers);
+            if (providers) {
+                if (selectProviderId !== null) {
+                    $.each(providers, function (index, provider) {
+                        if (provider.id == selectProviderId) {
+                            htmlProvider +=
+                                '<option value="' +
+                                provider.id +
+                                '" selected>' +
+                                provider.name +
+                                "</option>";
+                        } else {
+                            htmlProvider +=
+                                '<option value="' +
+                                provider.id +
+                                '">' +
+                                provider.name +
+                                "</option>";
+                        }
+                    });
+                } else {
+                    $.each(providers, function (index, provider) {
+                        htmlProvider +=
+                            '<option value="' +
+                            provider.id +
+                            '">' +
+                            provider.name +
+                            "</option>";
+                    });
+                }
+            }
+
+            providerSelector.html(htmlProvider);
         },
         error: function (response) {
             console.log(response);

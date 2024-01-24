@@ -31,7 +31,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="file-description" class="form-label">Description:</label>
-                    <textarea class="form-control" name="description" id="file-description" rows="3">value="{{ old('description') }}"</textarea>
+                    <textarea class="form-control" name="description" id="file-description" rows="3">{{ old('description') }}</textarea>
                     @error('description')
                         <small class="text-danger d-block">{{ $message }}</small>
                     @enderror
