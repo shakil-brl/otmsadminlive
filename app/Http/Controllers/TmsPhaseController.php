@@ -15,18 +15,17 @@ class TmsPhaseController extends Controller
 {
     public function index(Request $request)
     {
-        // ApiHttpClient::request('get', 'tms-phases', )->json();
         if ($request->ajax()) {
-            // Define the API endpoint and query parameters for pagination
-            $perPage = $request->input('length', 10); // Adjust the perPage value according to your API's pagination settings
-            $page = $request->input('page', 1); // Get the current page from the request
+            $perPage = $request->input('length', 10);
+            $page = $request->input('page', 1);
             $searchTerm = $request->input('searchTerm');
+
             // Make the API request to get paginated data
             $response = ApiHttpClient::request('get', 'tms-phases', ['page' => $page, 'perPage' => $perPage, 'searchTerm' => $searchTerm]);
             // dd($response);
             // Check if the API request was successful
             if ($response->successful()) {
-                $data = $response->json(); // Assuming the API response is in JSON format
+                $data = $response->json();
                 $pagination = $data['meta']['pagination'];
 
                 return Datatables::of($data['data'])
@@ -46,7 +45,6 @@ class TmsPhaseController extends Controller
                     ->setTotalRecords($pagination['total'])
                     ->make(true);
             } else {
-                // Handle the API error if the request was not successful
                 return response()->json(['error' => 'Failed to fetch data from API'], 500);
             }
         }
@@ -121,6 +119,8 @@ class TmsPhaseController extends Controller
 
         if ($request->isActive) {
             $phase['isActive'] = 1;
+        } else {
+            $phase['isActive'] = 0;
         }
         // dd($phase);
         $data = ApiHttpClient::request('post', 'tms-phases', $phase)->json();
@@ -172,6 +172,8 @@ class TmsPhaseController extends Controller
 
         if ($request->isActive) {
             $phase['isActive'] = 1;
+        } else {
+            $phase['isActive'] = 0;
         }
         // dd($phase);
         $data = ApiHttpClient::request('put', "tms-phases/$id", $phase)->json();
@@ -183,7 +185,7 @@ class TmsPhaseController extends Controller
             return redirect()->back()->with('error_message', $error_message)->withInput();
         } else {
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Created successfully');
+            session()->flash('message', $data['message'] ?? 'Updated successfully');
             return redirect()->route('tms-phase.index');
         }
 
