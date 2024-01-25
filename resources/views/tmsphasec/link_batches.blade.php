@@ -443,10 +443,9 @@
                     if (result.isConfirmed) {
                         let fd = new FormData();
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-                        let link = api_baseurl + "lot/link-batch";
+                        let link = api_baseurl + "tms-phases/link-batch";
 
                         let batchIds = $("#link-batch-form [name=link-batches]").val();
-
                         // console.log(batchIds);
 
                         fd.append("batch_ids", batchIds);
