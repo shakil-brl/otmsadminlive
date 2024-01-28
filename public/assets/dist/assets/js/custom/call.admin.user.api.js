@@ -94,7 +94,7 @@ $(function () {
 
                         userTbody.append(userTr);
                     });
-                    $('#dataTable').DataTable();
+                    $("#dataTable").DataTable();
                 } else {
                     userTbody.innerHTML = `
                             <tr>
@@ -102,7 +102,6 @@ $(function () {
                             </tr>                            
                         `;
                 }
-
             },
             error: function (xhr, status, error) {
                 // Handle errors here
@@ -125,29 +124,45 @@ $(function () {
         $("#open-create-user-modal").on("click", function () {
             let roleSelector = $("#kt_modal_add_admin_form #role_id");
             let role_api_link = api_baseurl + "role";
+            let divisionSelector = $("#kt_modal_add_admin_form #division_id");
+            let districtSelector = $("#kt_modal_add_admin_form #district_id");
+            let upazilaSelector = $("#kt_modal_add_admin_form #upazila_id");
             // let authToken = authToken;
             //console.log(roleSelector);
             populateRoleOptions(authToken, role_api_link, roleSelector);
 
             // load districts
-            let optionFor = "District";
-            let district_api_link = api_baseurl + "districts";
-            let districtSelector = $("#kt_modal_add_admin_form #district_id");
+            let optionFor = "Division";
+            let district_api_link = api_baseurl + "divisions";
+
             populateLocationOption(
                 optionFor,
                 district_api_link,
                 authToken,
-                districtSelector
+                divisionSelector
             );
 
+            // load districts
+            divisionSelector.change(function () {
+                let division_id = divisionSelector.val();
+                districtSelector.html("");
+                upazilaSelector.html("");
+                optionFor = "District";
+                district_api_link = api_baseurl + "districts/" + division_id;
+
+                populateLocationOption(
+                    optionFor,
+                    district_api_link,
+                    authToken,
+                    districtSelector
+                );
+            });
+
             // load upazila on district change
-            let selectDistrictElement = $(
-                "#kt_modal_add_admin_form #district_id"
-            );
-            selectDistrictElement.change(function () {
+            districtSelector.change(function () {
+                upazilaSelector.html("");
                 optionFor = "Upazila";
-                let upazilaSelector = $("#kt_modal_add_admin_form #upazila_id");
-                let district_id = selectDistrictElement.val();
+                let district_id = districtSelector.val();
                 let upazila_api_link = api_baseurl + "upazilas/" + district_id;
                 populateLocationOption(
                     optionFor,
@@ -601,21 +616,25 @@ $(function () {
                 let provider_id =
                     $("#kt_modal_add_admin_form [name=provider_id]").val() ??
                     "";
-                let district_id = $(
+                let division_id = $(
                     "#kt_modal_add_admin_form [name=district_id]"
+                ).val();
+                let district_id = $(
+                    "#kt_modal_add_admin_form [name=division_id]"
                 ).val();
                 let upazila_id =
                     $("#kt_modal_add_admin_form [name=upazila_id]").val() ?? "";
-                let address = $(
-                    "#kt_modal_add_admin_form [name=address]"
-                ).val();
+                // let address = $(
+                //     "#kt_modal_add_admin_form [name=address]"
+                // ).val();
 
                 fd.append("email", email);
                 fd.append("role_id", role_id);
                 fd.append("provider_id", provider_id);
+                fd.append("division_id", division_id);
                 fd.append("district_id", district_id);
                 fd.append("upazila_id", upazila_id);
-                fd.append("address", address);
+                // fd.append("address", address);
 
                 fd.append("_token", CSRF_TOKEN);
                 // console.log(fd);

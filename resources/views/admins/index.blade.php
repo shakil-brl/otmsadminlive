@@ -139,8 +139,7 @@
                     <div class="card-body py-4">
                         <div class="table-responsive">
                             <!--begin::Table-->
-                            <table class="table table-responsive align-middle table-row-dashed fs-6 gy-5"
-                                id="dataTable">
+                            <table class="table table-responsive align-middle table-row-dashed fs-6 gy-5" id="dataTable">
                                 <thead>
                                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
@@ -244,7 +243,8 @@
                             <!--start::Input group-->
                             <div class="fv-row mb-7 d-none" id="provider">
                                 <!--begin::Label-->
-                                <label class="required fw-semibold fs-6 mb-2">{{ __('admin-user-list.vendor_provider') }}</label>
+                                <label
+                                    class="required fw-semibold fs-6 mb-2">{{ __('admin-user-list.vendor_provider') }}</label>
                                 <!--end::Label-->
 
                                 <!--begin::Provider-->
@@ -257,6 +257,25 @@
 
                                 </span>
                                 <!--end::Provider-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--start::Input group-->
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.division') }}</label>
+                                <!--end::Label-->
+
+                                <!--begin::District-->
+                                <select name="division_id" aria-label="{{ __('profile.division_ph') }}"
+                                    data-control="select2" data-placeholder="{{ __('profile.division_ph') }}"
+                                    class="form-select form-select-solid" data-dropdown-parent="#kt_modal_add_admin_form"
+                                    id="division_id">
+                                </select>
+                                <span class="form-message-error-division_id">
+
+                                </span>
+                                <!--end::District-->
                             </div>
                             <!--end::Input group-->
 
@@ -296,7 +315,7 @@
                                 <!--end::Upazila-->
                             </div>
                             <!--end::Input group-->
-                            <!--start::Input group-->
+                            {{-- <!--start::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.address') }}</label>
@@ -315,7 +334,7 @@
                                 </span>
                                 <!--end::Address-->
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Input group--> --}}
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->
