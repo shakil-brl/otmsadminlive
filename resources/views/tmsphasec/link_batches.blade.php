@@ -485,7 +485,13 @@
                                             })
                                         }
 
-                                        swal.fire(ValidationError, errMsg);
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Validation Error',
+                                            html: '<span style="color: red;">' +
+                                                errMsg + '</span>'
+                                        });
+                                        // swal.fire(ValidationError, errMsg);
                                     }
                                 }
                             },
