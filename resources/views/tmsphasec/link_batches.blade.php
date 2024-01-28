@@ -338,7 +338,7 @@
                                 selectAllBox.removeClass("d-none");
                                 $("#selectAllCheckbox").prop('checked', '');
                                 $.each(allData, function(index, data) {
-                                    console.log(data);
+                                    // console.log(data);
                                     let isChecked = selectedBatches[data.id];
                                     let batchTitle = '';
                                     if (data.training) {
@@ -445,26 +445,24 @@
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
                         let link = api_baseurl + "tms-phases/link-batch";
 
-                        let batchIds = $("#link-batch-form [name=link-batches]").val();
-                        // console.log(batchIds);
-
-                        fd.append("batch_ids", batchIds);
-                        fd.append("phase_id", phaseId);
-                        fd.append("_token", CSRF_TOKEN);
+                        let batchIds = ($("#link-batch-form [name=link-batches]").val()).split(
+                            ",").map(Number);
 
                         $.ajax({
-                            type: "post",
-                            data: fd,
-                            processData: false,
-                            contentType: false,
-                            dataType: "JSON",
+                            type: "POST",
                             url: link,
+                            data: {
+                                batch_ids: batchIds,
+                                phase_id: phaseId,
+                                _token: CSRF_TOKEN
+                            },
+                            dataType: "json",
                             headers: {
                                 Authorization: authToken,
                                 "X-localization": language,
                             },
                             success: function(results) {
-                                console.log(results);
+                                // console.log(results);
                                 if (results.success === true) {
                                     swal.fire(yes, results.message);
 
@@ -479,7 +477,15 @@
                                 } else {
                                     if (results.error === true) {
                                         var errors = results.message;
-                                        swal.fire(ValidationError, errors);
+                                        console.log(errors);
+                                        let errMsg = '';
+                                        for (let key in errors) {
+                                            errors[key].map((e) => {
+                                                errMsg += (e + "<br>");
+                                            })
+                                        }
+
+                                        swal.fire(ValidationError, errMsg);
                                     }
                                 }
                             },
@@ -497,7 +503,6 @@
                 if (Object.keys(storedBatches).length > 0) {
                     // linkBatchSection.removeClass('d-none');
                     let batchKeysArray = Object.keys(storedBatches);
-
                     // Set the value of the input to the array of batch keys
                     $("#link-batch-form [name='link-batches']").val(batchKeysArray);
 
