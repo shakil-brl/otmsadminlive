@@ -108,4 +108,14 @@ class Controller extends BaseController
 
         return false;
     }
+
+    protected function authRole()
+    {
+        return [
+            'project_office' => ['superadmin', 'pd', 'dpd', 'admin', 'consultant', 'dg', 'minister', 'secretary'],
+            'division' => ['divisional commissioner'],
+            'district' => ['dc', 'programmer'],
+            'upazila' => ['uno', 'assistant programmer'],
+        ];
+    }
 }
