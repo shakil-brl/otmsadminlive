@@ -758,76 +758,6 @@ $(function () {
                 },
             });
         }
-
-        // function roleChange(selectRole) {
-        //     selectRole.on("change", function (e) {
-        //         let divisionSection = $("#division-section");
-        //         let districtSection = $("#district-section");
-        //         let upazilaSection = $("#upazila-section");
-
-        //         let selectedOptionText = selectRole.find(":selected").html();
-        //         let foundGroupName = null; // Initialize a variable to store the found group, initially set to null
-
-        //         // Iterate through each group in rolesGroup
-        //         for (let groupName in rolesGroup) {
-        //             // Check if the user role exists in the current group's array (case-insensitive)
-        //             if (
-        //                 rolesGroup[groupName].some(
-        //                     (role) =>
-        //                         role.toLowerCase() ===
-        //                         selectedOptionText.toLowerCase()
-        //                 )
-        //             ) {
-        //                 foundGroupName = groupName;
-        //             }
-        //         }
-        //         if (foundGroupName === "upazila") {
-        //             divisionSection.removeClass("d-none");
-        //             districtSection.removeClass("d-none");
-        //             upazilaSection.removeClass("d-none");
-        //         } else if (foundGroupName === "district") {
-        //             divisionSection.removeClass("d-none");
-        //             districtSection.removeClass("d-none");
-
-        //             upazilaSection.addClass("d-none");
-        //         } else if (foundGroupName === "division") {
-        //             divisionSection.removeClass("d-none");
-
-        //             districtSection.addClass("d-none");
-        //             upazilaSection.addClass("d-none");
-        //         } else {
-        //             divisionSection.addClass("d-none");
-        //             districtSection.addClass("d-none");
-        //             upazilaSection.addClass("d-none");
-        //             if (
-        //                 selectedOptionText == "Trainer" ||
-        //                 selectedOptionText == "Provider" ||
-        //                 selectedOptionText == "Coordinator"
-        //             ) {
-        //                 if (userRole != "Provider") {
-        //                     $("#kt_modal_add_admin_form #provider").removeClass(
-        //                         "d-none"
-        //                     );
-
-        //                     let providerSelector = $(
-        //                         "#kt_modal_add_admin_form #provider_id"
-        //                     );
-        //                     let api_link = api_baseurl + "providers";
-
-        //                     populateProviderOptions(
-        //                         authToken,
-        //                         api_link,
-        //                         providerSelector
-        //                     );
-        //                 }
-        //             } else {
-        //                 $("#kt_modal_add_admin_form #provider").addClass(
-        //                     "d-none"
-        //                 );
-        //             }
-        //         }
-        //     });
-        // }
     });
 
     // add admin user form submit
@@ -927,9 +857,9 @@ $(function () {
                                         "email",
                                         "role_id",
                                         "provider_id",
+                                        "division_id",
                                         "district_id",
                                         "upazila_id",
-                                        "address",
                                     ];
 
                                     // Usage example for multiple fields
@@ -983,7 +913,9 @@ $(function () {
                 let provider_id =
                     $("#kt_modal_update_admin_form [name=provider_id]").val() ??
                     "";
-
+                let division_id = $(
+                    "#kt_modal_update_admin_form [name=district_id]"
+                ).val();
                 let district_id = $(
                     "#kt_modal_update_admin_form [name=district_id]"
                 ).val();
@@ -994,6 +926,7 @@ $(function () {
                 fd.append("email", email);
                 fd.append("role_id", role_id);
                 fd.append("provider_id", provider_id);
+                fd.append("division_id", division_id);
                 fd.append("district_id", district_id);
                 fd.append("upazila_id", upazila_id);
 
@@ -1046,6 +979,7 @@ $(function () {
                                     "email",
                                     "role_id",
                                     "provider_id",
+                                    "division_id",
                                     "district_id",
                                     "upazila_id",
                                 ];
