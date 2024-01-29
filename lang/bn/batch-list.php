@@ -59,6 +59,18 @@ return [
     'jon' => 'জন',
     'view_attendance' => ' উপস্থিতি দেখুন',
     'edit_schedule' => 'সিডিউল এডিট করুন ',
+    'clean_schedule' => ' সিডিউল মুছে ফেলুন ',
+    'start_time' => 'ক্লাস শুরু হওয়ার সময়',
+    'end_time' => 'ক্লাস শেষ হওয়ার সময় ',
+    'class_start_date' => 'ক্লাস শুরুর তারিখ',
+    'close' => 'বাতিল করুন ',
+    'submit' => 'সাবমিট করুন ',
+    'class_attendance' => 'ক্লাসে উপস্থিতির তালিকা',
+    'total_tarinees' => 'মোট প্রশিক্ষণার্থী',
+    'present_tarinees' => 'উপস্থিত প্রশিক্ষণার্থী',
+    'absent_tarinees' => 'অনুপস্থিত প্রশিক্ষণার্থী',
+    'name' => 'নাম',
+    'attendance' => 'উপস্থিতি',
 
 
 
