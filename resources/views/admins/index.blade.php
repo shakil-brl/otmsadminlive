@@ -261,7 +261,7 @@
                             <!--end::Input group-->
 
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="division-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.division') }}</label>
                                 <!--end::Label-->
@@ -280,7 +280,7 @@
                             <!--end::Input group-->
 
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="district-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.district') }}</label>
                                 <!--end::Label-->
@@ -298,7 +298,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="upazila-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.upazila') }}</label>
                                 <!--end::Label-->
@@ -409,7 +409,7 @@
                                 <!--begin::User Role-->
                                 <select name="role_id" aria-label="Select User Role" data-control="select2"
                                     data-placeholder="Select User Role" class="form-select form-select-solid"
-                                    data-dropdown-parent="#kt_modal_update_admin_form">
+                                    data-dropdown-parent="#kt_modal_update_admin_form" id="role_id">
                                 </select>
                                 <span class="form-message-error-role_id">
 
@@ -435,8 +435,28 @@
                                 <!--end::Provider-->
                             </div>
                             <!--end::Input group-->
+
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="division-section">
+                                <!--begin::Label-->
+                                <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.division') }}</label>
+                                <!--end::Label-->
+
+                                <!--begin::District-->
+                                <select name="division_id" aria-label="{{ __('profile.division_ph') }}"
+                                    data-control="select2" data-placeholder="{{ __('profile.division_ph') }}"
+                                    class="form-select form-select-solid"
+                                    data-dropdown-parent="#kt_modal_update_admin_form" id="division_id">
+                                </select>
+                                <span class="form-message-error-division_id">
+
+                                </span>
+                                <!--end::District-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--start::Input group-->
+                            <div class="fv-row mb-7 d-none" id="district-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">District</label>
                                 <!--end::Label-->
@@ -454,7 +474,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="upazila-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">Upazila</label>
                                 <!--end::Label-->
@@ -470,7 +490,8 @@
                                 <!--end::Upazila-->
                             </div>
                             <!--end::Input group-->
-                            <!--start::Input group-->
+
+                            {{-- <!--start::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">Address</label>
@@ -489,7 +510,7 @@
                                 </span>
                                 <!--end::Address-->
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Input group--> --}}
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->
