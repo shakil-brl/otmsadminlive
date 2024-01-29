@@ -37,10 +37,7 @@ $(function () {
                         let userTr = `
                                 <tr>
                                     <td>
-                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                            <input class="form-check-input user-item" type="checkbox" name=""
-                                                value="" />
-                                        </div>
+                                        ${index + 1}.
                                     </td>
                                     <td>                                        
                                         ${user.ProfileId}
@@ -118,6 +115,10 @@ $(function () {
                             </tr>                            
                         `;
                 }
+                let table = $("#kt-user-table").DataTable();
+                $("#myInput").on("keyup", function () {
+                    table.search(this.value).draw();
+                });
             },
             error: function (xhr, status, error) {
                 // Handle errors here
