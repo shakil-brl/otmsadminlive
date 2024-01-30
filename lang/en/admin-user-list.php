@@ -78,6 +78,15 @@ return [
     'religion' => 'Religion',
     'parmanent_address' => 'Parmanent Address',
     'present_address' => 'Present Address',
+    'division' => 'Division',
+    'user_details' => 'User Details',
+    'all_users' => 'All Users',
+    'details_info' => 'Details Information',
+    'primary_info' => 'Primary Information',
+    'profiles_id' => 'Profile Id',
+    'full_name' => 'Full Name',
+    'roles' => 'User Role',
+
 
     
 
