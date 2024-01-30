@@ -373,7 +373,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="provider-row">
+                            <div class="fv-row mb-7 d-none" id="provider">
                                 <!--begin::Label-->
                                 <label class="required fw-semibold fs-6 mb-2">Provider</label>
                                 <!--end::Label-->
