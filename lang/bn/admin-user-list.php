@@ -77,7 +77,14 @@ return [
     'religion' =>'ধর্ম',
     'parmanent_address' =>'স্থায়ী ঠিকানা',
     'present_address' => 'বর্তমান ঠিকানা',
-    
+    'division' => 'বিভাগ ',
+    'user_details' => 'ব্যবহারকারীর তথ্য',
+    'all_users' => 'সকল ব্যবহারকারীর তালিকা',
+    'details_info' => 'বিস্তারিত তথ্য ',
+    'primary_info' => 'প্রাথমিক তথ্য',
+    'profiles_id' => 'প্রোফাইল আইডি',
+    'full_name' => 'সম্পূর্ণ নাম',
+    'roles' => 'ব্যবহারকারীর রোল',
 
    
 ];

@@ -3,7 +3,7 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <h3>Running Batches</h3>
+        <h3>{{ __('batch-list.running_batches') }}</h3>
         <br>
         <x-alert />
         @isset($running_batches)
@@ -11,32 +11,34 @@
                 <form action="">
                     <div class="w-50 d-flex gap-3">
                         <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                            placeholder="search here">
-                        <input type="submit" class="form-control btn btn-primary w-25" value="Search">
+                            placeholder="{{ __('batch-list.search_here') }}">
+                        <input type="submit" class="form-control btn btn-primary w-25" value="{{ __('batch-list.search') }}">
                     </div>
                 </form>
             </div>
             <table class="table table-bordered bg-white">
                 <thead>
-                    <th>SL</th>
-                    <th>Batch Code</th>
-                    <th>Start Date</th>
-                    <th>Training Title</th>
-                    <th>Location</th>
-                    <th>Vendor Name</th>
-                    <th>Action</th>
+                    <th>{{ __('batch-list.sl') }}</th>
+                    <th>{{ __('batch-list.batch_code') }}</th>
+                    <th>{{ __('batch-list.start_date') }}</th>
+                    <th>{{ __('batch-list.course_name') }}</th>
+                    <th>{{ __('batch-list.location') }}</th>
+                    <th>{{ __('batch-list.development_partner') }}</th>
+                    <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($running_batches) as $batch)
                         <tr>
                             <td>
-                                {{ $loop->iteration }}
+                                
+                                {{ digitLocale($loop->iteration) }}
                             </td>
                             <td>
                                 {{ $batch['training_batch'] ? $batch['training_batch']['batchCode'] : '' }}
                             </td>
                             <td>
-                                {{ $batch['training_batch'] ? $batch['training_batch']['startDate'] : '' }}
+                                {{ $batch['training_batch'] ? digitLocale(\Carbon\Carbon::parse($batch['training_batch']['startDate'])->format('d-m-Y')) : digitLocale(null) }}
+
                             </td>
                             <td>
                                 {{ $batch['training_batch'] ? $batch['training_batch']['training']['title']['Name'] : '' }}
@@ -54,9 +56,9 @@
                                         'schedule_detail_id' => $batch['id'],
                                     ];
                                 @endphp
-                                <a class="btn btn-sm btn-primary" href="{{ route('tms-inspections.create', $inspection_pm) }}"
+                                <a class="btn btn-sm btn-danger" href="{{ route('tms-inspections.create', $inspection_pm) }}"
                                     target="_blank">
-                                    Inspection
+                                    {{ __('sidemenu.inspection') }}
                                 </a>
                             </td>
                         </tr>
