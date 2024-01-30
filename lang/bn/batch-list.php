@@ -52,13 +52,20 @@ return [
     'development_partner' => 'ভেন্ডর',
     'live_streaming' => ' সরাসরি সম্প্রচার',
     'join_class' => ' ক্লাসে জয়েন করুন',
+    'class_details' => 'ক্লাসের বিস্তারিত',
+    'not_created-schedule' => ' সিডিউল তৈরি করা হয়নি',
+    'delete_schedule' => 'সিডিউল ডিলিট করুন ',
+    'total_tarinee' => 'মোট প্রশিক্ষণার্থী',
+    'jon' => 'জন',
+    'view_attendance' => ' উপস্থিতি দেখুন',
+    'edit_schedule' => 'সিডিউল এডিট করুন ',
 
 
 
 
 
     'duration' => 'সময়কাল',
-    'hours' => 'ঘন্টার',
+    'hours' => 'ঘন্টা',
     'first' => 'প্রথম',
     'previous' => 'আগে',
     'next' => 'পরবর্তী',
