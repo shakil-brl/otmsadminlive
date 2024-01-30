@@ -145,6 +145,16 @@ $(function () {
             let districtSelector = $("#kt_modal_add_admin_form #district_id");
             let upazilaSelector = $("#kt_modal_add_admin_form #upazila_id");
             // let authToken = authToken;
+            let divisionSection = $(
+                "#kt_modal_add_admin_form #division-section"
+            );
+            let districtSection = $(
+                "#kt_modal_add_admin_form #district-section"
+            );
+            let upazilaSection = $("#kt_modal_add_admin_form #upazila-section");
+            divisionSection.addClass("d-none");
+            districtSection.addClass("d-none");
+            upazilaSection.addClass("d-none");
             //console.log(roleSelector);
             populateRoleOptions(authToken, role_api_link, roleSelector);
 
@@ -189,99 +199,91 @@ $(function () {
                 );
                 // console.log(district_id);
             });
-        });
 
-        let selectRole = $("#kt_modal_add_admin_form #role_id");
-        selectRole.on("change", function (e) {
-            let divisionSection = $(
-                "#kt_modal_add_admin_form #division-section"
-            );
-            let districtSection = $(
-                "#kt_modal_add_admin_form #district-section"
-            );
-            let upazilaSection = $("#kt_modal_add_admin_form #upazila-section");
+            let selectRole = $("#kt_modal_add_admin_form #role_id");
+            selectRole.on("change", function (e) {
+                let selectedOptionText = selectRole.find(":selected").html();
+                let foundGroupName = null; // Initialize a variable to store the found group, initially set to null
 
-            let selectedOptionText = selectRole.find(":selected").html();
-            let foundGroupName = null; // Initialize a variable to store the found group, initially set to null
-
-            // Iterate through each group in rolesGroup
-            for (let groupName in rolesGroup) {
-                // Check if the user role exists in the current group's array (case-insensitive)
-                if (
-                    rolesGroup[groupName].some(
-                        (role) =>
-                            role.toLowerCase() ===
-                            selectedOptionText.toLowerCase()
-                    )
-                ) {
-                    foundGroupName = groupName;
-                }
-            }
-            $("#kt_modal_add_admin_form #provider").addClass("d-none");
-            if (foundGroupName === "upazila") {
-                divisionSection.removeClass("d-none");
-                districtSection.removeClass("d-none");
-                upazilaSection.removeClass("d-none");
-            } else if (foundGroupName === "district") {
-                divisionSection.removeClass("d-none");
-                districtSection.removeClass("d-none");
-
-                upazilaSection.addClass("d-none");
-                $('#kt_modal_add_admin_form [name="upazila_id"]')
-                    .val("")
-                    .trigger("change");
-            } else if (foundGroupName === "division") {
-                divisionSection.removeClass("d-none");
-
-                districtSection.addClass("d-none");
-                upazilaSection.addClass("d-none");
-                $('#kt_modal_add_admin_form [name="district_id"]')
-                    .val("")
-                    .trigger("change");
-                $('#kt_modal_add_admin_form [name="upazila_id"]')
-                    .val("")
-                    .trigger("change");
-            } else {
-                divisionSection.addClass("d-none");
-                districtSection.addClass("d-none");
-                upazilaSection.addClass("d-none");
-                $('#kt_modal_add_admin_form [name="division_id"]')
-                    .val("")
-                    .trigger("change");
-                $('#kt_modal_add_admin_form [name="district_id"]')
-                    .val("")
-                    .trigger("change");
-                $('#kt_modal_add_admin_form [name="upazila_id"]')
-                    .val("")
-                    .trigger("change");
-
-                if (
-                    selectedOptionText == "Trainer" ||
-                    selectedOptionText == "Provider" ||
-                    selectedOptionText == "Coordinator"
-                ) {
-                    if (userRole != "Provider") {
-                        $("#kt_modal_add_admin_form #provider").removeClass(
-                            "d-none"
-                        );
-
-                        let providerSelector = $(
-                            "#kt_modal_add_admin_form #provider_id"
-                        );
-                        let api_link = api_baseurl + "providers";
-
-                        populateProviderOptions(
-                            authToken,
-                            api_link,
-                            providerSelector
-                        );
-                    } else {
-                        $("#kt_modal_add_admin_form #provider").addClass(
-                            "d-none"
-                        );
+                // Iterate through each group in rolesGroup
+                for (let groupName in rolesGroup) {
+                    // Check if the user role exists in the current group's array (case-insensitive)
+                    if (
+                        rolesGroup[groupName].some(
+                            (role) =>
+                                role.toLowerCase() ===
+                                selectedOptionText.toLowerCase()
+                        )
+                    ) {
+                        foundGroupName = groupName;
                     }
                 }
-            }
+                $("#kt_modal_add_admin_form #provider").addClass("d-none");
+                if (foundGroupName === "upazila") {
+                    divisionSection.removeClass("d-none");
+                    districtSection.removeClass("d-none");
+                    upazilaSection.removeClass("d-none");
+                } else if (foundGroupName === "district") {
+                    divisionSection.removeClass("d-none");
+                    districtSection.removeClass("d-none");
+
+                    upazilaSection.addClass("d-none");
+                    $('#kt_modal_add_admin_form [name="upazila_id"]')
+                        .val("")
+                        .trigger("change");
+                } else if (foundGroupName === "division") {
+                    divisionSection.removeClass("d-none");
+
+                    districtSection.addClass("d-none");
+                    upazilaSection.addClass("d-none");
+                    $('#kt_modal_add_admin_form [name="district_id"]')
+                        .val("")
+                        .trigger("change");
+                    $('#kt_modal_add_admin_form [name="upazila_id"]')
+                        .val("")
+                        .trigger("change");
+                } else {
+                    divisionSection.addClass("d-none");
+                    districtSection.addClass("d-none");
+                    upazilaSection.addClass("d-none");
+                    $('#kt_modal_add_admin_form [name="division_id"]')
+                        .val("")
+                        .trigger("change");
+                    $('#kt_modal_add_admin_form [name="district_id"]')
+                        .val("")
+                        .trigger("change");
+                    $('#kt_modal_add_admin_form [name="upazila_id"]')
+                        .val("")
+                        .trigger("change");
+
+                    if (
+                        selectedOptionText == "Trainer" ||
+                        selectedOptionText == "Provider" ||
+                        selectedOptionText == "Coordinator"
+                    ) {
+                        if (userRole != "Provider") {
+                            $("#kt_modal_add_admin_form #provider").removeClass(
+                                "d-none"
+                            );
+
+                            let providerSelector = $(
+                                "#kt_modal_add_admin_form #provider_id"
+                            );
+                            let api_link = api_baseurl + "providers";
+
+                            populateProviderOptions(
+                                authToken,
+                                api_link,
+                                providerSelector
+                            );
+                        } else {
+                            $("#kt_modal_add_admin_form #provider").addClass(
+                                "d-none"
+                            );
+                        }
+                    }
+                }
+            });
         });
 
         // view admin user
