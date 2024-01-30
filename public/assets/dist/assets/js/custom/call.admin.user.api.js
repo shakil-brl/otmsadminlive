@@ -29,7 +29,7 @@ $(function () {
             },
             success: function (results) {
                 // Handle the successful response here
-                // console.log(results.data);
+                console.log(results.data);
                 let allUser = results.data;
                 sessionStorage.removeItem("message");
                 if (allUser.length > 0) {
@@ -217,6 +217,7 @@ $(function () {
                     foundGroupName = groupName;
                 }
             }
+            $("#kt_modal_add_admin_form #provider").addClass("d-none");
             if (foundGroupName === "upazila") {
                 divisionSection.removeClass("d-none");
                 districtSection.removeClass("d-none");
@@ -255,9 +256,11 @@ $(function () {
                             api_link,
                             providerSelector
                         );
+                    } else {
+                        $("#kt_modal_add_admin_form #provider").addClass(
+                            "d-none"
+                        );
                     }
-                } else {
-                    $("#kt_modal_add_admin_form #provider").addClass("d-none");
                 }
             }
         });
@@ -786,12 +789,12 @@ $(function () {
                 let provider_id =
                     $("#kt_modal_add_admin_form [name=provider_id]").val() ??
                     "";
-                let division_id = $(
-                    "#kt_modal_add_admin_form [name=district_id]"
-                ).val();
-                let district_id = $(
-                    "#kt_modal_add_admin_form [name=division_id]"
-                ).val();
+                let division_id =
+                    $("#kt_modal_add_admin_form [name=division_id]").val() ??
+                    "";
+                let district_id =
+                    $("#kt_modal_add_admin_form [name=district_id]").val() ??
+                    "";
                 let upazila_id =
                     $("#kt_modal_add_admin_form [name=upazila_id]").val() ?? "";
                 // let address = $(
@@ -849,7 +852,7 @@ $(function () {
                                                 .html("")
                                                 .removeClass("text-danger")
                                                 .fadeOut();
-                                        }, 2000);
+                                        }, 5000);
                                     }
 
                                     // Define an array of field names you want to handle
