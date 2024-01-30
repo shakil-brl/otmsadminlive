@@ -155,6 +155,7 @@ $(function () {
             divisionSection.addClass("d-none");
             districtSection.addClass("d-none");
             upazilaSection.addClass("d-none");
+            
             //console.log(roleSelector);
             populateRoleOptions(authToken, role_api_link, roleSelector);
 
