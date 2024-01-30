@@ -12,7 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'trainee_enrollment' => 'প্রশিক্ষণার্থী তালিকাভুক্তি',
+    'trainee_enrollment' => 'সকল এনরোল প্রশিক্ষণার্থী',
     'trainee_enrollment_list' => 'প্রশিক্ষণার্থী তালিকাভুক্তি তালিকা',
     'search_trainee' => 'প্রশিক্ষণার্থী খুঁজুন',
     'profile_id' => 'প্রোফাইল আইডি',
