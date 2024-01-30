@@ -18,12 +18,11 @@ class BatchReportController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-
+        dd($provider_results);
         if ($provider_results['items'] == true) {
             $data['providers'] = $provider_results['items']['data'];
             $data['page_from'] = $provider_results['items']['from'];
             $data['paginator'] = $this->customPaginate2($provider_results, $request, route('batch.report'));
-
             return view('batch-report.index', $data);
         } else {
             session()->flash('type', 'Danger');
@@ -80,6 +79,48 @@ class BatchReportController extends Controller
         }
     }
 
+  
+    // all batches for specific vendor
+    public function batchesWithoutSchedule(Request $request)
+    {
+        $results = ApiHttpClient::request('get', 'batches/without-schedule', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json(); 
+        if ($results['success'] == true) {
+            $data['without_schedule'] = $results['items']['data'];
+            $data['page_from'] = $results['items']['from'];
+            //$data['paginator'] = $this->customPaginate2($results, $request, route('without-batch-schedule.report'));
+            $data['paginator'] = $this->customPaginate2($results, $request, route('without-schedule.report'));
+            
+            return view('batch-report.without_batch_schedule', $data);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+    }
+
+    // all batches for specific vendor
+    public function batchesScheduleNotStartClass(Request $request)
+    {
+        $results = ApiHttpClient::request('get', 'batches/not-started-schedule', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json(); 
+        if ($results['success'] == true) {
+            $data['not_schedule'] = $results['items']['data'];
+            $data['page_from'] = $results['items']['from'];
+            //$data['paginator'] = $this->customPaginate2($results, $request, route('without-batch-schedule.report'));
+            $data['paginator'] = $this->customPaginate2($results, $request, route('not-start-class.report'));
+            
+            return view('batch-report.not_start_class', $data);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+    }
     
 
 }

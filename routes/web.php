@@ -335,4 +335,6 @@ Route::get('/vendor-batches/{vendorId}', [BatchReportController::class, 'vendorB
 Route::get('/vendor-batch-schedule/{scheduleId}', [BatchReportController::class, 'vendorBatchSchedule'])->name('vendor-batch.schedule');
 Route::get('/vendor-batch-schedule-attendance/{scheduleDetailsId}', [BatchReportController::class, 'vendorBatchScheduleAttendance'])->name('vendor-batch-schedule.attendance');
 
+Route::get('/without-batch-schedule-report', [BatchReportController::class, 'batchesWithoutSchedule'])->name('without-schedule.report');
+Route::get('/not-start-class-report', [BatchReportController::class, 'batchesScheduleNotStartClass'])->name('not-start-class.report');
 
