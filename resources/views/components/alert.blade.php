@@ -1,4 +1,4 @@
-<div>
+<div id="alertMessage">
     @if (session()->has('message'))
         @php
             $alertType = 'warning';
@@ -25,3 +25,10 @@
         </div>
     @endif
 </div>
+@push('js')
+    <script>
+        setTimeout(function() {
+            $('#alertMessage').fadeOut('slow');
+        }, 5000);
+    </script>
+@endpush
