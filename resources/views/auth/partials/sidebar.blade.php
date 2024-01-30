@@ -116,6 +116,7 @@
 
                 </div>
                 <!--end:Menu item--> --}}
+                
                 @isset($userRole)
                     @empty(!$userRole)
                         @if ($userRole == 'Trainee' || $userRole == 'trainee')
@@ -125,7 +126,7 @@
                                     @if (
                                         $userRole == 'SuperAdmin' || $userRole == 'superadmin' or
                                             $userRole == 'Admin' || $userRole == 'admin' or
-                                            $userRole == 'DPD' || $userRole == 'dpd' || $userRole == 'provider' || $userRole == 'Provider')
+                                            $userRole == 'DPD' || $userRole == 'dpd' || $userRole == 'provider' || $userRole == 'Provider'|| $userRole == 'Consultant' || $userRole == 'consultant')
                                         <div data-kt-menu-trigger="click"
                                             class="menu-item here menu-accordion <?php if (Illuminate\Support\Facades\Route::is('users.index') || Illuminate\Support\Facades\Route::is('users.show')||Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show') ||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?> here show<?php } ?> ">
                                             <!--begin:Menu link-->
@@ -282,6 +283,7 @@
                                             <!--end:Menu sub-->
                                         </div>
                                     @endif
+                        
                                     @if (in_array('traineeEnroll.index', $roleRoutePermissions))
                                         <div data-kt-menu-trigger="click"
                                             class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('traineeEnroll.index')||Illuminate\Support\Facades\Route::is('trainerEnroll.index')||Illuminate\Support\Facades\Route::is('trainerEnroll.index')||Illuminate\Support\Facades\Route::is('batches.index')) {?>here show<?php } ?>">

@@ -39,7 +39,7 @@
             @if (in_array('batch-schedule.clean', $roleRoutePermissions) && !$schedule_used)
                 <div class="text-end mb-2">
                     <a href="" id="{{ $batch['id'] }}" class="btn btn-md btn-danger clean-schedule">
-                        Clean Schedule
+                        {{ __('batch-list.clean_schedule') }}
                     </a>
                 </div>
             @endif
@@ -145,26 +145,26 @@
                         <input type="hidden" name="schedule_details_id" id="sd-id">
                         <div class="d-flex gap-3">
                             <div class="mb-3 w-100">
-                                <label for="startTimeInput" class="col-form-label">Start Time:</label>
+                                <label for="startTimeInput" class="col-form-label"> {{__('batch-list.start_time')}}:</label>
                                 <input type="text" class="form-control form-control-solid" id="startTimeInput"
                                     name="start_time">
                                 <span class="text-danger form-message-error-start_time"></span>
                             </div>
                             <div class="mb-3 w-100">
-                                <label for="endTimeInput" class="col-form-label">End Time:</label>
+                                <label for="endTimeInput" class="col-form-label">{{__('batch-list.end_time')}}:</label>
                                 <input type="text" class="form-control form-control-solid" id="endTimeInput"
                                     name="end_time">
                                 <span class="text-danger form-message-error-end_time"></span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="dateInput" class="col-form-label">Date:</label>
+                            <label for="dateInput" class="col-form-label">{{__('batch-list.class_start_date')}}:</label>
                             <input type="text" class="form-control form-control-solid" id="dateInput" name="date">
                             <span class="text-danger form-message-error-date"></span>
                         </div>
                         <div class="text-center mt-5">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('batch-list.close')}}</button>
+                            <button type="submit" class="btn btn-primary">{{__('batch-list.submit')}}</button>
                         </div>
                     </form>
                 </div>

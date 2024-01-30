@@ -35,7 +35,7 @@
                         <!--end::Item-->
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">
-                            <a href=""class="text-muted text-hover-primary">{{ __('admin-user-list.users') }}</a>
+                            <a href=""class="text-muted text-hover-primary">{{ __('admin-user-list.all_users') }}</a>
                         </li>
                         <!--end::Item-->
                     </ul>

@@ -160,6 +160,7 @@
         let wantCreateSchedule = "{{ __('batch-schedule.want_create_schedule') }}";
         let yesCreate = "{{ __('batch-schedule.yes_create') }}";
         let successfullyCreate = "{{ __('batch-schedule.successfully_create') }}";
+        let userFullName = {{ __('admin-user-list.full_name') }}
 
         var themeMode;
         if (document.documentElement) {
@@ -361,6 +362,7 @@
     <script src="{{ asset('assets/dist/assets/js/custom/call.division.api.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.provider.api.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.permission.api.js') }}"></script>
+    <script src="{{ asset('assets/dist/assets/js/custom/call.admin.show.api.js') }}"></script>
     @stack('js')
 
     @section('scripts')

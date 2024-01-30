@@ -71,7 +71,7 @@ return [
     'views' => 'বিস্তারিত ',
     'vendor_info' => 'ভেন্ডরের বিস্তারিত তথ্য',
     'vendor_names' => 'নাম',
-    'edit_linked_batch' => 'লিংক করা ব্যাচ এডিট করুন ',
+    'edit_linked_batch' => 'ব্যাচ লিংক',
     'all_batches' => 'সকল ব্যাচসমূহ ',
     'batch_code' => 'ব্যাচ কোড ',
     'course_name' => 'কোর্সের নাম',

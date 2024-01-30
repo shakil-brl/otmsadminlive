@@ -57,6 +57,18 @@ return [
     'jon' => '',
     'view_attendance' => ' View Attendance',
     'edit_schedule' => ' Edit Schedule',
+    'clean_schedule' => ' Clean Schedule',
+    'start_time' => 'Class Start Time',
+    'end_time' => 'Class End Time',
+    'class_start_date' => 'Class Start Date',
+    'close' => 'Close',
+    'submit' => 'Submit',
+    'class_attendance' => 'Class Attendance List',
+    'total_tarinees' => 'Total Trainees',
+    'present_tarinees' => 'Present Trainees',
+    'absent_tarinees' => 'Absent Trainees',
+    'name' => 'Name',
+    'attendance' => 'Attendance',
  
     
 
