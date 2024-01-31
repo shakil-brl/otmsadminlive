@@ -99,7 +99,7 @@ $(function () {
                                             Phone: ${user.profile.Phone ?? ""}
                                         </div>                                        
                                     </td>                                    
-                                    <td class="text-end">
+                                    <td class="text-end d-flex gap-1">
                                         <a href= "#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 view-user-action" 
                                         data-user-id="${user.ProfileId}">
                                             <i class="ki-duotone ki-switch fs-2">
