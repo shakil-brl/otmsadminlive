@@ -18,6 +18,18 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="w-50">
+                    <div class="d-flex justify-content-end align-items-center">
+                        @php
+                        $search = Request::get('search') ? Request::get('search') : 'null';
+                        $page = Request::get('page') ? Request::get('page') : 1; @endphp
+                        <a href="{{ route('without-schedule.pdf-report', ['search' => $search, 'page' => $page]) }}"
+                            class="btn btn-lg btn-secondary gap-3 me-1">
+                            {{ 'PDF' }}
+                        </a>
+                    </div>
+                </div>
             </div>
             <table class="table table-bordered bg-white">
                 <thead>
@@ -49,11 +61,10 @@
                     @endforeach
                 </tbody>
             </table>
-            {!! $paginator->links() !!}
+            {!! $paginator->withQueryString()->links() !!}
         @endisset
     </div>
     <!--end::Content-->
 @section('scripts')
-    
 @endsection
 @endsection

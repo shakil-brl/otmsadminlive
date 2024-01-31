@@ -338,3 +338,6 @@ Route::get('/vendor-batch-schedule-attendance/{scheduleDetailsId}', [BatchReport
 Route::get('/without-batch-schedule-report', [BatchReportController::class, 'batchesWithoutSchedule'])->name('without-schedule.report');
 Route::get('/not-start-class-report', [BatchReportController::class, 'batchesScheduleNotStartClass'])->name('not-start-class.report');
 
+Route::get('/without-batch-schedule-report-pdf/{search}/{page}', [BatchReportController::class, 'batchWithoutSchedulePdf'])->name('without-schedule.pdf-report');
+Route::get('/not-start-class-report-pdf/{search}/{page}', [BatchReportController::class, 'batchesScheduleNotStartClassPdf'])->name('not-start-class.pdf-report');
+

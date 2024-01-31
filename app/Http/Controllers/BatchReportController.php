@@ -18,7 +18,6 @@ class BatchReportController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        dd($provider_results);
         if ($provider_results['items'] == true) {
             $data['providers'] = $provider_results['items']['data'];
             $data['page_from'] = $provider_results['items']['from'];
@@ -120,6 +119,33 @@ class BatchReportController extends Controller
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return back();
         }
+    }
+
+    public function batchWithoutSchedulePdf(Request $request){
+        $page = $request->page;
+        $search = $request->search == 'null' ? ' ': $request->search;
+        $results = ApiHttpClient::request('get', 'batches/without-schedule', [
+            'page' => $request->page ?? 1,
+            'search' => $search,
+        ])->json(); 
+        $page_from = $results['items']['from'];
+
+        $pdf = PDF::loadView('batch-report.without_batch_schedule_pdf', compact('results','page_from'));
+        return $pdf->stream('withoutBatchSchedule.pdf'); 
+
+    }
+
+    public function batchesScheduleNotStartClassPdf(Request $request){
+        $page = $request->page;
+        $search = $request->search == 'null' ? ' ': $request->search;
+        $results = ApiHttpClient::request('get', 'batches/not-started-schedule', [
+            'page' => $request->page ?? 1,
+            'search' => $search,
+        ])->json(); 
+
+        $pdf = PDF::loadView('batch-report.not_start_class_pdf', compact('results'));
+        return $pdf->stream('notStartBatchScheduleClass.pdf'); 
+
     }
     
 
