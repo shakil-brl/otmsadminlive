@@ -109,7 +109,7 @@
                                                     id="all-permission" />
                                             </div>
                                         </th>
-                                        <th>{{ __('provider-list.id') }}</th>
+                                        <th>S.N.</th>
                                         <th class="min-w-125px">{{ __('roles-permissions.name') }}</th>
                                         <th class="min-w-125px">{{ __('roles-permissions.route_name') }}</th>
                                         <th class="min-w-125px">{{ __('roles-permissions.create_date') }}</th>
@@ -210,9 +210,6 @@
                         </div>
                         <!--end::Input group-->
                         <div class='separator separator-dashed my-2'></div>
-
-
-
                     </div>
                     <!--end::Scroll-->
                     <!--begin::Actions-->
@@ -313,8 +310,6 @@
                         </div>
                         <!--end::Input group-->
                         <div class='separator separator-dashed my-2'></div>
-
-
                     </div>
                     <!--end::Scroll-->
                     <!--begin::Actions-->
@@ -330,7 +325,6 @@
                     <!--end::Actions-->
                 </form>
                 <!--Provider added end::Form-->
-
             </div>
         </div>
     </div>
@@ -366,7 +360,7 @@
                                         </div>
                                     </td>
                                     <td>                                        
-                                        ${permission.id}
+                                        ${index + 1}
                                     </td>
                                     <td class="d-flex align-items-center">
                                         <!--begin::User details-->
