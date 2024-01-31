@@ -23,7 +23,7 @@
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.development_partner') }}</th>
-                    <th>{{ __('batch-list.action') }}</th>
+                    {{-- <th>{{ __('batch-list.action') }}</th> --}}
                 </thead>
                 <tbody>
                     @foreach (collect($running_batches) as $batch)
@@ -32,12 +32,12 @@
                                 {{ digitLocale($loop->iteration) }}
                             </td>
                             <td>
-                               
+
                                 {{ $batch['training_batch']['batchCode'] ?? '' }}
                             </td>
                             <td>
                                 {{ $batch['training_batch'] ? digitLocale(\Carbon\Carbon::parse($batch['training_batch']['startDate'])->format('d-m-Y')) : digitLocale(null) }}
-                                
+
                             </td>
                             <td>
                                 {{ $batch['training_batch']['training']['title']['Name'] ?? '' }}
@@ -48,11 +48,11 @@
                             <td>
                                 {{ $batch['training_batch']['provider']['name'] ?? '' }}
                             </td>
-                            <td>
-                                <a href="" class="btn btn-sm btn-info">
+                            {{-- <td>
+                                <a href="{{ route('') }}" class="btn btn-sm btn-info">
                                     {{ __('batch-list.view') }}
                                 </a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>

@@ -43,7 +43,7 @@
                                 {{ $partners['phone'] }}
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-info">
+                                <a href="{{ route('providers.show', $partners['id']) }}" class="btn btn-sm btn-info">
                                     View
                                 </a>
                             </td>

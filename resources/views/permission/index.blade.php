@@ -362,15 +362,8 @@
                                     <td>                                        
                                         ${index + 1}
                                     </td>
-                                    <td class="d-flex align-items-center">
-                                        <!--begin::User details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${permission.name}
-                                            </a>
-                                            <span></span>
-                                        </div>
-                                        <!--begin::category details-->
+                                    <td>
+                                        ${permission.name}                                            
                                     </td>
                                     <td>
                                         ${permission.route_name}
@@ -381,30 +374,32 @@
                                     </td>
                                     
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 show-action" 
-                                        data-permission-id="${permission.id}">
-                                            <i class="ki-duotone ki-switch fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </a>
-                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 editPermission" 
-                                        data-permission-id="${permission.id}" data-bs-toggle="modal" data-bs-target="#edit_permission">
-                                            <i class="ki-duotone ki-pencil fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </a>
-                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-permission" 
-                                        data-permission-id="${permission.id}" data-permission-name="${permission.name}">
-                                            <i class="ki-duotone ki-trash fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                                <span class="path4"></span>
-                                                <span class="path5"></span>
-                                            </i>
-                                        </a>
+                                        <div class="d-flex gap-1">
+                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 show-action" 
+                                            data-permission-id="${permission.id}">
+                                                <i class="ki-duotone ki-switch fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 editPermission" 
+                                            data-permission-id="${permission.id}" data-bs-toggle="modal" data-bs-target="#edit_permission">
+                                                <i class="ki-duotone ki-pencil fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-permission" 
+                                            data-permission-id="${permission.id}" data-permission-name="${permission.name}">
+                                                <i class="ki-duotone ki-trash fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                    <span class="path4"></span>
+                                                    <span class="path5"></span>
+                                                </i>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             `;
