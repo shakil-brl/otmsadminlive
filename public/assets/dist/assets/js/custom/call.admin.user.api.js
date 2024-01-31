@@ -43,7 +43,7 @@ $(function () {
                                         ${user.ProfileId}
                                     </td>
                                     <td class="">
-                                        <div class="d-flex flex-column gap-1">
+                                        <div class="">
                                             <div>${
                                                 user.profile.KnownAsBangla
                                             }</div>
@@ -51,12 +51,12 @@ $(function () {
                                         </div>
                                         <!--begin::User details-->
                                     </td>
-                                    <td>
+                                    <td class="">
                                         <div class="">
                                             <span class="bullet bg-primary me-3"></span>
                                             ${user.role.name}
                                         </div>
-                                        <div class="d-flex flex-column gap-1">
+                                        <div class="">
                                         ${
                                             user.upazila ||
                                             user.district ||
@@ -91,7 +91,7 @@ $(function () {
                                         </div>
                                                                                 
                                     </td>
-                                    <td class="d-flex flex-column gap-1">
+                                    <td class="">
                                         <div>
                                             NID: ${user.profile.NID ?? ""}
                                         </div>
