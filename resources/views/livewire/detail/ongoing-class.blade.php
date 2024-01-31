@@ -153,7 +153,8 @@
                                         </a>
                                     @endif
                                     @if ($status != 1)
-                                        <a class="btn btn-sm btn-info" href="{{ route('attendance.form', $batch['id']) }}"
+                                        <a class="btn btn-sm btn-info"
+                                            href="{{ route('attendance.form', encrypt($batch['id'])) }}"
                                             target="_blank">Attendence
                                         </a>
                                     @endif
