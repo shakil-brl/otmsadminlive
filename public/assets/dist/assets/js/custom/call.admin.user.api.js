@@ -29,7 +29,7 @@ $(function () {
             },
             success: function (results) {
                 // Handle the successful response here
-                // console.log(results.data);
+                console.log(results.data);
                 let allUser = results.data;
                 sessionStorage.removeItem("message");
                 if (allUser.length > 0) {
@@ -43,34 +43,62 @@ $(function () {
                                         ${user.ProfileId}
                                     </td>
                                     <td class="">
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${user.profile.KnownAsBangla}
-                                            </a>
-                                            <span></span>
+                                        <div class="d-flex flex-column gap-1">
+                                            <div>${
+                                                user.profile.KnownAsBangla
+                                            }</div>
+                                            <div>${user.profile.Email}</div>
                                         </div>
                                         <!--begin::User details-->
                                     </td>
                                     <td>
-                                        <div class="d-flex align-items-center py-2">
+                                        <div class="">
                                             <span class="bullet bg-primary me-3"></span>
                                             ${user.role.name}
-                                        </div>                                        
-                                    </td>
-                                    <td>
-                                        ${user.profile.Email}
-                                    </td>
-                                    <td>
-                                        ${user.profile.NID}
-                                    </td>
-                                    <td>
+                                        </div>
+                                        <div class="d-flex flex-column gap-1">
                                         ${
-                                            user.provider
-                                                ? user.provider.name
-                                                : ""
-                                        }
+                                            user.upazila ||
+                                            user.district ||
+                                            user.division
+                                                ? `(${
+                                                      user.upazila
+                                                          ? user.upazila
+                                                                .NameEng + "-"
+                                                          : ""
+                                                  } 
+                                             ${
+                                                 user.district
+                                                     ? user.district.NameEng +
+                                                       "-"
+                                                     : ""
+                                             } 
+                                             ${
+                                                 user.division
+                                                     ? user.division.NameEng
+                                                     : ""
+                                             })`
+                                                : `${
+                                                      userRole.toLowerCase() !=
+                                                      "provider"
+                                                          ? user.provider
+                                                              ? user.provider
+                                                                    .name
+                                                              : "Project Office"
+                                                          : ""
+                                                  }`
+                                        }                                                                                                             
+                                        </div>
+                                                                                
                                     </td>
-                                    
+                                    <td class="d-flex flex-column gap-1">
+                                        <div>
+                                            NID: ${user.profile.NID ?? ""}
+                                        </div>
+                                        <div>
+                                            Phone: ${user.profile.Phone ?? ""}
+                                        </div>                                        
+                                    </td>                                    
                                     <td class="text-end">
                                         <a href= "#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 view-user-action" 
                                         data-user-id="${user.ProfileId}">
@@ -145,6 +173,17 @@ $(function () {
             let districtSelector = $("#kt_modal_add_admin_form #district_id");
             let upazilaSelector = $("#kt_modal_add_admin_form #upazila_id");
             // let authToken = authToken;
+            let divisionSection = $(
+                "#kt_modal_add_admin_form #division-section"
+            );
+            let districtSection = $(
+                "#kt_modal_add_admin_form #district-section"
+            );
+            let upazilaSection = $("#kt_modal_add_admin_form #upazila-section");
+            divisionSection.addClass("d-none");
+            districtSection.addClass("d-none");
+            upazilaSection.addClass("d-none");
+
             //console.log(roleSelector);
             populateRoleOptions(authToken, role_api_link, roleSelector);
 
@@ -159,7 +198,7 @@ $(function () {
                 divisionSelector
             );
 
-            // load districts
+            // load districts on change division
             divisionSelector.change(function () {
                 let division_id = divisionSelector.val();
                 districtSelector.html("");
@@ -189,77 +228,91 @@ $(function () {
                 );
                 // console.log(district_id);
             });
-        });
 
-        let selectRole = $("#kt_modal_add_admin_form #role_id");
-        selectRole.on("change", function (e) {
-            let divisionSection = $(
-                "#kt_modal_add_admin_form #division-section"
-            );
-            let districtSection = $(
-                "#kt_modal_add_admin_form #district-section"
-            );
-            let upazilaSection = $("#kt_modal_add_admin_form #upazila-section");
+            let selectRole = $("#kt_modal_add_admin_form #role_id");
+            selectRole.on("change", function (e) {
+                let selectedOptionText = selectRole.find(":selected").html();
+                let foundGroupName = null; // Initialize a variable to store the found group, initially set to null
 
-            let selectedOptionText = selectRole.find(":selected").html();
-            let foundGroupName = null; // Initialize a variable to store the found group, initially set to null
-
-            // Iterate through each group in rolesGroup
-            for (let groupName in rolesGroup) {
-                // Check if the user role exists in the current group's array (case-insensitive)
-                if (
-                    rolesGroup[groupName].some(
-                        (role) =>
-                            role.toLowerCase() ===
-                            selectedOptionText.toLowerCase()
-                    )
-                ) {
-                    foundGroupName = groupName;
-                }
-            }
-            if (foundGroupName === "upazila") {
-                divisionSection.removeClass("d-none");
-                districtSection.removeClass("d-none");
-                upazilaSection.removeClass("d-none");
-            } else if (foundGroupName === "district") {
-                divisionSection.removeClass("d-none");
-                districtSection.removeClass("d-none");
-
-                upazilaSection.addClass("d-none");
-            } else if (foundGroupName === "division") {
-                divisionSection.removeClass("d-none");
-
-                districtSection.addClass("d-none");
-                upazilaSection.addClass("d-none");
-            } else {
-                divisionSection.addClass("d-none");
-                districtSection.addClass("d-none");
-                upazilaSection.addClass("d-none");
-                if (
-                    selectedOptionText == "Trainer" ||
-                    selectedOptionText == "Provider" ||
-                    selectedOptionText == "Coordinator"
-                ) {
-                    if (userRole != "Provider") {
-                        $("#kt_modal_add_admin_form #provider").removeClass(
-                            "d-none"
-                        );
-
-                        let providerSelector = $(
-                            "#kt_modal_add_admin_form #provider_id"
-                        );
-                        let api_link = api_baseurl + "providers";
-
-                        populateProviderOptions(
-                            authToken,
-                            api_link,
-                            providerSelector
-                        );
+                // Iterate through each group in rolesGroup
+                for (let groupName in rolesGroup) {
+                    // Check if the user role exists in the current group's array (case-insensitive)
+                    if (
+                        rolesGroup[groupName].some(
+                            (role) =>
+                                role.toLowerCase() ===
+                                selectedOptionText.toLowerCase()
+                        )
+                    ) {
+                        foundGroupName = groupName;
                     }
-                } else {
-                    $("#kt_modal_add_admin_form #provider").addClass("d-none");
                 }
-            }
+                $("#kt_modal_add_admin_form #provider").addClass("d-none");
+                if (foundGroupName === "upazila") {
+                    divisionSection.removeClass("d-none");
+                    districtSection.removeClass("d-none");
+                    upazilaSection.removeClass("d-none");
+                } else if (foundGroupName === "district") {
+                    divisionSection.removeClass("d-none");
+                    districtSection.removeClass("d-none");
+
+                    upazilaSection.addClass("d-none");
+                    $('#kt_modal_add_admin_form [name="upazila_id"]')
+                        .val("")
+                        .trigger("change");
+                } else if (foundGroupName === "division") {
+                    divisionSection.removeClass("d-none");
+
+                    districtSection.addClass("d-none");
+                    upazilaSection.addClass("d-none");
+                    $('#kt_modal_add_admin_form [name="district_id"]')
+                        .val("")
+                        .trigger("change");
+                    $('#kt_modal_add_admin_form [name="upazila_id"]')
+                        .val("")
+                        .trigger("change");
+                } else {
+                    divisionSection.addClass("d-none");
+                    districtSection.addClass("d-none");
+                    upazilaSection.addClass("d-none");
+                    $('#kt_modal_add_admin_form [name="division_id"]')
+                        .val("")
+                        .trigger("change");
+                    $('#kt_modal_add_admin_form [name="district_id"]')
+                        .val("")
+                        .trigger("change");
+                    $('#kt_modal_add_admin_form [name="upazila_id"]')
+                        .val("")
+                        .trigger("change");
+
+                    if (
+                        selectedOptionText == "Trainer" ||
+                        selectedOptionText == "Provider" ||
+                        selectedOptionText == "Coordinator"
+                    ) {
+                        if (userRole != "Provider") {
+                            $("#kt_modal_add_admin_form #provider").removeClass(
+                                "d-none"
+                            );
+
+                            let providerSelector = $(
+                                "#kt_modal_add_admin_form #provider_id"
+                            );
+                            let api_link = api_baseurl + "providers";
+
+                            populateProviderOptions(
+                                authToken,
+                                api_link,
+                                providerSelector
+                            );
+                        } else {
+                            $("#kt_modal_add_admin_form #provider").addClass(
+                                "d-none"
+                            );
+                        }
+                    }
+                }
+            });
         });
 
         // view admin user
@@ -340,6 +393,9 @@ $(function () {
                                 foundGroupName = groupName;
                             }
                         }
+                        $("#kt_modal_update_admin_form #provider").addClass(
+                            "d-none"
+                        );
                         if (foundGroupName === "upazila") {
                             divisionSection.removeClass("d-none");
                             districtSection.removeClass("d-none");
@@ -349,12 +405,39 @@ $(function () {
                             districtSection.removeClass("d-none");
 
                             upazilaSection.addClass("d-none");
+                            $('#kt_modal_update_admin_form [name="upazila_id"]')
+                                .val("")
+                                .trigger("change");
                         } else if (foundGroupName === "division") {
                             divisionSection.removeClass("d-none");
 
                             districtSection.addClass("d-none");
                             upazilaSection.addClass("d-none");
+                            $(
+                                '#kt_modal_update_admin_form [name="district_id"]'
+                            )
+                                .val("")
+                                .trigger("change");
+                            $('#kt_modal_update_admin_form [name="upazila_id"]')
+                                .val("")
+                                .trigger("change");
                         } else {
+                            divisionSection.addClass("d-none");
+                            districtSection.addClass("d-none");
+                            upazilaSection.addClass("d-none");
+                            $(
+                                '#kt_modal_update_admin_form [name="division_id"]'
+                            )
+                                .val("")
+                                .trigger("change");
+                            $(
+                                '#kt_modal_update_admin_form [name="district_id"]'
+                            )
+                                .val("")
+                                .trigger("change");
+                            $('#kt_modal_update_admin_form [name="upazila_id"]')
+                                .val("")
+                                .trigger("change");
                             if (
                                 userData.role.name == "Trainer" ||
                                 userData.role.name == "Coordinator" ||
@@ -363,7 +446,7 @@ $(function () {
                                 if (userData.provider) {
                                     if (userRole != "Provider") {
                                         $(
-                                            "#kt_modal_update_admin_form #provider-row"
+                                            "#kt_modal_update_admin_form #provider"
                                         ).removeClass("d-none");
 
                                         let providerSelector = $(
@@ -388,11 +471,11 @@ $(function () {
                                                 providerSelector
                                             );
                                         }
+                                    } else {
+                                        $(
+                                            "#kt_modal_update_admin_form #provider-row"
+                                        ).addClass("d-none");
                                     }
-                                } else {
-                                    $(
-                                        "#kt_modal_update_admin_form #provider-row"
-                                    ).addClass("d-none");
                                 }
                             } else {
                             }
@@ -410,6 +493,9 @@ $(function () {
 
                     let selectRole = $("#kt_modal_update_admin_form #role_id");
                     selectRole.on("change", function (e) {
+                        $("#kt_modal_update_admin_form [name=provider_id]").val(
+                            ""
+                        );
                         let divisionSection = $(
                             "#kt_modal_update_admin_form #division-section"
                         );
@@ -419,6 +505,7 @@ $(function () {
                         let upazilaSection = $(
                             "#kt_modal_update_admin_form #upazila-section"
                         );
+
                         let selectedOptionText = selectRole
                             .find(":selected")
                             .html();
@@ -437,6 +524,10 @@ $(function () {
                                 foundGroupName = groupName;
                             }
                         }
+
+                        $("#kt_modal_update_admin_form #provider").addClass(
+                            "d-none"
+                        );
                         if (foundGroupName === "upazila") {
                             divisionSection.removeClass("d-none");
                             districtSection.removeClass("d-none");
@@ -446,15 +537,39 @@ $(function () {
                             districtSection.removeClass("d-none");
 
                             upazilaSection.addClass("d-none");
+                            $('#kt_modal_update_admin_form [name="upazila_id"]')
+                                .val("")
+                                .trigger("change");
                         } else if (foundGroupName === "division") {
                             divisionSection.removeClass("d-none");
 
                             districtSection.addClass("d-none");
+                            $(
+                                '#kt_modal_update_admin_form [name="district_id"]'
+                            )
+                                .val("")
+                                .trigger("change");
                             upazilaSection.addClass("d-none");
+                            $('#kt_modal_update_admin_form [name="upazila_id"]')
+                                .val("")
+                                .trigger("change");
                         } else {
                             divisionSection.addClass("d-none");
                             districtSection.addClass("d-none");
                             upazilaSection.addClass("d-none");
+                            $(
+                                '#kt_modal_update_admin_form [name="division_id"]'
+                            )
+                                .val("")
+                                .trigger("change");
+                            $(
+                                '#kt_modal_update_admin_form [name="district_id"]'
+                            )
+                                .val("")
+                                .trigger("change");
+                            $('#kt_modal_update_admin_form [name="upazila_id"]')
+                                .val("")
+                                .trigger("change");
                             if (
                                 selectedOptionText == "Trainer" ||
                                 selectedOptionText == "Provider" ||
@@ -466,7 +581,7 @@ $(function () {
                                     ).removeClass("d-none");
 
                                     let providerSelector = $(
-                                        "#kt_modal_update_admin_form #provider_id"
+                                        "#kt_modal_update_admin_form [name=provider_id]"
                                     );
                                     let api_link = api_baseurl + "providers";
 
@@ -475,11 +590,11 @@ $(function () {
                                         api_link,
                                         providerSelector
                                     );
+                                } else {
+                                    $(
+                                        "#kt_modal_update_admin_form #provider"
+                                    ).addClass("d-none");
                                 }
-                            } else {
-                                $(
-                                    "#kt_modal_update_admin_form #provider"
-                                ).addClass("d-none");
                             }
                         }
                     });
@@ -488,7 +603,7 @@ $(function () {
                     optionFor = "Division";
                     let division_api_link = api_baseurl + "divisions";
                     let divisionSelector = $(
-                        '#kt_modal_update_admin_form [name="district_id"]'
+                        '#kt_modal_update_admin_form [name="division_id"]'
                     );
                     if (userData && userData.division_id) {
                         let selectedDivisionId = userData.division_id;
@@ -511,6 +626,11 @@ $(function () {
                     // load districts
                     optionFor = "District";
                     let district_api_link = api_baseurl + "districts";
+                    if (userData && userData.division_id) {
+                        district_api_link =
+                            api_baseurl + "districts/" + userData.division_id;
+                    }
+
                     let districtSelector = $(
                         '#kt_modal_update_admin_form [name="district_id"]'
                     );
@@ -533,13 +653,14 @@ $(function () {
                     }
 
                     let selectedDistrictId = userData.district_id;
+                    let upazilaSelector = $(
+                        '#kt_modal_update_admin_form [name="upazila_id"]'
+                    );
                     if (userData && selectedDistrictId) {
                         optionFor = "Upazila";
                         let upazila_api_link =
                             api_baseurl + "upazilas/" + selectedDistrictId;
-                        let upazilaSelector = $(
-                            '#kt_modal_update_admin_form [name="upazila_id"]'
-                        );
+
                         let selectedUpazilaId = userData.upazila_id;
 
                         if (selectedUpazilaId) {
@@ -560,6 +681,22 @@ $(function () {
                         }
                     }
 
+                    // load districts on change division
+                    divisionSelector.change(function () {
+                        let division_id = divisionSelector.val();
+                        districtSelector.html("");
+                        upazilaSelector.html("");
+                        optionFor = "District";
+                        district_api_link =
+                            api_baseurl + "districts/" + division_id;
+
+                        populateLocationOption(
+                            optionFor,
+                            district_api_link,
+                            authToken,
+                            districtSelector
+                        );
+                    });
                     // load upazila on district change
                     let selectDistrictElement = $(
                         '#kt_modal_update_admin_form [name="district_id"]'
@@ -786,12 +923,12 @@ $(function () {
                 let provider_id =
                     $("#kt_modal_add_admin_form [name=provider_id]").val() ??
                     "";
-                let division_id = $(
-                    "#kt_modal_add_admin_form [name=district_id]"
-                ).val();
-                let district_id = $(
-                    "#kt_modal_add_admin_form [name=division_id]"
-                ).val();
+                let division_id =
+                    $("#kt_modal_add_admin_form [name=division_id]").val() ??
+                    "";
+                let district_id =
+                    $("#kt_modal_add_admin_form [name=district_id]").val() ??
+                    "";
                 let upazila_id =
                     $("#kt_modal_add_admin_form [name=upazila_id]").val() ?? "";
                 // let address = $(
@@ -849,7 +986,7 @@ $(function () {
                                                 .html("")
                                                 .removeClass("text-danger")
                                                 .fadeOut();
-                                        }, 2000);
+                                        }, 5000);
                                     }
 
                                     // Define an array of field names you want to handle
@@ -913,12 +1050,12 @@ $(function () {
                 let provider_id =
                     $("#kt_modal_update_admin_form [name=provider_id]").val() ??
                     "";
-                let division_id = $(
-                    "#kt_modal_update_admin_form [name=district_id]"
-                ).val();
-                let district_id = $(
-                    "#kt_modal_update_admin_form [name=district_id]"
-                ).val();
+                let division_id =
+                    $("#kt_modal_update_admin_form [name=division_id]").val() ??
+                    "";
+                let district_id =
+                    $("#kt_modal_update_admin_form [name=district_id]").val() ??
+                    "";
                 let upazila_id =
                     $("#kt_modal_update_admin_form [name=upazila_id]").val() ??
                     "";
