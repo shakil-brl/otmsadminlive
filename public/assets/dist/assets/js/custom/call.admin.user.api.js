@@ -63,21 +63,30 @@ $(function () {
                                             user.division
                                                 ? `(${
                                                       user.upazila
-                                                          ? user.upazila.Name +
-                                                            "-"
+                                                          ? user.upazila
+                                                                .NameEng + "-"
                                                           : ""
                                                   } 
                                              ${
                                                  user.district
-                                                     ? user.district.Name + "-"
+                                                     ? user.district.NameEng +
+                                                       "-"
                                                      : ""
                                              } 
                                              ${
                                                  user.division
-                                                     ? user.division.Name
+                                                     ? user.division.NameEng
                                                      : ""
                                              })`
-                                                : ""
+                                                : `${
+                                                      userRole.toLowerCase() !=
+                                                      "provider"
+                                                          ? user.provider
+                                                              ? user.provider
+                                                                    .name
+                                                              : "Project Office"
+                                                          : ""
+                                                  }`
                                         }                                                                                                             
                                         </div>
                                                                                 
@@ -87,15 +96,7 @@ $(function () {
                                     </td>
                                     <td>
                                         ${user.profile.NID}
-                                    </td>
-                                    <td>
-                                        ${
-                                            user.provider
-                                                ? user.provider.name
-                                                : ""
-                                        }
-                                    </td>
-                                    
+                                    </td>                                    
                                     <td class="text-end">
                                         <a href= "#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 view-user-action" 
                                         data-user-id="${user.ProfileId}">
