@@ -11,7 +11,7 @@ use App\Http\Clients\ApiHttpClient;
 class AdminController extends Controller
 {
 
-   
+
 
     public function index()
     {
@@ -21,11 +21,9 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-         
         $response = ApiHttpClient::request('get', 'dashboardtotal/superadmin');
-
-       // dd(  $response);
         $data = $response->json()['data'];
+        // dd($data);
         if (isset($data['success'])) {
             if ($data['success'] !== true) {
                 abort(403, 'Unauthorized');

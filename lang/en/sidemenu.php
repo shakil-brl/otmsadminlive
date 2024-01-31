@@ -2,17 +2,6 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
     'user_heading' => 'User List',
     'user_dashboard' => 'User Dashboard',
     'admin_dashboard' => 'Admin Dashboard',
@@ -37,14 +26,14 @@ return [
     'providers_list' => 'Dev. Partners',
     'preliminary_selected' => 'Preliminary Selected',
     'enrollment_management' => 'Enrollment',
-    'trainee_enrollment_list' => 'All Enroll Trainees ',
-    'trainer_enrollment_list' => 'All Enroll Trainers ',
+    'trainee_enrollment_list' => 'All Enroll Trainees',
+    'trainer_enrollment_list' => 'All Enroll Trainers',
     'trainer_enrollment' => 'Trainer Enroll',
     'trainer_batch_list' => 'Batch List',
     'provider_batch_list' => 'Batch List',
     'schedule_management' => 'Class Schedule',
     'batch_schedule' => 'Batch Schedule',
-    'create_batch_schedul' => 'Create Batch Schedule',
+    'create_batch_schedule' => 'Create Batch Schedule',
     'create_trainer_enrollment' => 'Create Trainer Enrollment',
     'batches' => 'Batches',
     'batches_list' => 'Batches List',
@@ -53,19 +42,24 @@ return [
     'all_batch_list' => 'Batches List',
     'inspection' => 'Inspection',
     'report' => 'Report',
-    'add_new_inspection' => 'Add Inspection',
+    'inspection_report' => 'Inspection Report',
+    'add_new_inspection' => 'Class Inspection',
     'running_batch' => 'Running Batch',
     'running_batch_list' => 'Running Batch List',
     'partner_employee' => 'Vendor Employee',
-    'categorie' => 'Categorie',
+    'categorie' => 'Category',
     'course' => 'Courses',
-    'class_attendence' => 'Class Attendence',
+    'class_attendence' => 'Class Attendance',
     'class_document' => 'Class Document',
     'evaluation_student' => 'Evaluation Student',
     'evaluation_trainer' => 'Evaluation Trainer',
-    'holly_day' => 'Holly Day',
+    'holly_day' => 'Holiday',
     'training_title' => 'Training Title',
-    'training_group' => 'SP Group',
+    'training_group' => 'Training Group',
     'vendor' => 'Vendor',
+    'config' => 'Config',
+    'org_provider' => 'Org and provider',
+    'phase' => 'Phase',
+    'phase_batch' => "Phase Batch's",
 
 ];

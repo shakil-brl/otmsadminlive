@@ -10,23 +10,15 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">User View
+                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">{{ __('admin-user-list.user_details') }}
                     </h1>
                     <!--end::Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('home.index') }}" class="text-muted text-hover-primary">Home</a>
+                            <a href="{{ route('home.index') }}" class="text-muted text-hover-primary">{{ __('admin-user-list.home') }}</a>
                         </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted">User Management</li>
                         <!--end::Item-->
                         <!--begin::Item-->
                         <li class="breadcrumb-item">
@@ -35,7 +27,18 @@
                         <!--end::Item-->
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">
-                            <a href=""class="text-muted text-hover-primary">User View</a>
+                            <a href="{{ route('admins.index') }}" class="text-muted text-hover-primary">{{ __('admin-user-list.user_management') }}</a>
+                        </li>
+                        
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            <a href=""class="text-muted text-hover-primary">{{ __('admin-user-list.user_details') }}</a>
                         </li>
                         <!--end::Item-->
                     </ul>
@@ -93,7 +96,7 @@
                                 <div class="d-flex flex-stack fs-4 py-3">
                                     <div class="fw-bold rotate collapsible" data-bs-toggle="collapse"
                                         href="#kt_user_view_details" role="button" aria-expanded="false"
-                                        aria-controls="kt_user_view_details">Primary Info
+                                        aria-controls="kt_user_view_details">{{ __('admin-user-list.primary_info') }}
                                         <span class="ms-2 rotate-180">
                                             <i class="ki-duotone ki-down fs-3"></i>
                                         </span>
@@ -105,17 +108,17 @@
                                 <div id="kt_user_view_details" class="collapse show">
                                     <div class="pb-5 fs-6">
                                         <!--begin::Details item-->
-                                        <div class="fw-bold mt-5">Profile. Id</div>
+                                        <div class="fw-bold mt-5">{{ __('admin-user-list.profiles_id') }}</div>
                                         <div class="text-gray-600" id="user-regId"></div>
                                         <!--begin::Details item-->
                                         <!--begin::Details item-->
-                                        <div class="fw-bold mt-5">Email</div>
+                                        <div class="fw-bold mt-5">{{ __('admin-user-list.emails') }}</div>
                                         <div class="text-gray-600">
                                             <a href="#" class="text-gray-600 text-hover-primary" id="user-email"></a>
                                         </div>
                                         <!--begin::Details item-->
                                         <!--begin::Details item-->
-                                        <div class="fw-bold mt-5">Phone Number</div>
+                                        <div class="fw-bold mt-5">{{ __('admin-user-list.phone_number') }}</div>
                                         <div class="text-gray-600" id="user-phone"></div>
                                         <!--begin::Details item-->
                                     </div>
@@ -134,7 +137,7 @@
                             <!--begin:::Tab item-->
                             <li class="nav-item">
                                 <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
-                                    href="#kt_user_view_overview_tab">Overview</a>
+                                    href="#kt_user_view_overview_tab">{{ __('admin-user-list.details_info') }}</a>
                             </li>
                             <!--end:::Tab item-->
                         </ul>
@@ -146,14 +149,7 @@
                                 <!--begin::Card-->
                                 <div class="card pt-4 mb-6 mb-xl-9">
                                     <!--begin::Card header-->
-                                    <div class="card-header border-0">
-                                        <!--begin::Card title-->
-                                        <div class="card-title">
-                                            <h2>Profile</h2>
-                                        </div>
-                                        <!--end::Card title-->
-                                    </div>
-                                    <!--end::Card header-->
+                                  
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0 pb-5" id="overview-tab-body">
 

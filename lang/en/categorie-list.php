@@ -12,10 +12,10 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'categorie_list' => 'Categories List',
+    'categorie_list' => 'Category List',
     'home' => 'Home',
     'Setting_management' => 'Settings Management',
-    'categorie' => 'Categories',
+    'categorie' => 'Category',
     'search_category_ph' => 'Search category',
     'export_report' => 'Export Report',
     'copy_clipboard' => 'Copy to clipboard',

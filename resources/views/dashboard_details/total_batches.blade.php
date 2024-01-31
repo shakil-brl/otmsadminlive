@@ -45,9 +45,24 @@
                                 {{ __('batch-list.days') }}
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-info">
+                                
+                                @if (strtolower(Session::get('access_token')['role']) == 'trainer' ||strtolower(Session::get('access_token')['role']) == 'provider' )
+                                    @if ($batch['schedule'] == null)
+                                    @if (strtolower(Session::get('access_token')['role']) == 'provider')
+                                        <a href="{{ route('batch-schedule.create', $batch['id']) }}"
+                                            class="btn btn-sm btn-primary"> {{__('batch-list.create_schedule')}}</a>
+                                            @else
+                                            <span class="badge text-black badge-warning">Schedule Not Created</span>
+                                            @endif
+                                    @else
+                                        <a href="{{ route('batch-schedule.index', [$batch['schedule']['id'], $batch['id']]) }}"
+                                            class="btn btn-sm btn-info"> {{__('batch-list.view_schedule')}}</a>
+                                    @endif
+                                @endif
+
+                                {{-- <a href="" class="btn btn-sm btn-info">
                                     {{ __('batch-list.view') }}
-                                </a>
+                                </a> --}}
                             </td>
                         </tr>
                     @endforeach

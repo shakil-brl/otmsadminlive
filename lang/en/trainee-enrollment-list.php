@@ -12,7 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'trainee_enrollment' => 'Trainee Enrollment',
+    'trainee_enrollment' => 'All Enrollment Trainee ',
     'trainee_enrollment_list' => 'Trainee Enrollment List',
     'search_trainee' => 'Search Trainee',
     'profile_id' => 'Profile Id',

@@ -37,7 +37,7 @@ class DashboardDetailsController extends Controller
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        //  dd($running_batches);
+        // dd($running_batches);
         if ($running_batches['success'] == true) {
             $batches = $running_batches['data']['data'];
             $paginator = $this->customPaginate($running_batches, $request, route('dashboard_details.running_batches'));
@@ -94,7 +94,6 @@ class DashboardDetailsController extends Controller
         //     session()->flash('message', $ongoing_classes['message'] ?? 'Something went wrong');
         //     return redirect()->back();
         // }
-        //return view('dashboard_details.complete_batches');
     }
 
     // 
@@ -119,7 +118,6 @@ class DashboardDetailsController extends Controller
         //return view('dashboard_details.complete_batches');
     }
 
-    // 
     public function districts(Request $request)
     {
         $total_districts = ApiHttpClient::request('get', 'detail/district', [
@@ -142,15 +140,17 @@ class DashboardDetailsController extends Controller
     // 
     public function upazilas(Request $request)
     {
-        $total_upazilas = ApiHttpClient::request('get', 'upazilaslist', [
+        $total_upazilas = ApiHttpClient::request('get', 'detail/upazila', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
+            'new_data' => 'yes',
         ])->json();
-        // dd( $total_upazilas);
+
         if ($total_upazilas['success'] == true) {
             $upazilas = $total_upazilas['data']['data'];
             $paginator = $this->customPaginate($total_upazilas, $request, route('dashboard_details.upazilas'));
             $from = $total_upazilas['data']['from'];
+
             return view('dashboard_details.upazilas', ['total_upazilas' => $upazilas, 'paginator' => $paginator, 'from' => $from]);
         } else {
             session()->flash('type', 'Danger');
@@ -162,15 +162,15 @@ class DashboardDetailsController extends Controller
     // 
     public function partners(Request $request)
     {
-        $total_partners = ApiHttpClient::request('get', 'providerlist', [
+        $total_partners = ApiHttpClient::request('get', 'detail/development-partner', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
-        //  dd($total_partners);
-        if ($total_partners['items'] == true) {
-            $partners = $total_partners['items']['data'];
-            $paginator = $this->customPaginate2($total_partners, $request, route('dashboard_details.partners'));
-            $from = $total_partners['items']['from'];
+        // dd($total_partners);
+        if ($total_partners['data'] == true) {
+            $partners = $total_partners['data']['data'];
+            $paginator = $this->customPaginate($total_partners, $request, route('dashboard_details.partners'));
+            $from = $total_partners['data']['from'];
 
             return view('dashboard_details.partners', ['total_partners' => $partners, 'paginator' => $paginator, 'from' => $from]);
         } else {
@@ -181,10 +181,6 @@ class DashboardDetailsController extends Controller
     }
 
     // 
-    // public function trainers()
-    // {
-    //     return view('dashboard_details.trainers');
-    // }
     public function trainers(Request $request)
     {
         $total_trainers = ApiHttpClient::request('get', 'detail/trainer-total', [
@@ -206,8 +202,8 @@ class DashboardDetailsController extends Controller
             session()->flash('message', $total_trainers['message'] ?? 'Something went wrong');
             return redirect()->back();
         }
-
     }
+
     // 
     public function trainees()
     {

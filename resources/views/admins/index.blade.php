@@ -35,7 +35,7 @@
                         <!--end::Item-->
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">
-                            <a href=""class="text-muted text-hover-primary">{{ __('admin-user-list.users') }}</a>
+                            <a href=""class="text-muted text-hover-primary">{{ __('admin-user-list.all_users') }}</a>
                         </li>
                         <!--end::Item-->
                     </ul>
@@ -69,59 +69,17 @@
                                     <span class="path2"></span>
                                 </i>
                                 <form action="">
-                                    <input type="text" data-kt-user-order-filter="search"
+                                    <input type="text" data-kt-user-order-filter="search" id="myInput"
                                         class="form-control form-control-solid w-250px ps-13"
                                         placeholder="{{ __('admin-user-list.search_user_ph') }}" name="search"
                                         value="{{ request('search') }}" />
                                 </form>
-                                {{-- <input type="text" data-kt-user-table-filter="search"
-                                    class="form-control form-control-solid w-250px ps-13" placeholder="Search user" /> --}}
-                                <!--begin::Export buttons-->
-                                <div id="kt_user_report_views_export" class="d-none"></div>
-                                <!--end::Export buttons-->
                             </div>
                             <!--end::Search-->
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
-                            <!--begin::Export dropdown-->
-                            <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
-                                data-kt-menu-placement="bottom-end">
-                                <i class="ki-duotone ki-exit-up fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>{{ __('admin-user-list.export_report') }}</button>
-                            <!--begin::Menu-->
-                            <div id="kt_user_report_views_export_menu"
-                                class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4"
-                                data-kt-menu="true">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="copy">{{ __('admin-user-list.copy_clipboard') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="excel">{{ __('admin-user-list.export_excel') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="csv">{{ __('admin-user-list.export_csv') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="pdf">{{ __('admin-user-list.export_pdf') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-end px-3" data-kt-user-table-toolbar="base">
                                 <!--begin::Add user-->
@@ -140,15 +98,11 @@
                         <div class="table-responsive">
                             <!--begin::Table-->
                             <table class="table table-responsive align-middle table-row-dashed fs-6 gy-5"
-                                id="dataTable">
+                                id="kt-user-table">
                                 <thead>
                                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                                <input class="form-check-input" data-kt-check="true"
-                                                    data-kt-check-target="#kt_table_users .form-check-input" type="checkbox"
-                                                    value="" name="all-users" id="all-users" />
-                                            </div>
+                                            S.N.
                                         </th>
                                         <th class="min-w-125px">{{ __('admin-user-list.profile_id') }}</th>
                                         <th class="min-w-125px">{{ __('admin-user-list.user_name') }}</th>
@@ -244,7 +198,8 @@
                             <!--start::Input group-->
                             <div class="fv-row mb-7 d-none" id="provider">
                                 <!--begin::Label-->
-                                <label class="required fw-semibold fs-6 mb-2">{{ __('admin-user-list.vendor_provider') }}</label>
+                                <label
+                                    class="required fw-semibold fs-6 mb-2">{{ __('admin-user-list.vendor_provider') }}</label>
                                 <!--end::Label-->
 
                                 <!--begin::Provider-->
@@ -261,7 +216,26 @@
                             <!--end::Input group-->
 
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="division-section">
+                                <!--begin::Label-->
+                                <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.division') }}</label>
+                                <!--end::Label-->
+
+                                <!--begin::District-->
+                                <select name="division_id" aria-label="{{ __('profile.division_ph') }}"
+                                    data-control="select2" data-placeholder="{{ __('profile.division_ph') }}"
+                                    class="form-select form-select-solid" data-dropdown-parent="#kt_modal_add_admin_form"
+                                    id="division_id">
+                                </select>
+                                <span class="form-message-error-division_id">
+
+                                </span>
+                                <!--end::District-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--start::Input group-->
+                            <div class="fv-row mb-7 d-none" id="district-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.district') }}</label>
                                 <!--end::Label-->
@@ -279,7 +253,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="upazila-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.upazila') }}</label>
                                 <!--end::Label-->
@@ -296,7 +270,7 @@
                                 <!--end::Upazila-->
                             </div>
                             <!--end::Input group-->
-                            <!--start::Input group-->
+                            {{-- <!--start::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.address') }}</label>
@@ -315,7 +289,7 @@
                                 </span>
                                 <!--end::Address-->
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Input group--> --}}
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->
@@ -390,7 +364,7 @@
                                 <!--begin::User Role-->
                                 <select name="role_id" aria-label="Select User Role" data-control="select2"
                                     data-placeholder="Select User Role" class="form-select form-select-solid"
-                                    data-dropdown-parent="#kt_modal_update_admin_form">
+                                    data-dropdown-parent="#kt_modal_update_admin_form" id="role_id">
                                 </select>
                                 <span class="form-message-error-role_id">
 
@@ -416,8 +390,28 @@
                                 <!--end::Provider-->
                             </div>
                             <!--end::Input group-->
+
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="division-section">
+                                <!--begin::Label-->
+                                <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.division') }}</label>
+                                <!--end::Label-->
+
+                                <!--begin::District-->
+                                <select name="division_id" aria-label="{{ __('profile.division_ph') }}"
+                                    data-control="select2" data-placeholder="{{ __('profile.division_ph') }}"
+                                    class="form-select form-select-solid"
+                                    data-dropdown-parent="#kt_modal_update_admin_form" id="division_id">
+                                </select>
+                                <span class="form-message-error-division_id">
+
+                                </span>
+                                <!--end::District-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--start::Input group-->
+                            <div class="fv-row mb-7 d-none" id="district-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">District</label>
                                 <!--end::Label-->
@@ -435,7 +429,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="fv-row mb-7 d-none" id="upazila-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">Upazila</label>
                                 <!--end::Label-->
@@ -451,7 +445,8 @@
                                 <!--end::Upazila-->
                             </div>
                             <!--end::Input group-->
-                            <!--start::Input group-->
+
+                            {{-- <!--start::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">Address</label>
@@ -470,7 +465,7 @@
                                 </span>
                                 <!--end::Address-->
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Input group--> --}}
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->

@@ -6,7 +6,7 @@
         <h3>{{ __('batch-schedule.ongoing_class') }}</h3>
         <br>
         <x-alert />
-
         @livewire('detail.ongoing-class')
     </div>
+    <!--end::Content-->
 @endsection
