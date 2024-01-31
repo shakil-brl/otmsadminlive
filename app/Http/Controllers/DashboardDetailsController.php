@@ -76,7 +76,7 @@ class DashboardDetailsController extends Controller
     // 
     public function ongoingClasses(Request $request)
     {
-        return view('dashboard_details.ongoing_classes');
+        return view('dashboard_details.ongoing_classes', ['status' => $request->status ?? '']);
         // $ongoing_classes = ApiHttpClient::request(
         //     'get',
         //     'detail/class-running',

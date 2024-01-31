@@ -22,7 +22,7 @@
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.development_partner') }}</th>
-                    <th>About Class</th>
+                    <th>{{ __('batch-list.class_details') }}</th>
                     <th>{{ __('batch-list.class_schedule') }}</th>
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
@@ -34,7 +34,8 @@
                         @endphp
                         <tr>
                             <td>
-                                {{ $from + $loop->iteration - 1 }}
+                                {{ digitLocale($from + $loop->iteration - 1) }}
+                                
                             </td>
                             <td>
                                 {{ $batch['batchCode'] }}
@@ -50,20 +51,25 @@
                             </td>
                             <td class="">
                                 <div>
-                                    @if ($batch['startDate'])
-                                        {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
+                                   
+                                    @if (isset($batch['startDate']))
+                                      {{ __('batch-list.start_date') }}:
+                                      {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y')) : digitLocale(null) }}
+
                                     @endif
                                 </div>
                                 <div>
-                                    {{ $batch['duration'] }} {{ __('batch-list.days') }}
+                                    {{ __('batch-list.total_class') }}:
+                                    {{ isset($batch['duration']) ? digitLocale($batch['duration']) : digitLocale(null) }}
+                                    {{ __('batch-list.days') }}
                                 </div>
                             </td>
                             <td>
                                 @if ($schedule !== null)
-                                    <span> {{ __('batch-list.days') }}: {{ $schedule['class_days'] }}</span><br>
+                                    <span> {{ __('batch-list.class_days') }}: {{ isset($schedule['class_days']) ? digitLocale($schedule['class_days']) : digitLocale(null) }}</span><br>
                                     <div class="mt-1 d-flex justify-content-between align-item-center">
-                                        <span>{{ __('batch-list.time') }}: {{ $schedule['class_time'] }}</span>
-                                        <span>{{ __('batch-list.duration') }}: {{ $schedule['class_duration'] }}
+                                        <span>{{ __('batch-list.class_start_time') }}: {{ isset($schedule['class_time']) ? digitLocale(\Carbon\Carbon::parse($schedule['class_time'])->format('h:i A')) : digitLocale(null) }} </span>
+                                        <span>{{ __('batch-list.duration') }}: {{ isset($schedule['class_duration']) ? digitLocale($schedule['class_duration']) : digitLocale(null) }}
                                             {{ __('batch-list.hours') }}</span>
                                     </div>
                                 @else
@@ -71,7 +77,7 @@
                             </td>
                             <td>
                                 @if ($schedule == null)
-                                    <span class="badge bg-secondary">Not Created</span>
+                                    <span class="badge bg-secondary">{{ __('batch-list.not_created-schedule') }}</span>
                                 @else
                                     <div class="d-flex flex-column gap-1">
                                         <a href="{{ route('batch-schedule.office', [$schedule['id'], $batch['id']]) }}"
@@ -81,7 +87,7 @@
                                         @if (in_array('batch-schedule.destroy', $roleRoutePermissions))
                                             <a href="" id="{{ $batch['id'] }}"
                                                 class="btn btn-sm btn-danger delete-schedule">
-                                                Delete Schedule
+                                                {{ __('batch-list.delete_schedule') }}
                                             </a>
                                         @endif
                                     </div>
@@ -105,14 +111,14 @@
                 id = $(this).attr('id');
 
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    title: areYouSure,
+                    text: deleteData,
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
+                    confirmButtonText: yesDelete,
+                    cancelButtonText: noCancel ,
                 }).then((result) => {
                     if (result.isConfirmed) {
                         let finalUrl = `${app_url}/batch_schedules/destroy/${id}`;

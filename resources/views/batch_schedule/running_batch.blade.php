@@ -23,19 +23,21 @@
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.development_partner') }}</th>
-                    <th>Actions</th>
+                    <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($running_batches) as $batch)
                         <tr>
                             <td>
-                                {{ $loop->iteration }}
+                                {{ digitLocale($loop->iteration) }}
                             </td>
                             <td>
+                               
                                 {{ $batch['training_batch']['batchCode'] ?? '' }}
                             </td>
                             <td>
-                                {{ $batch['training_batch']['startDate'] ?? '' }}
+                                {{ $batch['training_batch'] ? digitLocale(\Carbon\Carbon::parse($batch['training_batch']['startDate'])->format('d-m-Y')) : digitLocale(null) }}
+                                
                             </td>
                             <td>
                                 {{ $batch['training_batch']['training']['title']['Name'] ?? '' }}

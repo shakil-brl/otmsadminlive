@@ -42,7 +42,8 @@ return [
     'all_batch_list' => 'Batches List',
     'inspection' => 'Inspection',
     'report' => 'Report',
-    'add_new_inspection' => 'Add Inspection',
+    'inspection_report' => 'Inspection Report',
+    'add_new_inspection' => 'Class Inspection',
     'running_batch' => 'Running Batch',
     'running_batch_list' => 'Running Batch List',
     'partner_employee' => 'Vendor Employee',
@@ -56,5 +57,9 @@ return [
     'training_title' => 'Training Title',
     'training_group' => 'Training Group',
     'vendor' => 'Vendor',
+    'config' => 'Config',
+    'org_provider' => 'Org and provider',
+    'phase' => 'Phase',
+    'phase_batch' => "Phase Batch's",
 
 ];

@@ -71,7 +71,7 @@ return [
     'views' => 'View',
     'vendor_info' => 'Vendor Details Information',
     'vendor_names' => 'Name',
-    'edit_linked_batch' => 'Edit Linked Batch',
+    'edit_linked_batch' => 'Batch Link',
     'all_batches' => 'All Batches',
     'batch_code' => 'Batch Code',
     'course_name' => 'Course Name',

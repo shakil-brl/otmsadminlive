@@ -38,6 +38,10 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css?v=1') }}">
     <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}">
     <link rel="stylesheet" href="{{ asset('css/new_pages/main.css?v=1') }}">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <style>
         /* styles.css */
 
@@ -156,6 +160,7 @@
         let wantCreateSchedule = "{{ __('batch-schedule.want_create_schedule') }}";
         let yesCreate = "{{ __('batch-schedule.yes_create') }}";
         let successfullyCreate = "{{ __('batch-schedule.successfully_create') }}";
+        let userFullName = {{ __('admin-user-list.full_name') }}
 
         var themeMode;
         if (document.documentElement) {
@@ -357,6 +362,7 @@
     <script src="{{ asset('assets/dist/assets/js/custom/call.division.api.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.provider.api.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/call.permission.api.js') }}"></script>
+    <script src="{{ asset('assets/dist/assets/js/custom/call.admin.show.api.js') }}"></script>
     @stack('js')
 
     @section('scripts')

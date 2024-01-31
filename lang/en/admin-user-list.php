@@ -63,9 +63,9 @@ return [
     'bangla_name' => ' Name (Bangla)',
     'english_name' => ' Name (English)',
     'father_name' => 'Fathers Name',
-    'father_name_bangla' => `'Father's Name Bangla'`,
-    'mother_name' => `'Mother's Name'`,
-    'mother_name_bangla' => `'Mother's Name Bangla'`,
+    'father_name_bangla' => 'Fathers Name Bangla',
+    'mother_name' => 'Mothers Name',
+    'mother_name_bangla' => 'Mothers Name Bangla',
     'genders' => 'Gender',
     'marital_status' => 'Marital Status',
     'dob' => 'Date of Birth',
@@ -78,6 +78,15 @@ return [
     'religion' => 'Religion',
     'parmanent_address' => 'Parmanent Address',
     'present_address' => 'Present Address',
+    'division' => 'Division',
+    'user_details' => 'User Details',
+    'all_users' => 'All Users',
+    'details_info' => 'Details Information',
+    'primary_info' => 'Primary Information',
+    'profiles_id' => 'Profile Id',
+    'full_name' => 'Full Name',
+    'roles' => 'User Role',
+
 
     
 

@@ -311,9 +311,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/{schedule_details_id}', 'scheduleDocument')->name('index');
         Route::get('/create/{schedule_details_id}', 'createDocument')->name('create');
     });
+
     Route::resource('evaluation-head', EvaluationHeadController::class);
-    Route::resource('/tms-phase', TmsPhaseController::class);
-    Route::resource('/tms-phase-batch', TmsBatchPhaseController::class);
     Route::resource('/training-provider-partners', TrainingProviderPartnerController::class);
 });
 
@@ -323,6 +322,9 @@ Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::clas
 
 Route::post('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'storeStudentEvaluation'])->name('trainer-schedule-details.store-student-evaluation');
 
+Route::resource('/tms-phase', TmsPhaseController::class);
+Route::get('/tms-phase/{id}/link-batch', [TmsPhaseController::class, 'linkBatch'])->name('tms-phase.link-batch');
+Route::resource('/tms-phase-batch', TmsBatchPhaseController::class);
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
@@ -340,4 +342,3 @@ Route::get('/not-start-class-report', [BatchReportController::class, 'batchesSch
 
 Route::get('/without-batch-schedule-report-pdf/{search}/{page}', [BatchReportController::class, 'batchWithoutSchedulePdf'])->name('without-schedule.pdf-report');
 Route::get('/not-start-class-report-pdf/{search}/{page}', [BatchReportController::class, 'batchesScheduleNotStartClassPdf'])->name('not-start-class.pdf-report');
-
