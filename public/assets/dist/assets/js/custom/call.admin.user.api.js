@@ -55,7 +55,32 @@ $(function () {
                                         <div class="d-flex align-items-center py-2">
                                             <span class="bullet bg-primary me-3"></span>
                                             ${user.role.name}
-                                        </div>                                        
+                                        </div>
+                                        <div class="d-flex align-items-center py-2">
+                                        ${
+                                            user.upazila ||
+                                            user.district ||
+                                            user.division
+                                                ? `(${
+                                                      user.upazila
+                                                          ? user.upazila.Name +
+                                                            "-"
+                                                          : ""
+                                                  } 
+                                             ${
+                                                 user.district
+                                                     ? user.district.Name + "-"
+                                                     : ""
+                                             } 
+                                             ${
+                                                 user.division
+                                                     ? user.division.Name
+                                                     : ""
+                                             })`
+                                                : ""
+                                        }                                                                                                             
+                                        </div>
+                                                                                
                                     </td>
                                     <td>
                                         ${user.profile.Email}
