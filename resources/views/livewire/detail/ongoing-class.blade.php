@@ -125,16 +125,19 @@
                         </td>
                         <td>
                             <div class="d-flex flex-wrap gap-1">
-                                @if ($batch['streaming_link'])
-                                    <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}" target="_blank">
-                                        {{ __('batch-schedule.live_streaming') }}
-                                    </a>
-                                @endif
-                                @if ($batch['static_link'])
-                                    <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}"
-                                        target="_blank">
-                                        {{ __('batch-schedule.join_class') }}
-                                    </a>
+                                @if ($status == 2)
+                                    @if ($batch['streaming_link'])
+                                        <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}"
+                                            target="_blank">
+                                            {{ __('batch-schedule.live_streaming') }}
+                                        </a>
+                                    @endif
+                                    @if ($batch['static_link'])
+                                        <a type="button" class="btn btn-sm btn-info" href="{{ $batch['static_link'] }}"
+                                            target="_blank">
+                                            {{ __('batch-schedule.join_class') }}
+                                        </a>
+                                    @endif
                                 @endif
                                 @php
                                     $inspection_pm = [
@@ -143,13 +146,17 @@
                                     ];
                                 @endphp
                                 @isset($inspection_pm)
-                                    <a class="btn btn-sm btn-primary"
-                                        href="{{ route('tms-inspections.create', $inspection_pm) }}" target="_blank">
-                                        Inspection
-                                    </a>
-                                    <a class="btn btn-sm btn-danger" href="{{ route('attendance.form', $batch['id']) }}"
-                                    target="_blank">Attendence
-                                </a>
+                                    @if ($status == 2)
+                                        <a class="btn btn-sm btn-primary"
+                                            href="{{ route('tms-inspections.create', $inspection_pm) }}" target="_blank">
+                                            Inspection
+                                        </a>
+                                    @endif
+                                    @if ($status != 1)
+                                        <a class="btn btn-sm btn-info" href="{{ route('attendance.form', $batch['id']) }}"
+                                            target="_blank">Attendence
+                                        </a>
+                                    @endif
                                 @endisset
                             </div>
                         </td>

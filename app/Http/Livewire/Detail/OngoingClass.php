@@ -28,6 +28,7 @@ class OngoingClass extends Component
     public $provider_id;
     public $from_date;
     public $to_date;
+    public $status;
     public function updated($attr)
     {
 
@@ -80,8 +81,14 @@ class OngoingClass extends Component
             'get',
             'detail/training'
         )->json()['data'];
-        $this->from_date = Carbon::now()->toDateString();
-        $this->to_date = Carbon::now()->toDateString();
+        $this->status = request()->status ?? 2;
+        if (!($this->status >= 1 && $this->status <= 3)) {
+            $this->status = 2;
+        }
+        if ($this->status == 2) {
+            $this->from_date = Carbon::now()->toDateString();
+            $this->to_date = Carbon::now()->toDateString();
+        }
     }
     public function render()
     {
@@ -100,6 +107,7 @@ class OngoingClass extends Component
                 'training_id' => $this->training_id,
                 'from_date' => $this->from_date,
                 'to_date' => $this->to_date,
+                'status' => $this->status,
             ]
         )->json();
 
