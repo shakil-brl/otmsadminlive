@@ -196,11 +196,12 @@
                                                 </a>
                                             @endif
                                         @elseif ($schedule_detail['status'] == 2)
-                                            <a href="{{ route('attendance.form', [$schedule_detail['id']]) }}" class="btn btn-detail ">
+                                            <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
+                                                class="btn btn-detail ">
                                                 {{ __('batch-schedule.join_class') }}
                                             </a>
                                         @elseif ($schedule_detail['status'] == 3)
-                                            <a href="{{ route('attendance.form', [$schedule_detail['id']]) }}"
+                                            <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
                                                 class="btn btn-detail complete">
                                                 {{ __('batch-schedule.class_details') }}</a>
                                         @endif
