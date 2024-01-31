@@ -43,92 +43,101 @@ $(function () {
                                         ${user.ProfileId}
                                     </td>
                                     <td class="">
-                                        <div class="">
-                                            <div>${
-                                                user.profile.KnownAsBangla
-                                            }</div>
+                                        <div class="d-flex flex-column gap-1">
+                                            <div>
+                                                ${user.profile.KnownAsBangla}
+                                            </div>
                                             <div>${user.profile.Email}</div>
                                         </div>
-                                        <!--begin::User details-->
                                     </td>
                                     <td class="">
-                                        <div class="">
-                                            <span class="bullet bg-primary me-3"></span>
-                                            ${user.role.name}
-                                        </div>
-                                        <div class="">
-                                        ${
-                                            user.upazila ||
-                                            user.district ||
-                                            user.division
-                                                ? `(${
-                                                      user.upazila
-                                                          ? user.upazila
-                                                                .NameEng + "-"
-                                                          : ""
-                                                  } 
-                                             ${
-                                                 user.district
-                                                     ? user.district.NameEng +
-                                                       "-"
-                                                     : ""
-                                             } 
-                                             ${
-                                                 user.division
-                                                     ? user.division.NameEng
-                                                     : ""
-                                             })`
-                                                : `${
-                                                      userRole.toLowerCase() !=
-                                                      "provider"
-                                                          ? user.provider
-                                                              ? user.provider
-                                                                    .name
-                                                              : "Project Office"
-                                                          : ""
-                                                  }`
-                                        }                                                                                                             
-                                        </div>
-                                                                                
+                                        <div class="d-flex flex-column gap-1">
+                                            <div class="">
+                                                <span class="bullet bg-primary me-3"></span>
+                                                ${user.role.name}
+                                            </div>
+                                            <div class="">
+                                                ${
+                                                    user.upazila ||
+                                                    user.district ||
+                                                    user.division
+                                                        ? `(${
+                                                              user.upazila
+                                                                  ? user.upazila
+                                                                        .NameEng +
+                                                                    "-"
+                                                                  : ""
+                                                          } 
+                                                    ${
+                                                        user.district
+                                                            ? user.district
+                                                                  .NameEng + "-"
+                                                            : ""
+                                                    } 
+                                                    ${
+                                                        user.division
+                                                            ? user.division
+                                                                  .NameEng
+                                                            : ""
+                                                    })`
+                                                        : `${
+                                                              userRole.toLowerCase() !=
+                                                              "provider"
+                                                                  ? user.provider
+                                                                      ? user
+                                                                            .provider
+                                                                            .name
+                                                                      : "Project Office"
+                                                                  : ""
+                                                          }`
+                                                }                                                                                                             
+                                            </div>
+                                        </div>                                        
                                     </td>
                                     <td class="">
-                                        <div>
-                                            NID: ${user.profile.NID ?? ""}
-                                        </div>
-                                        <div>
-                                            Phone: ${user.profile.Phone ?? ""}
+                                        <div class="d-flex flex-column gap-1">
+                                            <div>
+                                                NID: ${user.profile.NID ?? ""}
+                                            </div>
+                                            <div>
+                                                Phone: ${
+                                                    user.profile.Phone ?? ""
+                                                }
+                                            </div>
                                         </div>                                        
                                     </td>                                    
-                                    <td class="text-end d-flex gap-1">
-                                        <a href= "#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 view-user-action" 
-                                        data-user-id="${user.ProfileId}">
-                                            <i class="ki-duotone ki-switch fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </a>
-                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 edit-user-action" 
-                                        data-user-id="${
-                                            user.id
-                                        }" data-bs-toggle="modal"
-                                        data-bs-target="#kt_edit_user">
-                                            <i class="ki-duotone ki-pencil fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </a>
-                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-user-action" 
-                                        data-user-name="${
-                                            user.profile.KnownAsBangla
-                                        }" data-user-id="${user.id}">
-                                            <i class="ki-duotone ki-trash fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                                <span class="path4"></span>
-                                                <span class="path5"></span>
-                                            </i>
-                                        </a>
+                                    <td class="text-end">
+                                        <div class="d-flex gap-1">
+                                            <a href= "#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 view-user-action" 
+                                            data-user-id="${user.ProfileId}">
+                                                <i class="ki-duotone ki-switch fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 edit-user-action" 
+                                            data-user-id="${
+                                                user.id
+                                            }" data-bs-toggle="modal"
+                                            data-bs-target="#kt_edit_user">
+                                                <i class="ki-duotone ki-pencil fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-user-action" 
+                                            data-user-name="${
+                                                user.profile.KnownAsBangla
+                                            }" data-user-id="${user.id}">
+                                                <i class="ki-duotone ki-trash fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                    <span class="path4"></span>
+                                                    <span class="path5"></span>
+                                                </i>
+                                            </a>
+                                        </div>                                        
                                     </td>
                                 </tr>
                             `;
