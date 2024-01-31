@@ -155,7 +155,7 @@ $(function () {
             divisionSection.addClass("d-none");
             districtSection.addClass("d-none");
             upazilaSection.addClass("d-none");
-            
+
             //console.log(roleSelector);
             populateRoleOptions(authToken, role_api_link, roleSelector);
 
@@ -465,6 +465,9 @@ $(function () {
 
                     let selectRole = $("#kt_modal_update_admin_form #role_id");
                     selectRole.on("change", function (e) {
+                        $("#kt_modal_update_admin_form [name=provider_id]").val(
+                            ""
+                        );
                         let divisionSection = $(
                             "#kt_modal_update_admin_form #division-section"
                         );
@@ -550,7 +553,7 @@ $(function () {
                                     ).removeClass("d-none");
 
                                     let providerSelector = $(
-                                        "#kt_modal_update_admin_form #provider_id"
+                                        "#kt_modal_update_admin_form [name=provider_id]"
                                     );
                                     let api_link = api_baseurl + "providers";
 
