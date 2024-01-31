@@ -116,7 +116,7 @@
 
                 </div>
                 <!--end:Menu item--> --}}
-                
+
                 @isset($userRole)
                     @empty(!$userRole)
                         @if ($userRole == 'Trainee' || $userRole == 'trainee')
@@ -126,7 +126,12 @@
                                     @if (
                                         $userRole == 'SuperAdmin' || $userRole == 'superadmin' or
                                             $userRole == 'Admin' || $userRole == 'admin' or
-                                            $userRole == 'DPD' || $userRole == 'dpd' || $userRole == 'provider' || $userRole == 'Provider'|| $userRole == 'Consultant' || $userRole == 'consultant')
+                                            $userRole == 'DPD' ||
+                                                $userRole == 'dpd' ||
+                                                $userRole == 'provider' ||
+                                                $userRole == 'Provider' ||
+                                                $userRole == 'Consultant' ||
+                                                $userRole == 'consultant')
                                         <div data-kt-menu-trigger="click"
                                             class="menu-item here menu-accordion <?php if (Illuminate\Support\Facades\Route::is('users.index') || Illuminate\Support\Facades\Route::is('users.show')||Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show') ||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?> here show<?php } ?> ">
                                             <!--begin:Menu link-->
@@ -283,7 +288,7 @@
                                             <!--end:Menu sub-->
                                         </div>
                                     @endif
-                        
+
                                     @if (in_array('traineeEnroll.index', $roleRoutePermissions))
                                         <div data-kt-menu-trigger="click"
                                             class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('traineeEnroll.index')||Illuminate\Support\Facades\Route::is('trainerEnroll.index')||Illuminate\Support\Facades\Route::is('trainerEnroll.index')||Illuminate\Support\Facades\Route::is('batches.index')) {?>here show<?php } ?>">
@@ -563,14 +568,15 @@
                                                         <!--end:Menu link-->
                                                     </div>
                                                     <!--end:Menu item-->
-                                               
+
                                                 </div>
                                                 <!--end:Menu sub-->
                                             </div>
                                             <!--end:Menu sub-->
 
                                         </div>
-                                        <div data-kt-menu-trigger="click" class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>here show<?php } ?>">
+                                        <div data-kt-menu-trigger="click"
+                                            class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>here show<?php } ?>">
                                             <!--begin:Menu link-->
                                             <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>active<?php } ?>">
                                                 <span class="menu-icon">
@@ -612,9 +618,9 @@
 
                                         </div>
                                         <div data-kt-menu-trigger="click"
-                                            class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('training-provider-partners.index')||Illuminate\Support\Facades\Route::is('training-provider-partners.edit')||Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')||Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')||Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create')) {?>here show<?php } ?>">
+                                            class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('training-provider-partners.index')||Illuminate\Support\Facades\Route::is('training-provider-partners.edit')||Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')||Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')||Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create') || Illuminate\Support\Facades\Route::is('tms-phase.index')) {?>here show<?php } ?>">
                                             <!--begin:Menu link-->
-                                            <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('training-provider-partners.index')||Illuminate\Support\Facades\Route::is('training-provider-partners.edit')||Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')||Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')||Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create')) {?>active<?php } ?>">
+                                            <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('training-provider-partners.index')||Illuminate\Support\Facades\Route::is('training-provider-partners.edit')||Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')||Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')||Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create') || Illuminate\Support\Facades\Route::is('tms-phase.index')){?>active<?php } ?>">
                                                 <span class="menu-icon">
                                                     <i class="ki-duotone ki-wrench  fs-2">
                                                         <span class="path1"></span>
@@ -628,7 +634,7 @@
                                             <!--begin:Menu sub-->
                                             <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
                                                 <!--begin:Menu sub-->
-                                                <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('training-provider-partners.index')||Illuminate\Support\Facades\Route::is('training-provider-partners.edit')||Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')||Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')||Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create')) {?>here show<?php } ?>"
+                                                <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('training-provider-partners.index')||Illuminate\Support\Facades\Route::is('training-provider-partners.edit')||Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')||Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')||Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create') || Illuminate\Support\Facades\Route::is('tms-phase.index')) {?>here show<?php } ?>"
                                                     kt-hidden-height="81" style="">
                                                     <!--begin:Menu item-->
                                                     <div class="menu-item">
@@ -667,8 +673,8 @@
                                                         <!--end:Menu link-->
                                                     </div>
                                                     <!--end:Menu item-->
-                                                     <!--begin:Menu item-->
-                                                     <div class="menu-item">
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
                                                         <!--begin:Menu link-->
                                                         <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')) {?>active<?php } ?>"
                                                             href="{{ route('lots.index') }}">
@@ -683,8 +689,8 @@
                                                         <!--end:Menu link-->
                                                     </div>
                                                     <!--end:Menu item-->
-                                                      <!--begin:Menu item-->
-                                                      <div class="menu-item">
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
                                                         <!--begin:Menu link-->
                                                         <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')) {?>active<?php } ?>"
                                                             href="{{ route('holydays.index') }}">
@@ -703,9 +709,9 @@
                                                         <!--end:Menu link-->
                                                     </div>
                                                     <!--end:Menu item-->
-                                                    
-                                                      <!--begin:Menu item-->
-                                                      <div class="menu-item">
+
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
                                                         <!--begin:Menu link-->
                                                         <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create')) {?>active<?php } ?>"
                                                             href="{{ route('courses.index') }}">
@@ -757,11 +763,11 @@
                                                         <!--end:Menu link-->
                                                     </div>
                                                     <!--end:Menu item-->
-                                                     <!--begin:Menu item-->
-                                                     <div class="menu-item">
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
                                                         <!--begin:Menu link-->
-                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>"
-                                                            href="{{ '' }}">
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('tms-phase.index') ) {?>active<?php } ?>"
+                                                            href="{{ route('tms-phase.index') }}">
                                                             <span class="menu-icon">
                                                                 <i class="ki-duotone ki-row-horizontal  fs-2">
                                                                     <span class="path1"></span>
@@ -773,16 +779,16 @@
                                                         <!--end:Menu link-->
                                                     </div>
                                                     <!--end:Menu item-->
-                                                      <!--begin:Menu item-->
-                                                      <div class="menu-item">
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
                                                         <!--begin:Menu link-->
                                                         <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>"
                                                             href="{{ '' }}">
                                                             <span class="menu-icon">
-                                                              <i class="ki-duotone ki-element-6 fs-2">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                              </i>
+                                                                <i class="ki-duotone ki-element-6 fs-2">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
                                                             </span>
                                                             <span class="menu-title">{{ __('sidemenu.phase_batch') }}</span>
                                                         </a>
