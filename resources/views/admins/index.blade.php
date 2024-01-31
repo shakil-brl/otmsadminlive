@@ -105,11 +105,9 @@
                                             S.N.
                                         </th>
                                         <th class="min-w-125px">{{ __('admin-user-list.profile_id') }}</th>
-                                        <th class="min-w-125px">{{ __('admin-user-list.user_name') }}</th>
+                                        <th class="min-w-125px">{{ __('admin-user-list.user_name') }}-Email</th>
                                         <th class="min-w-125px">{{ __('admin-user-list.role') }}</th>
-                                        <th class="min-w-125px">{{ __('admin-user-list.email') }}</th>
-                                        <th class="min-w-125px">{{ __('admin-user-list.nid') }}</th>
-                                        {{-- <th class="min-w-125px">{{ __('admin-user-list.vendor_name') }}</th> --}}
+                                        <th class="min-w-125px">{{ __('admin-user-list.nid') }}-Phone</th>
                                         <th class="text-end min-w-100px">{{ __('admin-user-list.action') }}</th>
                                     </tr>
                                 </thead>

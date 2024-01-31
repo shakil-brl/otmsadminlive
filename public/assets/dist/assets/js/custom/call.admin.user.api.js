@@ -43,20 +43,20 @@ $(function () {
                                         ${user.ProfileId}
                                     </td>
                                     <td class="">
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${user.profile.KnownAsBangla}
-                                            </a>
-                                            <span></span>
+                                        <div class="d-flex flex-column gap-1">
+                                            <div>${
+                                                user.profile.KnownAsBangla
+                                            }</div>
+                                            <div>${user.profile.Email}</div>
                                         </div>
                                         <!--begin::User details-->
                                     </td>
                                     <td>
-                                        <div class="d-flex align-items-center py-2">
+                                        <div class="">
                                             <span class="bullet bg-primary me-3"></span>
                                             ${user.role.name}
                                         </div>
-                                        <div class="d-flex align-items-center py-2">
+                                        <div class="d-flex flex-column gap-1">
                                         ${
                                             user.upazila ||
                                             user.district ||
@@ -91,11 +91,13 @@ $(function () {
                                         </div>
                                                                                 
                                     </td>
-                                    <td>
-                                        ${user.profile.Email}
-                                    </td>
-                                    <td>
-                                        ${user.profile.NID}
+                                    <td class="d-flex flex-column gap-1">
+                                        <div>
+                                            NID: ${user.profile.NID ?? ""}
+                                        </div>
+                                        <div>
+                                            Phone: ${user.profile.Phone ?? ""}
+                                        </div>                                        
                                     </td>                                    
                                     <td class="text-end">
                                         <a href= "#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 view-user-action" 
