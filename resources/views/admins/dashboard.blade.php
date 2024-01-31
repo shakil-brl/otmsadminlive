@@ -40,7 +40,7 @@
                         @endif
                         @if (in_array('dashboard_details.complete_classes', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.complete_classes')" :totalBatch="$data['complete_class'] ?? 0" :icon="asset('img/new_icon/completedclass.png')"
+                                <x-dashboard-card :url="route('dashboard_details.ongoing_classes', ['status' => 3])" :totalBatch="$data['complete_class'] ?? 0" :icon="asset('img/new_icon/completedclass.png')"
                                     :title="__('dashboard.complete_class')" :class="'card-item purple show-loader'" />
                             </div>
                         @endif
