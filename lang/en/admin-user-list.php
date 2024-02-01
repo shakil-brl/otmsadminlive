@@ -86,6 +86,9 @@ return [
     'profiles_id' => 'Profile Id',
     'full_name' => 'Full Name',
     'roles' => 'User Role',
+    'sl' => 'SL',
+    'name_email' => 'Name and Email',
+    'nid_phone' => 'Nid and Phone',
 
 
     
