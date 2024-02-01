@@ -63,8 +63,8 @@
                                             <div class="progress-bar" role="progressbar" style="width: {{$batch['schedule']['total_complete']}}%" aria-valuenow="{{$batch['schedule']['total_complete']}}" aria-valuemin="{{$batch['schedule']['total_complete']}}" aria-valuemax="{{$batch['duration']}}"></div>
                                           </div>
 
-                                          <small>Complete:{{$batch['schedule']['total_complete'] }} </small><br>
-                                          <small>Pending:{{$batch['schedule']['total_pending'] }} </small><br>
+                                          <small>Complete:{{$batch['schedule']['total_complete'] }} </small>/
+                                          <small>Pending:{{$batch['schedule']['total_pending'] }} </small>/
                                           <small>Running{{$batch['schedule']['total_running'] }} </small>
                                           
                                 @endif
