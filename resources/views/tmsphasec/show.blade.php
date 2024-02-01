@@ -28,8 +28,23 @@
                             <div>Name: {{ $phase['name_en'] ?? '' }}</div>
                             <div>Remark: {{ $phase['remark'] ?? '' }}</div>
                         </div>
-
-
+                    </div>
+                    <div class="col-md-3">
+                        @if ($phase)
+                            <div class="text-center">
+                                @if (count($trainingBatchesArray) > 0)
+                                    <a href="{{ route('tms-phase.link-batch', $phase['id']) }}"
+                                        class="btn btn-lg btn-success w-100 show-action" title="Provider Details">
+                                        Update Link Batch
+                                    </a>
+                                @else
+                                    <a href="{{ route('tms-phase.link-batch', $phase['id']) }}"
+                                        class="btn btn-lg btn-success w-100 show-action" title="Provider Details">
+                                        Link With Batch
+                                    </a>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="mt-5">
@@ -44,25 +59,31 @@
                                 <th>Start Date</th>
                             </thead>
                             <tbody>
-                                @foreach (collect($trainingBatchesArray) as $batch)
+                                @if (count($trainingBatchesArray) > 0)
+                                    @foreach (collect($trainingBatchesArray) as $batch)
+                                        <tr>
+                                            <td>
+                                                {{ $loop->iteration }}
+                                            </td>
+                                            <td>
+                                                {{ $batch['batchCode'] ?? '' }}
+                                            </td>
+                                            <td>
+                                                {{ $batch['training']['title']['Name'] ?? '' }}
+                                            </td>
+                                            <td>
+                                                {{ $batch['GEOLocation'] ?? '' }}
+                                            </td>
+                                            <td>
+                                                {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-y') ?? '' }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>
-                                            {{ $loop->iteration }}
-                                        </td>
-                                        <td>
-                                            {{ $batch['batchCode'] ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $batch['training']['title']['Name'] ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $batch['GEOLocation'] ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-y') ?? '' }}
-                                        </td>
+                                        <td colspan="5" class="text-danger">No Data Found</td>
                                     </tr>
-                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
