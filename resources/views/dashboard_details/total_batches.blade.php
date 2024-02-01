@@ -26,9 +26,12 @@
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
+                   
                     @foreach (collect($total_batches) as $batch)
+                    
                         <tr>
                             <td>
+                                @dump($batch)
                                 {{ digitLocale($from_no + $loop->iteration - 1) }}
                             </td>
                             <td>
