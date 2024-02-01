@@ -24,7 +24,7 @@
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.development_partner') }}</th>
-                    {{-- <th>{{ __('batch-list.action') }}</th> --}}
+                    <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($running_batches) as $batch)
@@ -49,19 +49,11 @@
                             <td>
                                 {{ $batch['training_batch']['provider']['name'] ?? '' }}
                             </td>
-                            {{-- <td>
-                                @if ($batch['schedule'] == null)
-                                    @if (strtolower(Session::get('access_token')['role']) == 'provider')
-                                        <a href="{{ route('batch-schedule.create', encrypt($batch['id'])) }}"
-                                            class="btn btn-sm btn-primary"> {{ __('batch-list.create_schedule') }}</a>
-                                    @else
-                                        <span class="badge text-black badge-warning">Schedule Not Created</span>
-                                    @endif
-                                @else
-                                    <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
-                                        class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}</a>
-                                @endif
-                            </td> --}}
+                            <td>
+                                <a href="{{ route('batch-schedule.index', [encrypt($batch['id']), encrypt($batch['training_batch']['id'])]) }}"
+                                    class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
