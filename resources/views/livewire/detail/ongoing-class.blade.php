@@ -145,10 +145,13 @@
                                 @endphp
                                 @isset($inspection_pm)
                                     @if ($status == 2)
-                                        <a class="btn btn-sm btn-primary"
+                                        
+                                    @if (in_array('tms-inspections.create', Session::get('access_token.rolePermission')))
+                                    <a class="btn btn-sm btn-primary"
                                             href="{{ route('tms-inspections.create', $inspection_pm) }}" target="_blank">
                                             Inspection
                                         </a>
+                                        @endif
                                     @endif
                                     @if ($status != 1)
                                         <a class="btn btn-sm btn-info"
