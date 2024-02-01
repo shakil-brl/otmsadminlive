@@ -59,7 +59,7 @@
                                     <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
                                         class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}</a>
 
-                                        <div class="progress">
+                                        <div class="progress m-1">
                                             <div class="progress-bar" role="progressbar" style="width: {{$batch['schedule']['total_complete']}}%" aria-valuenow="{{$batch['schedule']['total_complete']}}" aria-valuemin="{{$batch['schedule']['total_complete']}}" aria-valuemax="{{$batch['duration']}}"></div>
                                           </div>
 
