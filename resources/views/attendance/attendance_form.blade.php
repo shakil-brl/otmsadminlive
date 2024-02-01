@@ -158,7 +158,7 @@
                         <input id="streaming_link_update" type="text" class="form-control">
                     </div>
                     <div class="mb-2">
-                        <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক গুগল মিট বা জুম</label>
+                        <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক (গুগল মিট বা জুম)</label>
                         <input id="static_link_update" type="text" class="form-control">
                     </div>
                 </div>
