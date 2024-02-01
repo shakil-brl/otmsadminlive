@@ -80,10 +80,17 @@
         @isset($schedule_details)
             @php
                 $schedule_used = false;
+                $runningClass = false;
                 $desiredKey = 'status';
                 foreach ($schedule_details as $array) {
                     if (array_key_exists($desiredKey, $array) && ($array[$desiredKey] == 2 || $array[$desiredKey] == 3)) {
                         $schedule_used = true;
+                        break;
+                    }
+                }
+                foreach ($schedule_details as $array) {
+                    if (array_key_exists($desiredKey, $array) && ($array[$desiredKey] == 2)) {
+                        $runningClass = true;
                         break;
                     }
                 }
@@ -183,7 +190,7 @@
                                     @isset($schedule_detail['status'])
                                         <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
                                             class="btn btn-secondary w-100 rounded-4 mb-1">Class Document</a>
-                                        @if ($schedule_detail['status'] == 1)
+                                        @if ($schedule_detail['status'] == 1 && !$runningClass)
                                             @if ($date <= \Carbon\Carbon::now())
                                                 <a id="{{ $schedule_detail['id'] }}" class="btn btn-detail start-class  update"
                                                     type="button" data-bs-toggle="modal" data-bs-target="#classStartModal"
