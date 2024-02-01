@@ -35,10 +35,10 @@ class TmsPhaseController extends Controller
                     })
                     ->addColumn('action', function ($row) {
                         $btn = '
-                        <div class="d-flex gap-1 justify-content-center">
+                        <div class="d-flex justify-content-center btn-group">
                             <a data-id="' . $row['id'] . '" class="link-batch btn btn-info btn-sm text-center">Link Batch</a>
-                            <a data-id="' . $row['id'] . '" class="view btn btn-info btn-sm text-center">View</a>
-                            <a data-id="' . $row['id'] . '" class="edit-action btn btn-success btn-sm text-center">Edit</a>
+                            <a data-id="' . $row['id'] . '" class="view btn btn-success btn-sm text-center">View</a>
+                            <a data-id="' . $row['id'] . '" class="edit-action btn btn-warning btn-sm text-center">Edit</a>
                             <a data-id="' . $row['id'] . '" class="delete-action btn btn-danger btn-sm text-center">Delete</a>
                         </div>';
                         return $btn;
