@@ -84,6 +84,8 @@
             </thead>
             <tbody>
                 @foreach (collect($classes) as $batch)
+
+              
                     <tr>
                         <td>
                             {{ digitLocale($from + $loop->index) }}
