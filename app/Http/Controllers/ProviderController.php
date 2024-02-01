@@ -20,6 +20,7 @@ class ProviderController extends Controller
         // dd($provider_results);
         if ($provider_results['data'] == true) {
             $data['providers'] = $provider_results['data']['data'];
+            // dd($data['providers']);
             $data['page_from'] = $provider_results['data']['from'];
             $data['paginator'] = $this->customPaginate($provider_results, $request, route('providers.index'));
 
