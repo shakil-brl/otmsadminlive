@@ -37,6 +37,7 @@ class TmsPhaseController extends Controller
                         $btn = '
                         <div class="d-flex gap-1 justify-content-center">
                             <a data-id="' . $row['id'] . '" class="link-batch btn btn-info btn-sm text-center">Link Batch</a>
+                            <a data-id="' . $row['id'] . '" class="view btn btn-info btn-sm text-center">View</a>
                             <a data-id="' . $row['id'] . '" class="edit-action btn btn-success btn-sm text-center">Edit</a>
                             <a data-id="' . $row['id'] . '" class="delete-action btn btn-danger btn-sm text-center">Delete</a>
                         </div>';
@@ -141,8 +142,23 @@ class TmsPhaseController extends Controller
     // Display the specified resource.
     public function show($id)
     {
-        $phase = TmsPhase::findOrFail($id);
-        return response()->json(['data' => $phase], 200);
+        if ($id) {
+            $results = ApiHttpClient::request('get', "tms-phases/$id")->json();
+
+            if ($results['success'] == true) {
+                $phase = $results['data'];
+                // dd($phase);
+                return view('tmsphasec.show', compact('phase'));
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', 'Something went wrong');
+                return redirect()->back();
+            }
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Something went wrong');
+            return redirect()->back();
+        }
     }
 
     public function edit($id)
@@ -157,7 +173,6 @@ class TmsPhaseController extends Controller
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return back();
         }
-        return 0;
     }
 
     // Update the specified resource in storage.
