@@ -160,7 +160,7 @@
         let wantCreateSchedule = "{{ __('batch-schedule.want_create_schedule') }}";
         let yesCreate = "{{ __('batch-schedule.yes_create') }}";
         let successfullyCreate = "{{ __('batch-schedule.successfully_create') }}";
-        let userFullName = {{ __('admin-user-list.full_name') }};
+        let userFullName = "{{ __('admin-user-list.full_name') }}"
 
         var themeMode;
         if (document.documentElement) {

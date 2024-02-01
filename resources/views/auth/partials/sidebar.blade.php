@@ -774,13 +774,13 @@
                                                                     <span class="path2"></span>
                                                                 </i>
                                                             </span>
-                                                            <span class="menu-title">{{ __('sidemenu.phase') }}</span>
+                                                            <span class="menu-title">{{ __('sidemenu.phase_batch') }}</span>
                                                         </a>
                                                         <!--end:Menu link-->
                                                     </div>
                                                     <!--end:Menu item-->
                                                     <!--begin:Menu item-->
-                                                    <div class="menu-item">
+                                                    {{-- <div class="menu-item">
                                                         <!--begin:Menu link-->
                                                         <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>"
                                                             href="{{ '' }}">
@@ -793,7 +793,7 @@
                                                             <span class="menu-title">{{ __('sidemenu.phase_batch') }}</span>
                                                         </a>
                                                         <!--end:Menu link-->
-                                                    </div>
+                                                    </div> --}}
                                                     <!--end:Menu item-->
 
                                                 </div>
