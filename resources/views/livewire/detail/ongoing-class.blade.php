@@ -76,11 +76,10 @@
                 <th>{{ __('batch-schedule.sl') }}</th>
                 <th>{{ __('batch-schedule.batch_code') }}</th>
                 <th>{{ __('batch-schedule.start_time') }}</th>
-                <th>{{ __('batch-schedule.course_name') }}</th>
-                <th>{{ __('batch-schedule.location') }}</th>
+                <th>{{ __('batch-schedule.course_name') }}<br/>{{ __('batch-schedule.location') }}</th>                 
                 <th>{{ __('batch-schedule.development_partner') }}</th>
                 <th>Trainer</th>
-                <th>{{ __('batch-schedule.action') }}</th>
+                <th class="text-end" style="width: 300px;">{{ __('batch-schedule.action') }}</th>
             </thead>
             <tbody>
                 @foreach (collect($classes) as $batch)
@@ -91,42 +90,39 @@
                             {{ digitLocale($from + $loop->index) }}
                         </td>
                         <td>
-                            {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}
+                            {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}<br>
+                           <small class="text-danger">Total Trainees: {{$batch['schedule']['training_batch']['totalTrainees']}}</small> 
                         </td>
                         <td>
                             {{ $batch['date'] ?? '' }}
                             <div>
-                                {{ digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) }}
+                              <small class="text-primary">  {{ digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) }}</small>
                             </div>
                         </td>
                         <td>
-                            {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}
+                            {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}<br/>
+                            <small>{{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : '' }}</small>
                         </td>
                         <td>
-                            {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : '' }}
-                        </td>
-                        <td>
-                            <div>
                                 {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
-                            </div>
-                            <div>
-                                Phone: {{ $batch['schedule']['training_batch']['provider']['phone'] ?? '' }}
-                            </div>
+                                <br/>
+                                <a href="tel:+{{ $trainer['profile']['Phone'] ?? '' }}">{{ $batch['schedule']['training_batch']['provider']['phone'] ?? '' }}</a>
+
                         </td>
                         <td>
                             @isset($batch['schedule']['training_batch']['provider_trainers'])
                                 @foreach ($batch['schedule']['training_batch']['provider_trainers'] as $trainer)
-                                    <div>
+                                    
                                         {{ $trainer['profile']['KnownAs'] ?? '' }}
-                                    </div>
-                                    <div>
-                                        Phone: {{ $trainer['profile']['Phone'] ?? '' }}
-                                    </div>
+                                    <br/>
+                                
+                                    <a href="tel:+{{ $trainer['profile']['Phone'] ?? '' }}">{{ $trainer['profile']['Phone'] ?? '' }}
+                                    </a>
                                 @endforeach
                             @endisset
                         </td>
-                        <td>
-                            <div class="d-flex flex-wrap gap-1">
+                        <td >
+                            <div class="d-flex flex-wrap gap-1 text-end">
                                 @if ($status == 2)
                                     @if ($batch['streaming_link'])
                                         <a class="btn btn-sm btn-danger" href="{{ $batch['streaming_link'] }}"
