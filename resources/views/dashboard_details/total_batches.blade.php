@@ -31,7 +31,7 @@
                     
                         <tr>
                             <td>
-                                @dump($batch)
+                               {{-- // @dump($batch) --}}
                                 {{ digitLocale($from_no + $loop->iteration - 1) }}
                             </td>
                             <td>
@@ -58,6 +58,15 @@
                                 @else
                                     <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
                                         class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}</a>
+
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: {{$batch['schedule']['total_complete']}}%" aria-valuenow="{{$batch['schedule']['total_complete']}}" aria-valuemin="{{$batch['schedule']['total_complete']}}" aria-valuemax="{{$batch['duration']}}"></div>
+                                          </div>
+
+                                          <small>Complete:{{$batch['schedule']['total_complete'] }} </small><br>
+                                          <small>Pending:{{$batch['schedule']['total_pending'] }} </small><br>
+                                          <small>Running{{$batch['schedule']['total_running'] }} </small>
+                                          
                                 @endif
                             </td>
                         </tr>
