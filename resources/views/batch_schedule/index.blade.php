@@ -269,11 +269,11 @@
                     <!--begin::Provider added Form-->
                     <div class="modal-body">
                         <div class="mb-2">
-                            <label for="" class="mb-1">Streaming Link</label>
+                            <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)</label>
                             <input id="streaming_link" type="text" class="form-control">
                         </div>
                         <div class="mb-2">
-                            <label for="" class="mb-1">Live Class Link</label>
+                            <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক (গুগল মিট বা জুম)</label>
                             <input id="static_link" type="text" class="form-control">
                         </div>
                     </div>
