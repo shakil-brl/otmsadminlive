@@ -91,7 +91,7 @@
                         </td>
                         <td>
                             {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}<br>
-                           <small class="text-danger">Total Trainees: {{$batch['schedule']['training_batch']['totalTrainees']}}</small> 
+                           {{-- <small class="text-danger">Total Trainees: {{$batch['schedule']['training_batch']['totalTrainees']}}</small>  --}}
                         </td>
                         <td>
                             {{ $batch['date'] ?? '' }}
