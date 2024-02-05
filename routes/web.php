@@ -274,7 +274,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/create/{schedule_details_id}', 'createDocument')->name('create');
     });
 
-    Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+    Route::get('logs-brl', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
     Route::resource('/training-provider-partners', TrainingProviderPartnerController::class);
 });
 
