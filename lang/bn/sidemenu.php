@@ -69,7 +69,7 @@ return [
     'training_group' => 'এসপি গ্রুপ',
     'vendor' => 'ভেন্ডর',
     'config' => 'কনফিগ',
-    'org_provider' => 'Org and provider',
+    'org_provider' => 'অর্গ এবং প্রোভাইডার ',
     'phase' => 'ফেইজ ',
     'phase_batch' => "ফেইজ ব্যাচ সমূহ ",
 

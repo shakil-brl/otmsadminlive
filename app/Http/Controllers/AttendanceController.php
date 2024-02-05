@@ -91,6 +91,8 @@ class AttendanceController extends Controller
 
     public function attendanceForm($id, $batchId = null)
     {
+        $id = decrypt($id);
+        // dd($id);
         $schedule_details = ApiHttpClient::request('get', 'batch-schedule-details/' . $id)
             ->json();
 

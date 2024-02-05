@@ -110,10 +110,11 @@
 
 
     @if (Session::get('access_token.access_token'))
-        <script>
-            var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
-            var authToken = 'Bearer {{ Session::get('access_token.access_token') }}';
-        </script>
+    <script>
+        var accessToken = 'Bearer {{ Session::get("access_token.access_token") }}';
+        var authToken = accessToken;
+    </script>
+    
     @endif
 
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
@@ -160,7 +161,7 @@
         let wantCreateSchedule = "{{ __('batch-schedule.want_create_schedule') }}";
         let yesCreate = "{{ __('batch-schedule.yes_create') }}";
         let successfullyCreate = "{{ __('batch-schedule.successfully_create') }}";
-        let userFullName = {{ __('admin-user-list.full_name') }}
+        let userFullName = "{{ __('admin-user-list.full_name') }}"
 
         var themeMode;
         if (document.documentElement) {
@@ -197,7 +198,7 @@
                 <!--end::Sidebar-->
                 <!--begin::Main-->
                 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-                    <!--begin::Content wrapper-->
+
                     <div class="d-flex flex-column flex-column-fluid">
                         @yield('content')
                     </div>

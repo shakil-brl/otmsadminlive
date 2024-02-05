@@ -100,6 +100,15 @@
             $('#searchInput').on('keyup', function() {
                 table.search(this.value).draw();
             });
+            // view
+            $(document).on("click", ".view", function(e) {
+                let id = $(this).data('id');
+
+                let finalUrl =
+                    `${app_url}/tms-phase/${id}`;
+
+                window.location.href = finalUrl;
+            });
             // edit
             $(document).on("click", ".edit-action", function(e) {
                 let id = $(this).data('id');

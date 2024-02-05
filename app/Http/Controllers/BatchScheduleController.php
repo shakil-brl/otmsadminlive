@@ -51,6 +51,8 @@ class BatchScheduleController extends Controller
 
     public function index($schedule_id, $batch_id)
     {
+        $schedule_id = decrypt($schedule_id);
+        $batch_id = decrypt($batch_id);
 
         $userRole = Session::get('access_token.role');
         $results = ApiHttpClient::request('get', 'batch/' . $batch_id . '/show')
@@ -72,6 +74,7 @@ class BatchScheduleController extends Controller
     // create batch schedule
     public function create($batch_id)
     {
+        $batch_id = decrypt($batch_id);
         $error = session('error') ?? '';
         $results = ApiHttpClient::request('get', 'batch/' . $batch_id . '/show')
             ->json();

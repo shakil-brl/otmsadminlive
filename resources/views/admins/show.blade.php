@@ -172,7 +172,7 @@
     </div>
     <!--End::Content wrapper-->
 @section('scripts')
-    <script src="{{ asset('assets/dist/assets/js/custom/call.admin.show.api.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/assets/js/custom/call.admin.show.api.js') }}"></script> --}}
     <script src="{{ asset('assets/dist/assets/js/custom/account/settings/signin-methods.js') }}"></script>
 
     <script>

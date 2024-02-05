@@ -121,12 +121,12 @@
 
                                 <div class="buttons">
                                     @if ($schedule == null)
-                                    <a href="{{ route('batch-schedule.create', $batch['id']) }}"
+                                    <a href="{{ route('batch-schedule.create', encrypt($batch['id'])) }}"
                                         class="btn schedule-btn btn-create">
                                         {{ __('batch-list.create_schedule') }}
                                     </a>
                                     @else
-                                    <a href="{{ route('batch-schedule.index', [$schedule['id'], $batch['id']]) }}"
+                                    <a href="{{ route('batch-schedule.index', [encrypt($schedule['id']), encrypt($batch['id'])]) }}"
                                         class="btn schedule-btn btn-view">{{ __('batch-list.view_schedule') }}</a>
                                     @endif
                                 </div>

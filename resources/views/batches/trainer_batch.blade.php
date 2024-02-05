@@ -6,14 +6,14 @@
         <h3>{{ __('batch-list.batches_list') }}</h3>
         <table class="table table-bordered bg-white">
             <thead>
-                <th>{{__('batch-list.sl')}}</th>
-                <th>{{__('batch-list.batch_code')}}</th>
-                <th>{{__('batch-list.course_name')}}</th>
-                <th>{{__('batch-list.location')}}</th>
-                <th>{{__('batch-list.start_date')}}</th>
-                <th>{{__('batch-list.total_class')}}</th>
-                <th>{{__('batch-list.class_schedule')}}</th>
-                <th>{{__('batch-list.action')}}</th>
+                <th>{{ __('batch-list.sl') }}</th>
+                <th>{{ __('batch-list.batch_code') }}</th>
+                <th>{{ __('batch-list.course_name') }}</th>
+                <th>{{ __('batch-list.location') }}</th>
+                <th>{{ __('batch-list.start_date') }}</th>
+                <th>{{ __('batch-list.total_class') }}</th>
+                <th>{{ __('batch-list.class_schedule') }}</th>
+                <th>{{ __('batch-list.action') }}</th>
             </thead>
             <tbody>
                 @foreach ($results ?? [] as $index => $batch)
@@ -30,7 +30,7 @@
                         <td>
                             {{ \Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y') }}
                         </td>
-                        <td>{{ $batch['duration'] }}  {{__('batch-list.days')}}</td>
+                        <td>{{ $batch['duration'] }} {{ __('batch-list.days') }}</td>
                         <td>
                             @if ($schedule !== null)
                                 <span> Days: {{ $schedule['class_days'] }}</span><br>
@@ -43,11 +43,12 @@
                         </td>
                         <td>
                             @if ($schedule == null)
-                                <a href="{{ route('batch-schedule.create', $batch['id']) }}"
-                                    class="btn btn-sm btn-primary"> {{__('batch-list.create_schedule')}}</a>
+                                <a href="{{ route('batch-schedule.create', encrypt($batch['id'])) }}"
+                                    class="btn btn-sm btn-primary">
+                                    {{ __('batch-list.create_schedule') }}</a>
                             @else
-                                <a href="{{ route('batch-schedule.index', [$schedule['id'], $batch['id']]) }}"
-                                    class="btn btn-sm btn-info"> {{__('batch-list.view_schedule')}}</a>
+                                <a href="{{ route('batch-schedule.index', [encrypt($schedule['id']), encrypt($batch['id'])]) }}"
+                                    class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}</a>
                             @endif
                         </td>
                     </tr>

@@ -9,7 +9,8 @@
         {{-- @dd($lot) --}}
         <div class="card p-5">
             <div id="">
-
+                <h2 class="text-center">Inspaction</h2>
+                <small class="text-warning">*Batches that have schedules.</small>
             </div>
             <div class="mt-5">
                 <h4>Inspection (Find Batch)</h4>
@@ -55,41 +56,13 @@
                     </div>
                 </div>
                 <div class="my-5">
-                    <form action="" id="add-batch-form">
-                        <div class="d-none mb-3 border border-primary rounded p-3 d-flex justify-content-between"
-                            id="select-all">
-                            <div class="form-check d-flex align-items-center gap-2">
-                                <input class="form-check-input" type="checkbox" id="selectAllCheckbox" name=""
-                                    value="">
-                                <label class="form-check-label text-dark fw-bold" for="selectAllCheckbox">
-                                    Check All
-                                </label>
-                            </div>
-                            <div class="d-flex align-items-center gap-2">
-                                {{-- <label class="form-label" for="">Search:</label>
-                                    <input class="form-control" type="search" name="search" id="batchSearch"> --}}
-                            </div>
-                        </div>
-                        <input type="hidden" name="GEOCode">
-                        <div class="row row-cols-3 g-3" id="batch-checkbox">
+                    <h6>Batches:</h6>
+                    <div id="add-batch-form" class="border rounded p-4" style="background-color: #faf5ff;">
+                        <div class="row row-cols-3 g-2" id="batch-checkbox">
 
                         </div>
-                    </form>
-                </div>
-                <div class="my-5" id="link-batch-section">
-                    <div class="fw-bold fs-5">Selected Batch:</div>
-                    <div class="d-flex flex-wrap gap-1 border rounded p-3" id="link-batch-show"
-                        style="background-color: #faf5ff;">
-
                     </div>
-                    <button class="btn btn-danger mt-3" id="clear-selected">Clear</button>
                 </div>
-                <form action="" id="link-batch-form" class="">
-                    <input type="hidden" type="text" name="link-batches" value="">
-                    <div class="text-center mt-3">
-                        <button class="btn btn-success" type="submit">Submit</button>
-                    </div>
-                </form>
             </div>
         </div>
 
@@ -98,73 +71,12 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            localStorage.removeItem('selectedBatches');
-            // alert(fromEdit);
-            let storedDBBatches = 1;
-            // console.log(storedDBBatches);
-            // Initialize an empty object for selectedBatches
-            var selectedBatches = {};
-
-
-
-            // Convert selectedBatches to JSON
-            var selectedBatchesJSON = JSON.stringify(selectedBatches);
-
-            localStorage.setItem('selectedBatches', selectedBatchesJSON);
-
-            // link-batch-form input value set adn view
-            generateSelectedList();
-
-            // remove item form view
-            $("#link-batch-show").on('click', '.remove-batch-buton', function() {
-                // Find the #batchCodeHidden within the clicked .bg-white element
-                let removeBatchId = $(this).find('#batchCodeHidden').val();
-                // alert(removeBatchId);
-                let selectedBatches = JSON.parse(localStorage.getItem('selectedBatches'));
-                if (selectedBatches && selectedBatches.hasOwnProperty(removeBatchId)) {
-                    let checkboxId = `#${removeBatchId}`;
-
-                    // Check or uncheck the checkbox
-                    $(checkboxId).prop('checked', false);
-                    // Remove the property from the object
-                    delete selectedBatches[removeBatchId];
-
-                    // Save the updated object back to localStorage
-                    localStorage.setItem('selectedBatches', JSON.stringify(selectedBatches));
-                }
-                generateSelectedList();
-            });
-
             let divisionSelectElement = $("#gioLocation-form #division_id");
             let districtSelectElement = $("#gioLocation-form #district_id");
             let upazilaSelectElement = $("#gioLocation-form #upazila_id");
             let batchLinkForm = $("#add-batch-form");
             let batchLinkCheck = $("#add-batch-form #batch-checkbox");
-            let selectAllBox = $("#add-batch-form #select-all");
-
-            // remove stored localstoreage selectedBatches
-            $("#clear-selected").on('click', function(event) {
-                event.preventDefault();
-                localStorage.removeItem('selectedBatches');
-                // location.reload();
-                batchLinkCheck.html("");
-                selectAllBox.addClass("d-none");
-                generateSelectedList();
-                districtSelectElement.html("");
-                upazilaSelectElement.html("");
-                // populate division options
-                let optionFor = "Division";
-                let division_api_link = api_baseurl + "divisions";
-                populateLocationOption(
-                    optionFor,
-                    division_api_link,
-                    authToken,
-                    divisionSelectElement
-                );
-            })
-            // link-batch-form input value set
-            generateSelectedList();
-
+            let app_url = "{{ url('') }}";
             // populate division options
             let optionFor = "Division";
             let division_api_link = api_baseurl + "divisions";
@@ -183,7 +95,6 @@
                 districtSelectElement.html("");
                 upazilaSelectElement.html("");
                 batchLinkCheck.html("");
-                selectAllBox.addClass("d-none");
                 if (division_id) {
                     district_api_link = api_baseurl + "districts/" + division_id;
                     populateLocationOption(
@@ -201,7 +112,6 @@
                 let district_id = districtSelectElement.val();
                 if (district_id) {
                     batchLinkCheck.html("");
-                    selectAllBox.addClass("d-none");
                     upazila_api_link = api_baseurl + "upazilas/" + district_id;
                     populateLocationOption(
                         optionFor,
@@ -212,7 +122,6 @@
                 } else {
                     upazilaSelectElement.html("");
                     batchLinkCheck.html("");
-                    selectAllBox.addClass("d-none");
                 }
             });
 
@@ -254,12 +163,10 @@
 
             // get the checkbox value
             $('.api-call').change(function() {
-                let val =
-                    selectAllBox.addClass("d-none");
                 $("#checkAll").prop('checked', '');
                 batchLinkCheck.html("");
                 if (1) {
-                    const link = api_baseurl + "batch/batch-link/get-batches";
+                    const link = api_baseurl + "batch/link/get-batches";
                     $.ajax({
                         type: "GET",
                         url: link,
@@ -276,90 +183,40 @@
                         },
                         success: function(results) {
                             // Handle the successful response here
-                            // console.log(results.data);
+                            console.log(results.data);
                             let allData = results.data;
-                            let GEOCode = results.GEOCode;
-                            // console.log(results);
                             batchLinkCheck.html("");
 
-                            // Assuming you have already retrieved selectedBatches from local storage
-                            let selectedBatches = JSON.parse(localStorage.getItem(
-                                'selectedBatches')) || {};
-
                             if (allData.length > 0) {
-                                selectAllBox.removeClass("d-none");
                                 $("#selectAllCheckbox").prop('checked', '');
                                 $.each(allData, function(index, data) {
-                                    let isChecked = selectedBatches[data.id];
                                     let batchTitle = '';
                                     if (data.training) {
                                         batchTitle = data.training.title.Name ?? "";
+                                        scheduleId = data.schedule ? data.schedule.id :
+                                            "";
                                     }
-                                    let checkbox = `
-                                        <div class="col mt-5">
-                                            <div class="form-check">
-                                                <input class="form-check-input batch-checkbox" type="checkbox" id="${data.id}" name="batches[]"
-                                                    value="${data.id}" batchCode="${data.batchCode ?? ''}" batchTitle="${batchTitle ?? ''}"
-                                                    GEOLocation="${data.GEOLocation}" ${isChecked ? 'checked' : ''}>
-                                                <label class="form-check-label text-dark" for="${data.id}">
+                                    providerName = data.provider ? data.provider
+                                        .name :
+                                        "";
+                                    if (scheduleId) {
+                                        let checkbox = `
+                                        <div class="col">
+                                            <div class="mb-1 me-1 d-inline-flex bg-success text-white rounded overflow-hidden border border-secondary view-item batch-item" style="cursor: pointer;">                                                
+                                                <input type="hidden" name="batch_id" value="${data.id}">
+                                                <input type="hidden" name="schedule_id" value="${scheduleId}">
+                                                <div class="px-4 py-1 text-center" style="user-select: none;">
                                                     ${data.batchCode} (${batchTitle ?? ""})
-                                                </label>
+                                                    Provider: ${providerName}
+                                                </div>
                                             </div>
                                         </div>
                                     `;
 
-                                    batchLinkCheck.append(checkbox);
-                                });
-
-                                // Event listener for checkbox changes
-                                batchLinkCheck.on('change', 'input[name="batches[]"]',
-                                    function() {
-                                        let batchId = this.value;
-                                        let batchCode = this.getAttribute('batchCode') ||
-                                            '';
-                                        let batchTitle = this.getAttribute('batchTitle') ||
-                                            '';
-                                        let GEOLocation = this.getAttribute(
-                                                'GEOLocation') ||
-                                            '';
-
-                                        // Update the selectedBatches object
-                                        if (this.checked) {
-                                            selectedBatches[batchId] = {
-                                                batchCode: batchCode,
-                                                title: batchTitle,
-                                                GEOLocation: GEOLocation
-                                            };
-                                        } else {
-                                            delete selectedBatches[batchId];
-                                        }
-
-                                        // Store the updated selectedBatches in local storage
-                                        localStorage.setItem('selectedBatches', JSON
-                                            .stringify(selectedBatches));
-
-                                        let storedBatches = JSON.parse(localStorage.getItem(
-                                            'selectedBatches')) || {};
-                                        // console.log(storedBatches);
-                                        // link-batch-form input vlue set
-                                        generateSelectedList()
-                                    });
-
-                                // all select
-                                $("#selectAllCheckbox").on('change', function() {
-                                    let isChecked = this.checked;
-
-                                    // Update all individual checkboxes
-                                    $(('.batch-checkbox:not(:disabled)')).each(
-                                        function() {
-                                            this.checked = isChecked;
-
-                                            // Trigger the change event for each individual checkbox
-                                            $(this).change();
-                                        });
+                                        batchLinkCheck.append(checkbox);
+                                    }
                                 });
                             } else {
-                                selectAllBox.addClass("d-none");
                                 batchLinkCheck.append(`
                                     <div class="text-danger">No Batch Found</div>
                                 `);
@@ -379,107 +236,18 @@
                 }
             });
 
-            // lot link batches form submit
-            // $("#link-batch-form").submit(function(e) {
-            //     e.preventDefault();
-            //     Swal.fire({
-            //         title: "Are you sure",
-            //         text: "You want to submit the form?",
-            //         icon: "warning",
-            //         showCancelButton: true,
-            //         confirmButtonColor: "#3085d6",
-            //         cancelButtonColor: "#d33",
-            //         confirmButtonText: "Yes, Submitted",
-            //     }).then((result) => {
-            //         if (result.isConfirmed) {
-            //             let fd = new FormData();
-            //             let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-            //             let link = api_baseurl + "lot/link-batch";
+            batchLinkCheck.on('click', '.batch-item', function() {
+                var batchId = $(this).find('input[name="batch_id"]').val();
+                var scheduleId = $(this).find('input[name="schedule_id"]').val();
+                console.log("Batch ID: " + batchId);
+                console.log("Schedule ID: " + scheduleId);
+                if (batchId && scheduleId) {
+                    let finalUrl =
+                        `${app_url}/tms-inspections/create?batch_id=${batchId}&schedule_detail_id=${scheduleId}`;
 
-            //             let batchIds = $("#link-batch-form [name=link-batches]").val();
-
-            //             console.log(batchIds);
-
-            //             fd.append("batch_ids", batchIds);
-            //             fd.append("lot_id", lotId);
-            //             fd.append("_token", CSRF_TOKEN);
-
-            //             $.ajax({
-            //                 type: "post",
-            //                 data: fd,
-            //                 processData: false,
-            //                 contentType: false,
-            //                 dataType: "JSON",
-            //                 url: link,
-            //                 headers: {
-            //                     Authorization: authToken,
-            //                     "X-localization": language,
-            //                 },
-            //                 success: function(results) {
-            //                     console.log(results);
-            //                     if (results.success === true) {
-            //                         swal.fire(yes, results.message);
-
-            //                         sessionStorage.setItem("message", results.message);
-            //                         sessionStorage.setItem("alert-type", "info");
-
-            //                         // refresh page after 2 seconds
-            //                         setTimeout(function() {
-            //                             // location.reload();
-            //                             history.back();
-            //                         }, 2000);
-            //                     } else {
-            //                         if (results.error === true) {
-            //                             var errors = results.message;
-            //                             swal.fire(ValidationError, errors);
-            //                         }
-            //                     }
-            //                 },
-            //             });
-            //         }
-            //     });
-            // });
-
-            // function 
-            function generateSelectedList() {
-                let linkBatchSection = $("#link-batch-section");
-                let linkBatchShowDiv = $("#link-batch-show");
-                linkBatchShowDiv.empty(); // Clear previous content
-                let storedBatches = JSON.parse(localStorage.getItem('selectedBatches')) || {};
-                if (Object.keys(storedBatches).length > 0) {
-                    // linkBatchSection.removeClass('d-none');
-                    let batchKeysArray = Object.keys(storedBatches);
-
-                    // Set the value of the input to the array of batch keys
-                    $("#link-batch-form [name='link-batches']").val(batchKeysArray);
-
-                    // Append array object items to the div with ID link-batch-show  
-
-                    batchKeysArray.forEach(batchId => {
-                        // Access the batch information from storedBatches using the batchId
-                        let batchInfo = storedBatches[batchId];
-
-                        // Create a pill-like element with batchCode and title and append it to the div
-                        let pillElement =
-                            `<div class="mb-1 me-1 d-inline-flex bg-white rounded overflow-hidden border border-secondary view-item">
-                                <div class="px-4 py-1">
-                                    <div>${batchInfo.batchCode} - ${batchInfo.title}</div>
-                                    <div>(${batchInfo.GEOLocation})</div>                                    
-                                </div>
-                                <div type="button" class="bg-danger lead text-light d-flex align-items-center justify-content-center px-2 remove-batch-buton">
-                                    &times;
-                                    <input type="hidden" id="batchCodeHidden" value="${batchId}">
-                                </div>
-                            </div>`;
-                        linkBatchShowDiv.append(pillElement);
-                    });
-                    $("#clear-selected").removeClass("d-none");
-                } else {
-                    // linkBatchSection.addClass('d-none');
-                    $("#clear-selected").addClass("d-none");
-                    $("#link-batch-form [name='link-batches']").val('');
+                    window.open(finalUrl);
                 }
-            }
+            });
         });
     </script>
 @endsection
