@@ -6,67 +6,67 @@
         <div class="mb-3">
             <select name="" wire:model='per_page'>
                 @foreach (range(15, 100, 15) as $j)
-                    <option>{{ $j }}</option>
+                    <option>{{ digitLocale($j) }}</option>
                 @endforeach
             </select>
             <div class="row row-cols-4 mt-2 row-cols-xxl-5 g-2 mb-2">
                 <div>
-                    <label for="">বিভাগ</label>
+                    <label for="">{{__('batch-list.division')}}</label>
                     <select wire:model='division_code' name="" class="form-select" id="">
-                        <option value="">Select</option>
+                        <option value="">{{__('batch-list.select_division')}}</option>
                         @foreach ($divisions as $division)
                             <option value="{{ $division['Code'] }}">{{ $division['Name'] }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <label for="">জেলা</label>
+                    <label for="">{{__('batch-list.district')}}</label>
                     <select wire:model='district_code' name="" class="form-select" id="">
-                        <option value="">Select</option>
+                        <option value="">{{__('batch-list.select_district')}}</option>
                         @foreach ($districts as $district)
                             <option value="{{ $district['Code'] }}">{{ $district['Name'] }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <label for="">উপজেলা</label>
+                    <label for="">{{__('batch-list.upazila')}}</label>
                     <select wire:model='upazila_code' name="" class="form-select" id="">
-                        <option value="">Select</option>
+                        <option value="">{{__('batch-list.select_upazila')}}</option>
                         @foreach ($upazilas as $upazila)
                             <option value="{{ $upazila['Code'] }}">{{ $upazila['Name'] }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <label for="">ভেন্ডরের নাম</label>
+                    <label for="">{{__('batch-list.vendor_name')}}</label>
                     <select wire:model='provider_id' name="" class="form-select" id="">
-                        <option value="">Select</option>
+                        <option value="">{{__('batch-list.select_vendor')}}</option>
                         @foreach ($providers as $provider)
                             <option value="{{ $provider['id'] }}">{{ $provider['name'] }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <label for="">প্রশিক্ষণের বিষয়</label>
+                    <label for="">{{__('batch-schedule.course_name')}}</label>
                     <select wire:model='training_id' name="" class="form-select" id="">
-                        <option value="">Select</option>
+                        <option value="">{{__('batch-list.select_course')}}</option>
                         @foreach ($trainings as $training)
                             <option value="{{ $training['id'] }}">{{ $training['title']['Name'] }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="">
-                    <label for="">From Date</label>
+                    <label for="">{{__('batch-list.from_date')}}</label>
                     <input wire:model='from_date' type="date" class="form-control">
                 </div>
                 <div class="">
-                    <label for="">To Date</label>
+                    <label for="">{{__('batch-list.to_date')}}</label>
                     <input wire:model='to_date' type="date" class="form-control">
                 </div>
                 <div class="">
-                    <label for="">Batch Code</label>
+                    <label for="">{{__('batch-list.batch_code')}}</label>
                     <input wire:model='search' type="search" name="search" value="{{ request('search') }}"
-                        class="form-control" placeholder="{{ __('batch-schedule.search_here') }}">
+                        class="form-control" placeholder="{{__('batch-list.search_with_batch')}}">
                 </div>
             </div>
 
@@ -75,10 +75,10 @@
             <thead>
                 <th>{{ __('batch-schedule.sl') }}</th>
                 <th>{{ __('batch-schedule.batch_code') }}</th>
-                <th>{{ __('batch-schedule.start_time') }}</th>
-                <th>{{ __('batch-schedule.course_name') }}<br/>{{ __('batch-schedule.location') }}</th>                 
-                <th>{{ __('batch-schedule.development_partner') }}</th>
-                <th>Trainer</th>
+                <th>{{ __('batch-list.class_detail') }}</th>
+                <th>{{__('batch-list.course_location')}}</th>                 
+                <th>{{__('batch-list.vendor_info')}}</th>
+                <th>{{__('batch-list.trainer')}}</th>
                 <th class="text-end" style="width: 300px;">{{ __('batch-schedule.action') }}</th>
             </thead>
             <tbody>
@@ -94,9 +94,9 @@
                            {{-- <small class="text-danger">Total Trainees: {{$batch['schedule']['training_batch']['totalTrainees']}}</small>  --}}
                         </td>
                         <td>
-                            {{ $batch['date'] ?? '' }}
+                            {{__('batch-list.start_date')}}: {{ isset($batch['date']) ? digitLocale(\Carbon\Carbon::parse($batch['date'])->format('d-m-Y')) : digitLocale(null) }}
                             <div>
-                              <small class="text-primary">  {{ digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) }}</small>
+                                {{__('batch-list.start_time')}}: <small class="text-primary">  {{ digitLocale(\Carbon\Carbon::createFromFormat('H:i:s', $batch['start_time'])->format('h:i A')) }}</small>
                             </div>
                         </td>
                         <td>
@@ -149,14 +149,14 @@
                                     @if (in_array('tms-inspections.create', Session::get('access_token.rolePermission')))
                                     <a class="btn btn-sm btn-primary"
                                             href="{{ route('tms-inspections.create', $inspection_pm) }}" target="_blank">
-                                            Inspection
+                                            {{ __('batch-list.inspection') }}
                                         </a>
                                         @endif
                                     @endif
                                     @if ($status != 1)
                                         <a class="btn btn-sm btn-info"
                                             href="{{ route('attendance.form', encrypt($batch['id'])) }}"
-                                            target="_blank">Attendence
+                                            target="_blank">{{__('batch-list.view_attendance')}}
                                         </a>
                                     @endif
                                 @endisset
