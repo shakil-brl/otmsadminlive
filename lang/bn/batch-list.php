@@ -71,6 +71,27 @@ return [
     'absent_tarinees' => 'অনুপস্থিত প্রশিক্ষণার্থী',
     'name' => 'নাম',
     'attendance' => 'উপস্থিতি',
+    'division' => 'বিভাগ',
+    'district' => 'জেলা',
+    'upazila' => 'উপজেলা',
+    'vendor_name' => 'ভেন্ডরের নাম',
+    'course_names' => 'কোর্সের নাম',
+    'from_date' => 'তারিখ থেকে',
+    'to_date' => 'তারিখ পর্যন্ত',
+    'batches_code' => 'ব্যাচের কোড',
+    'trainer' => 'প্রশিক্ষক',
+    'select_division' => 'বিভাগ নির্বাচন করুন',
+    'select_district' => 'জেলা নির্বাচন করুন',
+    'select_upazila' => 'উপজেলা নির্বাচন করুন',
+    'select_vendor' => 'ভেন্ডর নির্বাচন করুন',
+    'select_course' => 'কোর্স নির্বাচন করুন',
+    'vendor_info' => 'ভেন্ডর তথ্য',
+    'inspection' => 'পরিদর্শন করুন',
+    'phone' => 'ফোন',
+    'search_with_batch' => 'ব্যাচ কোড দিয়ে সার্চ করুন',
+    'class_detail' => 'ক্লাসের বিস্তারিত',
+    'course_location' => 'কোর্সের নাম এবং স্থান',
+    
 
 
 

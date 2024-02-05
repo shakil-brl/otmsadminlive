@@ -69,6 +69,33 @@ return [
     'absent_tarinees' => 'Absent Trainees',
     'name' => 'Name',
     'attendance' => 'Attendance',
+    'division' => 'Division',
+    'district' => 'District',
+    'upazila' => 'Upazila',
+    'vendor_name' => 'Vendor Name',
+    'course_names' => 'Course Name',
+    'from_date' => 'From Date',
+    'to_date' => 'To Date',
+    'batches_code' => 'Batch Code',
+    'trainer' => 'Trainer',
+    'select_division' => 'Select Division',
+    'select_district' => 'Select District',
+    'select_upazila' => 'Select Upazila',
+    'select_vendor' => 'Select Vendor',
+    'select_course' => 'Select Course',
+    'vendor_info' => 'Vendor Information',
+    'inspection' => 'Inspection',
+    'phone' => 'Phone',
+    'search_with_batch' => 'Search With Batch Code',
+    'class_detail' => 'Class Details',
+    'course_location' => 'Course Name and Location',
+   
+  
+
+
+
+
+
  
     
 
