@@ -23,7 +23,7 @@
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.development_partner') }}</th>
-                    {{-- <th>{{ __('batch-list.action') }}</th> --}}
+                    <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
                     @foreach (collect($running_batches) as $batch)
@@ -48,11 +48,11 @@
                             <td>
                                 {{ $batch['training_batch']['provider']['name'] ?? '' }}
                             </td>
-                            {{-- <td>
-                                <a href="{{ route('') }}" class="btn btn-sm btn-info">
-                                    {{ __('batch-list.view') }}
+                            <td>
+                                <a href="{{ route('batch-schedule.index', [encrypt($batch['id']), encrypt($batch['training_batch']['id'])]) }}"
+                                    class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
                                 </a>
-                            </td> --}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -10,6 +10,7 @@
         <div class="card p-5">
             <div id="">
                 <h2 class="text-center">Inspaction</h2>
+                <small class="text-warning">*Batches that have schedules.</small>
             </div>
             <div class="mt-5">
                 <h4>Inspection (Find Batch)</h4>
@@ -55,8 +56,9 @@
                     </div>
                 </div>
                 <div class="my-5">
-                    <div id="add-batch-form" class="border rounded p-3" style="background-color: #faf5ff;">
-                        <div class="row row-cols-3 g-3" id="batch-checkbox">
+                    <h6>Batches:</h6>
+                    <div id="add-batch-form" class="border rounded p-4" style="background-color: #faf5ff;">
+                        <div class="row row-cols-3 g-2" id="batch-checkbox">
 
                         </div>
                     </div>
@@ -199,7 +201,7 @@
                                         "";
                                     if (scheduleId) {
                                         let checkbox = `
-                                        <div class="col mt-5">
+                                        <div class="col">
                                             <div class="mb-1 me-1 d-inline-flex bg-success text-white rounded overflow-hidden border border-secondary view-item batch-item" style="cursor: pointer;">                                                
                                                 <input type="hidden" name="batch_id" value="${data.id}">
                                                 <input type="hidden" name="schedule_id" value="${scheduleId}">
