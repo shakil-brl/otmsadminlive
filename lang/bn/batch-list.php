@@ -91,7 +91,7 @@ return [
     'search_with_batch' => 'ব্যাচ কোড দিয়ে সার্চ করুন',
     'class_detail' => 'ক্লাসের বিস্তারিত',
     'course_location' => 'কোর্সের নাম এবং স্থান',
-    'update_class_link' => 'ক্লাস লিঙ্ক আপডেট করুন',
+    'update_class_link' => 'ক্লাস লিংক আপডেট করুন',
     'trainee_attendance_list' => 'প্রশিক্ষণার্থীদের উপস্থিতির তালিকা',
     'serial' => 'সিরিয়াল',
     'trainee_name' => 'প্রশিক্ষণার্থীর নাম',
