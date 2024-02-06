@@ -192,7 +192,7 @@
                                             class="btn btn-secondary w-100 rounded-4 mb-1">Class Document</a>
                                         @if ($schedule_detail['status'] == 1 && !$runningClass)
                                             @if ($date <= \Carbon\Carbon::now())
-                                                <a id="{{ $schedule_detail['id'] }}" class="btn btn-detail start-class  update"
+                                                <a id="{{ encrypt($schedule_detail['id']) }}" class="btn btn-detail start-class  update"
                                                     type="button" data-bs-toggle="modal" data-bs-target="#classStartModal"
                                                     type="button">
                                                     {{ __('batch-schedule.start_class') }}
@@ -346,7 +346,7 @@
                     let static_link = $("#static_link").val();
 
                     let finalUrl =
-                        `${app_url}/attendance/${id}/start?streaming_link=${encodeURIComponent(streaming_link)}&static_link=${encodeURIComponent(static_link)}`;
+                        `${app_url}/attendance/${encodeURIComponent(id)}/start?streaming_link=${encodeURIComponent(streaming_link)}&static_link=${encodeURIComponent(static_link)}`;
                     window.location.href = finalUrl;
                 });
             });
