@@ -91,8 +91,19 @@ return [
     'search_with_batch' => 'ব্যাচ কোড দিয়ে সার্চ করুন',
     'class_detail' => 'ক্লাসের বিস্তারিত',
     'course_location' => 'কোর্সের নাম এবং স্থান',
+    'update_class_link' => 'ক্লাস লিংক আপডেট করুন',
+    'trainee_attendance_list' => 'প্রশিক্ষণার্থীদের উপস্থিতির তালিকা',
+    'serial' => 'সিরিয়াল',
+    'trainee_name' => 'প্রশিক্ষণার্থীর নাম',
+    'absent' => 'অনুপস্থিত',
+    'present' => 'উপস্থিত',
+    'present_trainee' => 'উপস্থিত প্রশিক্ষণার্থী',
+    'submit_attendance' => 'অ্যাটেনডেন্স সাবমিট করুন ',
+    'end_class' => 'ক্লাস শেষ করুন ',
+    'class_stremimg_link' => 'ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)',
+    'class_live_link' => 'লাইভ ক্লাস লিংক (গুগল মিট বা জুম)',
+    'update' => 'আপডেট করুন',
     
-
 
 
 

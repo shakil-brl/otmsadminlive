@@ -89,6 +89,22 @@ return [
     'search_with_batch' => 'Search With Batch Code',
     'class_detail' => 'Class Details',
     'course_location' => 'Course Name and Location',
+    'update_class_link' => 'Update Class Link',
+    'trainee_attendance_list' => 'Trainees Attendance List',
+    'serial' => 'Serial',
+    'trainee_name' => 'Trainee Name',
+    'absent' => 'Absent',
+    'present' => 'Present',
+    'present_trainee' => 'Present Trainee',
+    'submit_attendance' => 'Submit Attendance',
+    'end_class' => 'End Class',
+    'class_stremimg_link' => 'Class Live Streaming Link (Facebook or YouTube)',
+    'class_live_link' => 'Live Class Link (Google Meet or Zoom)',
+    'update' => 'Update',
+    
+
+
+    
    
   
 
