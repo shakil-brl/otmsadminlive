@@ -111,36 +111,36 @@
                 </div>
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Heading-->
-                    <div class="text-center mb-13">
+                    <div class="text-center mb-5" id="trainer-modal-header">
                         <h3 class="mt-3" id="trainer-name"></h3>
-                        <div class="text-muted fw-semibold fs-5">{{ __('trainer-enrollment-list.provider_name') }}:
-                            <span class="mb-3 text-muted " id="provider-name"></span>
+                        <div class="fw-semibold fs-5">{{ __('trainer-enrollment-list.provider_name') }}:
+                            <span class="mb-3" id="provider-name"></span>
                         </div>
-                        <div class="text-muted fw-semibold fs-5">{{ __('trainer-enrollment-list.email') }}:
+                        <div class="fw-semibold fs-5">{{ __('trainer-enrollment-list.email') }}:
                             <span id="trainer-email"></span>
                         </div>
-                        <div class="text-muted fw-semibold fs-5">{{ __('trainer-enrollment-list.phone') }}:
+                        <div class="fw-semibold fs-5">{{ __('trainer-enrollment-list.phone') }}:
                             <span id="trainer-phone"></span>
                         </div>
-                        <div class="text-muted fw-semibold fs-5">{{ __('trainer-enrollment-list.address') }}:
+                        <div class="fw-semibold fs-5">{{ __('trainer-enrollment-list.address') }}:
                             <span id="trainer-address"></span>
                         </div>
                     </div>
                     <!--end::Heading-->
                     <!--begin::Users-->
-                    <div class="mb-15">
+                    <div class="mb-5" id="trainer-batches-list">
                         <!--begin::List-->
                         <div>
-                            <h4 class="text-center">Batches:</h4>
+                            <h4 class="">Batches:</h4>
                         </div>
-                        <div class="mh-375px scroll-y me-n7 pe-7" id="trainer-batches-list">
+                        <div class="mh-375px scroll-y me-n7 pe-7">
 
                         </div>
                         <!--end::List-->
                     </div>
                     <!--end::Users-->
                     <!--begin::Actions-->
-                    <div class="text-center pt-15">
+                    <div class="text-center">
                         <a href="#" type="reset" data-bs-dismiss="modal" class="btn btn-light me-3"
                             data-kt-users-modal-action="cancel">{{ __('trainer-enrollment-list.discard') }}</a>
                     </div>
@@ -159,7 +159,8 @@
             $(document).on("click", "#view_trainer_modal_btn", function(e) {
                 e.preventDefault();
                 let trainerBatchesList = $("#trainer-batches-list");
-                trainerBatchesList.empty();
+                let trainerModalHeader = $("#trainer-modal-header");
+
                 let id = $(this).attr("data-trainer-enroll-id");
                 let link = api_baseurl + "trainer-enroll/" + id + "/show";
 
@@ -172,7 +173,6 @@
                     },
                     success: function(results) {
                         let enrollData = results.data;
-                        console.log(enrollData);
                         $("#view_trainer_modal #trainer-name").html((enrollData.profile
                             .KnownAs ?? "") + " (" + (enrollData.profile
                             .KnownAsBangla ?? "") + ")");
@@ -185,72 +185,53 @@
                         );
 
                         let trainingBatches = enrollData.provider_trainers;
-                        console.log(trainingBatches);
                         sessionStorage.removeItem("message");
 
-                        if (trainingBatches) {
-                            $("#view_trainer_modal #provider-name").html(trainingBatches[0]
-                                .provider.name ?? "");
+                        if (trainingBatches && trainingBatches.length > 0) {
+                            let tableContent = `
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Training Title</th>
+                                            <th>${locations}</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                            `;
+
                             trainingBatches.forEach(batch => {
                                 let detals_href = `/batches/${batch.id}`;
 
-                                let batchListItem1 = `
-                                    <!--begin::Batch-->
-                                    <div class="d-flex flex-stack py-2 border-bottom border-gray-300 border-bottom-dashed">
-                                        <h5 class="mt-3">Code: ${
-                                            batch.training_batch.batchCode ?? ""
-                                        }</h5>
-                                    </div>
-                                    <div class="d-flex flex-stack py-2 border-bottom border-gray-300 border-bottom-dashed">
-                                        <!--begin::Details-->
-                                        <div class="d-flex align-items-center">                                    
-                                            <!--begin::Details-->
-                                            <div class="ms-6">
-                                                <!--begin::Name-->                                               
-                                                    <div class="text-muted fw-semibold fs-5">Training Title:
-                                                        <span class="badge badge-light fs-8 fw-semibold ms-2">
-                                                        ${
-                                                            batch.training_batch.training.title.NameEn ??
-                                                            ""
-                                                        }
-                                                        </span>
-                                                    </div>
-                                                    <div class="text-muted fw-semibold fs-5">${locations}:
-                                                        <span class="badge badge-light fs-8 fw-semibold ms-2">
-                                                        ${
-                                                            batch.training_batch.GEOLocation ??
-                                                            ""
-                                                        }
-                                                        </span>
-                                                    </div> 
-                                                    
-                                                <!--end::Name-->
-                                            </div>
-                                            <!--end::Details-->
-                                        </div>
-                                        <!--end::Details-->
-                                        <!--begin::Stats-->
-                                        <div class="d-flex align-items-center"">
-                                            <!--begin::Sales-->
-                                            <div class="ms-6">                                            
-                                                <a href="${detals_href}" target="_blank" class="btn btn-sm btn-primary">View Details</a>
-                                            </div>
-                                            <!--end::Sales-->
-                                        </div>
-                                        <!--end::Stats-->
-                                    </div>
-                                    <!--end::Batch-->
+                                let tableRow = `
+                                    <tr>
+                                        <td>${batch.training_batch.batchCode ?? ""}</td>
+                                        <td>${batch.training_batch.training.title.NameEn ?? ""}</td>
+                                        <td>${batch.training_batch.GEOLocation ?? ""}</td>
+                                        <td>
+                                            <a href="${detals_href}" target="_blank" class="btn btn-sm btn-primary">Details</a>
+                                        </td>
+                                    </tr>
                                 `;
 
-                                trainerBatchesList.append(batchListItem1);
+                                tableContent += tableRow;
                             });
+
+                            tableContent += `
+                                    </tbody>
+                                </table>
+                            `;
+
+                            trainerBatchesList.html(tableContent);
                         } else {
                             trainerBatchesList.html(`
-                            <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed text-warning">
-                                No Batch Found
-                            </div>
-                        `);
+                                <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed text-warning">
+                                    No Batch Found
+                                </div>
+                            `);
                         }
+
                     },
                     error: function(xhr, status, error) {
                         // Handle errors here details
