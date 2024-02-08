@@ -176,6 +176,9 @@
                         $("#view_trainer_modal #trainer-name").html((enrollData.profile
                             .KnownAs ?? "") + " (" + (enrollData.profile
                             .KnownAsBangla ?? "") + ")");
+                        $("#view_trainer_modal #provider-name").html(enrollData
+                            .provider_trainers[0]
+                            .provider.name ?? "");
                         $("#view_trainer_modal #trainer-email").html(enrollData.profile
                             .Email ?? "");
                         $("#view_trainer_modal #trainer-phone").html(enrollData.profile
