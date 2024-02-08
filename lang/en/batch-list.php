@@ -69,6 +69,49 @@ return [
     'absent_tarinees' => 'Absent Trainees',
     'name' => 'Name',
     'attendance' => 'Attendance',
+    'division' => 'Division',
+    'district' => 'District',
+    'upazila' => 'Upazila',
+    'vendor_name' => 'Vendor Name',
+    'course_names' => 'Course Name',
+    'from_date' => 'From Date',
+    'to_date' => 'To Date',
+    'batches_code' => 'Batch Code',
+    'trainer' => 'Trainer',
+    'select_division' => 'Select Division',
+    'select_district' => 'Select District',
+    'select_upazila' => 'Select Upazila',
+    'select_vendor' => 'Select Vendor',
+    'select_course' => 'Select Course',
+    'vendor_info' => 'Vendor Information',
+    'inspection' => 'Inspection',
+    'phone' => 'Phone',
+    'search_with_batch' => 'Search With Batch Code',
+    'class_detail' => 'Class Details',
+    'course_location' => 'Course Name and Location',
+    'update_class_link' => 'Update Class Link',
+    'trainee_attendance_list' => 'Trainees Attendance List',
+    'serial' => 'Serial',
+    'trainee_name' => 'Trainee Name',
+    'absent' => 'Absent',
+    'present' => 'Present',
+    'present_trainee' => 'Present Trainee',
+    'submit_attendance' => 'Submit Attendance',
+    'end_class' => 'End Class',
+    'class_stremimg_link' => 'Class Live Streaming Link (Facebook or YouTube)',
+    'class_live_link' => 'Live Class Link (Google Meet or Zoom)',
+    'update' => 'Update',
+    
+
+
+    
+   
+  
+
+
+
+
+
  
     
 

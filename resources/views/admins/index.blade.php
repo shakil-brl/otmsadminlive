@@ -102,14 +102,12 @@
                                 <thead>
                                     <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                         <th class="w-10px pe-2">
-                                            S.N.
+                                            {{ __('admin-user-list.sl') }}
                                         </th>
                                         <th class="min-w-125px">{{ __('admin-user-list.profile_id') }}</th>
-                                        <th class="min-w-125px">{{ __('admin-user-list.user_name') }}</th>
+                                        <th class="min-w-125px">{{ __('admin-user-list.name_email') }}</th>
                                         <th class="min-w-125px">{{ __('admin-user-list.role') }}</th>
-                                        <th class="min-w-125px">{{ __('admin-user-list.email') }}</th>
-                                        <th class="min-w-125px">{{ __('admin-user-list.nid') }}</th>
-                                        <th class="min-w-125px">{{ __('admin-user-list.vendor_name') }}</th>
+                                        <th class="min-w-125px">{{ __('admin-user-list.nid_phone') }}</th>
                                         <th class="text-end min-w-100px">{{ __('admin-user-list.action') }}</th>
                                     </tr>
                                 </thead>
@@ -373,7 +371,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="provider-row">
+                            <div class="fv-row mb-7 d-none" id="provider">
                                 <!--begin::Label-->
                                 <label class="required fw-semibold fs-6 mb-2">Provider</label>
                                 <!--end::Label-->

@@ -56,7 +56,7 @@
                             data-bs-toggle="modal" data-bs-target="#classLinkUpdateModal" type="button"
                             data-streaming-link="{{ $schedule_detail['streaming_link'] }}"
                             data-static-link="{{ $schedule_detail['static_link'] }}">
-                            Update Link
+                            {{__('batch-list.update_class_link')}}
                         </a>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
         @endphp
         <div>
             <div>
-                <h3 class="text-center mb-2 bg-white rounded-4 p-2">Trainee Attendance Form:</h3>
+                <h3 class="text-center mb-2 bg-white rounded-4 p-2"> {{__('batch-list.trainee_attendance_list')}}</h3>
                 <form method="POST" action="{{ route('attendance.take-attendance', $detail_id) }}" class=""
                     id="attendanceForm">
                     @csrf
@@ -89,12 +89,12 @@
                                 <div class="student">
                                     <div class="row row-cols-3 align-items-center">
                                         <div>
-                                            <div class="label">সিরিয়াল #</div>
+                                            <div class="label"> {{__('batch-list.serial')}}#</div>
                                             <div class="text">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</div>
                                         </div>
                                         <div>
                                             <label for="student{{ $loop->iteration }}" class="">
-                                                <div class="label">প্রশিক্ষণার্থীর নাম</div>
+                                                <div class="label"> {{__('batch-list.trainee_name')}}</div>
                                                 <div class="text">{{ $student['profile']['KnownAs'] }}</div>
                                             </label>
                                         </div>
@@ -114,7 +114,7 @@
                         <div id="attendance-bottom">
                             <div class="left">
                                 <div class="label">
-                                    উপস্থিত প্রশিক্ষণার্থী
+                                    {{__('batch-list.present_trainee')}}
                                     <span id="totalAttendance"></span>/<span>{{ count($students) }}</span>
                                 </div>
                                 <div class="attendance-progress">
@@ -123,10 +123,8 @@
                             </div>
                             <div class="right">
                                 @if ($status == 2)
-                                    <button class="btn btn-attendance" name="submit" value="attendance">সাবমিট
-                                        অ্যাটেনডেন্স</button>
-                                    <button class="btn btn-end end-class" name="submit" value="end">শেষ
-                                        ক্লাস</button>
+                                    <button class="btn btn-attendance" name="submit" value="attendance">{{__('batch-list.submit_attendance')}}</button>
+                                    <button class="btn btn-end end-class" name="submit" value="end">{{__('batch-list.end_class')}}</button>
                                 @endif
                             </div>
                         </div>
@@ -144,7 +142,7 @@
             <div class="modal-content">
                 <div class="modal-header" id="kt_modal_update_permission_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">Class Link</h2>
+                    <h2 class="fw-bold"> {{__('batch-list.update_class_link')}}</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div type="button" class="btn-close" data-bs-dismiss="modal">
@@ -154,17 +152,17 @@
                 <!--begin::Provider added Form-->
                 <div class="modal-body">
                     <div class="mb-2">
-                        <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)</label>
+                        <label for="streaming_link_update" class="mb-1 text-danger h6">{{__('batch-list.class_stremimg_link')}}</label>
                         <input id="streaming_link_update" type="text" class="form-control">
                     </div>
                     <div class="mb-2">
-                        <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক গুগল মিট বা জুম</label>
+                        <label for="static_link_update" class="mb-1 text-danger h6"> {{__('batch-list.class_live_link')}}</label>
                         <input id="static_link_update" type="text" class="form-control">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" data-bs-dismiss="modal" class="btn btn-light">Close</button>
-                    <button id="link-update-submit" type="button" class="btn btn-danger">Update</button>
+                <div class="modal-footer text-center">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-light">{{__('batch-list.close')}}</button>
+                    <button id="link-update-submit" type="button" class="btn btn-danger">{{__('batch-list.update')}}</button>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ class DashboardDetailsController extends Controller
             ...$request->all(),
             'page' => $request->page ?? 1,
         ])->json();
-        // dd($total_batches);
+         //dd($total_batches);
         if ($total_batches['success'] == true) {
             $batches = $total_batches['data']['data'];
             // dd($batches);

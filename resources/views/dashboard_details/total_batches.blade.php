@@ -26,9 +26,12 @@
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
+                   
                     @foreach (collect($total_batches) as $batch)
+                    
                         <tr>
                             <td>
+                               {{-- // @dump($batch) --}}
                                 {{ digitLocale($from_no + $loop->iteration - 1) }}
                             </td>
                             <td>
@@ -45,24 +48,26 @@
                                 {{ __('batch-list.days') }}
                             </td>
                             <td>
-                                
-                                @if (strtolower(Session::get('access_token')['role']) == 'trainer' ||strtolower(Session::get('access_token')['role']) == 'provider' )
-                                    @if ($batch['schedule'] == null)
+                                @if ($batch['schedule'] == null)
                                     @if (strtolower(Session::get('access_token')['role']) == 'provider')
-                                        <a href="{{ route('batch-schedule.create', $batch['id']) }}"
-                                            class="btn btn-sm btn-primary"> {{__('batch-list.create_schedule')}}</a>
-                                            @else
-                                            <span class="badge text-black badge-warning">Schedule Not Created</span>
-                                            @endif
+                                        <a href="{{ route('batch-schedule.create', encrypt($batch['id'])) }}"
+                                            class="btn btn-sm btn-primary"> {{ __('batch-list.create_schedule') }}</a>
                                     @else
-                                        <a href="{{ route('batch-schedule.index', [$batch['schedule']['id'], $batch['id']]) }}"
-                                            class="btn btn-sm btn-info"> {{__('batch-list.view_schedule')}}</a>
+                                        <span class="badge text-black badge-warning">Schedule Not Created</span>
                                     @endif
-                                @endif
+                                @else
+                                    <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
+                                        class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}</a>
 
-                                {{-- <a href="" class="btn btn-sm btn-info">
-                                    {{ __('batch-list.view') }}
-                                </a> --}}
+                                        <div class="progress m-1">
+                                            <div class="progress-bar" role="progressbar" style="width: {{$batch['schedule']['total_complete']}}%" aria-valuenow="{{$batch['schedule']['total_complete']}}" aria-valuemin="{{$batch['schedule']['total_complete']}}" aria-valuemax="{{$batch['duration']}}"></div>
+                                          </div>
+
+                                          <small>Complete:{{$batch['schedule']['total_complete'] }} </small>/
+                                          <small>Pending:{{$batch['schedule']['total_pending'] }} </small>/
+                                          <small>Running{{$batch['schedule']['total_running'] }} </small>
+                                          
+                                @endif
                             </td>
                         </tr>
                     @endforeach

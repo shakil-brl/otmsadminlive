@@ -32,12 +32,12 @@
                                 {{ digitLocale($loop->iteration) }}
                             </td>
                             <td>
-                               
+
                                 {{ $batch['training_batch']['batchCode'] ?? '' }}
                             </td>
                             <td>
                                 {{ $batch['training_batch'] ? digitLocale(\Carbon\Carbon::parse($batch['training_batch']['startDate'])->format('d-m-Y')) : digitLocale(null) }}
-                                
+
                             </td>
                             <td>
                                 {{ $batch['training_batch']['training']['title']['Name'] ?? '' }}
@@ -49,8 +49,8 @@
                                 {{ $batch['training_batch']['provider']['name'] ?? '' }}
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-info">
-                                    {{ __('batch-list.view') }}
+                                <a href="{{ route('batch-schedule.index', [encrypt($batch['id']), encrypt($batch['training_batch']['id'])]) }}"
+                                    class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
                                 </a>
                             </td>
                         </tr>

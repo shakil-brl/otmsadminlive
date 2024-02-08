@@ -38,7 +38,7 @@ class AttendanceController extends Controller
         ]);
 
         $results = ApiHttpClient::request('post', 'attendance/start-class', [
-            'schedule_detail_id' => $id,
+            'schedule_detail_id' => decrypt($id),
             ...$request->only('streaming_link', 'static_link'),
         ])->json();
 
@@ -91,6 +91,8 @@ class AttendanceController extends Controller
 
     public function attendanceForm($id, $batchId = null)
     {
+        $id = decrypt($id);
+        // dd($id);
         $schedule_details = ApiHttpClient::request('get', 'batch-schedule-details/' . $id)
             ->json();
 
