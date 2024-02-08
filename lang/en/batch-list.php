@@ -101,6 +101,9 @@ return [
     'class_stremimg_link' => 'Class Live Streaming Link (Facebook or YouTube)',
     'class_live_link' => 'Live Class Link (Google Meet or Zoom)',
     'update' => 'Update',
+    'complete_class' => 'Complete Class',
+    'pending_class' => 'Pending Class',
+    'running_class' => 'Running Class',
     
 
 
