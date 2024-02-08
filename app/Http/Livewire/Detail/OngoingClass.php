@@ -29,7 +29,7 @@ class OngoingClass extends Component
     public $from_date;
     public $to_date;
     public $status;
-    public $current_schedule = 1;
+    public $current_schedule ;
     public function updated($attr)
     {
 
