@@ -103,6 +103,9 @@ return [
     'class_stremimg_link' => 'ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)',
     'class_live_link' => 'লাইভ ক্লাস লিংক (গুগল মিট বা জুম)',
     'update' => 'আপডেট করুন',
+    'complete_class' => 'কমপ্লিট ক্লাস',
+    'pending_class' => 'পেন্ডিং ক্লাস',
+    'running_class' => 'চলমান ক্লাস',
     
 
 
