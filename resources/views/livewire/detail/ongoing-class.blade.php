@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <select name="" class="form-select" wire:model='status'>
-                        {{-- <option value="">Select Status</option> --}}
+                         <option value="">Select Status</option> 
                         <option value="1">Class Not Started</option>
                         <option value="2">Class Running</option>
                         <option value="3">Class End</option>
