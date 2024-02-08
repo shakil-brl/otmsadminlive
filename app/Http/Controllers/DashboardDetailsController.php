@@ -17,7 +17,7 @@ class DashboardDetailsController extends Controller
             ...$request->all(),
             'page' => $request->page ?? 1,
         ])->json();
-         //dd($total_batches);
+        //dd($total_batches);
         if ($total_batches['success'] == true) {
             $batches = $total_batches['data']['data'];
             // dd($batches);
@@ -77,23 +77,6 @@ class DashboardDetailsController extends Controller
     public function ongoingClasses(Request $request)
     {
         return view('dashboard_details.ongoing_classes', ['status' => $request->status ?? '']);
-        // $ongoing_classes = ApiHttpClient::request(
-        //     'get',
-        //     'detail/class-running',
-        //     $request->all(),
-        // )->json();
-        // //  dd($ongoing_classes);
-        // if ($ongoing_classes['success'] == true) {
-        //     $batches = $ongoing_classes['data']['data'];
-        //     $paginator = $this->customPaginate($ongoing_classes, $request, route('dashboard_details.ongoing_classes'));
-        //     $from = $ongoing_classes['data']['from'];
-
-        //     return view('dashboard_details.ongoing_classes', ['ongoing_classes' => $batches, 'paginator' => $paginator, 'from' => $from]);
-        // } else {
-        //     session()->flash('type', 'Danger');
-        //     session()->flash('message', $ongoing_classes['message'] ?? 'Something went wrong');
-        //     return redirect()->back();
-        // }
     }
 
     // 

@@ -110,11 +110,12 @@ class OngoingClass extends Component
                 'status' => $this->status,
             ]
         )->json();
- //dd($classes);
+        //dd($classes);
         $paginator = Controller::livewirePaginate($classes, $this->page, route('dashboard_details.ongoing_classes'));
         return view('livewire.detail.ongoing-class', [
             'classes' => $classes['data']['data'],
             'from' => $classes['data']['from'],
+            'total_count' => $classes['data']['total'],
             'paginator' => $paginator,
         ]);
     }
