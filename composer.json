@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "2.*",
+        "rap2hpoutre/laravel-log-viewer": "^2.3",
         "yajra/laravel-datatables-oracle": "^10.11"
     },
     "require-dev": {
