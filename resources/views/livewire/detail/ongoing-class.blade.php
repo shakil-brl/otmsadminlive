@@ -26,10 +26,10 @@
                 </div>
                 <div>
                     <select name="" class="form-select" wire:model='status'>
-                         <option value="">Select Status</option> 
+                         <option value="">Show All</option> 
                         <option value="1">Class Not Started</option>
                         <option value="2">Class Running</option>
-                        <option value="3">Class End</option>
+                        <option value="3">Class Completed</option>
                     </select>
                 </div>
                 <div>
@@ -175,7 +175,7 @@
                                     <span class="badge badge-danger mt-1">Time Expired</span>
                                 @endif
                             @elseif ($batch['status'] == 3)
-                                <span class="badge badge-success">Class End</span>
+                                <span class="badge badge-success">Class Completed</span>
                             @endif
 
                         </td>
