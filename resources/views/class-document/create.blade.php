@@ -5,7 +5,6 @@
         <div class="card p-5">
             <h3 class="text-center">Upload Document</h3>
             @if (session('error_message'))
-                {{-- @dump(session('error_message')) --}}
                 <ul class="text-danger">
                     @foreach (session('error_message') ?? [] as $neme => $err)
                         @foreach ($err as $e)
@@ -16,7 +15,6 @@
                     @endforeach
                 </ul>
             @endif
-            <x-alert />
 
             <form class="" action="{{ route('class-documents.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
