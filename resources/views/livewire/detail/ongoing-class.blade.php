@@ -32,7 +32,13 @@
                         <option value="3">Class End</option>
                     </select>
                 </div>
-                <div></div>
+                <div>
+                    <select name="" class="form-select" wire:model='current_schedule'>
+                        <option value="">Select Status</option>
+                        <option value="">All Schedule</option>
+                        <option value="1">Current Schedule</option>
+                    </select>
+                </div>
                 <div></div>
                 <div>
                     <h4 class="text-end text-info">Total : {{ $total_count }}</h4>

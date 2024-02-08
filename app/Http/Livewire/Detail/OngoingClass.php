@@ -29,6 +29,7 @@ class OngoingClass extends Component
     public $from_date;
     public $to_date;
     public $status;
+    public $current_schedule = 1;
     public function updated($attr)
     {
 
@@ -108,6 +109,7 @@ class OngoingClass extends Component
                 'from_date' => $this->from_date,
                 'to_date' => $this->to_date,
                 'status' => $this->status,
+                'current_schedule' => $this->current_schedule,
             ]
         )->json();
         //dd($classes);
