@@ -7,7 +7,7 @@
 @section('content')
     <div class="m-5">
         <h3>
-            Create Development Partner
+            {{ __('config.create_development_partner') }}
         </h3>
         <x-alert />
 
