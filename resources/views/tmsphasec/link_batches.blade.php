@@ -1,12 +1,8 @@
 @extends('layouts.auth-master')
-{{-- @dump($total_batches) --}}
 @section('content')
-    <!--begin::Content -->
     <div class="m-5">
         <x-alert />
-        {{-- @dump($from_edit) --}}
         @if (isset($phase) && isset($batch_phases))
-            {{-- @dump($phase) --}}
             @php
                 $trainingBatchesArray = [];
                 $trainingBatchIdsArray = [];
@@ -31,7 +27,6 @@
                     }
                 }
             @endphp
-            {{-- @dd($storedBptIds) --}}
             <div class="card p-5">
                 <div id="">
                     <h3>Batch Group Details({{ $phase['name_en'] ?? '' }} ):</h3>
