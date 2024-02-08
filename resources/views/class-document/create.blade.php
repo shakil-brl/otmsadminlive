@@ -16,7 +16,7 @@
                     @endforeach
                 </ul>
             @endif
-            <x-alert />
+            {{-- <x-alert /> --}}
 
             <form class="" action="{{ route('class-documents.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

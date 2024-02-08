@@ -1,186 +1,104 @@
 @extends('layouts.auth-master')
+
 @section('content')
-    <!--begin::Content wrapper-->
-    <div class="d-flex flex-column flex-column-fluid">
-        <!--begin::Toolbar-->
-        <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-            <!--begin::Toolbar container-->
-            <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
-                <!--begin::Page title-->
-                <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-                    <!--begin::Title-->
-                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                        {{ __('trainer-enrollment-list.trainer_enrollment') }}</h1>
-                    <!--end::Title-->
-                     <!--begin::Breadcrumb-->
-                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('home.index') }}"
-                                class="text-muted text-hover-primary">{{ __('categorie-list.home') }}</a>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted">{{ __('sidemenu.enrollment_management') }}</li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                        </li>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <li class="breadcrumb-item text-muted">
-                            <a
-                                href=""class="text-muted text-hover-primary">{{ __('trainer-enrollment-list.trainer_enrollment-list') }}</a>
-                        </li>
-                        <!--end::Item-->
-                    </ul>
-                    <!--end::Breadcrumb-->
-                </div>
-                <!--end::Page title-->
-                <!--begin::Actions-->
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
 
-                </div>
-                <!--end::Actions-->
-            </div>
-            <!--end::Toolbar container-->
-        </div>
-        <!--end::Toolbar-->
-        <!--begin::Content-->
-        <div id="kt_app_content" class="app-content flex-column-fluid">
-            <!--begin::Content container-->
-            <div id="kt_app_content_container" class="app-container container-xxl">
-                @include('layouts.partials.messages')
-                <!--begin::Card-->
-                <div class="card">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 pt-6">
-                        <!--begin::Card title-->
-                        <div class="card-title">
-                            <!--begin::Search-->
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                                <form action="">
-                                    <input type="text" data-kt-user-order-filter="search"
-                                        class="form-control form-control-solid w-250px ps-13" placeholder="{{ __('trainer-enrollment-list.search_trainer') }}"
-                                        name="search" value="{{ request('search') }}" />
-                                </form>
-                                {{-- <input type="text" data-kt-user-table-filter="search"
-                                    class="form-control form-control-solid w-250px ps-13" placeholder="Search user" /> --}}
-                                <!--begin::Export buttons-->
-                                <div id="kt_trainer_report_views_export" class="d-none"></div>
-                                <!--end::Export buttons-->
-                            </div>
-                            <!--end::Search-->
-                        </div>
-                        <!--begin::Card title-->
-                         <!--begin::Card toolbar-->
-                         <div class="card-toolbar">
-                            <!--begin::Export dropdown-->
-                            <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click"
-                                data-kt-menu-placement="bottom-end">
-                                <i class="ki-duotone ki-exit-up fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>{{ __('provider-list.export_report') }}</button>
-                            <!--begin::Menu-->
-                            <div id="kt_user_report_views_export_menu"
-                                class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4"
-                                data-kt-menu="true">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="copy">{{ __('provider-list.copy_clipboard') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="excel">{{ __('provider-list.export_excel') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="csv">{{ __('provider-list.export_csv') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3"
-                                        data-kt-user-export="pdf">{{ __('provider-list.export_pdf') }}</a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                            <!--begin::Toolbar-->
-                            <div class="d-flex justify-content-end px-3" data-kt-user-table-toolbar="base">
-
-                            </div>
-                            <!--end::Toolbar-->
-                        </div>
-                        <!--end::Card toolbar-->
+    <div class="m-5">
+        <h3>{{ __('dashboard.all_trainer') }}</h3>
+        <x-alert />
+        @isset($total_trainers)
+            <div class="my-3">
+                <form action="">
+                    <div class="w-50 d-flex gap-3">
+                        <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
+                            placeholder="{{ __('dashboard.search_here') }}">
+                        <input type="submit" class="form-control btn btn-primary w-25" value="{{ __('dashboard.search') }}">
                     </div>
-                    <!--end::Card header-->
-                    <!--begin::Card body-->
-                    <div class="card-body py-4">
-                        <div class="table-responsive">
-                            <!--begin::Table-->
-                            <table class="table table-responsive align-middle table-row-dashed fs-6 gy-5"
-                                id="kt_trainers_enroll_report_views_table">
-                                <thead>
-                                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                        <th class="w-10px pe-2">
-                                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                                <input class="form-check-input" data-kt-check="true"
-                                                    data-kt-check-target="#kt_table_trainers_enrolls .form-check-input"
-                                                    type="checkbox" value="" name="all-trainers-enroll"
-                                                    id="all-trainers-enroll" />
-                                            </div>
-                                        </th>
-                                        <th class="min-w-125px">{{ __('trainer-enrollment-list.trainer_id') }}</th>
-                                        <th class="min-w-125px">{{ __('trainer-enrollment-list.trainer_name') }}</th>
-                                        <th class="min-w-125px">{{ __('trainer-enrollment-list.trainer_email') }}</th>
-                                        <th class="min-w-125px">{{ __('trainer-enrollment-list.vendor_name') }}</th>
-                                        <th class="min-w-125px">{{ __('trainer-enrollment-list.batch') }}</th>
-                                        <th class="text-end min-w-100px">{{ __('provider-list.action') }}</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-600 fw-semibold" id="trainers-enroll-tbody">
-
-                                </tbody>
-                            </table>
-                            <!--end::Table-->
-                        </div>
-                    </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card-->
+                </form>
             </div>
-            <!--end::Content container-->
-        </div>
-        <!--end::Content-->
+            <table class="table table-bordered bg-white">
+                <thead>
+                    <th>{{ __('dashboard.sl') }}</th>
+                    <th>ID-Name</th>
+                    <th>Email-NID</th>
+                    <th>Phone</th>
+                    @if (strtolower($userRole) !== 'provider')
+                        <th>Provider</th>
+                    @endif
+                    <th>Batch</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    @if (count($total_trainers) > 0)
+                        @foreach (collect($total_trainers) as $trainers)
+                            <tr>
+                                <td>
+                                    {{ digitLocale($from + $loop->index) }}
+                                </td>
+                                <td class="">
+                                    <div>
+                                        Trainer ID: {{ $trainers['id'] }}
+                                    </div>
+                                    <div>
+                                        Name: {{ $trainers['profile']['KnownAs'] }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        Email: {{ $trainers['profile']['Email'] }}
+                                    </div>
+                                    <div>
+                                        NID: {{ $trainers['profile']['NID'] }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        {{ $trainers['profile']['Phone'] }}
+                                    </div>
+                                    <div>
+                                        {{ $trainers['profile']['Phone2'] ?? '' }}
+                                    </div>
+                                </td>
+                                @if (strtolower($userRole) !== 'provider')
+                                    <td>
+                                        {{ $trainers['provider_trainers'][0]['provider']['name'] }}
+                                    </td>
+                                @endif
+                                <td>
+                                    @foreach ($trainers['provider_trainers'] as $batch)
+                                        <div>
+                                            {{ $batch['training_batch']['batchCode'] }}
+                                        </div>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-info show-action"
+                                        data-trainer-enroll-id="{{ $trainers['id'] }}" data-bs-toggle="modal"
+                                        id="view_trainer_modal_btn" data-bs-target="#view_trainer_modal">
+                                        {{ __('upazila-list.view') }}
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="7">No data found</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+
+            {!! $paginator->links() !!}
+        @endisset
     </div>
-    <!--End::Content wrapper-->
 
-    <!--Start::Provider Update Modal-Content-->
-    <div class="modal fade" id="view_trainer_enroll" tabindex="-1" aria-hidden="true">
+    <!--Start::Trainer Details Modal-->
+    <div class="modal fade" id="view_trainer_modal" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog modal-dialog-centered mw-950px">
             <div class="modal-content">
                 <div class="modal-header" id="kt_modal_update_provider_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">{{__('trainer-enrollment-list.trainer_enroll_batch')}}</h2>
+                    <h2 class="fw-bold" id="">Trainer Details</h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -194,31 +112,27 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Heading-->
                     <div class="text-center mb-13">
-                        <!--begin::Title-->
-                        <h1 class="mt-3" id="trainee-name"></h1>
-                        <!--end::Title-->
-                        <div class="text-muted fw-semibold fs-5">{{__('trainer-enrollment-list.email')}}:
+                        <h3 class="mt-3" id="trainer-name"></h3>
+                        <div class="text-muted fw-semibold fs-5">{{ __('trainer-enrollment-list.provider_name') }}:
+                            <span class="mb-3 text-muted " id="provider-name"></span>
+                        </div>
+                        <div class="text-muted fw-semibold fs-5">{{ __('trainer-enrollment-list.email') }}:
                             <span id="trainer-email"></span>
                         </div>
-                        <div class="text-muted fw-semibold fs-5">{{__('trainer-enrollment-list.phone')}}:
+                        <div class="text-muted fw-semibold fs-5">{{ __('trainer-enrollment-list.phone') }}:
                             <span id="trainer-phone"></span>
                         </div>
-                        <!--begin::Description-->
-                        <div class="text-muted fw-semibold fs-5">{{__('trainer-enrollment-list.address')}}:
+                        <div class="text-muted fw-semibold fs-5">{{ __('trainer-enrollment-list.address') }}:
                             <span id="trainer-address"></span>
                         </div>
-                        <!--begin::SubTitle-->
-                        <div class="text-muted fw-semibold fs-5">{{__('trainer-enrollment-list.provider_name')}}:
-                            <span class="mb-3 text-muted " id="title"></span>
-                        </div>
-
-                        <!--end::SubTitle-->
-                        <!--end::Description-->
                     </div>
                     <!--end::Heading-->
                     <!--begin::Users-->
                     <div class="mb-15">
                         <!--begin::List-->
+                        <div>
+                            <h4 class="text-center">Batches:</h4>
+                        </div>
                         <div class="mh-375px scroll-y me-n7 pe-7" id="trainer-batches-list">
 
                         </div>
@@ -228,19 +142,122 @@
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
                         <a href="#" type="reset" data-bs-dismiss="modal" class="btn btn-light me-3"
-                            data-kt-users-modal-action="cancel">{{__('trainer-enrollment-list.discard')}}</a>
+                            data-kt-users-modal-action="cancel">{{ __('trainer-enrollment-list.discard') }}</a>
                     </div>
                     <!--end::Actions-->
                 </div>
             </div>
         </div>
     </div>
-    <!--End::Provider Update Modal-->
-@section('scripts')
-    <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/assets/functions.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/call.trainers.enrollment.api.js') }}"></script>
-    <script></script>
+    <!--End::Trainer Details Modal-->
 @endsection
-@endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            // show provider batches
+            $(document).on("click", "#view_trainer_modal_btn", function(e) {
+                e.preventDefault();
+                let trainerBatchesList = $("#trainer-batches-list");
+                trainerBatchesList.empty();
+                let id = $(this).attr("data-trainer-enroll-id");
+                let link = api_baseurl + "trainer-enroll/" + id + "/show";
+
+                $.ajax({
+                    type: "get",
+                    dataType: "JSON",
+                    url: link,
+                    headers: {
+                        Authorization: authToken,
+                    },
+                    success: function(results) {
+                        let enrollData = results.data;
+                        console.log(enrollData);
+                        $("#view_trainer_modal #trainer-name").html((enrollData.profile
+                            .KnownAs ?? "") + " (" + (enrollData.profile
+                            .KnownAsBangla ?? "") + ")");
+                        $("#view_trainer_modal #trainer-email").html(enrollData.profile
+                            .Email ?? "");
+                        $("#view_trainer_modal #trainer-phone").html(enrollData.profile
+                            .Phone ?? "");
+                        $("#view_trainer_modal #trainer-address").html(
+                            enrollData.profile.address ?? ""
+                        );
+
+                        let trainingBatches = enrollData.provider_trainers;
+                        console.log(trainingBatches);
+                        sessionStorage.removeItem("message");
+
+                        if (trainingBatches) {
+                            $("#view_trainer_modal #provider-name").html(trainingBatches[0]
+                                .provider.name ?? "");
+                            trainingBatches.forEach(batch => {
+                                let detals_href = `/batches/${batch.id}`;
+
+                                let batchListItem1 = `
+                                    <!--begin::Batch-->
+                                    <div class="d-flex flex-stack py-2 border-bottom border-gray-300 border-bottom-dashed">
+                                        <h5 class="mt-3">Code: ${
+                                            batch.training_batch.batchCode ?? ""
+                                        }</h5>
+                                    </div>
+                                    <div class="d-flex flex-stack py-2 border-bottom border-gray-300 border-bottom-dashed">
+                                        <!--begin::Details-->
+                                        <div class="d-flex align-items-center">                                    
+                                            <!--begin::Details-->
+                                            <div class="ms-6">
+                                                <!--begin::Name-->                                               
+                                                    <div class="text-muted fw-semibold fs-5">Training Title:
+                                                        <span class="badge badge-light fs-8 fw-semibold ms-2">
+                                                        ${
+                                                            batch.training_batch.training.title.NameEn ??
+                                                            ""
+                                                        }
+                                                        </span>
+                                                    </div>
+                                                    <div class="text-muted fw-semibold fs-5">${locations}:
+                                                        <span class="badge badge-light fs-8 fw-semibold ms-2">
+                                                        ${
+                                                            batch.training_batch.GEOLocation ??
+                                                            ""
+                                                        }
+                                                        </span>
+                                                    </div> 
+                                                    
+                                                <!--end::Name-->
+                                            </div>
+                                            <!--end::Details-->
+                                        </div>
+                                        <!--end::Details-->
+                                        <!--begin::Stats-->
+                                        <div class="d-flex align-items-center"">
+                                            <!--begin::Sales-->
+                                            <div class="ms-6">                                            
+                                                <a href="${detals_href}" target="_blank" class="btn btn-sm btn-primary">View Details</a>
+                                            </div>
+                                            <!--end::Sales-->
+                                        </div>
+                                        <!--end::Stats-->
+                                    </div>
+                                    <!--end::Batch-->
+                                `;
+
+                                trainerBatchesList.append(batchListItem1);
+                            });
+                        } else {
+                            trainerBatchesList.html(`
+                            <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed text-warning">
+                                No Batch Found
+                            </div>
+                        `);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here details
+                        console.error(xhr, status, error);
+                    },
+                });
+            });
+        });
+    </script>
+@endpush
