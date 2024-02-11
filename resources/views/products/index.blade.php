@@ -40,7 +40,7 @@
                                         {{ $product['name'] ?? '' }}
                                     </td>
                                     <td>
-                                        {{ $product['is_active'] ?? '' }}
+                                        {{ isset($product['is_active']) ? ($product['is_active'] == 1 ? 'Active' : 'Inactive') : '' }}
                                     </td>
                                     <td class="me-0 d-flex gap-1">
                                         <a href="{{ route('products.edit', $product['id']) }}" class="btn btn-sm btn-info">

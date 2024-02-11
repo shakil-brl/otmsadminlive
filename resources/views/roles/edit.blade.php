@@ -156,12 +156,12 @@
                                                                     </span>
                                                                 </td>
                                                             </tr>
-                                                            <th scope="col" width="1%"></th>
-                                                            <th scope="col" width="20%">
+                                                            <th></th>
+                                                            <th>
                                                                 {{ __('roles-permissions.access_route') }}</th>
-                                                            <th scope="col" width="20%">
+                                                            <th>
                                                                 {{ __('roles-permissions.route_path') }}</th>
-                                                            <th scope="col" width="1%">
+                                                            <th>
                                                                 {{ __('roles-permissions.guard') }}
                                                             </th>
                                                         </thead>
@@ -234,42 +234,19 @@
                                                 value="${permission.id}"  data-permission-id="${permission.id}"
                                                 ${rolePermissionArr.includes(permission.name) ? 'checked' : ''}
                                                 />
-                                        </div>.
-                                    </td>
-                                    <td class="d-flex align-items-center">
-                                        <!--begin::provider details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${permission.name}
-                                            </a>
-                                            <span></span>
                                         </div>
-                                        <!--begin::provider details-->
+                                    </td>
+                                    <td>                                      
+                                        ${permission.name}
                                     </td>
 
-                                    <td>
-                                        <!--begin::provider details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${permission.route_name}
-                                            </a>
-                                            <span></span>
-                                        </div>
-                                        <!--begin::provider details-->
+                                    <td>                                       
+                                        ${permission.route_name}
                                     </td>
 
-                                    <td>
-                                        <!--begin::provider details-->
-                                        <div class="d-flex flex-column">
-                                            <a href="#" class="text-gray-800 text-hover-primary mb-1">
-                                                ${permission.guard_name}
-                                            </a>
-                                            <span></span>
-                                        </div>
-                                        <!--begin::provider details-->
-                                    </td>
-
-                                    
+                                    <td>                                        
+                                        ${permission.guard_name}
+                                    </td>                                    
                                 </tr>
                             `;
 
@@ -278,7 +255,7 @@
                     } else {
                         permissionTbody.innerHTML = `
                             <tr>
-                                <td class="w-100"> No Provider Found</td>
+                                <td class="w-100"> No data found</td>
                             </tr>                            
                         `;
                     }
