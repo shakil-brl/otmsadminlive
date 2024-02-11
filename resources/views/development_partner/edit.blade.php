@@ -26,6 +26,7 @@
 
         @isset($partner)
             @php
+                $onBoardDate = '';
                 if ($partner['onBoardDate']) {
                     // dd($partner['onBoardDate']);
                     $onBoardDate = \Carbon\Carbon::createFromFormat('Y-m-d', $partner['onBoardDate'])->format('d/m/Y');
