@@ -6,7 +6,7 @@
 
 <div class="row row-cols-2 g-4">
     <div class="">
-        <label for="name" class="form-label">Name (English):</label>
+        <label for="name" class="form-label">Name:</label>
         <input type="text" class="form-control" name="name" id="name"
             value="{{ $product['name'] ?? old('name') }}">
         @error('name')

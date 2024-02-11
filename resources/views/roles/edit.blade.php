@@ -157,11 +157,13 @@
                                                                 </td>
                                                             </tr>
                                                             <th></th>
-                                                            <th>
-                                                                {{ __('roles-permissions.access_route') }}</th>
-                                                            <th>
-                                                                {{ __('roles-permissions.route_path') }}</th>
-                                                            <th>
+                                                            <th class="fw-bold">
+                                                                {{ __('roles-permissions.access_route') }}
+                                                            </th>
+                                                            <th class="fw-bold">
+                                                                {{ __('roles-permissions.route_path') }}
+                                                            </th>
+                                                            <th class="fw-bold">
                                                                 {{ __('roles-permissions.guard') }}
                                                             </th>
                                                         </thead>

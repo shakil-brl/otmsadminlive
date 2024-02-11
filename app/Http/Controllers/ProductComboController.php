@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 
 class ProductComboController extends Controller
@@ -23,7 +24,21 @@ class ProductComboController extends Controller
      */
     public function create()
     {
-        //
+        $results = ApiHttpClient::request('get', 'tms-phases')->json();
+        $products_results = ApiHttpClient::request('get', 'product')->json();
+        if ($results['data'] && $products_results['success'] == true) {
+            $data = [
+                'phases' => $results['data'],
+                'products' => $products_results['data']['data']
+            ];
+            // dd($data);
+            return view('product_combos.create', $data);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Something went wrong');
+            return redirect()->back();
+        }
+        return view('product-combos.create');
     }
 
     /**
