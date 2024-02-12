@@ -4,11 +4,10 @@
     <!--begin::Content-->
     <div class="m-5">
         <div class="d-flex justify-content-end align-items-center">
-            <a class="btn btn-lg btn-success" href="{{ route('courses.create') }}">Create Course</a>
+            <a class="btn btn-lg btn-success" href="{{ route('courses.create') }}">{{__('config.course_create')}}</a>
         </div>
-        <h3>Courses List</h3>
+        <h3>{{__('config.course_list')}}</h3>
         <x-alert />
-
         @isset($results['data'])
             <div class="my-3">
                 <div class="d-none">
@@ -22,10 +21,10 @@
                 </div>
                 <table class="table table-bordered bg-white">
                     <thead>
-                        <th>SL</th>
-                        <th>Name (English)</th>
-                        <th>Name (Bangla)</th>
-                        <th>Actions</th>
+                        <th>{{__('batch-list.sl')}}</th>
+                        <th>{{__('config.name_english')}}</th>
+                        <th>{{__('config.name_bangla')}}</th>
+                        <th>{{__('config.action')}}</th>
                     </thead>
                     <tbody>
                         @if (count($results['data']) > 0)
@@ -42,18 +41,18 @@
                                     </td>
                                     <td class="me-0 d-flex gap-1">
                                         <a href="{{ route('courses.edit', $course['id']) }}" class="btn btn-sm btn-info">
-                                            Edit
+                                            {{__('config.edit')}}
                                         </a>
                                         <form action="{{ route('courses.destroy', $course['id']) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger delete-action">Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger delete-action">{{__('config.delete')}}</button>
                                         </form>
                                     </td>
                                 </tr>
                             @endforeach
                         @else
-                            <td colspan="6" class="text-danger">Data Not Fount</td>
+                            <td colspan="6" class="text-danger">{{__('config.data_not_found')}}</td>
                         @endif
                     </tbody>
                 </table>

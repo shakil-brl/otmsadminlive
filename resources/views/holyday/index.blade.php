@@ -4,9 +4,9 @@
     <!--begin::Content-->
     <div class="m-5">
         <div class="d-flex justify-content-end align-items-center">
-            <a class="btn btn-lg btn-success" href="{{ route('holydays.create') }}">Create Holyday</a>
+            <a class="btn btn-lg btn-success" href="{{ route('holydays.create') }}">{{__('config.create_holyday')}}</a>
         </div>
-        <h3>Holydays List</h3>
+        <h3>{{__('config.holydays_list')}}</h3>
         <x-alert />
 
         @isset($results['data'])
@@ -23,9 +23,9 @@
                 <table class="table table-bordered bg-white">
                     <thead>
                         <th>{{ __('batch-list.sl') }}</th>
-                        <th>Name (English)</th>
-                        <th>Name (Bangla)</th>
-                        <th>Date</th>
+                        <th>{{__('config.name_english')}}</th>
+                        <th>{{__('config.name_bangla')}}</th>
+                        <th>{{__('config.date')}}</th>
                         <th>{{ __('batch-list.action') }}</th>
                     </thead>
                     <tbody>
@@ -48,12 +48,12 @@
                                 </td>
                                 <td class="me-0 d-flex gap-1">
                                     <a href="{{ route('holydays.edit', $holyday['id']) }}" class="btn btn-sm btn-info">
-                                        Edit
+                                        {{__('config.edit')}}
                                     </a>
                                     <form action="{{ route('holydays.destroy', $holyday['id']) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger delete-action">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger delete-action">{{__('config.delete')}}</button>
                                     </form>
                                 </td>
                             </tr>

@@ -31,7 +31,24 @@ return [
     'select_date' => 'Select Date',
     'ref_doc_title' => 'Reference Document Title',
     'ref_doc_no' => 'Reference Document No',
-    'submit' => 'Submit',                                
+    'submit' => 'Submit',      
+    'holydays_list' => 'Holydays List', 
+    'name_english' => 'Name (English)',
+    'name_bangla' => 'Name (Bangla)',
+    'create_holyday' => 'Create Holyday',
+    'update_holyday' => 'Update Holyday',
+    'name_english_ph' => 'Enter English Name',
+    'name_bangla_ph' => 'Enter Bangla Name',
+    'date_ph' => 'Select Date',
+    'course_list' => 'Course List',
+    'course_create' => 'Course Create',
+    'update_course' => 'Update Course',
+    'data_not_found' => 'Data Not Fount',
+
+  
+
+
+                 
 
     
   
