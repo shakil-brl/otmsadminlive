@@ -163,7 +163,7 @@ class ProductComboController extends Controller
         }
 
         $result = ApiHttpClient::request("PUT", "product-combo/$id", $product_combo)->json();
-
+        // dd($result);
         if (isset($result['error'])) {
             $errors = $result['message'];
             session()->flash('type', 'Danger');

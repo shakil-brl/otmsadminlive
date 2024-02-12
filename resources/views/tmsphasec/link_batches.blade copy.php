@@ -107,7 +107,7 @@
                             style="background-color: #faf5ff;">
 
                         </div>
-                        <button class="btn btn-danger mt-3 d-none" id="clear-selected">Clear</button>
+                        <button class="btn btn-danger mt-3" id="clear-selected">Clear</button>
                     </div>
                     <form action="" id="link-batch-form" class="">
                         <input type="hidden" type="text" name="link-batches" value="">
@@ -123,13 +123,14 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            // Initialize an empty object for selectedBatches
-            var selectedBatches = {};
-
+            localStorage.removeItem('selectedBatches');
             let phaseId = @json($phase['id']);
             let storedDBBatches = @json($trainingBatchesArray);
             let storedBatchIdsArray = @json($trainingBatchIdsArray);
             let storedBptIds = @json($storedBptIds);
+            // console.log(storedDBBatches);
+            // Initialize an empty object for selectedBatches
+            var selectedBatches = {};
 
             // Loop through storedBatches and create the selectedBatches object
             storedDBBatches.forEach(function(batch) {
@@ -149,30 +150,51 @@
                 };
             });
 
+            // Convert selectedBatches to JSON
+            var selectedBatchesJSON = JSON.stringify(selectedBatches);
+
+            localStorage.setItem('selectedBatches', selectedBatchesJSON);
+
             // link-batch-form input value set adn view
-            generateSelectedList(selectedBatches);
+            generateSelectedList();
 
             // remove item form view
             $("#link-batch-show").on('click', '.remove-batch-buton', function() {
+                // Find the #batchCodeHidden within the clicked .bg-white element
                 let removeBatchId = $(this).find('#batchCodeHidden').val();
+                // alert(removeBatchId);
+                let selectedBatches = JSON.parse(localStorage.getItem('selectedBatches'));
                 if (selectedBatches && selectedBatches.hasOwnProperty(removeBatchId)) {
                     let checkboxId = `#${removeBatchId}`;
+
+                    // Check or uncheck the checkbox
                     $(checkboxId).prop('checked', false);
+                    // Remove the property from the object
                     delete selectedBatches[removeBatchId];
+
+                    // Save the updated object back to localStorage
+                    localStorage.setItem('selectedBatches', JSON.stringify(selectedBatches));
                 }
-                generateSelectedList(selectedBatches);
+                generateSelectedList();
             });
 
-            // Clear selected batches
+            let divisionSelectElement = $("#gioLocation-form #division_id");
+            let districtSelectElement = $("#gioLocation-form #district_id");
+            let upazilaSelectElement = $("#gioLocation-form #upazila_id");
+            let batchLinkForm = $("#add-batch-form");
+            let batchLinkCheck = $("#add-batch-form #batch-checkbox");
+            let selectAllBox = $("#add-batch-form #select-all");
+
+            // remove stored localstoreage selectedBatches
             $("#clear-selected").on('click', function(event) {
                 event.preventDefault();
-                selectedBatches = {};
-                generateSelectedList(selectedBatches);
+                localStorage.removeItem('selectedBatches');
+                // location.reload();
                 batchLinkCheck.html("");
                 selectAllBox.addClass("d-none");
+                generateSelectedList();
                 districtSelectElement.html("");
                 upazilaSelectElement.html("");
-
                 // populate division options
                 let optionFor = "Division";
                 let division_api_link = api_baseurl + "divisions";
@@ -182,14 +204,9 @@
                     authToken,
                     divisionSelectElement
                 );
-            });
-
-            let divisionSelectElement = $("#gioLocation-form #division_id");
-            let districtSelectElement = $("#gioLocation-form #district_id");
-            let upazilaSelectElement = $("#gioLocation-form #upazila_id");
-            let batchLinkForm = $("#add-batch-form");
-            let batchLinkCheck = $("#add-batch-form #batch-checkbox");
-            let selectAllBox = $("#add-batch-form #select-all");
+            })
+            // link-batch-form input value set
+            generateSelectedList();
 
             // populate division options
             let optionFor = "Division";
@@ -308,6 +325,10 @@
                             // console.log(results);
                             batchLinkCheck.html("");
 
+                            // Assuming you have already retrieved selectedBatches from local storage
+                            let selectedBatches = JSON.parse(localStorage.getItem(
+                                'selectedBatches')) || {};
+
                             if (allData.length > 0) {
                                 selectAllBox.removeClass("d-none");
                                 $("#selectAllCheckbox").prop('checked', '');
@@ -353,12 +374,19 @@
                                                 title: batchTitle,
                                                 GEOLocation: GEOLocation
                                             };
-                                            // console.log(selectedBatches);
                                         } else {
                                             delete selectedBatches[batchId];
                                         }
 
-                                        generateSelectedList(selectedBatches)
+                                        // Store the updated selectedBatches in local storage
+                                        localStorage.setItem('selectedBatches', JSON
+                                            .stringify(selectedBatches));
+
+                                        let storedBatches = JSON.parse(localStorage.getItem(
+                                            'selectedBatches')) || {};
+                                        // console.log(storedBatches);
+                                        // link-batch-form input vlue set
+                                        generateSelectedList()
                                     });
 
                                 // all select
@@ -411,8 +439,10 @@
                         let fd = new FormData();
                         let CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
                         let link = api_baseurl + "tms-phases/link-batch";
-                        let batchIds = Object.keys(selectedBatches) ?? '';
-                        // console.log(batchIds);
+
+                        let batchIds = ($("#link-batch-form [name=link-batches]").val()).split(
+                            ",").map(Number);
+
                         $.ajax({
                             type: "POST",
                             url: link,
@@ -465,30 +495,43 @@
                 });
             });
 
-            // Function to generate selected list
-            function generateSelectedList(selectedBatches) {
+            // function 
+            function generateSelectedList() {
+                let linkBatchSection = $("#link-batch-section");
                 let linkBatchShowDiv = $("#link-batch-show");
                 linkBatchShowDiv.empty(); // Clear previous content
-                if (Object.keys(selectedBatches).length > 0) {
-                    let batchKeysArray = Object.keys(selectedBatches);
+                let storedBatches = JSON.parse(localStorage.getItem('selectedBatches')) || {};
+                if (Object.keys(storedBatches).length > 0) {
+                    // linkBatchSection.removeClass('d-none');
+                    let batchKeysArray = Object.keys(storedBatches);
+                    // Set the value of the input to the array of batch keys
+                    $("#link-batch-form [name='link-batches']").val(batchKeysArray);
+
+                    // Append array object items to the div with ID link-batch-show  
+
                     batchKeysArray.forEach(batchId => {
-                        let batchInfo = selectedBatches[batchId];
+                        // Access the batch information from storedBatches using the batchId
+                        let batchInfo = storedBatches[batchId];
+
+                        // Create a pill-like element with batchCode and title and append it to the div
                         let pillElement =
                             `<div class="mb-1 me-1 d-inline-flex bg-white rounded overflow-hidden border border-secondary view-item">
-                            <div class="px-4 py-1">
-                                <div>${batchInfo.batchCode} - ${batchInfo.title}</div>
-                                <div>(${batchInfo.GEOLocation})</div>                                    
-                            </div>
-                            <div type="button" class="bg-danger lead text-light d-flex align-items-center justify-content-center px-2 remove-batch-buton">
-                                &times;
-                                <input type="hidden" id="batchCodeHidden" value="${batchId}">
-                            </div>
-                        </div>`;
+                                <div class="px-4 py-1">
+                                    <div>${batchInfo.batchCode} - ${batchInfo.title}</div>
+                                    <div>(${batchInfo.GEOLocation})</div>                                    
+                                </div>
+                                <div type="button" class="bg-danger lead text-light d-flex align-items-center justify-content-center px-2 remove-batch-buton">
+                                    &times;
+                                    <input type="hidden" id="batchCodeHidden" value="${batchId}">
+                                </div>
+                            </div>`;
                         linkBatchShowDiv.append(pillElement);
                     });
                     $("#clear-selected").removeClass("d-none");
                 } else {
+                    // linkBatchSection.addClass('d-none');
                     $("#clear-selected").addClass("d-none");
+                    $("#link-batch-form [name='link-batches']").val('');
                 }
             }
         });

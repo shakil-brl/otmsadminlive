@@ -15,7 +15,7 @@
     </div>
     @isset($phases)
         <div class="">
-            <label for="phase_id" class="form-label">{{ __('config.development_partner') }}</label>
+            <label for="phase_id" class="form-label">Phase:</label>
             <select name="phase_id" id="" class="form-select">
                 <option value="">{{ __('config.select_partner') }}</option>
                 @foreach ($phases as $phase)
@@ -54,7 +54,7 @@
             </tr>
         </thead>
         <tbody id="detail-table-body">
-            
+
         </tbody>
     </table>
     @error('products')
