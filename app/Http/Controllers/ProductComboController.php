@@ -12,9 +12,24 @@ class ProductComboController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        dd(1);
+        $results = ApiHttpClient::request('get', 'product-combo', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+
+        if ($results['success'] == true) {
+            $product_combos = $results['data'];
+            $page_from = $results['data']['from'];
+            $paginator = $this->customPaginate($results, $request, route('product-combos.index'));
+            // dd($product_combos);
+            return view('product_combos.index', ['results' => $product_combos, 'paginator' => $paginator, 'page_from' => $page_from]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -49,7 +64,38 @@ class ProductComboController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'phase_id' => 'required',
+            'products' => 'required|array|min:1',
+            'quantities' => 'required|array|min:1',
+        ]);
+
+        $product_combo = $request->except(['isActive']);
+        $product_combo["org_id"] = 13;
+
+        if ($request->is_active) {
+            $product_combo['is_active'] = 1;
+        } else {
+            $product_combo['is_active'] = 0;
+        }
+
+        $result = ApiHttpClient::request("POST", "product-combo", $product_combo)->json();
+
+        if (isset($result['error'])) {
+            $errors = $result['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $errors)->withInput();
+        } else if ($result['success'] != true) {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $result['message'] ?? 'Something wrong');
+            return redirect()->route('product-combos.index');
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $result['message'] ?? 'Created successfully');
+            return redirect()->route('product-combos.index');
+        }
     }
 
     /**
@@ -71,7 +117,24 @@ class ProductComboController extends Controller
      */
     public function edit($id)
     {
-        //
+        $results = ApiHttpClient::request('get', "product-combo/$id")->json();
+        $results_phase = ApiHttpClient::request('get', 'tms-phases')->json();
+        $products_results = ApiHttpClient::request('get', 'product')->json();
+
+        if ($results['success'] == true && $results_phase['data'] && $products_results['success'] == true) {
+            $product_combo = $results['data'];
+            $data = [
+                'product_combo' => $product_combo,
+                'phases' => $results_phase['data'],
+                'products' => $products_results['data']['data']
+            ];
+
+            return view('product_combos.edit', $data);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -83,7 +146,38 @@ class ProductComboController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'phase_id' => 'required',
+            'products' => 'required|array|min:1',
+            'quantities' => 'required|array|min:1',
+        ]);
+
+        $product_combo = $request->except(['isActive']);
+        $product_combo["org_id"] = 13;
+
+        if ($request->is_active) {
+            $product_combo['is_active'] = 1;
+        } else {
+            $product_combo['is_active'] = 0;
+        }
+
+        $result = ApiHttpClient::request("PUT", "product-combo/$id", $product_combo)->json();
+
+        if (isset($result['error'])) {
+            $errors = $result['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $errors)->withInput();
+        } else if ($result['success'] != true) {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $result['message'] ?? 'Something wrong');
+            return redirect()->route('product-combos.index');
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $result['message'] ?? 'Updated successfully');
+            return redirect()->route('product-combos.index');
+        }
     }
 
     /**
@@ -94,6 +188,16 @@ class ProductComboController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $results = ApiHttpClient::request('delete', "product-combo/$id")->json();
+
+        if ($results['success'] == true) {
+            session()->flash('type', 'Success');
+            session()->flash('message', $results['message'] ?? 'Deleted successfully');
+            return redirect()->route('product-combos.index');
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->route('product-combos.index');
+        }
     }
 }

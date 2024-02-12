@@ -22,6 +22,7 @@ class ProductController extends Controller
         if ($results['success'] == true) {
             $products = $results['data'];
             $page_from = $results['data']['from'];
+
             $paginator = $this->customPaginate($results, $request, route('products.index'));
             // dd($products);
             return view('products.index', ['results' => $products, 'paginator' => $paginator, 'page_from' => $page_from]);

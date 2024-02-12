@@ -42,38 +42,33 @@
         @enderror
     </div>
 </div>
-<div class="detail-area mt-5 rounded p-5">
-    <table id="" class="table table-responsive">
+
+<div style="max-width: 800px;" class="mt-3">
+    <h4 class="">Products:</h4>
+    <table id="" class="table table-sm">
         <thead class="thead-light">
             <tr>
-                <th>Name</th>
-                <th>Quantity</th>
+                <th><b>S.N.</b></th>
+                <th style="width: 65%;"><b>Name</b></th>
+                <th><b>Quantity</b></th>
             </tr>
         </thead>
         <tbody id="detail-table-body">
-            <tr>
-                <td class="products default">
-
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="quantity[]">
-                </td>
-                <td>
-                    <button type="button"
-                        class="btn close-detail btn-danger d-flex justify-content-center align-items-center">
-                        <span class="material-symbols-outlined">
-                            close
-                        </span>
-                    </button>
-                </td>
-            </tr>
+            
         </tbody>
     </table>
+    @error('products')
+        <small class="text-danger d-block">{{ $message }}</small>
+    @enderror
+    @error('quantities')
+        <small class="text-danger d-block">{{ $message }}</small>
+    @enderror
+    <div class="text-center mt-2">
+        <button id="add-item" class="btn btn-sm btn-info">Add Product</button>
+    </div>
 </div>
-<div class="text-end mt-3">
-    <button id="add-item" class="btn btn-sm btn-info">Add Product</button>
-</div>
-<div class="mt-3 d-flex gap-2">
+
+<div class="mt-3 d-flex justify-content-center gap-2">
     <x-go-back />
     <button type="submit" class="btn btn-md btn-success">Submit</button>
 </div>

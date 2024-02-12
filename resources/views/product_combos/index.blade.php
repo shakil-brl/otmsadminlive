@@ -3,7 +3,7 @@
 @section('content')
     <div class="m-5">
         <div class="d-flex justify-content-end align-items-center">
-            <a class="btn btn-lg btn-success" href="{{ route('products.create') }}">Create Product</a>
+            <a class="btn btn-lg btn-success" href="{{ route('product-combos.create') }}">Create Product Combo</a>
         </div>
         <h3>Product List</h3>
         <x-alert />
@@ -14,7 +14,7 @@
                     <form action="">
                         <div class="w-50 d-flex gap-3">
                             <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                                placeholder="Search Product">
+                                placeholder="Search Product Combo">
                             <input type="submit" class="form-control btn btn-primary w-25" value="Search">
                         </div>
                     </form>
@@ -23,6 +23,7 @@
                     <thead>
                         <th>S.N.</th>
                         <th>Name</th>
+                        <th>Phase</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </thead>
@@ -40,13 +41,17 @@
                                         {{ $product['name'] ?? '' }}
                                     </td>
                                     <td>
+                                        {{ $product['phase']['name_en'] ?? '' }}
+                                    </td>
+                                    <td>
                                         {{ isset($product['is_active']) ? ($product['is_active'] == 1 ? 'Active' : 'Inactive') : '' }}
                                     </td>
                                     <td class="me-0 d-flex gap-1">
-                                        <a href="{{ route('products.edit', $product['id']) }}" class="btn btn-sm btn-info">
+                                        <a href="{{ route('product-combos.edit', $product['id']) }}"
+                                            class="btn btn-sm btn-info">
                                             Edit
                                         </a>
-                                        <form action="{{ route('products.destroy', $product['id']) }}" method="post">
+                                        <form action="{{ route('product-combos.destroy', $product['id']) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger delete-action">Delete</button>
