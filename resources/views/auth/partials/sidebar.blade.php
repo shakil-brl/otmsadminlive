@@ -804,9 +804,9 @@
                                         </div>
                                         <!--end:Menu item-->
                                         <div data-kt-menu-trigger="click"
-                                        class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>here show<?php } ?>">
+                                        class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>here show<?php } ?>">
                                         <!--begin:Menu link-->
-                                        <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>active<?php } ?>">
+                                        <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>active<?php } ?>">
                                             <span class="menu-icon">
                                                 <i class="ki-duotone ki-lots-shopping  fs-2">
                                                 <span class="path1"></span>
@@ -828,14 +828,14 @@
                                         <!--begin:Menu sub-->
                                         <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
                                             <!--begin:Menu sub-->
-                                            <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>here show<?php } ?>"
+                                            <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>here show<?php } ?>"
                                                 kt-hidden-height="81" style="">
 
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item">
                                                     <!--begin:Menu link-->
-                                                    <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('')||Illuminate\Support\Facades\Route::is('')) {?>active<?php } ?>"
-                                                        href="{{ route('') }}">
+                                                    <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')) {?>active<?php } ?>"
+                                                        href="{{ route('products.index') }}">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
 
@@ -849,8 +849,8 @@
                                                  <!--begin:Menu item-->
                                                  <div class="menu-item">
                                                     <!--begin:Menu link-->
-                                                    <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('')||Illuminate\Support\Facades\Route::is('')) {?>active<?php } ?>"
-                                                        href="{{ route('') }}">
+                                                    <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>active<?php } ?>"
+                                                        href="{{ route('product-combos.index') }}">
                                                         <span class="menu-bullet">
                                                             <span class="bullet bullet-dot"></span>
 
