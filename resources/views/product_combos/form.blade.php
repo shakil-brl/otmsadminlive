@@ -17,7 +17,7 @@
         <div class="">
             <label for="phase_id" class="form-label">Phase:</label>
             <select name="phase_id" id="" class="form-select">
-                <option value="">{{ __('config.select_partner') }}</option>
+                <option value="">Select phase</option>
                 @foreach ($phases as $phase)
                     <option value="{{ $phase['id'] }}"
                         {{ ($product_combo['phase_id'] ?? old('phase_id')) == $phase['id'] ? 'selected' : '' }}>

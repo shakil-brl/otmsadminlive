@@ -64,7 +64,6 @@
                                     <label for="att{{ $loop->iteration }}"> {{ $student['profile']['KnownAs'] ?? '' }}</label>
                                 </td>
                                 <td>
-
                                     <input @if ($status == 3) disabled @endif class="attendance"
                                         name="attendance[]" @checked($student['is_present'] == 1) value="{{ $student['ProfileId'] }}"
                                         id="att{{ $loop->iteration }}" type="checkbox">

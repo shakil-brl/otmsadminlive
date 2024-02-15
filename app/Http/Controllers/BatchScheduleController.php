@@ -162,7 +162,7 @@ class BatchScheduleController extends Controller
             return view('batch_schedule.running_batch', ['running_batches' => $batches, 'paginator' => $paginator]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            session()->flash('message', $running_batches['message'] ?? 'Something went wrong');
             return back();
         }
     }
@@ -200,7 +200,7 @@ class BatchScheduleController extends Controller
         if ($results['success'] == true) {
             // dd($holyday);
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Deleted successfully');
+            session()->flash('message', $results['message'] ?? 'Deleted successfully');
             return redirect()->back();
         } else {
             session()->flash('type', 'Danger');
@@ -220,7 +220,7 @@ class BatchScheduleController extends Controller
         if ($results['success'] == true) {
             // dd($holyday);
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Schedule Details Clean successfully');
+            session()->flash('message', $results['message'] ?? 'Schedule Details Clean successfully');
             if ($previousRouteName == "batch-schedule.index") {
                 return redirect()->route('batch-schedule.batches');
             }

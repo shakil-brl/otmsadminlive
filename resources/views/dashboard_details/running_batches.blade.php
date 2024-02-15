@@ -1,8 +1,5 @@
 @extends('layouts.auth-master')
-{{-- @dd($running_batches); --}}
-{{-- @dd($running_batches[0]) --}}
 @section('content')
-    <!--begin::Content-->
     <div class="m-5">
         <h3>{{ __('batch-list.running_batches') }}</h3>
         <x-alert />
@@ -36,9 +33,7 @@
                                 {{ $batch['training_batch']['batchCode'] ?? '' }}
                             </td>
                             <td>
-                                {{-- {{ $batch['training_batch']['startDate'] ?? '' }} --}}
                                 {{ isset($batch['training_batch']['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['training_batch']['startDate'])->format('d-m-Y')) : digitLocale(null) }}
-
                             </td>
                             <td>
                                 {{ $batch['training_batch']['training']['title']['Name'] ?? '' }}
@@ -53,6 +48,13 @@
                                 <a href="{{ route('batch-schedule.index', [encrypt($batch['id']), encrypt($batch['training_batch']['id'])]) }}"
                                     class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
                                 </a>
+
+                                @if (in_array('course-supplies.supply', $roleRoutePermissions))
+                                    <a href="{{ route('course-supplies.supply', [encrypt($batch['training_batch']['id'])]) }}"
+                                        class="btn btn-sm btn-success">
+                                        Supplies
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -61,7 +63,6 @@
             {!! $paginator->links() !!}
         @endisset
     </div>
-    <!--end::Content-->
 @section('script')
     <script></script>
 @endsection
