@@ -6,7 +6,7 @@
 @section('content')
     <!--begin::Content-->
             <div class="m-4">
-                <div id="batch-header">
+             
                     <x-alert />
                     <div class="my-3 d-flex">
                         <div class="w-50">
@@ -20,7 +20,6 @@
                             </form>
                         </div>
                     </div>
-                </div>
 
                 @isset($evaluation)
                     <div id="class-days">

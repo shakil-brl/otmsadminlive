@@ -312,10 +312,10 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/create/{schedule_details_id}', 'createDocument')->name('create');
     });
 
-    Route::resource('evaluation-head', EvaluationHeadController::class);
+    
     Route::resource('/training-provider-partners', TrainingProviderPartnerController::class);
 });
-
+Route::resource('evaluation-head', EvaluationHeadController::class);
 Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
 Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
 Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
@@ -342,3 +342,6 @@ Route::get('/not-start-class-report', [BatchReportController::class, 'batchesSch
 
 Route::get('/without-batch-schedule-report-pdf/{search}/{page}', [BatchReportController::class, 'batchWithoutSchedulePdf'])->name('without-schedule.pdf-report');
 Route::get('/not-start-class-report-pdf/{search}/{page}', [BatchReportController::class, 'batchesScheduleNotStartClassPdf'])->name('not-start-class.pdf-report');
+
+Route::get('/monthly-attendance-report', [AttendanceRepoController::class, 'monthlyAttendanceReport'])->name('monthly-attendance.report');
+

@@ -13,7 +13,6 @@ class BatchReportController extends Controller
     // show ui for all provider item
     public function index(Request $request)
     {
-        // dd($request->search);
         $provider_results = ApiHttpClient::request('get', 'providerlist', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
