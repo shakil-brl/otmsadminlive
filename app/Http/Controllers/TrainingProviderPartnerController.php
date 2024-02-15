@@ -81,12 +81,14 @@ class TrainingProviderPartnerController extends Controller
 
         $data = ApiHttpClient::request('post', 'provider-partner', $partner)->json();
 
-        if (isset($data['error'])) {
+        if ($data['success'] !== true) {
             $error_message = $data['message'];
+            session()->forget('message');
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
             return redirect()->back()->with('error_message', $error_message)->withInput();
         } else {
+
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Created successfully');
             return redirect()->route('training-provider-partners.index');

@@ -7,7 +7,7 @@
 @section('content')
     <div class="m-5">
         <h3>
-            {{ __('config.edit_development_partner') }}
+            Update Holyday
         </h3>
         <x-alert />
 
@@ -23,20 +23,13 @@
             </ul>
         @endif
 
-        @isset($partner)
-            @php
-                $onBoardDate = '';
-                if ($partner['onBoardDate']) {
-                    $onBoardDate = \Carbon\Carbon::createFromFormat('Y-m-d', $partner['onBoardDate'])->format('d/m/Y');
-                }
-            @endphp
+        @isset($product)
             <div class="card p-5 mt-3">
                 <div class="card p-5 mt-3">
-                    <form action="{{ route('training-provider-partners.update', $partner['id']) }}" method="post">
+                    <form action="{{ route('products.update', $product['id']) }}" method="post">
                         @csrf
                         @method('PUT')
-                        <input type="hidden" name="trainingProviderOrgId" value="13">
-                        @include('development_partner.form')
+                        @include('products.form')
                     </form>
                 </div>
             </div>
@@ -45,11 +38,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            let storedonBoardDate = @json($onBoardDate) ?? '';
-            $("#onBoardDate").flatpickr({
-                dateFormat: "d/m/Y",
-                defaultDate: [storedonBoardDate]
-            });
+
         });
     </script>
 @endsection

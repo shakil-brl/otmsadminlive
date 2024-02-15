@@ -22,6 +22,8 @@ use App\Http\Controllers\LotController;
 use App\Http\Controllers\MyClassController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PreliminarySelectionController;
+use App\Http\Controllers\ProductComboController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
@@ -276,11 +278,15 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
     Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('logs');
     Route::resource('/training-provider-partners', TrainingProviderPartnerController::class);
+
+    Route::resource('/tms-phase', TmsPhaseController::class);
+    Route::get('/tms-phase/{id}/link-batch', [TmsPhaseController::class, 'linkBatch'])->name('tms-phase.link-batch');
+
+    Route::resource('products', ProductController::class);
+    Route::resource('product-combos', ProductComboController::class);
 });
 
-Route::resource('/tms-phase', TmsPhaseController::class);
-Route::get('/tms-phase/{id}/link-batch', [TmsPhaseController::class, 'linkBatch'])->name('tms-phase.link-batch');
-Route::resource('/tms-phase-batch', TmsBatchPhaseController::class);
+
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');

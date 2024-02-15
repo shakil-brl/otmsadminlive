@@ -7,7 +7,7 @@
 @section('content')
     <div class="m-5">
         <h3>
-            {{__('config.create_holyday')}}
+            Create Product
         </h3>
         <x-alert />
 
@@ -24,18 +24,16 @@
         @endif
 
         <div class="card p-5 mt-3">
-            <form action="{{ route('holydays.store') }}" method="post">
+            <form action="{{ route('products.store') }}" method="post">
                 @csrf
-                @include('holyday.form')
+                @include('products.form')
             </form>
         </div>
     </div>
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $("#holly_bay").flatpickr({
-                dateFormat: "d/m/Y",
-            });
+           
         });
     </script>
 @endsection

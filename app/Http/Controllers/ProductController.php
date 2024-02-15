@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Clients\ApiHttpClient;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class HolydayController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +14,18 @@ class HolydayController extends Controller
      */
     public function index(Request $request)
     {
-        $results = ApiHttpClient::request('get', 'holyday', [
+        $results = ApiHttpClient::request('get', 'product', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
 
         if ($results['success'] == true) {
-            $holyday = $results['data'];
+            $products = $results['data'];
             $page_from = $results['data']['from'];
-            $paginator = $this->customPaginate($results, $request, route('holydays.index'));
-            // dd($holyday);
-            return view('holyday.index', ['results' => $holyday, 'paginator' => $paginator, 'page_from' => $page_from]);
+
+            $paginator = $this->customPaginate($results, $request, route('products.index'));
+            // dd($products);
+            return view('products.index', ['results' => $products, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
@@ -40,7 +40,7 @@ class HolydayController extends Controller
      */
     public function create()
     {
-        return view('holyday.create');
+        return view("products.create");
     }
 
     /**
@@ -51,30 +51,33 @@ class HolydayController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
-            'day_name_en' => 'required',
-            'day_name_bn' => 'required',
-            'holly_bay' => 'required|date_format:d/m/Y'
+            "name" => "required",
         ]);
 
-        $holyday = $request->except('holly_bay');
+        $product = $request->except(['isActive']);
+        $product["org_id"] = 13;
+        if ($request->is_active) {
+            $product['is_active'] = 1;
+        } else {
+            $product['is_active'] = 0;
+        }
 
-        $holyday['holly_bay'] = Carbon::createFromFormat('d/m/Y', $request->holly_bay)->format('Y-m-d');
+        $result = ApiHttpClient::request("POST", "product", $product)->json();
 
-        $data = ApiHttpClient::request('post', 'holyday', $holyday)->json();
-        //dd($data);
-        if (isset($data['error'])) {
-            $error_message = $data['message'];
+        if (isset($result['error'])) {
+            $errors = $result['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
-            return redirect()->back()->with('error_message', $error_message)->withInput();
-
-            // return redirect()->route('holydays.index');
+            return redirect()->back()->with('error_message', $errors)->withInput();
+        } else if ($result['success'] !== true) {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $result['message'] ?? 'Something wrong');
+            return redirect()->route('products.index');
         } else {
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Created successfully');
-            return redirect()->route('holydays.index');
+            session()->flash('message', $result['message'] ?? 'Created successfully');
+            return redirect()->route('products.index');
         }
     }
 
@@ -97,11 +100,11 @@ class HolydayController extends Controller
      */
     public function edit($id)
     {
-        $results = ApiHttpClient::request('get', "holyday/$id")->json();
+        $results = ApiHttpClient::request('get', "product/$id")->json();
         // dd($results);
         if ($results['success'] == true) {
-            $holyday = $results['data'];
-            return view('holyday.edit', ['holyday' => $holyday]);
+            $product = $results['data'];
+            return view('products.edit', ['product' => $product]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
@@ -118,28 +121,33 @@ class HolydayController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $request->validate([
-            'day_name_en' => 'required',
-            'day_name_bn' => 'required',
-            'holly_bay' => 'required|date_format:d/m/Y'
+            "name" => "required",
         ]);
 
-        $holyday = $request->except('holly_bay');
+        $product = $request->except(['isActive']);
+        $product["org_id"] = 13;
+        if ($request->is_active) {
+            $product['is_active'] = 1;
+        } else {
+            $product['is_active'] = 0;
+        }
 
-        $holyday['holly_bay'] = Carbon::createFromFormat('d/m/Y', $request->holly_bay)->format('Y-m-d');
+        $result = ApiHttpClient::request("PUT", "product/$id", $product)->json();
 
-        $data = ApiHttpClient::request('put', "holyday/$id", $holyday)->json();
-        // dd($data);
-        if (isset($data['error'])) {
-            $error_message = $data['message'];
+        if (isset($result['error'])) {
+            $errors = $result['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
-            return redirect()->back()->with('error_message', $error_message)->withInput();
+            return redirect()->back()->with('error_message', $errors)->withInput();
+        } else if ($result['success'] != true) {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $result['message'] ?? 'Something wrong');
+            return redirect()->route('products.index');
         } else {
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Updated successfully');
-            return redirect()->route('holydays.index');
+            session()->flash('message', $result['message'] ?? 'Updated successfully');
+            return redirect()->route('products.index');
         }
     }
 
@@ -151,17 +159,16 @@ class HolydayController extends Controller
      */
     public function destroy($id)
     {
-        $results = ApiHttpClient::request('delete', "holyday/$id")->json();
+        $results = ApiHttpClient::request('delete', "product/$id")->json();
 
         if ($results['success'] == true) {
-            // dd($holyday);
             session()->flash('type', 'Success');
             session()->flash('message', $results['message'] ?? 'Deleted successfully');
-            return redirect()->route('holydays.index');
+            return redirect()->route('products.index');
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return redirect()->route('holydays.index');
+            return redirect()->route('products.index');
         }
     }
 }
