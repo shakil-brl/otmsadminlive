@@ -802,63 +802,71 @@
                                             <!--end:Menu sub-->
 
                                         </div>
-                                        {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+                                        <!--end:Menu item-->
+                                        <div data-kt-menu-trigger="click"
+                                        class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>here show<?php } ?>">
+                                        <!--begin:Menu link-->
+                                        <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>active<?php } ?>">
+                                            <span class="menu-icon">
+                                                <i class="ki-duotone ki-lots-shopping  fs-2">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="path4"></span>
+                                                <span class="path5"></span>
+                                                <span class="path6"></span>
+                                                <span class="path7"></span>
+                                                <span class="path8"></span>
+                                                </i>
+                                                <i class="flaticon2-hourglass-1 icon-nm"></i>
+                                            </span>
 
-                                            <!--start:Menu link-->
-                                            <a href="" class="show-loader">
-                                                <span
-                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
-                                                    <span class="menu-icon">
-                                                        <i class="ki-duotone ki-people  fs-2                      ">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                            <span class="path3"></span>
-                                                            <span class="path4"></span>
-                                                            <span class="path5"></span>
-                                                        </i>
-                                                    </span>
-                                                    <span class="menu-title">{{ __('sidemenu.partner_employee') }}</span>
-                                                </span>
-                                            </a>
-                                            <!--end:Menu link-->
+                                            <span class="menu-title">{{ __('sidemenu.course_suplies') }}</span>
+                                            <span class="menu-arrow"></span>
+                                        </span>
+                                        <!--end:Menu link-->
+                                        <!--begin:Menu sub-->
+                                        <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
+                                            <!--begin:Menu sub-->
+                                            <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('inspaction.index')||Illuminate\Support\Facades\Route::is('tms-inspections.show')) {?>here show<?php } ?>"
+                                                kt-hidden-height="81" style="">
 
-                                        </div> --}}
-                                        {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
-                                            <!--start:Menu link-->
-                                            <a href="" class="show-loader"> <span
-                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
-                                                    <span class="menu-icon">
-                                                        <i class="ki-duotone ki-category fs-2                     ">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                            <span class="path3"></span>
-                                                            <span class="path4"></span>
-                                                        </i>
-                                                    </span>
-                                                    <span class="menu-title">{{ __('sidemenu.categorie') }}</span>
-                                                </span>
-                                            </a>
-                                            <!--end:Menu link-->
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('')||Illuminate\Support\Facades\Route::is('')) {?>active<?php } ?>"
+                                                        href="{{ route('') }}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
 
-                                        </div> --}}
-                                        {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
-                                            <!--start:Menu link-->
-                                            <a href="{{ route('courses.index') }}" class="show-loader">
-                                                <span
-                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('courses.index') || Illuminate\Support\Facades\Route::is('courses.edit')|| Illuminate\Support\Facades\Route::is('courses.create')) {?>active<?php } ?>">
-                                                    <span class="menu-icon">
-                                                        <i class="ki-duotone ki-some-files fs-2 ">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </span>
-                                                    <span class="menu-title">{{ __('sidemenu.course') }}</span>
-                                                </span>
-                                            </a>
-                                            <!--end:Menu link-->
+                                                        </span>
+                                                        <span class="menu-title">{{ __('sidemenu.products') }}</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                                 <!--begin:Menu item-->
+                                                 <div class="menu-item">
+                                                    <!--begin:Menu link-->
+                                                    <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('')||Illuminate\Support\Facades\Route::is('')) {?>active<?php } ?>"
+                                                        href="{{ route('') }}">
+                                                        <span class="menu-bullet">
+                                                            <span class="bullet bullet-dot"></span>
 
-                                        </div> --}}
+
+                                                        </span>
+                                                        <span class="menu-title">{{ __('sidemenu.product_combos') }}</span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                            </div>
+                                            <!--end:Menu sub-->
+                                        </div>
+                                        <!--end:Menu sub-->
+
+                                    </div>
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                                             <!--start:Menu link-->

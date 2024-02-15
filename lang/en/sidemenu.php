@@ -61,5 +61,8 @@ return [
     'org_provider' => 'Org and provider',
     'phase' => 'Phase',
     'phase_batch' => "Phase Batch's",
+    'course_suplies' => "Course Supplies",
+    'products' => "Products",
+    'product_combos' => "Product Combos",
 
 ];

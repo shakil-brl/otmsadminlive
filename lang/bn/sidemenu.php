@@ -72,6 +72,9 @@ return [
     'org_provider' => 'অর্গ এবং প্রোভাইডার ',
     'phase' => 'ফেইজ ',
     'phase_batch' => "ফেইজ ব্যাচ সমূহ ",
+    'course_suplies' => "কোর্স সাপ্লাই",
+    'products' => "প্রোডাক্ট সমূহ",
+    'product_combos' => "প্রোডাক্ট কম্বো সমূহ",
 
 
 
