@@ -34,7 +34,7 @@
 
                         @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.ongoing_classes')" :totalBatch="$data['running_class'] ?? 0" :icon="asset('img/new_icon/livestrem.gif')"
+                                <x-dashboard-card :url="route('dashboard_details.ongoing_classes')" :totalBatch="$total_ongoing ?? 0" :icon="asset('img/new_icon/livestrem.gif')"
                                     :title="__('dashboard.ongoing_class')" :class="'card-item red show-loader'" />
                             </div>
                         @endif

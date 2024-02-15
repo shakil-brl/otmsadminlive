@@ -4,10 +4,9 @@
     <!--begin::Content-->
     <div class="m-5">
         <div class="d-flex justify-content-end align-items-center">
-            <a class="btn btn-lg btn-success" href="{{ route('training-provider-partners.create') }}">Create Development
-                Partner</a>
+            <a class="btn btn-lg btn-success" href="{{ route('training-provider-partners.create') }}">{{__('config.create_development_partner')}}</a>
         </div>
-        <h3>Development Partner List</h3>
+        <h3>{{__('config.development_partner_list')}}</h3>
         <x-alert />
 
         @isset($results['data'])
@@ -17,7 +16,7 @@
                         <div class="w-50 d-flex gap-3">
                             <div class="input-group w-75">
                                 <input type="search" name="search" value="{{ request('search') }}" class="form-control"
-                                    placeholder="Search here" id="myInput">
+                                    placeholder="{{__('config.search_here')}}" id="myInput">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="bi bi-search"></i>
                                 </button>
@@ -28,11 +27,11 @@
 
                 <table class="table table-bordered bg-white" id="partner-table">
                     <thead>
-                        <th>S.N.</th>
-                        <th>Partner Name</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th class="text-center">Actions</th>
+                        <th>{{__('config.sl')}}</th>
+                        <th>{{__('config.partner_name')}}</th>
+                        <th>{{__('config.date')}}</th>
+                        <th>{{__('config.status')}}</th>
+                        <th class="text-center">{{__('config.action')}}</th>
                     </thead>
                     <tbody>
                         @foreach ($results['data'] ?? [] as $index => $partner)
@@ -49,19 +48,20 @@
                                 <td class="">
                                     <span
                                         class="badge badge-{{ isset($partner['isActive']) ? ($partner['isActive'] == 1 ? 'success' : 'warning') : '' }}">
-                                        {{ isset($partner['isActive']) ? ($partner['isActive'] == 1 ? 'Active' : 'Inactive') : '' }}
+                                        {{ isset($partner['isActive']) ? ($partner['isActive'] == 1 ? __('config.active') : __('config.inactive')) : '' }}
+
                                     </span>
                                 </td>
                                 <td class="me-0 d-flex gap-1 justify-content-center">
                                     <a href="{{ route('training-provider-partners.edit', $partner['id']) }}"
                                         class="btn btn-sm btn-info">
-                                        Edit
+                                        {{__('config.edit')}}
                                     </a>
                                     <form action="{{ route('training-provider-partners.destroy', $partner['id']) }}"
                                         method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger delete-action">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger delete-action">{{__('config.delete')}}</button>
                                     </form>
                                 </td>
                             </tr>

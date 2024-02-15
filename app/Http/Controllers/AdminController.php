@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -23,6 +24,19 @@ class AdminController extends Controller
     {
         $response = ApiHttpClient::request('get', 'dashboardtotal/superadmin');
         $data = $response->json()['data'];
+
+        $classes = ApiHttpClient::request(
+            'get',
+            'detail/class-running',
+            [
+                'per_page' => 1,
+                'from_date' => Carbon::now()->toDateString(),
+                'to_date' => Carbon::now()->toDateString(),
+                'status' => 2,
+            ]
+        )->json();
+
+
         // dd($data);
         if (isset($data['success'])) {
             if ($data['success'] !== true) {
@@ -32,11 +46,9 @@ class AdminController extends Controller
             if (isset($data['message'])) {
                 return $data['message'];
             } else {
+                $total_ongoing = $classes['data']['total'];
 
-                $data = $data;
-
-                return view('admins.dashboard', compact('data'));
-                return "API Server Error";
+                return view('admins.dashboard', compact('data', 'total_ongoing'));
             }
         }
     }

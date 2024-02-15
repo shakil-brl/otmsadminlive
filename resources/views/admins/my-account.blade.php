@@ -57,7 +57,7 @@
                         <dt class="col-sm-3">{{__('admin-user-list.mail')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['Email'] ?? '' }}</dd>
 
-                        <dt class="col-sm-3">{{__('admin-user-list.marital_status')}}:</dt>
+                        <dt class="col-sm-3">{{__('admin-user-list.phone_number')}}:</dt>
                         <dd class="col-sm-9">{{ $authProfile['Phone'] ?? '' }}</dd>
 
                         <dt class="col-sm-3">{{__('admin-user-list.nid_no')}}:</dt>

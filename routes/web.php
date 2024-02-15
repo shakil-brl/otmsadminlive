@@ -94,25 +94,17 @@ Route::post('/store-auth-user', [AuthUserController::class, 'storeAuthUser'])->n
 Route::get('/auth-error', [AuthUserController::class, 'authError'])->name('auth.error');
 
 Route::group(['middleware' => ['access.token', 'permission']], function () {
-    /**
-     * User Routes
-     */
+
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/{userId}', [UserController::class, 'show'])->name('users.show');
     });
 
-    /**
-     * Preliminary selected User Routes
-     */
     Route::group(['prefix' => 'preliminary-selected'], function () {
         Route::get('/', [PreliminarySelectionController::class, 'index'])->name('preliminary-selected.index');
         Route::get('/{userId}', [PreliminarySelectionController::class, 'show'])->name('preliminary-selected.show');
     });
 
-    /**
-     * User Routes
-     */
     Route::group(['prefix' => 'admins'], function () {
         Route::get('/', [AdminController::class, 'index'])->name('admins.index');
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admins.dashboard');
@@ -120,65 +112,43 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/{userProfileId}/show', [AdminController::class, 'show'])->name('admins.show');
     });
 
-    /**
-     * Categories Routes
-     */
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('/{categoryId}', [CategoryController::class, 'show'])->name('categories.show');
     });
 
-    /**
-     * Sub Categories Routes
-     */
     Route::group(['prefix' => 'subcategories'], function () {
         Route::get('/', [SubCategoryController::class, 'index'])->name('subcategories.index');
         Route::get('/{subCategoryId}', [SubCategoryController::class, 'show'])->name('subcategories.show');
     });
 
-    /**
-     * Divisions Routes
-     */
     Route::group(['prefix' => 'divisions'], function () {
         Route::get('/', [DivisionController::class, 'index'])->name('divisions.index');
         Route::get('/{divisionId}', [DivisionController::class, 'show'])->name('divisions.show');
     });
 
-    /**
-     * District Routes
-     */
     Route::group(['prefix' => 'districts'], function () {
         Route::get('/', [DistrictController::class, 'index'])->name('districts.index');
         Route::get('/{districtId}', [DistrictController::class, 'show'])->name('districts.show');
     });
 
-    /**
-     * Upazila Routes
-     */
+
     Route::group(['prefix' => 'upazilas'], function () {
         Route::get('/', [UpazilaController::class, 'index'])->name('upazilas.index');
         Route::get('/{upazilaId}', [UpazilaController::class, 'show'])->name('upazilas.show');
     });
 
-    /**
-     * Providers Routes
-     */
     Route::group(['prefix' => 'providers'], function () {
         Route::get('/', [ProviderController::class, 'index'])->name('providers.index');
         Route::get('/{providerId}', [ProviderController::class, 'show'])->name('providers.show');
     });
 
-    /**
-     * Committee Routes
-     */
     Route::group(['prefix' => 'committees'], function () {
         Route::get('/', [CommitteeController::class, 'index'])->name('committees.index');
         Route::get('/{committeeId}', [CommitteeController::class, 'show'])->name('committees.show');
     });
 
-    /**
-     * Batches Routes
-     */
+
     Route::group(['prefix' => 'batches'], function () {
         Route::get('/', [BatchController::class, 'index'])->name('batches.index');
         Route::get('/all', [BatchController::class, 'all'])->name('batches.all');
@@ -312,10 +282,11 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/create/{schedule_details_id}', 'createDocument')->name('create');
     });
 
-    
+    Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('logs');
+    Route::resource('evaluation-head', EvaluationHeadController::class);
     Route::resource('/training-provider-partners', TrainingProviderPartnerController::class);
 });
-Route::resource('evaluation-head', EvaluationHeadController::class);
+
 Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
 Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
 Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
