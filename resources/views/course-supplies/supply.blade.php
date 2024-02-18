@@ -66,11 +66,19 @@
                                     <td>
                                         {{ $combo['phase']['name_en'] ?? '' }}
                                     </td>
+
                                     <td class="text-center">
-                                        <a href="{{ route('course-supplies.distribute', [encrypt($batch['id']), $combo['id']]) }}"
-                                            class="btn btn-sm btn-info">
-                                            Distibute
-                                        </a>
+                                        @if (in_array('course-supplies.distribute', $roleRoutePermissions))
+                                            <a href="{{ route('course-supplies.distribute', [encrypt($batch['id']), $combo['id']]) }}"
+                                                class="btn btn-sm btn-info">
+                                                Distibute
+                                            </a>
+                                        @elseif(in_array('course-supplies.distributed-list', $roleRoutePermissions))
+                                            <a href="{{ route('course-supplies.distributed-list', [encrypt($batch['id']), $combo['id']]) }}"
+                                                class="btn btn-sm btn-info">
+                                                Distibuted List
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

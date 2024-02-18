@@ -39,8 +39,13 @@
                                             calendar_month
                                         </span>
                                     </span>
-                                    <input type="text" class="form-control" id="distribution_date"
-                                        name="distribution_date">
+                                    @if (in_array('course-supplies.allocation', $roleRoutePermissions))
+                                        <input type="text" class="form-control" id="distribution_date"
+                                            name="distribution_date">
+                                    @else
+                                        <input type="text" class="form-control" id="distribution_date"
+                                            name="distribution_date" disabled>
+                                    @endif
                                 </div>
                                 @error('distribution_date')
                                     <small class="text-danger d-block">{{ $message }}</small>
@@ -48,9 +53,15 @@
                             </div>
                             <div class="col">
                                 <label for="combo_id" class="form-label">Combo:</label>
-                                <select name="combo_id" id="combo_id" class="form-control">
-                                    <option value="{{ $combo['id'] }}" selected>{{ $combo['name'] }}</option>
-                                </select>
+                                @if (in_array('course-supplies.allocation', $roleRoutePermissions))
+                                    <select name="combo_id" id="combo_id" class="form-control">
+                                        <option value="{{ $combo['id'] }}" selected>{{ $combo['name'] }}</option>
+                                    </select>
+                                @else
+                                    <select name="combo_id" id="combo_id" class="form-control" disabled>
+                                        <option value="{{ $combo['id'] }}" selected>{{ $combo['name'] }}</option>
+                                    </select>
+                                @endif
                                 @error('combo_id')
                                     <small class="text-danger d-block">{{ $message }}</small>
                                 @enderror
@@ -124,14 +135,21 @@
                                                     }
                                                 }
                                             @endphp
+
                                             @if (count($materialIds) > 0 && in_array($combo['id'], $materialIds))
                                                 <input class="trainee form-check-input" name="training_applicant_ids[]"
                                                     value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
                                                     type="checkbox" disabled checked>
                                             @else
-                                                <input class="trainee form-check-input" name="training_applicant_ids[]"
-                                                    value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
-                                                    type="checkbox">
+                                                @if (in_array('course-supplies.distributed-list', $roleRoutePermissions))
+                                                    <input class="trainee form-check-input" name="training_applicant_ids[]"
+                                                        value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
+                                                        type="checkbox" disabled>
+                                                @else
+                                                    <input class="trainee form-check-input" name="training_applicant_ids[]"
+                                                        value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
+                                                        type="checkbox">
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>
@@ -141,11 +159,13 @@
                         @error('training_applicant_ids')
                             <small class="text-danger d-block">{{ $message }}</small>
                         @enderror
-                        <div class="text-center">
-                            <button class="btn btn-success btn-lg sumbit-form" type="submit">
-                                Sumbit
-                            </button>
-                        </div>
+                        @if (in_array('course-supplies.allocation', $roleRoutePermissions))
+                            <div class="text-center">
+                                <button class="btn btn-success btn-lg sumbit-form" type="submit">
+                                    Sumbit
+                                </button>
+                            </div>
+                        @endif
                     </form>
                 @endif
             </div>
