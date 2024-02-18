@@ -1,5 +1,4 @@
 @extends('layouts.auth-master')
-{{-- @dump($total_batches) --}}
 @section('content')
     <!--begin::Content -->
     <div class="m-5">
@@ -31,7 +30,6 @@
                     
                         <tr>
                             <td>
-                               {{-- // @dump($batch) --}}
                                 {{ digitLocale($from_no + $loop->iteration - 1) }}
                             </td>
                             <td>

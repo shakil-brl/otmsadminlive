@@ -12,6 +12,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClassDocumentController;
 use App\Http\Controllers\CommitteeController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CourseSupplies;
+use App\Http\Controllers\CourseSuppliesController;
 use App\Http\Controllers\DashboardDetailsController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
@@ -284,6 +286,10 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
     Route::resource('products', ProductController::class);
     Route::resource('product-combos', ProductComboController::class);
+
+    Route::get('course-supplies/supply/{batch_id}', [CourseSuppliesController::class, 'supply'])->name('course-supplies.supply');
+    Route::get('course-supplies/distribute/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distribute'])->name('course-supplies.distribute');
+    Route::post('course-supplies/allocation', [CourseSuppliesController::class, 'allocation'])->name('course-supplies.allocation');
 });
 
 

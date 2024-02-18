@@ -5,12 +5,12 @@
         <div class="d-flex justify-content-end align-items-center">
             <a class="btn btn-lg btn-success" href="{{ route('product-combos.create') }}">Create Product Combo</a>
         </div>
-        <h3>Product List</h3>
+        <h3>Product Combo List</h3>
         <x-alert />
 
         @isset($results['data'])
             <div class="my-3">
-                <div class="d-none">
+                <div class="mb-3">
                     <form action="">
                         <div class="w-50 d-flex gap-3">
                             <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
