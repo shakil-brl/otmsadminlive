@@ -380,7 +380,7 @@
                 },
                 success: function(results) {
                     // Handle the successful response here
-                    console.log(results.data);
+                    // console.log(results.data);
 
                     let allRoles = results.data;
                     sessionStorage.removeItem('message');

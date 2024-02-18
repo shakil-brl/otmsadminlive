@@ -36,7 +36,7 @@
     <div class="">
         <label for="refDocTitle" class="form-label">{{__('config.ref_doc_title')}}</label>
         <input type="text" class="form-control" name="refDocTitle" id="refDocTitle"
-            value="{{ $holyday['refDocTitle'] ?? old('refDocTitle') }}">
+            value="{{ $partner['refDocTitle'] ?? old('refDocTitle') }}">
         @error('refDocTitle')
             <small class="text-danger d-block">{{ $message }}</small>
         @enderror
@@ -44,7 +44,7 @@
     <div class="">
         <label for="refDocNo" class="form-label">{{__('config.ref_doc_no')}}</label>
         <input type="text" class="form-control" name="refDocNo" id="refDocNo"
-            value="{{ $holyday['refDocNo'] ?? old('refDocNo') }}">
+            value="{{ $partner['refDocNo'] ?? old('refDocNo') }}">
         @error('refDocNo')
             <small class="text-danger d-block">{{ $message }}</small>
         @enderror
