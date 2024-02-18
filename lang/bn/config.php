@@ -33,5 +33,17 @@ return [
     'ref_doc_title' => 'রেফারেন্স ডকুমেন্ট টাইটেল',
     'ref_doc_no' => 'রেফারেন্স ডকুমেন্ট নং',
     'submit' => 'সাবমিট করুন ',  
+    'holydays_list' => 'ছুটির তালিকা', 
+    'name_english' => 'নাম (ইংরেজি)',
+    'name_bangla' => 'নাম (বাংলা)',
+    'create_holyday' => 'ছুটির তালিকা তৈরি করুন ',
+    'update_holyday' => 'ছুটির তালিকা আপডেট করুন',
+    'name_english_ph' => 'ইংরেজি নাম লিখুন',
+    'name_bangla_ph' => 'বাংলা নাম লিখুন',
+    'date_ph' => 'তারিখ নির্বাচন করুন',
+    'course_list' => 'কোর্সের তালিকা',
+    'course_create' => 'কোর্স তৈরি করুন',
+    'update_course' => 'কোর্স আপডেট করুন',
+    'data_not_found' => 'তথ্য পাওয়া যায়নি',
    
 ];

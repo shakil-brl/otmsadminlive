@@ -7,7 +7,7 @@
 @section('content')
     <div class="m-5">
         <h3>
-            Create Course
+            {{__('config.course_create')}}
         </h3>
         <x-alert />
 

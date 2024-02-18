@@ -7,7 +7,7 @@
 @section('content')
     <div class="m-5">
         <h3>
-            Create Holyday
+            {{__('config.create_holyday')}}
         </h3>
         <x-alert />
 
