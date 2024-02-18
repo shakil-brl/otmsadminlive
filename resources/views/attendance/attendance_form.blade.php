@@ -7,7 +7,6 @@
     </style>
 @endpush
 @section('content')
-    <!--begin::Content-->
     <div class="m-5">
         @isset($schedule_detail)
             <div id="batch-header" class="mb-1">

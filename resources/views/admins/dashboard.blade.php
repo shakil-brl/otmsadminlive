@@ -261,12 +261,12 @@
                                                                     </div>
 
                                                                     <div class="item">
-                                                                        <div class="digit">
+                                                                        {{-- <div class="digit">
                                                                             {{ isset($data['total_dropout']) ? digitLocale($data['total_dropout']) : digitLocale(0) }}
-                                                                        </div>
-                                                                        <div class="label">
+                                                                        </div> --}}
+                                                                        {{-- <div class="label">
                                                                             {{ __('dashboard.dropout_trainee') }}
-                                                                        </div>
+                                                                        </div> --}}
                                                                         {{-- <div class="digit">66%</div>
                                                             <div class="label">
                                                                 {{ __('dashboard.successful_freelancer') }}</div> --}}
