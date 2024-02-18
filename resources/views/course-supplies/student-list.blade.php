@@ -65,8 +65,25 @@
                                     <th>Email-NID</th>
                                     <th>Phone</th>
                                     <th class="d-flex align-item-center gap-2 justify-content-center">
-                                        <label for="selectAll">Select All</label>
-                                        <input type="checkbox" id="selectAll" class="form-check-input">
+                                        <label for="selectAll">Distribute</label>
+                                        @php
+                                            $hasDistributeId = false;
+
+                                            foreach ($batch_details['trainees'] as $trainee) {
+                                                if (isset($trainee['material_allocations']) && is_array($trainee['material_allocations'])) {
+                                                    foreach ($trainee['material_allocations'] as $allocation) {
+                                                        if ($allocation['combo_id'] == $combo['id']) {
+                                                            $distributedDate = \Carbon\Carbon::createFromFormat('Y-m-d', $allocation['distribution_date'])->format('d/m/Y');
+                                                            $hasDistributeId = true;
+                                                            break 2;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                        @if (!$hasDistributeId)
+                                            <input type="checkbox" id="selectAll" class="form-check-input">
+                                        @endif
                                     </th>
                                 </tr>
                             </thead>
@@ -151,7 +168,7 @@
         //     dateFormat: "d/m/Y",
         // });
 
-        let oldDistributionDate = @json(old('distribution_date')) ?? '';
+        let oldDistributionDate = @json($distributedDate ?? old('distribution_date'));
         $("#distribution_date").flatpickr({
             dateFormat: "d/m/Y",
             defaultDate: [oldDistributionDate]
