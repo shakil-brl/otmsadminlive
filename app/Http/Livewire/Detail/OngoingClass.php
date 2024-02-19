@@ -32,7 +32,7 @@ class OngoingClass extends Component
     public $current_schedule = 1;
     public function updated($attr)
     {
-
+        $this->gotoPage(1);
         if ($attr == 'division_code') {
             $this->districts = ApiHttpClient::request(
                 'get',
