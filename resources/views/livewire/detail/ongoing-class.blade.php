@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <select name="" class="form-select" wire:model='status'>
-                         <option value="">Show All</option> 
+                        <option value="">Show All</option>
                         <option value="1">Class Not Started</option>
                         <option value="2">Class Running</option>
                         <option value="3">Class Completed</option>
@@ -210,7 +210,7 @@
                                             </a>
                                         @endif
                                     @endif
-                                    @if ($batch['status'] > 2)
+                                    @if ($batch['status'] >= 2)
                                         <a class="btn btn-sm btn-info"
                                             href="{{ route('attendance.form', encrypt($batch['id'])) }}"
                                             target="_blank">{{ __('batch-list.view_attendance') }}
