@@ -356,7 +356,7 @@
 
             setTimeout(function() {
                 myDiv.style.display = "none";
-            }, 10000);
+            }, 80000);
         });
     </script>
 
