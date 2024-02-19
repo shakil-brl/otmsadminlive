@@ -6,7 +6,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
-        <a href="">
+        <a href="{{ url('/') }}">
             <img alt="Logo" src="{{ asset('img/logo.svg') }}" class="h-45px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('img/logo-icon.svg') }}" class="h-30px app-sidebar-logo-minimize" />
         </a>
@@ -804,69 +804,69 @@
                                         </div>
                                         <!--end:Menu item-->
                                         <div data-kt-menu-trigger="click"
-                                        class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>here show<?php } ?>">
-                                        <!--begin:Menu link-->
-                                        <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>active<?php } ?>">
-                                            <span class="menu-icon">
-                                                <i class="ki-duotone ki-lots-shopping  fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                                <span class="path4"></span>
-                                                <span class="path5"></span>
-                                                <span class="path6"></span>
-                                                <span class="path7"></span>
-                                                <span class="path8"></span>
-                                                </i>
-                                                <i class="flaticon2-hourglass-1 icon-nm"></i>
+                                            class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>here show<?php } ?>">
+                                            <!--begin:Menu link-->
+                                            <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>active<?php } ?>">
+                                                <span class="menu-icon">
+                                                    <i class="ki-duotone ki-lots-shopping  fs-2">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                        <span class="path4"></span>
+                                                        <span class="path5"></span>
+                                                        <span class="path6"></span>
+                                                        <span class="path7"></span>
+                                                        <span class="path8"></span>
+                                                    </i>
+                                                    <i class="flaticon2-hourglass-1 icon-nm"></i>
+                                                </span>
+
+                                                <span class="menu-title">{{ __('sidemenu.course_suplies') }}</span>
+                                                <span class="menu-arrow"></span>
                                             </span>
-
-                                            <span class="menu-title">{{ __('sidemenu.course_suplies') }}</span>
-                                            <span class="menu-arrow"></span>
-                                        </span>
-                                        <!--end:Menu link-->
-                                        <!--begin:Menu sub-->
-                                        <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
+                                            <!--end:Menu link-->
                                             <!--begin:Menu sub-->
-                                            <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>here show<?php } ?>"
-                                                kt-hidden-height="81" style="">
+                                            <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
+                                                <!--begin:Menu sub-->
+                                                <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>here show<?php } ?>"
+                                                    kt-hidden-height="81" style="">
 
-                                                <!--begin:Menu item-->
-                                                <div class="menu-item">
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')) {?>active<?php } ?>"
-                                                        href="{{ route('products.index') }}">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
+                                                        <!--begin:Menu link-->
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')) {?>active<?php } ?>"
+                                                            href="{{ route('products.index') }}">
+                                                            <span class="menu-bullet">
+                                                                <span class="bullet bullet-dot"></span>
 
 
-                                                        </span>
-                                                        <span class="menu-title">{{ __('sidemenu.products') }}</span>
-                                                    </a>
-                                                    <!--end:Menu link-->
+                                                            </span>
+                                                            <span class="menu-title">{{ __('sidemenu.products') }}</span>
+                                                        </a>
+                                                        <!--end:Menu link-->
+                                                    </div>
+                                                    <!--end:Menu item-->
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
+                                                        <!--begin:Menu link-->
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>active<?php } ?>"
+                                                            href="{{ route('product-combos.index') }}">
+                                                            <span class="menu-bullet">
+                                                                <span class="bullet bullet-dot"></span>
+
+
+                                                            </span>
+                                                            <span class="menu-title">{{ __('sidemenu.product_combos') }}</span>
+                                                        </a>
+                                                        <!--end:Menu link-->
+                                                    </div>
+                                                    <!--end:Menu item-->
                                                 </div>
-                                                <!--end:Menu item-->
-                                                 <!--begin:Menu item-->
-                                                 <div class="menu-item">
-                                                    <!--begin:Menu link-->
-                                                    <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>active<?php } ?>"
-                                                        href="{{ route('product-combos.index') }}">
-                                                        <span class="menu-bullet">
-                                                            <span class="bullet bullet-dot"></span>
-
-
-                                                        </span>
-                                                        <span class="menu-title">{{ __('sidemenu.product_combos') }}</span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
+                                                <!--end:Menu sub-->
                                             </div>
                                             <!--end:Menu sub-->
-                                        </div>
-                                        <!--end:Menu sub-->
 
-                                    </div>
+                                        </div>
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                                             <!--start:Menu link-->
