@@ -290,6 +290,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::get('course-supplies/supply/{batch_id}', [CourseSuppliesController::class, 'supply'])->name('course-supplies.supply');
     Route::get('course-supplies/distribute/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distribute'])->name('course-supplies.distribute');
     Route::post('course-supplies/allocation', [CourseSuppliesController::class, 'allocation'])->name('course-supplies.allocation');
+    Route::get('course-supplies/show/{batch_id}', [CourseSuppliesController::class, 'show'])->name('course-supplies.show');
+    Route::get('course-supplies/distribute/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distributedList'])->name('course-supplies.distributed-list');
 });
 
 

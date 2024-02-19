@@ -25,9 +25,8 @@
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
-                   
+
                     @foreach (collect($total_batches) as $batch)
-                    
                         <tr>
                             <td>
                                 {{ digitLocale($from_no + $loop->iteration - 1) }}
@@ -51,20 +50,34 @@
                                         <a href="{{ route('batch-schedule.create', encrypt($batch['id'])) }}"
                                             class="btn btn-sm btn-primary"> {{ __('batch-list.create_schedule') }}</a>
                                     @else
-                                        <span class="badge text-black badge-warning">{{__('batch-list.not_created-schedule')}}</span>
+                                        <span
+                                            class="badge text-black badge-warning">{{ __('batch-list.not_created-schedule') }}</span>
                                     @endif
                                 @else
-                                    <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
-                                        class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}</a>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
+                                            class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
+                                        </a>
+                                        <a href="{{ route('course-supplies.show', encrypt($batch['id'])) }}"
+                                            class="btn btn-sm btn-success">
+                                            Supplies
+                                        </a>
+                                    </div>
+                                    <small class="fw-bold">Class Progress:</small>
+                                    <div class="progress m-1">
+                                        <div class="progress-bar" role="progressbar"
+                                            style="width: {{ $batch['schedule']['total_complete'] }}%"
+                                            aria-valuenow="{{ $batch['schedule']['total_complete'] }}"
+                                            aria-valuemin="{{ $batch['schedule']['total_complete'] }}"
+                                            aria-valuemax="{{ $batch['duration'] }}"></div>
+                                    </div>
 
-                                        <div class="progress m-1">
-                                            <div class="progress-bar" role="progressbar" style="width: {{$batch['schedule']['total_complete']}}%" aria-valuenow="{{$batch['schedule']['total_complete']}}" aria-valuemin="{{$batch['schedule']['total_complete']}}" aria-valuemax="{{$batch['duration']}}"></div>
-                                          </div>
-
-                                          <small>{{__('batch-list.complete_class')}}: {{ digitLocale($batch['schedule']['total_complete']) }}</small>/
-                                          <small>{{__('batch-list.pending_class')}}: {{ digitLocale($batch['schedule']['total_pending']) }}</small>/
-                                          <small>{{__('batch-list.running_class')}}: {{ digitLocale($batch['schedule']['total_running']) }}</small>
-                                          
+                                    <small>{{ __('batch-list.complete_class') }}:
+                                        {{ digitLocale($batch['schedule']['total_complete']) }}</small>/
+                                    <small>{{ __('batch-list.pending_class') }}:
+                                        {{ digitLocale($batch['schedule']['total_pending']) }}</small>/
+                                    <small>{{ __('batch-list.running_class') }}:
+                                        {{ digitLocale($batch['schedule']['total_running']) }}</small>
                                 @endif
                             </td>
                         </tr>

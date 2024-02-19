@@ -39,8 +39,13 @@
                                             calendar_month
                                         </span>
                                     </span>
-                                    <input type="text" class="form-control" id="distribution_date"
-                                        name="distribution_date">
+                                    @if (in_array('course-supplies.allocation', $roleRoutePermissions))
+                                        <input type="text" class="form-control" id="distribution_date"
+                                            name="distribution_date">
+                                    @else
+                                        <input type="text" class="form-control" id="distribution_date"
+                                            name="distribution_date" disabled>
+                                    @endif
                                 </div>
                                 @error('distribution_date')
                                     <small class="text-danger d-block">{{ $message }}</small>
@@ -48,9 +53,15 @@
                             </div>
                             <div class="col">
                                 <label for="combo_id" class="form-label">Combo:</label>
-                                <select name="combo_id" id="combo_id" class="form-control">
-                                    <option value="{{ $combo['id'] }}" selected>{{ $combo['name'] }}</option>
-                                </select>
+                                @if (in_array('course-supplies.allocation', $roleRoutePermissions))
+                                    <select name="combo_id" id="combo_id" class="form-control">
+                                        <option value="{{ $combo['id'] }}" selected>{{ $combo['name'] }}</option>
+                                    </select>
+                                @else
+                                    <select name="combo_id" id="combo_id" class="form-control" disabled>
+                                        <option value="{{ $combo['id'] }}" selected>{{ $combo['name'] }}</option>
+                                    </select>
+                                @endif
                                 @error('combo_id')
                                     <small class="text-danger d-block">{{ $message }}</small>
                                 @enderror
@@ -65,8 +76,25 @@
                                     <th>Email-NID</th>
                                     <th>Phone</th>
                                     <th class="d-flex align-item-center gap-2 justify-content-center">
-                                        <label for="selectAll">Select All</label>
-                                        <input type="checkbox" id="selectAll" class="form-check-input">
+                                        <label for="selectAll">Distribute</label>
+                                        @php
+                                            $hasDistributeId = false;
+
+                                            foreach ($batch_details['trainees'] as $trainee) {
+                                                if (isset($trainee['material_allocations']) && is_array($trainee['material_allocations'])) {
+                                                    foreach ($trainee['material_allocations'] as $allocation) {
+                                                        if ($allocation['combo_id'] == $combo['id']) {
+                                                            $distributedDate = \Carbon\Carbon::createFromFormat('Y-m-d', $allocation['distribution_date'])->format('d/m/Y');
+                                                            $hasDistributeId = true;
+                                                            break 2;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                        @if (!$hasDistributeId)
+                                            <input type="checkbox" id="selectAll" class="form-check-input">
+                                        @endif
                                     </th>
                                 </tr>
                             </thead>
@@ -107,14 +135,21 @@
                                                     }
                                                 }
                                             @endphp
+
                                             @if (count($materialIds) > 0 && in_array($combo['id'], $materialIds))
                                                 <input class="trainee form-check-input" name="training_applicant_ids[]"
                                                     value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
                                                     type="checkbox" disabled checked>
                                             @else
-                                                <input class="trainee form-check-input" name="training_applicant_ids[]"
-                                                    value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
-                                                    type="checkbox">
+                                                @if (in_array('course-supplies.distributed-list', $roleRoutePermissions))
+                                                    <input class="trainee form-check-input" name="training_applicant_ids[]"
+                                                        value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
+                                                        type="checkbox" disabled>
+                                                @else
+                                                    <input class="trainee form-check-input" name="training_applicant_ids[]"
+                                                        value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
+                                                        type="checkbox">
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>
@@ -124,11 +159,13 @@
                         @error('training_applicant_ids')
                             <small class="text-danger d-block">{{ $message }}</small>
                         @enderror
-                        <div class="text-center">
-                            <button class="btn btn-success btn-lg sumbit-form" type="submit">
-                                Sumbit
-                            </button>
-                        </div>
+                        @if (in_array('course-supplies.allocation', $roleRoutePermissions))
+                            <div class="text-center">
+                                <button class="btn btn-success btn-lg sumbit-form" type="submit">
+                                    Sumbit
+                                </button>
+                            </div>
+                        @endif
                     </form>
                 @endif
             </div>
@@ -151,7 +188,7 @@
         //     dateFormat: "d/m/Y",
         // });
 
-        let oldDistributionDate = @json(old('distribution_date')) ?? '';
+        let oldDistributionDate = @json($distributedDate ?? old('distribution_date'));
         $("#distribution_date").flatpickr({
             dateFormat: "d/m/Y",
             defaultDate: [oldDistributionDate]
