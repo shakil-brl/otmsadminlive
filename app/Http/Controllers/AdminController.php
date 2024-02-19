@@ -32,7 +32,6 @@ class AdminController extends Controller
                 'per_page' => 1,
                 'from_date' => Carbon::now()->toDateString(),
                 'to_date' => Carbon::now()->toDateString(),
-                'status' => 2,
             ]
         )->json();
 

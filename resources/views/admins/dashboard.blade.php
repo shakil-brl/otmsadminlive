@@ -34,7 +34,9 @@
 
                         @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.ongoing_classes')" :totalBatch="$total_ongoing ?? 0" :icon="asset('img/new_icon/livestrem.gif')"
+                                <x-dashboard-card :url="route('dashboard_details.ongoing_classes')" :totalBatch="collect($data['running_class'])
+                                    ->where('status', 2)
+                                    ->first()['total'] ?? 0" :icon="asset('img/new_icon/livestrem.gif')"
                                     :title="__('dashboard.ongoing_class')" :class="'card-item red show-loader'" />
                             </div>
                         @endif
@@ -66,7 +68,7 @@
                         @endif
                         @if (in_array('dashboard_details.partners', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="0" :icon="asset('img/new_icon/developmentpartner.png')"
+                                <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="$total_ongoing ?? 0" :icon="asset('img/new_icon/developmentpartner.png')"
                                     :title="__('dashboard.todays_class')" :class="'card-item red show-loader'" />
                             </div>
                         @endif
