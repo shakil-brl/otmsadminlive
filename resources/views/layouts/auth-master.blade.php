@@ -40,7 +40,9 @@
     <link rel="stylesheet" href="{{ asset('css/new_pages/main.css?v=1') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet"> --}}
+    {{--
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
+    --}}
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <style>
         /* styles.css */
@@ -51,7 +53,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background-color: #000000b0;
+            background-color: transparent;
             /* Set the background color of your preloader */
             display: none;
             justify-content: center;
@@ -114,7 +116,7 @@
         var accessToken = 'Bearer {{ Session::get("access_token.access_token") }}';
         var authToken = accessToken;
     </script>
-    
+
     @endif
 
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
@@ -351,7 +353,7 @@
 
             setTimeout(function() {
                 myDiv.style.display = "none";
-            }, 10000);
+            }, 80000);
         });
     </script>
 
