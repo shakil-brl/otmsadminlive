@@ -67,7 +67,9 @@
     <div id="preloader" class="hiddenDiv">
         <div class="loader"></div>
     </div>
-    <div id="body" style="background-image: url('{{ asset('img/login/placeholder.jpg') }}');">
+    <div id="body" class="" >
+         <div style="background-image:url('{{ asset('img/login/placeholder.jpg') }}'); background-size: cover;  background-position: center; width: 100%; border-radius: 40px; margin-right: 10px;"> </div>
+         
         <div id="login-page">
             <header id="navbar">
                 <nav class="navbar navbar-expand-md navbar-light ">
