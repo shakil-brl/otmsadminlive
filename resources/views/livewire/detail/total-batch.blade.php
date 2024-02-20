@@ -44,7 +44,7 @@
                     <select name="" class="form-select" wire:model='trainer_count'>
                         <option value="">Trainer Status</option>
                         <option value="1">No Trainer</option>
-                        <option value="2">Trainer Assigned</option>
+                        <option value="2">Minimum One Trainer Assigned</option>
                         <option value="3">One Trainer</option>
                         <option value="4">Multiple Trainer</option>
                     </select>
