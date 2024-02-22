@@ -17,6 +17,8 @@ use App\Http\Controllers\CourseSuppliesController;
 use App\Http\Controllers\DashboardDetailsController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\EvaluationHeadController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -300,7 +302,11 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
 
-// test
-Route::resource('roles', RoleController::class);
+// test without permission
+Route::resource('evaluation-head', EvaluationHeadController::class);
+Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
+Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
+Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
+Route::post('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'storeStudentEvaluation'])->name('trainer-schedule-details.store-student-evaluation');
 
 
