@@ -20,14 +20,14 @@
 
                         @if (in_array('dashboard_details.running_batches', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.running_batches')" :totalBatch="$data['running_batch'] ?? 0" :icon="asset('img/new_icon/current_batch.png')" :title="__('dashboard.running_batch')"
+                                <x-dashboard-card :url="route('dashboard_details.total_batches', ['batch_status' => 1])" :totalBatch="$data['running_batch'] ?? 0" :icon="asset('img/new_icon/current_batch.png')" :title="__('dashboard.running_batch')"
                                     :class="'card-item yellow show-loader'" />
                             </div>
                         @endif
 
                         @if (in_array('dashboard_details.complete_batches', $roleRoutePermissions))
                             <div>
-                                <x-dashboard-card :url="route('dashboard_details.complete_batches')" :totalBatch="$data['completed_batch']" :icon="asset('img/new_icon/completed_batch.png')"
+                                <x-dashboard-card :url="route('dashboard_details.total_batches', ['batch_status' => 2])" :totalBatch="$data['completed_batch']" :icon="asset('img/new_icon/completed_batch.png')"
                                     :title="__('dashboard.complete_batch')" :class="'card-item green show-loader'" />
                             </div>
                         @endif
