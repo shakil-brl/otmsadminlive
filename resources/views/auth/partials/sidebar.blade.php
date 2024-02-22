@@ -133,11 +133,11 @@
                                                 $userRole == 'Consultant' ||
                                                 $userRole == 'consultant')
                                         <div data-kt-menu-trigger="click"
-                                            class="menu-item here menu-accordion <?php if (Illuminate\Support\Facades\Route::is('users.index') || Illuminate\Support\Facades\Route::is('users.show')||Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show') ||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?> here show<?php } ?> ">
+                                            class="menu-item here menu-accordion <?php if (Illuminate\Support\Facades\Route::is('users.index') || Illuminate\Support\Facades\Route::is('users.show')||Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show') ||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')||Illuminate\Support\Facades\Route::is('roles.index')) {?> here show<?php } ?> ">
                                             <!--begin:Menu link-->
 
                                             <span
-                                                class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('users.index')|| Illuminate\Support\Facades\Route::is('users.show')|| Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?> active<?php } ?>   ">
+                                                class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('users.index')|| Illuminate\Support\Facades\Route::is('users.show')|| Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')||Illuminate\Support\Facades\Route::is('roles.index')) {?> active<?php } ?>   ">
                                                 <span class="menu-icon">
                                                     <i class="ki-duotone ki-profile-user fs-2">
                                                         <i class="path1"></i>
@@ -155,7 +155,7 @@
 
                                                 @if (in_array('admins.index', $roleRoutePermissions))
                                                     <!--begin:Menu sub-->
-                                                    <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')|| Illuminate\Support\Facades\Route::is('role.index') || Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')) {?> here show<?php } ?>"
+                                                    <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')|| Illuminate\Support\Facades\Route::is('role.index') || Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('roles.index')) {?> here show<?php } ?>"
                                                         kt-hidden-height="81" style="">
                                                         <!--begin:Menu item-->
                                                         @if (in_array('admins.index', $roleRoutePermissions))
@@ -172,7 +172,21 @@
                                                             </div>
                                                             <!--end:Menu item-->
                                                         @endif
-
+                                                        <!--begin:Menu item-->
+                                                        @if (in_array('role.index', $roleRoutePermissions))
+                                                            <div class="menu-item">
+                                                                <!--begin:Menu link-->
+                                                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('roles.index')||Illuminate\Support\Facades\Route::is('roles.edit')) {?>active<?php } ?>"
+                                                                    href="{{ route('roles.index') }}">
+                                                                    <span class="menu-bullet">
+                                                                        <span class="bullet bullet-dot"></span>
+                                                                    </span>
+                                                                    <span class="menu-title">{{ __('sidemenu.roles') }}</span>
+                                                                </a>
+                                                                <!--end:Menu link-->
+                                                            </div>
+                                                        @endif
+                                                        <!--end:Menu item-->
                                                         <!--begin:Menu item-->
                                                         @if (in_array('role.index', $roleRoutePermissions))
                                                             <div class="menu-item">
