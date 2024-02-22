@@ -308,11 +308,5 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
 // test without permission
-Route::resource('roles', RoleController::class);
-
-Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
-Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
-Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
-Route::post('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'storeStudentEvaluation'])->name('trainer-schedule-details.store-student-evaluation');
 
 

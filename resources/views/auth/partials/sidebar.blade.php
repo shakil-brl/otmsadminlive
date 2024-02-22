@@ -997,7 +997,7 @@
                                             <!--end:Menu link-->
 
                                         </div>
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
+                                        {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                                             <!--start:Menu link-->
                                             <a href="" class="show-loader">
@@ -1033,68 +1033,8 @@
                                             </a>
                                             <!--end:Menu link-->
 
-                                        </div>
-                                        {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
-
-                                            <!--start:Menu link-->
-                                            <a href="{{ route('holydays.index') }}" class="show-loader">
-                                                <span
-                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('holydays.index')||Illuminate\Support\Facades\Route::is('holydays.edit')|| Illuminate\Support\Facades\Route::is('holydays.create')) {?>active<?php } ?>">
-                                                    <span class="menu-icon">
-                                                        <i class="ki-duotone ki-calendar-tick fs-2 ">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                            <span class="path3"></span>
-                                                            <span class="path4"></span>
-                                                            <span class="path5"></span>
-                                                            <span class="path6"></span>
-                                                        </i>
-                                                    </span>
-                                                    <span class="menu-title">{{ __('sidemenu.holly_day') }}</span>
-                                                </span>
-                                            </a>
-                                            <!--end:Menu link-->
-
                                         </div> --}}
-                                        {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
-
-                                            <!--start:Menu link-->
-                                            <a href="" class="show-loader">
-                                                <span
-                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('') ) {?>active<?php } ?>">
-                                                    <span class="menu-icon">
-                                                        <i class="ki-duotone ki-subtitle fs-2                    ">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                            <span class="path3"></span>
-                                                            <span class="path4"></span>
-                                                            <span class="path5"></span>
-                                                        </i>
-                                                    </span>
-                                                    <span class="menu-title">{{ __('sidemenu.training_title') }}</span>
-                                                </span>
-                                            </a>
-                                            <!--end:Menu link-->
-
-                                        </div> --}}
-                                        {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
-
-                                            <!--start:Menu link-->
-                                            <a href="{{ route('lots.index') }}" class="show-loader">
-                                                <span
-                                                    class="menu-link sidebar-menu-link dashboard-item <?php if (Illuminate\Support\Facades\Route::is('lots.index') || Illuminate\Support\Facades\Route::is('lots.create') || Illuminate\Support\Facades\Route::is('lots.edit') || Illuminate\Support\Facades\Route::is('lots.show')|| Illuminate\Support\Facades\Route::is('lots.link-batch')) {?>active<?php } ?>">
-                                                    <span class="menu-icon">
-                                                        <i class="ki-duotone ki-element-2  fs-2                   ">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                        </i>
-                                                    </span>
-                                                    <span class="menu-title">{{ __('sidemenu.training_group') }}</span>
-                                                </span>
-                                            </a>
-                                            <!--end:Menu link-->
-
-                                        </div> --}}
+                                        
                                     @endif
                                 @endempty
                             @endisset
