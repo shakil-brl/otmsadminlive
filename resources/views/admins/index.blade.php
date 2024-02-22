@@ -147,16 +147,16 @@
                 </div>
                 <div class="modal-body py-lg-10 px-lg-10">
                     <!--begin::Form-->
-                    <form id="kt_modal_add_admin_form" method="post" class="form m-5" action="">
+                    <form id="kt_modal_add_admin_form" method="post" class="form" action="">
                         @csrf
                         <!--begin::Scroll-->
-                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_user_scroll"
-                            data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
-                            data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_user_header"
+                        <div class="row row-cols-2 scroll-y g-5" id="kt_modal_update_user_scroll" data-kt-scroll="true"
+                            data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+                            data-kt-scroll-dependencies="#kt_modal_update_user_header"
                             data-kt-scroll-wrappers="#kt_modal_update_user_scroll" data-kt-scroll-offset="300px">
 
                             <!--begin::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="col">
                                 <!--begin::Label-->
                                 <label class="required fw-semibold fs-6 mb-2">{{ __('admin-user-list.emails') }}</label>
                                 <!--end::Label-->
@@ -171,9 +171,8 @@
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group-->
-
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="col">
                                 <!--begin::Label-->
                                 <label
                                     class="required fw-semibold fs-6 mb-2">{{ __('admin-user-list.user_role') }}</label>
@@ -194,7 +193,7 @@
                             @if ($role == 'Provider')
                             @endif
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="provider">
+                            <div class="col d-none" id="provider">
                                 <!--begin::Label-->
                                 <label
                                     class="required fw-semibold fs-6 mb-2">{{ __('admin-user-list.vendor_provider') }}</label>
@@ -212,9 +211,8 @@
                                 <!--end::Provider-->
                             </div>
                             <!--end::Input group-->
-
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="division-section">
+                            <div class="col d-none" id="division-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.division') }}</label>
                                 <!--end::Label-->
@@ -231,9 +229,8 @@
                                 <!--end::District-->
                             </div>
                             <!--end::Input group-->
-
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="district-section">
+                            <div class="col d-none" id="district-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.district') }}</label>
                                 <!--end::Label-->
@@ -251,7 +248,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="upazila-section">
+                            <div class="col d-none" id="upazila-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.upazila') }}</label>
                                 <!--end::Label-->
@@ -268,30 +265,10 @@
                                 <!--end::Upazila-->
                             </div>
                             <!--end::Input group-->
-                            {{-- <!--start::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.address') }}</label>
-                                <!--end::Label-->
-
-                                <!--begin::Address-->
-                                <textarea class="form-control form-control-solid" rows="4" name="address"
-                                    placeholder="{{ __('profile.address_ph') }}"></textarea>
-                                <!--begin::Hint-->
-                                <div class="form-text">
-                                    {{ __('profile.address_allow_details') }}
-                                </div>
-                                <!--end::Hint-->
-                                <span class="form-message-error-address">
-
-                                </span>
-                                <!--end::Address-->
-                            </div>
-                            <!--end::Input group--> --}}
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->
-                        <div class="text-center pt-15">
+                        <div class="text-center pt-10">
                             <a href="" type="reset" class="btn btn-light me-3"
                                 data-bs-dismiss="modal">{{ __('admin-user-list.discard') }}</a>
                             <button type="submit" class="btn btn-primary show-loader">
@@ -326,19 +303,20 @@
                     </div>
                     <!--end::Close-->
                 </div>
-                <div class="modal-body py-lg-10 px-lg-10">
+                <div class="modal-body  py-lg-10 px-lg-10">
                     <!--begin::Form-->
-                    <form id="kt_modal_update_admin_form" method="post" class="form m-5" action="">
+                    <form id="kt_modal_update_admin_form" method="post" class="form" action="">
                         @csrf
                         @method('PATCH')
                         <!--begin::Scroll-->
                         <input type="hidden" name="user_id">
-                        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_user_scroll"
-                            data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
-                            data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_user_header"
+                        <div class="row row-cols-2 scroll-y g-5" id="kt_modal_update_user_scroll" data-kt-scroll="true"
+                            data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+                            data-kt-scroll-dependencies="#kt_modal_update_user_header"
                             data-kt-scroll-wrappers="#kt_modal_update_user_scroll" data-kt-scroll-offset="300px">
+
                             <!--begin::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="col">
                                 <!--begin::Label-->
                                 <label class="required fw-semibold fs-6 mb-2">Email</label>
                                 <!--end::Label-->
@@ -354,7 +332,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7">
+                            <div class="col">
                                 <!--begin::Label-->
                                 <label class="required fw-semibold fs-6 mb-2">User Role</label>
                                 <!--end::Label-->
@@ -371,7 +349,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="provider">
+                            <div class="col d-none" id="provider">
                                 <!--begin::Label-->
                                 <label class="required fw-semibold fs-6 mb-2">Provider</label>
                                 <!--end::Label-->
@@ -388,9 +366,8 @@
                                 <!--end::Provider-->
                             </div>
                             <!--end::Input group-->
-
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="division-section">
+                            <div class="col d-none" id="division-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">{{ __('admin-user-list.division') }}</label>
                                 <!--end::Label-->
@@ -407,9 +384,8 @@
                                 <!--end::District-->
                             </div>
                             <!--end::Input group-->
-
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="district-section">
+                            <div class="col d-none" id="district-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">District</label>
                                 <!--end::Label-->
@@ -427,7 +403,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--start::Input group-->
-                            <div class="fv-row mb-7 d-none" id="upazila-section">
+                            <div class="col d-none" id="upazila-section">
                                 <!--begin::Label-->
                                 <label class="fw-semibold fs-6 mb-2">Upazila</label>
                                 <!--end::Label-->
@@ -443,31 +419,10 @@
                                 <!--end::Upazila-->
                             </div>
                             <!--end::Input group-->
-
-                            {{-- <!--start::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="fw-semibold fs-6 mb-2">Address</label>
-                                <!--end::Label-->
-
-                                <!--begin::Address-->
-                                <textarea class="form-control form-control-solid" rows="4" name="address"
-                                    placeholder="{{ __('profile.address_ph') }}"></textarea>
-                                <!--begin::Hint-->
-                                <div class="form-text">
-                                    {{ __('profile.address_allow_details') }}
-                                </div>
-                                <!--end::Hint-->
-                                <span class="form-message-error-address">
-
-                                </span>
-                                <!--end::Address-->
-                            </div>
-                            <!--end::Input group--> --}}
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->
-                        <div class="text-center pt-15">
+                        <div class="text-center pt-10">
                             <a href="" type="reset" class="btn btn-light me-3"
                                 data-bs-dismiss="modal">Discard</a>
                             <button type="submit" class="btn btn-primary  show-loader ">

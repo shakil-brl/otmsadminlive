@@ -27,7 +27,7 @@ return [
     'guard_names_ph' => 'গার্ডের নাম লিখুন',
     'total_user_role' => 'রোল সহ মোট ব্যবহারকারী',
     'view_role' => 'রোল দেখুন',
-    'edit_role' => 'রোল সম্পাদনা করুন',
+    'edit_role' => 'এডিট করুন',
     'role_name' => 'রোলের নাম',
     'role_name_ph' => 'রোলের নাম লিখুন',
     'role_permission' => 'রোল পারমিশন',
