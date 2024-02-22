@@ -29,6 +29,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TmsPhaseController;
 use App\Http\Controllers\TraineeEnrollmentController;
@@ -179,13 +180,15 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/', [PermissionController::class, 'index'])->name('permission.index');
     });
 
+    // Route::resource('roles', RoleController::class);
+
     /**
-     * Role Routes
+     * Role Permission Routes
      */
-    Route::group(['prefix' => 'role'], function () {
-        Route::get('/', [RoleController::class, 'index'])->name('role.index');
-        Route::get('/{roleId}', [RoleController::class, 'show'])->name('role.show');
-        Route::get('/{roleId}', [RoleController::class, 'edit'])->name('role.edit');
+    Route::group(['prefix' => 'role-permissions'], function () {
+        Route::get('/', [RolePermissionController::class, 'index'])->name('role.index');
+        Route::get('/{roleId}', [RolePermissionController::class, 'show'])->name('role.show');
+        Route::get('/{roleId}', [RolePermissionController::class, 'edit'])->name('role.edit');
     });
 
     /**
@@ -294,9 +297,10 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::get('course-supplies/distribute/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distributedList'])->name('course-supplies.distributed-list');
 });
 
-
-
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
+
+// test
+Route::resource('roles', RoleController::class);
 
 

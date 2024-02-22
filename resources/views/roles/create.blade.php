@@ -7,7 +7,7 @@
 @section('content')
     <div class="m-5">
         <h3>
-            Update Batch Group
+            Create Batch Group
         </h3>
         <x-alert />
 
@@ -24,17 +24,12 @@
             </ul>
         @endif
 
-        @isset($group)
-            <div class="card p-5 mt-3">
-                <div class="card p-5 mt-3">
-                    <form action="{{ route('lots.update', $group['id']) }}" method="post">
-                        @csrf
-                        @method('PUT')
-                        @include('lot.form')
-                    </form>
-                </div>
-            </div>
-        @endisset
+        <div class="card p-5 mt-3">
+            <form action="{{ route('lots.store') }}" method="post">
+                @csrf
+                @include('lot.form')
+            </form>
+        </div>
     </div>
 @section('scripts')
     <script></script>

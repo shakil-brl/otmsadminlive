@@ -58,10 +58,12 @@
                                         <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
                                             class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
                                         </a>
-                                        <a href="{{ route('course-supplies.show', encrypt($batch['id'])) }}"
-                                            class="btn btn-sm btn-success">
-                                            Supplies
-                                        </a>
+                                        @if (in_array('course-supplies.show', $roleRoutePermissions))
+                                            <a href="{{ route('course-supplies.show', encrypt($batch['id'])) }}"
+                                                class="btn btn-sm btn-success">
+                                                Supplies
+                                            </a>
+                                        @endif
                                     </div>
                                     <small class="fw-bold">Class Progress:</small>
                                     <div class="progress m-1">
