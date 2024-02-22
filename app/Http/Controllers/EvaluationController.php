@@ -41,6 +41,7 @@ class EvaluationController extends Controller
             'search' => $request->search,
         ])->json();
         if ($results['success'] == true) {
+            // dd($results['data']);
             $page_from = $results['data']['from'];
             $evaluation = $results['data']['data'];
             $paginator = $this->customPaginate($results, $request, route('trainer-schedule-details.lists'));

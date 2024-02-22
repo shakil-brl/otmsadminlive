@@ -88,8 +88,6 @@
                                             </div>
                                         @endif
                                     @endisset
-
-
                                 </div>
                             </div>
                         </div>
@@ -107,7 +105,6 @@
                                         {{ 'Create Evaluations' }}</a>
                                 @endif
                             @endisset
-
                         </div>
                     </div>
                 @endforeach
@@ -116,45 +113,7 @@
             <div class="row my-5">
                 {!! $paginator->links() !!}
             </div>
-        @endisset
-
-        <!--Start::Provider Update Modal-Content-->
-        <div class="modal fade" id="classStartModal" tabindex="-1" aria-hidden="true">
-            <!--begin::Modal dialog-->
-            <div class="modal-dialog modal-dialog-centered">
-                <!--begin::Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header" id="kt_modal_update_permission_header">
-                        <!--begin::Modal title-->
-                        <h2 class="fw-bold">Class Link</h2>
-                        <!--end::Modal title-->
-                        <!--begin::Close-->
-                        <div type="button" class="btn-close" data-bs-dismiss="modal">
-                        </div>
-                        <!--end::Close-->
-                    </div>
-                    <!--begin::Provider added Form-->
-                    <div class="modal-body">
-                        <div class="mb-2">
-                            <label for="" class="mb-1">Streaming Link</label>
-                            <input id="streaming_link" type="text" class="form-control">
-                        </div>
-                        <div class="mb-2">
-                            <label for="" class="mb-1">Live Class Link</label>
-                            <input id="static_link" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-light">Close</button>
-                        <button id="start-class" type="button" class="btn btn-danger">Start CLass</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!--End::Provider Update Modal-->
-
-
+        @endisset   
     </div>
 
 @endsection
