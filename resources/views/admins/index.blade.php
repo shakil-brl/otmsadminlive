@@ -147,7 +147,7 @@
                 </div>
                 <div class="modal-body py-lg-10 px-lg-10">
                     <!--begin::Form-->
-                    <form id="kt_modal_add_admin_form" method="post" class="form m-5" action="">
+                    <form id="kt_modal_add_admin_form" method="post" class="form" action="">
                         @csrf
                         <!--begin::Scroll-->
                         <div class="row row-cols-2 scroll-y g-5" id="kt_modal_update_user_scroll" data-kt-scroll="true"
@@ -268,7 +268,7 @@
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->
-                        <div class="text-center pt-15">
+                        <div class="text-center pt-10">
                             <a href="" type="reset" class="btn btn-light me-3"
                                 data-bs-dismiss="modal">{{ __('admin-user-list.discard') }}</a>
                             <button type="submit" class="btn btn-primary show-loader">
@@ -303,9 +303,9 @@
                     </div>
                     <!--end::Close-->
                 </div>
-                <div class="modal-body py-lg-10 px-lg-10">
+                <div class="modal-body  py-lg-10 px-lg-10">
                     <!--begin::Form-->
-                    <form id="kt_modal_update_admin_form" method="post" class="form m-5" action="">
+                    <form id="kt_modal_update_admin_form" method="post" class="form" action="">
                         @csrf
                         @method('PATCH')
                         <!--begin::Scroll-->
@@ -422,7 +422,7 @@
                         </div>
                         <!--end::Scroll-->
                         <!--begin::Actions-->
-                        <div class="text-center pt-15">
+                        <div class="text-center pt-10">
                             <a href="" type="reset" class="btn btn-light me-3"
                                 data-bs-dismiss="modal">Discard</a>
                             <button type="submit" class="btn btn-primary  show-loader ">
