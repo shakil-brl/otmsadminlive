@@ -17,6 +17,8 @@ use App\Http\Controllers\CourseSuppliesController;
 use App\Http\Controllers\DashboardDetailsController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\EvaluationHeadController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -29,6 +31,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TmsPhaseController;
 use App\Http\Controllers\TraineeEnrollmentController;
@@ -179,13 +182,15 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/', [PermissionController::class, 'index'])->name('permission.index');
     });
 
+    // Route::resource('roles', RoleController::class);
+
     /**
-     * Role Routes
+     * Role Permission Routes
      */
-    Route::group(['prefix' => 'role'], function () {
-        Route::get('/', [RoleController::class, 'index'])->name('role.index');
-        Route::get('/{roleId}', [RoleController::class, 'show'])->name('role.show');
-        Route::get('/{roleId}', [RoleController::class, 'edit'])->name('role.edit');
+    Route::group(['prefix' => 'role-permissions'], function () {
+        Route::get('/', [RolePermissionController::class, 'index'])->name('role.index');
+        Route::get('/{roleId}', [RolePermissionController::class, 'show'])->name('role.show');
+        Route::get('/{roleId}', [RolePermissionController::class, 'edit'])->name('role.edit');
     });
 
     /**
@@ -294,9 +299,15 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::get('course-supplies/distribute/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distributedList'])->name('course-supplies.distributed-list');
 });
 
-
-
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
+
+// test without permission
+Route::resource('roles', RoleController::class);
+Route::resource('evaluation-head', EvaluationHeadController::class);
+Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
+Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
+Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
+Route::post('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'storeStudentEvaluation'])->name('trainer-schedule-details.store-student-evaluation');
 
 
