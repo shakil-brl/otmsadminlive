@@ -817,6 +817,7 @@
 
                                         </div>
                                         <!--end:Menu item-->
+                                        <!--Start:Menu item-->
                                         <div data-kt-menu-trigger="click"
                                             class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>here show<?php } ?>">
                                             <!--begin:Menu link-->
@@ -880,6 +881,85 @@
                                             <!--end:Menu sub-->
 
                                         </div>
+                                        <!--end:Menu item-->
+                                        <!--Start:Menu item-->
+                                        <div data-kt-menu-trigger="click"
+                                            class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('evaluation-head.index')||Illuminate\Support\Facades\Route::is('evaluation-head.create')||Illuminate\Support\Facades\Route::is('evaluation-head.edit')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.students')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation')) {?>here show<?php } ?>">
+                                            <!--begin:Menu link-->
+                                            <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('evaluation-head.index')||Illuminate\Support\Facades\Route::is('evaluation-head.create')||Illuminate\Support\Facades\Route::is('evaluation-head.edit')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.students')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation')) {?>active<?php } ?>">
+                                                <span class="menu-icon">
+                                                    <i class="ki-duotone ki-double-check  fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    </i>
+                                                </span>
+
+                                                <span class="menu-title">{{ __('sidemenu.evaluation') }}</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu sub-->
+                                            <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
+                                                <!--begin:Menu sub-->
+                                                <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('evaluation-head.index')||Illuminate\Support\Facades\Route::is('evaluation-head.create')||Illuminate\Support\Facades\Route::is('evaluation-head.edit')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.students')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation')) {?>here show<?php } ?>"
+                                                    kt-hidden-height="81" style="">
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
+                                                        <!--begin:Menu link-->
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('evaluation-head.index')||Illuminate\Support\Facades\Route::is('evaluation-head.create')||Illuminate\Support\Facades\Route::is('evaluation-head.edit')) {?>active<?php } ?>"
+                                                            href="{{ route('evaluation-head.index') }}">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-duotone ki-tablet-text-up fs-2  ">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">{{ __('sidemenu.evaluation_head') }}</span>
+                                                        </a>
+                                                        <!--end:Menu link-->
+                                                    </div>
+                                                    <!--end:Menu item-->
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
+                                                        <!--begin:Menu link-->
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.students')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation')) {?>active<?php } ?>"
+                                                            href="{{ route('trainer-schedule-details.lists') }}">
+                                                            <span class="menu-icon">
+                                                                <i
+                                                                    class="ki-duotone ki-questionnaire-tablet  fs-2                       ">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">{{ __('sidemenu.evaluation_student') }}</span>
+                                                        </a>
+                                                        <!--end:Menu link-->
+                                                    </div>
+                                                    <!--end:Menu item-->
+                                                    {{-- <!--begin:Menu item-->
+                                                    <div class="menu-item">
+                                                        <!--begin:Menu link-->
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>active<?php } ?>"
+                                                            href="{{ route('product-combos.index') }}">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-duotone ki-tablet-ok fs-2 ">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                    <span class="path3"></span>
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">{{ __('sidemenu.evaluation_trainer') }}</span>
+                                                        </a>
+                                                        <!--end:Menu link-->
+                                                    </div>
+                                                    <!--end:Menu item--> --}}
+                                                </div>
+                                                <!--end:Menu sub-->
+                                            </div>
+                                            <!--end:Menu sub-->
+
+                                        </div>
+                                        <!--end:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                                             <!--start:Menu link-->

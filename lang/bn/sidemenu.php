@@ -63,6 +63,8 @@ return [
     'course' => 'কোর্স সমুহ',
     'class_attendence' => 'ক্লাসে উপস্থিতি',
     'class_document' => 'ক্লাস ডকুমেন্ট',
+    'evaluation' => 'ইভালুয়েশন',
+    'evaluation_head' => 'ইভালুয়েশন হেড',
     'evaluation_student' => 'প্রশিক্ষণার্থী ইভালুয়েশন',
     'evaluation_trainer' => 'প্রশিক্ষক ইভালুয়েশন',
     'holly_day' => 'ছুটির দিন',
