@@ -301,7 +301,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
-
+Route::resource('roles', RoleController::class);
 // test without permission
 Route::resource('evaluation-head', EvaluationHeadController::class);
 Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');

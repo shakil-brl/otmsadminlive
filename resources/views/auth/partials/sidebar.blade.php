@@ -832,7 +832,6 @@
                                                         <span class="path7"></span>
                                                         <span class="path8"></span>
                                                     </i>
-                                                    <i class="flaticon2-hourglass-1 icon-nm"></i>
                                                 </span>
 
                                                 <span class="menu-title">{{ __('sidemenu.course_suplies') }}</span>
