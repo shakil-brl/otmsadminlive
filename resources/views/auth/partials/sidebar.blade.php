@@ -133,11 +133,11 @@
                                                 $userRole == 'Consultant' ||
                                                 $userRole == 'consultant')
                                         <div data-kt-menu-trigger="click"
-                                            class="menu-item here menu-accordion <?php if (Illuminate\Support\Facades\Route::is('users.index') || Illuminate\Support\Facades\Route::is('users.show')||Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show') ||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?> here show<?php } ?> ">
+                                            class="menu-item here menu-accordion <?php if (Illuminate\Support\Facades\Route::is('users.index') || Illuminate\Support\Facades\Route::is('users.show')||Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show') ||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')||Illuminate\Support\Facades\Route::is('roles.index')) {?> here show<?php } ?> ">
                                             <!--begin:Menu link-->
 
                                             <span
-                                                class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('users.index')|| Illuminate\Support\Facades\Route::is('users.show')|| Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')) {?> active<?php } ?>   ">
+                                                class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('users.index')|| Illuminate\Support\Facades\Route::is('users.show')|| Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')||Illuminate\Support\Facades\Route::is('preliminary-selected.index')||Illuminate\Support\Facades\Route::is('role.index')||Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('role.edit')||Illuminate\Support\Facades\Route::is('roles.index')) {?> active<?php } ?>   ">
                                                 <span class="menu-icon">
                                                     <i class="ki-duotone ki-profile-user fs-2">
                                                         <i class="path1"></i>
@@ -155,7 +155,7 @@
 
                                                 @if (in_array('admins.index', $roleRoutePermissions))
                                                     <!--begin:Menu sub-->
-                                                    <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')|| Illuminate\Support\Facades\Route::is('role.index') || Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')) {?> here show<?php } ?>"
+                                                    <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('admins.index') || Illuminate\Support\Facades\Route::is('admins.show')|| Illuminate\Support\Facades\Route::is('role.index') || Illuminate\Support\Facades\Route::is('role.edit')|| Illuminate\Support\Facades\Route::is('permission.index')||Illuminate\Support\Facades\Route::is('roles.index')) {?> here show<?php } ?>"
                                                         kt-hidden-height="81" style="">
                                                         <!--begin:Menu item-->
                                                         @if (in_array('admins.index', $roleRoutePermissions))
@@ -172,7 +172,21 @@
                                                             </div>
                                                             <!--end:Menu item-->
                                                         @endif
-
+                                                        <!--begin:Menu item-->
+                                                        @if (in_array('role.index', $roleRoutePermissions))
+                                                            <div class="menu-item">
+                                                                <!--begin:Menu link-->
+                                                                <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('roles.index')||Illuminate\Support\Facades\Route::is('roles.edit')) {?>active<?php } ?>"
+                                                                    href="{{ route('roles.index') }}">
+                                                                    <span class="menu-bullet">
+                                                                        <span class="bullet bullet-dot"></span>
+                                                                    </span>
+                                                                    <span class="menu-title">{{ __('sidemenu.roles') }}</span>
+                                                                </a>
+                                                                <!--end:Menu link-->
+                                                            </div>
+                                                        @endif
+                                                        <!--end:Menu item-->
                                                         <!--begin:Menu item-->
                                                         @if (in_array('role.index', $roleRoutePermissions))
                                                             <div class="menu-item">
@@ -803,6 +817,7 @@
 
                                         </div>
                                         <!--end:Menu item-->
+                                        <!--Start:Menu item-->
                                         <div data-kt-menu-trigger="click"
                                             class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('products.index')||Illuminate\Support\Facades\Route::is('products.create')||Illuminate\Support\Facades\Route::is('products.edit')||Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>here show<?php } ?>">
                                             <!--begin:Menu link-->
@@ -818,7 +833,6 @@
                                                         <span class="path7"></span>
                                                         <span class="path8"></span>
                                                     </i>
-                                                    <i class="flaticon2-hourglass-1 icon-nm"></i>
                                                 </span>
 
                                                 <span class="menu-title">{{ __('sidemenu.course_suplies') }}</span>
@@ -867,6 +881,85 @@
                                             <!--end:Menu sub-->
 
                                         </div>
+                                        <!--end:Menu item-->
+                                        <!--Start:Menu item-->
+                                        <div data-kt-menu-trigger="click"
+                                            class="menu-item here menu-accordion  <?php if (Illuminate\Support\Facades\Route::is('evaluation-head.index')||Illuminate\Support\Facades\Route::is('evaluation-head.create')||Illuminate\Support\Facades\Route::is('evaluation-head.edit')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.students')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation')) {?>here show<?php } ?>">
+                                            <!--begin:Menu link-->
+                                            <span class="menu-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('evaluation-head.index')||Illuminate\Support\Facades\Route::is('evaluation-head.create')||Illuminate\Support\Facades\Route::is('evaluation-head.edit')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.students')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation')) {?>active<?php } ?>">
+                                                <span class="menu-icon">
+                                                    <i class="ki-duotone ki-double-check  fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    </i>
+                                                </span>
+
+                                                <span class="menu-title">{{ __('sidemenu.evaluation') }}</span>
+                                                <span class="menu-arrow"></span>
+                                            </span>
+                                            <!--end:Menu link-->
+                                            <!--begin:Menu sub-->
+                                            <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
+                                                <!--begin:Menu sub-->
+                                                <div class="menu-sub menu-sub-accordion <?php if (Illuminate\Support\Facades\Route::is('evaluation-head.index')||Illuminate\Support\Facades\Route::is('evaluation-head.create')||Illuminate\Support\Facades\Route::is('evaluation-head.edit')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.students')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation')) {?>here show<?php } ?>"
+                                                    kt-hidden-height="81" style="">
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
+                                                        <!--begin:Menu link-->
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('evaluation-head.index')||Illuminate\Support\Facades\Route::is('evaluation-head.create')||Illuminate\Support\Facades\Route::is('evaluation-head.edit')) {?>active<?php } ?>"
+                                                            href="{{ route('evaluation-head.index') }}">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-duotone ki-tablet-text-up fs-2  ">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">{{ __('sidemenu.evaluation_head') }}</span>
+                                                        </a>
+                                                        <!--end:Menu link-->
+                                                    </div>
+                                                    <!--end:Menu item-->
+                                                    <!--begin:Menu item-->
+                                                    <div class="menu-item">
+                                                        <!--begin:Menu link-->
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.students')||Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation')) {?>active<?php } ?>"
+                                                            href="{{ route('trainer-schedule-details.lists') }}">
+                                                            <span class="menu-icon">
+                                                                <i
+                                                                    class="ki-duotone ki-questionnaire-tablet  fs-2                       ">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">{{ __('sidemenu.evaluation_student') }}</span>
+                                                        </a>
+                                                        <!--end:Menu link-->
+                                                    </div>
+                                                    <!--end:Menu item-->
+                                                    {{-- <!--begin:Menu item-->
+                                                    <div class="menu-item">
+                                                        <!--begin:Menu link-->
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('product-combos.index')||Illuminate\Support\Facades\Route::is('product-combos.create')||Illuminate\Support\Facades\Route::is('product-combos.edit')) {?>active<?php } ?>"
+                                                            href="{{ route('product-combos.index') }}">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-duotone ki-tablet-ok fs-2 ">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                    <span class="path3"></span>
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">{{ __('sidemenu.evaluation_trainer') }}</span>
+                                                        </a>
+                                                        <!--end:Menu link-->
+                                                    </div>
+                                                    <!--end:Menu item--> --}}
+                                                </div>
+                                                <!--end:Menu sub-->
+                                            </div>
+                                            <!--end:Menu sub-->
+
+                                        </div>
+                                        <!--end:Menu item-->
                                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion ">
 
                                             <!--start:Menu link-->
