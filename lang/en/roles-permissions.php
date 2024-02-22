@@ -27,7 +27,7 @@ return [
     'guard_names_ph' => 'Enter Guard Name',
     'total_user_role' => 'Total users with this role',
     'view_role' => 'View Role',
-    'edit_role' => 'Edit Role',
+    'edit_role' => 'Edit',
     'role_name' => 'Role name',
     'role_permission' => 'Role Permissions',
     'all' => 'All',
