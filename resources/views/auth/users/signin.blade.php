@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <title>OTMS Login</title>
-    <style>
+    {{-- <style>
         #preloader {
             position: fixed;
             top: 0;
@@ -59,14 +59,14 @@
                 transform: rotate(1turn)
             }
         }
-    </style>
+    </style> --}}
 </head>
 
 <body>
 
-    <div id="preloader" class="hiddenDiv">
+    {{-- <div id="preloader" class="hiddenDiv">
         <div class="loader"></div>
-    </div>
+    </div> --}}
     <div id="body" class="">
         <div loading="lazy"
             style="background-image:url('{{ asset('img/login/placeholder.jpg') }}'); background-size: cover;  background-position: center; width: 100%;">
@@ -78,10 +78,10 @@
                     <a class="navbar-brand" href="{{ URL('/')}}">
                         <div class="d-flex align-items-center">
                             <div class="logo">
-                                <img class="" src="{{ asset('img/login') }}/logo.svg" alt="">
+                                <img loading="lazy" class="" src="{{ asset('img/login') }}/logo.svg" alt="">
                             </div>
                             <div class="govt-logo">
-                                <img class="" src="{{ asset('img/login') }}/govt-logo.png" alt="">
+                                <img loading="lazy" class="" src="{{ asset('img/login') }}/govt-logo.png" alt="">
 
                             </div>
                         </div>
@@ -192,7 +192,7 @@
                     &copy; {{ digitLocale(date('Y')) }} @lang('login.herpower_project')
                 </div>
                 <div class="text-center center">
-                    <img class="govt-logo" src="{{ asset('img/login') }}/footer-logo.png" alt="">
+                    <img loading="lazy" class="govt-logo" src="{{ asset('img/login') }}/footer-logo.png" alt="">
                 </div>
                 <div class="text-md-end right">
                     @lang('login.ict_division')
@@ -202,38 +202,34 @@
     </div>
 
 
-    {{-- <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script> --}}
-    <script type="text/javascript" src="{{ asset('assets/login') }}/js/jquery-3.6.0.min.js"></script>
-    {{-- <script type="text/javascript" src="{{ asset('assets/login') }}/js/bootstrap.bundle.min.js"></script> --}}
 
+    {{-- <script type="text/javascript" src="{{ asset('assets/login') }}/js/jquery-3.6.0.min.js"></script> --}}
     <script>
-        $(".password .material-icons-outlined").click(function() {
-    let input = $(this).closest('.password').find('input');
-    let type = input.attr('type');
+        //         $(".password .material-icons-outlined").click(function() {
+//     let input = $(this).closest('.password').find('input');
+//     let type = input.attr('type');
     
-    input.attr('type', type === 'password' ? 'text' : 'password');
-    $(this).html(type === 'password' ? 'visibility_off' : 'visibility');
-});
+//     input.attr('type', type === 'password' ? 'text' : 'password');
+//     $(this).html(type === 'password' ? 'visibility_off' : 'visibility');
+// });
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("preloader").style.display = "none";
-    document.getElementById("body").style.display = "flex";
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//     document.getElementById("preloader").style.display = "none";
+//     document.getElementById("body").style.display = "flex";
+// });
 
 
-function toggleDivVisibility() {
-  var myDiv = document.getElementById("preloader");
+// function toggleDivVisibility() {
+//   var myDiv = document.getElementById("preloader");
 
-  // Toggle the visibility of the div
-  if (myDiv.style.display === "none" || myDiv.style.display === "") {
-    myDiv.style.display = "flex";
-  } else {
-    myDiv.style.display = "none";
-  }
-}
-
-
+//   // Toggle the visibility of the div
+//   if (myDiv.style.display === "none" || myDiv.style.display === "") {
+//     myDiv.style.display = "flex";
+//   } else {
+//     myDiv.style.display = "none";
+//   }
+// }
     </script>
 
 </body>

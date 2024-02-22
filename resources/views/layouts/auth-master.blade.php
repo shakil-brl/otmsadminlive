@@ -35,7 +35,8 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/class-custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/custom.css') }}">
 
-    {{-- <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/custom.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/custom.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css?v=1') }}">
     <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}">
     <link rel="stylesheet" href="{{ asset('css/new_pages/main.css?v=1') }}">
@@ -44,7 +45,8 @@
     {{--
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
     --}}
-    {{-- <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"> --}}
+    {{--
+    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"> --}}
     <style>
         /* styles.css */
 
@@ -120,7 +122,7 @@
 
     @endif
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
 
 </head>
 <!--end::Head-->
@@ -227,13 +229,13 @@
     <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/scripts.bundle.js') }}"></script>
     {{-- <script src="{{ asset('assets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-     --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> --}}
     <script src="{{ asset('assets/dist/assets/js/custom/assets/functions.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
     {{-- <script src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-     --}}
+    --}}
     <script src="{{ asset('assets/dist/assets/js/custom/code.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/custom.js') }}"></script>
     <!--end::Vendors Javascript-->
@@ -242,7 +244,7 @@
     <script src="{{ asset('assets/dist/assets/js/custom/bootstrap-tagsinput.min.js') }}"></script>
     {{-- <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script> --}}
     {{-- <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script> --}}
-    
+
 
 
     <!--end::Custom Javascript-->

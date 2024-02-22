@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script> -->
 
   <style>
     @page {
@@ -49,8 +49,8 @@
     }
   </style>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
-    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+
 </head>
 </head>
 @section('content')
@@ -155,11 +155,11 @@
       <tr>
         <th class="auto-height">Student</th>
         <?php for ($day = 1; $day <= 20; $day++): ?>
-        <th class="rotated-header auto-height">
-          <span style="white-space: nowrap; font-size:10px">
-            <?= now()->addDays($day)->format('d-m') ?>
-          </span>
-        </th>
+          <th class="rotated-header auto-height">
+            <span style="white-space: nowrap; font-size:10px">
+              <?= now()->addDays($day)->format('d-m') ?>
+            </span>
+          </th>
         <?php endfor; ?>
         <th class="auto-height">Monthly %</th>
         <th class="auto-height">Present <br>Absent</th>
@@ -167,37 +167,37 @@
     </thead>
     <tbody>
 
-   
+
       <?php
-        for ($i = 1; $i <= 30; $i++):
-            $studentName = 'Student ' . $i;
-            $presentCount = 0;
+      for ($i = 1; $i <= 30; $i++):
+        $studentName = 'Student ' . $i;
+        $presentCount = 0;
         ?>
-      <tr>
-        <td>
-          <?= $studentName ?>
-        </td>
-        <?php for ($day = 1; $day <= 20; $day++): ?>
-        <?php
-                    $attendanceStatus = rand(0, 1) == 1 ? 'P' : 'A';
-                    $presentCount += $attendanceStatus === 'P' ? 1 : 0;
-                    ?>
-        <td>
-          <?= $attendanceStatus ?>
-        </td>
-        <?php endfor; ?>
-        <?php
-                $monthlyPercentage = ($presentCount / 20) * 100;
-                $absentCount = 20 - $presentCount;
-                ?>
-        <td>
-          <?= round($monthlyPercentage, 2) ?>%
-        </td>
-        <td>
-          <?= $presentCount ?> /
-          <?= $absentCount ?>
-        </td>
-      </tr>
+        <tr>
+          <td>
+            <?= $studentName ?>
+          </td>
+          <?php for ($day = 1; $day <= 20; $day++): ?>
+            <?php
+            $attendanceStatus = rand(0, 1) == 1 ? 'P' : 'A';
+            $presentCount += $attendanceStatus === 'P' ? 1 : 0;
+            ?>
+            <td>
+              <?= $attendanceStatus ?>
+            </td>
+          <?php endfor; ?>
+          <?php
+          $monthlyPercentage = ($presentCount / 20) * 100;
+          $absentCount = 20 - $presentCount;
+          ?>
+          <td>
+            <?= round($monthlyPercentage, 2) ?>%
+          </td>
+          <td>
+            <?= $presentCount ?> /
+            <?= $absentCount ?>
+          </td>
+        </tr>
       <?php endfor; ?>
     </tbody>
   </table>
