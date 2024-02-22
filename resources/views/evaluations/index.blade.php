@@ -6,7 +6,7 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-4">
-        <div id="batch-header">
+        <div id="d-flex flex-column">
             <x-alert />
             <div class="my-3 d-flex">
                 <div class="w-50">

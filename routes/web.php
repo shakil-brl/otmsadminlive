@@ -303,6 +303,7 @@ Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendan
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
 Route::resource('roles', RoleController::class);
 // test without permission
+Route::resource('roles', RoleController::class);
 Route::resource('evaluation-head', EvaluationHeadController::class);
 Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
 Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
