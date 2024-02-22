@@ -4,11 +4,11 @@
 {{ __('Create') }} Tms Inspection
 @endsection
 @push('css')
-<style>
-    .ck.ck-reset.ck-editor.ck-rounded-corners {
-        width: 100%;
-    }
-</style>
+    <style>
+        .ck.ck-reset.ck-editor.ck-rounded-corners {
+    width: 100%;
+}
+    </style>
 @endpush
 @section('content')
 <section class="content container-fluid">
@@ -33,7 +33,7 @@
 </section>
 @endsection
 @push('js')
-<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
 <script>
     ClassicEditor
         .create(document.querySelector('#remark'))
