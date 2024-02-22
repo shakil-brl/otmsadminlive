@@ -68,7 +68,7 @@
         <div class="loader"></div>
     </div>
     <div id="body" class="" >
-         <div loading="lazy" style="background-image:url('{{ asset('img/login/placeholder.jpg') }}'); background-size: cover;  background-position: center; width: 100%; border-radius: 40px; margin-right: 10px;"> </div>
+         <img loading="lazy" style="background-image:url('{{ asset('img/login/placeholder.jpg') }}'); background-size: cover;  background-position: center; width: 100%; border-radius: 40px; margin-right: 10px;"> 
          
         <div id="login-page">
             <header id="navbar">
