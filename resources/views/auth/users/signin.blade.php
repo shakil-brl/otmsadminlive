@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
         rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <title>OTMS Login</title>
     <style>
@@ -67,9 +67,11 @@
     <div id="preloader" class="hiddenDiv">
         <div class="loader"></div>
     </div>
-    <div id="body" class="" >
-         <div loading="lazy" style="background-image:url('{{ asset('img/login/placeholder.jpg') }}'); background-size: cover;  background-position: center; width: 100%; border-radius: 40px; margin-right: 10px;"> </div>
-         
+    <div id="body" class="">
+        <div loading="lazy"
+            style="background-image:url('{{ asset('img/login/placeholder.jpg') }}'); background-size: cover;  background-position: center; width: 100%;">
+        </div>
+
         <div id="login-page">
             <header id="navbar">
                 <nav class="navbar navbar-expand-md navbar-light ">
@@ -118,7 +120,7 @@
                                 <div class="nav-link pe-0">
                                     <div class="auth-panel d-md-block d-inline-block ">
                                         <a class="signup btn" href="https://training.gov.bd/signup">
-                                           @lang('login.sign_up')
+                                            @lang('login.sign_up')
                                         </a>
                                         <a class="login btn active" href="#">
                                             @lang('login.logins')
@@ -205,7 +207,7 @@
     {{-- <script type="text/javascript" src="{{ asset('assets/login') }}/js/bootstrap.bundle.min.js"></script> --}}
 
     <script>
-$(".password .material-icons-outlined").click(function() {
+        $(".password .material-icons-outlined").click(function() {
     let input = $(this).closest('.password').find('input');
     let type = input.attr('type');
     
