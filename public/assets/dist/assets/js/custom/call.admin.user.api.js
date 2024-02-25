@@ -29,7 +29,7 @@ $(function () {
             },
             success: function (results) {
                 // Handle the successful response here
-                console.log(results.data);
+                // console.log(results.data);
                 let allUser = results.data;
                 sessionStorage.removeItem("message");
                 if (allUser.length > 0) {
