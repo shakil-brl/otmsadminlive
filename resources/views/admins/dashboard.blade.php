@@ -35,60 +35,7 @@
     <div id="preloader">
         <div class="loader"></div>
     </div>
-    <!--begin::Theme mode setup on page load-->
-    <script>
-        var defaultThemeMode = "light";
-        let areYouSure = "{{ __('sign-out.are_you') }}";
-        let wantLogout = "{{ __('sign-out.want_logout') }}";
-        let yesLogout = "{{ __('sign-out.yes') }}";
-        let cancelLogout = "{{ __('sign-out.cancel') }}";
-        let areYou = "{{ __('categorie-list.are_you') }}";
-        let wantUpdate = "{{ __('categorie-list.want_update') }}";
-        let yesUpdate = "{{ __('categorie-list.yes_update') }}";
-        let noCancel = "{{ __('categorie-list.no_cancel') }}";
-        let sucessfullyUpdated = "{{ __('categorie-list.sucessfully_updated') }}";
-        let ValidationError = "{{ __('categorie-list.update_validation_error') }}";
-        let deleteData = "{{ __('categorie-list.delete_data') }}";
-        let yesDelete = "{{ __('categorie-list.yes_delete') }}";
-        let noDelete = "{{ __('categorie-list.cancel_delete') }}";
-        let deletedData = "{{ __('categorie-list.deleted') }}";
-        let yes = "{{ __('categorie-list.yes') }}";
-        let linkBatch = "{{ __('provider-list.link_batch') }}";
-        let selectBatch = "{{ __('provider-list.select_batche') }}";
-        let enrollBatchCode = "{{ __('trainee-enrollment-list.enroll_batch_code') }}";
-        let startDate = "{{ __('trainee-enrollment-list.start_date') }}";
-        let geoCode = "{{ __('trainee-enrollment-list.geocode') }}";
-        let locations = "{{ __('trainee-enrollment-list.location') }}";
-        let vanue = "{{ __('trainee-enrollment-list.vanue') }}";
-        let totalTrainee = "{{ __('trainee-enrollment-list.total_trainee') }}";
-        let totalDuration = "{{ __('trainee-enrollment-list.total_duration') }}";
-        let wantCreateSchedule = "{{ __('batch-schedule.want_create_schedule') }}";
-        let yesCreate = "{{ __('batch-schedule.yes_create') }}";
-        let successfullyCreate = "{{ __('batch-schedule.successfully_create') }}";
-        let userFullName = "{{ __('admin-user-list.full_name') }}"
 
-        var themeMode;
-        if (document.documentElement) {
-            if (document.documentElement.hasAttribute("data-bs-theme-mode")) {
-                themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
-            } else {
-                if (localStorage.getItem("data-bs-theme") !== null) {
-                    themeMode = localStorage.getItem("data-bs-theme");
-                } else {
-                    themeMode = defaultThemeMode;
-                }
-            }
-            if (themeMode === "system") {
-                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-            }
-            document.documentElement.setAttribute("data-bs-theme", themeMode);
-        }
-    </script>
-    <!--end::Theme mode setup on page load-->
-
-
-
-    <!--begin::App-->
     <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
         <!--begin::Page-->
         <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
@@ -525,10 +472,7 @@
         </div>
         <!--end::Page-->
     </div>
-    <!--end::App-->
-    <!--begin::Javascript-->
 
-    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/scripts.bundle.js') }}"></script>
     {{-- <script src="{{ asset('assets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
