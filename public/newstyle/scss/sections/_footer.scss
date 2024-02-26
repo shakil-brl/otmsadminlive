@@ -1,0 +1,16 @@
+#footer {
+    height: 80px;
+    border-left: 1px solid $purple100;
+    background-color: $purple950;
+    display: flex;
+    padding: 0 24px 0 16px;
+    justify-content: space-between;
+    align-items: center;
+    color: $white;
+    font-size: 14px;
+    font-weight: 600;
+    flex-wrap: wrap;
+    img {
+        height: 56px;
+    }
+}

@@ -1,0 +1,32 @@
+.material-icons-outlined {
+    font-size: 16px;
+    vertical-align: text-top;
+}
+
+.page-content {
+    .card {
+        border: 0;
+        .card-header {
+            background-color: transparent;
+            border: 0;
+            padding: 30px 30px 0 30px;
+            .search {
+                width: 250px;
+            }
+        }
+        .card-body {
+            padding: 23px 30px;
+        }
+    }
+}
+
+.pagination {
+    .page-item {
+        .page-link {
+            font-size: 14px;
+        }
+    }
+}
+.table-responsive {
+    min-height: 350px;
+}
