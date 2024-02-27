@@ -225,11 +225,12 @@
     <!--begin::Javascript-->
 
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/scripts.bundle.js') }}"></script>
-    {{-- <script src="{{ asset('assets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-    --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> --}}
+    <script src="{{ asset('assets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/assets/functions.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
@@ -241,8 +242,8 @@
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/dist/assets/js/custom/pages/user-profile/general.js') }}"></script>
     <script src="{{ asset('assets/dist/assets/js/custom/bootstrap-tagsinput.min.js') }}"></script>
-    {{-- <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script> --}}
+    <script src="{{ asset('assets/dist/assets/js/custom/toastr.min.js') }}"></script>
+    <script src="{{ asset('assets/dist/assets/js/custom/ckeditor.js') }}"></script>
 
 
 
