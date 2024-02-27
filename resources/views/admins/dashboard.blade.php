@@ -202,7 +202,7 @@
 
 
                         @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
-                            <div><a href="{{ route('dashboard_details.ongoing_classes') }}"
+                            <div><a href="{{ route('dashboard_details.ongoing_classes', ['status' => 2]) }}"
                                     class="card-item red show-loader">
                                     <div class="icon">
                                         <img load="lazy" src="{{ asset('img/new_icon/livestrem.gif') }}"
@@ -281,7 +281,8 @@
 
                         @if (in_array('dashboard_details.partners', $roleRoutePermissions))
                             <div>
-                                <a href="#" class="card-item red show-loader">
+                                <a href="{{ route('dashboard_details.ongoing_classes', ['status' => '']) }}"
+                                    class="card-item red show-loader">
                                     <div class="icon">
                                         <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}"
                                             alt="">
