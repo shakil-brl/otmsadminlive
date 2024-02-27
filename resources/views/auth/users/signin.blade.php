@@ -9,64 +9,13 @@
     <link rel="shortcut icon" href="{{ asset('img/logo-icon.svg') }}" type="image/x-icon">
     <link
         href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-        rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+        rel="stylesheet" defer>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" defer>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}" defer>
     <title>OTMS Login</title>
-    <style>
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(4px);
-        }
-
-        #body {
-            display: none;
-        }
-
-        .hiddenDiv {
-            display: none;
-        }
-
-        /* HTML: <div class="loader"></div> */
-        .loader {
-            --d: 22px;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            color: #c5c5c5;
-            box-shadow:
-                calc(1*var(--d)) calc(0*var(--d)) 0 0,
-                calc(0.707*var(--d)) calc(0.707*var(--d)) 0 1px,
-                calc(0*var(--d)) calc(1*var(--d)) 0 2px,
-                calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
-                calc(-1*var(--d)) calc(0*var(--d)) 0 4px,
-                calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
-                calc(0*var(--d)) calc(-1*var(--d)) 0 6px;
-            animation: l27 1s infinite steps(8);
-        }
-
-        @keyframes l27 {
-            100% {
-                transform: rotate(1turn)
-            }
-        }
-    </style>
 </head>
 
 <body>
-
-    <div id="preloader" class="hiddenDiv">
-        <div class="loader"></div>
-    </div>
     <div id="body" class="">
         <div loading="lazy"
             style="background-image:url('{{ asset('img/login/placeholder.jpg') }}'); background-size: cover;  background-position: center; width: 100%;">
@@ -171,8 +120,8 @@
                                 </label>
                             </div>
                             <div class="password">
-                                <input id="password" name="password" type="password" class="form-control"
-                                    placeholder="Enter Password">
+                                <input id="password" name="password" type="password" class="form-control password"
+                                    placeholder="Enter Password" autocomplete="current-password">
                                 <div class="icon">
                                     <span type="button" class="material-icons-outlined">
                                         visibility
@@ -200,42 +149,19 @@
             </footer>
         </div>
     </div>
-
-
-    {{-- <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script> --}}
-    <script type="text/javascript" src="{{ asset('assets/login') }}/js/jquery-3.6.0.min.js"></script>
-    {{-- <script type="text/javascript" src="{{ asset('assets/login') }}/js/bootstrap.bundle.min.js"></script> --}}
-
-    <script>
-        $(".password .material-icons-outlined").click(function() {
-    let input = $(this).closest('.password').find('input');
-    let type = input.attr('type');
-    
-    input.attr('type', type === 'password' ? 'text' : 'password');
-    $(this).html(type === 'password' ? 'visibility_off' : 'visibility');
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("preloader").style.display = "none";
-    document.getElementById("body").style.display = "flex";
-});
-
-
-function toggleDivVisibility() {
-  var myDiv = document.getElementById("preloader");
-
-  // Toggle the visibility of the div
-  if (myDiv.style.display === "none" || myDiv.style.display === "") {
-    myDiv.style.display = "flex";
-  } else {
-    myDiv.style.display = "none";
-  }
-}
-
-
+    <!-- JavaScript for toggling password visibility -->
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('click', function (event) {
+            const togglePassword = event.target.closest('.material-icons-outlined');
+            if (togglePassword) {
+                const passwordInput = togglePassword.closest('.password').querySelector('input');
+                passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+                togglePassword.textContent = passwordInput.type === 'password' ? 'visibility' : 'visibility_off';
+            }
+        });
+    });
     </script>
-
 </body>
 
 </html>
