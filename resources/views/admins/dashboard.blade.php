@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Training Management System</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" />
+    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" /> --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0"/>
     <link rel="shortcut icon" href="img/favicon.png" type="image/png">
     <link rel="preload" href="{{ asset('/newstyle/css/bootstrap.min.css') }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -28,7 +28,7 @@
                     </a>
                 </div>
             </div>
-            @include('auth.partials.sidebar')
+            @include('auth.partials.sidebar-new')
         </section>
         <section id="right">
             <div class="backdrop overlay"></div>
@@ -77,7 +77,9 @@
                                                 alt="">
                                         </div>
                                         <div class="name">{{ $authProfile['KnownAs'] ?? '' }}</div>
-                                        <span class="material-icons-outlined">expand_more</span>
+                                        <span class="material-symbols-rounded">
+                                            expand_more
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-end">
@@ -120,7 +122,9 @@
                                         <form action="{{ url('/logout') }}" method="POST">
                                             @csrf
                                             <button class="btn logout-btn">
-                                                <span class="material-icons-outlined">logout</span>
+                                                <span class="material-symbols-rounded">
+                                                    logout
+                                                    </span>
                                                 {{ __('dashboard-header.sign_out') }}
                                             </button>
                                         </form>
