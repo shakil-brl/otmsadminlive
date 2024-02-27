@@ -5,8 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Training Management System</title>
-    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" /> --}}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0"/>
+    {{--
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" /> --}}
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0" />
     <link rel="shortcut icon" href="img/favicon.png" type="image/png">
     <link rel="preload" href="{{ asset('/newstyle/css/bootstrap.min.css') }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -128,7 +131,7 @@
                                             <button class="btn logout-btn">
                                                 <span class="material-symbols-rounded">
                                                     logout
-                                                    </span>
+                                                </span>
                                                 {{ __('dashboard-header.sign_out') }}
                                             </button>
                                         </form>
@@ -619,7 +622,7 @@
         // Function to render the dashboard
         function renderDashboard(data) {
             // Render the dashboard with the retrieved data
-            console.log('Data:', data.data);
+            // console.log('Data:', data.data);
             $('.total_batches').text(data.data.total_batch);
             $('.running_batches').text(data.data.running_batch);
             $('.completed_batch').text(data.data.completed_batch);
@@ -639,7 +642,6 @@
 
 
 const ongoing_classes = data.data.running_class.filter(classObj => classObj.status === 2);
-console.log('ongoing_classes:', );
 $('.ongoing_class').text(ongoing_classes[0].total);
         }
         // Function to handle errors
