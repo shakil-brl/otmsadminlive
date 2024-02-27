@@ -150,7 +150,7 @@
                         @if (in_array('dashboard_details.total_batches', $roleRoutePermissions))
                         <div>
                             <a href="{{ route('dashboard_details.total_batches') }}"
-                                class="card-item purple show-loader">
+                                class="card-item purple text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/total_batch.png') }}" alt="">
                                 </div>
@@ -169,7 +169,7 @@
                         @if (in_array('dashboard_details.running_batches', $roleRoutePermissions))
                         <div>
                             <a href="{{ route('dashboard_details.running_batches') }}"
-                                class="card-item yellow show-loader">
+                                class="card-item yellow text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/current_batch.png') }}" alt="">
                                 </div>
@@ -188,7 +188,7 @@
                         @if (in_array('dashboard_details.complete_batches', $roleRoutePermissions))
                         <div>
                             <a href="{{ route('dashboard_details.complete_batches') }}"
-                                class="card-item green show-loader">
+                                class="card-item green text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/completed_batch.png') }}" alt="">
                                 </div>
@@ -208,7 +208,7 @@
 
                         @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
                         <div><a href="{{ route('dashboard_details.ongoing_classes', ['status' => 2]) }}"
-                                class="card-item red show-loader">
+                                class="card-item red text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/livestrem.gif') }}" alt="">
                                 </div>
@@ -226,7 +226,7 @@
                         @if (in_array('dashboard_details.complete_classes', $roleRoutePermissions))
                         <div>
                             <a href="{{ route('dashboard_details.ongoing_classes', ['status' => 3]) }}"
-                                class="card-item green show-loader">
+                                class="card-item green text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/completedclass.png') }}" alt="">
                                 </div>
@@ -246,7 +246,7 @@
                         @if (in_array('dashboard_details.districts', $roleRoutePermissions))
                         <div>
                             <a href="{{ route('dashboard_details.districts') }}"
-                                class="card-item green-white show-loader">
+                                class="card-item green-white text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/district.png') }}" alt="">
                                 </div>
@@ -264,7 +264,8 @@
 
                         @if (in_array('dashboard_details.upazilas', $roleRoutePermissions))
                         <div>
-                            <a href="{{ route('dashboard_details.upazilas') }}" class="card-item info show-loader">
+                            <a href="{{ route('dashboard_details.upazilas') }}"
+                                class="card-item info text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/upazila.png') }}" alt="">
                                 </div>
@@ -281,7 +282,8 @@
                         @endif
                         @if (in_array('dashboard_details.partners', $roleRoutePermissions))
                         <div>
-                            <a href="{{ route('dashboard_details.partners') }}" class="card-item red show-loader">
+                            <a href="{{ route('dashboard_details.partners') }}"
+                                class="card-item red text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}" alt="">
                                 </div>
@@ -300,7 +302,7 @@
                         @if (in_array('dashboard_details.partners', $roleRoutePermissions))
                         <div>
                             <a href="{{ route('dashboard_details.ongoing_classes', ['status' => '']) }}"
-                                class="card-item red show-loader">
+                                class="card-item red text-decoration-none show-loader">
                                 <div class="icon">
                                     <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}" alt="">
                                 </div>
@@ -445,7 +447,7 @@
                             @if (!empty($commonPermissions))
                             <div class="col-7">
                                 @if (in_array('dashboard_details.trainers', $roleRoutePermissions))
-                                <a href="{{ route('dashboard_details.trainers') }}">
+                                <a href="{{ route('dashboard_details.trainers') }}" class="text-decoration-none">
                                     <div class="trainer-info">
                                         <div id="attendance-summery">
                                             <div>
@@ -491,7 +493,7 @@
                                 </a>
                                 @endif
                                 @if (in_array('traineeEnroll.index', $roleRoutePermissions))
-                                <a href="{{ route('traineeEnroll.index') }}">
+                                <a href="{{ route('traineeEnroll.index') }}" class="text-decoration-none">
                                     <div class="student-info">
                                         <div id="attendance-summery">
                                             <div>
