@@ -146,7 +146,10 @@
                             {{ digitLocale($from + $loop->index) }}
                         </td>
                         <td>
-                            {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['batchCode'] : '' }}<br>
+                            {{ $batch['schedule']['training_batch']['batchCode'] ?? '' }}
+                            <small class="d-block">
+                                {{ $batch['schedule']['training_batch']['training']['title']['Name'] ?? '' }}
+                            </small>
                             {{-- <small class="text-danger">Total Trainees: {{$batch['schedule']['training_batch']['totalTrainees']}}</small>  --}}
                         </td>
                         <td>
@@ -160,14 +163,17 @@
                             </div>
                         </td>
                         <td>
-                            {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['training']['title']['Name'] : '' }}<br />
-                            <small>{{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['GEOLocation'] : '' }}</small>
+                            {{ $batch['schedule']['training_batch']['GEOLocation'] ?? '' }}
+                            <small class="d-block">
+                                {{ $batch['schedule']['training_batch']['TrainingVenue'] ?? '' }}
+                            </small>
                         </td>
                         <td>
-                            {{ $batch['schedule']['training_batch'] ? $batch['schedule']['training_batch']['provider']['name'] : '' }}
+                            {{ $batch['schedule']['training_batch']['provider']['name'] ?? '' }}
                             <br />
-                            <a
-                                href="tel:+{{ $trainer['profile']['Phone'] ?? '' }}">{{ $batch['schedule']['training_batch']['provider']['phone'] ?? '' }}</a>
+                            <a href="callto:+{{ $trainer['profile']['Phone'] ?? '' }}">
+                                {{ $batch['schedule']['training_batch']['provider']['phone'] ?? '' }}
+                            </a>
 
                         </td>
                         <td>
@@ -176,7 +182,7 @@
                                     {{ $trainer['profile']['KnownAs'] ?? '' }}
                                     <br />
 
-                                    <a href="tel:+{{ $trainer['profile']['Phone'] ?? '' }}">{{ $trainer['profile']['Phone'] ?? '' }}
+                                    <a href="callto:+{{ $trainer['profile']['Phone'] ?? '' }}">{{ $trainer['profile']['Phone'] ?? '' }}
                                     </a>
                                 @endforeach
                             @endisset
