@@ -267,6 +267,8 @@
         // if (authToken == null) {
         //     window.open('/', '_self')
         // }
+        //...
+
 
         let url = "{{ route('changeLang') }}";
         let language = "{{ session()->get('locale') }}";
