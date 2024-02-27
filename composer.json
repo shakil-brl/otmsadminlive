@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "carlos-meneses/laravel-mpdf": "^2.1",
+        "carlos-meneses/laravel-mpdf": "*",
         "devfactory/minify": "*",
         "guzzlehttp/guzzle": "^7.8",
         "ibex/crud-generator": "^1.4",

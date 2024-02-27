@@ -26,7 +26,7 @@
     <h6>Payment Form:</h6>
     <div class="form-check form-switch my-3">
         <input class="form-check-input" type="checkbox" id="status" name="status"
-            {{ (isset($payment_batch['status']) && $payment_batch['status'] == 1) || old('status') == 'on' ? 'checked' : '' }}>
+            {{ (isset($payment_batch['status']) && $payment_batch['status'] != 1) || old('status') == 'off' ? '' : 'checked' }}>
         <label class="form-check-label" for="status">Status(Inactive/Active)</label>
     </div>
 
