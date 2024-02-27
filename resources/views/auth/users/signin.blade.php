@@ -109,7 +109,8 @@
 
                         <div class="form-input">
                             <label for="emailid">@lang('login.email')</label>
-                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Email">
+                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Email"
+                                autocomplete="email">
                         </div>
                         <div class="form-input">
                             <div class="d-flex justify-content-between">
@@ -121,7 +122,7 @@
                             </div>
                             <div class="password">
                                 <input id="password" name="password" type="password" class="form-control password"
-                                    placeholder="Enter Password" autocomplete="current-password">
+                                    placeholder="Enter Password" autocomplete="password">
 
                                 <div class="icon">
                                     <span type="button" class="material-icons-outlined">
