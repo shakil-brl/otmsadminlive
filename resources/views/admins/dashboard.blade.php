@@ -617,7 +617,7 @@
         // Function to render the dashboard
         function renderDashboard(data) {
             // Render the dashboard with the retrieved data
-             console.log('Data:', data.data);
+             //console.log('Data:', data.data);
         $('.total_batches').text(data.data.total_batch ?? 0);
         $('.running_batches').text(data.data.running_batch ?? 0);
         $('.completed_batch').text(data.data.completed_batch ?? 0);
