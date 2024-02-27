@@ -125,7 +125,9 @@
             });
             let selectedId = @json($payment_batch['batch_id'] ?? old('batch_id'));
             loadBatch(selectedId);
-
+            $("#batch_id").change(function() {
+                let batchId = $("#batch_id").val();
+            });
             // populate division options
             let optionFor = "Division";
             let division_api_link = api_baseurl + "divisions";
@@ -278,6 +280,7 @@
                             }
                             batchSelector.html(htmlSelect);
                         }
+                        alert($("#batch_id").val());
 
                     },
                     error: function(xhr, status, error) {
