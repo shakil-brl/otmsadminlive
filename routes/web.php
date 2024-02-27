@@ -24,6 +24,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LotController;
 use App\Http\Controllers\MyClassController;
+use App\Http\Controllers\PaymentBatchController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PreliminarySelectionController;
 use App\Http\Controllers\ProductComboController;
@@ -307,6 +308,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
+
 // test without permission
+Route::resource('payment-batches', PaymentBatchController::class);
 
 

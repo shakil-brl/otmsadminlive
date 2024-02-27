@@ -197,7 +197,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\GlobalVariableServiceProvider::class,
-        Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class
+        // Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class
     ],
 
     /*
