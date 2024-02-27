@@ -94,7 +94,7 @@
                                             <div class="email">{{ $authProfile['Email'] ?? '' }}</div>
                                         </div>
                                     </div>
-                                    <div class="links">
+                                    {{-- <div class="links">
                                         <a href="" class="link">
                                             <span class="material-icons-outlined">person</span>
                                             My Profile
@@ -115,7 +115,7 @@
                                             <span class="material-icons-outlined">feedback</span>
                                             Send Feedback
                                         </a>
-                                    </div>
+                                    </div> --}}
                                     <div class="logout">
                                         <form action="{{ url('/logout') }}" method="POST">
                                             @csrf
@@ -134,18 +134,76 @@
             <div id="main-content">
                 <div class="page-content">
                     <div class="row g-4 row-cols-3 cards" id="dashboard-card">
+
+
+                        @if (in_array('dashboard_details.total_batches', $roleRoutePermissions))
                         <div>
-                            <a href="{{ route('dashboard_details.ongoing_classes', ['status' => 3])}}"
-                                class="card-item green-white show-loader">
+                            <a href="{{route('dashboard_details.total_batches')}}" class="card-item purple show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/completedclass.png')}}" alt="">
+                                    <img load="lazy" src="{{asset('img/new_icon/total_batch.png')}}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit complete_class"></div>
-                                    <div class="label">{{ __('dashboard.complete_class') }}</div>
+                                    <div class="digit total_batches"></div>
+                                    <div class="label">{{ __('dashboard.total_batch')}}</div>
                                 </div>
                             </a>
                         </div>
+                        @endif
+                        @if (in_array('dashboard_details.running_batches', $roleRoutePermissions))
+                        <div>
+                            <a href="{{route('dashboard_details.running_batches')}}"
+                                class="card-item yellow show-loader">
+                                <div class="icon">
+                                    <img load="lazy" src="{{asset('img/new_icon/current_batch.png')}}" alt="">
+                                </div>
+                                <div>
+                                    <div class="digit running_batches"></div>
+                                    <div class="label">{{__('dashboard.running_batch')}}</div>
+                                </div>
+                            </a>
+                        </div>
+                        @endif
+
+                        @if (in_array('dashboard_details.complete_batches', $roleRoutePermissions))
+
+                        <div>
+                            <a href="{{route('dashboard_details.complete_batches')}}"
+                                class="card-item green show-loader">
+                                <div class="icon">
+                                    <img load="lazy" src="{{asset('img/new_icon/completed_batch.png')}}" alt="">
+                                </div>
+                                <div>
+                                    <div class="digit completed_batch"></div>
+                                    <div class="label">{{__('dashboard.complete_batch')}}</div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                        @endif
+                        {{-- @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
+                        <div>
+                            <x-dashboard-card :url="route('dashboard_details.ongoing_classes')" :totalBatch="collect($data['running_class'])
+                                ->where('status', 2)
+                                ->first()['total'] ?? 0" :icon="asset('img/new_icon/livestrem.gif')" :title=""
+                                :class="'card-item red show-loader'" />
+                        </div>
+                        @endif --}}
+
+                        @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
+                        <div><a href="{{route('dashboard_details.ongoing_classes') }}"
+                                class="card-item red show-loader">
+                                <div class="icon">
+                                    <img load="lazy" src="{{asset('img/new_icon/livestrem.gif')}}" alt="">
+                                </div>
+                                <div>
+                                    <div class="digit ongoing_class"></div>
+                                    <div class="label">{{__('dashboard.ongoing_class')}}</div>
+                                </div>
+                            </a>
+                        </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -222,7 +280,10 @@
         function renderDashboard(data) {
             // Render the dashboard with the retrieved data
             console.log('Data:', data.data);
-            $('.complete_class').text(data.data.complete_class);
+            $('.total_batches').text(data.data.total_batch);
+            $('.running_batches').text(data.data.running_batch);
+            $('.completed_batch').text(data.data.completed_batch);
+           
             // Implement rendering logic here (e.g., update DOM elements)
         }
         // Function to handle errors
