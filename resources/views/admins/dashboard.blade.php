@@ -10,7 +10,7 @@
         href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" /> --}}
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0" />
-    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('img/logo-icon.svg') }}" type="image/x-icon">
     <link rel="preload" href="{{ asset('/newstyle/css/bootstrap.min.css') }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{{ asset('/newstyle/scss/main.css') }}" as="style"
