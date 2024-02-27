@@ -225,18 +225,18 @@
     <!--begin::Javascript-->
 
     <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-    <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/scripts.bundle.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/js/scripts.bundle.js') }}"></script>
     {{-- <script src="{{ asset('assets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
     --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> --}}
-    <script src="{{ asset('assets/dist/assets/js/custom/assets/functions.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/js/custom/assets/functions.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-   
-    <script src="{{ asset('assets/dist/assets/js/custom/code.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/custom.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+
+    <script defer src="{{ asset('assets/dist/assets/js/custom/code.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/js/custom/custom.js') }}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/dist/assets/js/custom/pages/user-profile/general.js') }}"></script>
@@ -248,7 +248,7 @@
 
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
-    <script>
+    <script defer>
         if (sessionStorage.getItem('message')) {
             var type = sessionStorage.getItem('alert-type')
             switch (type) {
@@ -362,11 +362,11 @@
     </script>
 
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/dist/assets/js/custom/call.category.api.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/call.division.api.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/call.provider.api.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/call.permission.api.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/custom/call.admin.show.api.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/js/custom/call.category.api.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/js/custom/call.division.api.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/js/custom/call.provider.api.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/js/custom/call.permission.api.js') }}"></script>
+    <script defer src="{{ asset('assets/dist/assets/js/custom/call.admin.show.api.js') }}"></script>
     @stack('js')
 
     @section('scripts')
