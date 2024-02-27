@@ -82,13 +82,17 @@ class OngoingClass extends Component
             'get',
             'detail/training'
         )->json()['data'];
-        $this->status = request()->status ?? 2;
-        if (!($this->status >= 1 && $this->status <= 3)) {
-            $this->status = 2;
-        }
-        if ($this->status == 2) {
+        $this->status = request()->status;
+        // if (!($this->status >= 1 && $this->status <= 3)) {
+        //     $this->status = 2;
+        // }
+
+        if ($this->status == 2 || $this->status == null) {
             $this->from_date = Carbon::now()->toDateString();
             $this->to_date = Carbon::now()->toDateString();
+        }
+        if ($this->status == 3 || $this->status == null) {
+            $this->current_schedule = null;
         }
     }
     public function render()
