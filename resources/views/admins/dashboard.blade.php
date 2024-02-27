@@ -155,7 +155,12 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/total_batch.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_batches"></div>
+                                    <div class="digit total_batches">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+
+                                    </div>
                                     <div class="label">{{ __('dashboard.total_batch') }}</div>
                                 </div>
                             </a>
@@ -169,7 +174,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/current_batch.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit running_batches"></div>
+                                    <div class="digit running_batches">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div class="label">{{ __('dashboard.running_batch') }}</div>
                                 </div>
                             </a>
@@ -184,7 +193,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/completed_batch.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit completed_batch"></div>
+                                    <div class="digit completed_batch">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div class="label">{{ __('dashboard.complete_batch') }}</div>
                                 </div>
                             </a>
@@ -200,7 +213,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/livestrem.gif') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit ongoing_class"></div>
+                                    <div class="digit ongoing_class">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div class="label">{{ __('dashboard.ongoing_class') }}</div>
                                 </div>
                             </a>
@@ -214,7 +231,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/completedclass.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit complete_class"></div>
+                                    <div class="digit complete_class">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div class="label">{{ __('dashboard.complete_class') }}</div>
                                 </div>
                             </a>
@@ -230,7 +251,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/district.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_district"></div>
+                                    <div class="digit total_district">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div class="label">{{ __('dashboard.district') }}</div>
                                 </div>
                             </a>
@@ -244,7 +269,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/upazila.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_upazila"></div>
+                                    <div class="digit total_upazila">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div class="label">{{ __('dashboard.upazila') }}</div>
                                 </div>
                             </a>
@@ -257,7 +286,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_vendor"></div>
+                                    <div class="digit total_vendor">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div class="label">{{ __('dashboard.partner') }}</div>
                                 </div>
                             </a>
@@ -272,7 +305,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit todays_total_schedule"></div>
+                                    <div class="digit todays_total_schedule">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
                                     <div class="label">{{ __('dashboard.todays_class') }}</div>
                                 </div>
                             </a>
