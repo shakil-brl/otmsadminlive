@@ -638,7 +638,7 @@ $('.total_allownce_paid').text(data.data.total_allownce_paid ?? 0);
 
 
             const ongoing_classes = data.data.running_class.filter(classObj => classObj.status === 2);
-            $('.ongoing_class').text(ongoing_classes[0].total);
+            $('.ongoing_class').text(ongoing_classes[0].total ?? 0);
         }
         // Function to handle errors
         function handleError(error) {
