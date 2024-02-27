@@ -7,12 +7,11 @@
 @section('content')
     <div class="m-5">
         <h3>
-            {{__('config.update_holyday')}}
+            Edit Payment Batch
         </h3>
         <x-alert />
 
         @if (session('error_message'))
-            {{-- @dump(session('error_message')) --}}
             <ul class="m-0 text-danger">
                 @foreach (session('error_message') ?? [] as $neme => $err)
                     @foreach ($err as $e)
@@ -24,18 +23,21 @@
             </ul>
         @endif
 
-        @isset($holyday)
-            @php
-                if ($holyday['holly_bay']) {
-                    $holly_bay = \Carbon\Carbon::createFromFormat('Y-m-d', $holyday['holly_bay'])->format('d/m/Y');
+        @isset($payment_batch)
+            {{-- @php
+                if ($payment_batch['start_date']) {
+                    $start_date = \Carbon\Carbon::createFromFormat('Y-m-d', $payment_batch['start_date'])->format('d/m/Y');
                 }
-            @endphp
+                if ($payment_batch['end_date']) {
+                    $end_date = \Carbon\Carbon::createFromFormat('Y-m-d', $payment_batch['end_date'])->format('d/m/Y');
+                }
+            @endphp --}}
             <div class="card p-5 mt-3">
                 <div class="card p-5 mt-3">
-                    <form action="{{ route('holydays.update', $holyday['id']) }}" method="post">
+                    <form action="{{ route('payment-batches.update', $payment_batch['id']) }}" method="post">
                         @csrf
                         @method('PUT')
-                        @include('holyday.form')
+                        @include('payment-batches.form')
                     </form>
                 </div>
             </div>
@@ -43,13 +45,7 @@
     </div>
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            let storedHolyday = @json($holly_bay) ?? '';
-            $("#holly_bay").flatpickr({
-                dateFormat: "d/m/Y",
-                defaultDate: [storedHolyday]
-            });
-        });
+        
     </script>
 @endsection
 @endsection

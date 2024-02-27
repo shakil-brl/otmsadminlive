@@ -49,7 +49,7 @@
         </div>
         <div class="">
             <label for="daily_allowance" class="form-label">Daily Allowance: <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="daily_allowance" id="daily_allowance"
+            <input type="number" step="0.50" class="form-control" name="daily_allowance" id="daily_allowance"
                 value="{{ $payment_batch['daily_allowance'] ?? old('daily_allowance') }}" placeholder="Daily allowance">
             @error('daily_allowance')
                 <small class="text-danger d-block">{{ $message }}</small>
@@ -88,7 +88,8 @@
         <div class="">
             <label for="total_payment_amount" class="form-label">Payment Amount: <span
                     class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="total_payment_amount" id="total_payment_amount"
+            <input type="number" step="0.50" class="form-control" name="total_payment_amount"
+                id="total_payment_amount"
                 value="{{ $payment_batch['total_payment_amount'] ?? old('total_payment_amount') }}"
                 placeholder="Total payment amount">
             @error('total_payment_amount')

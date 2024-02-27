@@ -13,9 +13,24 @@ class PaymentBatchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $results = ApiHttpClient::request('get', 'payment-batches', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+
+        if ($results['success'] == true) {
+            $payment_batches = $results['data'];
+            $page_from = $results['data']['from'];
+            $paginator = $this->customPaginate($results, $request, route('payment-batches.index'));
+            // dd($payment_batches);
+            return view('payment-batches.index', ['results' => $payment_batches, 'paginator' => $paginator, 'page_from' => $page_from]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -36,8 +51,6 @@ class PaymentBatchController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
             'batch_id' => 'required|numeric',
             'daily_allowance' => 'required',
@@ -91,7 +104,16 @@ class PaymentBatchController extends Controller
      */
     public function edit($id)
     {
-        //
+        $results = ApiHttpClient::request('get', "payment-batches/$id")->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $payment_batch = $results['data'];
+            return view('payment-batches.edit', ['payment_batch' => $payment_batch]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -103,7 +125,38 @@ class PaymentBatchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'batch_id' => 'required|numeric',
+            'daily_allowance' => 'required',
+            'start_date' => 'required|date_format:d/m/Y',
+            'end_date' => 'required|date_format:d/m/Y|after_or_equal:start_date',
+            'total_payment_amount' => 'required|numeric',
+            'remark' => 'nullable|string',
+        ]);
+
+        $batch_payment = $request->only(['batch_id', 'daily_allowance', 'total_payment_amount', 'remark']);
+
+        if ($request->status) {
+            $batch_payment['status'] = 1;
+        } else {
+            $batch_payment['status'] = 0;
+        }
+
+        $batch_payment['start_date'] = Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d');
+        $batch_payment['end_date'] = Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d');
+        // dd($batch_payment);
+        $data = ApiHttpClient::request('put', "payment-batches/$id", $batch_payment)->json();
+        // dd($data);
+        if (isset($data['error'])) {
+            $error_message = $data['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $error_message)->withInput();
+        } elseif ($data['success'] == true) {
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Created successfully');
+            return redirect()->route('payment-batches.index');
+        }
     }
 
     /**
@@ -114,6 +167,16 @@ class PaymentBatchController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $results = ApiHttpClient::request('delete', "payment-batches/$id")->json();
+
+        if ($results['success'] == true) {
+            session()->flash('type', 'Success');
+            session()->flash('message', $results['message'] ?? 'Deleted successfully');
+            return redirect()->route('payment-batches.index');
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->route('payment-batches.index');
+        }
     }
 }
