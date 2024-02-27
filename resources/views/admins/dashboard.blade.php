@@ -617,21 +617,21 @@
         // Function to render the dashboard
         function renderDashboard(data) {
             // Render the dashboard with the retrieved data
-            // console.log('Data:', data.data);
-            $('.total_batches').text(data.data.total_batch ?? 0);
-$('.running_batches').text(data.data.running_batch ?? 0);
-$('.completed_batch').text(data.data.completed_batch ?? 0);
-$('.complete_class').text(data.data.complete_class ?? 0);
-$('.total_district').text(data.data.total_district ?? 0);
-$('.total_division').text(data.data.total_division ?? 0);
-$('.total_upazila').text(data.data.total_upazila ?? 0);
-$('.total_vendor').text(data.data.total_vendor ?? 0);
-$('.todays_total_schedule').text(data.data.todays_total_schedule ?? 0);
-$('.total_attend_today').text(data.data.total_attend_today ?? 0);
-$('.total_trainee').text(data.data.total_trainee ?? 0);
-$('.total_trainer').text(data.data.total_trainer ?? 0);
-$('.total_attend_month').text(data.data.total_attend_month ?? 0);
-$('.total_allownce_paid').text(data.data.total_allownce_paid ?? 0);
+             console.log('Data:', data.data);
+        $('.total_batches').text(data.data.total_batch ?? 0);
+        $('.running_batches').text(data.data.running_batch ?? 0);
+        $('.completed_batch').text(data.data.completed_batch ?? 0);
+        $('.complete_class').text(data.data.complete_class ?? 0);
+        $('.total_district').text(data.data.total_district ?? 0);
+        $('.total_division').text(data.data.total_division ?? 0);
+        $('.total_upazila').text(data.data.total_upazila ?? 0);
+        $('.total_vendor').text(data.data.total_vendor ?? 0);
+        $('.todays_total_schedule').text(data.data.todays_total_schedule ?? 0);
+        $('.total_attend_today').text(data.data.total_attend_today ?? 0);
+        $('.total_trainee').text(data.data.total_trainee ?? 0);
+        $('.total_trainer').text(data.data.total_trainer ?? 0);
+        $('.total_attend_month').text(data.data.total_attend_month ?? 0);
+        $('.total_allownce_paid').text(data.data.total_allownce_paid ?? 0);
 
             // $('.todays_total_schedule').text(data.data.todays_total_schedule);
             // $('.todays_total_schedule').text(data.data.todays_total_schedule);
