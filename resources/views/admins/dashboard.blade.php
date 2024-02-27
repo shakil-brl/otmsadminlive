@@ -638,7 +638,13 @@
 
 
             const ongoing_classes = data.data.running_class.filter(classObj => classObj.status === 2);
-            $('.ongoing_class').text(ongoing_classes[0].total ?? 0);
+
+if (ongoing_classes.length > 0) {
+    $('.ongoing_class').text(ongoing_classes[0].total ?? 0);
+} else {
+    $('.ongoing_class').text(0);
+}
+            
         }
         // Function to handle errors
         function handleError(error) {
