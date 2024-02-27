@@ -11,11 +11,11 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0" />
     <link rel="shortcut icon" href="img/favicon.png" type="image/png">
-    <link rel="preload" href="{{ asset('/newstyle/css/bootstrap.min.csss') }}" as="style"
+    <link rel="preload" href="{{ asset('/newstyle/css/bootstrap.min.css') }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="{{ asset('/newstyle/scss/main.csss') }}" as="style"
+    <link rel="preload" href="{{ asset('/newstyle/scss/main.css') }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.csss?v=1') }}" as="style"
+    <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link title="No scr" rel="stylesheet" href="{{ asset('/newstyle/css/bootstrap.min.css') }}">
@@ -202,7 +202,7 @@
 
 
                         @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
-                            <div><a href="{{ route('dashboard_details.ongoing_classes') }}"
+                            <div><a href="{{ route('dashboard_details.ongoing_classes', ['status' => 2]) }}"
                                     class="card-item red show-loader">
                                     <div class="icon">
                                         <img load="lazy" src="{{ asset('img/new_icon/livestrem.gif') }}"
@@ -281,7 +281,8 @@
 
                         @if (in_array('dashboard_details.partners', $roleRoutePermissions))
                             <div>
-                                <a href="#" class="card-item red show-loader">
+                                <a href="{{ route('dashboard_details.ongoing_classes', ['status' => '']) }}"
+                                    class="card-item red show-loader">
                                     <div class="icon">
                                         <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}"
                                             alt="">
