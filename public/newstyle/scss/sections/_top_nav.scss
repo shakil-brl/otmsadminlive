@@ -1,0 +1,32 @@
+#top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: $white;
+    height: 66px;
+    padding-left: 16px;
+    padding-right: 30px;
+    height: $nav-height;
+    border-bottom: solid 1px $purple200;
+
+    .left {
+        display: flex;
+        align-items: center;
+        .govt-logo {
+            height: 63px;
+            margin-right: 10px;
+        }
+        .menu-icon {
+            transition: 0.5s;
+            cursor: pointer;
+            user-select: none;
+            .material-icons-outlined {
+                font-size: 35px;
+            }
+        }
+    }
+    .right {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,475 +1,590 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<!--begin::Head-->
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Training Management System</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
     {{--
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" /> --}}
-    <link rel="shortcut icon" href="{{ asset('img/logo-icon.svg') }}" type="image/x-icon">
-
-
-
-
-
-    <link rel="stylesheet" href="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/dist/assets/css/style.bundle.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css?v=1') }}">
-    <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}">
-    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script> --}}
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" /> --}}
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0" />
+    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+    <link rel="preload" href="{{ asset('/newstyle/css/bootstrap.min.csss') }}" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{{ asset('/newstyle/scss/main.csss') }}" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.csss?v=1') }}" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link title="No scr" rel="stylesheet" href="{{ asset('/newstyle/css/bootstrap.min.css') }}">
+        <link title="No scr" rel="stylesheet" href="{{ asset('/newstyle/scss/main.css') }}">
+        <link title="No scr" rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}">
+    </noscript>
 
 </head>
-<!--end::Head-->
-<!--begin::Body-->
 
-<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true"
-    data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true"
-    data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true"
-    data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
-
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-
-    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
-        <!--begin::Page-->
-        <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            <!--begin::Header-->
-            @include('auth.partials.header')
-            <!--end::Header-->
-            <!--begin::Wrapper-->
-            <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-                <!--begin::Sidebar-->
-                @include('auth.partials.sidebar')
-                <!--end::Sidebar-->
-                <!--begin::Main-->
-                <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-
-                    <div class="d-flex flex-column flex-column-fluid">
-
-                        <div class="m-5">
-                            <div id="main-content bg-warning">
-                                <div class="page-content" style="background-color: transparent;">
-                                    <div class="m-4">
-                                        <div class="row g-4 row-cols-3 cards" id="dashboard-card">
-                                            @if (in_array('dashboard_details.total_batches', $roleRoutePermissions))
-                                                <div>
-                                                    {{-- $data['total_batch'] ?? 0 --}}
-                                                    <x-dashboard-card :url="route('dashboard_details.total_batches')" :totalBatch="$data['total_batch'] ?? 0"
-                                                        :icon="asset('img/new_icon/total_batch.png')" :title="__('dashboard.total_batch')" :class="'card-item purple show-loader'" />
-                                                </div>
-                                            @endif
-
-                                            @if (in_array('dashboard_details.running_batches', $roleRoutePermissions))
-                                                <div>
-                                                    <x-dashboard-card :url="route('dashboard_details.total_batches', [
-                                                        'batch_status' => 1,
-                                                    ])" :totalBatch="$data['running_batch'] ?? 0"
-                                                        :icon="asset('img/new_icon/current_batch.png')" :title="__('dashboard.running_batch')" :class="'card-item yellow show-loader'" />
-                                                </div>
-                                            @endif
-
-                                            @if (in_array('dashboard_details.complete_batches', $roleRoutePermissions))
-                                                <div>
-                                                    <x-dashboard-card :url="route('dashboard_details.total_batches', [
-                                                        'batch_status' => 2,
-                                                    ])" :totalBatch="$data['completed_batch']"
-                                                        :icon="asset('img/new_icon/completed_batch.png')" :title="__('dashboard.complete_batch')" :class="'card-item green show-loader'" />
-                                                </div>
-                                            @endif
-
-                                            @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
-                                                <div>
-                                                    <x-dashboard-card :url="route('dashboard_details.ongoing_classes', [
-                                                        'status' => 2,
-                                                    ])" :totalBatch="collect($data['running_class'])
-                                                        ->where('status', 2)
-                                                        ->first()['total'] ?? 0"
-                                                        :icon="asset('img/new_icon/livestrem.gif')" :title="__('dashboard.ongoing_class')" :class="'card-item red show-loader'" />
-                                                </div>
-                                            @endif
-                                            @if (in_array('dashboard_details.complete_classes', $roleRoutePermissions))
-                                                <div>
-                                                    <x-dashboard-card :url="route('dashboard_details.ongoing_classes', [
-                                                        'status' => 3,
-                                                    ])" :totalBatch="$data['complete_class'] ?? 0"
-                                                        :icon="asset('img/new_icon/completedclass.png')" :title="__('dashboard.complete_class')" :class="'card-item purple show-loader'" />
-                                                </div>
-                                            @endif
-                                            @if (in_array('dashboard_details.districts', $roleRoutePermissions))
-                                                <div>
-                                                    <x-dashboard-card :url="route('dashboard_details.districts')" :totalBatch="$data['total_district'] ?? 0"
-                                                        :icon="asset('img/new_icon/district.png')" :title="__('dashboard.district')" :class="'card-item green-white show-loader'" />
-                                                </div>
-                                            @endif
-
-                                            @if (in_array('dashboard_details.upazilas', $roleRoutePermissions))
-                                                <div>
-                                                    <x-dashboard-card :url="route('dashboard_details.upazilas')" :totalBatch="$data['total_upazila'] ?? 0"
-                                                        :icon="asset('img/new_icon/upazila.png')" :title="__('dashboard.upazila')" :class="'card-item info show-loader'" />
-                                                </div>
-                                            @endif
-                                            @if (in_array('dashboard_details.partners', $roleRoutePermissions))
-                                                <div>
-                                                    {{-- $data['total_vendor'] --}}
-                                                    <x-dashboard-card :url="route('dashboard_details.partners')" :totalBatch="$data['total_vendor'] ?? 0"
-                                                        :icon="asset('img/new_icon/developmentpartner.png')" :title="__('dashboard.partner')" :class="'card-item red'" />
-                                                </div>
-                                            @endif
-                                            @if (in_array('dashboard_details.partners', $roleRoutePermissions))
-                                                <div>
-                                                    <x-dashboard-card :url="route('dashboard_details.ongoing_classes', [
-                                                        'status' => '',
-                                                    ])" :totalBatch="$total_ongoing ?? 0"
-                                                        :icon="asset('img/new_icon/developmentpartner.png')" :title="__('dashboard.todays_class')" :class="'card-item red show-loader'" />
-                                                </div>
-                                            @endif
+<body>
+    <section id="admin">
+        <section id="sidebar">
+            <div class="top">
+                <div class="logo">
+                    <a href="{{ url('/') }}">
+                        <img load="lazy" src="{{ asset('newstyle/img/logo.svg') }}" alt="">
+                    </a>
+                </div>
+            </div>
+            @include('auth.partials.sidebar-new')
+        </section>
+        <section id="right">
+            <div class="backdrop overlay"></div>
+            <div class="topnav" id="top-nav">
+                <div class="d-flex justify-content-between align-items-center h-100">
+                    <div class="left">
+                        <img load="lazy" class="govt-logo menu-click" type="button"
+                            src="{{ asset('newstyle/img/govt-logo.png') }}" alt="">
+                    </div>
+                    <div class="right">
+                        <div class="nav-item lang" id="lang-menu">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                                @if (session()->get('locale') == 'en')
+                                    <img load="lazy" class="flag" src="{{ asset('img/icon/us.svg') }}"
+                                        alt="">
+                                    <span class="label dropdown-toggle">English</span>
+                                @elseif(session()->get('locale') == 'bn')
+                                    <img load="lazy" class="flag" src="{{ asset('img/icon/bd.svg') }}"
+                                        alt="">
+                                    <span class="label dropdown-toggle">বাংলা</span>
+                                @else
+                                    <img load="lazy" class="flag" src="{{ asset('img/icon/us.svg') }}"
+                                        alt="">
+                                    <span class="label dropdown-toggle">English</span>
+                                @endif
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="item">
+                                    <a class="dropdown-item" id="lang-bd">
+                                        <img load="lazy" class="flag" src="{{ asset('img/icon/bd.svg') }}"
+                                            alt="">
+                                        <span class="label">বাংলা</span>
+                                    </a>
+                                </li>
+                                <li class="item">
+                                    <a class="dropdown-item" id="lang-us">
+                                        <img load="lazy" class="flag" src="{{ asset('img/icon/us.svg') }}"
+                                            alt="">
+                                        <span class="label">English</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="userinfo" id="logout-panel">
+                            <div class="dropdown">
+                                <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="d-inline-flex align-items-center">
+                                        <div class="avatar">
+                                            <img load="lazy" class="photo d-none"
+                                                src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}"
+                                                alt="">
                                         </div>
-                                        @php
-                                            $permissionsToCheck = ['dashboard.total_present', 'dashboard.average_attendance', 'dashboard.dropout_trainee'];
-
-                                            $commonPermissions = array_intersect($permissionsToCheck, $roleRoutePermissions);
-                                        @endphp
-                                        @if (!empty($commonPermissions))
-                                            <div id="dashboard-attendance">
-                                                <div class="row align-items-stretch">
-                                                    <div class="col-7">
-                                                        <div id="attendance-summery">
-                                                            <div class="header">
-                                                                <div class="left menu">
-                                                                    <a class="link active"
-                                                                        href="#">{{ __('dashboard.todays') }}</a>
-                                                                    <a class="link"
-                                                                        href="#">{{ __('dashboard.weekly') }}</a>
-                                                                    <a class="link"
-                                                                        href="#">{{ __('dashboard.monthly') }}</a>
-                                                                </div>
-                                                                <div class="right menu">
-                                                                    <a class="link"
-                                                                        href="#">{{ __('dashboard.details') }}</a>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="content">
-                                                                    <div class="icon">
-                                                                        <img src="{{ asset('img/new_icon') }}/attendance.png"
-                                                                            alt="">
-                                                                    </div>
-                                                                    <div class="attendance">
-                                                                        <div class="items">
-                                                                            @if (in_array('dashboard.total_present', $roleRoutePermissions))
-                                                                                <div class="item">
-                                                                                    <div class="digit">
-                                                                                        {{ isset($data['total_attend_today']) ? digitLocale($data['total_attend_today']) : digitLocale(0) }}
-                                                                                    </div>
-                                                                                    <div class="label">
-                                                                                        {{ __('dashboard.total_present') }}
-                                                                                    </div>
-                                                                                </div>
-                                                                            @endif
-                                                                            <div class="item">
-                                                                                {{-- <div class="digit">66%</div>
-                                                                            <div class="label">{{
-                                                                                __('dashboard.percentage_attendance') }}
-                                                                            </div> --}}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="items">
-                                                                            @if (in_array('dashboard.average_attendance', $roleRoutePermissions))
-                                                                                <div class="item">
-                                                                                    <div class="digit">
-                                                                                        {{ isset($data['total_trainee']) ? digitLocale($data['total_trainee']) : digitLocale(0) }}
-                                                                                    </div>
-                                                                                    <div class="label">
-                                                                                        {{ __('dashboard.average_attendance') }}
-                                                                                    </div>
-                                                                                </div>
-                                                                            @endif
-                                                                            @if (in_array('dashboard.dropout_trainee', $roleRoutePermissions))
-                                                                                <div class="item">
-                                                                                    <div class="digit">
-                                                                                        {{ isset($data['total_dropout']) ? digitLocale($data['total_dropout']) : digitLocale(0) }}
-                                                                                    </div>
-                                                                                    <div class="label">
-                                                                                        {{ __('dashboard.dropout_trainee') }}
-                                                                                    </div>
-                                                                                </div>
-                                                                            @endif
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-5">
-                                                        <div id="attendance-chart" class="h-100 d-none">
-                                                            <div class="chart-item">
-                                                                <div class="bar" style="height: 70%;">
-                                                                    {{-- <span class="bar-text">75%</span> --}}
-                                                                </div>
-                                                                <div class="label">{{ __('dashboard.class_day_sat') }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="chart-item">
-                                                                <div class="bar danger" style="height: 0%;">
-                                                                    {{-- <span class="bar-text">25%</span> --}}
-                                                                </div>
-                                                                {{-- <div class="label">{{ __('dashboard.class_day_sun') }}
-                                                            </div> --}}
-                                                            </div>
-                                                            <div class="chart-item">
-                                                                <div class="bar" style="height: 95%;">
-                                                                    <span class="bar-text">100%</span>
-                                                                </div>
-                                                                <div class="label">{{ __('dashboard.class_day_mon') }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="chart-item">
-                                                                <div class="bar" style="height: 35%;">
-                                                                    <span class="bar-text">35%</span>
-                                                                </div>
-                                                                <div class="label">{{ __('dashboard.class_day_tue') }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="chart-item">
-                                                                <div class="bar" style="height: 90%;">
-                                                                    <span class="bar-text">100%</span>
-                                                                </div>
-                                                                <div class="label">
-                                                                    {{ __('dashboard.class_day_wed') }}</div>
-                                                            </div>
-                                                            <div class="chart-item">
-                                                                <div class="bar" style="height: 50%;">
-                                                                    <span class="bar-text">55%</span>
-                                                                </div>
-                                                                <div class="label">
-                                                                    {{ __('dashboard.class_day_thu') }}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-
-                                        <div id="allownce">
-                                            <div class="row  align-items-stretch">
-                                                @php
-                                                    $permissionsToCheck = ['dashboard_details.trainers', 'traineeEnroll.index'];
-
-                                                    $commonPermissions = array_intersect($permissionsToCheck, $roleRoutePermissions);
-                                                @endphp
-                                                @if (!empty($commonPermissions))
-                                                    <div class="col-7">
-                                                        @if (in_array('dashboard_details.trainers', $roleRoutePermissions))
-                                                            <a href="{{ route('dashboard_details.trainers') }}">
-                                                                <div class="trainer-info">
-                                                                    <div id="attendance-summery">
-                                                                        <div>
-                                                                            <div class="content">
-                                                                                <div class="icon">
-                                                                                    <img src="{{ asset('img/new_icon') }}/trainer.png"
-                                                                                        alt="">
-                                                                                </div>
-                                                                                <div class="attendance">
-                                                                                    <div class="items">
-                                                                                        <div class="item">
-                                                                                            <div class="digit">
-
-                                                                                                {{ isset($data['total_trainer']) ? digitLocale($data['total_trainer']) : digitLocale(0) }}
-                                                                                            </div>
-                                                                                            <div class="label">
-                                                                                                {{ __('dashboard.total_trainer') }}
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="item">
-                                                                                            <div class="digit"></div>
-                                                                                            <div class="label">
-                                                                                                {{-- {{
-                                                                                        __('dashboard.top_trainer') }}
-                                                                                        --}}
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="items">
-                                                                                        {{-- <div class="item">
-                                                                                    <div class="digit">20000</div>
-                                                                                    <div class="label">
-                                                                                        {{
-                                                                                        __('dashboard.reserve_trainer')
-                                                                                        }}
-                                                                                    </div>
-                                                                                </div> --}}
-                                                                                        {{-- <div class="item">
-                                                                                    <div class="digit">7</div>
-                                                                                    <div class="label">{{
-                                                                                        __('dashboard.lack_trainer') }}
-                                                                                    </div>
-                                                                                </div> --}}
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        @endif
-                                                        @if (in_array('traineeEnroll.index', $roleRoutePermissions))
-                                                            <a href="{{ route('traineeEnroll.index') }}">
-                                                                <div class="student-info">
-                                                                    <div id="attendance-summery">
-                                                                        <div>
-                                                                            <div class="content">
-                                                                                <div class="icon">
-                                                                                    <img src="{{ asset('img/new_icon') }}/student_info.png"
-                                                                                        alt="">
-                                                                                </div>
-                                                                                <div class="attendance">
-                                                                                    <div class="items">
-                                                                                        <div class="item">
-                                                                                            <div class="digit">
-                                                                                                {{ isset($data['total_trainee']) ? digitLocale($data['total_trainee']) : digitLocale(0) }}
-                                                                                            </div>
-                                                                                            <div class="label">
-                                                                                                {{ __('dashboard.total_trainee') }}
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="item">
-                                                                                            {{-- <div class="digit">
-                                                                                        {{ isset($data['total_dropout'])
-                                                                                        ?
-                                                                                        digitLocale($data['total_dropout'])
-                                                                                        : digitLocale(0) }}
-                                                                                    </div> --}}
-                                                                                            {{-- <div class="label">
-                                                                                        {{
-                                                                                        __('dashboard.dropout_trainee')
-                                                                                        }}
-                                                                                    </div> --}}
-                                                                                            {{-- <div class="digit">66%</div>
-                                                                                    <div class="label">
-                                                                                        {{
-                                                                                        __('dashboard.successful_freelancer')
-                                                                                        }}</div> --}}
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    {{-- <div class="items">
-                                                                                <div class="item">
-                                                                                    <div class="digit">{{
-                                                                                        $data['total_dropout']}}</div>
-                                                                                    <div class="label">
-                                                                                        {{
-                                                                                        __('dashboard.dropout_trainee')
-                                                                                        }}
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div> --}}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        @endif
-                                                    </div>
-                                                @endif
-
-                                                @php
-                                                    $permissionsToCheck = ['traineeEnroll.index'];
-
-                                                    $commonPermissions = array_intersect($permissionsToCheck, $roleRoutePermissions);
-                                                @endphp
-                                                @if (!empty($commonPermissions))
-                                                    <div class="col-5">
-                                                        <div id="py-chart" class="">
-                                                            <div id="attendance-summery">
-                                                                <div>
-                                                                    <div class="content">
-                                                                        <div class="icon">
-                                                                            <img src="{{ asset('img/new_icon') }}/alownce.png"
-                                                                                alt="">
-                                                                        </div>
-                                                                        <div class="attendance">
-                                                                            <div class="items d-block">
-                                                                                <div class="item">
-                                                                                    <div class="digit">
-                                                                                        {{ digitLocale(0) }}
-                                                                                    </div>
-                                                                                    <div class="label">
-                                                                                        {{ __('dashboard.total_trainee') }}
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div>
-                                                                        <canvas id="allownceChart"></canvas>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            </div>
+                                        <div class="name">{{ $authProfile['KnownAs'] ?? '' }}</div>
+                                        <span class="material-symbols-rounded">
+                                            expand_more
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <div class="identity">
+                                        <div>
+                                            <img load="lazy" class="photo user-face d-none"
+                                                src="{{ asset('assets/dist/assets/media/svg/avatars/blank.svg') }}"
+                                                alt="{{ $role }}" title="{{ $role }}">
+                                            <div class="avatar user-face">M</div>
                                         </div>
+                                        <div>
+                                            <div class="name" title="{{ $userRole }}">
+                                                {{ $authProfile['KnownAs'] ?? '' }}</div>
+                                            <div class="email">{{ $authProfile['Email'] ?? '' }}</div>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="links">
+                                        <a href="" class="link">
+                                            <span class="material-icons-outlined">person</span>
+                                            My Profile
+                                        </a>
+                                        <a href="" class="link">
+                                            <span class="material-icons-outlined">translate</span>
+                                            Language: English(US)
+                                        </a>
+                                        <a href="" class="link">
+                                            <span class="material-icons-outlined">settings</span>
+                                            Settings
+                                        </a>
+                                        <a href="" class="link">
+                                            <span class="material-icons-outlined">help_outline</span>
+                                            Help
+                                        </a>
+                                        <a href="" class="link">
+                                            <span class="material-icons-outlined">feedback</span>
+                                            Send Feedback
+                                        </a>
+                                    </div> --}}
+                                    <div class="logout">
+                                        <form action="{{ url('/logout') }}" method="POST">
+                                            @csrf
+                                            <button class="btn logout-btn">
+                                                <span class="material-symbols-rounded">
+                                                    logout
+                                                </span>
+                                                {{ __('dashboard-header.sign_out') }}
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--end::Content wrapper-->
-                    <!--begin::Footer-->
-                    <div id="kt_app_footer" class="app-footer">
-                        <!--begin::Footer container-->
-                        @include('auth.partials.footer')
-                        <!--end::Footer container-->
-                    </div>
-                    <!--end::Footer-->
                 </div>
-                <!--end:::Main-->
             </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Page-->
-    </div>
-
-    <script src="{{ asset('assets/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('assets/dist/assets/js/scripts.bundle.js') }}"></script>
-    {{-- <script src="{{ asset('assets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-    --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> --}}
-    {{-- <script src="{{ asset('assets/dist/assets/js/custom/assets/functions.js') }}"></script> --}}
-    <!--end::Global Javascript Bundle-->
-    <!--begin::Vendors Javascript(used for this page only)-->
-    {{-- <script src="{{ asset('assets/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    --}}
+            <div id="main-content">
+                <div class="page-content">
+                    <div class="row g-4 row-cols-3 cards" id="dashboard-card">
 
 
-    <script>
+                        @if (in_array('dashboard_details.total_batches', $roleRoutePermissions))
+                            <div>
+                                <a href="{{ route('dashboard_details.total_batches') }}"
+                                    class="card-item purple show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/total_batch.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit total_batches"></div>
+                                        <div class="label">{{ __('dashboard.total_batch') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+                        @if (in_array('dashboard_details.running_batches', $roleRoutePermissions))
+                            <div>
+                                <a href="{{ route('dashboard_details.running_batches') }}"
+                                    class="card-item yellow show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/current_batch.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit running_batches"></div>
+                                        <div class="label">{{ __('dashboard.running_batch') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+
+                        @if (in_array('dashboard_details.complete_batches', $roleRoutePermissions))
+                            <div>
+                                <a href="{{ route('dashboard_details.complete_batches') }}"
+                                    class="card-item green show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/completed_batch.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit completed_batch"></div>
+                                        <div class="label">{{ __('dashboard.complete_batch') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+
+
+
+                        @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
+                            <div><a href="{{ route('dashboard_details.ongoing_classes') }}"
+                                    class="card-item red show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/livestrem.gif') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit ongoing_class"></div>
+                                        <div class="label">{{ __('dashboard.ongoing_class') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+                        @if (in_array('dashboard_details.complete_classes', $roleRoutePermissions))
+                            <div>
+                                <a href="{{ route('dashboard_details.ongoing_classes', ['status' => 3]) }}"
+                                    class="card-item green show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/completedclass.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit complete_class"></div>
+                                        <div class="label">{{ __('dashboard.complete_class') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+
+
+                        @if (in_array('dashboard_details.districts', $roleRoutePermissions))
+                            <div>
+                                <a href="{{ route('dashboard_details.districts') }}"
+                                    class="card-item green-white show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/district.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit total_district"></div>
+                                        <div class="label">{{ __('dashboard.district') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+
+                        @if (in_array('dashboard_details.upazilas', $roleRoutePermissions))
+                            <div>
+                                <a href="{{ route('dashboard_details.upazilas') }}"
+                                    class="card-item info show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/upazila.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit total_upazila"></div>
+                                        <div class="label">{{ __('dashboard.upazila') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+                        @if (in_array('dashboard_details.partners', $roleRoutePermissions))
+                            <div>
+                                <a href="{{ route('dashboard_details.partners') }}"
+                                    class="card-item red show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit total_vendor"></div>
+                                        <div class="label">{{ __('dashboard.partner') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+
+                        @if (in_array('dashboard_details.partners', $roleRoutePermissions))
+                            <div>
+                                <a href="#" class="card-item red show-loader">
+                                    <div class="icon">
+                                        <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div>
+                                        <div class="digit todays_total_schedule"></div>
+                                        <div class="label">{{ __('dashboard.todays_class') }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
+
+
+                    </div>
+
+                    @php
+                        $permissionsToCheck = ['dashboard.total_present', 'dashboard.average_attendance', 'dashboard.dropout_trainee'];
+                        $commonPermissions = array_intersect($permissionsToCheck, $roleRoutePermissions);
+                    @endphp
+                    @if (!empty($commonPermissions))
+                        <div id="dashboard-attendance">
+                            <div class="row align-items-stretch">
+                                <div class="col-7">
+                                    <div id="attendance-summery">
+                                        <div class="header">
+                                            <div class="left menu">
+                                                <a class="link active"
+                                                    href="#">{{ __('dashboard.todays') }}</a>
+                                                <a class="link" href="#">{{ __('dashboard.weekly') }}</a>
+                                                <a class="link" href="#">{{ __('dashboard.monthly') }}</a>
+                                            </div>
+                                            <div class="right menu">
+                                                <a class="link" href="#">{{ __('dashboard.details') }}</a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="content">
+                                                <div class="icon">
+                                                    <img src="{{ asset('img/new_icon') }}/attendance.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="attendance">
+                                                    <div class="items">
+                                                        @if (in_array('dashboard.total_present', $roleRoutePermissions))
+                                                            <div class="item">
+                                                                <div class="digit">
+                                                                    {{ isset($data['total_attend_today']) ? digitLocale($data['total_attend_today']) : digitLocale(0) }}
+                                                                </div>
+                                                                <div class="label">
+                                                                    {{ __('dashboard.total_present') }}
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                        <div class="item">
+                                                            {{-- <div class="digit">66%</div>
+                                                        <div class="label">{{ __('dashboard.percentage_attendance') }}
+                                                        </div> --}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="items">
+                                                        @if (in_array('dashboard.average_attendance', $roleRoutePermissions))
+                                                            <div class="item">
+                                                                <div class="digit total_trainee">
+
+                                                                </div>
+                                                                <div class="label">
+                                                                    {{ __('dashboard.average_attendance') }}
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                        @if (in_array('dashboard.dropout_trainee', $roleRoutePermissions))
+                                                            <div class="item">
+                                                                <div class="digit total_dropout">
+
+                                                                </div>
+                                                                <div class="label">
+                                                                    {{ __('dashboard.dropout_trainee') }}
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div id="attendance-chart" class="h-100 d-none">
+                                        <div class="chart-item">
+                                            <div class="bar" style="height: 70%;">
+                                                {{-- <span class="bar-text">75%</span> --}}
+                                            </div>
+                                            <div class="label">{{ __('dashboard.class_day_sat') }}</div>
+                                        </div>
+                                        <div class="chart-item">
+                                            <div class="bar danger" style="height: 0%;">
+                                                {{-- <span class="bar-text">25%</span> --}}
+                                            </div>
+                                            {{-- <div class="label">{{ __('dashboard.class_day_sun') }}</div> --}}
+                                        </div>
+                                        <div class="chart-item">
+                                            <div class="bar" style="height: 95%;">
+                                                <span class="bar-text">100%</span>
+                                            </div>
+                                            <div class="label">{{ __('dashboard.class_day_mon') }}</div>
+                                        </div>
+                                        <div class="chart-item">
+                                            <div class="bar" style="height: 35%;">
+                                                <span class="bar-text">35%</span>
+                                            </div>
+                                            <div class="label">{{ __('dashboard.class_day_tue') }}</div>
+                                        </div>
+                                        <div class="chart-item">
+                                            <div class="bar" style="height: 90%;">
+                                                <span class="bar-text">100%</span>
+                                            </div>
+                                            <div class="label">{{ __('dashboard.class_day_wed') }}</div>
+                                        </div>
+                                        <div class="chart-item">
+                                            <div class="bar" style="height: 50%;">
+                                                <span class="bar-text">55%</span>
+                                            </div>
+                                            <div class="label">{{ __('dashboard.class_day_thu') }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div id="allownce">
+                        <div class="row  align-items-stretch">
+                            @php
+                                $permissionsToCheck = ['dashboard_details.trainers', 'traineeEnroll.index'];
+
+                                $commonPermissions = array_intersect($permissionsToCheck, $roleRoutePermissions);
+                            @endphp
+                            @if (!empty($commonPermissions))
+                                <div class="col-7">
+                                    @if (in_array('dashboard_details.trainers', $roleRoutePermissions))
+                                        <a href="{{ route('dashboard_details.trainers') }}">
+                                            <div class="trainer-info">
+                                                <div id="attendance-summery">
+                                                    <div>
+                                                        <div class="content">
+                                                            <div class="icon">
+                                                                <img src="{{ asset('img/new_icon') }}/trainer.png"
+                                                                    alt="">
+                                                            </div>
+                                                            <div class="attendance">
+                                                                <div class="items">
+                                                                    <div class="item">
+                                                                        <div class="digit total_trainer">
+
+                                                                        </div>
+                                                                        <div class="label">
+                                                                            {{ __('dashboard.total_trainer') }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="item">
+                                                                        <div class="digit "
+                                                                            title="total_attend_month"></div>
+                                                                        <div class="label">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="items">
+                                                                    {{-- <div class="item">
+                                                                <div class="digit">20000</div>
+                                                                <div class="label">
+                                                                    {{ __('dashboard.reserve_trainer') }}
+                                                                </div>
+                                                            </div> --}}
+                                                                    {{-- <div class="item">
+                                                                <div class="digit">7</div>
+                                                                <div class="label">{{ __('dashboard.lack_trainer') }}
+                                                                </div>
+                                                            </div> --}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endif
+                                    @if (in_array('traineeEnroll.index', $roleRoutePermissions))
+                                        <a href="{{ route('traineeEnroll.index') }}">
+                                            <div class="student-info">
+                                                <div id="attendance-summery">
+                                                    <div>
+                                                        <div class="content">
+                                                            <div class="icon">
+                                                                <img src="{{ asset('img/new_icon') }}/student_info.png"
+                                                                    alt="">
+                                                            </div>
+                                                            <div class="attendance">
+                                                                <div class="items">
+                                                                    <div class="item">
+                                                                        <div class="digit total_trainee">
+
+                                                                        </div>
+                                                                        <div class="label">
+                                                                            {{ __('dashboard.total_trainee') }}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="item">
+                                                                        <div class="digit ">
+
+                                                                        </div>
+                                                                        <div class="label">
+
+                                                                            {{-- {{ __('dashboard.dropout_trainee') }} --}}
+                                                                        </div>
+                                                                        {{-- <div class="digit">66%</div>
+                                                                <div class="label">
+                                                                    {{ __('dashboard.successful_freelancer') }}</div>
+                                                                --}}
+                                                                    </div>
+                                                                </div>
+
+                                                                {{-- <div class="items">
+                                                            <div class="item">
+                                                                <div class="digit">{{ $data['total_dropout']}}</div>
+                                                                <div class="label">
+                                                                    {{ __('dashboard.dropout_trainee') }}
+                                                                </div>
+                                                            </div>
+                                                        </div> --}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endif
+                                </div>
+                            @endif
+
+                            @php
+                                $permissionsToCheck = ['traineeEnroll.index'];
+                                $commonPermissions = array_intersect($permissionsToCheck, $roleRoutePermissions);
+                            @endphp
+                            @if (!empty($commonPermissions))
+                                <div class="col-5">
+                                    <div id="py-chart" class="">
+                                        <div id="attendance-summery">
+                                            <div>
+                                                <div class="content">
+                                                    <div class="icon">
+                                                        <img src="{{ asset('img/new_icon') }}/alownce.png"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="attendance">
+                                                        <div class="items d-block">
+                                                            <div class="item">
+                                                                <div class="digit total_allownce_paid"></div>
+                                                                <div class="digit total_allownce_remaining"></div>
+                                                                <div class="label">Alownce
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <canvas id="allownceChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <footer id="footer">
+                <div class="left">©২০২৩ হার পাওয়ার প্রজেক্ট</div>
+                <div class="center"><img load="lazy" src="{{ asset('newstyle/img/footer-logo.png') }}"
+                        alt=""></div>
+                <div class="right">তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ</div>
+            </footer>
+        </section>
+    </section>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script defer src="{{ asset('/newstyle/js/bootstrap.bundle.min.js') }}"></script>
+    <script defer src="{{ asset('/newstyle/js/admin.js') }}"></script>
+    <script defer>
         if (sessionStorage.getItem('message')) {
-            var type = sessionStorage.getItem('alert-type')
+            var type = sessionStorage.getItem('alert-type');
             switch (type) {
                 case 'info':
                     toastr.info(sessionStorage.getItem('message'));
                     break;
             }
         }
-
         let admin_baseurl = '{{ route('home.index') }}';
         let api_baseurl = '{{ config('app.api_url') }}';
         let api_assets_baseurl = '{{ config('app.api_asset_url') }}';
-        // let authToken = localStorage.getItem('authToken');
-        // let token = localStorage.getItem('token');
-        // if (authToken == null) {
-        //     window.open('/', '_self')
-        // }
-
         let url = "{{ route('changeLang') }}";
         let language = "{{ session()->get('locale') }}";
         let selectDivision = "{{ __('district-list.select_division') }}";
@@ -477,58 +592,78 @@
         let selectDistrict = "{{ __('upazila-list.select_district') }}";
 
         function changeLocale(lang) {
-            let url_link = api_baseurl + "language";
-            $.ajax({
-                type: "get",
-                url: url_link,
-                headers: {
-                    'X-localization': lang
-                },
-                data: {},
-                dataType: "JSON",
-                success: function(results) {
-                    if (results.success === true) {
-                        console.log(results.message);
-                    } else {
-                        // swal.fire("Error!", results.message, "error");
-                    }
-                },
-                error: function(response) {
-                    // alert(response);
-                },
-            });
-            window.location.href = url + "?lang=" + lang;
+            sessionStorage.setItem('locale', lang);
+            window.location.href = "{{ route('changeLang') }}?lang=" + lang;
         }
-        $(" #lang - bd ").click(function() {
+
+        // Event listeners for language change
+        document.getElementById('lang-bd').addEventListener('click', function() {
             changeLocale('bn');
         });
-        $("#lang-us").click(function() {
+        document.getElementById('lang-us').addEventListener('click', function() {
             changeLocale('en');
         });
-        $(".changeLang").change(function() {
-            let url_link = api_baseurl + "language";
-            $.ajax({
-                type: "get",
-                url: url_link,
-                headers: {
-                    'X-localization': $(this).val()
-                },
-                data: {},
-                dataType: "JSON",
-                success: function(results) {
-                    if (results.success === true) {
-                        console.log(results.message);
-                    } else {
-                        swal.fire("Error!", results.message, "error");
-                    }
-                },
-                error: function(response) {
-                    alert(response);
-                },
-            });
-            window.location.href = url + "?lang=" + $(this).val();
-        }); <
-        /body> <!--end::Body-- >
 
-        <
-        /html>
+
+
+        // Define your Bearer token
+        const bearerToken = `{{ Session::get('access_token.access_token') }}`;
+        // Make API request for dashboard total
+        fetch(api_baseurl + 'dashboardtotal/superadmin', {
+                headers: {
+                    'Authorization': `Bearer ${bearerToken}`
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Check if the response indicates success
+                if (data.success !== true) {
+                    throw new Error('Unauthorized');
+                }
+                // Render the dashboard with the retrieved data
+                renderDashboard(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle errors (e.g., unauthorized, network errors)
+                handleError(error);
+            });
+        // Function to render the dashboard
+        function renderDashboard(data) {
+            // Render the dashboard with the retrieved data
+            // console.log('Data:', data.data);
+            $('.total_batches').text(data.data.total_batch);
+            $('.running_batches').text(data.data.running_batch);
+            $('.completed_batch').text(data.data.completed_batch);
+            $('.complete_class').text(data.data.complete_class);
+            $('.total_district').text(data.data.total_district);
+            $('.total_division').text(data.data.total_division);
+            $('.total_upazila').text(data.data.total_upazila);
+            $('.total_vendor').text(data.data.total_vendor);
+            $('.todays_total_schedule').text(data.data.todays_total_schedule);
+            $('.total_attend_today').text(data.data.total_attend_today);
+            $('.total_trainee').text(data.data.total_trainee);
+            $('.total_trainer').text(data.data.total_trainer);
+            $('.total_attend_month').text(data.data.total_attend_month);
+            $('.total_allownce_paid').text(data.data.total_allownce_paid);
+            // $('.todays_total_schedule').text(data.data.todays_total_schedule);
+            // $('.todays_total_schedule').text(data.data.todays_total_schedule);
+
+
+            const ongoing_classes = data.data.running_class.filter(classObj => classObj.status === 2);
+            $('.ongoing_class').text(ongoing_classes[0].total);
+        }
+        // Function to handle errors
+        function handleError(error) {
+            // Handle errors (e.g., display error message to user)
+            console.error('Error:', error);
+        }
+    </script>
+</body>
+
+</html>

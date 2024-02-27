@@ -1,0 +1,21 @@
+.page-title {
+    margin-bottom: 15px;
+    .title {
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .breadcrumb {
+        .breadcrumb-item {
+            // color: $gray2;
+            a {
+                // color: $gray2;
+                text-decoration: none;
+                &:hover {
+                    color: $primary;
+                }
+            }
+        }
+    }
+}

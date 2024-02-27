@@ -1,0 +1,56 @@
+#sidebar-menu {
+    overflow-y: auto;
+    height: calc(100% - $nav-height);
+    padding: 20px;
+    .nav-item {
+        background-color: transparent;
+        border: 0;
+        .accordion-button::after {
+            background-image: url('data:image/svg+xml,<%3Fxml version="1.0" encoding="utf-8"%3F><!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 14.76 14.76" style="enable-background:new 0 0 14.76 14.76;" xml:space="preserve"><style type="text/css">.st0{fill:%23FAF5FF;}</style><g id="expand_less"><path id="Vector" class="st0" d="M13.38,5.08l-1.41-1.41L7.38,8.25L2.79,3.67L1.38,5.08l6,6L13.38,5.08z"/></g></svg>');
+        }
+        .accordion-collapse {
+            .accordion-content {
+                padding-left: 32px;
+            }
+        }
+        .nav-link {
+            color: $purple50;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            border-radius: 6px;
+            &.accordion-button {
+                background-color: transparent;
+                &:focus {
+                    box-shadow: none;
+                    outline: 0;
+                }
+                &:not(.collapsed) {
+                    box-shadow: none;
+                    outline: 0;
+                    color: $body;
+                }
+                &::after {
+                    $px: 14px;
+                    height: $px;
+                    width: $px;
+                    background-size: $px;
+                }
+            }
+
+            &.active {
+                background: rgba(0, 0, 0, 0.3);
+            }
+            &:hover:not(&.active) {
+                color: $purple300;
+            }
+
+            .material-icons-outlined {
+                width: 32px;
+                font-size: 22px;
+            }
+        }
+    }
+}
