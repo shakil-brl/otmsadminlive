@@ -243,10 +243,10 @@
                         batchSelector.html("");
 
                         if (results) {
-                            console.log(results.data);
+                            // console.log(results.data);
                             let batches = results.data;
                             let htmlSelect;
-                            console.log(batches);
+                            // console.log(batches);
                             if (selectedId !== null) {
                                 $.each(batches, function(index, result) {
                                     if (result.id == selectedId) {
