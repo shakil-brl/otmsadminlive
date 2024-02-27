@@ -1,0 +1,61 @@
+.table-otms {
+    $cellPadding: 5px 10px;
+    overflow-x: auto;
+    border: 1px solid $nutral200;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        tr {
+            min-height: 100px;
+        }
+    }
+    thead {
+        tr {
+            th {
+                padding: $cellPadding;
+                border: 1px solid $nutral200;
+            }
+            &:first-child {
+                th {
+                    border-top: 0;
+                    &:first-child {
+                        border-left: 0;
+                    }
+                    &:last-child {
+                        border-right: 0;
+                    }
+                }
+                td {
+                    border-top: 0;
+                    &:first-child {
+                        border-left: 0;
+                    }
+                    &:last-child {
+                        border-right: 0;
+                    }
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            th,
+            td {
+                padding: $cellPadding;
+                border: 1px solid $nutral200;
+                &:first-child {
+                    border-left: 0;
+                }
+                &:last-child {
+                    border-right: 0;
+                }
+            }
+            &:last-child {
+                th,
+                td {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}

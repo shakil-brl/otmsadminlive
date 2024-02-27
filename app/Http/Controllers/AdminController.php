@@ -22,7 +22,9 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $response = ApiHttpClient::request('get', 'dashboardtotal/superadmin');
+
+        return view('admins.dashboard');
+        /*$response = ApiHttpClient::request('get', 'dashboardtotal/superadmin');
         $data = $response->json()['data'];
 
         $classes = ApiHttpClient::request(
@@ -49,7 +51,7 @@ class AdminController extends Controller
 
                 return view('admins.dashboard', compact('data', 'total_ongoing'));
             }
-        }
+        }*/
     }
 
     public function profile()

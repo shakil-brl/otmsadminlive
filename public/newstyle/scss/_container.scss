@@ -1,0 +1,29 @@
+#admin {
+    display: grid;
+    grid-template-columns: $sidebar-width 1fr;
+    transition: 0.5s;
+    .ml-250 {
+        margin-left: -$sidebar-width;
+    }
+    &.sidebar-on {
+        grid-template-columns: 0 1fr;
+    }
+    #right {
+        transition: 0.5s;
+        flex: 1;
+        position: relative;
+
+        #main-content {
+            padding: 30px;
+            min-height: calc(100vh - $content-min-height);
+        }
+    }
+}
+@media (max-width: 991px) {
+    #admin {
+        display: flex;
+        .tsx-265 {
+            transform: translateX($sidebar-width);
+        }
+    }
+}
