@@ -121,7 +121,8 @@
                             </div>
                             <div class="password">
                                 <input id="password" name="password" type="password" class="form-control password"
-                                    placeholder="Enter Password">
+                                    placeholder="Enter Password" autocomplete="current-password">
+
                                 <div class="icon">
                                     <span type="button" class="material-icons-outlined">
                                         visibility
