@@ -10,7 +10,7 @@
         href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0" /> --}}
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0" />
-    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('img/logo-icon.svg') }}" type="image/x-icon">
     <link rel="preload" href="{{ asset('/newstyle/css/bootstrap.min.css') }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{{ asset('/newstyle/scss/main.css') }}" as="style"
@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="{{ asset('/newstyle/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('/newstyle/scss/main.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}">
+        <link title="No scr" rel="stylesheet" href="{{ asset('/newstyle/css/bootstrap.min.css') }}">
+        <link title="No scr" rel="stylesheet" href="{{ asset('/newstyle/scss/main.css') }}">
+        <link title="No scr" rel="stylesheet" href="{{ asset('css/new_dashboard/dashboard.css?v=1') }}">
     </noscript>
 
 </head>
@@ -31,7 +31,7 @@
             <div class="top">
                 <div class="logo">
                     <a href="{{ url('/') }}">
-                        <img load="lazy" src="{{ asset('newstyle/img/logo.svg')}}" alt="">
+                        <img load="lazy" src="{{ asset('newstyle/img/logo.svg') }}" alt="">
                     </a>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class="d-flex justify-content-between align-items-center h-100">
                     <div class="left">
                         <img load="lazy" class="govt-logo menu-click" type="button"
-                            src="{{ asset('newstyle/img/govt-logo.png')}}" alt="">
+                            src="{{ asset('newstyle/img/govt-logo.png') }}" alt="">
                     </div>
                     <div class="right">
                         <div class="nav-item lang" id="lang-menu">
@@ -98,8 +98,8 @@
                                             <div class="avatar user-face">M</div>
                                         </div>
                                         <div>
-                                            <div class="name" title="{{ $userRole }}">{{ $authProfile['KnownAs'] ?? ''
-                                                }}</div>
+                                            <div class="name" title="{{ $userRole }}">
+                                                {{ $authProfile['KnownAs'] ?? '' }}</div>
                                             <div class="email">{{ $authProfile['Email'] ?? '' }}</div>
                                         </div>
                                     </div>
@@ -149,76 +149,94 @@
 
                         @if (in_array('dashboard_details.total_batches', $roleRoutePermissions))
                         <div>
-                            <a href="{{route('dashboard_details.total_batches')}}" class="card-item purple show-loader">
+                            <a href="{{ route('dashboard_details.total_batches') }}"
+                                class="card-item purple text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/total_batch.png')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/total_batch.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_batches"></div>
-                                    <div class="label">{{ __('dashboard.total_batch')}}</div>
+                                    <div class="digit total_batches">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="label">{{ __('dashboard.total_batch') }}</div>
                                 </div>
                             </a>
                         </div>
                         @endif
                         @if (in_array('dashboard_details.running_batches', $roleRoutePermissions))
                         <div>
-                            <a href="{{route('dashboard_details.running_batches')}}"
-                                class="card-item yellow show-loader">
+                            <a href="{{ route('dashboard_details.running_batches') }}"
+                                class="card-item yellow text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/current_batch.png')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/current_batch.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit running_batches"></div>
-                                    <div class="label">{{__('dashboard.running_batch')}}</div>
+                                    <div class="digit running_batches">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="label">{{ __('dashboard.running_batch') }}</div>
                                 </div>
                             </a>
                         </div>
                         @endif
 
                         @if (in_array('dashboard_details.complete_batches', $roleRoutePermissions))
-
                         <div>
-                            <a href="{{route('dashboard_details.complete_batches')}}"
-                                class="card-item green show-loader">
+                            <a href="{{ route('dashboard_details.complete_batches') }}"
+                                class="card-item green text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/completed_batch.png')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/completed_batch.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit completed_batch"></div>
-                                    <div class="label">{{__('dashboard.complete_batch')}}</div>
+                                    <div class="digit completed_batch">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="label">{{ __('dashboard.complete_batch') }}</div>
                                 </div>
                             </a>
                         </div>
-
-
                         @endif
 
 
 
                         @if (in_array('dashboard_details.ongoing_classes', $roleRoutePermissions))
-                        <div><a href="{{route('dashboard_details.ongoing_classes') }}"
-                                class="card-item red show-loader">
+                        <div><a href="{{ route('dashboard_details.ongoing_classes', ['status' => 2]) }}"
+                                class="card-item red text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/livestrem.gif')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/livestrem.gif') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit ongoing_class"></div>
-                                    <div class="label">{{__('dashboard.ongoing_class')}}</div>
+                                    <div class="digit ongoing_class">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="label">{{ __('dashboard.ongoing_class') }}</div>
                                 </div>
                             </a>
                         </div>
                         @endif
                         @if (in_array('dashboard_details.complete_classes', $roleRoutePermissions))
-
                         <div>
-                            <a href="{{route('dashboard_details.ongoing_classes', ['status' => 3])}}"
-                                class="card-item green show-loader">
+                            <a href="{{ route('dashboard_details.ongoing_classes', ['status' => 3]) }}"
+                                class="card-item green text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/completedclass.png')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/completedclass.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit complete_class"></div>
-                                    <div class="label">{{__('dashboard.complete_class')}}</div>
+                                    <div class="digit complete_class">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="label">{{ __('dashboard.complete_class') }}</div>
                                 </div>
                             </a>
                         </div>
@@ -227,65 +245,77 @@
 
                         @if (in_array('dashboard_details.districts', $roleRoutePermissions))
                         <div>
-                            <a href="{{route('dashboard_details.districts')}}"
-                                class="card-item green-white show-loader">
+                            <a href="{{ route('dashboard_details.districts') }}"
+                                class="card-item green-white text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/district.png')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/district.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_district"></div>
-                                    <div class="label">{{__('dashboard.district')}}</div>
+                                    <div class="digit total_district">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="label">{{ __('dashboard.district') }}</div>
                                 </div>
                             </a>
                         </div>
-
                         @endif
 
                         @if (in_array('dashboard_details.upazilas', $roleRoutePermissions))
                         <div>
-                            <a href="{{route('dashboard_details.upazilas')}}" class="card-item info show-loader">
+                            <a href="{{ route('dashboard_details.upazilas') }}"
+                                class="card-item info text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/upazila.png')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/upazila.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_upazila"></div>
-                                    <div class="label">{{__('dashboard.upazila')}}</div>
+                                    <div class="digit total_upazila">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="label">{{ __('dashboard.upazila') }}</div>
                                 </div>
                             </a>
                         </div>
-
                         @endif
                         @if (in_array('dashboard_details.partners', $roleRoutePermissions))
-
                         <div>
-                            <a href="{{route('dashboard_details.partners')}}" class="card-item red show-loader">
+                            <a href="{{ route('dashboard_details.partners') }}"
+                                class="card-item red text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/developmentpartner.png')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_vendor"></div>
-                                    <div class="label">{{__('dashboard.partner')}}</div>
+                                    <div class="digit total_vendor">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="label">{{ __('dashboard.partner') }}</div>
                                 </div>
                             </a>
                         </div>
-
-
                         @endif
 
                         @if (in_array('dashboard_details.partners', $roleRoutePermissions))
                         <div>
-                            <a href="#" class="card-item red show-loader">
+                            <a href="{{ route('dashboard_details.ongoing_classes', ['status' => '']) }}"
+                                class="card-item red text-decoration-none show-loader">
                                 <div class="icon">
-                                    <img load="lazy" src="{{asset('img/new_icon/developmentpartner.png')}}" alt="">
+                                    <img load="lazy" src="{{ asset('img/new_icon/developmentpartner.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit todays_total_schedule"></div>
-                                    <div class="label">{{__('dashboard.todays_class')}}</div>
+                                    <div class="digit todays_total_schedule">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="label">{{ __('dashboard.todays_class') }}</div>
                                 </div>
                             </a>
                         </div>
-
-
                         @endif
 
 
@@ -324,7 +354,8 @@
                                                             {{ isset($data['total_attend_today']) ?
                                                             digitLocale($data['total_attend_today']) : digitLocale(0) }}
                                                         </div>
-                                                        <div class="label">{{ __('dashboard.total_present') }}
+                                                        <div class="label">
+                                                            {{ __('dashboard.total_present') }}
                                                         </div>
                                                     </div>
                                                     @endif
@@ -341,7 +372,8 @@
                                                         <div class="digit total_trainee">
 
                                                         </div>
-                                                        <div class="label">{{ __('dashboard.average_attendance') }}
+                                                        <div class="label">
+                                                            {{ __('dashboard.average_attendance') }}
                                                         </div>
                                                     </div>
                                                     @endif
@@ -350,7 +382,8 @@
                                                         <div class="digit total_dropout">
 
                                                         </div>
-                                                        <div class="label">{{ __('dashboard.dropout_trainee') }}
+                                                        <div class="label">
+                                                            {{ __('dashboard.dropout_trainee') }}
                                                         </div>
                                                     </div>
                                                     @endif
@@ -414,7 +447,7 @@
                             @if (!empty($commonPermissions))
                             <div class="col-7">
                                 @if (in_array('dashboard_details.trainers', $roleRoutePermissions))
-                                <a href="{{ route('dashboard_details.trainers') }}">
+                                <a href="{{ route('dashboard_details.trainers') }}" class="text-decoration-none">
                                     <div class="trainer-info">
                                         <div id="attendance-summery">
                                             <div>
@@ -460,7 +493,7 @@
                                 </a>
                                 @endif
                                 @if (in_array('traineeEnroll.index', $roleRoutePermissions))
-                                <a href="{{ route('traineeEnroll.index') }}">
+                                <a href="{{ route('traineeEnroll.index') }}" class="text-decoration-none">
                                     <div class="student-info">
                                         <div id="attendance-summery">
                                             <div>
@@ -552,7 +585,7 @@
             </div>
             <footer id="footer">
                 <div class="left">©২০২৩ হার পাওয়ার প্রজেক্ট</div>
-                <div class="center"><img load="lazy" src="{{ asset('newstyle/img/footer-logo.png')}}" alt=""></div>
+                <div class="center"><img load="lazy" src="{{ asset('newstyle/img/footer-logo.png') }}" alt=""></div>
                 <div class="right">তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ</div>
             </footer>
         </section>
@@ -577,6 +610,7 @@
         let selectDivision = "{{ __('district-list.select_division') }}";
         let selectCourseCategory = "{{ __('sub-categorie-list.select_category') }}";
         let selectDistrict = "{{ __('upazila-list.select_district') }}";
+
         function changeLocale(lang) {
             sessionStorage.setItem('locale', lang);
             window.location.href = "{{ route('changeLang') }}?lang=" + lang;
@@ -596,63 +630,66 @@
         const bearerToken = `{{ Session::get('access_token.access_token') }}`;
         // Make API request for dashboard total
         fetch(api_baseurl + 'dashboardtotal/superadmin', {
-            headers: {
-                'Authorization': `Bearer ${bearerToken}`
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Check if the response indicates success
-            if (data.success !== true) {
-                throw new Error('Unauthorized');
-            }
-            // Render the dashboard with the retrieved data
-            renderDashboard(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle errors (e.g., unauthorized, network errors)
-            handleError(error);
-        });
+                headers: {
+                    'Authorization': `Bearer ${bearerToken}`
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Check if the response indicates success
+                if (data.success !== true) {
+                    throw new Error('Unauthorized');
+                }
+                // Render the dashboard with the retrieved data
+                renderDashboard(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle errors (e.g., unauthorized, network errors)
+                handleError(error);
+            });
         // Function to render the dashboard
         function renderDashboard(data) {
             // Render the dashboard with the retrieved data
-            // console.log('Data:', data.data);
-            $('.total_batches').text(data.data.total_batch);
-            $('.running_batches').text(data.data.running_batch);
-            $('.completed_batch').text(data.data.completed_batch);
-            $('.complete_class').text(data.data.complete_class);
-            $('.total_district').text(data.data.total_district);
-            $('.total_division').text(data.data.total_division);
-            $('.total_upazila').text(data.data.total_upazila);
-            $('.total_vendor').text(data.data.total_vendor);
-            $('.todays_total_schedule').text(data.data.todays_total_schedule);
-            $('.total_attend_today').text(data.data.total_attend_today);
-            $('.total_trainee').text(data.data.total_trainee);
-            $('.total_trainer').text(data.data.total_trainer);
-            $('.total_attend_month').text(data.data.total_attend_month);
-            $('.total_allownce_paid').text(data.data.total_allownce_paid);
+             //console.log('Data:', data.data);
+        $('.total_batches').text(data.data.total_batch ?? 0);
+        $('.running_batches').text(data.data.running_batch ?? 0);
+        $('.completed_batch').text(data.data.completed_batch ?? 0);
+        $('.complete_class').text(data.data.complete_class ?? 0);
+        $('.total_district').text(data.data.total_district ?? 0);
+        $('.total_division').text(data.data.total_division ?? 0);
+        $('.total_upazila').text(data.data.total_upazila ?? 0);
+        $('.total_vendor').text(data.data.total_vendor ?? 0);
+        $('.todays_total_schedule').text(data.data.todays_total_schedule ?? 0);
+        $('.total_attend_today').text(data.data.total_attend_today ?? 0);
+        $('.total_trainee').text(data.data.total_trainee ?? 0);
+        $('.total_trainer').text(data.data.total_trainer ?? 0);
+        $('.total_attend_month').text(data.data.total_attend_month ?? 0);
+        $('.total_allownce_paid').text(data.data.total_allownce_paid ?? 0);
+
             // $('.todays_total_schedule').text(data.data.todays_total_schedule);
             // $('.todays_total_schedule').text(data.data.todays_total_schedule);
 
 
-const ongoing_classes = data.data.running_class.filter(classObj => classObj.status === 2);
-$('.ongoing_class').text(ongoing_classes[0].total);
+            const ongoing_classes = data.data.running_class.filter(classObj => classObj.status === 2);
+
+if (ongoing_classes.length > 0) {
+    $('.ongoing_class').text(ongoing_classes[0].total ?? 0);
+} else {
+    $('.ongoing_class').text(0);
+}
+            
         }
         // Function to handle errors
         function handleError(error) {
             // Handle errors (e.g., display error message to user)
             console.error('Error:', error);
         }
-
-       
-  
-
     </script>
 </body>
 

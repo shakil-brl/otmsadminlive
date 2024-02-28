@@ -25,13 +25,13 @@
                         @endforeach
                     </select>
                 </div>
-                <div>
+                {{-- <div>
                     <select name="" class="form-select" wire:model='batch_status'>
                         <option value="">Batch Status</option>
                         <option value="1">Running Batch</option>
                         <option value="2">Completed Batch</option>
                     </select>
-                </div>
+                </div> --}}
                 <div>
                     <select name="" class="form-select" wire:model='schedule_status'>
                         <option value="">Schedule Status</option>
