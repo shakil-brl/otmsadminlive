@@ -54,6 +54,8 @@ return [
         '*.iso',
         '*.flv',
         '*.m4v',
+        '*plugins.bundle.js',
+        '*scripts.bundle.js',
         '*.torrent'
     ],
 ];

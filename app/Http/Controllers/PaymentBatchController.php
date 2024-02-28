@@ -51,8 +51,10 @@ class PaymentBatchController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'batch_id' => 'required|numeric',
+            'trainees_data' => 'required|string',
             'daily_allowance' => 'required',
             'start_date' => 'required|date_format:d/m/Y',
             'end_date' => 'required|date_format:d/m/Y|after_or_equal:start_date',
@@ -60,19 +62,19 @@ class PaymentBatchController extends Controller
             'remark' => 'nullable|string',
         ]);
 
-        $batch_payment = $request->only(['batch_id', 'daily_allowance', 'total_payment_amount', 'remark']);
+        $batch_payment = $request->only(['batch_id', 'trainees_data', 'daily_allowance', 'total_payment_amount', 'remark']);
 
-        if ($request->status) {
-            $batch_payment['status'] = 1;
-        } else {
-            $batch_payment['status'] = 0;
-        }
-
+        // if ($request->status) {
+        //     $batch_payment['status'] = 1;
+        // } else {
+        //     $batch_payment['status'] = 0;
+        // }
+        $batch_payment['status'] = 1;
         $batch_payment['start_date'] = Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d');
         $batch_payment['end_date'] = Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d');
-
+        // dd($batch_payment);
         $data = ApiHttpClient::request('post', 'payment-batches', $batch_payment)->json();
-        //dd($data);
+
         if (isset($data['error'])) {
             $error_message = $data['message'];
             session()->flash('type', 'Danger');
@@ -125,38 +127,7 @@ class PaymentBatchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'batch_id' => 'required|numeric',
-            'daily_allowance' => 'required',
-            'start_date' => 'required|date_format:d/m/Y',
-            'end_date' => 'required|date_format:d/m/Y|after_or_equal:start_date',
-            'total_payment_amount' => 'required|numeric',
-            'remark' => 'nullable|string',
-        ]);
-
-        $batch_payment = $request->only(['batch_id', 'daily_allowance', 'total_payment_amount', 'remark']);
-
-        if ($request->status) {
-            $batch_payment['status'] = 1;
-        } else {
-            $batch_payment['status'] = 0;
-        }
-
-        $batch_payment['start_date'] = Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d');
-        $batch_payment['end_date'] = Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d');
-        // dd($batch_payment);
-        $data = ApiHttpClient::request('put', "payment-batches/$id", $batch_payment)->json();
-        // dd($data);
-        if (isset($data['error'])) {
-            $error_message = $data['message'];
-            session()->flash('type', 'Danger');
-            session()->flash('message', 'Validation failed');
-            return redirect()->back()->with('error_message', $error_message)->withInput();
-        } elseif ($data['success'] == true) {
-            session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Created successfully');
-            return redirect()->route('payment-batches.index');
-        }
+        
     }
 
     /**
