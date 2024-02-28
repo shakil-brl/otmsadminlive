@@ -60,10 +60,10 @@
                                         {{ $payment['total_payment_amount'] ?? '' }}
                                     </td>
                                     <td class="me-0 d-flex gap-1">
-                                        <a href="{{ route('payment-batches.edit', $payment['id']) }}"
+                                        {{-- <a href="{{ route('payment-batches.edit', $payment['id']) }}"
                                             class="btn btn-sm btn-info">
                                             {{ __('config.edit') }}
-                                        </a>
+                                        </a> --}}
                                         <form action="{{ route('payment-batches.destroy', $payment['id']) }}" method="post">
                                             @csrf
                                             @method('DELETE')
