@@ -28,7 +28,9 @@
                         <th>{{ __('batch-list.sl') }}</th>
                         <th>Batch Code</th>
                         <th>Date</th>
-                        <th>D. Allowance</th>
+                        <th>
+                            Total Trainee (D. Allowance)
+                        </th>
                         <th>Payment</th>
                         <th>Status</th>
                     </thead>
@@ -54,10 +56,13 @@
                                         {{ isset($payment['end_date']) ? \Carbon\Carbon::parse($payment['end_date'])->format('d-m-Y') : '' }}
                                     </td>
                                     <td>
-                                        {{ $payment['daily_allowance'] ?? '' }}
+                                        <div>
+                                            {{ $payment['total_students'] ?? '' }}
+                                        </div>
+                                        {{ $payment['daily_allowance'] ?? '' }} Tk
                                     </td>
                                     <td>
-                                        {{ $payment['total_payment_amount'] ?? '' }}
+                                        {{ $payment['total_payment_amount'] ?? '' }} Tk
                                     </td>
                                     <td class="me-0 d-flex gap-1">
                                         {{-- <a href="{{ route('payment-batches.edit', $payment['id']) }}"
