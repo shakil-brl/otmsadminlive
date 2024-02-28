@@ -24,11 +24,11 @@
 
 <div class="my-5">
     <h6>Payment Form:</h6>
-    <div class="form-check form-switch my-3">
+    {{-- <div class="form-check form-switch my-3">
         <input class="form-check-input" type="checkbox" id="status" name="status"
             {{ (isset($payment_batch['status']) && $payment_batch['status'] != 1) || old('status') == 'off' ? '' : 'checked' }}>
         <label class="form-check-label" for="status">Status(Inactive/Active)</label>
-    </div>
+    </div> --}}
 
     <div class="row row-cols-2 g-4">
         @isset($payment_batch)
@@ -84,30 +84,61 @@
                 <small class="text-danger d-block">{{ $message }}</small>
             @enderror
         </div>
-
+    </div>
+    <button class="btn btn-sm btn-primary my-5" id="show-list">Draw Payment</button>
+    <div class="row row-cols-2 g-4">
         <div class="">
             <label for="total_payment_amount" class="form-label">Payment Amount: <span
                     class="text-danger">*</span></label>
             <input type="number" step="0.50" class="form-control" name="total_payment_amount"
                 id="total_payment_amount"
                 value="{{ $payment_batch['total_payment_amount'] ?? old('total_payment_amount') }}"
-                placeholder="Total payment amount">
+                placeholder="Total payment amount" readonly>
             @error('total_payment_amount')
                 <small class="text-danger d-block">{{ $message }}</small>
             @enderror
         </div>
+        <div class="">
+            <label for="remark" class="form-label">Remark:</label>
+            <input type="text" class="form-control" name="remark" id="remark"
+                value="{{ $payment_batch['remark'] ?? old('remark') }}" placeholder="Remark">
+            </input>
+            @error('remark')
+                <small class="text-danger d-block">{{ $message }}</small>
+            @enderror
+        </div>
     </div>
-    <div class="mt-4">
-        <label for="remark" class="form-label">Remark:</label>
-        <textarea class="form-control" name="remark" id="remark" rows="3">
-            {{ $payment_batch['remark'] ?? old('remark') }}
-        </textarea>
-        @error('remark')
-            <small class="text-danger d-block">{{ $message }}</small>
-        @enderror
+
+    <div class="mt-5 d-none" id="class-detail">
+        <h3 class="text-center">Payment Trainee Table</h3>
+        <div id="class-detail-top">
+
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>S.N.</th>
+                    <th>Trainee(Phone)</th>
+                    <th>Total Attend</th>
+                    <th>Payable</th>
+                </tr>
+            </thead>
+            <tbody class="" id="trainee-list-tbody">
+
+            </tbody>
+        </table>
+
+        <div id="total-payable">
+
+        </div>
     </div>
+    <input type="hidden" name="trainees_data" id="trainees_data">
+    @error('trainees_data')
+        <small class="text-danger d-block">{{ $message }}</small>
+    @enderror
     <div class="mt-5 text-center">
-        <button type="submit" class="btn btn-md btn-success">{{ __('config.submit') }}</button>
+        <button type="submit" id="payment-btn"
+            class="btn btn-md btn-success d-none">{{ __('config.submit') }}</button>
     </div>
 </div>
 
@@ -123,6 +154,7 @@
             batchSelector.select2({
                 placeholder: 'Select Batch',
             });
+
             let selectedId = @json($payment_batch['batch_id'] ?? old('batch_id'));
             loadBatch(selectedId);
 
@@ -231,6 +263,141 @@
                 }
             });
 
+            // date
+            let oldpaymentStartDate = @json($paymentStartDate ?? old('start_date'));
+            $("#start_date").flatpickr({
+                dateFormat: "d/m/Y",
+                defaultDate: [oldpaymentStartDate]
+            });
+
+            let oldpaymentEndDate = @json($paymentEndDate ?? old('end_date'));
+            $("#end_date").flatpickr({
+                dateFormat: "d/m/Y",
+                defaultDate: [oldpaymentEndDate]
+            });
+
+            let showBtn = $("#show-list");
+            let batchIdInput = $("#batch_id");
+            let startDateInput = $("#start_date");
+            let endDateInput = $("#end_date");
+
+            showBtn.click(function(e) {
+                e.preventDefault();
+                let batchId = batchIdInput.val();
+                let startDate = startDateInput.val();
+                let endDate = endDateInput.val();
+                let dailyAllowance = $("#daily_allowance").val();
+
+                if (batchId && startDate && endDate && dailyAllowance) {
+                    let formatedStartDate = parseDateString(startDate);
+                    let formatedEndDate = parseDateString(endDate);
+
+                    let getTraineeList = api_baseurl + "allownce/student-list/date-range";
+                    let showRequest = {
+                        batch_id: batchId,
+                        start_date: formatedStartDate,
+                        end_date: formatedEndDate,
+                    }
+                    $.ajax({
+                        type: "GET",
+                        url: getTraineeList,
+                        data: showRequest,
+                        headers: {
+                            Authorization: authToken,
+                        },
+                        success: function(results) {
+                            console.log(results.data);
+                            let classDetails = results.data;
+                            if (classDetails) {
+                                $("#class-detail").removeClass('d-none');
+                                $("#class-detail-top").html("");
+                                let listHeader = `
+                                <div class="d-flex gap-5 h6 justify-content-center">
+                                    <div>Schedule Total: <span class="text-info">${classDetails.total_schedule}</span></div>
+                                    <div>Class Total: <span class="text-success">${classDetails.total_class}</span></div>    
+                                </div>
+                            `;
+                                $("#class-detail-top").append(listHeader);
+                                let tbodyTraineeList = $("#trainee-list-tbody");
+                                tbodyTraineeList.html("");
+                                let allTrainees = classDetails.students;
+                                let totalSum = 0;
+                                if (allTrainees.length > 0) {
+                                    let traineesData = {};
+                                    allTrainees.forEach((trainee, index) => {
+                                        // Calculate payable amount for the current trainee
+                                        let payableAmount = trainee.total *
+                                            dailyAllowance;
+
+                                        // Add payable amount to the total sum
+                                        totalSum += payableAmount;
+                                        // Create table row
+                                        let tr = $(`
+                                                <tr>
+                                                    <td>${index + 1}</td>
+                                                    <td>${(trainee.profile.KnownAs ?? '')} (${(trainee.profile.Phone ?? '')})</td>
+                                                    <td>${trainee.total} x ${dailyAllowance} Tk</td>
+                                                    <td class="paybale-td">${trainee.total * dailyAllowance} Tk</td>
+                                                </tr>
+                                            `);
+
+                                        // Append the table row to the tbody
+                                        tbodyTraineeList.append(tr);
+                                        traineesData[trainee.ProfileId] = trainee.total;
+                                    });
+                                    $("#total-payable").html(
+                                        `
+                                        <hr>
+                                        <div class="row row-cols-4">
+                                            <div class="col"></div>
+                                            <div class="col"></div>
+                                            <div class="col"></div>
+                                            <div class="col text-center h5">Total Payable Amount: ${totalSum} Tk</div>
+                                        </div>
+                                    `
+                                    );
+                                    $("#total_payment_amount").val(totalSum);
+                                    $("#payment-btn").removeClass("d-none");
+                                    $("#trainees_data").val(JSON.stringify(traineesData));
+                                } else {
+                                    tbodyTraineeList.html(`
+                                        <tr>
+                                            <td colspan=4 class="text-danger">No Trainee Found</td>
+                                        </tr>
+                                    `);
+                                    $("#payment-btn").addClass("d-none");
+                                }
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle errors here
+                            console.error(xhr, status, error);
+                        },
+                    });
+                } else {
+                    alert('Select Batch, Allowance, Start date, End date');
+                }
+            })
+            $(document).on("click", "#payment-btn", function(e) {
+                e.preventDefault();
+                const form = $(this).closest('form');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to edit this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+            // functions
             function loadBatch(selectedId = null, filterBy = null) {
                 $.ajax({
                     type: "GET",
@@ -278,7 +445,6 @@
                             }
                             batchSelector.html(htmlSelect);
                         }
-
                     },
                     error: function(xhr, status, error) {
                         // Handle errors here
@@ -287,19 +453,24 @@
                 });
             }
 
-            // date
-            let oldpaymentStartDate = @json($paymentStartDate ?? old('start_date'));
-            $("#start_date").flatpickr({
-                dateFormat: "d/m/Y",
-                defaultDate: [oldpaymentStartDate]
-            });
+            function parseDateString(dateString) {
+                var components = dateString.split('/');
 
-            let oldpaymentEndDate = @json($paymentEndDate ?? old('end_date'));
-            $("#end_date").flatpickr({
-                dateFormat: "d/m/Y",
-                defaultDate: [oldpaymentEndDate]
-            });
+                // Convert the components to numbers
+                var day = parseInt(components[0], 10);
+                var month = parseInt(components[1], 10);
+                var year = parseInt(components[2], 10);
 
+                // Create a new date string with the desired format
+                var formattedDay = day < 10 ? '0' + day : day;
+                var formattedMonth = month < 10 ? '0' + month : month;
+                var formattedYear = year < 10 ? '0' + year : year;
+
+                // Create a new date string with the desired format
+                var formattedDate = formattedYear + '-' + formattedMonth + '-' + formattedDay;
+
+                return formattedDate;
+            }
         })
     </script>
 @endpush
