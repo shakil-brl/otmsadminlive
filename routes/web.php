@@ -21,6 +21,7 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EvaluationHeadController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LaptopDistributionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LotController;
 use App\Http\Controllers\MyClassController;
@@ -312,4 +313,6 @@ Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendanc
 // test without permission
 Route::resource('payment-batches', PaymentBatchController::class);
 
-
+Route::group(['controller' => LaptopDistributionController::class, 'prefix' => 'laptop-distribution', 'as' => 'laptop-distribution.'], function () {
+    Route::get('/{batch_id}', 'create')->name('create');
+});

@@ -55,6 +55,13 @@
                                         Supplies
                                     </a>
                                 @endif
+
+                                @if (in_array('laptop-distribution.create', $roleRoutePermissions))
+                                    <a href="{{ route('laptop-distribution.create', [encrypt($batch['training_batch']['id'])]) }}"
+                                        class="btn btn-sm btn-success">
+                                        Laptop Distribution
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
