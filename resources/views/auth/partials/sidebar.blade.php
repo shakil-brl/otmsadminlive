@@ -128,10 +128,14 @@
                 $userRole == 'Admin' || $userRole == 'admin' or
                 $userRole == 'DPD' ||
                 $userRole == 'dpd' ||
+                $userRole == 'DG' ||
+                $userRole == 'dg' ||
                 $userRole == 'provider' ||
                 $userRole == 'Provider' ||
                 $userRole == 'Consultant' ||
-                $userRole == 'consultant')
+                $userRole == 'consultant'||
+                $userRole == 'Minister' ||
+                $userRole == 'minister')
                 <div data-kt-menu-trigger="click"
                     class="menu-item here menu-accordion <?php if (Route::is('users.index') || Route::is('users.show')||Route::is('admins.index') || Route::is('admins.show') ||Route::is('preliminary-selected.index')||Route::is('role.index')||Route::is('role.edit')|| Route::is('permission.index')||Route::is('role.edit')||Route::is('roles.index')) {?> here show<?php } ?> ">
                     <!--begin:Menu link-->
@@ -459,7 +463,9 @@
                 $userRole == 'DPD' ||
                 $userRole == 'dpd' ||
                 $userRole == 'DG' ||
-                $userRole == 'dg')
+                $userRole == 'dg'||
+                $userRole == 'Minister' ||
+                $userRole == 'minister')
                 <div data-kt-menu-trigger="click"
                     class="menu-item here menu-accordion  <?php if (Route::is('dashboard_details.total_batches')||Route::is('batch-schedule.office')||Route::is('attendance.schedule')) {?>here show<?php } ?>">
                     <!--begin:Menu link-->

@@ -22,6 +22,8 @@
                     'superadmin',
                     'Admin',
                     'admin',
+                    'DG',
+                    'dg',
                     'DPD',
                     'dpd',
                     'provider',
@@ -30,10 +32,12 @@
                     'Trainer',
                     'Consultant',
                     'consultant',
+                    'Minister',
+                    'minister',
                 ]))
                 <!-- collapse menu -->
                 <li class="nav-item accordion-item">
-                    <a href="#" class="nav-link accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    <a href="#" class="nav-link accordion-button collapsed <?php echo ($userRole == 'Trainer') ? 'd-none' : ''; ?> " type="button" data-bs-toggle="collapse"
                         data-bs-target="#userCollapse">
                         <span class="material-symbols-rounded">
                             group
@@ -209,7 +213,9 @@
                     $userRole == 'DPD' ||
                     $userRole == 'dpd' ||
                     $userRole == 'DG' ||
-                    $userRole == 'dg')
+                    $userRole == 'dg'||
+                    $userRole == 'Minister' ||
+                    $userRole == 'minister')
                 <li class="nav-item accordion-item">
                     <a href="#" class="nav-link accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#batchMonitoringCollapse">
@@ -262,6 +268,26 @@
                         </div>
                     </div>
                 </li>
+
+                
+                <li class="nav-item accordion-item">
+                    <a href="#" class="nav-link accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseReport">
+                        <span class="material-symbols-rounded">
+                            task
+                        </span>
+                        {{ __('sidemenu.report') }}
+                    </a>
+                    <div id="collapseReport" class="accordion-collapse collapse" data-bs-parent="#sidebar-menu">
+                        <div class="accordion-content">
+                            <a href="{{ route('inspaction.index') }}"
+                                class="nav-link{{ Route::is('inspaction.index')||Route::is('tms-inspections.show') ? ' active' : '' }}">
+                                - {{ __('sidemenu.inspection_report') }}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
 
 
                 <li class="nav-item accordion-item">
