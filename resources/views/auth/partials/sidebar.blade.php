@@ -135,7 +135,22 @@
                 $userRole == 'Consultant' ||
                 $userRole == 'consultant'||
                 $userRole == 'Minister' ||
-                $userRole == 'minister')
+                $userRole == 'minister'||
+                $userRole == 'uno' ||
+                $userRole == 'UNO'||
+                $userRole == 'Assistant Programmer'||
+                $userRole == 'assistant programmer'||
+                $userRole == 'DC'||
+                $userRole == 'dc'||
+                $userRole == 'PD'||
+                $userRole == 'pd'||
+                $userRole == 'Programmer'||
+                $userRole == 'programmer'||
+                $userRole == 'Divisional Commissioner'||
+                $userRole == 'divisional commissioner'||
+                $userRole == 'Secretary'||
+                $userRole == 'secretary'
+                )
                 <div data-kt-menu-trigger="click"
                     class="menu-item here menu-accordion <?php if (Route::is('users.index') || Route::is('users.show')||Route::is('admins.index') || Route::is('admins.show') ||Route::is('preliminary-selected.index')||Route::is('role.index')||Route::is('role.edit')|| Route::is('permission.index')||Route::is('role.edit')||Route::is('roles.index')) {?> here show<?php } ?> ">
                     <!--begin:Menu link-->
@@ -465,7 +480,10 @@
                 $userRole == 'DG' ||
                 $userRole == 'dg'||
                 $userRole == 'Minister' ||
-                $userRole == 'minister')
+                $userRole == 'minister'||
+                $userRole == 'UNO' ||
+                $userRole == 'uno'||
+                $userRole == 'Assistant Programmer')
                 <div data-kt-menu-trigger="click"
                     class="menu-item here menu-accordion  <?php if (Route::is('dashboard_details.total_batches')||Route::is('batch-schedule.office')||Route::is('attendance.schedule')) {?>here show<?php } ?>">
                     <!--begin:Menu link-->
