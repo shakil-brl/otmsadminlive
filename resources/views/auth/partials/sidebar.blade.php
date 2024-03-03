@@ -483,7 +483,20 @@
                 $userRole == 'minister'||
                 $userRole == 'UNO' ||
                 $userRole == 'uno'||
-                $userRole == 'Assistant Programmer')
+                $userRole == 'Assistant Programmer'||
+                $userRole == 'assistant programmer'||
+                $userRole == 'DC' ||
+                $userRole == 'dc'||
+                $userRole == 'PD' ||
+                $userRole == 'pd'||
+                $userRole == 'Consultant' ||
+                $userRole == 'consultant'||
+                $userRole == 'Programmer' ||
+                $userRole == 'programmer'||
+                $userRole == 'Secretary' ||
+                $userRole == 'secretary'||
+                $userRole == 'Divisional Commissioner' ||
+                $userRole == 'divisional commissioner')
                 <div data-kt-menu-trigger="click"
                     class="menu-item here menu-accordion  <?php if (Route::is('dashboard_details.total_batches')||Route::is('batch-schedule.office')||Route::is('attendance.schedule')) {?>here show<?php } ?>">
                     <!--begin:Menu link-->

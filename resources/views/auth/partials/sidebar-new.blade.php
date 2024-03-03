@@ -245,8 +245,8 @@
                     $userRole == 'programmer'||
                     $userRole == 'Secretary' ||
                     $userRole == 'secretary'||
-                    $userRole == 'Divisional Commissional' ||
-                    $userRole == 'divisional commission')
+                    $userRole == 'Divisional Commissioner' ||
+                    $userRole == 'divisional commissioner')
                 <li class="nav-item accordion-item">
                     <a href="#" class="nav-link accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#batchMonitoringCollapse">
