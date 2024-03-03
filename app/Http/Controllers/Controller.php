@@ -32,7 +32,8 @@ class Controller extends BaseController
                 $data['data']['per_page'],
                 $currentPage
             );
-            $paginator->setPath($path);
+            $paginator->setPath($path . '?' . http_build_query($request->except('page')));
+
             return $paginator;
         } catch (\Throwable $th) {
             return false;

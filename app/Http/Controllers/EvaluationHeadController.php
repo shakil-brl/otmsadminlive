@@ -8,21 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class EvaluationHeadController extends Controller
 {
-    /**
-     * Call api for all evaluation data
-     * And Display a listing of the evaluation data.
-     */
     public function index(Request $request)
     {
         $results = ApiHttpClient::request('get', 'evaluation-head', [
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
+            ...$request->all(),
         ])->json();
 
         if ($results['success'] == true) {
-            $evaluation = $results['data']['data'];            
+            $evaluation = $results['data']['data'];
+            $from = $results['data']['from'];
             $paginator = $this->customPaginate($results, $request, route('evaluation-head.index'));
-            return view('head-evaluation.index', ['evaluation' => $evaluation, 'paginator' => $paginator]);
+            return view('head-evaluation.index', ['evaluations' => $evaluation, 'paginator' => $paginator, 'from' => $from, 'request' => $request]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', 'Something went wrong');
@@ -30,9 +26,6 @@ class EvaluationHeadController extends Controller
         }
     }
 
-    /**
-     * Call function create for form input
-     */
 
     public function create()
     {
@@ -53,7 +46,7 @@ class EvaluationHeadController extends Controller
             $errorMessage = $data['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
-            return redirect()->back()->withErrors(['error'=>$errorMessage]);
+            return redirect()->back()->withErrors(['error' => $errorMessage]);
 
             // return redirect()->route('holydays.index');
         } else {
@@ -68,7 +61,7 @@ class EvaluationHeadController extends Controller
      */
     public function edit($id)
     {
-        $results = ApiHttpClient::request('get', "evaluation-head/$id")->json();       
+        $results = ApiHttpClient::request('get', "evaluation-head/$id")->json();
         if ($results['success'] == true) {
             $evaluation = $results['data'];
             return view('head-evaluation.edit', ['evaluation' => $evaluation]);
@@ -116,5 +109,5 @@ class EvaluationHeadController extends Controller
         }
     }
 
-    
+
 }

@@ -6,69 +6,96 @@
     <div class="m-5">
         <h3>Head Evaluation List</h3>
         <x-alert />
-        @isset($evaluation)
-            <div class="my-3 d-flex">
-                <div class="w-100">
-                    <form action="">
-                        <div class="d-flex gap-3">
-                            <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
+        @isset($evaluations)
+            <div class="my-3 ">
+                <form action="">
+                    <div class="row row-cols-5">
+                        <div>
+                            <select name="status" class="form-select">
+                                <option value="">Select</option>
+                                <option @if ($request->status === '1') selected @endif value="1">Active</option>
+                                <option @if ($request->status === '0') selected @endif value="0">Inactive</option>
+                            </select>
+                            <input type="search" name="search" value="{{ request('search') }}" class="form-control"
                                 placeholder="{{ 'search' }}">
-                            <input type="submit" class="form-control btn btn-primary w-25" value="{{ 'Search' }}">
                         </div>
-                    </form>
-                </div>
-                <div class="w-100 text-end">
-                    <div class="d-flex justify-content-end align-items-center">
-                        <a class="btn btn-lg btn-success" href="{{ route('evaluation-head.create') }}">Create Head Evaluations</a>
+                        <div>
+                            <input type="search" name="search" value="{{ request('search') }}" class="form-control"
+                                placeholder="{{ 'search' }}">
+                        </div>
+                        <div>
+                            <input type="submit" class="btn btn-primary" value="{{ 'Search' }}">
+                        </div>
                     </div>
+                </form>
+                <div class="d-flex justify-content-end align-items-center">
+                    <a class="btn btn-lg btn-success" href="{{ route('evaluation-head.create') }}">Create Head
+                        Evaluations</a>
+
                 </div>
             </div>
             <table class="table table-bordered bg-white">
                 <thead>
-                    <th>{{ __('batch-list.sl') }}</th>
-                    <th>Title</th>
+                    <th>Sl. No.</th>
+                    <th>Evaluation Question</th>
                     <th>Question Type</th>
-                    <th>Used For</th>
-                    <th>Max Value</th>
+                    <th>Question For</th>
                     <th>Mark</th>
                     <th>Status</th>
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
-                <tbody>                    
-                    @foreach (collect($evaluation) as $item)
+                <tbody>
+                    @foreach ($evaluations as $evaluation)
                         <tr>
                             <td>
-                                {{ $loop->iteration }}
+                                {{ $from + $loop->index }}
                             </td>
                             <td>
-                                {{ $item['title'] ?? '' }}
+                                {{ $evaluation['title'] ?? '' }}
                             </td>
                             <td>
-                                {{ $item['is_bool'] == 1 ? 'yes no question' : 'others' }}
+                                @isset($evaluation['is_bool'])
+                                    @if ($evaluation['is_bool'])
+                                        Yes No Question
+                                    @else
+                                        Start Marked Question
+                                    @endif
+                                @endisset
                             </td>
                             <td>
-                                {{ $item['type'] == 1 ? 'Student' : 'Teacher' }}
+                                @isset($evaluation['type'])
+                                    @if ($evaluation['type'] == 1)
+                                        Student
+                                    @elseif ($evaluation['type'] == 2)
+                                        Teacher
+                                    @elseif ($evaluation['type'] == 3)
+                                        Vendor
+                                    @endif
+                                @endisset
 
                             </td>
                             <td>
-                                {{ $item['max_value'] ?? 0 }}
+                                {{ $evaluation['mark'] ?? 0 }}
                             </td>
                             <td>
-                                {{ $item['mark'] ?? 0 }}
-                            </td>
-                            <td>
-                                {{ $item['status'] == 1 ? 'Active' : 'Inactive' }}
+                                @isset($evaluation['status'])
+                                    @if ($evaluation['status'] == 1)
+                                        <span class="badge badge-primary">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">Inactive</span>
+                                    @endif
+                                @endisset
                             </td>
                             <td class="me-0 d-flex gap-1">
-                                
-                                    <a href="{{ route('evaluation-head.edit', $item['id']) }}" class="btn btn-sm btn-info" title="Evaludation Edit">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('evaluation-head.destroy', $item['id']) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                    </form>
+                                <a href="{{ route('evaluation-head.edit', $evaluation['id']) }}" class="btn btn-sm btn-info"
+                                    title="Evaludation Edit">
+                                    Edit
+                                </a>
+                                <form action="{{ route('evaluation-head.destroy', $evaluation['id']) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

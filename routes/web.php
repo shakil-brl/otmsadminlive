@@ -299,11 +299,13 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::get('course-supplies/show/{batch_id}', [CourseSuppliesController::class, 'show'])->name('course-supplies.show');
     Route::get('course-supplies/distribute/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distributedList'])->name('course-supplies.distributed-list');
     Route::resource('roles', RoleController::class);
-    Route::resource('evaluation-head', EvaluationHeadController::class);
+    //evaluation
+    Route::resource('evaluation-head', EvaluationHeadController::class)->except('show');
     Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
     Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
     Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
     Route::post('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'storeStudentEvaluation'])->name('trainer-schedule-details.store-student-evaluation');
+    //evaluation end
 });
 
 Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendanceSheet'])->name('attendance.report');
@@ -311,5 +313,7 @@ Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendanc
 
 // test without permission
 Route::resource('payment-batches', PaymentBatchController::class);
+
+
 
 
