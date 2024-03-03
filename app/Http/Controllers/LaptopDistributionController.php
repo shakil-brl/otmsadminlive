@@ -12,9 +12,24 @@ class LaptopDistributionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $results = ApiHttpClient::request('get', 'laptop', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+
+        if ($results['success'] == true) {
+            $laptop = $results['data'];
+            $page_from = $results['data']['from'];
+            $paginator = $this->customPaginate($results, $request, route('laptop-distribution.index'));
+            return view('laptop-distribution.index', ['results' => $laptop, 'paginator' => $paginator, 'page_from' => $page_from]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+        // return view('laptop-distribution.index');
     }
 
     /**
@@ -31,6 +46,7 @@ class LaptopDistributionController extends Controller
             "batch_id" => $batch_id,
             "end_date" => date("Y-m-d"),
         ])->json();
+
         // dd($results);
         if ($results['success'] == true && $batch_results['success'] == true) {
             $class_details = $results['data'];
@@ -44,7 +60,7 @@ class LaptopDistributionController extends Controller
             return view('laptop-distribution.create', $data);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            session()->flash('message', ($results['message'] ?? $batch_results['message']) ?? 'Something went wrong');
             return back();
         }
     }
@@ -57,7 +73,38 @@ class LaptopDistributionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'batch_id' => 'required',
+                'distribution_date' => 'required|date|before_or_equal:today',
+                'total_students' => 'required|integer|gt:0',
+                'remark' => 'nullable',
+                'applicant_id' => 'required|array|min:1',
+                'laptop_serial' => 'required|array|min:1',
+                'document' => 'nullable|array|min:1',
+                'agr_num' => 'required|array|min:1',
+            ]
+        );
+
+        $laptop = $request->all();
+
+        $laptop['status'] = 1;
+        $laptop['total_laptop'] = count($request->applicant_id);
+
+        // $laptop['holly_bay'] = Carbon::createFromFormat('d/m/Y', $request->holly_bay)->format('Y-m-d');
+
+        $data = ApiHttpClient::request('post', 'laptop', $laptop)->json();
+        //dd($data);
+        if (isset($data['error'])) {
+            $error_message = $data['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $error_message)->withInput();
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Created successfully');
+            return redirect()->route('laptop-distribution.index');
+        }
     }
 
     /**
@@ -77,9 +124,34 @@ class LaptopDistributionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $batch_id)
     {
-        //
+        $batch_id = decrypt($batch_id);
+
+        $trainee_results = ApiHttpClient::request('get', "allownce/student-list/date-range", [
+            "batch_id" => $batch_id,
+            "end_date" => date("Y-m-d"),
+        ])->json();
+
+        $laptop_results = ApiHttpClient::request('get', "laptop/$id")->json();
+
+        // dd($results);
+        if ($laptop_results['success'] == true && $trainee_results['success'] == true) {
+            $laptop = $laptop_results['data'];
+            $class_details = $trainee_results['data'];
+            $batch = $laptop_results['data']['training_batch'];
+
+            $data = [
+                'laptop' => $laptop,
+                'class_details' => $class_details,
+                'batch' => $batch
+            ];
+            return view('laptop-distribution.edit', $data);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', (($trainee_results['message'] ?? $laptop_results['message'])) ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -91,7 +163,36 @@ class LaptopDistributionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'batch_id' => 'required',
+                'distribution_date' => 'required|date|before_or_equal:today',
+                'total_students' => 'required|integer|gt:0',
+                'remark' => 'nullable',
+                'applicant_id' => 'required|array|min:1',
+                'laptop_serial' => 'required|array|min:1',
+                'document' => 'nullable|array|min:1',
+                'agr_num' => 'required|array|min:1',
+            ]
+        );
+
+        $laptop = $request->all();
+
+        $laptop['status'] = 1;
+        $laptop['total_laptop'] = count($request->applicant_id);
+
+        $data = ApiHttpClient::request('PUT', "laptop/$id", $laptop)->json();
+        //dd($data);
+        if (isset($data['error'])) {
+            $error_message = $data['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $error_message)->withInput();
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $data['message'] ?? 'Created successfully');
+            return redirect()->route('laptop-distribution.index');
+        }
     }
 
     /**
@@ -102,6 +203,16 @@ class LaptopDistributionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $results = ApiHttpClient::request('delete', "laptop/$id")->json();
+
+        if ($results['success'] == true) {
+            session()->flash('type', 'Success');
+            session()->flash('message', $results['message'] ?? 'Deleted successfully');
+            return redirect()->route('laptop-distribution.index');
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->route('laptop-distribution.index');
+        }
     }
 }

@@ -67,9 +67,10 @@
                     <div>Today: {{ date('d-m-Y') }}</div>
                 </div>
                 <div class="">
-                    <form method="POST" action="{{ route('laptop-distribution.store') }}" class="" id="distributeForm">
+                    <form method="POST" action="{{ route('laptop-distribution.update', $laptop['id']) }}" class=""
+                        id="distributeForm">
                         @csrf
-
+                        @method('PUT')
                         @include('laptop-distribution.form')
                     </form>
                 </div>

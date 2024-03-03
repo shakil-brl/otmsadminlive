@@ -314,5 +314,10 @@ Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendanc
 Route::resource('payment-batches', PaymentBatchController::class);
 
 Route::group(['controller' => LaptopDistributionController::class, 'prefix' => 'laptop-distribution', 'as' => 'laptop-distribution.'], function () {
+    Route::get('', 'index')->name('index');
     Route::get('/{batch_id}', 'create')->name('create');
+    Route::post('', 'store')->name('store');
+    Route::get('/{id}/{batch_id}/edit', 'edit')->name('edit');
+    Route::put('/{id}', 'update')->name('update');
+    Route::delete('/{id}', 'destroy')->name('destroy');
 });
