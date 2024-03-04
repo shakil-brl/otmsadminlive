@@ -9,30 +9,45 @@
         @isset($evaluations)
             <div class="my-3 ">
                 <form action="">
-                    <div class="row row-cols-5">
+                    <div class="row row-cols-5 align-items-start">
                         <div>
+                            <label for="">Select Status</label>
                             <select name="status" class="form-select">
                                 <option value="">Select</option>
                                 <option @if ($request->status === '1') selected @endif value="1">Active</option>
                                 <option @if ($request->status === '0') selected @endif value="0">Inactive</option>
                             </select>
+                        </div>
+                        <div>
+                            <label for="">Select Question Type</label>
+                            <select name="type" class="form-select">
+                                <option value="">Select</option>
+                                <option @if ($request->type === '1') selected @endif value="1">Student</option>
+                                <option @if ($request->type === '2') selected @endif value="2">Teacher</option>
+                                <option @if ($request->type === '3') selected @endif value="3">Vendor</option>
+                                <option @if ($request->type === '4') selected @endif value="4">Batch</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="">Question Search</label>
                             <input type="search" name="search" value="{{ request('search') }}" class="form-control"
                                 placeholder="{{ 'search' }}">
                         </div>
                         <div>
-                            <input type="search" name="search" value="{{ request('search') }}" class="form-control"
-                                placeholder="{{ 'search' }}">
+                            <label for=""></label>
+                            <div>
+                                <input type="submit" class="btn btn-primary" value="{{ 'Search' }}">
+                            </div>
                         </div>
-                        <div>
-                            <input type="submit" class="btn btn-primary" value="{{ 'Search' }}">
+                        <div class="text-end">
+                            <label for=""></label>
+                            <div>
+                                <a class="btn btn-success" href="{{ route('evaluation-head.create') }}">Create</a>
+                            </div>
                         </div>
                     </div>
                 </form>
-                <div class="d-flex justify-content-end align-items-center">
-                    <a class="btn btn-lg btn-success" href="{{ route('evaluation-head.create') }}">Create Head
-                        Evaluations</a>
 
-                </div>
             </div>
             <table class="table table-bordered bg-white">
                 <thead>
@@ -56,9 +71,9 @@
                             <td>
                                 @isset($evaluation['is_bool'])
                                     @if ($evaluation['is_bool'])
-                                        Yes No Question
+                                        Yes No
                                     @else
-                                        Start Marked Question
+                                        Start Marked
                                     @endif
                                 @endisset
                             </td>
@@ -72,7 +87,6 @@
                                         Vendor
                                     @endif
                                 @endisset
-
                             </td>
                             <td>
                                 {{ $evaluation['mark'] ?? 0 }}
