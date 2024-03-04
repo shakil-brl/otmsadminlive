@@ -220,8 +220,7 @@
 
             <!--=============Newadmon=================-->
 
-            @if (
-                $userRole == 'SuperAdmin' ||
+            @if ($userRole == 'SuperAdmin' ||
                     $userRole == 'superadmin' ||
                     $userRole == 'Admin' ||
                     $userRole == 'admin' ||
