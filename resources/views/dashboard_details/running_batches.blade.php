@@ -44,15 +44,27 @@
                             <td>
                                 {{ $batch['training_batch']['provider']['name'] ?? '' }}
                             </td>
-                            <td>
+                            <td class="">
                                 <a href="{{ route('batch-schedule.index', [encrypt($batch['id']), encrypt($batch['training_batch']['id'])]) }}"
-                                    class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
+                                    class="btn btn-sm btn-info mb-1"> {{ __('batch-list.view_schedule') }}
                                 </a>
 
                                 @if (in_array('course-supplies.supply', $roleRoutePermissions))
                                     <a href="{{ route('course-supplies.supply', [encrypt($batch['training_batch']['id'])]) }}"
-                                        class="btn btn-sm btn-success">
+                                        class="btn btn-sm btn-success mb-1">
                                         Supplies
+                                    </a>
+                                @endif
+
+                                @if (in_array('laptop-distribution.create', $roleRoutePermissions) && !$batch['training_batch']['laptop'])
+                                    <a href="{{ route('laptop-distribution.create', [encrypt($batch['training_batch']['id'])]) }}"
+                                        class="btn btn-sm btn-success mb-1">
+                                        Laptop Distribution
+                                    </a>
+                                @elseif(in_array('laptop-distribution.edit', $roleRoutePermissions) && $batch['training_batch']['laptop'])
+                                    <a href="{{ route('laptop-distribution.edit', [$batch['training_batch']['laptop']['id'], encrypt($batch['training_batch']['id'])]) }}"
+                                        class="btn btn-sm btn-warning mb-1">
+                                        Edit Laptop Distribution
                                     </a>
                                 @endif
                             </td>
