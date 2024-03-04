@@ -89,6 +89,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+        dd($id);
         $results = ApiHttpClient::request('delete', "roles/$id")->json();
 
         if ($results['success'] == true) {
