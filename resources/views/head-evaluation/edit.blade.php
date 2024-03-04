@@ -36,7 +36,7 @@
                     <form action="{{ route('evaluation-head.update', $evaluation['id']) }}" method="post">
                         @csrf
                         @method('PUT')
-                        @include('head-evaluation.form')
+                        @include('head-evaluation.form', compact('evaluation'))
                     </form>
                 </div>
             </div>
@@ -45,15 +45,15 @@
 @section('scripts')
     <script>
         if ($("#others").val() == 0) {
-                    $("#max-value").removeAttr("disabled");
-                }
+            $("#max-value").removeAttr("disabled");
+        }
         $("#others").change(function() {
-                if ($(this).val() == 0) {
-                    $("#max-value").removeAttr("disabled");
-                }else{
-                    $("#max-value").prop("disabled",true);
-                }
-            });
+            if ($(this).val() == 0) {
+                $("#max-value").removeAttr("disabled");
+            } else {
+                $("#max-value").prop("disabled", true);
+            }
+        });
     </script>
 @endsection
 @endsection
