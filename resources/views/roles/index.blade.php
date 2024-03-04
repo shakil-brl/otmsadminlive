@@ -3,10 +3,10 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <div class="d-flex justify-content-end align-items-center">
+        {{-- <div class="d-flex justify-content-end align-items-center">
             <a class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#kt_create_role"
                 id="open-create-user-modal">Create Role</a>
-        </div>
+        </div> --}}
         <h3>Role List</h3>
         <x-alert />
 
@@ -437,7 +437,7 @@
 
             $(document).on("click", ".delete-action", function(e) {
                 e.preventDefault();
-                const form = $("#deleteForm");
+                const form = $(this).find('form');
 
                 Swal.fire({
                     title: "Are you sure?",

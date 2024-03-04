@@ -12,7 +12,7 @@
                         dashboard
                     </span>
 
-                    Dashboard
+                    {{ __('sidemenu.dashboard') }}
                 </a>
             </li>
 
@@ -22,6 +22,8 @@
                     'superadmin',
                     'Admin',
                     'admin',
+                    'DG',
+                    'dg',
                     'DPD',
                     'dpd',
                     'provider',
@@ -30,15 +32,31 @@
                     'Trainer',
                     'Consultant',
                     'consultant',
+                    'Minister',
+                    'minister',
+                    'uno',
+                    'UNO',
+                    'Assistant Programmer',
+                    'DC',
+                    'dc',
+                    'PD',
+                    'pd',
+                    'Programmer',
+                    'programmer',
+                    'Divisional Commissioner',
+                    'divisional commissioner',
+                    'Secretary',
+                    'secretary',
+
                 ]))
                 <!-- collapse menu -->
                 <li class="nav-item accordion-item">
-                    <a href="#" class="nav-link accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    <a href="#" class="nav-link accordion-button collapsed <?php echo ($userRole == 'Trainer') ? 'd-none' : ''; ?> " type="button" data-bs-toggle="collapse"
                         data-bs-target="#userCollapse">
                         <span class="material-symbols-rounded">
                             group
                         </span>
-                        User
+                        {{ __('sidemenu.user_management') }}
                     </a>
                     <div id="userCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebar-menu">
                         <div class="accordion-content">
@@ -70,14 +88,14 @@
                         </div>
                     </div>
                 </li>
-                @if (in_array($userRole, ['SuperAdmin', 'superadmin', 'Admin', 'admin', 'DPD', 'dpd', 'Consultant', 'consultant']))
+                @if (in_array($userRole, ['SuperAdmin', 'superadmin', 'Admin', 'admin', 'DPD', 'dpd', 'Consultant', 'consultant', 'Minister', 'minister', 'uno', 'UNO']))
                     <li class="nav-item accordion-item here menu-accordion <?php if ( Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show') || Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')|| Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show') || Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show')|| Illuminate\Support\Facades\Route::is('provider.link-batch')) {?>here show<?php } ?>">
                         <a href="#" class="nav-link accordion-button <?php if (Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show') || Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')|| Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show') || Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show')|| Illuminate\Support\Facades\Route::is('provider.link-batch')) {?>active<?php } ?>"
                             type="button" data-bs-toggle="collapse" data-bs-target="#settingsManagementCollapse">
                             <span class="material-symbols-rounded">
                                 settings
                             </span>
-                            Settings
+                            {{ __('sidemenu.settings_management') }}
                         </a>
                         <div id="settingsManagementCollapse"
                             class="accordion-collapse collapse <?php if ( Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show') || Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')|| Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show') || Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show')|| Illuminate\Support\Facades\Route::is('provider.link-batch')) {?>show<?php } ?>"
@@ -85,19 +103,19 @@
                             <div class="accordion-content">
                                 <a href="{{ route('divisions.index') }}"
                                     class="nav-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('divisions.index') || Illuminate\Support\Facades\Route::is('divisions.show')) { ?>active<?php } ?>">
-                                    - Division List
+                                    - {{ __('sidemenu.division_list') }}
                                 </a>
                                 <a href="{{ route('districts.index') }}"
                                     class="nav-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('districts.index') || Illuminate\Support\Facades\Route::is('districts.show')) { ?>active<?php } ?>">
-                                    - District List
+                                    - {{ __('sidemenu.district_list') }}
                                 </a>
                                 <a href="{{ route('upazilas.index') }}"
                                     class="nav-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('upazilas.index') || Illuminate\Support\Facades\Route::is('upazilas.show')) { ?>active<?php } ?>">
-                                    - Upazila List
+                                    - {{ __('sidemenu.upazila_list') }}
                                 </a>
                                 <a href="{{ route('providers.index') }}"
                                     class="nav-link sidebar-menu-link <?php if (Illuminate\Support\Facades\Route::is('providers.index') || Illuminate\Support\Facades\Route::is('providers.show') || Illuminate\Support\Facades\Route::is('provider.link-batch')) { ?>active<?php } ?>">
-                                    - Vendor
+                                    - {{ __('sidemenu.vendor') }}
                                 </a>
                             </div>
                         </div>
@@ -112,17 +130,18 @@
                             <span class="material-symbols-rounded">
                                 supervisor_account
                             </span>
-                            Enrollment
+                            {{ __('sidemenu.enrollment_management') }}
                         </a>
                         <div id="enrollmentCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebar-menu">
                             <div class="accordion-content">
+                                @if ($userRole == 'provider' || $userRole == 'Provider')
                                 @if (in_array('batches.index', $roleRoutePermissions))
                                     <a href="{{ route('batches.index') }}"
                                         class="nav-link {{ Illuminate\Support\Facades\Route::is('batches.index') ? 'active' : '' }}">
                                         - {{ __('sidemenu.trainer_enrollment') }}
                                     </a>
                                 @endif
-                                @if ($userRole == 'provider' || $userRole == 'Provider')
+                                @endif
                                     <a href="{{ route('traineeEnroll.index') }}"
                                         class="nav-link {{ Illuminate\Support\Facades\Route::is('traineeEnroll.index') ? 'active' : '' }}">
                                         - {{ __('sidemenu.trainee_enrollment_list') }}
@@ -131,7 +150,7 @@
                                         class="nav-link {{ Illuminate\Support\Facades\Route::is('trainerEnroll.index') ? 'active' : '' }}">
                                         - {{ __('sidemenu.trainer_enrollment_list') }}
                                     </a>
-                                @endif
+                                
 
                             </div>
                         </div>
@@ -209,19 +228,37 @@
                     $userRole == 'DPD' ||
                     $userRole == 'dpd' ||
                     $userRole == 'DG' ||
-                    $userRole == 'dg')
+                    $userRole == 'dg'||
+                    $userRole == 'Minister' ||
+                    $userRole == 'minister'||
+                    $userRole == 'UNO' ||
+                    $userRole == 'uno'||
+                    $userRole == 'Assistant Programmer'||
+                    $userRole == 'assistant programmer'||
+                    $userRole == 'DC' ||
+                    $userRole == 'dc'||
+                    $userRole == 'PD' ||
+                    $userRole == 'pd'||
+                    $userRole == 'Consultant' ||
+                    $userRole == 'consultant'||
+                    $userRole == 'Programmer' ||
+                    $userRole == 'programmer'||
+                    $userRole == 'Secretary' ||
+                    $userRole == 'secretary'||
+                    $userRole == 'Divisional Commissioner' ||
+                    $userRole == 'divisional commissioner')
                 <li class="nav-item accordion-item">
                     <a href="#" class="nav-link accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#batchMonitoringCollapse">
                         <span class="material-symbols-rounded">
                             clinical_notes
                         </span>
-                        Batch Monitoring
+                        {{ __('sidemenu.batch_monitoring') }}
                     </a>
                     <div id="batchMonitoringCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebar-menu">
                         <a href="{{ route('dashboard_details.total_batches') }}"
                             class="nav-link{{ Illuminate\Support\Facades\Route::is('dashboard_details.total_batches') ? ' active' : '' }}">-
-                            All Batch List</a>
+                            {{ __('sidemenu.all_batch_list') }}</a>
                     </div>
                 </li>
 
@@ -231,13 +268,13 @@
                         <span class="material-symbols-rounded">
                             change_circle
                         </span>
-                        Running Batches
+                        {{ __('sidemenu.running_batch') }}
                     </a>
                     <div id="collapseRunningBatches" class="accordion-collapse collapse" data-bs-parent="#sidebar-menu">
                         <div class="accordion-content">
                             <a href="{{ route('batch-schedule.runningBatches') }}"
                                 class="nav-link{{ Illuminate\Support\Facades\Route::is('batch-schedule.runningBatches') ? ' active' : '' }}">
-                                - Running Batch List
+                                - {{ __('sidemenu.running_batch_list') }}
                             </a>
                         </div>
                     </div>
@@ -251,17 +288,37 @@
                         <span class="material-symbols-rounded">
                             done_all
                         </span>
-                        Inspection
+                        {{ __('sidemenu.inspection') }}
                     </a>
                     <div id="collapseInspection" class="accordion-collapse collapse" data-bs-parent="#sidebar-menu">
                         <div class="accordion-content">
                             <a href="{{ route('batch-schedule.running-class-list') }}"
                                 class="nav-link{{ Illuminate\Support\Facades\Route::is('batch-schedule.running-class-list') ? ' active' : '' }}">
-                                - Add New Inspection
+                                - {{ __('sidemenu.add_new_inspection') }}
                             </a>
                         </div>
                     </div>
                 </li>
+
+                
+                <li class="nav-item accordion-item">
+                    <a href="#" class="nav-link accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseReport">
+                        <span class="material-symbols-rounded">
+                            task
+                        </span>
+                        {{ __('sidemenu.report') }}
+                    </a>
+                    <div id="collapseReport" class="accordion-collapse collapse" data-bs-parent="#sidebar-menu">
+                        <div class="accordion-content">
+                            <a href="{{ route('inspaction.index') }}"
+                                class="nav-link{{ Route::is('inspaction.index')||Route::is('tms-inspections.show') ? ' active' : '' }}">
+                                - {{ __('sidemenu.inspection_report') }}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
 
 
                 <li class="nav-item accordion-item">
