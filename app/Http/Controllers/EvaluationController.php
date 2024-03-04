@@ -7,10 +7,62 @@ use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
 {
-    /**
-     * Call api for all evaluation data
-     * And Display a listing of the evaluation data.
-     */
+
+    public function batchList(Request $request)
+    {
+        $results = ApiHttpClient::request('get', 'detail/total-batch', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+            'trainer_count' => 2,
+        ])->json();
+        if ($results['success'] == true) {
+            $paginator = $this->customPaginate($results, $request, route('evaluation-head.index'));
+            return view('evaluations.batch-list', ['total_batches' => $results['data']['data'], 'paginator' => $paginator, 'page_from' => $results['data']['from']]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return view('evaluations.batch-list');
+        }
+    }
+    public function traineeList(Request $request, $batch_id)
+    {
+        $results = ApiHttpClient::request('get', 'detail/trainee-total', [
+            'page' => $request->page ?? 1,
+            'without_dropout' => $request->search,
+            'batch_id' => $batch_id,
+            'data_type' => 'get',
+        ])->json();
+
+        if ($results['success'] == true) {
+            return view('evaluations.trainee-list', ['students' => $results['data']]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return view('evaluations.batch-list');
+        }
+    }
+
+    public function evaluationForm($training_applicant_id)
+    {
+        $student = ApiHttpClient::request('get', 'detail/trainee-total', [
+            'applicant_id' => $training_applicant_id,
+            'data_type' => 'first',
+        ])->json();
+
+        $heads = ApiHttpClient::request('get', 'evaluation-head', [
+            'type' => 1,
+            'status' => 1,
+            'data_type' => 'get',
+        ])
+            ->json();
+
+        return view('evaluations.head', [
+            'heads' => $heads['data'],
+            'student' => $student['data'],
+        ]);
+
+
+    }
     public function index(Request $request)
     {
         $results = ApiHttpClient::request('get', 'evaluation-head', [
@@ -30,10 +82,7 @@ class EvaluationController extends Controller
         }
     }
 
-    /**
-     * Call api for all trainer schedule details data
-     * And Display a listing of trainer schedule details data.
-     */
+
     public function trainerScheduleDetailsList(Request $request)
     {
         $results = ApiHttpClient::request('get', 'schedule-details', [
