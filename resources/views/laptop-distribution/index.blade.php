@@ -12,7 +12,6 @@
         <x-alert />
 
         @isset($results['data'])
-            @dump($results['data'])
             <div class="my-3">
                 <div class="d-none">
                     <form action="">
