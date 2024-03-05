@@ -113,9 +113,34 @@ class LaptopDistributionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $batch_id)
     {
-        //
+        $batch_id = decrypt($batch_id);
+
+        $trainee_results = ApiHttpClient::request('get', "allownce/student-list/date-range", [
+            "batch_id" => $batch_id,
+            "end_date" => date("Y-m-d"),
+        ])->json();
+
+        $laptop_results = ApiHttpClient::request('get', "laptop/$id")->json();
+
+        // dd($results);
+        if ($laptop_results['success'] == true && $trainee_results['success'] == true) {
+            $laptop = $laptop_results['data'];
+            $class_details = $trainee_results['data'];
+            $batch = $laptop_results['data']['training_batch'];
+
+            $data = [
+                'laptop' => $laptop,
+                'class_details' => $class_details,
+                'batch' => $batch
+            ];
+            return view('laptop-distribution.show', $data);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', (($trainee_results['message'] ?? $laptop_results['message'])) ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**

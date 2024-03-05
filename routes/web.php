@@ -298,7 +298,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::get('course-supplies/distribute/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distribute'])->name('course-supplies.distribute');
     Route::post('course-supplies/allocation', [CourseSuppliesController::class, 'allocation'])->name('course-supplies.allocation');
     Route::get('course-supplies/show/{batch_id}', [CourseSuppliesController::class, 'show'])->name('course-supplies.show');
-    Route::get('course-supplies/distribute/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distributedList'])->name('course-supplies.distributed-list');
+    Route::get('course-supplies/distribute-list/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distributedList'])->name('course-supplies.distributed-list');
     Route::resource('roles', RoleController::class);
 
 });
@@ -331,6 +331,7 @@ Route::resource('payment-batches', PaymentBatchController::class);
 Route::group(['controller' => LaptopDistributionController::class, 'prefix' => 'laptop-distribution', 'as' => 'laptop-distribution.'], function () {
     Route::get('', 'index')->name('index');
     Route::get('/{batch_id}', 'create')->name('create');
+    Route::get('/{id}/{batch_id}/show', 'show')->name('show');
     Route::post('', 'store')->name('store');
     Route::get('/{id}/{batch_id}/edit', 'edit')->name('edit');
     Route::put('/{id}', 'update')->name('update');

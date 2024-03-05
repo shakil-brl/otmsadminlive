@@ -38,7 +38,7 @@
                     <form action="">
                         <div class="w-50 d-flex gap-3">
                             <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                                placeholder="Search combo Combo">
+                                placeholder="Search combo">
                             <input type="submit" class="form-control btn btn-primary w-25" value="Search">
                         </div>
                     </form>

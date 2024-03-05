@@ -1,7 +1,5 @@
 <div>
     <h3>
-
-
         @if ($batch_status == 1)
             Running Batch List
         @elseif ($batch_status == 2)
@@ -9,7 +7,6 @@
         @else
             Batch List
         @endif
-
     </h3>
     <br>
     @isset($total_batches)
@@ -178,6 +175,12 @@
                                         class="btn btn-sm btn-success">
                                         Supplies
                                     </a>
+                                    @if (in_array('laptop-distribution.show', $roleRoutePermissions) && $batch['laptop'])
+                                        <a href="{{ route('laptop-distribution.show', [$batch['laptop']['id'], encrypt($batch['id'])]) }}"
+                                            class="btn btn-sm btn-warning mb-1">
+                                            Laptop Distribution
+                                        </a>
+                                    @endif
                                 </div>
                                 <small class="fw-bold">Class Progress:</small>
                                 <div class="progress m-1">
