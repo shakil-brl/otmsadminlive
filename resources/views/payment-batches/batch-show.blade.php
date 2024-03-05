@@ -3,49 +3,28 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <div class="d-flex justify-content-end align-items-center">
-            <a class="btn btn-lg btn-success" href="{{ route('payment-batches.create') }}">
-                Make Payment
-            </a>
-        </div>
-        <h3>Payment Batch List</h3>
+        <h3>Payment List</h3>
         <x-alert />
 
-        @isset($results['data'])
-            {{-- @dump($results['data']) --}}
+        @isset($payments)
             <div class="my-3">
-                <div class="my-3">
-                    <form action="">
-                        <div class="w-50 d-flex gap-3">
-                            <input type="search" name="search" value="{{ request('search') }}" class="form-control w-75"
-                                placeholder="Search batch">
-                            <input type="submit" class="form-control btn btn-primary w-25" value="Search">
-                        </div>
-                    </form>
-                </div>
                 <table class="table table-bordered bg-white">
                     <thead>
                         <th>{{ __('batch-list.sl') }}</th>
-                        <th>Batch Code</th>
                         <th>Date</th>
                         <th>
                             Total Trainee (D. Allowance)
                         </th>
                         <th>Payment</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody>
-                        @if (count($results['data']) > 0)
-                            @foreach ($results['data'] ?? [] as $index => $payment)
-                                @php
-                                    $from = $results['from'];
-                                @endphp
+                        @if (count($payments) > 0)
+                            @foreach ($payments ?? [] as $index => $payment)
                                 <tr>
                                     <td>
-                                        {{ $from + $loop->iteration - 1 }}
-                                    </td>
-                                    <td>
-                                        {{ $payment['training_batch']['batchCode'] ?? '' }}
+                                        {{ $loop->iteration }}
                                     </td>
                                     <td>
                                         <div>
@@ -64,17 +43,20 @@
                                     <td>
                                         {{ $payment['total_payment_amount'] ?? '' }} Tk
                                     </td>
+                                    <td>
+                                        {{ $payment['status'] ? ($payment['status'] == 1 ? 'Active' : 'Inactive') : '' }}
+                                    </td>
                                     <td class="me-0 d-flex gap-1">
-                                        {{-- <a href="{{ route('payment-batches.edit', $payment['id']) }}"
+                                        <a href="{{ route('payment-batches.show', encrypt($payment['id'])) }}"
                                             class="btn btn-sm btn-info">
-                                            {{ __('config.edit') }}
-                                        </a> --}}
-                                        <form action="{{ route('payment-batches.destroy', $payment['id']) }}" method="post">
+                                            View
+                                        </a>
+                                        {{-- <form action="{{ route('payment-batches.destroy', $payment['id']) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
                                                 class="btn btn-sm btn-danger delete-action">{{ __('config.delete') }}</button>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -86,12 +68,11 @@
 
                     </tbody>
                 </table>
-                {!! $paginator->links() !!}
             </div>
         @endisset
     </div>
 @section('scripts')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $(document).on("click", ".delete-action", function(e) {
                 e.preventDefault();
@@ -113,6 +94,6 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endsection
 @endsection

@@ -324,8 +324,9 @@ Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendanc
 
 // test without permission
 Route::resource('payment-batches', PaymentBatchController::class);
-
-
+Route::group(['controller' => PaymentBatchController::class, 'prefix' => 'payment-batches', 'as' => 'payment-batches.'], function () {
+    Route::get('/{batch_id}/batch', 'batchShow')->name('batch');
+});
 
 
 Route::group(['controller' => LaptopDistributionController::class, 'prefix' => 'laptop-distribution', 'as' => 'laptop-distribution.'], function () {
