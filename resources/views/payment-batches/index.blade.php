@@ -3,11 +3,13 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <div class="d-flex justify-content-end align-items-center">
-            <a class="btn btn-lg btn-success" href="{{ route('payment-batches.create') }}">
-                Make Payment
-            </a>
-        </div>
+        @if (in_array('payment-batches.create', $roleRoutePermissions))
+            <div class="d-flex justify-content-end align-items-center">
+                <a class="btn btn-lg btn-success" href="{{ route('payment-batches.create') }}">
+                    Make Payment
+                </a>
+            </div>
+        @endif
         <h3>Payment Batch List</h3>
         <x-alert />
 
@@ -65,16 +67,19 @@
                                         {{ $payment['total_payment_amount'] ?? '' }} Tk
                                     </td>
                                     <td class="me-0 d-flex gap-1">
-                                        {{-- <a href="{{ route('payment-batches.edit', $payment['id']) }}"
+                                        <a href="{{ route('payment-batches.show', encrypt($payment['id'])) }}"
                                             class="btn btn-sm btn-info">
-                                            {{ __('config.edit') }}
-                                        </a> --}}
-                                        <form action="{{ route('payment-batches.destroy', $payment['id']) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="btn btn-sm btn-danger delete-action">{{ __('config.delete') }}</button>
-                                        </form>
+                                            View
+                                        </a>
+                                        @if (in_array('payment-batches.destroy', $roleRoutePermissions))
+                                            <form action="{{ route('payment-batches.destroy', $payment['id']) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-danger delete-action">{{ __('config.delete') }}</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
