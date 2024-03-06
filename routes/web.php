@@ -306,7 +306,6 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/{batch_id}/batch', 'batchShow')->name('batch');
     });
 
-
     Route::group(['controller' => LaptopDistributionController::class, 'prefix' => 'laptop-distribution', 'as' => 'laptop-distribution.'], function () {
         Route::get('', 'index')->name('index');
         Route::get('/{batch_id}', 'create')->name('create');
