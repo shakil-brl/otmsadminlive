@@ -20,6 +20,6 @@ class ApiHttpClient
         }
 
         // dd($headers, $app_url . $url);
-        return Http::withHeaders($headers)->$method($app_url . $url, $options);
+        return Http::withOptions(['timeout' => 100])->withHeaders($headers)->$method($app_url . $url, $options);
     }
 }

@@ -115,7 +115,7 @@
             </div>
 
         </div>
-        <x-ongoing-class-component :classes="$classes" :from="$from" />
+        <x-on-going-class-component :classes="$classes" :from="$from" />
 
         {!! $paginator->links() !!}
     @endisset

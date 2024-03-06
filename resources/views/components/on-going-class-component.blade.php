@@ -24,7 +24,10 @@
                     $end_time = Carbon::createFromFormat('H:i:s', $batch['end_time']);
                     $now = Carbon::now();
 
-                    if ((Carbon::parse($batch['date'])->format('Y-m-d') == Carbon::now()->toDateString()) & ($batch['status'] == 1)) {
+                    if (
+                        (Carbon::parse($batch['date'])->format('Y-m-d') == Carbon::now()->toDateString()) &
+                        ($batch['status'] == 1)
+                    ) {
                         if ($strart_time_clone->addMinutes(30)->lt($now)) {
                             $is_late = 1;
 
@@ -99,7 +102,10 @@
                                 <span class="badge badge-info">Class Running</span>
                             </div>
                             @php
-                                $class_end_time = Carbon::createFromFormat('Y-m-d H:i:s', $batch['date'] . ' ' . $batch['end_time']);
+                                $class_end_time = Carbon::createFromFormat(
+                                    'Y-m-d H:i:s',
+                                    $batch['date'] . ' ' . $batch['end_time'],
+                                );
                             @endphp
 
                             @if ($now > $class_end_time)

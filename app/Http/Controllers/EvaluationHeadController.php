@@ -8,21 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class EvaluationHeadController extends Controller
 {
-    /**
-     * Call api for all evaluation data
-     * And Display a listing of the evaluation data.
-     */
     public function index(Request $request)
     {
         $results = ApiHttpClient::request('get', 'evaluation-head', [
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
+            ...$request->all(),
         ])->json();
 
         if ($results['success'] == true) {
-            $evaluation = $results['data']['data'];            
+            $evaluation = $results['data']['data'];
+            $from = $results['data']['from'];
             $paginator = $this->customPaginate($results, $request, route('evaluation-head.index'));
-            return view('head-evaluation.index', ['evaluation' => $evaluation, 'paginator' => $paginator]);
+            return view('head-evaluation.index', ['evaluations' => $evaluation, 'paginator' => $paginator, 'from' => $from, 'request' => $request]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', 'Something went wrong');
@@ -30,32 +26,28 @@ class EvaluationHeadController extends Controller
         }
     }
 
-    /**
-     * Call function create for form input
-     */
 
     public function create()
     {
         return view('head-evaluation.create');
     }
 
-    /**
-     * Call api for storage data into database
-     */
-
     public function store(Request $request)
     {
-
+        $request->validate([
+            'title' => 'required',
+            'is_bool' => 'required',
+            'type' => 'required|integer|gte:1',
+            'mark' => 'required|integer|gt:0',
+            'status' => 'required|integer|in:1,0',
+        ]);
         $requestData = $request->all();
         $data = ApiHttpClient::request('post', 'evaluation-head/', $requestData)->json();
         if (isset($data['error'])) {
-            $error = $data['error'];
             $errorMessage = $data['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
-            return redirect()->back()->withErrors(['error'=>$errorMessage]);
-
-            // return redirect()->route('holydays.index');
+            return redirect()->back()->withInput()->withErrors($errorMessage);
         } else {
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Created successfully');
@@ -63,12 +55,10 @@ class EvaluationHeadController extends Controller
         }
     }
 
-    /**
-     * Call specefic item data api for update data into database
-     */
+
     public function edit($id)
     {
-        $results = ApiHttpClient::request('get', "evaluation-head/$id")->json();       
+        $results = ApiHttpClient::request('get', "evaluation-head/$id")->json();
         if ($results['success'] == true) {
             $evaluation = $results['data'];
             return view('head-evaluation.edit', ['evaluation' => $evaluation]);
@@ -84,6 +74,13 @@ class EvaluationHeadController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required',
+            'is_bool' => 'required',
+            'type' => 'required|integer|gte:1',
+            'mark' => 'required|integer|gt:0',
+            'status' => 'required|integer|in:1,0',
+        ]);
 
         $data = ApiHttpClient::request('patch', "evaluation-head/$id", $request->all())->json();
         if (isset($data['error'])) {
@@ -106,8 +103,8 @@ class EvaluationHeadController extends Controller
         $results = ApiHttpClient::request('delete', "evaluation-head/$id")->json();
 
         if ($results['success'] == true) {
-            session()->flash('type', 'Danger');
-            session()->flash('message', $data['message'] ?? 'Deleted successfully');
+            session()->flash('type', 'Success');
+            session()->flash('message', $results['message'] ?? 'Deleted successfully');
             return redirect()->route('evaluation-head.index');
         } else {
             session()->flash('type', 'Danger');
@@ -116,5 +113,5 @@ class EvaluationHeadController extends Controller
         }
     }
 
-    
+
 }

@@ -145,22 +145,22 @@
             </div>
             <div class="row row-cols-4">
                 <div class="item">
-                    <div class="title"> {{ $students['schedule_detail']['schedule']['training_batch']['batchCode'] ?? '' }}
+                    <div class="title"> {{ $student['training_batch']['batchCode'] ?? '' }}
                     </div>
                     <div class="tag">{{ __('batch-schedule.batch_code') }} #</div>
                 </div>
                 <div class="item">
-                    <div class="title">{{ $students['profile']['KnownAsBangla'] ?? '' }}</div>
+                    <div class="title">
+                        {{ $student['training_batch']['GEOLocation'] ?? '' }}</div>
+                    <div class="tag">Location #</div>
+                </div>
+                <div class="item">
+                    <div class="title">{{ $student['profile']['KnownAsBangla'] ?? '' }}</div>
                     <div class="tag">{{ 'Student Name' }}</div>
                 </div>
                 <div class="item">
-                    <div class="title">
-                        {{ $students['schedule_detail']['schedule']['training_batch']['GEOLocation'] ?? '' }}</div>
-                    <div class="tag">{{ __('batch-schedule.address') }}</div>
-                </div>
-                <div class="item">
-                    <div class="title">{{ $students['schedule_detail']['date'] ?? '' }} </div>
-                    <div class="tag">{{ 'Date' }}</div>
+                    <div class="title">{{ $student['profile']['KnownAsBangla'] ?? '' }}</div>
+                    <div class="tag">Fathers Name</div>
                 </div>
             </div>
         </div>
@@ -168,7 +168,7 @@
         <div id="class-days">
             <div class="m-0">
                 <form id="formSubmit" method="POST"
-                    action="{{ route('trainer-schedule-details.store-student-evaluation', $class_att_id) }}">
+                    action="{{ route('trainer-schedule-details.store-student-evaluation', $student['id']) }}">
                     @csrf
                     <input type="hidden" name="schedule_detail_id" value="" />
 
@@ -183,7 +183,7 @@
                     @endif
                     <div id="students">
 
-                        @foreach ($head as $index => $question)
+                        @foreach ($heads as $question)
                             <div class="student">
                                 <div class="row row-cols-3 align-items-center">
                                     <div>
