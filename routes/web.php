@@ -301,6 +301,20 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::get('course-supplies/distribute-list/{batch_id}/{combo_id}', [CourseSuppliesController::class, 'distributedList'])->name('course-supplies.distributed-list');
     Route::resource('roles', RoleController::class);
 
+    Route::resource('payment-batches', PaymentBatchController::class);
+    Route::group(['controller' => PaymentBatchController::class, 'prefix' => 'payment-batches', 'as' => 'payment-batches.'], function () {
+        Route::get('/{batch_id}/batch', 'batchShow')->name('batch');
+    });
+
+    Route::group(['controller' => LaptopDistributionController::class, 'prefix' => 'laptop-distribution', 'as' => 'laptop-distribution.'], function () {
+        Route::get('', 'index')->name('index');
+        Route::get('/{batch_id}', 'create')->name('create');
+        Route::get('/{id}/{batch_id}/show', 'show')->name('show');
+        Route::post('', 'store')->name('store');
+        Route::get('/{id}/{batch_id}/edit', 'edit')->name('edit');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
 });
 
 
@@ -323,18 +337,4 @@ Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendan
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
 
 // test without permission
-Route::resource('payment-batches', PaymentBatchController::class);
-Route::group(['controller' => PaymentBatchController::class, 'prefix' => 'payment-batches', 'as' => 'payment-batches.'], function () {
-    Route::get('/{batch_id}/batch', 'batchShow')->name('batch');
-});
 
-
-Route::group(['controller' => LaptopDistributionController::class, 'prefix' => 'laptop-distribution', 'as' => 'laptop-distribution.'], function () {
-    Route::get('', 'index')->name('index');
-    Route::get('/{batch_id}', 'create')->name('create');
-    Route::get('/{id}/{batch_id}/show', 'show')->name('show');
-    Route::post('', 'store')->name('store');
-    Route::get('/{id}/{batch_id}/edit', 'edit')->name('edit');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
-});
