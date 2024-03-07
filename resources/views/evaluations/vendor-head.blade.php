@@ -143,35 +143,29 @@
                     <img src="{{ asset('img') }}/new_icon/batch_head.png" alt="">
                 </div>
             </div>
-            <div class="row row-cols-4">
+            <div class="row row-cols-3">
                 <div class="item">
-                    <div class="title"> {{ $training_applicant['training_batch']['batchCode'] ?? '' }}
+                    <div class="title"> {{ $partner['name'] ?? '' }}
                     </div>
-                    <div class="tag">{{ __('batch-schedule.batch_code') }} #</div>
+                    <div class="tag">Parnmer Name #</div>
                 </div>
                 <div class="item">
                     <div class="title">
-                        {{ $training_applicant['training_batch']['GEOLocation'] ?? '' }}</div>
-                    <div class="tag">Location #</div>
+                        {{ $partner['phone'] ?? '' }}</div>
+                    <div class="tag">Contact #</div>
                 </div>
                 <div class="item">
-                    <div class="title">{{ $training_applicant['profile']['KnownAsBangla'] ?? '' }}</div>
-                    <div class="tag">{{ 'Student Name' }}</div>
-                </div>
-                <div class="item">
-                    <div class="title">{{ $training_applicant['profile']['KnownAsBangla'] ?? '' }}</div>
-                    <div class="tag">Fathers Name</div>
+                    <div class="title">{{ $partner['email'] ?? 'N/A' }}</div>
+                    <div class="tag">Email #</div>
                 </div>
             </div>
         </div>
         <!--begin::Content-->
         <div id="class-days">
             <div class="m-0">
-                <form id="formSubmit" method="POST"
-                    action="{{ route('evaluate.trainee.store', $training_applicant['id']) }}">
+                <form id="formSubmit" method="POST" action="{{ route('evaluate.vendor.store', $partner['id']) }}">
                     @csrf
-                    <input type="hidden" name="tarining_batch_id"
-                        value="{{ $training_applicant['training_batch']['id'] }}" />
+                    <input type="hidden" name="partner_id" value="{{ $partner['id'] }}" />
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

@@ -3,7 +3,6 @@
 @section('content')
     <!--begin::Content -->
     <div class="m-5">
-        <h3>Trainee List</h3>
 
         <x-alert />
         @isset($students)
@@ -11,10 +10,50 @@
                 @php
                     $batch = collect($students)->first()['training_batch'] ?? [];
                 @endphp
-                <div class="h3">
-                    Batch Code:{{ $batch['batchCode'] ?? '' }} <br>
+                <div id="batch-header">
+                    <div>
+                        <div class="icon">
+                            <img src="{{ asset('img') }}/new_icon/batch_head.png" alt="">
+                        </div>
+                    </div>
+                    <div class="row row-cols-4">
+                        <div class="item">
+                            <div class="title">{{ $batch['batchCode'] ?? '' }}
+                            </div>
+                            <div class="tag">{{ __('batch-schedule.batch_code') }} #</div>
+                        </div>
+                        <div class="item">
+                            <div class="title">
+                                {{ $batch['GEOLocation'] ?? '' }}</div>
+                            <div class="tag">Location #</div>
+                        </div>
+                        <div class="item">
+                            <div class="title">
+                                {{ collect($students)->filter(function ($student) {
+                                        if ($student['evaluation'] == null) {
+                                            return false;
+                                        }
+                                        return true;
+                                    })->count() }}
+                            </div>
+                            <div class="tag">Evaluated #</div>
+                        </div>
+                        <div class="item">
+                            <div class="title">
+                                {{ collect($students)->filter(function ($student) {
+                                        if ($student['evaluation'] == null) {
+                                            return true;
+                                        }
+                                        return false;
+                                    })->count() }}
+                            </div>
+                            <div class="tag">Evaluated Pending #</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <h3 class="mt-5 mb-3">Trainee List</h3>
 
             <table class="table table-bordered bg-white">
                 <thead>
@@ -40,9 +79,13 @@
                                 {{ $student['profile']['MotherNameBangla'] ?? '' }}
                             </td>
                             <td>
-                                <a href="{{ route('evaluate.trainee.form', $student['id']) }}" class="btn btn-sm btn-info">
-                                    Evaluate
-                                </a>
+                                @if ($student['evaluation'])
+                                    <span class="badge badge-success">Evaluated</span>
+                                @else
+                                    <a href="{{ route('evaluate.trainee.form', $student['id']) }}" class="btn btn-sm btn-info">
+                                        Evaluate
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

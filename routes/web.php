@@ -308,7 +308,11 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 Route::resource('evaluation-head', EvaluationHeadController::class)->except('show');
 Route::get('/evaluation/trainees/batch-list', [EvaluationController::class, 'batchList'])->name('evaluate.trainee.batch-list');
 Route::get('/evaluation/trainees/{batch_id}/trainee-list', [EvaluationController::class, 'traineeList'])->name('evaluate.trainee.trainee-list');
-Route::get('/evaluation/trainees/{training_applicant_id}/heads/', [EvaluationController::class, 'evaluationForm'])->name('evaluate.trainee.form');
+Route::get('/evaluation/trainees/{training_applicant_id}/head', [EvaluationController::class, 'traineeEvaluationForm'])->name('evaluate.trainee.form');
+Route::post('/evaluation/trainees/{training_applicant_id}/head', [EvaluationController::class, 'traineeEvaluationStore'])->name('evaluate.trainee.store');
+
+Route::get('/evaluation/vendor/{training_batch_id}/head', [EvaluationController::class, 'vendorEvaluationForm'])->name('evaluate.vendor.form');
+Route::post('/evaluation/vendor/{training_batch_id}/head', [EvaluationController::class, 'vendorEvaluationStore'])->name('evaluate.vendor.store');
 
 
 Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
