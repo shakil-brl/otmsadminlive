@@ -1055,9 +1055,9 @@
                                         <!--end:Menu item-->
                                         <!--Start:Menu item-->
                                         <div data-kt-menu-trigger="click"
-                                            class="menu-item here menu-accordion  <?php if (Route::is('evaluation-head.index')||Route::is('evaluation-head.create')||Route::is('evaluation-head.edit')||Route::is('trainer-schedule-details.lists')||Route::is('trainer-schedule-details.students')||Route::is('trainer-schedule-details.show-student-evaluation')) {?>here show<?php } ?>">
+                                            class="menu-item here menu-accordion  <?php if (Route::is('evaluation-head.index')||Route::is('evaluation-head.create')||Route::is('evaluation-head.edit')||Route::is('evaluate.trainee.batch-list')||Route::is('trainer-schedule-details.students')||Route::is('trainer-schedule-details.show-student-evaluation')) {?>here show<?php } ?>">
                                             <!--begin:Menu link-->
-                                            <span class="menu-link sidebar-menu-link <?php if (Route::is('evaluation-head.index')||Route::is('evaluation-head.create')||Route::is('evaluation-head.edit')||Route::is('trainer-schedule-details.lists')||Route::is('trainer-schedule-details.students')||Route::is('trainer-schedule-details.show-student-evaluation')) {?>active<?php } ?>">
+                                            <span class="menu-link sidebar-menu-link <?php if (Route::is('evaluation-head.index')||Route::is('evaluation-head.create')||Route::is('evaluation-head.edit')||Route::is('evaluate.trainee.batch-list')||Route::is('trainer-schedule-details.students')||Route::is('trainer-schedule-details.show-student-evaluation')) {?>active<?php } ?>">
                                                 <span class="menu-icon">
                                                     <i class="ki-duotone ki-double-check  fs-2">
                                                         <span class="path1"></span>
@@ -1072,7 +1072,7 @@
                                             <!--begin:Menu sub-->
                                             <div class="menu-sub menu-sub-accordion" kt-hidden-height="124" style="">
                                                 <!--begin:Menu sub-->
-                                                <div class="menu-sub menu-sub-accordion <?php if (Route::is('evaluation-head.index')||Route::is('evaluation-head.create')||Route::is('evaluation-head.edit')||Route::is('trainer-schedule-details.lists')||Route::is('trainer-schedule-details.students')||Route::is('trainer-schedule-details.show-student-evaluation')) {?>here show<?php } ?>"
+                                                <div class="menu-sub menu-sub-accordion <?php if (Route::is('evaluation-head.index')||Route::is('evaluation-head.create')||Route::is('evaluation-head.edit')||Route::is('evaluate.trainee.batch-list')||Route::is('trainer-schedule-details.students')||Route::is('trainer-schedule-details.show-student-evaluation')) {?>here show<?php } ?>"
                                                     kt-hidden-height="81" style="">
                                                     <!--begin:Menu item-->
                                                     <div class="menu-item">
@@ -1093,8 +1093,8 @@
                                                     <!--begin:Menu item-->
                                                     <div class="menu-item">
                                                         <!--begin:Menu link-->
-                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Route::is('trainer-schedule-details.lists')||Route::is('trainer-schedule-details.students')||Route::is('trainer-schedule-details.show-student-evaluation')) {?>active<?php } ?>"
-                                                            href="{{ route('trainer-schedule-details.lists') }}">
+                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Route::is('evaluate.trainee.batch-list')||Route::is('trainer-schedule-details.students')||Route::is('trainer-schedule-details.show-student-evaluation')) {?>active<?php } ?>"
+                                                            href="{{ route('evaluate.trainee.batch-list') }}">
                                                             <span class="menu-icon">
                                                                 <i
                                                                     class="ki-duotone ki-questionnaire-tablet  fs-2                       ">

@@ -429,7 +429,7 @@
                             <a href="{{ route('evaluation-head.index') }}"
                                 class="nav-link{{ Illuminate\Support\Facades\Route::is('evaluation-head.index') || Illuminate\Support\Facades\Route::is('evaluation-head.create') || Illuminate\Support\Facades\Route::is('evaluation-head.edit') ? ' active' : '' }}">-
                                 {{ __('sidemenu.evaluation_head') }}</a>
-                            <a href="{{ route('trainer-schedule-details.lists') }}"
+                            <a href="{{ route('evaluate.trainee.batch-list') }}"
                                 class="nav-link{{ Illuminate\Support\Facades\Route::is('trainer-schedule-details.lists') || Illuminate\Support\Facades\Route::is('trainer-schedule-details.students') || Illuminate\Support\Facades\Route::is('trainer-schedule-details.show-student-evaluation') ? ' active' : '' }}">-
                                 {{ __('sidemenu.evaluation_student') }}</a>
                         </div>
