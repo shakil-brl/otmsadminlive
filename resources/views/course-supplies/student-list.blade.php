@@ -81,10 +81,16 @@
                                             $hasDistributeId = false;
 
                                             foreach ($batch_details['trainees'] as $trainee) {
-                                                if (isset($trainee['material_allocations']) && is_array($trainee['material_allocations'])) {
+                                                if (
+                                                    isset($trainee['material_allocations']) &&
+                                                    is_array($trainee['material_allocations'])
+                                                ) {
                                                     foreach ($trainee['material_allocations'] as $allocation) {
                                                         if ($allocation['combo_id'] == $combo['id']) {
-                                                            $distributedDate = \Carbon\Carbon::createFromFormat('Y-m-d', $allocation['distribution_date'])->format('d/m/Y');
+                                                            $distributedDate = \Carbon\Carbon::createFromFormat(
+                                                                'Y-m-d',
+                                                                $allocation['distribution_date'],
+                                                            )->format('d/m/Y');
                                                             $hasDistributeId = true;
                                                             break 2;
                                                         }
@@ -93,7 +99,9 @@
                                             }
                                         @endphp
                                         @if (!$hasDistributeId)
-                                            <input type="checkbox" id="selectAll" class="form-check-input">
+                                            @if (in_array('course-supplies.supply', $roleRoutePermissions))
+                                                <input type="checkbox" id="selectAll" class="form-check-input">
+                                            @endif
                                         @endif
                                     </th>
                                 </tr>

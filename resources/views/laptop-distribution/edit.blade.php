@@ -64,7 +64,11 @@
                 <div class="h3 p-5 d-flex justify-content-between align-items-center card-header">
                     <div>Total Class: {{ $class_details['total_class'] }}</div>
                     <div>Trainee List</div>
-                    <div>Today: {{ date('d-m-Y') }}</div>
+                    @if (isset($laptop))
+                        <div>Distribute Date: {{ \Carbon\Carbon::parse($laptop['distribution_date'])->format('d-m-Y') }}</div>
+                    @else
+                        <div>Today: {{ date('d-m-Y') }}</div>
+                    @endif
                 </div>
                 <div class="">
                     <form method="POST" action="{{ route('laptop-distribution.update', $laptop['id']) }}" class=""
