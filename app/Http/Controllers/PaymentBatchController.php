@@ -95,7 +95,19 @@ class PaymentBatchController extends Controller
      */
     public function show($id)
     {
-        //
+        $id = decrypt($id);
+
+        $results = ApiHttpClient::request('get', "payment-batches/$id")->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $payment_details = $results['data'];
+            // dd($payment_details);
+            return view('payment-batches.show', ['data' => $payment_details]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -127,7 +139,7 @@ class PaymentBatchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
     }
 
     /**
@@ -148,6 +160,22 @@ class PaymentBatchController extends Controller
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return redirect()->route('payment-batches.index');
+        }
+    }
+
+    public function batchShow($batch_id)
+    {
+        $batch_id = decrypt($batch_id);
+
+        $results = ApiHttpClient::request('get', "payment-batches/$batch_id/batch")->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $payment_batch = $results['data'];
+            return view('payment-batches.batch-show', ['payments' => $payment_batch]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
         }
     }
 }

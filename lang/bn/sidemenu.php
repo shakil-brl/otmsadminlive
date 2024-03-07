@@ -78,6 +78,9 @@ return [
     'course_suplies' => "কোর্স সাপ্লাই",
     'products' => "প্রোডাক্ট সমূহ",
     'product_combos' => "প্রোডাক্ট কম্বো সমূহ",
+    'trainee_allowance' => "প্রশিক্ষণার্থী ভাতা",
+    'all_payment' => "সকল পেমেন্ট",
+    'make_payment' => "পেমেন্ট করুন",
 
 
 

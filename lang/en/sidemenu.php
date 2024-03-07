@@ -67,5 +67,9 @@ return [
     'course_suplies' => "Course Supplies",
     'products' => "Products",
     'product_combos' => "Product Combos",
+    'trainee_allowance' => "Trainee Allowance",
+    'all_payment' => "All Payment",
+    'make_payment' => "Make Payment",
+
 
 ];
