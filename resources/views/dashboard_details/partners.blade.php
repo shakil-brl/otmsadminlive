@@ -43,9 +43,30 @@
                                 {{ $partners['phone'] }}
                             </td>
                             <td>
-                                <a href="{{ route('providers.show', $partners['id']) }}" class="btn btn-sm btn-info">
+                                <a href="{{ route('providers.show', $partners['id']) }}" class="btn btn-sm mt-1 btn-info">
                                     View
                                 </a>
+                                @if (in_array(strtolower(Session::get('access_token')['role']), [
+                                        'superadmin',
+                                        'pd',
+                                        'dpd',
+                                        'admin',
+                                        'consultant',
+                                        'dg',
+                                        'minister',
+                                        'secretary',
+                                        'project office',
+                                    ]))
+                                    @if ($partners['evaluation'] == null)
+                                        <a href="{{ route('evaluate.vendor.form', $partners['id']) }}"
+                                            class="btn mt-1 btn-sm btn-primary">
+                                            Evaluate
+                                        </a>
+                                    @else
+                                        <span class="badge badge-success">Evaluated</span>
+                                    @endif
+                                @endif
+
                             </td>
                         </tr>
                     @endforeach
