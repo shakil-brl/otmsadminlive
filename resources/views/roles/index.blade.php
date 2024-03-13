@@ -46,14 +46,14 @@
                                                 class="btn btn-sm btn-primary show-action">
                                                 Permissions
                                             </a>
-                                            <div class="btn btn-sm btn-danger delete-action">
+                                            {{-- <div class="btn btn-sm btn-danger delete-action">
                                                 Delete
                                                 <form action="{{ route('roles.destroy', $role['id']) }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </td>
                                 </tr>
