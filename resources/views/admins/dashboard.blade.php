@@ -155,10 +155,12 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/total_batch.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_batches">
-                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                    <div class="digit total_batches_100">
+                                        {{-- <div class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
-                                        </div>
+                                        </div> --}}
+
+                                        1213
 
                                     </div>
                                     <div class="label">{{ __('dashboard.total_batch') }}</div>
@@ -251,10 +253,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/district.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_district">
-                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                    <div class="digit total_district_100">
+                                        {{-- <div class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
-                                        </div>
+                                        </div> --}}
+                                        44
                                     </div>
                                     <div class="label">{{ __('dashboard.district') }}</div>
                                 </div>
@@ -270,10 +273,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/upazila.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_upazila">
-                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                    <div class="digit total_upazila_100">
+                                        {{-- <div class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
-                                        </div>
+                                        </div> --}}
+                                        130
                                     </div>
                                     <div class="label">{{ __('dashboard.upazila') }}</div>
                                 </div>
