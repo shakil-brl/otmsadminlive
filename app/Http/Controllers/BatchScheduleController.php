@@ -11,6 +11,69 @@ use Illuminate\Support\Str;
 
 class BatchScheduleController extends Controller
 {
+
+
+    public function scheduleDetailCreate(Request $request, $training_batch_id)
+    {
+
+        $response = ApiHttpClient::request('get', 'batch/' . $training_batch_id . '/show')
+            ->json();
+        return view('batch_schedule.batch-scheedule-create', ['batch' => $response['data']]);
+
+    }
+    public function scheduleDetailStore(Request $request, $training_batch_id)
+    {
+        $request->validate([
+            'date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
+        ]);
+
+        $response = ApiHttpClient::request(
+            'POST',
+            'schedule/schedule-detail-store/' . $training_batch_id,
+            [
+                ...$request->all(),
+                'start_time' => Carbon::createFromFormat('H:i', $request->start_time)->format('H:i:s'),
+                'end_time' => Carbon::createFromFormat('H:i', $request->end_time)->format('H:i:s'),
+            ]
+        )
+            ->json();
+
+
+        if (isset($response['error'])) {
+            $error = $response['error'];
+            $errorMessage = $response['message'];
+            return redirect()->back()->withInput()->withErrors($errorMessage);
+        } else {
+            if ($response['success'] == false) {
+                session()->flash('type', 'Warning');
+                session()->flash('message', $response['message']);
+                return redirect()->back()->withInput();
+            } else {
+                session()->flash('type', 'Success');
+                session()->flash('message', $response['message']);
+                return redirect()->back();
+            }
+
+        }
+
+    }
+
+
+    public function scheduleDetailDestroy(Request $request, $schedule_detail_id)
+    {
+        $response = ApiHttpClient::request('delete', 'schedule/schedule-detail-destroy/' . $schedule_detail_id)
+            ->json();
+        if ($response['success'] == true) {
+            session()->flash('type', 'Success');
+        } else {
+            session()->flash('type', 'Warning');
+        }
+        session()->flash('message', $response['message'] ?? 'Something went wrong');
+        return redirect()->back();
+
+    }
     // all batches
     public function batches(Request $request)
     {
