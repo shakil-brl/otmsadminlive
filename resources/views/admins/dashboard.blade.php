@@ -155,10 +155,10 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/total_batch.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_batches_100">
-                                        {{-- <div class="spinner-grow spinner-grow-sm" role="status">
+                                    <div class="digit total_batches">
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
-                                        </div> --}}
+                                        </div>
 
                                         1213
 
