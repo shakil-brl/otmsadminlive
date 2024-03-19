@@ -159,9 +159,6 @@
                                         <div class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>
-
-                                        1213
-
                                     </div>
                                     <div class="label">{{ __('dashboard.total_batch') }}</div>
                                 </div>
