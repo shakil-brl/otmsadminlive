@@ -98,19 +98,20 @@ class CourseSuppliesController extends Controller
         if ($batch_results['success'] == true) {
             $batch = $batch_results['data'];
             $phase_id = $batch['batch_phase'] ? $batch['batch_phase']['phase']['id'] : null;
-
-            $combo_results = ApiHttpClient::request('get', 'product-combo', [
+            // dd($phase_id);
+            $combo_results = ApiHttpClient::request('get', "product-combo/phase/$phase_id", [
                 'page' => $request->page ?? 1,
                 'search' => $request->search,
                 'is_active' => 1,
-                'phase_id' => $phase_id,
             ])->json();
-
+            // dd($combo_results);
             if ($combo_results['success'] == true) {
                 $product_combos = $combo_results['data'];
                 $paginator = $this->customPaginate($combo_results, $request, route('course-supplies.supply', $batch_id));
 
                 return view('course-supplies.supply', ['batch' => $batch, 'combos' => $product_combos, 'paginator' => $paginator]);
+            } else {
+                return view('course-supplies.supply', ['batch' => $batch, 'combos' => 0]);
             }
         } else {
             session()->flash('type', 'Danger');

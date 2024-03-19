@@ -179,10 +179,11 @@
                                             Payment
                                         </a>
                                     @endif
-                                    @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
+                                    @if ($batch['lot_id'])
                                         <a href="{{ route('course-supplies.show', encrypt($batch['id'])) }}"
                                             class="btn btn-sm btn-success">
                                             Supplies
+                                            @dump($batch)
                                         </a>
                                     @endif
                                     @if (in_array('laptop-distribution.show', $roleRoutePermissions) && $batch['laptop'])

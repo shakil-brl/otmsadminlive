@@ -31,7 +31,7 @@
         @endisset
         <x-alert />
 
-        @isset($combos['data'])
+        @if (isset($combos['data']))
             <div class="card my-3 p-5">
                 <h3>Available Combo List:</h3>
                 <div class="mb-3">
@@ -91,7 +91,9 @@
                 </table>
                 {!! $paginator->links() !!}
             </div>
-        @endisset
+        @else
+            <h6 class="text-danger">No Available Combo</h6>
+        @endif
     </div>
 @section('scripts')
     <script>
