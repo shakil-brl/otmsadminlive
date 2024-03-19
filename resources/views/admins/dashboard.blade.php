@@ -658,7 +658,17 @@
         function renderDashboard(data) {
             // Render the dashboard with the retrieved data
              //console.log('Data:', data.data);
-        $('.total_batches').text(data.data.total_batch ?? 0);
+
+                let totalBatches = data.data.total_batch ?? 0;
+
+                if (totalBatches > 1213) {
+                $('.total_batches').text(1213);
+                } else {
+                $('.total_batches').text(totalBatches);
+                }
+
+
+        // $('.total_batches').text(data.data.total_batch ?? 0);
         $('.running_batches').text(data.data.running_batch ?? 0);
         $('.completed_batch').text(data.data.completed_batch ?? 0);
         $('.complete_class').text(data.data.complete_class ?? 0);
