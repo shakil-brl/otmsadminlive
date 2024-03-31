@@ -67,6 +67,12 @@
                 </div>
             </div>
         </div>
+        <div class="my-3 text-end">
+            <a href="{{ route('batch-schedule-detail.create', $batch['id']) }}" class="btn btn-primary">
+                Add New
+                Schedule
+            </a>
+        </div>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -83,13 +89,16 @@
                 $runningClass = false;
                 $desiredKey = 'status';
                 foreach ($schedule_details as $array) {
-                    if (array_key_exists($desiredKey, $array) && ($array[$desiredKey] == 2 || $array[$desiredKey] == 3)) {
+                    if (
+                        array_key_exists($desiredKey, $array) &&
+                        ($array[$desiredKey] == 2 || $array[$desiredKey] == 3)
+                    ) {
                         $schedule_used = true;
                         break;
                     }
                 }
                 foreach ($schedule_details as $array) {
-                    if (array_key_exists($desiredKey, $array) && ($array[$desiredKey] == 2)) {
+                    if (array_key_exists($desiredKey, $array) && $array[$desiredKey] == 2) {
                         $runningClass = true;
                         break;
                     }
@@ -192,9 +201,9 @@
                                             class="btn btn-secondary w-100 rounded-4 mb-1">Class Document</a>
                                         @if ($schedule_detail['status'] == 1 && !$runningClass)
                                             @if ($date <= \Carbon\Carbon::now())
-                                                <a id="{{ encrypt($schedule_detail['id']) }}" class="btn btn-detail start-class  update"
-                                                    type="button" data-bs-toggle="modal" data-bs-target="#classStartModal"
-                                                    type="button">
+                                                <a id="{{ encrypt($schedule_detail['id']) }}"
+                                                    class="btn btn-detail start-class  update" type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#classStartModal" type="button">
                                                     {{ __('batch-schedule.start_class') }}
                                                 </a>
                                             @else
@@ -214,6 +223,16 @@
                                         @endif
                                     @endisset
                                 @else
+                                    @if ($schedule_detail['status'] == 1)
+                                        <form action="{{ route('batch-schedule-detail.destroy', $schedule_detail['id']) }}"
+                                            method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-danger">
+                                                Delete This Schedule
+                                            </button>
+                                        </form>
+                                    @endif
                                     @if ($schedule_detail['status'] == 2)
                                         @if ($schedule_detail['streaming_link'])
                                             <a class="btn btn-detail" href="{{ $schedule_detail['streaming_link'] }}"
@@ -223,7 +242,8 @@
                                         @endif
                                         @if ($schedule_detail['static_link'])
                                             <a type="button" class="btn btn-detail mt-1"
-                                                href="{{ $schedule_detail['static_link'] }}" target="_blank" style="background-color: rgb(65, 65, 238);">
+                                                href="{{ $schedule_detail['static_link'] }}" target="_blank"
+                                                style="background-color: rgb(65, 65, 238);">
                                                 {{ __('batch-schedule.join_class') }}
                                             </a>
                                         @endif
@@ -236,8 +256,8 @@
                             @endisset
                             @isset($schedule_detail['status'])
                                 @if (in_array('batch-schedule.edit', $roleRoutePermissions) && $schedule_detail['status'] == 1)
-                                    <a href="" type="button" class="btn btn-detail btn-edit-schedule" id="btn-edit-schedule"
-                                        data-bs-toggle="modal" data-bs-target="#edit_schedule_details"
+                                    <a href="" type="button" class="btn btn-detail btn-edit-schedule"
+                                        id="btn-edit-schedule" data-bs-toggle="modal" data-bs-target="#edit_schedule_details"
                                         data-sd-id="{{ $schedule_detail['id'] }}" data-date={{ $date->format('d/m/Y') }}
                                         data-start-time={{ $schedule_detail['start_time'] }}
                                         data-end-time={{ $schedule_detail['end_time'] }}>
@@ -269,11 +289,13 @@
                     <!--begin::Provider added Form-->
                     <div class="modal-body">
                         <div class="mb-2">
-                            <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)</label>
+                            <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক
+                                (ফেসবুক বা ইউটিউব)</label>
                             <input id="streaming_link" type="text" class="form-control">
                         </div>
                         <div class="mb-2">
-                            <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক (গুগল মিট বা জুম)</label>
+                            <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক (গুগল মিট বা
+                                জুম)</label>
                             <input id="static_link" type="text" class="form-control">
                         </div>
                     </div>

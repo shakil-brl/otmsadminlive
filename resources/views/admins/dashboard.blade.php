@@ -159,7 +159,6 @@
                                         <div class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>
-
                                     </div>
                                     <div class="label">{{ __('dashboard.total_batch') }}</div>
                                 </div>
@@ -251,10 +250,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/district.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_district">
-                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                    <div class="digit total_district_100">
+                                        {{-- <div class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
-                                        </div>
+                                        </div> --}}
+                                        44
                                     </div>
                                     <div class="label">{{ __('dashboard.district') }}</div>
                                 </div>
@@ -270,10 +270,11 @@
                                     <img load="lazy" src="{{ asset('img/new_icon/upazila.png') }}" alt="">
                                 </div>
                                 <div>
-                                    <div class="digit total_upazila">
-                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                    <div class="digit total_upazila_100">
+                                        {{-- <div class="spinner-grow spinner-grow-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
-                                        </div>
+                                        </div> --}}
+                                        130
                                     </div>
                                     <div class="label">{{ __('dashboard.upazila') }}</div>
                                 </div>
@@ -657,7 +658,17 @@
         function renderDashboard(data) {
             // Render the dashboard with the retrieved data
              //console.log('Data:', data.data);
-        $('.total_batches').text(data.data.total_batch ?? 0);
+
+                let totalBatches = data.data.total_batch ?? 0;
+
+                if (totalBatches > 1213) {
+                $('.total_batches').text(1213);
+                } else {
+                $('.total_batches').text(totalBatches);
+                }
+
+
+        // $('.total_batches').text(data.data.total_batch ?? 0);
         $('.running_batches').text(data.data.running_batch ?? 0);
         $('.completed_batch').text(data.data.completed_batch ?? 0);
         $('.complete_class').text(data.data.complete_class ?? 0);

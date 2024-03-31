@@ -233,6 +233,13 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/destroy/{batch_id}', [BatchScheduleController::class, 'destroy'])->name('batch-schedule.destroy');
         Route::get('/clean/{batch_id}', [BatchScheduleController::class, 'clean'])->name('batch-schedule.clean');
         Route::get('/edit/{batch_id}', [BatchScheduleController::class, 'edit'])->name('batch-schedule.edit');
+
+
+        Route::delete('/schedule_detail/{schedule_detail_id}/destory', [BatchScheduleController::class, 'scheduleDetailDestroy'])->name('batch-schedule-detail.destroy');
+        Route::get('/create_schedule_detail/{training_batch_id}/add-new', [BatchScheduleController::class, 'scheduleDetailCreate'])->name('batch-schedule-detail.create');
+        Route::post('/schedule_detail_srore/{training_batch_id}', [BatchScheduleController::class, 'scheduleDetailStore'])->name('batch-schedule-detail.store');
+
+
     });
 
     //Route::resource('tms-inspections', TmsInspectionController::class);
