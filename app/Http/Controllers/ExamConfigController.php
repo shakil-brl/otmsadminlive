@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Clients\ApiHttpClient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use View;
 
-class HolydayController extends Controller
+class ExamConfigController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +16,17 @@ class HolydayController extends Controller
      */
     public function index(Request $request)
     {
-        $results = ApiHttpClient::request('get', 'holyday', [
+        $results = ApiHttpClient::request('get', 'exam-config', [
             'page' => $request->page ?? 1,
             'search' => $request->search,
         ])->json();
 
         if ($results['success'] == true) {
-            $holyday = $results['data'];
+            $exam_configs = $results['data'];
             $page_from = $results['data']['from'];
-            $paginator = $this->customPaginate($results, $request, route('holydays.index'));
-            // dd($holyday);
-            return view('holyday.index', ['results' => $holyday, 'paginator' => $paginator, 'page_from' => $page_from]);
+            $paginator = $this->customPaginate($results, $request, route('exam-config.index'));
+
+            return view('exam-config.index', ['results' => $exam_configs, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
@@ -40,7 +41,18 @@ class HolydayController extends Controller
      */
     public function create()
     {
-        return view('holyday.create');
+        $results = ApiHttpClient::request('get', 'training_title')
+            ->json();
+
+        if ($results['success'] == true) {
+            $data = $results['data'];
+            return view('exam-config.create', ['trainings' => $data]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+
     }
 
     /**
@@ -51,28 +63,29 @@ class HolydayController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
-            'day_name_en' => 'required',
-            'day_name_bn' => 'required',
-            'holly_bay' => 'required|date_format:d/m/Y'
+            'training_id' => 'required',
+            'exam_title' => 'required',
+            'exam_date' => 'required|date_format:d/m/Y',
+            'total_mark' => 'required',
+            'pass_mark' => 'required',
         ]);
 
-        $holyday = $request->except('holly_bay');
+        $exam_config = $request->except('exam_date');
 
-        $holyday['holly_bay'] = Carbon::createFromFormat('d/m/Y', $request->holly_bay)->format('Y-m-d');
+        $exam_config['exam_date'] = Carbon::createFromFormat('d/m/Y', $request->exam_date)->format('Y-m-d');
 
-        $data = ApiHttpClient::request('post', 'holyday', $holyday)->json();
-        //dd($data);
-        if (isset($data['error'])) {
-            $error_message = $data['message'];
+        $result = ApiHttpClient::request('post', 'exam-config', $exam_config)->json();
+
+        if (isset($result['error'])) {
+            $error_message = $result['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
             return redirect()->back()->with('error_message', $error_message)->withInput();
         } else {
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Created successfully');
-            return redirect()->route('holydays.index');
+            session()->flash('message', $result['message'] ?? 'Created successfully');
+            return redirect()->route('exam-config.index');
         }
     }
 
@@ -95,11 +108,14 @@ class HolydayController extends Controller
      */
     public function edit($id)
     {
-        $results = ApiHttpClient::request('get', "holyday/$id")->json();
-        // dd($results);
-        if ($results['success'] == true) {
-            $holyday = $results['data'];
-            return view('holyday.edit', ['holyday' => $holyday]);
+        $results = ApiHttpClient::request('get', "exam-config/$id")->json();
+        $trainingResults = ApiHttpClient::request('get', 'training_title')->json();
+
+        if ($results['success'] == true && $trainingResults['success'] == true) {
+            $exam_config = $results['data'];
+            $data = $trainingResults['data'];
+
+            return view('exam-config.edit', ['exam_config' => $exam_config, 'trainings' => $data]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
@@ -116,28 +132,29 @@ class HolydayController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $request->validate([
-            'day_name_en' => 'required',
-            'day_name_bn' => 'required',
-            'holly_bay' => 'required|date_format:d/m/Y'
+            'training_id' => 'required',
+            'exam_title' => 'required',
+            'exam_date' => 'required|date_format:d/m/Y',
+            'total_mark' => 'required',
+            'pass_mark' => 'required',
         ]);
 
-        $holyday = $request->except('holly_bay');
+        $exam_config = $request->except('exam_date');
 
-        $holyday['holly_bay'] = Carbon::createFromFormat('d/m/Y', $request->holly_bay)->format('Y-m-d');
+        $exam_config['exam_date'] = Carbon::createFromFormat('d/m/Y', $request->exam_date)->format('Y-m-d');
 
-        $data = ApiHttpClient::request('put', "holyday/$id", $holyday)->json();
-        // dd($data);
-        if (isset($data['error'])) {
-            $error_message = $data['message'];
+        $result = ApiHttpClient::request('put', "exam-config/$id", $exam_config)->json();
+
+        if (isset($result['error'])) {
+            $error_message = $result['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
             return redirect()->back()->with('error_message', $error_message)->withInput();
         } else {
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Updated successfully');
-            return redirect()->route('holydays.index');
+            session()->flash('message', $result['message'] ?? 'Updated successfully');
+            return redirect()->route('exam-config.index');
         }
     }
 
@@ -149,17 +166,16 @@ class HolydayController extends Controller
      */
     public function destroy($id)
     {
-        $results = ApiHttpClient::request('delete', "holyday/$id")->json();
+        $results = ApiHttpClient::request('delete', "exam-config/$id")->json();
 
         if ($results['success'] == true) {
-            // dd($holyday);
             session()->flash('type', 'Success');
             session()->flash('message', $results['message'] ?? 'Deleted successfully');
-            return redirect()->route('holydays.index');
+            return redirect()->route('exam-config.index');
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return redirect()->route('holydays.index');
+            return redirect()->route('exam-config.index');
         }
     }
 }

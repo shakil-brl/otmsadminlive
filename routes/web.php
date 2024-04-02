@@ -7,6 +7,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceRepoController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\BatchExamController;
 use App\Http\Controllers\BatchScheduleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClassDocumentController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EvaluationHeadController;
+use App\Http\Controllers\ExamConfigController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaptopDistributionController;
@@ -348,4 +350,4 @@ Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendan
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
 
 // test without permission
-
+Route::resource('/exam-config', ExamConfigController::class);
