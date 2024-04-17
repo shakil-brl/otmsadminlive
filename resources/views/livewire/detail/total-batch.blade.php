@@ -191,6 +191,12 @@
                                             Laptop Distribution
                                         </a>
                                     @endif
+                                    @if (in_array('exam.training', $roleRoutePermissions) && $batch['training']['exam_config'])
+                                        <a href="{{ route('exam.training', [encrypt($batch['id']), $batch['training']['id']]) }}"
+                                            class="btn btn-sm btn-warning mb-1">
+                                            All Exam
+                                        </a>
+                                    @endif
                                 </div>
 
                                 @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])

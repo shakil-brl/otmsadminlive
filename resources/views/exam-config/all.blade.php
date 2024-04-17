@@ -3,10 +3,7 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <div class="d-flex justify-content-end align-items-center">
-            <a class="btn btn-lg btn-success" href="{{ route('holydays.create') }}">{{__('config.create_holyday')}}</a>
-        </div>
-        <h3>{{__('config.holydays_list')}}</h3>
+        <h3>Exam List</h3>
         <x-alert />
 
         @isset($results['data'])
@@ -23,13 +20,14 @@
                 <table class="table table-bordered bg-white">
                     <thead>
                         <th>{{ __('batch-list.sl') }}</th>
-                        <th>{{__('config.name_english')}}</th>
-                        <th>{{__('config.name_bangla')}}</th>
-                        <th>{{__('config.date')}}</th>
-                        <th>{{ __('batch-list.action') }}</th>
+                        <th>Training Title</th>
+                        <th>Exam Title</th>
+                        <th>Date</th>
+                        <th>Total Mark</th>
+                        <th>Pass Mark</th>
                     </thead>
                     <tbody>
-                        @foreach ($results['data'] ?? [] as $index => $holyday)
+                        @foreach ($results['data'] ?? [] as $index => $e_config)
                             @php
                                 $from = $results['from'];
                             @endphp
@@ -38,23 +36,33 @@
                                     {{ $from + $loop->iteration - 1 }}
                                 </td>
                                 <td>
-                                    {{ $holyday['day_name_en'] ?? '' }}
+                                    {{ $e_config['training']['title']['NameEn'] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $holyday['day_name_bn'] ?? '' }}
+                                    {{ $e_config['exam_title'] ?? '' }}
                                 </td>
                                 <td>
-                                    {{ isset($holyday['holly_bay']) ? \Carbon\Carbon::parse($holyday['holly_bay'])->format('d-m-Y') : '' }}
+                                    {{ isset($e_config['exam_date']) ? \Carbon\Carbon::parse($e_config['exam_date'])->format('d-m-Y') : '' }}
+                                </td>
+                                <td>
+                                    {{ $e_config['total_mark'] ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $e_config['pass_mark'] ?? '' }}
                                 </td>
                                 <td class="me-0 d-flex gap-1">
-                                    <a href="{{ route('holydays.edit', $holyday['id']) }}" class="btn btn-sm btn-info">
-                                        {{__('config.edit')}}
-                                    </a>
-                                    <form action="{{ route('holydays.destroy', $holyday['id']) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger delete-action">{{__('config.delete')}}</button>
-                                    </form>
+                                    @if (in_array('exam.create', $roleRoutePermissions))
+                                        <a href="{{ route('exam.create', [encrypt($batch_data['id']), $e_config['id']]) }}"
+                                            class="btn btn-sm btn-success">
+                                            Take
+                                        </a>
+                                    @endif
+                                    @if (in_array('exam.result', $roleRoutePermissions))
+                                        <a href="{{ route('exam.result', [encrypt($batch_data['id']), $e_config['id']]) }}"
+                                            class="btn btn-sm btn-info">
+                                            Result
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
