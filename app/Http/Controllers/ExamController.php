@@ -62,14 +62,19 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $exam = $request->except('exact_exam_date');
+        $exam = $request->except('exact_exam_date', 'trainees', 'obtained_marks');
 
         $exam['exact_exam_date'] = Carbon::createFromFormat('d/m/Y', $request->exact_exam_date)->format('Y-m-d');
-        dd($exam);
+        $trainees = $request['trainees'];
+        $obtain_marks = $request['obtained_marks'];
+        $trainees_marks = array_combine($trainees, $obtain_marks);
+        $exam['trainees_marks'] = $trainees_marks;
+        // dd($exam);
         $data = ApiHttpClient::request('post', 'exam', $exam)->json();
-        // dd($data);
+        dd($data);
         if (isset($data['error'])) {
             $error_message = $data['message'];
+            dd($error_message);
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
             return redirect()->back()->with('error_message', $error_message)->withInput();

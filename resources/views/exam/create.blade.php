@@ -37,7 +37,7 @@
                                                 <td style="max-width: 35px">{{ $loop->iteration }}.</td>
                                                 <td>{{ $trainee['profile']['KnownAs'] }}</td>
                                                 <td class="d-flex align-items-center gap-5">
-                                                    <input type="number" name="obtained_mark[]" class="form-control w-50"
+                                                    <input type="number" name="obtained_marks[]" class="form-control w-50"
                                                         id="input-{{ $trainee['id'] }}">
                                                     <div>
                                                         <input type="hidden" name="training_batch_id"
@@ -45,11 +45,11 @@
                                                         <input type="hidden" name="exam_config_id"
                                                             value="{{ $exam_config_id }}">
                                                         <input type="hidden" name="trainees[]" value="{{ $trainee['id'] }}">
-                                                        <input type="checkbox" name="exam_absent[]"
+                                                        {{-- <input type="checkbox" name="exam_absent[]"
                                                             class="form-check-input exam-absent"
                                                             traineeId="{{ $trainee['id'] }}">
                                                         <label for="exam-absent" class="form-check-label text-danger">Mark as
-                                                            absent</label>
+                                                            absent</label> --}}
                                                     </div>
                                                 </td>
                                             </tr>
@@ -73,23 +73,23 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $(".exam-absent").click(function(e) {
-                let eValue = $(this).attr('traineeId');
-                let inputId = `input-${eValue}`;
-                let targetInput = $("#" + inputId);
+            // $(".exam-absent").click(function(e) {
+            //     let eValue = $(this).attr('traineeId');
+            //     let inputId = `input-${eValue}`;
+            //     let targetInput = $("#" + inputId);
 
-                if ($(this).is(":checked")) {
-                    targetInput.prop('disabled', true);
-                    targetInput.val('');
-                } else {
-                    targetInput.prop('disabled', false);
-                    targetInput.val('');
-                }
+            //     if ($(this).is(":checked")) {
+            //         targetInput.prop('disabled', true);
+            //         targetInput.val('');
+            //     } else {
+            //         targetInput.prop('disabled', false);
+            //         targetInput.val('');
+            //     }
 
-                toggleSubmitButtonVisibility();
-            });
+            //     toggleSubmitButtonVisibility();
+            // });
 
-            $("input[name='obtained_mark[]']").on('input', function() {
+            $("input[name='obtained_marks[]']").on('input', function() {
                 toggleSubmitButtonVisibility();
             });
 
@@ -103,7 +103,7 @@
             function toggleSubmitButtonVisibility() {
                 let hasInputValue = false;
 
-                $("input[name='obtained_mark[]']").each(function() {
+                $("input[name='obtained_marks[]']").each(function() {
                     if ($(this).val() !== '') {
                         hasInputValue = true;
                         return false; // Exit the loop early since we found at least one input with a value
