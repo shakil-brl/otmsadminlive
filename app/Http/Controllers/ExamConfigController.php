@@ -190,7 +190,7 @@ class ExamConfigController extends Controller
             $batch_data = $batch_results['data'];
             $exam_configs = $results['data'];
             $paginator = $this->customPaginate($results, $request, route('exam-config.index'));
-            // dd($results['data']);
+            // dd($batch_data);
             return view('exam-config.all', ['results' => $exam_configs, 'paginator' => $paginator, 'batch_data' => $batch_data]);
         } else {
             session()->flash('type', 'Danger');

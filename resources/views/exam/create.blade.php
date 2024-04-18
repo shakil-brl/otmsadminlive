@@ -44,7 +44,7 @@
                                                             value="{{ $result['id'] }}">
                                                         <input type="hidden" name="exam_config_id"
                                                             value="{{ $exam_config_id }}">
-                                                        <input type="hidden" name="trainee[]" value="{{ $trainee['id'] }}">
+                                                        <input type="hidden" name="trainees[]" value="{{ $trainee['id'] }}">
                                                         <input type="checkbox" name="exam_absent[]"
                                                             class="form-check-input exam-absent"
                                                             traineeId="{{ $trainee['id'] }}">

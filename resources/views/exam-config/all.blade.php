@@ -51,13 +51,21 @@
                                     {{ $e_config['pass_mark'] ?? '' }}
                                 </td>
                                 <td class="me-0 d-flex gap-1">
-                                    @if (in_array('exam.create', $roleRoutePermissions))
+                                    @php
+                                        $exam_ids = [];
+                                        if (isset($batch_data['exam'])) {
+                                            foreach ($batch_data['exam'] as $key => $exam) {
+                                                array_push($exam_ids, $exam['id']);
+                                            }
+                                        }
+                                    @endphp
+                                    @if (in_array('exam.create', $roleRoutePermissions) && !in_array($e_config['id'], $exam_ids))
                                         <a href="{{ route('exam.create', [encrypt($batch_data['id']), $e_config['id']]) }}"
                                             class="btn btn-sm btn-success">
                                             Take
                                         </a>
                                     @endif
-                                    @if (in_array('exam.result', $roleRoutePermissions))
+                                    @if (in_array('exam.result', $roleRoutePermissions) && in_array($e_config['id'], $exam_ids))
                                         <a href="{{ route('exam.result', [encrypt($batch_data['id']), $e_config['id']]) }}"
                                             class="btn btn-sm btn-info">
                                             Result

@@ -65,12 +65,11 @@ class ExamController extends Controller
         $exam = $request->except('exact_exam_date');
 
         $exam['exact_exam_date'] = Carbon::createFromFormat('d/m/Y', $request->exact_exam_date)->format('Y-m-d');
-
+        dd($exam);
         $data = ApiHttpClient::request('post', 'exam', $exam)->json();
         // dd($data);
         if (isset($data['error'])) {
             $error_message = $data['message'];
-            dd($error_message);
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
             return redirect()->back()->with('error_message', $error_message)->withInput();
