@@ -178,23 +178,29 @@ class ExamConfigController extends Controller
         }
     }
 
-    public function trainingExam($batch_id, $training_id, Request $request)
+    public function trainingExam(Request $request, $batch_id, $training_id = null)
     {
         $batch_id = decrypt($batch_id);
         $batch_results = ApiHttpClient::request('get', "get-batch-show/$batch_id")->json();
-        $results = ApiHttpClient::request('get', 'exam-config', [
-            'training_id' => $training_id,
-        ])->json();
 
-        if ($batch_results['success'] == true && $results['success'] == true) {
+        if ($batch_results['success'] == true) {
             $batch_data = $batch_results['data'];
-            $exam_configs = $results['data'];
-            $paginator = $this->customPaginate($results, $request, route('exam-config.index'));
+            $results = ApiHttpClient::request('get', 'exam-config', [
+                'training_id' => $training_id ?? $batch_data['get_training']['id'],
+            ])->json();
+            if ($results['success'] == true) {
+                $exam_configs = $results['data'];
+                $paginator = $this->customPaginate($results, $request, route('exam-config.index'));
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', $results['message'] ?? 'Something went wrong');
+                return back();
+            }
             // dd($batch_data);
             return view('exam-config.all', ['results' => $exam_configs, 'paginator' => $paginator, 'batch_data' => $batch_data]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            session()->flash('message', $batch_results['message'] ?? 'Something went wrong');
             return back();
         }
     }

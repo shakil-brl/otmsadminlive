@@ -25,6 +25,7 @@
                         <th>Date</th>
                         <th>Total Mark</th>
                         <th>Pass Mark</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody>
                         @foreach ($results['data'] ?? [] as $index => $e_config)
@@ -71,6 +72,17 @@
                                             class="btn btn-sm btn-info">
                                             Result
                                         </a>
+                                    @endif
+                                    @if (in_array('exam.destroy', $roleRoutePermissions) && in_array($e_config['id'], $exam_ids))
+                                        <form
+                                            action="{{ route('exam.destroy', [encrypt($batch_data['id']), $e_config['id']]) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger delete-action">
+                                                destroy
+                                            </button>
+                                        </form>
                                     @endif
                                 </td>
                             </tr>

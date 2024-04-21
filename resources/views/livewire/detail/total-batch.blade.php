@@ -191,8 +191,8 @@
                                             Laptop Distribution
                                         </a>
                                     @endif
-                                    @if (in_array('exam.training', $roleRoutePermissions) && $batch['training']['exam_config'])
-                                        <a href="{{ route('exam.training', [encrypt($batch['id']), $batch['training']['id']]) }}"
+                                    @if (in_array('all-exam.training', $roleRoutePermissions) && $batch['training']['exam_config'])
+                                        <a href="{{ route('all-exam.training', [encrypt($batch['id']), $batch['training']['id']]) }}"
                                             class="btn btn-sm btn-warning mb-1">
                                             All Exam
                                         </a>

@@ -83,7 +83,7 @@ class ExamController extends Controller
         } else {
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Created successfully');
-            return redirect()->route('exam.index');
+            return redirect()->route('all-exam.training', encrypt($request['training_batch_id']));
         }
     }
 
@@ -127,9 +127,21 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($batch_id, $exam_config_id)
     {
-        //
+        $batch_id = decrypt($batch_id);
+
+        $results = ApiHttpClient::request('delete', "exam/$batch_id/$exam_config_id/delete")->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            session()->flash('type', 'Success');
+            session()->flash('message', $results['message'] ?? 'Deleted successfully');
+            return redirect()->route('all-exam.training', encrypt($batch_id));
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
     }
 
     public function result($batch_id, $ec_id)
@@ -140,7 +152,6 @@ class ExamController extends Controller
         // dd($result);
         if ($result['success'] == true) {
             $exam = $result['data'];
-            // $paginator = $this->customPaginate($results, $request, route('exam.index'));
 
             return view('exam.result', ['result' => $exam]);
         } else {

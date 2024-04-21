@@ -44,10 +44,12 @@
                                         </div>
                                         <div>
                                             <h6>Exam Details</h6>
-                                            <p>Total Trainee: {{ $result['total_student'] }}</p>
-                                            <p>Total Present: {{ $result['total_present'] }}</p>
-                                            <p>Schedule Date: {{ $schedule_date }}</p>
-                                            <p>Taken Date: {{ $exam_date }}</p>
+                                            <p><span class="fw-semibold">Total Trainee:</span> {{ $result['total_student'] }}
+                                            </p>
+                                            <p><span class="fw-semibold">Total Present:</span> {{ $result['total_present'] }}
+                                            </p>
+                                            <p><span class="fw-semibold">Schedule Date:</span> {{ $schedule_date }}</p>
+                                            <p><span class="fw-semibold">Taken Date:</span> {{ $exam_date }}</p>
                                         </div>
 
                                     </div>
@@ -66,8 +68,9 @@
                                             <tr>
                                                 <td style="max-width: 35px">{{ $loop->iteration }}.</td>
                                                 <td>{{ $details['training_applicant']['profile']['KnownAs'] }}</td>
-                                                <td class="text-center">
-                                                    {{ $details['obtained_mark'] }}
+                                                <td
+                                                    class="text-center {{ $details['obtained_mark'] ? '' : ( $details['remark'] === 'Fails' ? 'text-danger' : 'text-warning') }}">
+                                                    {{ $details['obtained_mark'] ? $details['obtained_mark'] : $details['remark'] }}
                                                 </td>
                                             </tr>
                                         @endforeach

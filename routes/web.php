@@ -352,10 +352,12 @@ Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendanc
 
 // test without permission
 Route::resource('/exam-config', ExamConfigController::class);
-Route::get('/exam/{batch_id}/{training_id}', [ExamConfigController::class, 'trainingExam'])->name('exam.training');
+Route::get('/all-exam/{batch_id}/{training_id?}', [ExamConfigController::class, 'trainingExam'])->name('all-exam.training');
 
 Route::resource('/exam', ExamController::class)->except([
-    'create'
+    'create',
+    'destroy'
 ]);
+Route::delete('/exam/{batch_id}/{exam_config_id}/delete', [ExamController::class, 'destroy'])->name('exam.destroy');
 Route::get('/exam/{batch_id}/{exam_config_id}/create', [ExamController::class, 'create'])->name('exam.create');
 Route::get('/exam/result/{batch_id}/{ec_id}show', [ExamController::class, 'result'])->name('exam.result');

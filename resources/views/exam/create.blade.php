@@ -52,6 +52,9 @@
                                     <input type="date" class="form-control" name="exact_exam_date" id="exact_exam_date"
                                         placeholder="Select exam taken date">
                                 </div>
+                                <div>
+                                    <p class="text-danger">*** প্রশিক্ষনার্থীর নম্বর প্রদান না করিলে অনুপস্থিত হিসেবে গৃহীত হইবে</p>
+                                </div>
                                 <h6>Trainee List:</h6>
                                 <table class="table table-bordered">
                                     <thead>
@@ -68,18 +71,14 @@
                                                 <td>{{ $trainee['profile']['KnownAs'] }}</td>
                                                 <td class="d-flex align-items-center gap-5">
                                                     <input type="number" name="obtained_marks[]"
-                                                        class="form-control w-50 mx-auto" id="input-{{ $trainee['id'] }}">
+                                                        class="form-control w-50 mx-auto" id="input-{{ $trainee['id'] }}"
+                                                        max="{{ $exam_config['total_mark'] }}" min="0">
                                                     <div>
                                                         <input type="hidden" name="training_batch_id"
                                                             value="{{ $result['id'] }}">
                                                         <input type="hidden" name="exam_config_id"
                                                             value="{{ $exam_config['id'] }}">
                                                         <input type="hidden" name="trainees[]" value="{{ $trainee['id'] }}">
-                                                        {{-- <input type="checkbox" name="exam_absent[]"
-                                                            class="form-check-input exam-absent"
-                                                            traineeId="{{ $trainee['id'] }}">
-                                                        <label for="exam-absent" class="form-check-label text-danger">Mark as
-                                                            absent</label> --}}
                                                     </div>
                                                 </td>
                                             </tr>
@@ -87,7 +86,7 @@
                                     </tbody>
                                 </table>
                                 <div class="text-center mt-5">
-                                    <button class="btn btn-md btn-success d-none" id="submit-btn">Submit</button>
+                                    <button class="btn btn-md btn-success d-none submit-btn" id="submit-btn">Submit</button>
                                 </div>
                             </form>
                         @else
@@ -103,22 +102,6 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            // $(".exam-absent").click(function(e) {
-            //     let eValue = $(this).attr('traineeId');
-            //     let inputId = `input-${eValue}`;
-            //     let targetInput = $("#" + inputId);
-
-            //     if ($(this).is(":checked")) {
-            //         targetInput.prop('disabled', true);
-            //         targetInput.val('');
-            //     } else {
-            //         targetInput.prop('disabled', false);
-            //         targetInput.val('');
-            //     }
-
-            //     toggleSubmitButtonVisibility();
-            // });
-
             $("input[name='obtained_marks[]']").on('input', function() {
                 toggleSubmitButtonVisibility();
             });
@@ -139,13 +122,6 @@
 
             $("#exact_exam_date").flatpickr(dateFromatJson);
 
-            // $("#exact_exam_date").flatpickr({
-            //     dateFormat: "d/m/Y",
-            //     onChange: function(selectedDates, dateStr, instance) {
-            //         toggleSubmitButtonVisibility();
-            //     }
-            // });
-
             function toggleSubmitButtonVisibility() {
                 let hasInputValue = false;
 
@@ -164,6 +140,26 @@
                     $("#submit-btn").addClass("d-none");
                 }
             }
+
+            $(document).on("click", ".submit-btn", function(e) {
+                e.preventDefault();
+                const form = $(this).closest('form');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, submit!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
         });
     </script>
 @endpush
