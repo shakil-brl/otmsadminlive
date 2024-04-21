@@ -6,18 +6,48 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between border p-5">
-                        <p class="fw-semibold fs-6">Batch Code: {{ old('batchCode', $result['batchCode'] ?? '') }}</p>
-                        <p class="fw-semibold fs-6">Location: {{ old('GEOLocation', $result['GEOLocation'] ?? '') }}</p>
+                        <p class="fw-semibold fs-6">Batch Code: {{ $result['batchCode'] ?? '' }}</p>
+                        <p class="fw-semibold fs-6">Location: {{ $result['GEOLocation'] ?? '' }}</p>
                         <p class="fw-semibold fs-6">Training Title:
-                            {{ old('training_title', $result['get_training']['title']['Name'] ?? '') }}</p>
+                            {{ $result['get_training']['title']['Name'] ?? '' }}</p>
                     </div>
+                    <x-alert />
 
-                    <div class="mt-5">
+                    @if (session('error_message'))
+                        <ul class="m-0 text-danger">
+                            @foreach (session('error_message') ?? [] as $neme => $err)
+                                @foreach ($err as $e)
+                                    <li>
+                                        {{ $e }}
+                                    </li>
+                                @endforeach
+                            @endforeach
+                        </ul>
+                    @endif
 
+                    @php
+                        $default_date = '';
+                        if (isset($exam_config['exam_date'])) {
+                            if ($exam_config['exam_date']) {
+                                $default_date = \Carbon\Carbon::createFromFormat(
+                                    'Y-m-d',
+                                    $exam_config['exam_date'],
+                                )->format('d/m/Y');
+                            }
+                        }
+                    @endphp
+
+                    <div class="mt-5 border p-5">
                         @if (count($result['trainees']) > 0)
                             <form action="{{ route('exam.store') }}" method="POST">
                                 @csrf
                                 <div class="mb-5">
+                                    <div class="d-flex justify-content-between mb-3 fw-semibold">
+                                        <p>Exam Title: {{ $exam_config['exam_title'] }}</p>
+                                        <p>Total Mark: {{ $exam_config['total_mark'] }}</p>
+                                        <p>Pass Mark: {{ $exam_config['pass_mark'] }}</p>
+                                    </div>
+
                                     <label for="exact_exam_date">Exact Exam Date:</label>
                                     <input type="date" class="form-control" name="exact_exam_date" id="exact_exam_date"
                                         placeholder="Select exam taken date">
@@ -28,7 +58,7 @@
                                         <tr>
                                             <th style="max-width: 35px">S.N.</th>
                                             <th>Name</th>
-                                            <th>Mark</th>
+                                            <th class="text-center">Marks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -37,13 +67,13 @@
                                                 <td style="max-width: 35px">{{ $loop->iteration }}.</td>
                                                 <td>{{ $trainee['profile']['KnownAs'] }}</td>
                                                 <td class="d-flex align-items-center gap-5">
-                                                    <input type="number" name="obtained_marks[]" class="form-control w-50"
-                                                        id="input-{{ $trainee['id'] }}">
+                                                    <input type="number" name="obtained_marks[]"
+                                                        class="form-control w-50 mx-auto" id="input-{{ $trainee['id'] }}">
                                                     <div>
                                                         <input type="hidden" name="training_batch_id"
                                                             value="{{ $result['id'] }}">
                                                         <input type="hidden" name="exam_config_id"
-                                                            value="{{ $exam_config_id }}">
+                                                            value="{{ $exam_config['id'] }}">
                                                         <input type="hidden" name="trainees[]" value="{{ $trainee['id'] }}">
                                                         {{-- <input type="checkbox" name="exam_absent[]"
                                                             class="form-check-input exam-absent"
@@ -93,12 +123,28 @@
                 toggleSubmitButtonVisibility();
             });
 
-            $("#exact_exam_date").flatpickr({
+            let starDate = "{{ $default_date ?? '' }}";
+            let dateFromatJson = {
                 dateFormat: "d/m/Y",
                 onChange: function(selectedDates, dateStr, instance) {
                     toggleSubmitButtonVisibility();
                 }
-            });
+            };
+
+            @if (isset($default_date))
+                @if ($default_date != '')
+                    dateFromatJson['defaultDate'] = starDate;
+                @endif
+            @endif
+
+            $("#exact_exam_date").flatpickr(dateFromatJson);
+
+            // $("#exact_exam_date").flatpickr({
+            //     dateFormat: "d/m/Y",
+            //     onChange: function(selectedDates, dateStr, instance) {
+            //         toggleSubmitButtonVisibility();
+            //     }
+            // });
 
             function toggleSubmitButtonVisibility() {
                 let hasInputValue = false;

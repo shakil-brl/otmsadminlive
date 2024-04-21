@@ -55,10 +55,11 @@
                                         $exam_ids = [];
                                         if (isset($batch_data['exam'])) {
                                             foreach ($batch_data['exam'] as $key => $exam) {
-                                                array_push($exam_ids, $exam['id']);
+                                                array_push($exam_ids, $exam['exam_config_id']);
                                             }
                                         }
                                     @endphp
+                                    {{-- @dd($exam_ids); --}}
                                     @if (in_array('exam.create', $roleRoutePermissions) && !in_array($e_config['id'], $exam_ids))
                                         <a href="{{ route('exam.create', [encrypt($batch_data['id']), $e_config['id']]) }}"
                                             class="btn btn-sm btn-success">

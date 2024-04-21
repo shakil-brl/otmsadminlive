@@ -39,14 +39,16 @@ class ExamController extends Controller
      */
     public function create($batch_id, $exam_config_id)
     {
+        // dd($exam_config_id);
         $batch_id = decrypt($batch_id);
-
+        $ec_results = ApiHttpClient::request('get', "exam-config/$exam_config_id")->json();
         $results = ApiHttpClient::request('get', "get-batch-show/$batch_id")->json();
-        // dd($batch_id);
-        if ($results['success'] == true) {
+        // dd($ec_results);
+        if ($results['success'] == true && $ec_results['success'] == true) {
             $batch_data = $results['data'];
+            $exam_config = $ec_results['data'];
             // dd($batch_data);
-            return view('exam.create', ['result' => $batch_data, 'exam_config_id' => $exam_config_id]);
+            return view('exam.create', ['result' => $batch_data, 'exam_config' => $exam_config]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
@@ -71,10 +73,10 @@ class ExamController extends Controller
         $exam['trainees_marks'] = $trainees_marks;
         // dd($exam);
         $data = ApiHttpClient::request('post', 'exam', $exam)->json();
-        dd($data);
+        // dd($data);
         if (isset($data['error'])) {
             $error_message = $data['message'];
-            dd($error_message);
+            // dd($error_message);
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
             return redirect()->back()->with('error_message', $error_message)->withInput();
@@ -133,17 +135,17 @@ class ExamController extends Controller
     public function result($batch_id, $ec_id)
     {
         $batch_id = decrypt($batch_id);
-        dd($batch_id);
-        $results = ApiHttpClient::request('get', "exam-result/$batch_id/$ec_id")->json();
-        dd($results);
-        if ($results['success'] == true) {
-            $exam = $results['data'];
-            $paginator = $this->customPaginate($results, $request, route('exam.index'));
+        // dd($batch_id);
+        $result = ApiHttpClient::request('get', "exam-result/$batch_id/$ec_id")->json();
+        // dd($result);
+        if ($result['success'] == true) {
+            $exam = $result['data'];
+            // $paginator = $this->customPaginate($results, $request, route('exam.index'));
 
-            return view('exam.index', ['results' => $exam, 'paginator' => $paginator]);
+            return view('exam.result', ['result' => $exam]);
         } else {
             session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            session()->flash('message', $result['message'] ?? 'Something went wrong');
             return back();
         }
     }
