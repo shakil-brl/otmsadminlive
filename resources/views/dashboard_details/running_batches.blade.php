@@ -47,7 +47,7 @@
                             <td class="">
                                 <a href="{{ route('batch-schedule.index', [encrypt($batch['id']), encrypt($batch['training_batch']['id'])]) }}"
                                     class="btn btn-sm btn-info mb-1"> {{ __('batch-list.view_schedule') }}
-                                </a>                            
+                                </a>
 
                                 @if (in_array('course-supplies.supply', $roleRoutePermissions))
                                     <a href="{{ route('course-supplies.supply', [encrypt($batch['training_batch']['id'])]) }}"
@@ -65,6 +65,13 @@
                                     <a href="{{ route('laptop-distribution.edit', [$batch['training_batch']['laptop']['id'], encrypt($batch['training_batch']['id'])]) }}"
                                         class="btn btn-sm btn-warning mb-1">
                                         Edit Laptop Distribution
+                                    </a>
+                                @endif
+
+                                @if (in_array('all-exam.training', $roleRoutePermissions) && $batch['training_batch']['training']['exam_config'])
+                                    <a href="{{ route('all-exam.training', [encrypt($batch['training_batch']['id']), $batch['training_batch']['training']['id']]) }}"
+                                        class="btn btn-sm btn-warning mb-1">
+                                        All Exam
                                     </a>
                                 @endif
                             </td>

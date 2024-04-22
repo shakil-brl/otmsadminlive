@@ -32,6 +32,10 @@ class CourseSuppliesController extends Controller
                 $paginator = $this->customPaginate($combo_results, $request, route('course-supplies.supply', $batch_id));
 
                 return view('course-supplies.supply', ['batch' => $batch, 'combos' => $product_combos, 'paginator' => $paginator]);
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', ($batch_results['message'] ?? 'Something went wrong'));
+                return back();
             }
         } else {
             session()->flash('type', 'Danger');
@@ -83,7 +87,7 @@ class CourseSuppliesController extends Controller
         } else {
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Distributed successfully');
-            return redirect()->route('dashboard_details.running_batches');
+            return redirect()->back();
         }
     }
 
