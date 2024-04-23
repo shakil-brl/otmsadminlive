@@ -49,7 +49,7 @@
                                     class="btn btn-sm btn-info mb-1"> {{ __('batch-list.view_schedule') }}
                                 </a>
 
-                                @if (in_array('course-supplies.supply', $roleRoutePermissions))
+                                @if (in_array('course-supplies.supply', $roleRoutePermissions) && $batch['training_batch']['batch_phase'])
                                     <a href="{{ route('course-supplies.supply', [encrypt($batch['training_batch']['id'])]) }}"
                                         class="btn btn-sm btn-success mb-1">
                                         Supplies

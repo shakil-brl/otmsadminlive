@@ -179,8 +179,9 @@
                                             Payment
                                         </a>
                                     @endif
-                                    @if (in_array('course-supplies.supply', $roleRoutePermissions))
-                                        <a href="{{ route('course-supplies.show', encrypt($batch['id'])) }}"
+
+                                    @if (in_array('course-supplies.supply', $roleRoutePermissions) && $batch['batch_phase'])
+                                        <a href="{{ route('course-supplies.supply', encrypt($batch['id'])) }}"
                                             class="btn btn-sm btn-success">
                                             Supplies
                                         </a>
