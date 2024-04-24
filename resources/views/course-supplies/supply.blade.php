@@ -73,14 +73,9 @@
                                                 class="btn btn-sm btn-info">
                                                 Distibute
                                             </a>
-                                        @elseif(in_array('course-supplies.distributed-list', $roleRoutePermissions) && $combo['allocation'])
+                                        @elseif(in_array('course-supplies.distributed-list', $roleRoutePermissions))
                                             <a href="{{ route('course-supplies.distributed-list', [encrypt($batch['id']), $combo['id']]) }}"
                                                 class="btn btn-sm btn-info">
-                                                Distibuted List
-                                            </a>
-                                        @elseif(in_array('course-supplies.distributed-list', $roleRoutePermissions) && !$combo['allocation'])
-                                            <a href="{{ route('course-supplies.distributed-list', [encrypt($batch['id']), $combo['id']]) }}"
-                                                class="btn btn-sm btn-info disabled">
                                                 Distibuted List
                                             </a>
                                         @endif

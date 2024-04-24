@@ -13,7 +13,7 @@ class CourseSuppliesController extends Controller
         $batch_id = decrypt($batch_id);
         $batch_results = ApiHttpClient::request('get', 'batch/' . $batch_id . '/show')
             ->json();
-        // dd($batch_results['data']);
+        // dd($batch_results);
         if ($batch_results['success'] == true) {
             $batch = $batch_results['data'];
             $phase_id = $batch['batch_phase'] ? $batch['batch_phase']['phase']['id'] : null;

@@ -167,7 +167,7 @@
                                         class="badge text-black badge-warning">{{ __('batch-list.not_created-schedule') }}</span>
                                 @endif
                             @else
-                                <div class="d-flex gap-2">
+                                <div class="d-flex flex-column gap-2">
                                     @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
                                         <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
                                             class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
@@ -196,6 +196,12 @@
                                         <a href="{{ route('all-exam.training', [encrypt($batch['id']), $batch['training']['id']]) }}"
                                             class="btn btn-sm btn-warning mb-1">
                                             All Exam
+                                        </a>
+                                    @endif
+                                    @if (in_array('certificates.create', $roleRoutePermissions) && !$batch['schedule']['total_pending'] && !$batch['schedule']['total_running'] && $batch['schedule']['total_complete'])
+                                        <a href="{{ route('certificates.create', [encrypt($batch['id'])]) }}"
+                                            class="btn btn-sm btn-warning mb-1">
+                                            Certificate
                                         </a>
                                     @endif
                                 </div>

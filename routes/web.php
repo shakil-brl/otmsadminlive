@@ -10,6 +10,7 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\BatchExamController;
 use App\Http\Controllers\BatchScheduleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ClassDocumentController;
 use App\Http\Controllers\CommitteeController;
 use App\Http\Controllers\CourseController;
@@ -361,3 +362,10 @@ Route::resource('/exam', ExamController::class)->except([
 Route::delete('/exam/{batch_id}/{exam_config_id}/delete', [ExamController::class, 'destroy'])->name('exam.destroy');
 Route::get('/exam/{batch_id}/{exam_config_id}/create', [ExamController::class, 'create'])->name('exam.create');
 Route::get('/exam/result/{batch_id}/{ec_id}show', [ExamController::class, 'result'])->name('exam.result');
+
+// certificate
+
+Route::resource('certificates', CertificateController::class)->except([
+    'create'
+]);
+Route::get('certificates/{batch_id}/create', [CertificateController::class, 'create'])->name('certificates.create');
