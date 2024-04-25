@@ -39,6 +39,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TmsPhaseController;
 use App\Http\Controllers\TraineeEnrollmentController;
 use App\Http\Controllers\TrainerEnrollmentController;
@@ -239,6 +240,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/edit/{batch_id}', [BatchScheduleController::class, 'edit'])->name('batch-schedule.edit');
 
 
+
         Route::delete('/schedule_detail/{schedule_detail_id}/destory', [BatchScheduleController::class, 'scheduleDetailDestroy'])->name('batch-schedule-detail.destroy');
         Route::get('/create_schedule_detail/{training_batch_id}/add-new', [BatchScheduleController::class, 'scheduleDetailCreate'])->name('batch-schedule-detail.create');
         Route::post('/schedule_detail_srore/{training_batch_id}', [BatchScheduleController::class, 'scheduleDetailStore'])->name('batch-schedule-detail.store');
@@ -326,6 +328,24 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
+
+    Route::resource('/exam-config', ExamConfigController::class);
+    Route::get('/all-exam/{batch_id}/{training_id?}', [ExamConfigController::class, 'trainingExam'])->name('all-exam.training');
+
+    Route::resource('/exam', ExamController::class)->except([
+        'create',
+        'destroy'
+    ]);
+    Route::delete('/exam/{batch_id}/{exam_config_id}/delete', [ExamController::class, 'destroy'])->name('exam.destroy');
+    Route::get('/exam/{batch_id}/{exam_config_id}/create', [ExamController::class, 'create'])->name('exam.create');
+    Route::get('/exam/result/{batch_id}/{ec_id}show', [ExamController::class, 'result'])->name('exam.result');
+
+    // certificate
+
+    Route::resource('certificates', CertificateController::class)->except([
+        'create'
+    ]);
+    Route::get('certificates/{batch_id}/create', [CertificateController::class, 'create'])->name('certificates.create');
 });
 
 
@@ -352,20 +372,10 @@ Route::get('/attendance-report', [AttendanceRepoController::class, 'showAttendan
 Route::get('/generate-pdf', [AttendanceRepoController::class, 'generateAttendancePdf'])->name('generate-pdf');
 
 // test without permission
-Route::resource('/exam-config', ExamConfigController::class);
-Route::get('/all-exam/{batch_id}/{training_id?}', [ExamConfigController::class, 'trainingExam'])->name('all-exam.training');
-
-Route::resource('/exam', ExamController::class)->except([
-    'create',
-    'destroy'
-]);
-Route::delete('/exam/{batch_id}/{exam_config_id}/delete', [ExamController::class, 'destroy'])->name('exam.destroy');
-Route::get('/exam/{batch_id}/{exam_config_id}/create', [ExamController::class, 'create'])->name('exam.create');
-Route::get('/exam/result/{batch_id}/{ec_id}show', [ExamController::class, 'result'])->name('exam.result');
-
-// certificate
-
-Route::resource('certificates', CertificateController::class)->except([
-    'create'
-]);
-Route::get('certificates/{batch_id}/create', [CertificateController::class, 'create'])->name('certificates.create');
+Route::group(['controller' => SupportController::class, 'prefix' => 'support'], function () {
+    Route::get('/all-batch', 'allBatch')->name('support.all-batch');
+    Route::get('/class/{b_id}/{s_id}/miss', 'allScheduleDetails')->name('support.miss-class');
+    Route::post('/attendance/start-all', 'startAll')->name('support.start-all');
+    Route::get('/class/{b_id}/{s_id}/running', 'allStartDetails')->name('support.running-class');
+    Route::post('/attendance/end-all', 'endAll')->name('support.end-all');
+});
