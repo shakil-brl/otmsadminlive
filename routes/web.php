@@ -23,6 +23,7 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EvaluationHeadController;
 use App\Http\Controllers\ExamConfigController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\FileSettingController;
 use App\Http\Controllers\HolydayController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaptopDistributionController;
@@ -41,6 +42,7 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\TmsPhaseController;
+use App\Http\Controllers\TmsSettingController;
 use App\Http\Controllers\TraineeEnrollmentController;
 use App\Http\Controllers\TrainerEnrollmentController;
 use App\Http\Controllers\UpazilaController;
@@ -379,3 +381,5 @@ Route::group(['controller' => SupportController::class, 'prefix' => 'support'], 
     Route::get('/class/{b_id}/{s_id}/running', 'allStartDetails')->name('support.running-class');
     Route::post('/attendance/end-all', 'endAll')->name('support.end-all');
 });
+
+Route::resource('/tms-settings', TmsSettingController::class);

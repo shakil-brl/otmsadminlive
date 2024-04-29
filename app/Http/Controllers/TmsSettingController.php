@@ -5,16 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 
-class ClassDocumentController extends Controller
+class TmsSettingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $results = ApiHttpClient::request('get', 'tms-settings', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+        ])->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $paginator = $this->customPaginate($results, $request, route('tms-settings.index'));
+            // dd($results);
+            return view('tms-setting.index', ['results' => $results['data'], 'paginator' => $paginator]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
     /**
@@ -24,6 +37,7 @@ class ClassDocumentController extends Controller
      */
     public function create()
     {
+        return view('tms-setting.create');
     }
 
     /**
@@ -34,23 +48,22 @@ class ClassDocumentController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $data = $request->validate([
-            'tms_batch_schedule_detail_id' => 'required',
-            'document_title' => 'required',
-            'description' => 'required',
-            'doc_file' => 'required|mimes:pdf,doc,docx,jpg,jpeg,png,gif,txt|max:5120',
+            'key' => 'required',
+            'file' => 'required|mimes:pdf,doc,docx,jpg,jpeg,png,gif,txt|max:5120',
         ]);
 
-        $document = $request->except('doc_file');
+        $document = $request->except('file');
 
-        if ($request->hasFile('doc_file')) {
-            $file = $request->file('doc_file');
-            // $document['doc_type'] = $file->getClientOriginalExtension();
-            $document['doc_type'] = 1;
-            $document['document_path'] = $this->classFileUpload($file, $data['tms_batch_schedule_detail_id']);
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $document['type'] = $file->getClientOriginalExtension();
+            // dd($document['type']);
+            $document['value'] = $this->fileUpload($file);
 
-            if (strlen($document['document_path']) > 100) {
-                $filePath = storage_path('app/public/' . $document['document_path']);
+            if (strlen($document['value']) > 100) {
+                $filePath = storage_path('app/public/' . $document['value']);
                 $this->removeFile($filePath);
                 session()->flash('type', 'Danger');
                 session()->flash('message', 'File name is too long.');
@@ -61,9 +74,10 @@ class ClassDocumentController extends Controller
             session()->flash('message', 'File not found.');
             return redirect()->back()->withInput();
         }
-        $data = ApiHttpClient::request('post', 'class-document', $document)->json();
+        $data = ApiHttpClient::request('post', 'tms-settings', $document)->json();
 
         if ($data['success'] == false) {
+            $this->removeFile(storage_path('app/public/' . $document['value']));
             $error_message = $data['message'];
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
@@ -71,7 +85,7 @@ class ClassDocumentController extends Controller
         } else {
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Created successfully');
-            return redirect()->route('schedule-class-documents.index', $request->tms_batch_schedule_detail_id);
+            return redirect()->route('tms-settings.index');
         }
     }
 
@@ -94,7 +108,17 @@ class ClassDocumentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $results = ApiHttpClient::request('get', "tms-settings/$id")->json();
+
+        if ($results['success'] == true) {
+            $data = $results['data'];
+
+            return view('file-setting.edit', ['file' => $data]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -106,7 +130,7 @@ class ClassDocumentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -117,11 +141,11 @@ class ClassDocumentController extends Controller
      */
     public function destroy($id)
     {
-        $document = ApiHttpClient::request('get', "class-document/$id")->json();
-        $results = ApiHttpClient::request('delete', "class-document/$id")->json();
+        $file = ApiHttpClient::request('get', "tms-settings/$id")->json();
+        $results = ApiHttpClient::request('delete', "tms-settings/$id")->json();
 
-        if ($results['success'] == true && $document['success'] == true) {
-            $filePath = storage_path('app/public/' . $document['data']['document_path']);
+        if ($results['success'] == true && $file['success'] == true) {
+            $filePath = storage_path('app/public/' . $file['data']['value']);
             $this->removeFile($filePath);
 
             session()->flash('type', 'Success');
@@ -132,32 +156,5 @@ class ClassDocumentController extends Controller
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return redirect()->back();
         }
-    }
-
-    /**
-     * Class Document for specific schedule_details_id/class
-     */
-    public function scheduleDocument(Request $request, $schedule_details_id)
-    {
-        $results = ApiHttpClient::request('get', 'class-document', [
-            'schedule_detail_id' => $schedule_details_id,
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
-        ])->json();
-        // dd($results);
-        if ($results['success'] == true) {
-            $paginator = $this->customPaginate($results, $request, route('schedule-class-documents.index', $schedule_details_id));
-            // dd($results);
-            return view('schedule-details.class-document', ['schedule_details_id' => $schedule_details_id, 'results' => $results['data'], 'paginator' => $paginator]);
-        } else {
-            session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return back();
-        }
-    }
-
-    public function createDocument($schedule_details_id)
-    {
-        return view('class-document.create', compact('schedule_details_id'));
     }
 }
