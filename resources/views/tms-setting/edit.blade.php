@@ -17,15 +17,17 @@
             @endif
 
             <div class="border rounded p-5 mt-5">
-                <form class="" action="{{ route('tms-settings.update', $file['id']) }}" method="POST"
+                <form class="" action="{{ route('tms-settings.update', $setting['id']) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('patch')
                     <div class="text-center">
-                        <figure>
-                            <img src="{{ asset('storage/' . $file['value']) }}" alt="" width="250px">
-                            <figcaption>.</figcaption>
-                        </figure>
+                        @if ($setting['type'] != 'text')
+                            <figure>
+                                <img src="{{ asset('storage/' . $setting['value']) }}" alt="" width="250px">
+                                <figcaption>Img: Existing Image</figcaption>
+                            </figure>
+                        @endif
                     </div>
                     @include('tms-setting.form')
 

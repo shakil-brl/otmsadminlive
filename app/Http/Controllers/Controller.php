@@ -86,14 +86,14 @@ class Controller extends BaseController
             // Generate a unique filename based on date, time, original filename, and schedule ID
             $filename = "{$dateTime}_{$originalFilename}.{$file->getClientOriginalExtension()}";
 
-            $folderPath = storage_path("app/public/file");
+            $folderPath = storage_path("app/public/settings");
             // Check if the folder exists, create it if not
             if (!File::isDirectory($folderPath)) {
                 File::makeDirectory($folderPath, 0777, true, true);
             }
 
             $file->move($folderPath, $filename);
-            $path = "file/{$filename}";
+            $path = "settings/{$filename}";
         }
 
         return $path;

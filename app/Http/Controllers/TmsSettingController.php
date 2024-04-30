@@ -48,46 +48,56 @@ class TmsSettingController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        $data = $request->validate([
+        $commonValidationRules = [
             'key' => 'required',
-            'file' => 'required|mimes:pdf,doc,docx,jpg,jpeg,png,gif,txt|max:5120',
-        ]);
+            'type' => 'required',
+        ];
 
-        $document = $request->except('file');
+        $fileValidationRules = [
+            'file' => 'required|mimes:jpg,jpeg,png,gif,svg|max:5120',
+        ];
 
-        if ($request->hasFile('file')) {
+        $textValidationRules = [
+            'text' => 'required'
+        ];
+
+        if ($request->has('type') && $request->input('type') === 'file') {
+            $request->validate(array_merge($commonValidationRules, $fileValidationRules));
+            $document = $request->except('file', 'type', 'text');
+        } else {
+            $request->validate(array_merge($commonValidationRules, $textValidationRules));
+            $document = $request->except('file');
+        }
+
+        if ($request->hasFile('file') && $request->input('type') === 'file') {
             $file = $request->file('file');
-            $document['type'] = $file->getClientOriginalExtension();
-            // dd($document['type']);
+            $document['type'] = image_type_to_mime_type(exif_imagetype($file->path()));
             $document['value'] = $this->fileUpload($file);
 
             if (strlen($document['value']) > 100) {
-                $filePath = storage_path('app/public/' . $document['value']);
-                $this->removeFile($filePath);
-                session()->flash('type', 'Danger');
-                session()->flash('message', 'File name is too long.');
-                return redirect()->back()->withInput();
+                $this->removeFile(storage_path('app/public/' . $document['value']));
+                return redirect()->back()->withInput()->with('type', 'danger')->with('message', 'File name is too long.');
             }
         } else {
-            session()->flash('type', 'Danger');
-            session()->flash('message', 'File not found.');
-            return redirect()->back()->withInput();
+            $value = $document['text'];
+            $document = $request->except('file', 'text');
+            $document['value'] = $value;
         }
+
         $data = ApiHttpClient::request('post', 'tms-settings', $document)->json();
 
-        if ($data['success'] == false) {
-            $this->removeFile(storage_path('app/public/' . $document['value']));
-            $error_message = $data['message'];
+        if (!$data['success']) {
+            if ($request->hasFile('file') && $request->input('type') === 'file') {
+                $this->removeFile(storage_path('app/public/' . $document['value']));
+            }
             session()->flash('type', 'Danger');
             session()->flash('message', 'Validation failed');
-            return redirect()->back()->with('error_message', $error_message)->withInput();
+            return redirect()->back()->with('error_message', $data['message'])->with('type', 'danger')->withInput();
         } else {
-            session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Created successfully');
-            return redirect()->route('tms-settings.index');
+            return redirect()->route('tms-settings.index')->with('message', $data['message'] ?? 'Created successfully')->with('type', 'success');
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -113,7 +123,7 @@ class TmsSettingController extends Controller
         if ($results['success'] == true) {
             $data = $results['data'];
 
-            return view('file-setting.edit', ['file' => $data]);
+            return view('tms-setting.edit', ['setting' => $data]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
@@ -130,7 +140,91 @@ class TmsSettingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        // Fetch existing data for the resource
+        $results = ApiHttpClient::request('get', "tms-settings/$id")->json();
+        $results = ApiHttpClient::request('get', "tms-settings/$id")->json();
+
+        if ($results['success'] == true) {
+            $data = $results['data'];
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
+        // Common validation rules
+        $commonValidationRules = [
+            'key' => 'required',
+            'type' => 'required',
+        ];
+
+        // File validation rules
+        $fileValidationRules = [
+            'file' => 'required|mimes:jpg,jpeg,png,gif,svg|max:5120',
+        ];
+
+        $textValidationRules = [
+            'text' => 'required'
+        ];
+
+        // Validate input based on 'type' field
+        if ($request->has('type') && $request->input('type') === 'file') {
+            if ($data['type'] !== 'text') {
+                $request->validate($commonValidationRules);
+            } else {
+                $request->validate(array_merge($commonValidationRules, $fileValidationRules));
+            }
+
+            $document = $request->except('file', 'type', 'text');
+        } else {
+            $request->validate(array_merge($commonValidationRules, $textValidationRules));
+            $document = $request->except('file');
+        }
+
+        // Handle file upload/update
+        if ($request->hasFile('file') && $request->input('type') === 'file') {
+            $file = $request->file('file');
+            $document['type'] = image_type_to_mime_type(exif_imagetype($file->path()));
+            $document['value'] = $this->fileUpload($file);
+
+            // Validate file name length
+            if (strlen($document['value']) > 100) {
+                $this->removeFile(storage_path('app/public/' . $document['value']));
+                return redirect()->back()->withInput()->with('type', 'danger')->with('message', 'File name is too long.');
+            }
+        } else if ($request->input('type') === 'text') {
+            // If 'text' type, update the 'value' field with the new text value
+            // dd(1);
+            $value = $document['text'] ?? '';
+            $document = $request->except('file', 'text');
+            $document['value'] = $value;
+        } else {
+            $document = $request->except('text', 'type');
+            $document['type'] = $data['type'];
+            $document['value'] = $data['value'];
+        }
+        // dd($document);
+        // Send update request to API
+        $updateData = ApiHttpClient::request('put', "tms-settings/$id", $document)->json();
+
+        // Handle API response
+        if (!$updateData['success']) {
+            if ($request->hasFile('file') && $request->input('type') === 'file') {
+                $this->removeFile(storage_path('app/public/' . $document['value']));
+            }
+            session()->flash('type', 'danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->with('error_message', $updateData['message'])->with('type', 'danger')->withInput();
+        } else {
+            // Delete existing file if it exists
+            if (isset($document['type'])) {
+                if ($data['type'] !== 'text' && $request->hasFile('file') && $request->input('type') === 'file') {
+                    $this->removeFile(storage_path('app/public/' . $data['value']));
+                } elseif ($data['type'] !== 'text') {
+                    $this->removeFile(storage_path('app/public/' . $data['value']));
+                }
+            }
+            return redirect()->route('tms-settings.index')->with('message', $updateData['message'] ?? 'Updated successfully')->with('type', 'success');
+        }
     }
 
     /**

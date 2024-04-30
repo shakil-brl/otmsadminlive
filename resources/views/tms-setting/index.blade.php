@@ -46,13 +46,18 @@
                                     </td>
                                     {{-- @dump($file['document_path']) --}}
                                     <td class="d-flex gap-1">
-                                        <a href="{{ asset('storage/' . $file['value']) }}" target="_blank"
-                                            class="btn btn-sm btn-success">
-                                            View
-                                        </a>
-                                        <a href="{{ asset('storage/' . $file['value']) }}" download class="btn btn-sm btn-info">
-                                            Download
-                                        </a>
+                                        @if ($file['type'] !== 'text')
+                                            <a href="{{ asset('storage/' . $file['value']) }}" target="_blank"
+                                                class="btn btn-sm btn-success">
+                                                View
+                                            </a>
+
+                                            <a href="{{ asset('storage/' . $file['value']) }}" download
+                                                class="btn btn-sm btn-info">
+                                                Download
+                                            </a>
+                                        @endif
+
                                         <a href="{{ route('tms-settings.edit', $file['id']) }}"class="btn btn-sm btn-warning">
                                             Edit
                                         </a>
