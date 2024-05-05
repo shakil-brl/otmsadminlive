@@ -154,6 +154,7 @@ class CertificateController extends Controller
             'foo' => 'bar'
         ];
 
+
         $pdf = PDF::loadView('certificate.document', $data);
 
         return $pdf->stream('document.pdf');

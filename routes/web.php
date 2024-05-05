@@ -385,3 +385,7 @@ Route::group(['controller' => SupportController::class, 'prefix' => 'support'], 
 });
 
 Route::resource('/tms-settings', TmsSettingController::class);
+
+Route::get('test', function () {
+    return view('certificate.test');
+});

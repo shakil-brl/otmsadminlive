@@ -10,7 +10,6 @@
         .certificate {
             width: 100%;
             max-width: 800px;
-            margin: 0 auto;
             padding: 20px;
             border: 1px solid #ccc;
         }
@@ -18,7 +17,6 @@
         .certificate-content {
             max-width: 64rem;
             margin: 0 auto;
-            background-color: #fff;
             border-width: 4px;
             border-color: #6c3483;
         }
@@ -54,8 +52,6 @@
         }
 
         .signature {
-            widows: 40%;
-            display: inline-block;
             text-align: center;
             margin-top: 20px;
         }
@@ -63,13 +59,11 @@
 </head>
 
 <body>
-    <div class="certificate">
+    <div class="certificate" style="background-image: url('img/certificate/certificate-bg.png');">
         <div class="certificate-content">
             <div class="certificate-header">
                 <div class="top-logos">
-                    <img src="https://placehold.co/100x50" alt="Logo 1" style="margin-right: 300px">
-                    <img src="https://placehold.co/100x50" alt="Logo 2">
-                    <img src="https://placehold.co/100x50" alt="Logo 3" style="margin-left: 300px">
+
                 </div>
             </div>
             <div class="certificate-details">
@@ -80,13 +74,11 @@
                 <h3>"Digital Marketing"</h3>
                 <p>Conducted by [Institute Name] and supported by [Supporting Organization]</p>
             </div>
-            <div class="certificate-signatures">
-                <div class="signature">
-                    <img src="https://placehold.co/100x50" alt="Signature 1">
+            <div class="certificate-signatures" style="">
+                <div class="signature" style="display: inline-block">
                     <p>[Signatory Title 1]</p>
                 </div>
-                <div class="signature">
-                    <img src="https://placehold.co/100x50" alt="Signature 2">
+                <div class="signature" style="display: inline-block">
                     <p>[Signatory Title 2]</p>
                 </div>
             </div>
