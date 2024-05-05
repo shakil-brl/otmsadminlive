@@ -198,10 +198,24 @@
                                             All Exam
                                         </a>
                                     @endif
-                                    @if (in_array('certificates.create', $roleRoutePermissions) && !$batch['schedule']['total_pending'] && !$batch['schedule']['total_running'] && $batch['schedule']['total_complete'])
+                                    @if (in_array('certificates.create', $roleRoutePermissions) &&
+                                            !$batch['schedule']['total_pending'] &&
+                                            !$batch['schedule']['total_running'] &&
+                                            $batch['schedule']['total_complete']
+                                    )
                                         <a href="{{ route('certificates.create', [encrypt($batch['id'])]) }}"
                                             class="btn btn-sm btn-warning mb-1">
                                             Certificate
+                                        </a>
+                                    @endif
+                                    @if (in_array('certificates.eligible', $roleRoutePermissions) &&
+                                            !$batch['schedule']['total_pending'] &&
+                                            !$batch['schedule']['total_running'] &&
+                                            $batch['schedule']['total_complete']
+                                    )
+                                        <a href="{{ route('certificates.eligible', [encrypt($batch['id'])]) }}"
+                                            class="btn btn-sm btn-warning mb-1">
+                                            Certificate Print
                                         </a>
                                     @endif
                                 </div>

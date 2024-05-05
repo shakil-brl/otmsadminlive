@@ -348,6 +348,8 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         'create'
     ]);
     Route::get('certificates/{batch_id}/create', [CertificateController::class, 'create'])->name('certificates.create');
+    Route::get('certificates/{batch_id}/print/eligible', [CertificateController::class, 'eligible'])->name('certificates.eligible');
+    Route::post('certificates/print', [CertificateController::class, 'print'])->name('certificates.print');
 });
 
 

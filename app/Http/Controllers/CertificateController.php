@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
+use PDF;
 
 class CertificateController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -119,4 +121,44 @@ class CertificateController extends Controller
     {
         //
     }
+
+    public function eligible($batch_id)
+    {
+        $batch_id = decrypt($batch_id);
+        $results = ApiHttpClient::request('get', "get-batch-show/$batch_id")->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $batch_data = $results['data'];
+
+            $hasCertificates = false;
+
+            foreach ($batch_data['trainees'] as $trainee) {
+                if (isset($trainee['certificate'])) {
+                    $hasCertificates = true;
+                    break; // Exit the loop as soon as a certificate is found
+                }
+            }
+            // dd($hasCertificates);
+
+            return view('certificate.eligible', ['batch' => $batch_data, 'has_certificate' => $hasCertificates]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
+    }
+
+    public function print(Request $request)
+    {
+        $data = [
+            'foo' => 'bar'
+        ];
+
+        $pdf = PDF::loadView('certificate.document', $data);
+
+        return $pdf->stream('document.pdf');
+    }
+
+
+
 }
