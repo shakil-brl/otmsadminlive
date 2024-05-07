@@ -171,13 +171,15 @@
                         </td>
 
                         <td>
-                            <div class="text-center">
-                                @if ($batch['trainees'] == null)
-                                    <span class="badge text-black badge-warning mb-1">Has no Trainee</span>
-                                @else
-                                    <p class="text-success mb-1">Total trainee({{ count($batch['trainees']) }})</p>
-                                @endif
-                            </div>
+                            @isset($batch['trainees'])
+                                <div class="text-center">
+                                    @if ($batch['trainees'] == null)
+                                        <span class="badge text-black badge-warning mb-1">Has no Trainee</span>
+                                    @else
+                                        <p class="text-success mb-1">Total trainee({{ count($batch['trainees']) }})</p>
+                                    @endif
+                                </div>
+                            @endisset
                         </td>
                         <td>
                             {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d/m/Y')) : digitLocale(null) }}
