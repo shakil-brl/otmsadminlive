@@ -29,9 +29,14 @@ class TotalBatch extends Component
     public $batch_status;
     public $schedule_status;
     public $trainer_count;
+    public $phases = [];
+    public $phase_id;
+    public $phase_status;
     public function updated($attr)
     {
         $this->gotoPage(1);
+
+
         if ($attr == 'division_code') {
             $this->districts = ApiHttpClient::request(
                 'get',
@@ -62,6 +67,11 @@ class TotalBatch extends Component
 
     public function mount()
     {
+        $this->phases = ApiHttpClient::request(
+            'get',
+            "tms-phases/$this->phase_id",
+        )->json()['data'];
+
         $this->divisions = ApiHttpClient::request(
             'get',
             'detail/division',
@@ -82,6 +92,11 @@ class TotalBatch extends Component
             'detail/training'
         )->json()['data'];
 
+        $this->phases = ApiHttpClient::request(
+            'get',
+            'tms-phases'
+        )->json()['data'];
+
         $this->batch_status = request()->batch_status;
     }
     public function render()
@@ -100,6 +115,8 @@ class TotalBatch extends Component
                 'upazila_code' => $this->upazila_code,
                 'training_id' => $this->training_id,
                 'batch_status' => $this->batch_status,
+                'phase_status' => $this->phase_id ? 3 : $this->phase_status,
+                'phase_id' => $this->phase_id,
                 'schedule_status' => $this->schedule_status,
                 'trainer_count' => $this->trainer_count,
             ]

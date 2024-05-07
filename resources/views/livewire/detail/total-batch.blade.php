@@ -14,7 +14,7 @@
             <div class="loader"></div>
         </div>
         <div class="mb-3">
-            <div class="row row-cols-5">
+            <div class="d-flex justify-content-between">
                 <div>
                     <select name="" class="form-select" wire:model='per_page'>
                         @foreach (range(15, 100, 15) as $j)
@@ -22,13 +22,16 @@
                         @endforeach
                     </select>
                 </div>
-                {{-- <div>
+                <h4 class="text-end text-info">Total : {{ $total_count }}</h4>
+            </div>
+            <div class="row row-cols-5 mt-5">
+                <div>
                     <select name="" class="form-select" wire:model='batch_status'>
                         <option value="">Batch Status</option>
                         <option value="1">Running Batch</option>
                         <option value="2">Completed Batch</option>
                     </select>
-                </div> --}}
+                </div>
                 <div>
                     <select name="" class="form-select" wire:model='schedule_status'>
                         <option value="">Schedule Status</option>
@@ -47,8 +50,23 @@
                     </select>
                 </div>
                 <div>
-                    <h4 class="text-end text-info">Total : {{ $total_count }}</h4>
+                    <select name="" class="form-select" wire:model='phase_status' id="phase_status">
+                        <option value="">Phase Status</option>
+                        <option value="1">Have Phase</option>
+                        <option value="2">Doesn't Have</option>
+                    </select>
                 </div>
+                <div>
+                    @if ($phase_status != 2)
+                        <select wire:model='phase_id' name="" class="form-select" id="">
+                            <option value="">Select Phase</option>
+                            @foreach ($phases as $phase)
+                                <option value="{{ $phase['id'] }}">{{ $phase['name_en'] }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                </div>
+
             </div>
             <div class="row row-cols-4 mt-2 row-cols-xxl-5 g-2 mb-2">
                 <div>
