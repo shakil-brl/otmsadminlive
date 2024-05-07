@@ -5,18 +5,18 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
         }
 
         .certificate {
-            width: 100%;
-            max-width: 800px;
+            width: 11.69in;
+            height: 8.27in;
             padding: 20px;
             border: 1px solid #ccc;
         }
 
         .certificate-content {
-            max-width: 64rem;
-            margin: 0 auto;
+            margin-top: 170px;
             border-width: 4px;
             border-color: #6c3483;
         }
@@ -59,7 +59,12 @@
 </head>
 
 <body>
-    <div class="certificate" style="background-image: url('img/certificate/certificate-bg.png');">
+    {{-- clock.png --}}
+    {{-- img/certificate/certificate-bg.png --}}
+
+    <div class="certificate"
+        style="background-image: url('img/certificate/certificate-bg.png') ; background-size: 100%; background-repeat: no-repeat;">
+
         <div class="certificate-content">
             <div class="certificate-header">
                 <div class="top-logos">
