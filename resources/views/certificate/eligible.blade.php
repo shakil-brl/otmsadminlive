@@ -51,8 +51,7 @@
                 <div class="card mx-4">
                     <div class="card-body py-4 mt-5">
                         <h3 class="mt-5">Eligible Trainee List</h3>
-                        <form action="{{ route('certificates.print') }}" method="POST">
-                            @csrf
+                        <form action="{{ route('certificates.print') }}" method="GET">
                             <input type="hidden" name="batch_id" id="" value="{{ $batch['id'] }}">
                             <table class="table table-bordered">
                                 <thead>
