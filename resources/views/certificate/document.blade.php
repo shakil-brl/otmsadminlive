@@ -21,18 +21,6 @@
             border-color: #6c3483;
         }
 
-        .certificate-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .top-logos {}
-
-        .logo {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
         .certificate-title {
             font-size: 24px;
             margin-bottom: 10px;
@@ -61,34 +49,34 @@
 <body>
     {{-- clock.png --}}
     {{-- img/certificate/certificate-bg.png --}}
+    @isset($certificates)
+        @foreach (collect($certificates) as $certificate)
+            <div class="certificate"
+                style="background-image: url('img/certificate/certificate-bg.png') ; background-size: 100%; background-repeat: no-repeat;">
 
-    <div class="certificate"
-        style="background-image: url('img/certificate/certificate-bg.png') ; background-size: 100%; background-repeat: no-repeat;">
-
-        <div class="certificate-content">
-            <div class="certificate-header">
-                <div class="top-logos">
-
+                <div class="certificate-content">
+                    <div class="certificate-details">
+                        <h1 class="certificate-title">Certificate of Completion</h1>
+                        <h2>{{ $certificate['trainee']['profile']['KnownAs'] }}</h2>
+                        <p>son/daughter of {{ $certificate['trainee']['profile']['FatherName'] }}</p>
+                        <p>has successfully completed the [Course Duration] course on</p>
+                        <h3>"{{ $certificate['trainee']['training_title']['NameEn'] }}"</h3>
+                        <p>Conducted by "{{ $certificate['trainee']['training_batch']['provider']['name'] }}" and supported
+                            by ict division.</p>
+                    </div>
+                    <div class="certificate-signatures" style="display: flex;">
+                        <div class="signature">
+                            <p>[Signatory Title 1]</p>
+                        </div>
+                        <div class="signature">
+                            <p>[Signatory Title 2]</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="certificate-details">
-                <h1 class="certificate-title">Certificate of Completion</h1>
-                <h2>[Name]</h2>
-                <p>son/daughter of [Parent's Name]</p>
-                <p>has successfully completed the [Course Duration] course on</p>
-                <h3>"Digital Marketing"</h3>
-                <p>Conducted by [Institute Name] and supported by [Supporting Organization]</p>
-            </div>
-            <div class="certificate-signatures" style="">
-                <div class="signature" style="display: inline-block">
-                    <p>[Signatory Title 1]</p>
-                </div>
-                <div class="signature" style="display: inline-block">
-                    <p>[Signatory Title 2]</p>
-                </div>
-            </div>
-        </div>
-    </div>
+        @endforeach
+
+    @endisset
 </body>
 
 </html>

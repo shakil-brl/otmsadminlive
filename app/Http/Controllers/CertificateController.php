@@ -150,20 +150,28 @@ class CertificateController extends Controller
 
     public function print(Request $request)
     {
-        $data = [
-            'foo' => 'bar'
-        ];
-
-        // return view('certificate.document', $data);
-        $pdf = PDF::loadView('certificate.document', $data, [], [
-            'title' => 'Another Title',
-            'margin_top' => 0,
-            'margin_left' => 0,
-            'margin_right' => 0,
-            'margin_bottom' => 0,
+        $data = $request->validate([
+            'certificate_ids' => ['required', 'array']
         ]);
+        $results = ApiHttpClient::request('post', "certificates/print", $data)->json();
+        // dd($results);
+        if ($results['success'] == true) {
+            $certificates = $results['data'];
 
-        return $pdf->stream('document.pdf');
+            $pdf = PDF::loadView('certificate.document', [], [
+                'certificates' => $certificates,
+                'margin_top' => 0,
+                'margin_left' => 0,
+                'margin_right' => 0,
+                'margin_bottom' => 0,
+            ]);
+
+            return $pdf->stream('document.pdf');
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return back();
+        }
     }
 
 

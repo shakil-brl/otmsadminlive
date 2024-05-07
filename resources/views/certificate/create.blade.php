@@ -47,7 +47,14 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="text-end pe-4">
+                    @if (in_array('certificates.eligible', $roleRoutePermissions))
+                        <a href="{{ route('certificates.eligible', [encrypt($batch['id'])]) }}"
+                            class="btn btn-md btn-warning mb-4">
+                            Print Certificate
+                        </a>
+                    @endif
+                </div>
                 <div class="card mx-4">
                     <div class="card-body py-4 mt-5">
                         <h3 class="mt-5">Trainee List</h3>
