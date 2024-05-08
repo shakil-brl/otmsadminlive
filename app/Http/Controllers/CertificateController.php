@@ -3,27 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Clients\ApiHttpClient;
+use BaconQrCode\Encoder\QrCode;
 use Illuminate\Http\Request;
 use PDF;
 
 class CertificateController extends Controller
 {
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($batch_id)
     {
         $batch_id = decrypt($batch_id);
@@ -50,19 +35,12 @@ class CertificateController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
             'training_applicant_ids' => 'required|array',
         ]);
         $data = $request->all();
-        // dd($data);
         $data = ApiHttpClient::request('post', 'certificates', $data)->json();
         // dd($data);
         if (isset($data['error'])) {
@@ -75,51 +53,6 @@ class CertificateController extends Controller
             session()->flash('message', $data['message'] ?? 'Distributed successfully');
             return redirect()->back();
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function eligible($batch_id)
@@ -154,26 +87,26 @@ class CertificateController extends Controller
             'certificate_ids' => ['required', 'array']
         ]);
         $results = ApiHttpClient::request('post', "certificates/print", $data)->json();
-        // dd($results);
-        if ($results['success'] == true) {
-            $certificates = $results['data'];
 
-            $pdf = PDF::loadView('certificate.document', [], [
-                'certificates' => $certificates,
+        if ($results['success'] == true) {
+            $data['certificates'] = $results['data'];
+            // dd($data);
+            // return view('certificate.certificate', $data);
+            $pdf = PDF::loadView('certificate.certificate', $data, [], [
+                'format' => 'A4',
+                'orientation' => 'L',
                 'margin_top' => 0,
                 'margin_left' => 0,
                 'margin_right' => 0,
                 'margin_bottom' => 0,
             ]);
 
-            return $pdf->stream('document.pdf');
+            return $pdf->stream('certificate.pdf');
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return back();
         }
     }
-
-
 
 }
