@@ -89,8 +89,21 @@ class CertificateController extends Controller
         $results = ApiHttpClient::request('post', "certificates/print", $data)->json();
 
         if ($results['success'] == true) {
+            $settings = ApiHttpClient::request('get', "tms-settings")->json();
+
+            if ($settings['success'] == true) {
+                $settings_data = $settings['data'];
+            } else {
+                session()->flash('type', 'Danger');
+                session()->flash('message', $settings['message'] ?? 'Something went wrong');
+                return back();
+            }
+
             $data['certificates'] = $results['data'];
-            // dd($data);
+            $data['settings_data'] = $settings_data;
+            $setting_collection = collect($settings_data);
+            $data['setting_collection'] = $setting_collection;
+            // dd($data['auth_1_stamp']);
             // return view('certificate.certificate', $data);
             $pdf = PDF::loadView('certificate.certificate', $data, [], [
                 'format' => 'A4',

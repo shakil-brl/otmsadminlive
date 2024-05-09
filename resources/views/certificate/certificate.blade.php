@@ -64,12 +64,10 @@
             <table style="width: 100%;">
                 <tr valign="top">
                     <td
-                        style="font-size: 8pt; line-height: 1.15; text-align: center;font-family: 'flex';  width: 250px; ">
+                        style="font-size: 8pt; line-height: 1.15; text-align: center;font-family: 'flex';  width: 260px; ">
                         <img width="90" src="img/certificate/sign1.png" alt="">
                         <hr>
-                        Full Name Here <br>
-                        Designation <br>
-                        Organization Name
+                        {!! $setting_collection->where('key', 'certificate_auth_1_details')->pluck('value')->first() !!}
                     </td>
                     <td style="text-align: center; ">
                         @php
@@ -84,12 +82,10 @@
                         </div>
                     </td>
                     <td
-                        style="font-size: 8pt; line-height: 1.15; text-align: center; font-family: 'flex'; width: 250px; ">
+                        style="font-size: 8pt; line-height: 1.15; text-align: center; font-family: 'flex'; width: 260px; ">
                         <img width="90" src="img/certificate/sign2.png" alt="">
                         <hr>
-                        Full Name Here <br>
-                        Designation <br>
-                        Organization Name
+                        {!! $setting_collection->where('key', 'certificate_auth_2_details')->pluck('value')->first() !!}
                     </td>
                 </tr>
             </table>
