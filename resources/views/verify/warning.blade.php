@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div>
-                <a href="{{ url($url ?? '') }}" style="background: #2c004e;" class="btn btn-primary rounded-pill mt-3">Search
+                <a href="{{ url($url ?? '') }}" style="background-color: #2c004e; color:white" class="btn rounded-pill mt-3">Search
                     Again</a>
             </div>
         </div>

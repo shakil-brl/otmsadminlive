@@ -3,13 +3,13 @@
 @section('content')
     <div class="py-4">
         <div class="text-center mb-3">
-            <a href="{{ url('verify') }}" class="btn btn-primary rounded-pill">Search Again</a>
+            <a href="{{ url('verify') }}" class="btn rounded-pill" style="background-color: #2c004e; color:white">Search Again</a>
         </div>
 
         <div class="text-center">
             <div class="badge-success">
                 <img src="{{ asset('img/icon/verified.png') }}" alt="" class="text-center badge-img">
-                Varified Certificate
+                Varified
             </div>
         </div>
 
@@ -28,14 +28,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="text-right">Father</td>
+                    <td class="text-right">Father Name</td>
                     <td>:</td>
                     <td>
                         {{ $member['trainee']['profile']['FatherName'] ?? '' }}
                     </td>
                 </tr>
                 <tr>
-                    <td class="text-right">Mother</td>
+                    <td class="text-right">Mother Name</td>
                     <td>:</td>
                     <td>
                         {{ $member['trainee']['profile']['MotherName'] ?? '' }}
