@@ -42,6 +42,34 @@
         font-weight: 700;
     }
 
+    .badge-success {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        /* background-color: #4CAF50; */
+        border: 1px solid;
+        border-color: #4CAF50;
+        color: #4CAF50
+            /* Green background color */
+    }
+
+    .badge-warning {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        /* background-color: #4CAF50; */
+        border: 1px solid;
+        border-color: #ff0000;
+        color: #ff0000
+            /* Green background color */
+    }
+
+    .badge-img {
+        width: 30px;
+        /* Adjust as needed */
+        vertical-align: middle;
+    }
+
     @media only screen and (max-width: 500px) {
 
         .ss {

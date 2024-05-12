@@ -3,7 +3,12 @@
 @section('content')
     <div class="text-center">
         <div class="mt-5">
-            <img src="{{ asset('front') }}/img/warning.svg" class="" width="100" alt="">
+            <div class="text-center mb-3">
+                <div class="badge-warning">
+                    <img src="{{ asset('img/icon/warning.png') }}" alt="" class="text-center badge-img">
+                    Unvarified Certificate
+                </div>
+            </div>
             <div>
                 <div style="font-size: 20px;" class="text-danger">
                     ID <b>{{ $id ?? '' }}</b> not found. <br>
