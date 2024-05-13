@@ -14,11 +14,16 @@ class VerifyController extends Controller
         $data['placeholder'] = 'Enter Certificate ID';
         return view('verify.verify', $data);
     }
-
-    function search(Request $request)
+    public function getCerNo(Request $request)
     {
-        $id = $request->input('id');
+        $request->validate([
+            'certificate_no' => 'required',
+        ]);
+        return redirect()->route('search', $request->certificate_no);
 
+    }
+    function search(Request $request, $id)
+    {
         $certificate_id = (int) substr($id, 3);
 
         $data['id'] = $id;
