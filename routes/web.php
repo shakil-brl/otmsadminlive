@@ -388,5 +388,5 @@ Route::group(['controller' => SupportController::class, 'prefix' => 'support'], 
 Route::resource('/tms-settings', TmsSettingController::class);
 
 Route::get('/verify', [VerifyController::class, 'verify']);
-Route::post('/verify', [VerifyController::class, 'search'])->name('search');
+Route::get('/verify/certificate', [VerifyController::class, 'search'])->name('search');
 

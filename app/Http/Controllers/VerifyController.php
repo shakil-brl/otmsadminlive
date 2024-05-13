@@ -15,9 +15,9 @@ class VerifyController extends Controller
         return view('verify.verify', $data);
     }
 
-    function search()
+    function search(Request $request)
     {
-        $id = request()->id;
+        $id = $request->input('id');
 
         $certificate_id = (int) substr($id, 3);
 

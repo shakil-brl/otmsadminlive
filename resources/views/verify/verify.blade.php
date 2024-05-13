@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="text-center">
-        <form method="post" action="{{ route('search') }}">
-            @csrf
+        <form method="get" action="{{ route('search') }}">
             <div style="max-width: 500px; margin: auto; margin-top: 50px;  margin-bottom: 20px;" class="input-group ss px-3">
                 <input required="" style="border-color: #2c004e; border-radius:  100px 0 0 100px;" type="text"
                     name="id" placeholder="{{ $placeholder ?? '' }}" class="form-control pl-4">
