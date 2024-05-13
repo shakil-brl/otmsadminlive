@@ -179,7 +179,7 @@
                                             Payment
                                         </a>
                                     @endif
-                                    @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
+                                    @if ($batch['lot_id'])
                                         <a href="{{ route('course-supplies.show', encrypt($batch['id'])) }}"
                                             class="btn btn-sm btn-success">
                                             Supplies
@@ -189,6 +189,12 @@
                                         <a href="{{ route('laptop-distribution.show', [$batch['laptop']['id'], encrypt($batch['id'])]) }}"
                                             class="btn btn-sm btn-warning mb-1">
                                             Laptop Distribution
+                                        </a>
+                                    @endif
+                                    @if (in_array('all-exam.training', $roleRoutePermissions) && $batch['training']['exam_config'])
+                                        <a href="{{ route('all-exam.training', [encrypt($batch['id']), $batch['training']['id']]) }}"
+                                            class="btn btn-sm btn-warning mb-1">
+                                            All Exam
                                         </a>
                                     @endif
                                 </div>
