@@ -98,7 +98,7 @@
                                                 }
                                             }
                                         @endphp
-                                        @if (!$hasDistributeId)
+                                        @if (!$hasDistributeId && in_array('course-supplies.allocation', $roleRoutePermissions))
                                             @if (in_array('course-supplies.supply', $roleRoutePermissions))
                                                 <input type="checkbox" id="selectAll" class="form-check-input">
                                             @endif
