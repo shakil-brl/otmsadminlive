@@ -144,6 +144,7 @@
                         </td>
                         <td>
                             {{ $batch['batchCode'] }}
+                            <div>({{ $batch['batch_phase']['phase']['name_en'] ?? '' }})</div>
                         </td>
                         <td>
                             {{ $batch['get_training']['title']['Name'] ?? '' }}
