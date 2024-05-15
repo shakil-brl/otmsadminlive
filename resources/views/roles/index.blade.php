@@ -3,10 +3,10 @@
 @section('content')
     <!--begin::Content-->
     <div class="m-5">
-        <div class="d-flex justify-content-end align-items-center">
+        {{-- <div class="d-flex justify-content-end align-items-center">
             <a class="btn btn-lg btn-success" data-bs-toggle="modal" data-bs-target="#kt_create_role"
                 id="open-create-user-modal">Create Role</a>
-        </div>
+        </div> --}}
         <h3>Role List</h3>
         <x-alert />
 
@@ -46,14 +46,14 @@
                                                 class="btn btn-sm btn-primary show-action">
                                                 Permissions
                                             </a>
-                                            <div class="btn btn-sm btn-danger delete-action">
+                                            {{-- <div class="btn btn-sm btn-danger delete-action">
                                                 Delete
                                                 <form action="{{ route('roles.destroy', $role['id']) }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </td>
                                 </tr>
