@@ -29,7 +29,6 @@ class VerifyController extends Controller
         $data['id'] = $id;
 
         $results = ApiHttpClient::request('get', "certificates/$certificate_id")->json();
-        // dd($results);
         if ($results['success'] == true) {
             $data['member'] = $results['data'];
             // dd($data);
