@@ -26,6 +26,12 @@
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
+                    @if (count($complete_batches) > 0)
+                    @else
+                        <tr>
+                            <td class="text-danger" colspan="7">No Data found</td>
+                        </tr>
+                    @endif
                     @foreach (collect($complete_batches) as $batch)
                         <tr>
                             <td>

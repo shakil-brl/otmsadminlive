@@ -592,7 +592,7 @@
                                                             <div class="item">
                                                                 <div class="digit total_allownce_paid"></div>
                                                                 <div class="digit total_allownce_remaining"></div>
-                                                                <div class="label">Alownce
+                                                                <div class="label">Allowance
                                                                 </div>
                                                             </div>
                                                         </div>

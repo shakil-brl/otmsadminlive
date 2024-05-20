@@ -13,25 +13,34 @@ class CourseSuppliesController extends Controller
         $batch_id = decrypt($batch_id);
         $batch_results = ApiHttpClient::request('get', 'batch/' . $batch_id . '/show')
             ->json();
-        // dd($batch_results['data']);
-
-
+        // dd($batch_results);
         if ($batch_results['success'] == true) {
             $batch = $batch_results['data'];
             $phase_id = $batch['batch_phase'] ? $batch['batch_phase']['phase']['id'] : null;
+            // dd($phase_id);
+            // $combo_results = ApiHttpClient::request('get', "product-combo/phase/$phase_id", [
+            //     'page' => $request->page ?? 1,
+            //     'search' => $request->search,
+            //     'is_active' => 1,
+            // ])->json();
 
-            $combo_results = ApiHttpClient::request('get', 'product-combo', [
+            $combo_results = ApiHttpClient::request('get', "product-combo/phase/$phase_id", [
                 'page' => $request->page ?? 1,
                 'search' => $request->search,
                 'is_active' => 1,
-                'phase_id' => $phase_id,
             ])->json();
 
             if ($combo_results['success'] == true) {
                 $product_combos = $combo_results['data'];
+                // dd($product_combos);
                 $paginator = $this->customPaginate($combo_results, $request, route('course-supplies.supply', $batch_id));
 
                 return view('course-supplies.supply', ['batch' => $batch, 'combos' => $product_combos, 'paginator' => $paginator]);
+            } else {
+                dd($combo_results['message']);
+                session()->flash('type', 'Danger');
+                session()->flash('message', ($combo_results['message'] ?? 'Something went wrong'));
+                return back();
             }
         } else {
             session()->flash('type', 'Danger');
@@ -83,18 +92,17 @@ class CourseSuppliesController extends Controller
         } else {
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Distributed successfully');
-            return redirect()->route('dashboard_details.running_batches');
+            return redirect()->back();
         }
     }
 
     public function show(Request $request, $batch_id)
     {
         $batch_id = decrypt($batch_id);
+        // dd($batch_id);
         $batch_results = ApiHttpClient::request('get', 'batch/' . $batch_id . '/show')
             ->json();
         // dd($batch_results['data']);
-
-
         if ($batch_results['success'] == true) {
             $batch = $batch_results['data'];
             $phase_id = $batch['batch_phase'] ? $batch['batch_phase']['phase']['id'] : null;
