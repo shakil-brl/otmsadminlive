@@ -117,7 +117,7 @@ class ClassDocumentController extends Controller
      */
     public function destroy($id)
     {
-        $document =  ApiHttpClient::request('get', "class-document/$id")->json();
+        $document = ApiHttpClient::request('get', "class-document/$id")->json();
         $results = ApiHttpClient::request('delete', "class-document/$id")->json();
 
         if ($results['success'] == true && $document['success'] == true) {
@@ -125,7 +125,7 @@ class ClassDocumentController extends Controller
             $this->removeFile($filePath);
 
             session()->flash('type', 'Success');
-            session()->flash('message', $data['message'] ?? 'Deleted successfully');
+            session()->flash('message', $results['message'] ?? 'Deleted successfully');
             return redirect()->back();
         } else {
             session()->flash('type', 'Danger');

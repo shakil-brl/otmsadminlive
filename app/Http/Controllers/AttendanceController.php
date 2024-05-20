@@ -51,7 +51,7 @@ class AttendanceController extends Controller
                 return view('batch_schedule.index');
             }
         }
-        return $data['message'] ?? 'Something went wrong';
+        return $results['message'] ?? 'Something went wrong';
     }
 
     public function updateLink(Request $request)
@@ -181,5 +181,5 @@ class AttendanceController extends Controller
                 return redirect()->back();
             }
         }
-    }
+    }    
 }
