@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Detail;
 
+use App\Exports\OngoingClassExport;
+use App\Exports\TotalBatchExport;
 use App\Http\Clients\ApiHttpClient;
 use Carbon\Carbon;
 use Livewire\Component;
 use App\Http\Controllers\Controller;
 use Livewire\WithPagination;
+use Excel;
 
 class TotalBatch extends Component
 {
@@ -35,7 +38,7 @@ class TotalBatch extends Component
     public $total_batches = [];
     public $total_batches_get = [];
     public $from;
-    public $total_count;
+    public $total_count = 0;
     public function updated($attr)
     {
         $this->gotoPage(1);
@@ -70,7 +73,36 @@ class TotalBatch extends Component
         }
 
     }
+    public function export()
+    {
+        $data = ApiHttpClient::request(
+            'get',
+            'detail/total-batch',
+            [
+                'page' => $this->page,
+                'per_page' => $this->per_page,
+                'search' => $this->search,
+                'provider_id' => $this->provider_id,
+                'division_code' => $this->division_code,
+                'district_code' => $this->district_code,
+                'upazila_code' => $this->upazila_code,
+                'training_id' => $this->training_id,
+                'batch_status' => $this->batch_status,
+                'phase_status' => $this->phase_id ? 3 : $this->phase_status,
+                'phase_id' => $this->phase_id,
+                'schedule_status' => $this->schedule_status,
+                'trainer_count' => $this->trainer_count,
+                'data_type' => 'get',
+            ]
+        )->json();
 
+        $total_batches = $data['data'];
+
+
+        return Excel::download(new TotalBatchExport($total_batches), 'Total Batch Details (' . Carbon::now()->format('d-m-Y h:i:s A') . ').xlsx', \Maatwebsite\Excel\Excel::XLSX);
+
+
+    }
     public function mount()
     {
         $this->phases = ApiHttpClient::request(
@@ -103,10 +135,13 @@ class TotalBatch extends Component
         )->json()['data'];
 
         $this->batch_status = request()->batch_status;
+        // $this->searchFilter();
+
     }
+
+
     public function searchFilter()
     {
-
         $this->total_batches_get = ApiHttpClient::request(
             'get',
             'detail/total-batch',
