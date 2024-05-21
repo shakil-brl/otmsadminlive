@@ -120,6 +120,12 @@
                     <input wire:model='search' type="search" name="search" value="{{ request('search') }}"
                         class="form-control" placeholder="{{ __('batch-list.search_with_batch') }}">
                 </div>
+                <div>
+                    <div>
+                        <label for=""></label>
+                    </div>
+                    <button type="button" wire:click='searchFilter' class="btn btn-primary">Search</button>
+                </div>
             </div>
 
         </div>
@@ -132,8 +138,7 @@
                 <th>Training Info</th>
                 <th>Provider</th>
                 <th>Trainer</th>
-                <th>Trainee</th>
-                <th>Start Date & Duration</th>
+                <th>Batch Information</th>
                 <th>{{ __('batch-list.action') }}</th>
             </thead>
             <tbody>
@@ -172,21 +177,16 @@
                         </td>
 
                         <td>
-                            @isset($batch['trainees'])
-                                <div class="text-center">
-                                    @if ($batch['trainees'] == null)
-                                        <span class="badge text-black badge-warning mb-1">Has no Trainee</span>
-                                    @else
-                                        <p class="text-success mb-1">Total trainee({{ count($batch['trainees']) }})</p>
-                                    @endif
-                                </div>
-                            @endisset
-                        </td>
-                        <td>
+                            <div>
+                                @isset($batch['trainees'])
+                                    Total Trainee : {{ count($batch['trainees'] ?? []) }}
+                                @endisset
+                            </div>
+                            Start Date:
                             {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d/m/Y')) : digitLocale(null) }}
                             <div>
+                                Number of Class:
                                 {{ isset($batch['duration']) ? digitLocale($batch['duration']) : digitLocale(0) }}
-                                {{ __('batch-list.days') }}
                             </div>
                         </td>
                         <td class="text-center">
@@ -293,6 +293,8 @@
         </table>
 
 
-        {!! $paginator->links() !!}
+        @if ($paginator)
+            {!! $paginator->links() !!}
+        @endif
     @endisset
 </div>

@@ -32,10 +32,16 @@ class TotalBatch extends Component
     public $phases = [];
     public $phase_id;
     public $phase_status;
+    public $total_batches = [];
+    public $total_batches_get = [];
+    public $from;
+    public $total_count;
     public function updated($attr)
     {
         $this->gotoPage(1);
-
+        if ($attr == 'search') {
+            $this->search = trim($this->search);
+        }
 
         if ($attr == 'division_code') {
             $this->districts = ApiHttpClient::request(
@@ -71,7 +77,6 @@ class TotalBatch extends Component
             'get',
             "tms-phases/$this->phase_id",
         )->json()['data'];
-
         $this->divisions = ApiHttpClient::request(
             'get',
             'detail/division',
@@ -99,10 +104,10 @@ class TotalBatch extends Component
 
         $this->batch_status = request()->batch_status;
     }
-    public function render()
+    public function searchFilter()
     {
 
-        $total_batches = ApiHttpClient::request(
+        $this->total_batches_get = ApiHttpClient::request(
             'get',
             'detail/total-batch',
             [
@@ -121,13 +126,15 @@ class TotalBatch extends Component
                 'trainer_count' => $this->trainer_count,
             ]
         )->json();
-        //dd($classes);
-        $paginator = Controller::livewirePaginate($total_batches, $this->page, route('dashboard_details.total_batches'));
+
+        $this->total_batches = $this->total_batches_get['data']['data'];
+        $this->from = $this->total_batches_get['data']['from'];
+        $this->total_count = $this->total_batches_get['data']['total'];
+    }
+    public function render()
+    {
         return view('livewire.detail.total-batch', [
-            'total_batches' => $total_batches['data']['data'],
-            'from' => $total_batches['data']['from'],
-            'total_count' => $total_batches['data']['total'],
-            'paginator' => $paginator,
+            'paginator' => Controller::livewirePaginate($this->total_batches_get, $this->page ?? 1, route('dashboard_details.total_batches')),
         ]);
     }
 }
