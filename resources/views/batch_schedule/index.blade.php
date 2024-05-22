@@ -248,6 +248,8 @@
                                         </form>
                                     @endif
                                     @if ($schedule_detail['status'] == 2)
+                                        <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
+                                            class="btn btn-secondary w-100 rounded-4 mb-1">Class Document</a>
                                         @if ($schedule_detail['streaming_link'])
                                             <a class="btn btn-detail" href="{{ $schedule_detail['streaming_link'] }}"
                                                 target="_blank" style="background-color: rgb(238, 66, 66);">
@@ -262,6 +264,8 @@
                                             </a>
                                         @endif
                                     @elseif ($schedule_detail['status'] == 3)
+                                        <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
+                                            class="btn btn-secondary w-100 rounded-4 mb-1">Class Document</a>
                                         <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
                                             class="btn btn-detail complete">
                                             {{ __('batch-schedule.class_details') }}</a>
