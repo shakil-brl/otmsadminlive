@@ -176,9 +176,25 @@ class DashboardDetailsController extends Controller
     }
 
     // 
-    public function trainees()
+    public function trainees(Request $request, $batch_id)
     {
-        return view('dashboard_details.trainees');
+        $results = ApiHttpClient::request('get', 'detail/trainee-total', [
+            'page' => $request->page ?? 1,
+            'search' => $request->search,
+            'batch_id' => $request->batch_id,
+            'per_page' => 50,
+        ])->json();
+
+        if ($results['success'] == true) {
+            $trainees = $results['data']['data'] ?? [];
+            $page_from = $results['data']['from'] ?? 1;
+            $paginator = $this->customPaginate($results, $request, route('dashboard_details.trainees', $batch_id));
+            return view('dashboard_details.trainees', ['trainees' => $trainees, 'paginator' => $paginator, 'page_from' => $page_from]);
+        } else {
+            session()->flash('type', 'Danger');
+            session()->flash('message', $results['message'] ?? 'Something went wrong');
+            return redirect()->back();
+        }
     }
 
     // 

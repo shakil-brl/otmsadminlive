@@ -22,7 +22,15 @@
                         @endforeach
                     </select>
                 </div>
-                <h4 class="text-end text-info">Total : {{ $total_count }}</h4>
+                <div class="d-flex align-items-center">
+                    <h4 class="text-end text-info m-0 me-3">Total : {{ $total_count }}</h4>
+                    <button class="btn btn-success d-flex" wire:click='export' type="button">
+                        <span class="material-icons-outlined me-1">
+                            download
+                        </span>
+                        Export
+                    </button>
+                </div>
             </div>
             <div class="row row-cols-5 mt-5">
                 <div>
@@ -120,10 +128,15 @@
                     <input wire:model='search' type="search" name="search" value="{{ request('search') }}"
                         class="form-control" placeholder="{{ __('batch-list.search_with_batch') }}">
                 </div>
+                <div>
+                    <div>
+                        <label for=""></label>
+                    </div>
+                    <button type="button" wire:click='searchFilter' class="btn btn-primary">Search</button>
+                </div>
             </div>
 
         </div>
-
 
         <table class="table table-bordered bg-white">
             <thead>
@@ -132,8 +145,7 @@
                 <th>Training Info</th>
                 <th>Provider</th>
                 <th>Trainer</th>
-                <th>Trainee</th>
-                <th>Start Date & Duration</th>
+                <th>Batch Information</th>
                 <th>{{ __('batch-list.action') }}</th>
             </thead>
             <tbody>
@@ -144,7 +156,12 @@
                         </td>
                         <td>
                             {{ $batch['batchCode'] }}
-                            <div>({{ $batch['batch_phase']['phase']['name_en'] ?? '' }})</div>
+                            @isset($batch['batch_phase']['phase']['name_en'])
+                                <div>
+                                    ({{ $batch['batch_phase']['phase']['name_en'] ?? '' }})
+                                </div>
+                            @endisset
+
                         </td>
                         <td>
                             {{ $batch['get_training']['title']['Name'] ?? '' }}
@@ -172,21 +189,16 @@
                         </td>
 
                         <td>
-                            @isset($batch['trainees'])
-                                <div class="text-center">
-                                    @if ($batch['trainees'] == null)
-                                        <span class="badge text-black badge-warning mb-1">Has no Trainee</span>
-                                    @else
-                                        <p class="text-success mb-1">Total trainee({{ count($batch['trainees']) }})</p>
-                                    @endif
-                                </div>
-                            @endisset
-                        </td>
-                        <td>
+                            <div>
+                                @isset($batch['trainees'])
+                                    Total Trainee : {{ count($batch['trainees'] ?? []) }}
+                                @endisset
+                            </div>
+                            Start Date:
                             {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d/m/Y')) : digitLocale(null) }}
                             <div>
+                                Number of Class:
                                 {{ isset($batch['duration']) ? digitLocale($batch['duration']) : digitLocale(0) }}
-                                {{ __('batch-list.days') }}
                             </div>
                         </td>
                         <td class="text-center">
@@ -202,9 +214,25 @@
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        All Actions
+                                        Action
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        @isset($batch['trainees'])
+                                            <li>
+                                                <a href="{{ route('dashboard_details.trainees', $batch['id']) }}"
+                                                    class="dropdown-item">
+                                                    Trainee List
+                                                </a>
+                                            </li>
+                                        @endisset
+                                        @if (in_array('batch-schedule.index', $roleRoutePermissions) && $batch['schedule'])
+                                            <li>
+                                                <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
+                                                    class="dropdown-item">
+                                                    Class Schedule
+                                                </a>
+                                            </li>
+                                        @endif
                                         @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
                                             <li>
                                                 <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
@@ -293,6 +321,8 @@
         </table>
 
 
-        {!! $paginator->links() !!}
+        @if ($paginator)
+            {!! $paginator->links() !!}
+        @endif
     @endisset
 </div>

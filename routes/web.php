@@ -272,7 +272,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::get('/upazilas', [DashboardDetailsController::class, 'upazilas'])->name('dashboard_details.upazilas');
         Route::get('/partners', [DashboardDetailsController::class, 'partners'])->name('dashboard_details.partners');
         Route::get('/trainers', [DashboardDetailsController::class, 'trainers'])->name('dashboard_details.trainers');
-        Route::get('/trainees', [DashboardDetailsController::class, 'trainees'])->name('dashboard_details.trainees');
+        Route::get('/trainees/{batch_id}', [DashboardDetailsController::class, 'trainees'])->name('dashboard_details.trainees');
     });
 
     Route::group(['prefix' => 'provider'], function () {
