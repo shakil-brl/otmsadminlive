@@ -293,5 +293,5 @@ class BatchScheduleController extends Controller
             session()->flash('message', $results['message'] ?? 'Something went wrong');
             return redirect()->back();
         }
-    }    
+    }
 }
