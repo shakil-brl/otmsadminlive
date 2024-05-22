@@ -29,6 +29,7 @@
                     <thead>
                         <th>{{ __('batch-list.sl') }}</th>
                         <th>Batch Code</th>
+                        <th>Vendor</th>
                         <th>Date</th>
                         <th>
                             Total Trainee (D. Allowance)
@@ -48,6 +49,11 @@
                                     </td>
                                     <td>
                                         {{ $payment['training_batch']['batchCode'] ?? '' }}
+                                        <br>
+                                        ({{ $payment['training_batch']['batch_phase']['phase']['name_en'] ?? '' }})
+                                    </td>
+                                    <td>
+                                        {{ $payment['training_batch']['provider']['name'] ?? '' }}
                                     </td>
                                     <td>
                                         <div>
