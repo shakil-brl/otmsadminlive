@@ -285,14 +285,14 @@
                                                 </a>
                                             </li>
                                         @endif
-                                        {{-- @if (in_array('certificates.eligible', $roleRoutePermissions) && !$batch['schedule']['total_pending'] && !$batch['schedule']['total_running'] && $batch['schedule']['total_complete'])
+                                        @if (in_array('batch-closing.close', $roleRoutePermissions))
                                             <li>
-                                                <a href="{{ route('certificates.eligible', [encrypt($batch['id'])]) }}"
+                                                <a href="{{ route('batch-closing.close', ['batch_id' => encrypt($batch['id'])]) }}"
                                                     class="dropdown-item">
-                                                    Certificate Print
+                                                    Batch Close
                                                 </a>
                                             </li>
-                                        @endif --}}
+                                        @endif
                                     </ul>
                                 </div>
 
