@@ -49,13 +49,12 @@ class TmsBatchClosingController extends Controller
         if ($request['action'] == 'update') {
             $batch_closing_id = $request['batch_closing_id'];
             $data = ApiHttpClient::request('PATCH', "batch-closing/$batch_closing_id", $batch_closing)->json();
-            dd($data);
         } else {
             $batch_closing['training_batch_id'] = $request['training_batch_id'];
             $data = ApiHttpClient::request('post', 'batch-closing', $batch_closing)->json();
         }
 
-        // dd($data);
+        dd($data);
         if (isset($data['error'])) {
             $error_message = $data['message'];
             session()->flash('type', 'Danger');
