@@ -40,6 +40,7 @@
     <button type="submit" class="btn btn-md btn-success submit-action">{{ __('config.submit') }}</button>
 </div>
 @php
+    $completed_at = '';
     if ($batch['completed_at']) {
         $completed_at = \Carbon\Carbon::createFromFormat('Y-m-d', $batch['completed_at'])->format('d/m/Y');
     }

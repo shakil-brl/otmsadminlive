@@ -49,14 +49,13 @@ class TmsBatchClosingController extends Controller
         if ($request->completed_at) {
             $batch_closing['completed_at'] = Carbon::createFromFormat('d/m/Y', $request->completed_at)->format('Y-m-d');
         }
-        
+
         $batch_closing['training_batch_id'] = $request['training_batch_id'];
 
         if ($request['action'] == 'update') {
             $batch_closing_id = $request['batch_closing_id'];
             $data = ApiHttpClient::request('PATCH', "batch-closing/$batch_closing_id", $batch_closing)->json();
         } else {
-            
             $data = ApiHttpClient::request('post', 'batch-closing', $batch_closing)->json();
         }
 
