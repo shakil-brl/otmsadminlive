@@ -69,8 +69,8 @@ class SupportController extends Controller
         foreach ($schedule_detail_ids as $sd_id) {
             $results = ApiHttpClient::request('post', 'attendance/start-class', [
                 'schedule_detail_id' => $sd_id,
-                'streaming_link' => 'https://meet.google.com/',
-                'static_link' => 'https://www.facebook.com/'
+                'streaming_link' => 'https://meet.google.com/keq-ivaw-nem',
+                'static_link' => 'https://www.facebook.com/groups/brlherpower/'
             ])->json();
 
             if (isset($results['success'])) {
