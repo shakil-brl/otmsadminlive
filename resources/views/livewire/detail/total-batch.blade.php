@@ -145,7 +145,8 @@
                 <th>Training Info</th>
                 <th>Provider</th>
                 <th>Trainer</th>
-                <th>Batch Information</th>
+                <th>Batch Info</th>
+                <th>Class Progress</th>
                 <th>{{ __('batch-list.action') }}</th>
             </thead>
             <tbody>
@@ -200,6 +201,24 @@
                                 Number of Class:
                                 {{ isset($batch['duration']) ? digitLocale($batch['duration']) : digitLocale(0) }}
                             </div>
+                        </td>
+                        <td>
+                            @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
+                                <div class="progress m-1">
+                                    <div class="progress-bar" role="progressbar"
+                                        style="width: {{ $batch['schedule']['total_complete'] }}%"
+                                        aria-valuenow="{{ $batch['schedule']['total_complete'] }}"
+                                        aria-valuemin="{{ $batch['schedule']['total_complete'] }}"
+                                        aria-valuemax="{{ $batch['duration'] }}"></div>
+                                </div>
+
+                                <small>{{ __('batch-list.complete_class') }}:
+                                    {{ digitLocale($batch['schedule']['total_complete']) }}</small>/
+                                <small>{{ __('batch-list.pending_class') }}:
+                                    {{ digitLocale($batch['schedule']['total_pending']) }}</small>/
+                                <small>{{ __('batch-list.running_class') }}:
+                                    {{ digitLocale($batch['schedule']['total_running']) }}</small>
+                            @endif
                         </td>
                         <td class="text-center">
                             @if ($batch['schedule'] == null)
@@ -295,24 +314,6 @@
                                         @endif
                                     </ul>
                                 </div>
-
-                                @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
-                                    <small class="fw-bold">Class Progress:</small>
-                                    <div class="progress m-1">
-                                        <div class="progress-bar" role="progressbar"
-                                            style="width: {{ $batch['schedule']['total_complete'] }}%"
-                                            aria-valuenow="{{ $batch['schedule']['total_complete'] }}"
-                                            aria-valuemin="{{ $batch['schedule']['total_complete'] }}"
-                                            aria-valuemax="{{ $batch['duration'] }}"></div>
-                                    </div>
-
-                                    <small>{{ __('batch-list.complete_class') }}:
-                                        {{ digitLocale($batch['schedule']['total_complete']) }}</small>/
-                                    <small>{{ __('batch-list.pending_class') }}:
-                                        {{ digitLocale($batch['schedule']['total_pending']) }}</small>/
-                                    <small>{{ __('batch-list.running_class') }}:
-                                        {{ digitLocale($batch['schedule']['total_running']) }}</small>
-                                @endif
                             @endif
                         </td>
                     </tr>

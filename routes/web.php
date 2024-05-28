@@ -395,3 +395,6 @@ Route::get('/verify/{id}', [VerifyController::class, 'search'])->name('search');
 Route::get('batch-closing', [TmsBatchClosingController::class, 'create'])->name('batch-closing.close');
 Route::post('batch-closing', [TmsBatchClosingController::class, 'close'])->name('batch-closing.store');
 
+//Tariqul New
+Route::get('certificate-config', [CertificateController::class, 'certificateConfig'])->name('certificate.config');
+Route::post('certificate-config', [CertificateController::class, 'certificateConfigStore'])->name('certificate.config-store');
