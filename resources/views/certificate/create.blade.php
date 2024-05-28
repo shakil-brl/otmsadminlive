@@ -48,7 +48,9 @@
                     </div>
                 </div>
                 <div class="text-end pe-4">
-                    @if (in_array('certificates.eligible', $roleRoutePermissions))
+                    @if (in_array('certificates.eligible', $roleRoutePermissions) &&
+                            collect($batch['trainees'])->contains(
+                                fn($trainee) => isset($trainee['certificate']) && $trainee['certificate']['is_eligible']))
                         <a href="{{ route('certificates.eligible', [encrypt($batch['id'])]) }}"
                             class="btn btn-md btn-warning mb-4">
                             Print Certificate
