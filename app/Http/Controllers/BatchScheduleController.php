@@ -77,20 +77,45 @@ class BatchScheduleController extends Controller
     // all batches
     public function batches(Request $request)
     {
-        $page = request('page', 1);
-        $app_url = Str::finish(config('app.api_url'), '/');
-        $results = ApiHttpClient::request('get', 'batch/list', $request->all())
-            ->json();
+        $divisions = ApiHttpClient::request('get', 'detail/division')->json();
 
+        $providers = ApiHttpClient::request('get', 'detail/development-partner')->json();
 
-        if ($results['success'] == true) {
-            $from = $results['data']['from'] ?? 1;
-            $paginator = $this->customPaginate($results, $request, route('batch-schedule.batches'));
-            return view('batches.index', ['results' => $results['data'], 'from' => $from, 'paginator' => $paginator]);
+        $trainings = ApiHttpClient::request('get', 'detail/training')->json();
+
+        $phases = ApiHttpClient::request('get', 'tms-phases')->json();
+
+        if ($divisions['success'] && $providers['success'] && $trainings['success'] && isset($phases['data'])) {
+            $data = [
+                'divisions' => $divisions['data'],
+                'providers' => $providers['data'],
+                'trainings' => $trainings['data'],
+                'phases' => $phases['data'],
+            ];
+
+            $results = ApiHttpClient::request('get', 'batch/list', $request->all())->json();
+
+            if ($results['success']) {
+                $from = $results['data']['from'] ?? 1;
+                $paginator = $this->customPaginate($results, $request, route('batch-schedule.batches'));
+
+                return view('batches.index', [
+                    'results' => $results['data'],
+                    'from' => $from,
+                    'paginator' => $paginator,
+                    'data' => $data
+                ]);
+            } else {
+                Session::flash('type', 'Danger');
+                Session::flash('message', $results['message'] ?? 'Something went wrong');
+
+                return view('batches.index', ['data' => $data]);
+            }
         } else {
-            session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return view('batches.index');
+            Session::flash('type', 'Danger');
+            Session::flash('message', 'Something went wrong');
+
+            return view('batches.index', ['data' => []]);
         }
     }
 
