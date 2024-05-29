@@ -63,10 +63,10 @@
                             <div>
                                 <select name="schedule_status" class="form-select" id="schedule_status">
                                     <option value="">Schedule Status</option>
-                                    <option value="1" {{ request('schedule_status') == 1 ? 'selected' : '' }}>Schedule Not
+                                    {{-- <option value="1" {{ request('schedule_status') == 1 ? 'selected' : '' }}>Schedule Not
                                         Created</option>
                                     <option value="2" {{ request('schedule_status') == 2 ? 'selected' : '' }}>Schedule
-                                        Created</option>
+                                        Created</option> --}}
                                     <option value="3" {{ request('schedule_status') == 3 ? 'selected' : '' }}>Schedule
                                         Created But Class Not Started</option>
                                 </select>

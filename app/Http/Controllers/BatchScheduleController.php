@@ -94,7 +94,7 @@ class BatchScheduleController extends Controller
             ];
 
             $results = ApiHttpClient::request('get', 'batch/list', $request->all())->json();
-
+            // dd($results);
             if ($results['success']) {
                 $from = $results['data']['from'] ?? 1;
                 $paginator = $this->customPaginate($results, $request, route('batch-schedule.batches'));
