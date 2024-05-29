@@ -160,7 +160,7 @@
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label
-                                class="required fw-semibold fs-6 mb-2">{{ __('roles-permissions.permission_name_ph') }}</label>
+                                class="required fw-semibold fs-6 mb-2">{{ __('roles-permissions.permission_name') }}</label>
                             <!--end::Label-->
 
                             <!--begin::First Name-->
