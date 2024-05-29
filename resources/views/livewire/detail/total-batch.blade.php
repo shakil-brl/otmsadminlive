@@ -203,7 +203,9 @@
                             </div>
                         </td>
                         <td>
-                            @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
+                            @if (isset($batch['schedule']['total_complete']) ||
+                                    isset($batch['schedule']['total_pending']) ||
+                                    isset($batch['schedule']['total_running']))
                                 <div class="progress m-1">
                                     <div class="progress-bar" role="progressbar"
                                         style="width: {{ $batch['schedule']['total_complete'] }}%"
