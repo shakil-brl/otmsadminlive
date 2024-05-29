@@ -221,9 +221,9 @@
                                 <small>{{ __('batch-list.running_class') }}:
                                     {{ digitLocale($batch['schedule']['total_running']) }}</small>
                             @endif
-                            @if ($batch['schedule'] == null)                                
-                                    <span
-                                        class="badge text-black badge-warning">{{ __('batch-list.not_created-schedule') }}</span>
+                            @if ($batch['schedule'] == null)
+                                <span
+                                    class="badge text-black badge-warning">{{ __('batch-list.not_created-schedule') }}</span>
                             @endif
                         </td>
                         <td class="text-center">
@@ -268,17 +268,17 @@
                                             <li>
                                                 <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
                                                     class="dropdown-item">
-                                                    Class Schedule
+                                                    {{ __('batch-list.view_schedule') }}
                                                 </a>
                                             </li>
                                         @endif
-                                        @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
+                                        {{-- @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
                                             <li>
                                                 <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
                                                     class="dropdown-item"> {{ __('batch-list.view_schedule') }}
                                                 </a>
                                             </li>
-                                        @endif
+                                        @endif --}}
                                         @if (in_array('payment-batches.batch', $roleRoutePermissions) && $batch['payment'])
                                             <li>
                                                 <a href="{{ route('payment-batches.batch', encrypt($batch['id'])) }}"
