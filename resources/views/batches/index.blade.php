@@ -38,7 +38,8 @@
                     <div class="loader"></div>
                 </div>
                 <div class="mb-3 p-5">
-                    <form action="" method="GET">
+                    <form action="" method="POST">
+                        @csrf
                         <div class="d-flex justify-content-between">
                             <div>
                                 <select name="per_page" class="form-select" id="per_page">

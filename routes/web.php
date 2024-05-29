@@ -232,7 +232,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
      * Batch Schedule Routes
      */
     Route::group(['prefix' => 'batch_schedules'], function () {
-        Route::get('/', [BatchScheduleController::class, 'batches'])->name('batch-schedule.batches');
+        Route::match (['get', 'post'], '/', [BatchScheduleController::class, 'batches'])->name('batch-schedule.batches');
         Route::get('/all/{schedule_id}/{batch_id}', [BatchScheduleController::class, 'index'])->name('batch-schedule.index');
         Route::get('/create/{batch_id}', [BatchScheduleController::class, 'create'])->name('batch-schedule.create');
         Route::post('/store', [BatchScheduleController::class, 'store'])->name('batch-schedule.store');
