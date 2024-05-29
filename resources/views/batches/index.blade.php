@@ -38,110 +38,112 @@
                     <div class="loader"></div>
                 </div>
                 <div class="mb-3 p-5">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <select name="per_page" class="form-select" id="per_page">
-                                @foreach (range(15, 100, 15) as $j)
-                                    <option>{{ digitLocale($j) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row row-cols-5 mt-5">
-                        <div>
-                            <select name="batch_status" class="form-select" id="batch_status">
-                                <option value="">Batch Status</option>
-                                <option value="1">Running Batch</option>
-                                <option value="2">Completed Batch</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select name="schedule_status" class="form-select" id="schedule_status">
-                                <option value="">Schedule Status</option>
-                                <option value="1">Schedule Not Created</option>
-                                <option value="2">Schedule Created</option>
-                                <option value="3">Schedule Created But Class Not Started</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select name="trainer_count" class="form-select" id="trainer_count">
-                                <option value="">Trainer Status</option>
-                                <option value="1">No Trainer</option>
-                                <option value="2">Minimum One Trainer Assigned</option>
-                                <option value="3">One Trainer</option>
-                                <option value="4">Multiple Trainer</option>
-                            </select>
-                        </div>
-                        <div>
-                            <select name="phase_status" class="form-select" id="phase_status">
-                                <option value="">Phase Status</option>
-                                <option value="1">Have Phase</option>
-                                <option value="2">Doesn't Have</option>
-                            </select>
-                        </div>
-                        <div id="phase_id_container" style="display: none;">
-                            <select name="phase_id" class="form-select" id="phase_id">
-                                <option value="">Select Phase</option>
-                                @foreach ($data['phases'] as $phase)
-                                    <option value="{{ $phase['id'] }}">{{ $phase['name_en'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row row-cols-4 mt-2 row-cols-xxl-5 g-2 mb-2">
-                        <div>
-                            <label for="division_code">{{ __('batch-list.division') }}</label>
-                            <select name="division_code" class="form-select" id="division_code">
-                                <option value="">{{ __('batch-list.select_division') }}</option>
-                                @foreach ($data['divisions']['data'] as $division)
-                                    <option value="{{ $division['id'] }}">{{ $division['Name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            <label for="district_code">{{ __('batch-list.district') }}</label>
-                            <select name="district_code" class="form-select" id="district_code">
-                                <option value="">{{ __('batch-list.select_district') }}</option>
-                                <!-- Districts will be dynamically loaded here -->
-                            </select>
-                        </div>
-                        <div>
-                            <label for="upazila_code">{{ __('batch-list.upazila') }}</label>
-                            <select name="upazila_code" class="form-select" id="upazila_code">
-                                <option value="">{{ __('batch-list.select_upazila') }}</option>
-                                <!-- Upazilas will be dynamically loaded here -->
-                            </select>
-                        </div>
-                        <div>
-                            <label for="provider_id">{{ __('batch-list.vendor_name') }}</label>
-                            <select name="provider_id" class="form-select" id="provider_id">
-                                <option value="">{{ __('batch-list.select_vendor') }}</option>
-                                @foreach ($data['providers']['data'] as $provider)
-                                    <option value="{{ $provider['id'] }}">{{ $provider['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            <label for="training_id">{{ __('batch-schedule.course_name') }}</label>
-                            <select name="training_id" class="form-select" id="training_id">
-                                <option value="">{{ __('batch-list.select_course') }}</option>
-                                @foreach ($data['trainings'] as $training)
-                                    <option value="{{ $training['id'] }}">{{ $training['title']['Name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="">
-                            <label for="search">{{ __('batch-list.batch_code') }}</label>
-                            <input type="search" name="search" id="search" value="{{ request('search') }}"
-                                class="form-control" placeholder="{{ __('batch-list.search_with_batch') }}">
-                        </div>
-                        <div>
+                    <form action="" method="GET">
+                        <div class="d-flex justify-content-between">
                             <div>
-                                <label for=""></label>
+                                <select name="per_page" class="form-select" id="per_page">
+                                    @foreach (range(15, 100, 15) as $j)
+                                        <option>{{ digitLocale($j) }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <button type="button" id="search_button" class="btn btn-primary">Search</button>
                         </div>
-                    </div>
+                        <div class="row row-cols-5 mt-5">
+                            <div>
+                                <select name="batch_status" class="form-select" id="batch_status">
+                                    <option value="">Batch Status</option>
+                                    <option value="1">Running Batch</option>
+                                    <option value="2">Completed Batch</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select name="schedule_status" class="form-select" id="schedule_status">
+                                    <option value="">Schedule Status</option>
+                                    <option value="1">Schedule Not Created</option>
+                                    <option value="2">Schedule Created</option>
+                                    <option value="3">Schedule Created But Class Not Started</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select name="trainer_count" class="form-select" id="trainer_count">
+                                    <option value="">Trainer Status</option>
+                                    <option value="1">No Trainer</option>
+                                    <option value="2">Minimum One Trainer Assigned</option>
+                                    <option value="3">One Trainer</option>
+                                    <option value="4">Multiple Trainer</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select name="phase_status" class="form-select" id="phase_status">
+                                    <option value="">Phase Status</option>
+                                    <option value="1">Have Phase</option>
+                                    <option value="2">Doesn't Have</option>
+                                </select>
+                            </div>
+                            <div id="phase_id_container" style="display: none;">
+                                <select name="phase_id" class="form-select" id="phase_id">
+                                    <option value="">Select Phase</option>
+                                    @foreach ($data['phases'] as $phase)
+                                        <option value="{{ $phase['id'] }}">{{ $phase['name_en'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row row-cols-4 mt-2 row-cols-xxl-5 g-2 mb-2">
+                            <div>
+                                <label for="division_code">{{ __('batch-list.division') }}</label>
+                                <select name="division_code" class="form-select" id="division_code">
+                                    <option value="">{{ __('batch-list.select_division') }}</option>
+                                    @foreach ($data['divisions']['data'] as $division)
+                                        <option value="{{ $division['id'] }}">{{ $division['Name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div>
+                                <label for="district_code">{{ __('batch-list.district') }}</label>
+                                <select name="district_code" class="form-select" id="district_code">
+                                    <option value="">{{ __('batch-list.select_district') }}</option>
+                                    <!-- Districts will be dynamically loaded here -->
+                                </select>
+                            </div>
+                            <div>
+                                <label for="upazila_code">{{ __('batch-list.upazila') }}</label>
+                                <select name="upazila_code" class="form-select" id="upazila_code">
+                                    <option value="">{{ __('batch-list.select_upazila') }}</option>
+                                    <!-- Upazilas will be dynamically loaded here -->
+                                </select>
+                            </div>
+                            <div>
+                                <label for="provider_id">{{ __('batch-list.vendor_name') }}</label>
+                                <select name="provider_id" class="form-select" id="provider_id">
+                                    <option value="">{{ __('batch-list.select_vendor') }}</option>
+                                    @foreach ($data['providers']['data'] as $provider)
+                                        <option value="{{ $provider['id'] }}">{{ $provider['name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div>
+                                <label for="training_id">{{ __('batch-schedule.course_name') }}</label>
+                                <select name="training_id" class="form-select" id="training_id">
+                                    <option value="">{{ __('batch-list.select_course') }}</option>
+                                    @foreach ($data['trainings'] as $training)
+                                        <option value="{{ $training['id'] }}">{{ $training['title']['Name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="">
+                                <label for="search">{{ __('batch-list.batch_code') }}</label>
+                                <input type="search" name="search" id="search" value="{{ request('search') }}"
+                                    class="form-control" placeholder="{{ __('batch-list.search_with_batch') }}">
+                            </div>
+                            <div>
+                                <div>
+                                    <label for=""></label>
+                                </div>
+                                <button type="submit" id="search_button" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="m-4">
