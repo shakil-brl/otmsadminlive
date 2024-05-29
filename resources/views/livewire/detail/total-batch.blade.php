@@ -221,6 +221,10 @@
                                 <small>{{ __('batch-list.running_class') }}:
                                     {{ digitLocale($batch['schedule']['total_running']) }}</small>
                             @endif
+                            @if ($batch['schedule'] == null)                                
+                                    <span
+                                        class="badge text-black badge-warning">{{ __('batch-list.not_created-schedule') }}</span>
+                            @endif
                         </td>
                         <td class="text-center">
                             @if ($batch['schedule'] == null)
@@ -228,8 +232,22 @@
                                     <a href="{{ route('batch-schedule.create', encrypt($batch['id'])) }}"
                                         class="btn btn-sm btn-primary"> {{ __('batch-list.create_schedule') }}</a>
                                 @else
-                                    <span
-                                        class="badge text-black badge-warning">{{ __('batch-list.not_created-schedule') }}</span>
+                                    @isset($batch['trainees'])
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a href="{{ route('dashboard_details.trainees', $batch['id']) }}"
+                                                        class="dropdown-item">
+                                                        Trainee List
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endisset
                                 @endif
                             @else
                                 <div class="dropdown">
