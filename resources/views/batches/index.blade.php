@@ -95,7 +95,7 @@
                                 <select name="division_code" class="form-select" id="division_code">
                                     <option value="">{{ __('batch-list.select_division') }}</option>
                                     @foreach ($data['divisions']['data'] as $division)
-                                        <option value="{{ $division['id'] }}">{{ $division['Name'] }}</option>
+                                        <option value="{{ $division['Code'] }}">{{ $division['Name'] }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -326,10 +326,11 @@
                 var division_id = $(this).val();
                 if (division_id) {
                     $.ajax({
-                        url: api_baseurl + 'districts/' + division_id,
+                        url: api_baseurl + 'detail/district',
                         method: 'GET',
                         headers: {
                             Authorization: authToken,
+                            'division_code': division_id
                         },
                         success: function(data) {
                             var district_select = $('#district_code');
@@ -337,9 +338,9 @@
                             district_select.append(
                                 '<option value="">{{ __('batch-list.select_district') }}</option>'
                             );
-                            $.each(data.data, function(index, district) {
+                            $.each(data.data.data, function(index, district) {
                                 district_select.append('<option value="' + district
-                                    .id +
+                                    .Code +
                                     '">' + district.Name + '</option>');
                             });
                         },
@@ -359,10 +360,11 @@
                 var district_id = $(this).val();
                 if (district_id) {
                     $.ajax({
-                        url: api_baseurl + 'upazilas/' + district_id,
+                        url: api_baseurl + 'detail/upazila',
                         method: 'GET',
                         headers: {
                             Authorization: authToken,
+                            'district_code': district_id
                         },
                         success: function(data) {
                             var upazila_select = $('#upazila_code');
@@ -370,8 +372,8 @@
                             upazila_select.append(
                                 '<option value="">{{ __('batch-list.select_upazila') }}</option>'
                             );
-                            $.each(data.data, function(index, upazila) {
-                                upazila_select.append('<option value="' + upazila.id +
+                            $.each(data.data.data, function(index, upazila) {
+                                upazila_select.append('<option value="' + upazila.Code +
                                     '">' + upazila.Name + '</option>');
                             });
                         },
