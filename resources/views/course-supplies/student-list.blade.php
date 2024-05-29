@@ -208,7 +208,7 @@
 
             Swal.fire({
                 title: "Are you sure?",
-                text: "This will submit the form!",
+                text: "Do you want to submit the form?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",

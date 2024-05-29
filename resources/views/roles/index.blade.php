@@ -211,8 +211,8 @@
                 e.preventDefault();
 
                 Swal.fire({
-                    title: "Are you sure",
-                    text: "You want to submit the form?",
+                    title: "Are you sure?",
+                    text: "Do you want to submit the form?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -341,8 +341,8 @@
                 e.preventDefault();
 
                 Swal.fire({
-                    title: "Are you sure",
-                    text: "You want to submit the form?",
+                    title: "Are you sure?",
+                    text: "Do you want to submit the form?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -441,7 +441,7 @@
 
                 Swal.fire({
                     title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    text: "Do you want to delete this data?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",

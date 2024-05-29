@@ -124,8 +124,8 @@ $(function () {
     $("#kt_modal_course_student_evaluation_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

@@ -404,8 +404,8 @@
             $("#link-batch-form").submit(function(e) {
                 e.preventDefault();
                 Swal.fire({
-                    title: "Are you sure",
-                    text: "You want to submit the form?",
+                    title: "Are you sure?",
+                    text: "D want to submit the form?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",

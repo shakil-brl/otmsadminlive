@@ -76,7 +76,7 @@ return [
     'birth_reg_no' => 'Birth Registration Number',
     'passport_no' => 'Passport Number',
     'religion' => 'Religion',
-    'parmanent_address' => 'Parmanent Address',
+    'parmanent_address' => 'Permanent Address',
     'present_address' => 'Present Address',
     'division' => 'Division',
     'user_details' => 'User Details',

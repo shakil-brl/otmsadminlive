@@ -5,8 +5,8 @@ $(function () {
         var link = $(this).attr("href");
         Swal.fire({
             title: "Are you sure?",
-            text: "Delete This Data?",
-            icon: "warning",
+            text: "Do you want to Delete This Data?",
+            icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
@@ -25,8 +25,8 @@ $(function () {
         e.preventDefault();
         Swal.fire({
             title: "Are you sure?",
-            text: "Delete This Data?",
-            icon: "warning",
+            text: "Do you want to Delete This Data?",
+            icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
@@ -62,8 +62,8 @@ $(function () {
     $("#kt_modal_new_target_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -407,8 +407,8 @@ $(function () {
     $("#kt_modal_store_course_schedule_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -655,8 +655,8 @@ $(function () {
     $("#kt_modal_store_course_schedule_update_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -925,8 +925,8 @@ $(function () {
     $("#kt_modal_course_exam_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -1133,8 +1133,8 @@ $(function () {
     $("#kt_modal_course_exam_update_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -1317,8 +1317,8 @@ $(function () {
     $("#kt_modal_course_exam_question_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -1552,8 +1552,8 @@ $(function () {
     $("#kt_modal_course_exam_question_update_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -2177,8 +2177,8 @@ $(function () {
     $("#kt_modal_course_class_evaluation_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -2643,8 +2643,8 @@ $(function () {
     $("#notifications_form").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

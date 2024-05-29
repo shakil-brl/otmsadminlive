@@ -270,7 +270,7 @@ $(function () {
                 alert("No Trainee Selected! Select At Least One");
             } else {
                 Swal.fire({
-                    title: "Are you sure",
+                    title: "Are you sure?",
                     text: "Add selected Trainee as final selected?",
                     icon: "warning",
                     showCancelButton: true,

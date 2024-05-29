@@ -463,8 +463,8 @@
                         alert("No Trainee Selected! Select At Least One");
                     } else {
                         Swal.fire({
-                            title: "Are you sure",
-                            text: "Add selected Trainee as absent today?",
+                            title: "Are you sure?",
+                            text: "Do you want to Add selected Trainee as absent today?",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#3085d6",

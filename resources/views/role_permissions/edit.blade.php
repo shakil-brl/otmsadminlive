@@ -334,8 +334,8 @@
             $("#kt_modal_update_role_form").submit(function(e) {
                 e.preventDefault();
                 Swal.fire({
-                    title: "Are you sure",
-                    text: "Role wise permission access is ok!",
+                    title: "Are you sure?",
+                    text: "Do you want to submit this form?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",

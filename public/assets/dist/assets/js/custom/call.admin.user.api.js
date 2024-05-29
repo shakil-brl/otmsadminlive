@@ -911,9 +911,9 @@ $(function () {
         e.preventDefault();
 
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
-            icon: "warning",
+            title: "Are you sure?",
+            text: "Do you want to submit this form?",
+            icon: "info",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
@@ -1034,9 +1034,9 @@ $(function () {
         e.preventDefault();
 
         Swal.fire({
-            title: "Are you sure",
-            text: "You want to submit the form?",
-            icon: "warning",
+            title: "Are you sure?",
+            text: "Do you want to submit the form?",
+            icon: "info",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",

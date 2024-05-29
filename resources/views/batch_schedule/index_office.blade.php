@@ -184,7 +184,7 @@
 
                 Swal.fire({
                     title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    text: "Do you want to delete this batch schedule?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -235,7 +235,7 @@
                 e.preventDefault();
                 Swal.fire({
                     title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    text: "Do you want to edit this batch schedule?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
