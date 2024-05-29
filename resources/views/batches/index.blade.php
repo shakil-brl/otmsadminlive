@@ -54,39 +54,51 @@
                             <div>
                                 <select name="batch_status" class="form-select" id="batch_status">
                                     <option value="">Batch Status</option>
-                                    <option value="1" {{ request('batch_status') == 1 ? 'selected' : '' }}>Running Batch</option>
-                                    <option value="2" {{ request('batch_status') == 2 ? 'selected' : '' }}>Completed Batch</option>
+                                    <option value="1" {{ request('batch_status') == 1 ? 'selected' : '' }}>Running Batch
+                                    </option>
+                                    <option value="2" {{ request('batch_status') == 2 ? 'selected' : '' }}>Completed Batch
+                                    </option>
                                 </select>
                             </div>
                             <div>
                                 <select name="schedule_status" class="form-select" id="schedule_status">
                                     <option value="">Schedule Status</option>
-                                    <option value="1" {{ request('schedule_status') == 1 ? 'selected' : '' }}>Schedule Not Created</option>
-                                    <option value="2" {{ request('schedule_status') == 2 ? 'selected' : '' }}>Schedule Created</option>
-                                    <option value="3" {{ request('schedule_status') == 3 ? 'selected' : '' }}>Schedule Created But Class Not Started</option>
+                                    <option value="1" {{ request('schedule_status') == 1 ? 'selected' : '' }}>Schedule Not
+                                        Created</option>
+                                    <option value="2" {{ request('schedule_status') == 2 ? 'selected' : '' }}>Schedule
+                                        Created</option>
+                                    <option value="3" {{ request('schedule_status') == 3 ? 'selected' : '' }}>Schedule
+                                        Created But Class Not Started</option>
                                 </select>
                             </div>
                             <div>
                                 <select name="trainer_count" class="form-select" id="trainer_count">
                                     <option value="">Trainer Status</option>
-                                    <option value="1" {{ request('trainer_count') == 1 ? 'selected' : '' }}>No Trainer</option>
-                                    <option value="2" {{ request('trainer_count') == 2 ? 'selected' : '' }}>Minimum One Trainer Assigned</option>
-                                    <option value="3" {{ request('trainer_count') == 3 ? 'selected' : '' }}>One Trainer</option>
-                                    <option value="4" {{ request('trainer_count') == 4 ? 'selected' : '' }}>Multiple Trainer</option>
+                                    <option value="1" {{ request('trainer_count') == 1 ? 'selected' : '' }}>No Trainer
+                                    </option>
+                                    <option value="2" {{ request('trainer_count') == 2 ? 'selected' : '' }}>Minimum One
+                                        Trainer Assigned</option>
+                                    <option value="3" {{ request('trainer_count') == 3 ? 'selected' : '' }}>One Trainer
+                                    </option>
+                                    <option value="4" {{ request('trainer_count') == 4 ? 'selected' : '' }}>Multiple
+                                        Trainer</option>
                                 </select>
                             </div>
                             <div>
                                 <select name="phase_status" class="form-select" id="phase_status">
                                     <option value="">Phase Status</option>
-                                    <option value="1" {{ request('phase_status') == 1 ? 'selected' : '' }}>Have Phase</option>
-                                    <option value="2" {{ request('phase_status') == 2 ? 'selected' : '' }}>Doesn't Have</option>
+                                    <option value="1" {{ request('phase_status') == 1 ? 'selected' : '' }}>Have Phase
+                                    </option>
+                                    <option value="2" {{ request('phase_status') == 2 ? 'selected' : '' }}>Doesn't Have
+                                    </option>
                                 </select>
                             </div>
                             <div id="phase_id_container" style="{{ request('phase_status') != 2 ? '' : 'display: none;' }}">
                                 <select name="phase_id" class="form-select" id="phase_id">
                                     <option value="">Select Phase</option>
                                     @foreach ($data['phases'] as $phase)
-                                        <option value="{{ $phase['id'] }}" {{ request('phase_id') == $phase['id'] ? 'selected' : '' }}>
+                                        <option value="{{ $phase['id'] }}"
+                                            {{ request('phase_id') == $phase['id'] ? 'selected' : '' }}>
                                             {{ $phase['name_en'] }}</option>
                                     @endforeach
                                 </select>
@@ -98,7 +110,8 @@
                                 <select name="division_code" class="form-select" id="division_code">
                                     <option value="">{{ __('batch-list.select_division') }}</option>
                                     @foreach ($data['divisions']['data'] as $division)
-                                        <option value="{{ $division['Code'] }}" {{ request('division_code') == $division['Code'] ? 'selected' : '' }}>
+                                        <option value="{{ $division['Code'] }}"
+                                            {{ request('division_code') == $division['Code'] ? 'selected' : '' }}>
                                             {{ $division['Name'] }}</option>
                                     @endforeach
                                 </select>
@@ -122,7 +135,8 @@
                                 <select name="provider_id" class="form-select" id="provider_id">
                                     <option value="">{{ __('batch-list.select_vendor') }}</option>
                                     @foreach ($data['providers']['data'] as $provider)
-                                        <option value="{{ $provider['id'] }}" {{ request('provider_id') == $provider['id'] ? 'selected' : '' }}>
+                                        <option value="{{ $provider['id'] }}"
+                                            {{ request('provider_id') == $provider['id'] ? 'selected' : '' }}>
                                             {{ $provider['name'] }}</option>
                                     @endforeach
                                 </select>
@@ -132,7 +146,8 @@
                                 <select name="training_id" class="form-select" id="training_id">
                                     <option value="">{{ __('batch-list.select_course') }}</option>
                                     @foreach ($data['trainings'] as $training)
-                                        <option value="{{ $training['id'] }}" {{ request('training_id') == $training['id'] ? 'selected' : '' }}>
+                                        <option value="{{ $training['id'] }}"
+                                            {{ request('training_id') == $training['id'] ? 'selected' : '' }}>
                                             {{ $training['title']['Name'] }}</option>
                                     @endforeach
                                 </select>
@@ -330,14 +345,15 @@
             });
 
             $('#division_code').change(function() {
-                var division_id = $(this).val();
+                let division_id = $(this).val();
                 if (division_id) {
+                    let encodedDivisionId = encodeURIComponent(division_id);
+                    let url = `${api_baseurl}detail/district?division_code=${encodedDivisionId}`;
                     $.ajax({
-                        url: api_baseurl + 'detail/district',
+                        url: url,
                         method: 'GET',
                         headers: {
                             Authorization: authToken,
-                            'division_code': division_id
                         },
                         success: function(data) {
                             var district_select = $('#district_code');
@@ -364,10 +380,12 @@
             });
 
             $('#district_code').change(function() {
-                var district_id = $(this).val();
+                let district_id = $(this).val();
                 if (district_id) {
+                    let encodedDistrictId = encodeURIComponent(district_id);
+                    let url = `${api_baseurl}detail/upazila?district_code=${encodedDistrictId}`;
                     $.ajax({
-                        url: api_baseurl + 'detail/upazila',
+                        url: url,
                         method: 'GET',
                         headers: {
                             Authorization: authToken,
