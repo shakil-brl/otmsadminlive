@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Clients\ApiHttpClient;
+use App\Trait\FileUpload;
 use BaconQrCode\Encoder\QrCode;
 use Illuminate\Http\Request;
 use PDF;
 
 class CertificateController extends Controller
 {
+    use FileUpload;
     public function create($batch_id)
     {
         $batch_id = decrypt($batch_id);
@@ -88,6 +90,10 @@ class CertificateController extends Controller
         ]);
         $results = ApiHttpClient::request('post', "certificates/print", $data)->json();
 
+        $setting_configs = ApiHttpClient::request('get', "tms-settings", [])->json();
+        $data['setting_configs'] = collect($setting_configs['data'])->pluck('value', 'key');
+
+
         if ($results['success'] == true) {
             $settings = ApiHttpClient::request('get', "tms-settings")->json();
 
@@ -122,4 +128,66 @@ class CertificateController extends Controller
         }
     }
 
+    public function certificateConfig(Request $request)
+    {
+        $results = ApiHttpClient::request('get', "tms-settings", [])->json();
+        $data = collect($results['data'])->pluck('value', 'key');
+        return view('certificate.config', compact('data'));
+    }
+    public function certificateConfigStore(Request $request)
+    {
+        // return $request->all();
+        $request->validate([
+            'certificate_bg' => 'nullable|mimes:png|max:2000',
+            'certificate_title' => 'required|string',
+            'description_line_1' => 'required',
+            'description_line_2' => 'required',
+            'description_line_3' => 'required',
+            'sign_description_left' => 'required',
+            'certificate_sub_title' => 'required',
+            'sign_description_right' => 'required',
+            'sign_right' => 'nullable|mimes:png|max:200',
+            'sign_left' => 'nullable|mimes:png|max:200',
+        ]);
+        $request['sign_description_left'] = nl2br(e($request['sign_description_left']));
+        $request['sign_description_right'] = nl2br(e($request['sign_description_right']));
+
+        if ($request->hasFile('certificate_bg')) {
+            $file_name = 'certificate-bg.png';
+            $this->upload($request->file('certificate_bg'), $file_name);
+        }
+
+        if ($request->hasFile('sign_left')) {
+            $file_name = 'sign1.png';
+            $this->upload($request->file('sign_left'), $file_name);
+        }
+        if ($request->hasFile('sign_right')) {
+            $file_name = 'sign2.png';
+            $this->upload($request->file('sign_right'), $file_name);
+        }
+
+        $keys = [];
+        $values = [];
+        $al_keys = ['certificate_title', 'description_line_1', 'description_line_2', 'description_line_3', 'sign_description_left', 'sign_description_right', 'certificate_sub_title'];
+        foreach ($al_keys as $key) {
+            if ($request->{$key}) {
+                $keys[$key] = $key;
+                $values[$key] = $request->{$key};
+            }
+        }
+
+        $data = [
+            'keys' => $keys,
+            'values' => $values,
+        ];
+
+        $results = ApiHttpClient::request('post', "tms-settings-multiple-store", $data)->json();
+
+        $alert = [
+            'type' => 'Success',
+            'message' => 'Updated successfully.',
+        ];
+        return redirect()->back()->with($alert);
+
+    }
 }
