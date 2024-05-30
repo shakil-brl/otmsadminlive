@@ -7,7 +7,8 @@
             background: #e9d5ff;
         }
 
-        .actions-btn:hover {
+        .actions-btn:hover,
+        .actions-btn:focus {
             background: #6b21a8;
             color: white;
         }
