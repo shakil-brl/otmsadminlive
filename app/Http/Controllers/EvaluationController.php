@@ -48,15 +48,12 @@ class EvaluationController extends Controller
             'applicant_id' => $training_applicant_id,
             'data_type' => 'first',
         ])->json();
-
-
         $heads = ApiHttpClient::request('get', 'evaluation-head', [
             'type' => 1,
             'status' => 1,
             'data_type' => 'get',
         ])
             ->json();
-
         return view('evaluations.head', [
             'heads' => $heads['data'],
             'training_applicant' => $training_applicant['data'],

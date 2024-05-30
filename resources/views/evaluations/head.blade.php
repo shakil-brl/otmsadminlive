@@ -159,7 +159,7 @@
                     <div class="tag">{{ 'Student Name' }}</div>
                 </div>
                 <div class="item">
-                    <div class="title">{{ $training_applicant['profile']['KnownAsBangla'] ?? '' }}</div>
+                    <div class="title">{{ $training_applicant['profile']['FatherNameBangla'] ?? '' }}</div>
                     <div class="tag">Fathers Name</div>
                 </div>
             </div>
