@@ -23,7 +23,7 @@
         <tr>
             <th style="font-weight: 700;">{{ __('batch-schedule.sl') }}</th>
             <th style="font-weight: 700;">{{ __('batch-schedule.batch_code') }}</th>
-            <th style="font-weight: 700;">Traiting Title</th>
+            <th style="font-weight: 700;">Training Title</th>
             <th style="font-weight: 700;">Date</th>
             <th style="font-weight: 700;">Start Time</th>
             <th style="font-weight: 700;">End Time</th>
