@@ -24,7 +24,7 @@
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.start_date') }}</th>
                     <th>{{ __('batch-list.total_class') }}</th>
-                    <th>Traineer List</th>
+                    <th>Trainer List</th>
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
@@ -76,7 +76,7 @@
                                     data-provider-id="{{ $batch['provider_id'] }}"
                                     data-batch-trainers="{{ $trainersIdsString ?? '' }}" class="btn btn-sm fw-bold btn-success"
                                     data-bs-toggle="modal" data-bs-target="#link_trainers_batches">
-                                    Enroll Traineer
+                                    Enroll Trainer
                                 </a>
                             </td>
                         </tr>
