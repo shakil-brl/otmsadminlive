@@ -118,10 +118,12 @@
                         @endif
                     @endif
                 </div>
-                <a href="{{ route('batch-schedule-detail.create', $batch['id']) }}" class="btn btn-primary">
-                    Add New
-                    Schedule
-                </a>
+                @if (in_array('batch-schedule-detail.create', $roleRoutePermissions))
+                    <a href="{{ route('batch-schedule-detail.create', $batch['id']) }}" class="btn btn-primary">
+                        Add New
+                        Schedule
+                    </a>
+                @endif
             </div>
 
             <x-alert />
@@ -209,6 +211,34 @@
                         </div>
                         <div class="button-area">
                             @isset($role)
+                                <div class="d-flex gap-1">
+                                    @if (in_array('batch-schedule-detail.destroy', $roleRoutePermissions) && $schedule_detail['status'] == 1)
+                                        <div class="text-center">
+                                            <form action="{{ route('batch-schedule-detail.destroy', $schedule_detail['id']) }}"
+                                                method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn mb-1 btn-danger">
+                                                    Delete Schedule
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endif
+                                    @isset($schedule_detail['status'])
+                                        @if (in_array('batch-schedule.edit', $roleRoutePermissions) && $schedule_detail['status'] == 1)
+                                            <div>
+                                                <a href="" type="button" class="btn btn-warning btn-edit-schedule"
+                                                    id="btn-edit-schedule" data-bs-toggle="modal"
+                                                    data-bs-target="#edit_schedule_details" data-sd-id="{{ $schedule_detail['id'] }}"
+                                                    data-date={{ $date->format('d/m/Y') }}
+                                                    data-start-time={{ $schedule_detail['start_time'] }}
+                                                    data-end-time={{ $schedule_detail['end_time'] }}>
+                                                    Edit Schedule
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endisset
+                                </div>
                                 @if (strtolower($role) == 'trainer')
                                     @isset($schedule_detail['status'])
                                         <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
@@ -237,16 +267,6 @@
                                         @endif
                                     @endisset
                                 @else
-                                    @if ($schedule_detail['status'] == 1)
-                                        <form action="{{ route('batch-schedule-detail.destroy', $schedule_detail['id']) }}"
-                                            method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button class="btn mb-1 btn-danger">
-                                                Delete This Schedule
-                                            </button>
-                                        </form>
-                                    @endif
                                     @if ($schedule_detail['status'] == 2)
                                         <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
                                             class="btn btn-secondary w-100 rounded-4 mb-1">Class Document</a>
@@ -270,17 +290,6 @@
                                             class="btn btn-detail complete">
                                             {{ __('batch-schedule.class_details') }}</a>
                                     @endif
-                                @endif
-                            @endisset
-                            @isset($schedule_detail['status'])
-                                @if (in_array('batch-schedule.edit', $roleRoutePermissions) && $schedule_detail['status'] == 1)
-                                    <a href="" type="button" class="btn btn-detail btn-edit-schedule"
-                                        id="btn-edit-schedule" data-bs-toggle="modal" data-bs-target="#edit_schedule_details"
-                                        data-sd-id="{{ $schedule_detail['id'] }}" data-date={{ $date->format('d/m/Y') }}
-                                        data-start-time={{ $schedule_detail['start_time'] }}
-                                        data-end-time={{ $schedule_detail['end_time'] }}>
-                                        Edit Schedule
-                                    </a>
                                 @endif
                             @endisset
                         </div>
