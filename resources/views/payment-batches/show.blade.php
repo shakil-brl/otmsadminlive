@@ -32,7 +32,7 @@
                         <div>Total Payment Amount: {{ $data['total_payment_amount'] }}</div>
                     </div>
                 </div>
-                <h5>Payment Recived Trainee List</h5>
+                <h5>Payment Received Trainee List</h5>
                 <table class="table table-bordered bg-white">
                     <thead>
                         <th>{{ __('batch-list.sl') }}</th>
