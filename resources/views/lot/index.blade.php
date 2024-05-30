@@ -82,7 +82,7 @@
                                 </tr>
                             @endforeach
                         @else
-                            <td colspan="6" class="text-danger">Data Not Fount</td>
+                            <td colspan="6" class="text-danger">Data Not Found</td>
                         @endif
                     </tbody>
                 </table>
