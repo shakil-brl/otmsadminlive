@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\TraineesExport;
 use App\Http\Clients\ApiHttpClient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -40,6 +41,8 @@ class TraineeEnrollmentController extends Controller
 
     public function export($batch_id)
     {
-        return Excel::download(new TraineesExport($batch_id), 'trainee.xlsx');
+        $filename = 'Trainee List ' . Carbon::now()->format('d-m-Y h:i:s A') . '.xlsx';
+
+        return Excel::download(new TraineesExport($batch_id), $filename);
     }
 }
