@@ -1,4 +1,8 @@
 @extends('layouts.auth-master')
+@push('css')
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0"
+        rel="stylesheet">
+@endpush
 @section('content')
     <div class="m-5">
         <div id="batch-header" class="mb-1">
@@ -53,8 +57,7 @@
             @if ($first_trainee['training_batch'])
                 <div class="d-flex align-items-center">
                     <h4 class="text-end text-info m-0 me-3">Total : {{ $total_count }}</h4>
-                    <a href="{{ route('trainees.export', $batch['id']) }}" class="btn btn-success d-flex"
-                        wire:click='export' type="button">
+                    <a href="{{ route('trainees.export', $batch['id']) }}" class="btn btn-success d-flex" type="button">
                         <span class="material-icons-outlined me-1">
                             download
                         </span>
