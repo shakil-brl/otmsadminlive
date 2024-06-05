@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TraineesExport;
 use App\Http\Clients\ApiHttpClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TraineeEnrollmentController extends Controller
 {
@@ -34,5 +36,10 @@ class TraineeEnrollmentController extends Controller
     public function show($userId)
     {
         return view('traineesenroll.show', compact('userId'));
+    }
+
+    public function export($batch_id)
+    {
+        return Excel::download(new TraineesExport($batch_id), 'trainee.xlsx');
     }
 }
