@@ -93,7 +93,7 @@
                         <td style="border: 1px solid #000;">{{ $loop->iteration }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['KnownAs'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['Email'] ?? '' }}</td>
-                        <td style="border: 1px solid #000;">{{ '\'' . $trainee['profile']['NID'] ?? '' }}</td>
+                        <td style="border: 1px solid #000;">{{ '\'' .$trainee['profile']['NID'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['Phone'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['FatherNameBangla'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['MotherNameBangla'] ?? '' }}</td>

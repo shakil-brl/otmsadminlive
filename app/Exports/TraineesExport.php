@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class TraineesExport implements FromView, WithTitle, WithDefaultStyles, WithEvents, WithHeadings
 {
@@ -73,7 +74,7 @@ class TraineesExport implements FromView, WithTitle, WithDefaultStyles, WithEven
     public function columnFormats(): array
     {
         return [
-            'D' => '@',
+            'D' => NumberFormat::FORMAT_TEXT,
         ];
     }
     public function defaultStyles(Style $defaultStyle)
