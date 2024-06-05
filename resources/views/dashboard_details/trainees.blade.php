@@ -57,7 +57,7 @@
             @if ($first_trainee['training_batch'])
                 <div class="d-flex align-items-center">
                     <h4 class="text-end text-info m-0 me-3">Total : {{ $total_count }}</h4>
-                    <a href="{{ route('trainees.export', $batch['id']) }}" class="btn btn-success d-flex" type="button">
+                    <a href="{{ route('trainees.export', $batch['batchCode']) }}" class="btn btn-success d-flex" type="button">
                         <span class="material-icons-outlined me-1">
                             download
                         </span>

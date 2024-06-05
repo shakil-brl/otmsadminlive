@@ -20,21 +20,9 @@ class TraineesExport implements FromView, WithTitle, WithDefaultStyles, WithEven
      */
     protected $batch_id, $trainees;
 
-    public function __construct($batch_id)
+    public function __construct($data)
     {
-        $this->batch_id = $batch_id;
-        $this->trainees = [];
-
-        $results = ApiHttpClient::request('get', 'detail/trainee-total', [
-            'batch_id' => $this->batch_id,
-            'per_page' => 100,
-        ])->json();
-
-        if ($results['success'] == true) {
-            $data = $results['data']['data'] ?? [];
-
-            $this->trainees = $data;
-        }
+        $this->trainees = $data;
     }
 
     public function headings(): array
@@ -73,12 +61,19 @@ class TraineesExport implements FromView, WithTitle, WithDefaultStyles, WithEven
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-                $columns = range('A', 'Z');
+                $columns = range('A', 'H');
 
                 foreach ($columns as $column) {
                     $event->sheet->getDelegate()->getColumnDimension($column)->setAutoSize(true);
                 }
             }
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => '@',
         ];
     }
     public function defaultStyles(Style $defaultStyle)
