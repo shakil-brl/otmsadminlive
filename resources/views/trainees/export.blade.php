@@ -59,18 +59,24 @@
                 </th>
             </tr>
             <tr>
-                <td style="border: 1px solid #000;" colspan="2">
+                <th style="" colspan="{{ $colspan }}">
                     <div><strong>Batch Code: </strong> {{ $batch['batchCode'] ?? '' }}</div>
-                </td>
-                <td style="border: 1px solid #000;" colspan="2">
-                    <div><strong>Course Name: </strong> {{ $batch['training']['title']['Name'] ?? '' }}</div>
-                </td>
-                <td style="border: 1px solid #000;" colspan="2">
-                    <div><strong>Address: </strong> {{ $batch['GEOLocation'] ?? '' }}</div>
-                </td>
-                <td style="border: 1px solid #000;" colspan="2">
-                    <div><strong>Total Class Days: </strong> {{ $batch['duration'] ?? '' }} Days</div>
-                </td>
+                </th>
+            </tr>
+            <tr>
+                <th style="" colspan="{{ $colspan }}">
+                    <div>Course Name: {{ $batch['training']['title']['Name'] ?? '' }}</div>
+                </th>
+            </tr>
+            <tr>
+                <th style="" colspan="{{ $colspan }}">
+                    <div>Address: {{ $batch['GEOLocation'] ?? '' }}</div>
+                </th>
+            </tr>
+            <tr>
+                <th style="" colspan="{{ $colspan }}">
+                    <div>Total Class Days: {{ $batch['duration'] ?? '' }} Days</div>
+                </th>
             </tr>
         </table>
 
@@ -93,7 +99,7 @@
                         <td style="border: 1px solid #000;">{{ $loop->iteration }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['KnownAs'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['Email'] ?? '' }}</td>
-                        <td style="border: 1px solid #000;">{{ '\'' .$trainee['profile']['NID'] ?? '' }}</td>
+                        <td style="border: 1px solid #000;">{{ '\'' . $trainee['profile']['NID'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['Phone'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['FatherNameBangla'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['MotherNameBangla'] ?? '' }}</td>
