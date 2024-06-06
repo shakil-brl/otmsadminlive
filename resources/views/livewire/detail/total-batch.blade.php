@@ -10,7 +10,7 @@
     </h3>
     <br>
     @isset($total_batches)
-        <div id="preloader" wire:target='searchFilter' wire:loading.class="d-flex">
+        <div id="preloader" wire:loading.class="d-flex">
             <div class="loader"></div>
         </div>
         <div class="mb-3">
