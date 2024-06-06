@@ -11,23 +11,111 @@ use Illuminate\Support\Str;
 
 class BatchScheduleController extends Controller
 {
-    // all batches
-    public function batches(Request $request)
+
+
+    public function scheduleDetailCreate(Request $request, $training_batch_id)
     {
-        $page = request('page', 1);
-        $app_url = Str::finish(config('app.api_url'), '/');
-        $results = ApiHttpClient::request('get', 'batch/list', $request->all())
+
+        $response = ApiHttpClient::request('get', 'batch/' . $training_batch_id . '/show')
+            ->json();
+        return view('batch_schedule.batch-scheedule-create', ['batch' => $response['data']]);
+
+    }
+    public function scheduleDetailStore(Request $request, $training_batch_id)
+    {
+        $request->validate([
+            'date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
+        ]);
+
+        $response = ApiHttpClient::request(
+            'POST',
+            'schedule/schedule-detail-store/' . $training_batch_id,
+            [
+                ...$request->all(),
+                'start_time' => Carbon::createFromFormat('H:i', $request->start_time)->format('H:i:s'),
+                'end_time' => Carbon::createFromFormat('H:i', $request->end_time)->format('H:i:s'),
+            ]
+        )
             ->json();
 
 
-        if ($results['success'] == true) {
-            $from = $results['data']['from'] ?? 1;
-            $paginator = $this->customPaginate($results, $request, route('batch-schedule.batches'));
-            return view('batches.index', ['results' => $results['data'], 'from' => $from, 'paginator' => $paginator]);
+        if (isset($response['error'])) {
+            $error = $response['error'];
+            $errorMessage = $response['message'];
+            return redirect()->back()->withInput()->withErrors($errorMessage);
         } else {
-            session()->flash('type', 'Danger');
-            session()->flash('message', $results['message'] ?? 'Something went wrong');
-            return view('batches.index');
+            if ($response['success'] == false) {
+                session()->flash('type', 'Warning');
+                session()->flash('message', $response['message']);
+                return redirect()->back()->withInput();
+            } else {
+                session()->flash('type', 'Success');
+                session()->flash('message', $response['message']);
+                return redirect()->back();
+            }
+
+        }
+
+    }
+
+
+    public function scheduleDetailDestroy(Request $request, $schedule_detail_id)
+    {
+        $response = ApiHttpClient::request('delete', 'schedule/schedule-detail-destroy/' . $schedule_detail_id)
+            ->json();
+        if ($response['success'] == true) {
+            session()->flash('type', 'Success');
+        } else {
+            session()->flash('type', 'Warning');
+        }
+        session()->flash('message', $response['message'] ?? 'Something went wrong');
+        return redirect()->back();
+
+    }
+    // all batches
+    public function batches(Request $request)
+    {
+        $divisions = ApiHttpClient::request('get', 'detail/division')->json();
+
+        $providers = ApiHttpClient::request('get', 'detail/development-partner')->json();
+
+        $trainings = ApiHttpClient::request('get', 'detail/training')->json();
+
+        $phases = ApiHttpClient::request('get', 'tms-phases')->json();
+
+        if ($divisions['success'] && $providers['success'] && $trainings['success'] && isset($phases['data'])) {
+            $data = [
+                'divisions' => $divisions['data'],
+                'providers' => $providers['data'],
+                'trainings' => $trainings['data'],
+                'phases' => $phases['data'],
+            ];
+
+            $results = ApiHttpClient::request('get', 'batch/list', $request->all())->json();
+            // dd($results);
+            if ($results['success']) {
+                $from = $results['data']['from'] ?? 1;
+                $paginator = $this->customPaginate($results, $request, route('batch-schedule.batches'));
+
+                return view('batches.index', [
+                    'results' => $results['data'],
+                    'from' => $from,
+                    'paginator' => $paginator,
+                    'data' => $data
+                ]);
+            } else {
+                Session::flash('type', 'Danger');
+                Session::flash('message', $results['message'] ?? 'Something went wrong');
+
+                return view('batches.index', ['data' => $data]);
+            }
+        } else {
+            Session::flash('type', 'Danger');
+            Session::flash('message', 'Something went wrong');
+
+            return view('batches.index', ['data' => []]);
         }
     }
 

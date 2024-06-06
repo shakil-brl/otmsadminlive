@@ -145,21 +145,21 @@
             </div>
             <div class="row row-cols-4">
                 <div class="item">
-                    <div class="title"> {{ $student['training_batch']['batchCode'] ?? '' }}
+                    <div class="title"> {{ $training_applicant['training_batch']['batchCode'] ?? '' }}
                     </div>
                     <div class="tag">{{ __('batch-schedule.batch_code') }} #</div>
                 </div>
                 <div class="item">
                     <div class="title">
-                        {{ $student['training_batch']['GEOLocation'] ?? '' }}</div>
+                        {{ $training_applicant['training_batch']['GEOLocation'] ?? '' }}</div>
                     <div class="tag">Location #</div>
                 </div>
                 <div class="item">
-                    <div class="title">{{ $student['profile']['KnownAsBangla'] ?? '' }}</div>
+                    <div class="title">{{ $training_applicant['profile']['KnownAsBangla'] ?? '' }}</div>
                     <div class="tag">{{ 'Student Name' }}</div>
                 </div>
                 <div class="item">
-                    <div class="title">{{ $student['profile']['KnownAsBangla'] ?? '' }}</div>
+                    <div class="title">{{ $training_applicant['profile']['KnownAsBangla'] ?? '' }}</div>
                     <div class="tag">Fathers Name</div>
                 </div>
             </div>
@@ -168,10 +168,10 @@
         <div id="class-days">
             <div class="m-0">
                 <form id="formSubmit" method="POST"
-                    action="{{ route('trainer-schedule-details.store-student-evaluation', $student['id']) }}">
+                    action="{{ route('evaluate.trainee.store', $training_applicant['id']) }}">
                     @csrf
-                    <input type="hidden" name="schedule_detail_id" value="" />
-
+                    <input type="hidden" name="tarining_batch_id"
+                        value="{{ $training_applicant['training_batch']['id'] }}" />
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -182,66 +182,68 @@
                         </div>
                     @endif
                     <div id="students">
-
                         @foreach ($heads as $question)
                             <div class="student">
-                                <div class="row row-cols-3 align-items-center">
-                                    <div>
-                                        <div class="label">সিরিয়াল #</div>
-                                        <div class="text">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</div>
-                                    </div>
-                                    <div>
+                                <div class="row  align-items-center">
+                                    <div class="d-flex col-7">
+                                        <div style="width: 100px;">
+                                            <div class="label">সিরিয়াল #</div>
+                                            <div class="text">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</div>
+                                        </div>
+
                                         <label for="student{{ $loop->iteration }}" class="">
                                             <div class="label">মূল্যায়ন প্রশ্ন</div>
                                             <div class="text">{{ $question['title'] }}</div>
                                         </label>
                                     </div>
-                                    <div>
-
-                                        @if ($question['is_bool'] == 1)
-                                            <label class="">
-                                                <div class="label">হ্যাঁ/না</div>
-                                                <div class="form-check form-switch my-4">
-
-                                                    <div class="text"><input name="heads[{{ $question['id'] }}]"
-                                                            class="form-check-input" type="checkbox" role="switch"
-                                                            id="student{{ $loop->iteration }}"
-                                                            value="{{ $question['mark'] }}">
+                                    <div class="col-5">
+                                        <div>
+                                            @if ($question['is_bool'] == 1)
+                                                <label class="">
+                                                    {{-- <div class="label">হ্যাঁ/না</div> --}}
+                                                    <div class="form-check form-switch my-4">
+                                                        <div class="text"><input
+                                                                name="evaluations[{{ $question['id'] }}]"
+                                                                class="form-check-input" type="checkbox" role="switch"
+                                                                id="student{{ $loop->iteration }}"
+                                                                value="{{ $question['mark'] }}">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                            </label>
-                                        @else
-                                            <label class="">
-                                                <div class="label">মূল্যনির্ধারণ</div>
-                                                <star-rating>
-                                                    @foreach (range(1, $question['max_value']) as $max_val)
-                                                        <label style="font-size: 14px;"
-                                                            for="{{ $question['id'] . $loop->iteration }}">{{ $max_val }}</label>
-                                                        <input type="radio" id="{{ $question['id'] . $loop->iteration }}"
-                                                            name="heads[{{ $question['id'] }}]"
-                                                            value="{{ $max_val }}" />
-                                                    @endforeach
-                                                </star-rating>
+                                                </label>
+                                            @else
+                                                <label class="">
+                                                    {{-- <div class="label">মূল্যনির্ধারণ</div> --}}
+                                                    <star-rating>
+                                                        @foreach (range(1, $question['mark']) as $mark)
+                                                            <label style="font-size: 14px;"
+                                                                for="{{ $question['id'] . $loop->iteration }}">{{ $mark }}</label>
+                                                            <input type="radio"
+                                                                id="{{ $question['id'] . $loop->iteration }}"
+                                                                name="evaluations[{{ $question['id'] }}]"
+                                                                value="{{ $mark }}" />
+                                                        @endforeach
+                                                    </star-rating>
 
-                                            </label>
-                                        @endif
+                                                </label>
+                                            @endif
 
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
                         @endforeach
                     </div>
-                    <div class="row">
-                        <div class="col-sm-2 mt-10 m-auto">
-                            <div id="attendance-bottom">
-                                <div class="right">
-                                    <button class="btn btn-attendance submit" name="submit" id="submit"
-                                        value="attendance">Submit</button>
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="mt-2">
+                        <label for="">মন্তব্য (যদি থাকে)</label>
+                        <textarea name="remark" class="form-control"></textarea>
+                    </div>
+                    <div class="mt-4 mb-5 text-end">
+                        <button class="btn btn-primary" name="submit" id="submit" value="attendance">
+                            সাবমিট করুন
+                        </button>
                     </div>
                 </form>
 

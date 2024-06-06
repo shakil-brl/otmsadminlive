@@ -42,12 +42,13 @@ class EvaluationController extends Controller
         }
     }
 
-    public function evaluationForm($training_applicant_id)
+    public function traineeEvaluationForm($training_applicant_id)
     {
-        $student = ApiHttpClient::request('get', 'detail/trainee-total', [
+        $training_applicant = ApiHttpClient::request('get', 'detail/trainee-total', [
             'applicant_id' => $training_applicant_id,
             'data_type' => 'first',
         ])->json();
+
 
         $heads = ApiHttpClient::request('get', 'evaluation-head', [
             'type' => 1,
@@ -58,10 +59,93 @@ class EvaluationController extends Controller
 
         return view('evaluations.head', [
             'heads' => $heads['data'],
-            'student' => $student['data'],
+            'training_applicant' => $training_applicant['data'],
+        ]);
+    }
+    public function traineeEvaluationStore(Request $request, $training_applicant_id)
+    {
+        $request->validate([
+            'tarining_batch_id' => 'required|integer|gt:0',
+            'remark' => 'nullable|max:500',
+            'evaluations' => 'required|array|min:1',
+            'evaluations.*' => 'required',
         ]);
 
+        $evaluations = array_map(function ($head_id, $mark) {
+            return ['head_id' => $head_id, 'mark' => $mark];
+        }, array_keys($request->evaluations), $request->evaluations);
 
+        $results = ApiHttpClient::request('post', "evaluation", [
+            'type' => 1,
+            'tarining_batch_id' => $request->tarining_batch_id,
+            'remark' => $request->remark,
+            'evaluate_to' => $training_applicant_id,
+            'evaluations' => $evaluations,
+        ])
+            ->json();
+        if (isset($results['error'])) {
+            $error = $results['error'];
+            $errorMessage = $results['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->withInput()->withErrors($errorMessage);
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $results['message'] ?? 'Created successfully');
+            return redirect()->route('evaluate.trainee.trainee-list', $request->tarining_batch_id);
+        }
+    }
+    public function vendorEvaluationForm(Request $request, $partner_it)
+    {
+        $parner = ApiHttpClient::request('get', 'detail/development-partner', [
+            'partner_id' => $partner_it,
+            'data_type' => 'first',
+        ])->json();
+
+        $heads = ApiHttpClient::request('get', 'evaluation-head', [
+            'type' => 3,
+            'status' => 1,
+            'data_type' => 'get',
+        ])
+            ->json();
+
+        return view('evaluations.vendor-head', [
+            'heads' => $heads['data'],
+            'partner' => $parner['data'],
+        ]);
+    }
+
+    public function vendorEvaluationStore(Request $request, $partner_id)
+    {
+        $request->validate([
+            'remark' => 'nullable|max:500',
+            'evaluations' => 'required|array|min:1',
+            'evaluations.*' => 'required',
+        ]);
+
+        $evaluations = array_map(function ($head_id, $mark) {
+            return ['head_id' => $head_id, 'mark' => $mark];
+        }, array_keys($request->evaluations), $request->evaluations);
+
+        $results = ApiHttpClient::request('post', "evaluation", [
+            'type' => 3,
+            'remark' => $request->remark,
+            'evaluate_to' => $partner_id,
+            'evaluations' => $evaluations,
+        ])
+            ->json();
+
+        if (isset($results['error'])) {
+            $error = $results['error'];
+            $errorMessage = $results['message'];
+            session()->flash('type', 'Danger');
+            session()->flash('message', 'Validation failed');
+            return redirect()->back()->withInput()->withErrors($errorMessage);
+        } else {
+            session()->flash('type', 'Success');
+            session()->flash('message', $results['message'] ?? 'Created successfully');
+            return redirect()->route('dashboard_details.partners');
+        }
     }
     public function index(Request $request)
     {

@@ -20,12 +20,19 @@
                     <th>{{ __('batch-list.sl') }}</th>
                     <th>{{ __('batch-list.batch_code') }}</th>
                     <th>{{ __('batch-list.start_date') }}</th>
+                    <th>Class End Date</th>
                     <th>{{ __('batch-list.course_name') }}</th>
                     <th>{{ __('batch-list.location') }}</th>
                     <th>{{ __('batch-list.development_partner') }}</th>
-                    <th>{{ __('batch-list.action') }}</th>
+                    {{-- <th>{{ __('batch-list.action') }}</th> --}}
                 </thead>
                 <tbody>
+                    @if (count($complete_batches) > 0)
+                    @else
+                        <tr>
+                            <td class="text-danger" colspan="7">No Data found</td>
+                        </tr>
+                    @endif
                     @foreach (collect($complete_batches) as $batch)
                         <tr>
                             <td>
@@ -35,7 +42,10 @@
                                 {{ $batch['training_batch']['batchCode'] ?? '' }}
                             </td>
                             <td>
-                                {{ $batch['training_batch']['startDate'] ?? '' }}
+                                {{ $batch['schedule_details'][0]['date'] ?? '' }}
+                            </td>
+                            <td>
+                                {{ $batch['schedule_details'][count($batch['schedule_details']) - 1]['date'] ?? '' }}
                             </td>
                             <td>
                                 {{ $batch['training_batch']['training']['title']['Name'] ?? '' }}
@@ -46,11 +56,11 @@
                             <td>
                                 {{ $batch['training_batch']['provider']['name'] ?? '' }}
                             </td>
-                            <td>
+                            {{-- <td>
                                 <a href="" class="btn btn-sm btn-info">
                                     {{ __('batch-list.view') }}
                                 </a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>

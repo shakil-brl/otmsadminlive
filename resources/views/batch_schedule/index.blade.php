@@ -2,6 +2,17 @@
 @push('css')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined:opsz,wght,FILL,GRAD@48,700,0,0"
         rel="stylesheet">
+    <style>
+        .actions-btn {
+            background: #e9d5ff;
+        }
+
+        .actions-btn:hover,
+        .actions-btn:focus {
+            background: #6b21a8;
+            color: white;
+        }
+    </style>
 @endpush
 @section('content')
     <!--begin::Content-->
@@ -67,6 +78,7 @@
                 </div>
             </div>
         </div>
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -76,33 +88,57 @@
                 </ul>
             </div>
         @endif
-        <x-alert />
+
+
+
         @isset($schedule_details)
             @php
                 $schedule_used = false;
                 $runningClass = false;
                 $desiredKey = 'status';
                 foreach ($schedule_details as $array) {
-                    if (array_key_exists($desiredKey, $array) && ($array[$desiredKey] == 2 || $array[$desiredKey] == 3)) {
+                    if (
+                        array_key_exists($desiredKey, $array) &&
+                        ($array[$desiredKey] == 2 || $array[$desiredKey] == 3)
+                    ) {
                         $schedule_used = true;
                         break;
                     }
                 }
                 foreach ($schedule_details as $array) {
-                    if (array_key_exists($desiredKey, $array) && ($array[$desiredKey] == 2)) {
+                    if (array_key_exists($desiredKey, $array) && $array[$desiredKey] == 2) {
                         $runningClass = true;
                         break;
                     }
                 }
             @endphp
 
-            @if (in_array('batch-schedule.clean', $roleRoutePermissions) && !$schedule_used)
-                <div class="text-end mt-2">
-                    <a href="" id="{{ $batch['id'] }}" class="btn btn-md btn-danger clean-schedule">
-                        Clean Schedule
-                    </a>
+            <div class="d-flex flex-wrap justify-content-between">
+                <div>
+                    @if (count($schedule_details))
+                        @if (in_array('batch-schedule.clean', $roleRoutePermissions) && !$schedule_used)
+                            <a href="" id="{{ $batch['id'] }}"
+                                class="btn btn-md btn-warning text-black clean-schedule me-2">
+                                Clean Schedule
+                            </a>
+                        @endif
+                        @if (strtolower($role) == 'superadmin')
+                            <a href="" id="destroy-schedule" class="btn btn-md btn-danger clean-schedule me-3">
+                                Schedule Destroy with Attandance
+                            </a>
+                        @endif
+                    @endif
                 </div>
-            @endif
+                @if (in_array('batch-schedule-detail.create', $roleRoutePermissions))
+                    <a href="{{ route('batch-schedule-detail.create', $batch['id']) }}" class="btn btn-primary">
+                        Add New
+                        Schedule
+                    </a>
+                @endif
+            </div>
+
+            <x-alert />
+
 
             <div id="class-days">
                 @foreach (collect($schedule_details) as $schedule_detail)
@@ -186,64 +222,114 @@
                         </div>
                         <div class="button-area">
                             @isset($role)
-                                @if (strtolower($role) == 'trainer')
-                                    @isset($schedule_detail['status'])
-                                        <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
-                                            class="btn btn-secondary w-100 rounded-4 mb-1">Class Document</a>
-                                        @if ($schedule_detail['status'] == 1 && !$runningClass)
-                                            @if ($date <= \Carbon\Carbon::now())
-                                                <a id="{{ encrypt($schedule_detail['id']) }}" class="btn btn-detail start-class  update"
-                                                    type="button" data-bs-toggle="modal" data-bs-target="#classStartModal"
-                                                    type="button">
-                                                    {{ __('batch-schedule.start_class') }}
-                                                </a>
-                                            @else
-                                                <a class="btn disabled btn-detail  update">
-                                                    {{ __('batch-schedule.start_class') }}
-                                                </a>
+                                <div class="dropdown text-center">
+                                    <button class="btn actions-btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @if (in_array('batch-schedule-detail.destroy', $roleRoutePermissions) && $schedule_detail['status'] == 1)
+                                            <li>
+                                                <form action="{{ route('batch-schedule-detail.destroy', $schedule_detail['id']) }}"
+                                                    method="POST" style="display: inline;">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="dropdown-item text-danger" id="delete-schedule">
+                                                        Delete Schedule
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        @endif
+                                        @isset($schedule_detail['status'])
+                                            @if (in_array('batch-schedule.edit', $roleRoutePermissions) && $schedule_detail['status'] == 1)
+                                                <li>
+                                                    <a href="" type="button"
+                                                        class="dropdown-item text-warning btn-edit-schedule" id="btn-edit-schedule"
+                                                        data-bs-toggle="modal" data-bs-target="#edit_schedule_details"
+                                                        data-sd-id="{{ $schedule_detail['id'] }}"
+                                                        data-date={{ $date->format('d/m/Y') }}
+                                                        data-start-time={{ $schedule_detail['start_time'] }}
+                                                        data-end-time={{ $schedule_detail['end_time'] }}>
+                                                        Edit Schedule
+                                                    </a>
+                                                </li>
                                             @endif
-                                        @elseif ($schedule_detail['status'] == 2)
-                                            <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
-                                                class="btn btn-detail">
-                                                {{ __('batch-schedule.join_class') }}
-                                            </a>
-                                        @elseif ($schedule_detail['status'] == 3)
-                                            <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
-                                                class="btn btn-detail complete">
-                                                {{ __('batch-schedule.class_details') }}</a>
+                                        @endisset
+                                        @if (strtolower($role) == 'trainer')
+                                            @isset($schedule_detail['status'])
+                                                <li>
+                                                    <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
+                                                        class="dropdown-item text-info">Class Document</a>
+                                                </li>
+                                                @if ($schedule_detail['status'] == 1 && !$runningClass)
+                                                    @if ($date <= \Carbon\Carbon::now())
+                                                        <li>
+                                                            <a id="{{ encrypt($schedule_detail['id']) }}"
+                                                                class="dropdown-item start-class update text-primary" type="button"
+                                                                data-bs-toggle="modal" data-bs-target="#classStartModal">
+                                                                {{ __('batch-schedule.start_class') }}
+                                                            </a>
+                                                        </li>
+                                                    @else
+                                                        <li>
+                                                            <a class="dropdown-item disabled update text-primary">
+                                                                {{ __('batch-schedule.start_class') }}
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @elseif ($schedule_detail['status'] == 2)
+                                                    <li>
+                                                        <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
+                                                            class="dropdown-item text-success">
+                                                            {{ __('batch-schedule.join_class') }}
+                                                        </a>
+                                                    </li>
+                                                @elseif ($schedule_detail['status'] == 3)
+                                                    <li>
+                                                        <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
+                                                            class="dropdown-item complete">
+                                                            {{ __('batch-schedule.class_details') }}
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endisset
+                                        @else
+                                            @if ($schedule_detail['status'] == 2)
+                                                <li>
+                                                    <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
+                                                        class="dropdown-item">Class Document</a>
+                                                </li>
+                                                @if ($schedule_detail['streaming_link'])
+                                                    <li>
+                                                        <a class="dropdown-item text-danger"
+                                                            href="{{ $schedule_detail['streaming_link'] }}" target="_blank">
+                                                            {{ __('batch-schedule.live_streaming') }}
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                                @if ($schedule_detail['static_link'])
+                                                    <li>
+                                                        <a type="button" class="dropdown-item text-primary"
+                                                            href="{{ $schedule_detail['static_link'] }}" target="_blank">
+                                                            {{ __('batch-schedule.join_class') }}
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @elseif ($schedule_detail['status'] == 3)
+                                                <li>
+                                                    <a href="{{ route('schedule-class-documents.index', $schedule_detail['id']) }}"
+                                                        class="dropdown-item">Class Document</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
+                                                        class="dropdown-item complete">
+                                                        {{ __('batch-schedule.class_details') }}
+                                                    </a>
+                                                </li>
+                                            @endif
                                         @endif
-                                    @endisset
-                                @else
-                                    @if ($schedule_detail['status'] == 2)
-                                        @if ($schedule_detail['streaming_link'])
-                                            <a class="btn btn-detail" href="{{ $schedule_detail['streaming_link'] }}"
-                                                target="_blank" style="background-color: rgb(238, 66, 66);">
-                                                {{ __('batch-schedule.live_streaming') }}
-                                            </a>
-                                        @endif
-                                        @if ($schedule_detail['static_link'])
-                                            <a type="button" class="btn btn-detail mt-1"
-                                                href="{{ $schedule_detail['static_link'] }}" target="_blank" style="background-color: rgb(65, 65, 238);">
-                                                {{ __('batch-schedule.join_class') }}
-                                            </a>
-                                        @endif
-                                    @elseif ($schedule_detail['status'] == 3)
-                                        <a href="{{ route('attendance.form', [encrypt($schedule_detail['id'])]) }}"
-                                            class="btn btn-detail complete">
-                                            {{ __('batch-schedule.class_details') }}</a>
-                                    @endif
-                                @endif
-                            @endisset
-                            @isset($schedule_detail['status'])
-                                @if (in_array('batch-schedule.edit', $roleRoutePermissions) && $schedule_detail['status'] == 1)
-                                    <a href="" type="button" class="btn btn-detail btn-edit-schedule" id="btn-edit-schedule"
-                                        data-bs-toggle="modal" data-bs-target="#edit_schedule_details"
-                                        data-sd-id="{{ $schedule_detail['id'] }}" data-date={{ $date->format('d/m/Y') }}
-                                        data-start-time={{ $schedule_detail['start_time'] }}
-                                        data-end-time={{ $schedule_detail['end_time'] }}>
-                                        Edit Schedule
-                                    </a>
-                                @endif
+                                    </ul>
+                                </div>
                             @endisset
                         </div>
                     </div>
@@ -269,11 +355,13 @@
                     <!--begin::Provider added Form-->
                     <div class="modal-body">
                         <div class="mb-2">
-                            <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক (ফেসবুক বা ইউটিউব)</label>
+                            <label for="streaming_link_update" class="mb-1 text-danger h6">ক্লাস লাইভ স্ট্রিমিং লিংক
+                                (ফেসবুক বা ইউটিউব)</label>
                             <input id="streaming_link" type="text" class="form-control">
                         </div>
                         <div class="mb-2">
-                            <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক (গুগল মিট বা জুম)</label>
+                            <label for="static_link_update" class="mb-1 text-danger h6">লাইভ ক্লাস লিংক (গুগল মিট বা
+                                জুম)</label>
                             <input id="static_link" type="text" class="form-control">
                         </div>
                     </div>
@@ -368,6 +456,47 @@
                     if (result.isConfirmed) {
                         let finalUrl = `${app_url}/batch_schedules/clean/${id}`;
                         window.location.href = finalUrl;
+                    }
+                });
+            });
+
+            $('#destroy-schedule').click(function(e) {
+                e.preventDefault();
+                id = {{ $batch['id'] }};
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "All schedule deleted with attandance.!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let finalUrl = `${app_url}/batch_schedules/destroy/${id}`;
+                        window.location.href = finalUrl;
+                    }
+                });
+            });
+
+            $(document).on("click", "#delete-schedule", function(e) {
+                e.preventDefault();
+                const form = $(this).closest('form');
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
                     }
                 });
             });

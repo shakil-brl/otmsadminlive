@@ -88,7 +88,6 @@
                                 <span class="label dropdown-toggle">English</span>
                             @endif
                         </div>
-
                     </div>
                     <!--begin::Menu-->
                     <div class="menu menu-sub menu-sub-dropdown menu-column" data-kt-menu="true">

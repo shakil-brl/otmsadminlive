@@ -848,43 +848,7 @@
                                                         <!--end:Menu link-->
                                                     </div>
                                                     <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Route::is('') ) {?>active<?php } ?>"
-                                                            href="{{ '' }}">
-                                                            <span class="menu-icon">
-                                                                <i class="ki-duotone ki-category fs-2                     ">
-                                                                    <span class="path1"></span>
-                                                                    <span class="path2"></span>
-                                                                    <span class="path3"></span>
-                                                                    <span class="path4"></span>
-                                                                </i>
-                                                            </span>
-                                                            <span class="menu-title">{{ __('sidemenu.categorie') }}</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
-                                                    <!--begin:Menu item-->
-                                                    <div class="menu-item">
-                                                        <!--begin:Menu link-->
-                                                        <a class="menu-link show-loader  sidebar-menu-link <?php if (Route::is('') ) {?>active<?php } ?>"
-                                                            href="{{ '' }}">
-                                                            <span class="menu-icon">
-                                                                <i class="ki-duotone ki-people  fs-2                      ">
-                                                                    <span class="path1"></span>
-                                                                    <span class="path2"></span>
-                                                                    <span class="path3"></span>
-                                                                    <span class="path4"></span>
-                                                                    <span class="path5"></span>
-                                                                </i>
-                                                            </span>
-                                                            <span class="menu-title">{{ __('sidemenu.partner_employee') }}</span>
-                                                        </a>
-                                                        <!--end:Menu link-->
-                                                    </div>
-                                                    <!--end:Menu item-->
+                                                    
                                                     <!--begin:Menu item-->
                                                     <div class="menu-item">
                                                         <!--begin:Menu link-->

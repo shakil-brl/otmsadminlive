@@ -75,6 +75,30 @@ class Controller extends BaseController
         }
     }
 
+    protected function fileUpload($file)
+    {
+        $path = null;
+
+        if ($file != null) {
+            $dateTime = now()->format('Ymd_His');
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+
+            // Generate a unique filename based on date, time, original filename, and schedule ID
+            $filename = "{$dateTime}_{$originalFilename}.{$file->getClientOriginalExtension()}";
+
+            $folderPath = storage_path("app/public/settings");
+            // Check if the folder exists, create it if not
+            if (!File::isDirectory($folderPath)) {
+                File::makeDirectory($folderPath, 0777, true, true);
+            }
+
+            $file->move($folderPath, $filename);
+            $path = "settings/{$filename}";
+        }
+
+        return $path;
+    }
+
     protected function classFileUpload($file, $tmsBatchScheduleDetailId)
     {
         $path = null;

@@ -14,7 +14,7 @@
             <div class="loader"></div>
         </div>
         <div class="mb-3">
-            <div class="row row-cols-5">
+            <div class="d-flex justify-content-between">
                 <div>
                     <select name="" class="form-select" wire:model='per_page'>
                         @foreach (range(15, 100, 15) as $j)
@@ -22,13 +22,24 @@
                         @endforeach
                     </select>
                 </div>
-                {{-- <div>
+                <div class="d-flex align-items-center">
+                    <h4 class="text-end text-info m-0 me-3">Total : {{ $total_count }}</h4>
+                    <button class="btn btn-success d-flex" wire:click='export' type="button">
+                        <span class="material-icons-outlined me-1">
+                            download
+                        </span>
+                        Export
+                    </button>
+                </div>
+            </div>
+            <div class="row row-cols-5 mt-5">
+                <div>
                     <select name="" class="form-select" wire:model='batch_status'>
                         <option value="">Batch Status</option>
                         <option value="1">Running Batch</option>
                         <option value="2">Completed Batch</option>
                     </select>
-                </div> --}}
+                </div>
                 <div>
                     <select name="" class="form-select" wire:model='schedule_status'>
                         <option value="">Schedule Status</option>
@@ -47,8 +58,23 @@
                     </select>
                 </div>
                 <div>
-                    <h4 class="text-end text-info">Total : {{ $total_count }}</h4>
+                    <select name="" class="form-select" wire:model='phase_status' id="phase_status">
+                        <option value="">Phase Status</option>
+                        <option value="1">Have Phase</option>
+                        <option value="2">Doesn't Have</option>
+                    </select>
                 </div>
+                <div>
+                    @if ($phase_status != 2)
+                        <select wire:model='phase_id' name="" class="form-select" id="">
+                            <option value="">Select Phase</option>
+                            @foreach ($phases as $phase)
+                                <option value="{{ $phase['id'] }}">{{ $phase['name_en'] }}</option>
+                            @endforeach
+                        </select>
+                    @endif
+                </div>
+
             </div>
             <div class="row row-cols-4 mt-2 row-cols-xxl-5 g-2 mb-2">
                 <div>
@@ -102,10 +128,15 @@
                     <input wire:model='search' type="search" name="search" value="{{ request('search') }}"
                         class="form-control" placeholder="{{ __('batch-list.search_with_batch') }}">
                 </div>
+                <div>
+                    <div>
+                        <label for=""></label>
+                    </div>
+                    <button type="button" wire:click='searchFilter' class="btn btn-primary">Search</button>
+                </div>
             </div>
 
         </div>
-
 
         <table class="table table-bordered bg-white">
             <thead>
@@ -114,7 +145,8 @@
                 <th>Training Info</th>
                 <th>Provider</th>
                 <th>Trainer</th>
-                <th>Start Date & Duration</th>
+                <th>Batch Info</th>
+                <th>Class Progress</th>
                 <th>{{ __('batch-list.action') }}</th>
             </thead>
             <tbody>
@@ -125,6 +157,12 @@
                         </td>
                         <td>
                             {{ $batch['batchCode'] }}
+                            @isset($batch['batch_phase']['phase']['name_en'])
+                                <div>
+                                    ({{ $batch['batch_phase']['phase']['name_en'] ?? '' }})
+                                </div>
+                            @endisset
+
                         </td>
                         <td>
                             {{ $batch['get_training']['title']['Name'] ?? '' }}
@@ -150,66 +188,152 @@
                                 <small class="text-danger">Not Assigned</small>
                             @endforelse
                         </td>
+
                         <td>
+                            <div>
+                                @isset($batch['trainees'])
+                                    Total Trainee : {{ count($batch['trainees'] ?? []) }}
+                                @endisset
+                            </div>
+                            Start Date:
                             {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d/m/Y')) : digitLocale(null) }}
                             <div>
+                                Number of Class:
                                 {{ isset($batch['duration']) ? digitLocale($batch['duration']) : digitLocale(0) }}
-                                {{ __('batch-list.days') }}
                             </div>
                         </td>
                         <td>
+                            @if (isset($batch['schedule']['total_complete']) ||
+                                    isset($batch['schedule']['total_pending']) ||
+                                    isset($batch['schedule']['total_running']))
+                                <div class="progress m-1">
+                                    <div class="progress-bar" role="progressbar"
+                                        style="width: {{ $batch['schedule']['total_complete'] }}%"
+                                        aria-valuenow="{{ $batch['schedule']['total_complete'] }}"
+                                        aria-valuemin="{{ $batch['schedule']['total_complete'] }}"
+                                        aria-valuemax="{{ $batch['duration'] }}"></div>
+                                </div>
+
+                                <small>{{ __('batch-list.complete_class') }}:
+                                    {{ digitLocale($batch['schedule']['total_complete']) }}</small>/
+                                <small>{{ __('batch-list.pending_class') }}:
+                                    {{ digitLocale($batch['schedule']['total_pending']) }}</small>/
+                                <small>{{ __('batch-list.running_class') }}:
+                                    {{ digitLocale($batch['schedule']['total_running']) }}</small>
+                            @endif
+                            @if ($batch['schedule'] == null)
+                                <span
+                                    class="badge text-black badge-warning">{{ __('batch-list.not_created-schedule') }}</span>
+                            @endif
+                        </td>
+                        <td class="text-center">
                             @if ($batch['schedule'] == null)
                                 @if (strtolower(Session::get('access_token')['role']) == 'provider')
                                     <a href="{{ route('batch-schedule.create', encrypt($batch['id'])) }}"
                                         class="btn btn-sm btn-primary"> {{ __('batch-list.create_schedule') }}</a>
                                 @else
-                                    <span
-                                        class="badge text-black badge-warning">{{ __('batch-list.not_created-schedule') }}</span>
+                                    @isset($batch['trainees'])
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li>
+                                                    <a href="{{ route('dashboard_details.trainees', $batch['id']) }}"
+                                                        class="dropdown-item">
+                                                        Trainee List
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endisset
                                 @endif
                             @else
-                                <div class="d-flex gap-2">
-                                    @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
-                                        <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
-                                            class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}
-                                        </a>
-                                    @endif
-                                    @if (in_array('payment-batches.batch', $roleRoutePermissions) && $batch['payment'])
-                                        <a href="{{ route('payment-batches.batch', encrypt($batch['id'])) }}"
-                                            class="btn btn-sm btn-success">
-                                            Payment
-                                        </a>
-                                    @endif
-                                    @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
-                                        <a href="{{ route('course-supplies.show', encrypt($batch['id'])) }}"
-                                            class="btn btn-sm btn-success">
-                                            Supplies
-                                        </a>
-                                    @endif
-                                    @if (in_array('laptop-distribution.show', $roleRoutePermissions) && $batch['laptop'])
-                                        <a href="{{ route('laptop-distribution.show', [$batch['laptop']['id'], encrypt($batch['id'])]) }}"
-                                            class="btn btn-sm btn-warning mb-1">
-                                            Laptop Distribution
-                                        </a>
-                                    @endif
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        @isset($batch['trainees'])
+                                            <li>
+                                                <a href="{{ route('dashboard_details.trainees', $batch['id']) }}"
+                                                    class="dropdown-item">
+                                                    Trainee List
+                                                </a>
+                                            </li>
+                                        @endisset
+                                        @if (in_array('batch-schedule.index', $roleRoutePermissions) && $batch['schedule'])
+                                            <li>
+                                                <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
+                                                    class="dropdown-item">
+                                                    {{ __('batch-list.view_schedule') }}
+                                                </a>
+                                            </li>
+                                        @endif
+                                        {{-- @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
+                                            <li>
+                                                <a href="{{ route('batch-schedule.index', [encrypt($batch['schedule']['id']), encrypt($batch['id'])]) }}"
+                                                    class="dropdown-item"> {{ __('batch-list.view_schedule') }}
+                                                </a>
+                                            </li>
+                                        @endif --}}
+                                        @if (in_array('payment-batches.batch', $roleRoutePermissions) && $batch['payment'])
+                                            <li>
+                                                <a href="{{ route('payment-batches.batch', encrypt($batch['id'])) }}"
+                                                    class="dropdown-item">
+                                                    Payment
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                        @if (in_array('course-supplies.supply', $roleRoutePermissions) && $batch['batch_phase'])
+                                            <li>
+                                                <a href="{{ route('course-supplies.supply', encrypt($batch['id'])) }}"
+                                                    class="dropdown-item">
+                                                    Supplies
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (in_array('laptop-distribution.show', $roleRoutePermissions) && $batch['laptop'])
+                                            <li>
+                                                <a href="{{ route('laptop-distribution.show', [$batch['laptop']['id'], encrypt($batch['id'])]) }}"
+                                                    class="dropdown-item">
+                                                    Laptop Distribution
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (in_array('all-exam.training', $roleRoutePermissions) && $batch['training']['exam_config'])
+                                            <li>
+                                                <a href="{{ route('all-exam.training', [encrypt($batch['id']), $batch['training']['id']]) }}"
+                                                    class="dropdown-item">
+                                                    All Exam
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (in_array('certificates.create', $roleRoutePermissions) &&
+                                                !$batch['schedule']['total_pending'] &&
+                                                !$batch['schedule']['total_running'] &&
+                                                $batch['schedule']['total_complete']
+                                        )
+                                            <li>
+                                                <a href="{{ route('certificates.create', [encrypt($batch['id'])]) }}"
+                                                    class="dropdown-item">
+                                                    Certificate
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (in_array('batch-closing.close', $roleRoutePermissions))
+                                            <li>
+                                                <a href="{{ route('batch-closing.close', ['batch_id' => encrypt($batch['id'])]) }}"
+                                                    class="dropdown-item">
+                                                    Batch Close
+                                                </a>
+                                            </li>
+                                        @endif
+                                    </ul>
                                 </div>
-
-                                @if ($batch['schedule']['total_complete'] || $batch['schedule']['total_pending'] || $batch['schedule']['total_running'])
-                                    <small class="fw-bold">Class Progress:</small>
-                                    <div class="progress m-1">
-                                        <div class="progress-bar" role="progressbar"
-                                            style="width: {{ $batch['schedule']['total_complete'] }}%"
-                                            aria-valuenow="{{ $batch['schedule']['total_complete'] }}"
-                                            aria-valuemin="{{ $batch['schedule']['total_complete'] }}"
-                                            aria-valuemax="{{ $batch['duration'] }}"></div>
-                                    </div>
-
-                                    <small>{{ __('batch-list.complete_class') }}:
-                                        {{ digitLocale($batch['schedule']['total_complete']) }}</small>/
-                                    <small>{{ __('batch-list.pending_class') }}:
-                                        {{ digitLocale($batch['schedule']['total_pending']) }}</small>/
-                                    <small>{{ __('batch-list.running_class') }}:
-                                        {{ digitLocale($batch['schedule']['total_running']) }}</small>
-                                @endif
                             @endif
                         </td>
                     </tr>
@@ -218,6 +342,8 @@
         </table>
 
 
-        {!! $paginator->links() !!}
+        @if ($paginator)
+            {!! $paginator->links() !!}
+        @endif
     @endisset
 </div>

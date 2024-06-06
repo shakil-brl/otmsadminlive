@@ -5,6 +5,8 @@
     <div class="m-5">
         <h3>{{ __('batch-list.batch_list') }}</h3>
         <x-alert />
+
+
         @isset($results['data'])
             <div class="my-3">
                 <form action="">
@@ -35,7 +37,7 @@
                         <tr>
                             <td>
                                 {{ digitLocale($from + $loop->iteration - 1) }}
-                                
+
                             </td>
                             <td>
                                 {{ $batch['batchCode'] }}
@@ -51,11 +53,10 @@
                             </td>
                             <td class="">
                                 <div>
-                                   
-                                    @if (isset($batch['startDate']))
-                                      {{ __('batch-list.start_date') }}:
-                                      {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y')) : digitLocale(null) }}
 
+                                    @if (isset($batch['startDate']))
+                                        {{ __('batch-list.start_date') }}:
+                                        {{ isset($batch['startDate']) ? digitLocale(\Carbon\Carbon::parse($batch['startDate'])->format('d-m-Y')) : digitLocale(null) }}
                                     @endif
                                 </div>
                                 <div>
@@ -66,10 +67,14 @@
                             </td>
                             <td>
                                 @if ($schedule !== null)
-                                    <span> {{ __('batch-list.class_days') }}: {{ isset($schedule['class_days']) ? digitLocale($schedule['class_days']) : digitLocale(null) }}</span><br>
+                                    <span> {{ __('batch-list.class_days') }}:
+                                        {{ isset($schedule['class_days']) ? digitLocale($schedule['class_days']) : digitLocale(null) }}</span><br>
                                     <div class="mt-1 d-flex justify-content-between align-item-center">
-                                        <span>{{ __('batch-list.class_start_time') }}: {{ isset($schedule['class_time']) ? digitLocale(\Carbon\Carbon::parse($schedule['class_time'])->format('h:i A')) : digitLocale(null) }} </span>
-                                        <span>{{ __('batch-list.duration') }}: {{ isset($schedule['class_duration']) ? digitLocale($schedule['class_duration']) : digitLocale(null) }}
+                                        <span>{{ __('batch-list.class_start_time') }}:
+                                            {{ isset($schedule['class_time']) ? digitLocale(\Carbon\Carbon::parse($schedule['class_time'])->format('h:i A')) : digitLocale(null) }}
+                                        </span>
+                                        <span>{{ __('batch-list.duration') }}:
+                                            {{ isset($schedule['class_duration']) ? digitLocale($schedule['class_duration']) : digitLocale(null) }}
                                             {{ __('batch-list.hours') }}</span>
                                     </div>
                                 @else
@@ -118,7 +123,7 @@
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
                     confirmButtonText: yesDelete,
-                    cancelButtonText: noCancel ,
+                    cancelButtonText: noCancel,
                 }).then((result) => {
                     if (result.isConfirmed) {
                         let finalUrl = `${app_url}/batch_schedules/destroy/${id}`;
