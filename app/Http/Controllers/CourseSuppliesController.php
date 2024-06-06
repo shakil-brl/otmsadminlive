@@ -75,7 +75,8 @@ class CourseSuppliesController extends Controller
         $request->validate([
             'combo_id' => 'required',
             'training_applicant_ids' => 'required|array',
-            'distribution_date' => 'required|date_format:d/m/Y'
+            'distribution_date' => 'required|date_format:d/m/Y',
+            'batch_id' => 'required'
         ]);
 
         $allocation = $request->except('distribution_date');
@@ -83,7 +84,7 @@ class CourseSuppliesController extends Controller
         $allocation['distribution_date'] = Carbon::createFromFormat('d/m/Y', $request->distribution_date)->format('Y-m-d');
         // dd($allocation);
         $data = ApiHttpClient::request('post', 'material-allocation', $allocation)->json();
-
+        
         if (isset($data['error'])) {
             $error_message = $data['message'];
             session()->flash('type', 'Danger');

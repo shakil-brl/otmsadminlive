@@ -25,8 +25,33 @@
                     @endforeach
                 </ul>
             @endif
+            @php
+                $hasDistributeId = false;
+
+                foreach ($batch_details['trainees'] as $trainee) {
+                    if (isset($trainee['material_allocations']) && is_array($trainee['material_allocations'])) {
+                        foreach ($trainee['material_allocations'] as $allocation) {
+                            if ($allocation['combo_id'] == $combo['id']) {
+                                $distributedDate = \Carbon\Carbon::createFromFormat(
+                                    'Y-m-d',
+                                    $allocation['distribution_date'],
+                                )->format('d/m/Y');
+                                $hasDistributeId = true;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+            @endphp
 
             <div class="card-body py-4">
+                @if (!$hasDistributeId)
+                    <div>
+                        <p class="text-danger fw-bold">
+                            *** এখনও বিতরণ করা হয়নি।
+                        </p>
+                    </div>
+                @endif
                 @if ($batch_details['trainees'])
                     <form action="{{ route('course-supplies.allocation') }}" method="POST">
                         @csrf
@@ -51,6 +76,7 @@
                                     <small class="text-danger d-block">{{ $message }}</small>
                                 @enderror
                             </div>
+                            <input type="hidden" name="batch_id" value="{{ $batch_details['id'] }}">
                             <div class="col">
                                 <label for="combo_id" class="form-label">Combo:</label>
                                 @if (in_array('course-supplies.allocation', $roleRoutePermissions))
@@ -77,27 +103,6 @@
                                     <th>Phone</th>
                                     <th class="d-flex align-item-center gap-2 justify-content-center">
                                         <label for="selectAll">Distribute</label>
-                                        @php
-                                            $hasDistributeId = false;
-
-                                            foreach ($batch_details['trainees'] as $trainee) {
-                                                if (
-                                                    isset($trainee['material_allocations']) &&
-                                                    is_array($trainee['material_allocations'])
-                                                ) {
-                                                    foreach ($trainee['material_allocations'] as $allocation) {
-                                                        if ($allocation['combo_id'] == $combo['id']) {
-                                                            $distributedDate = \Carbon\Carbon::createFromFormat(
-                                                                'Y-m-d',
-                                                                $allocation['distribution_date'],
-                                                            )->format('d/m/Y');
-                                                            $hasDistributeId = true;
-                                                            break 2;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        @endphp
                                         @if (!$hasDistributeId && in_array('course-supplies.allocation', $roleRoutePermissions))
                                             @if (in_array('course-supplies.supply', $roleRoutePermissions))
                                                 <input type="checkbox" id="selectAll" class="form-check-input">
@@ -144,10 +149,12 @@
                                                 }
                                             @endphp
 
-                                            @if (count($materialIds) > 0 && in_array($combo['id'], $materialIds))
+                                            @if (count($materialIds) > 0 &&
+                                                    in_array($combo['id'], $materialIds) &&
+                                                    !in_array('course-supplies.distributed-list', $roleRoutePermissions))
                                                 <input class="trainee form-check-input" name="training_applicant_ids[]"
                                                     value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
-                                                    type="checkbox" disabled checked>
+                                                    type="checkbox" checked>
                                             @else
                                                 @if (in_array('course-supplies.distributed-list', $roleRoutePermissions))
                                                     <input class="trainee form-check-input" name="training_applicant_ids[]"
