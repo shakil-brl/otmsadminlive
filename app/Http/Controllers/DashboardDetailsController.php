@@ -178,19 +178,14 @@ class DashboardDetailsController extends Controller
     // 
     public function trainees(Request $request, $batch_id)
     {
-        $results = ApiHttpClient::request('get', 'detail/trainee-total', [
-            'page' => $request->page ?? 1,
-            'search' => $request->search,
-            'batch_id' => $request->batch_id,
-            'per_page' => 50,
+        $results = ApiHttpClient::request('get', 'detail/total-batch', [
+            'data_type' => 'first',
+            'batch_id' => $batch_id,
         ])->json();
 
         if ($results['success'] == true) {
-            $trainees = $results['data']['data'] ?? [];
-            $total_count = $results['data']['total'];
-            $page_from = $results['data']['from'] ?? 1;
-            $paginator = $this->customPaginate($results, $request, route('dashboard_details.trainees', $batch_id));
-            return view('dashboard_details.trainees', ['trainees' => $trainees, 'total_count' => $total_count, 'paginator' => $paginator, 'page_from' => $page_from]);
+            $batch = $results['data'] ?? [];
+            return view('dashboard_details.trainees', ['batch' => $batch]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');

@@ -135,7 +135,7 @@ class TotalBatch extends Component
         )->json()['data'];
 
         $this->batch_status = request()->batch_status;
-        // $this->searchFilter();
+        $this->searchFilter();
 
     }
 
