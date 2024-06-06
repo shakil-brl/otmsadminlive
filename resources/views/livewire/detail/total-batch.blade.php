@@ -313,6 +313,29 @@
                                                 </a>
                                             </li>
                                         @endif
+                                        {{-- new added --}}
+                                        @if (in_array('laptop-distribution.create', $roleRoutePermissions) &&
+                                                in_array('laptop-distribution.edit', $roleRoutePermissions) &&
+                                                !$batch['schedule']['total_pending'] &&
+                                                !$batch['schedule']['total_running'] &&
+                                                $batch['schedule']['total_complete']
+                                        )
+                                            @if (in_array('laptop-distribution.create', $roleRoutePermissions) && !$batch['laptop'])
+                                                <li>
+                                                    <a href="{{ route('laptop-distribution.create', [encrypt($batch['id'])]) }}"
+                                                        class="dropdown-item">
+                                                        Laptop Distribution
+                                                    </a>
+                                                </li>
+                                            @elseif(in_array('laptop-distribution.edit', $roleRoutePermissions) && $batch['laptop'])
+                                                <li>
+                                                    <a href="{{ route('laptop-distribution.edit', [$batch['laptop']['id'], encrypt($batch['id'])]) }}"
+                                                        class="dropdown-item">
+                                                        Show Laptop Distribution
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endif
                                     @endif
                                 </ul>
                             </div>
