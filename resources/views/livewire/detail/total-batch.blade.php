@@ -246,7 +246,12 @@
                                         <li>
                                             <a href="{{ route('dashboard_details.trainees', $batch['id']) }}"
                                                 class="dropdown-item">
-                                                Trainee List
+                                                Trainee List View
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('trainees.export', $batch['id']) }}" class="dropdown-item">
+                                                Trainee List Download
                                             </a>
                                         </li>
                                     @endisset
