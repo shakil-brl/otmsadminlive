@@ -29,10 +29,9 @@
 <body>
     <div>
         <table>
-            <tr>
-                @php
-                    $colspan = 8;
-                @endphp
+            @php
+                $colspan = 8;
+            @endphp
             <tr>
                 <th style="font-weight: bold; font-size: 24px;" colspan="{{ $colspan }}">
                     Her Power Trainee List

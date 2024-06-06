@@ -400,4 +400,4 @@ Route::get('certificate-config', [CertificateController::class, 'certificateConf
 Route::post('certificate-config', [CertificateController::class, 'certificateConfigStore'])->name('certificate.config-store');
 
 
-Route::get('trainees/export/{batch_code}', [TraineeEnrollmentController::class, 'export'])->name('trainees.export');
+Route::get('trainees/export/{batch_id}', [TraineeEnrollmentController::class, 'export'])->name('trainees.export');
