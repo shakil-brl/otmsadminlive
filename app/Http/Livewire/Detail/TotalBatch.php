@@ -135,18 +135,26 @@ class TotalBatch extends Component
         )->json()['data'];
 
         $this->batch_status = request()->batch_status;
-        $this->searchFilter();
+        $this->searchFilter($this->page);
 
     }
-
-
-    public function searchFilter()
+    public function updatingPage($page)
     {
+        $this->searchFilter($page);
+    }
+    public function searchFilter($page = null)
+    {
+        $this->searchData($page ?? 1);
+    }
+
+    private function searchData($page)
+    {
+
         $this->total_batches_get = ApiHttpClient::request(
             'get',
             'detail/total-batch',
             [
-                'page' => $this->page,
+                'page' => $page ?? $this->page,
                 'per_page' => $this->per_page,
                 'search' => $this->search,
                 'provider_id' => $this->provider_id,
@@ -162,10 +170,12 @@ class TotalBatch extends Component
             ]
         )->json();
 
+
         $this->total_batches = $this->total_batches_get['data']['data'];
         $this->from = $this->total_batches_get['data']['from'];
         $this->total_count = $this->total_batches_get['data']['total'];
     }
+
     public function render()
     {
         return view('livewire.detail.total-batch', [
