@@ -149,12 +149,16 @@
                                                 }
                                             @endphp
 
-                                            @if (count($materialIds) > 0 &&
-                                                    in_array($combo['id'], $materialIds) &&
-                                                    !in_array('course-supplies.distributed-list', $roleRoutePermissions))
-                                                <input class="trainee form-check-input" name="training_applicant_ids[]"
-                                                    value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
-                                                    type="checkbox" checked>
+                                            @if (count($materialIds) > 0 && in_array($combo['id'], $materialIds))
+                                                @if (!in_array('course-supplies.distributed-list', $roleRoutePermissions))
+                                                    <input class="trainee form-check-input" name="training_applicant_ids[]"
+                                                        value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
+                                                        type="checkbox" checked>
+                                                @else
+                                                    <input class="trainee form-check-input" name="training_applicant_ids[]"
+                                                        value="{{ $trainee['id'] }}" id="att{{ $loop->iteration }}"
+                                                        type="checkbox" checked disabled>
+                                                @endif
                                             @else
                                                 @if (in_array('course-supplies.distributed-list', $roleRoutePermissions))
                                                     <input class="trainee form-check-input" name="training_applicant_ids[]"
