@@ -28,10 +28,6 @@
 
 <body>
     <div>
-        @php
-            $first_trainee = collect($trainees)->first() ?? [];
-            $batch = $first_trainee['training_batch'] ?? [];
-        @endphp
         <table>
             <tr>
                 @php
@@ -48,52 +44,61 @@
                     Generated At: {{ Carbon\Carbon::now()->format('d/m/Y h:i:s A') }}
                 </th>
             </tr>
+
             <tr>
-                <th style="font-weight: bold; "colspan="{{ $colspan }}">
-                    Total :{{ count($trainees ?? []) }}
+                <th style="font-weight: bold;" colspan="{{ $colspan }}">
+                    Batch Code: {{ $batch['batchCode'] ?? '' }}
                 </th>
             </tr>
+            <tr>
+                <th style="font-weight: bold;" colspan="{{ $colspan }}">
+                    Course Name: {{ $batch['get_training']['title']['Name'] ?? '' }}
+                </th>
+            </tr>
+
+            <tr>
+                <th style="font-weight: bold; "colspan="{{ $colspan }}">
+                    Address: {{ $batch['GEOLocation'] ?? '' }}
+                </th>
+            </tr>
+            <tr>
+                <th style="font-weight: bold; "colspan="{{ $colspan }}">
+                    Total Class Days:{{ $batch['duration'] ?? '' }} Days
+                </th>
+            </tr>
+            <tr>
+                <th style="font-weight: bold; "colspan="{{ $colspan }}">
+                    Total :{{ count($batch['trainees'] ?? []) }}
+                </th>
+            </tr>
+
             <tr>
                 <th style="" colspan="{{ $colspan }}">
 
                 </th>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000;" colspan="2">
-                    <div><strong>Batch Code: </strong> {{ $batch['batchCode'] ?? '' }}</div>
-                </td>
-                <td style="border: 1px solid #000;" colspan="2">
-                    <div><strong>Course Name: </strong> {{ $batch['training']['title']['Name'] ?? '' }}</div>
-                </td>
-                <td style="border: 1px solid #000;" colspan="2">
-                    <div><strong>Address: </strong> {{ $batch['GEOLocation'] ?? '' }}</div>
-                </td>
-                <td style="border: 1px solid #000;" colspan="2">
-                    <div><strong>Total Class Days: </strong> {{ $batch['duration'] ?? '' }} Days</div>
-                </td>
             </tr>
         </table>
 
         <table>
             <thead>
                 <tr>
-                    <th style="font-weight: bold; border: 1px solid #000;">সিরিয়াল নং</th>
-                    <th style="font-weight: bold; border: 1px solid #000;">নাম</th>
-                    <th style="font-weight: bold; border: 1px solid #000;">ইমেইল</th>
-                    <th style="font-weight: bold; border: 1px solid #000;">জাতীয় পরিচয়পত্র</th>
-                    <th style="font-weight: bold; border: 1px solid #000;">মোবাইল নং</th>
-                    <th style="font-weight: bold; border: 1px solid #000;">পিতার নাম</th>
-                    <th style="font-weight: bold; border: 1px solid #000;">মাতার নাম</th>
-                    <th style="font-weight: bold; border: 1px solid #000;">বর্তমান ঠিকানা</th>
+                    <th style="font-weight: bold; border: 1px solid #000;">Sl. No.</th>
+                    <th style="font-weight: bold; border: 1px solid #000;">Full Name</th>
+                    <th style="font-weight: bold; border: 1px solid #000;">Email</th>
+                    <th style="font-weight: bold; border: 1px solid #000;">NID </th>
+                    <th style="font-weight: bold; border: 1px solid #000;">Contact </th>
+                    <th style="font-weight: bold; border: 1px solid #000;">Father's Name</th>
+                    <th style="font-weight: bold; border: 1px solid #000;">Mother's Name</th>
+                    <th style="font-weight: bold; border: 1px solid #000;">Present Address</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($trainees as $trainee)
+                @foreach ($batch['trainees'] as $trainee)
                     <tr>
                         <td style="border: 1px solid #000;">{{ $loop->iteration }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['KnownAs'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['Email'] ?? '' }}</td>
-                        <td style="border: 1px solid #000;">{{ '\'' .$trainee['profile']['NID'] ?? '' }}</td>
+                        <td style="border: 1px solid #000;">{{ $trainee['profile']['NID'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['Phone'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['FatherNameBangla'] ?? '' }}</td>
                         <td style="border: 1px solid #000;">{{ $trainee['profile']['MotherNameBangla'] ?? '' }}</td>

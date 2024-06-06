@@ -19,42 +19,16 @@ class TraineesExport implements FromView, WithTitle, WithDefaultStyles, WithEven
     /**
      * @return \Illuminate\Support\Collection
      */
-    protected $batch_id, $trainees;
 
-    public function __construct($data)
+    public function __construct(private $batch)
     {
-        $this->trainees = $data;
+
     }
 
     public function headings(): array
     {
         return [
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
-            'Test',
+            //
         ];
     }
 
@@ -93,7 +67,7 @@ class TraineesExport implements FromView, WithTitle, WithDefaultStyles, WithEven
     public function view(): View
     {
         return view('trainees.export', [
-            'trainees' => $this->trainees,
+            'batch' => $this->batch,
         ]);
     }
 }

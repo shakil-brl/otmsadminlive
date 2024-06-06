@@ -6,10 +6,6 @@
 @section('content')
     <div class="m-5">
         <div id="batch-header" class="mb-1">
-            @php
-                $first_trainee = collect($trainees)->first() ?? [];
-                $batch = $first_trainee['training_batch'] ?? [];
-            @endphp
             <div>
                 <div class="icon">
                     <img src="{{ asset('img') }}/new_icon/batch_head.png" alt="">
@@ -54,17 +50,15 @@
                     </div>
                 </form>
             </div>
-            @if ($first_trainee['training_batch'])
-                <div class="d-flex align-items-center">
-                    <h4 class="text-end text-info m-0 me-3">Total : {{ $total_count }}</h4>
-                    <a href="{{ route('trainees.export', $batch['batchCode']) }}" class="btn btn-success d-flex" type="button">
-                        <span class="material-icons-outlined me-1">
-                            download
-                        </span>
-                        Export
-                    </a>
-                </div>
-            @endif
+            <div class="d-flex align-items-center">
+                <h4 class="text-end text-info m-0 me-3">Total : {{ count($batch['trainees'] ?? []) }}</h4>
+                <a href="{{ route('trainees.export', $batch['id']) }}" class="btn btn-success d-flex" type="button">
+                    <span class="material-icons-outlined me-1">
+                        download
+                    </span>
+                    Export
+                </a>
+            </div>
         </div>
         <div class="card">
             <div class="card-body">
@@ -82,10 +76,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($trainees as $trainee)
+                        @foreach ($batch['trainees'] as $trainee)
                             <tr>
                                 <td>
-                                    {{ $page_from + $loop->index }}
+                                    {{ $loop->iteration }}
                                 </td>
                                 <td>{{ $trainee['profile']['KnownAs'] ?? '' }}</td>
                                 <td>{{ $trainee['profile']['Email'] ?? '' }}</td>
@@ -99,7 +93,6 @@
                     </tbody>
                 </table>
 
-                {{ $paginator->links() }}
             </div>
         </div>
     </div>

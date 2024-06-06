@@ -39,22 +39,20 @@ class TraineeEnrollmentController extends Controller
         return view('traineesenroll.show', compact('userId'));
     }
 
-    public function export($batch_code)
+    public function export($batch_id)
     {
-        $results = ApiHttpClient::request('get', 'detail/trainee-total', [
-            'search' => $batch_code,
-            'per_page' => 100,
+
+        $results = ApiHttpClient::request('get', 'detail/total-batch', [
+            'data_type' => 'first',
+            'batch_id' => $batch_id,
         ])->json();
 
         if ($results['success'] == true) {
-            $data = $results['data']['data'];
-            $first_trainee = collect($data)->first() ?? [];
-            $batch = $first_trainee['training_batch'] ?? [];
-            $batchCode = $batch['batchCode'] ?? '';
+            $batch = $results['data'];
 
-            $filename = 'Trainee List (' . $batchCode . ") " . now() . '.xlsx';
+            $filename = 'Trainee List (' . $batch['batchCode'] . ") " . Carbon::now()->format('d-m-Y h.i.s A') . '.xlsx';
 
-            return Excel::download(new TraineesExport($data), $filename);
+            return Excel::download(new TraineesExport($batch), $filename);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
