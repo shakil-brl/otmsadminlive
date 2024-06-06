@@ -368,7 +368,7 @@
     <script defer src="{{ asset('assets/dist/assets/js/custom/call.division.api.js') }}"></script>
     <script defer src="{{ asset('assets/dist/assets/js/custom/call.provider.api.js') }}"></script>
     <script defer src="{{ asset('assets/dist/assets/js/custom/call.permission.api.js') }}"></script>
-    <script defer src="{{ asset('assets/dist/assets/js/custom/call.admin.show.api.js') }}"></script>
+    {{-- <script defer src="{{ asset('assets/dist/assets/js/custom/call.admin.show.api.js') }}"></script> --}}
     @stack('js')
 
     @section('scripts')
