@@ -41,6 +41,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\TmsBatchClosingController;
 use App\Http\Controllers\TmsPhaseController;
 use App\Http\Controllers\TmsSettingController;
 use App\Http\Controllers\TraineeEnrollmentController;
@@ -231,7 +232,7 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
      * Batch Schedule Routes
      */
     Route::group(['prefix' => 'batch_schedules'], function () {
-        Route::get('/', [BatchScheduleController::class, 'batches'])->name('batch-schedule.batches');
+        Route::match(['get', 'post'], '/', [BatchScheduleController::class, 'batches'])->name('batch-schedule.batches');
         Route::get('/all/{schedule_id}/{batch_id}', [BatchScheduleController::class, 'index'])->name('batch-schedule.index');
         Route::get('/create/{batch_id}', [BatchScheduleController::class, 'create'])->name('batch-schedule.create');
         Route::post('/store', [BatchScheduleController::class, 'store'])->name('batch-schedule.store');
@@ -391,3 +392,12 @@ Route::get('/verify', [VerifyController::class, 'verify']);
 Route::post('/verify', [VerifyController::class, 'getCerNo']);
 Route::get('/verify/{id}', [VerifyController::class, 'search'])->name('search');
 
+Route::get('batch-closing', [TmsBatchClosingController::class, 'create'])->name('batch-closing.close');
+Route::post('batch-closing', [TmsBatchClosingController::class, 'close'])->name('batch-closing.store');
+
+//Tariqul New
+Route::get('certificate-config', [CertificateController::class, 'certificateConfig'])->name('certificate.config');
+Route::post('certificate-config', [CertificateController::class, 'certificateConfigStore'])->name('certificate.config-store');
+
+
+Route::get('trainees/export/{batch_code}', [TraineeEnrollmentController::class, 'export'])->name('trainees.export');

@@ -187,9 +187,10 @@ class DashboardDetailsController extends Controller
 
         if ($results['success'] == true) {
             $trainees = $results['data']['data'] ?? [];
+            $total_count = $results['data']['total'];
             $page_from = $results['data']['from'] ?? 1;
             $paginator = $this->customPaginate($results, $request, route('dashboard_details.trainees', $batch_id));
-            return view('dashboard_details.trainees', ['trainees' => $trainees, 'paginator' => $paginator, 'page_from' => $page_from]);
+            return view('dashboard_details.trainees', ['trainees' => $trainees, 'total_count' => $total_count, 'paginator' => $paginator, 'page_from' => $page_from]);
         } else {
             session()->flash('type', 'Danger');
             session()->flash('message', $results['message'] ?? 'Something went wrong');
