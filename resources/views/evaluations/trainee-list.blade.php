@@ -61,6 +61,7 @@
                     <th>Student Name</th>
                     <th>Fathers Name</th>
                     <th>Mothers Name</th>
+                    <th>Evaluation</th>
                     <th>{{ __('batch-list.action') }}</th>
                 </thead>
                 <tbody>
@@ -77,6 +78,11 @@
                             </td>
                             <td>
                                 {{ $student['profile']['MotherNameBangla'] ?? '' }}
+                            </td>
+                            <td>
+                                @if ($student['evaluation'])
+                                    {{ $student['evaluation']['total_mark'] }} / {{ $student['evaluation']['obtained_mark'] }}
+                                @endif
                             </td>
                             <td>
                                 @if ($student['evaluation'])
