@@ -24,9 +24,14 @@ class TmsInspectionController extends Controller
      */
     public function create(Request $request)
     {
-        // return auth()->user();
         $data = $request->all();
         $data['tmsInspection'] = new TmsInspection();
+
+        $data['batch'] = $response = ApiHttpClient::request('get', 'detail/total-batch', [
+            'batch_id' => $request->batch_id,
+            'data_type' => 'first',
+        ])->json()['data'];
+
         return view('tms-inspection.create', $data);
     }
 
@@ -39,11 +44,13 @@ class TmsInspectionController extends Controller
     public function store(Request $request)
     {
         $all = request()->validate(TmsInspection::$rules);
+        // return $request->all();
         $response = ApiHttpClient::request('post', 'inspection', [
-            $request->all()
+            ...$request->all()
         ]);
         $data = $response->json();
-
+        return $data;
+        dd($response->body());
         if (isset($data['error'])) {
             if ($data['error'] == true) {
                 $error = $data['message'];

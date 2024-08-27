@@ -39,7 +39,6 @@ class TmsInspection extends Model
 
 	static $rules = [
 		'batch_id' => 'required',
-		'class_no' => 'required',
 		'lab_size' => 'required',
 		'electricity' => 'required',
 		'internet' => 'required',
@@ -57,7 +56,8 @@ class TmsInspection extends Model
 		'upazila_audit' => 'required',
 		'upazila_monitoring' => 'required',
 		'remark' => 'required',
-		'created_by' => 'required',
+		'visit_date' => 'required|date|before_or_equal:today',
+		'class_no' => 'required|integer|lt:200',
 	];
 
 	protected $perPage = 20;
