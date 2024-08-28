@@ -352,6 +352,9 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
     Route::get('certificates/{batch_id}/create', [CertificateController::class, 'create'])->name('certificates.create');
     Route::get('certificates/{batch_id}/print/eligible', [CertificateController::class, 'eligible'])->name('certificates.eligible');
     Route::get('certificates/print/pdf', [CertificateController::class, 'print'])->name('certificates.print');
+
+    Route::get('training-batch/{batch_id}/inspection', [TmsInspectionController::class, 'batchWiseInspection'])->name('training-batch.inspections');
+
 });
 
 

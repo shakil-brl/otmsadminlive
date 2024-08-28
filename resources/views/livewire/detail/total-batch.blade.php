@@ -255,6 +255,17 @@
                                             </a>
                                         </li>
                                     @endisset
+                                    @if (in_array('inspection.create', $roleRoutePermissions) ||
+                                            in_array('training-batch.inspections', $roleRoutePermissions))
+                                        @if ($batch['inspections'])
+                                            <li>
+                                                <a href="{{ route('training-batch.inspections', $batch['id']) }}"
+                                                    class="dropdown-item">
+                                                    Inspection Report
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endif
 
                                     @if ($batch['schedule'] != null)
                                         @if (in_array('batch-schedule.index', $roleRoutePermissions))

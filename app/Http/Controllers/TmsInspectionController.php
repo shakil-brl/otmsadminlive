@@ -17,11 +17,15 @@ class TmsInspectionController extends Controller
         return view('tms-inspection.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function batchWiseInspection(Request $request, $batch_id)
+    {
+        $data['batch'] = $response = ApiHttpClient::request('get', 'detail/total-batch', [
+            'batch_id' => $batch_id,
+            'data_type' => 'first',
+        ])->json()['data'];
+        return view('tms-inspection.inspection-show', $data);
+    }
+
     public function create(Request $request)
     {
         $data = $request->all();
@@ -35,31 +39,24 @@ class TmsInspectionController extends Controller
         return view('tms-inspection.create', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $all = request()->validate(TmsInspection::$rules);
-        // return $request->all();
         $response = ApiHttpClient::request('post', 'inspection', [
             ...$request->all()
         ]);
         $data = $response->json();
-        return $data;
-        dd($response->body());
-        if (isset($data['error'])) {
-            if ($data['error'] == true) {
+
+        if (isset($data['success'])) {
+            if ($data['success'] == false) {
                 $error = $data['message'];
                 return redirect()->back()->with('error', $error)->withInput();
             }
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Schedule created succesfully');
-            //return redirect('batch_schedules');
-            return to_route('inspaction.index');
+
+            return to_route('training-batch.inspections', $request->batch_id);
         } else {
             session()->flash('type', 'Success');
             session()->flash('message', $data['message'] ?? 'Schedule created succesfully');

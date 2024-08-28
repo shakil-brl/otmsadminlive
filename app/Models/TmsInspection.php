@@ -57,7 +57,7 @@ class TmsInspection extends Model
 		'upazila_monitoring' => 'required',
 		'remark' => 'required',
 		'visit_date' => 'required|date|before_or_equal:today',
-		'class_no' => 'required|integer|lt:200',
+		'class_no' => 'required|integer|lte:132',
 	];
 
 	protected $perPage = 20;
