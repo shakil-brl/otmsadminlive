@@ -355,25 +355,29 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
 
     Route::get('training-batch/{batch_id}/inspection', [TmsInspectionController::class, 'batchWiseInspection'])->name('training-batch.inspections');
 
+
+    //new permission
+    //evaluation
+    Route::resource('evaluation-head', EvaluationHeadController::class)->except('show');
+    Route::get('/evaluation/trainees/batch-list', [EvaluationController::class, 'batchList'])->name('evaluate.trainee.batch-list');
+    Route::get('/evaluation/trainees/{batch_id}/trainee-list', [EvaluationController::class, 'traineeList'])->name('evaluate.trainee.trainee-list');
+    Route::get('/evaluation/trainees/{training_applicant_id}/head', [EvaluationController::class, 'traineeEvaluationForm'])->name('evaluate.trainee.form');
+    Route::post('/evaluation/trainees/{training_applicant_id}/head', [EvaluationController::class, 'traineeEvaluationStore'])->name('evaluate.trainee.store');
+
+    Route::get('/evaluation/vendor/{training_batch_id}/head', [EvaluationController::class, 'vendorEvaluationForm'])->name('evaluate.vendor.form');
+    Route::post('/evaluation/vendor/{training_batch_id}/head', [EvaluationController::class, 'vendorEvaluationStore'])->name('evaluate.vendor.store');
+
+
+    Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
+    Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
+    Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
+    Route::post('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'storeStudentEvaluation'])->name('trainer-schedule-details.store-student-evaluation');
+    //evaluation end
+    //new permission
+
 });
 
 
-//evaluation
-Route::resource('evaluation-head', EvaluationHeadController::class)->except('show');
-Route::get('/evaluation/trainees/batch-list', [EvaluationController::class, 'batchList'])->name('evaluate.trainee.batch-list');
-Route::get('/evaluation/trainees/{batch_id}/trainee-list', [EvaluationController::class, 'traineeList'])->name('evaluate.trainee.trainee-list');
-Route::get('/evaluation/trainees/{training_applicant_id}/head', [EvaluationController::class, 'traineeEvaluationForm'])->name('evaluate.trainee.form');
-Route::post('/evaluation/trainees/{training_applicant_id}/head', [EvaluationController::class, 'traineeEvaluationStore'])->name('evaluate.trainee.store');
-
-Route::get('/evaluation/vendor/{training_batch_id}/head', [EvaluationController::class, 'vendorEvaluationForm'])->name('evaluate.vendor.form');
-Route::post('/evaluation/vendor/{training_batch_id}/head', [EvaluationController::class, 'vendorEvaluationStore'])->name('evaluate.vendor.store');
-
-
-Route::get('/evaluation/schedule-details', [EvaluationController::class, 'trainerScheduleDetailsList'])->name('trainer-schedule-details.lists');
-Route::get('/evaluation/{scheduleDetailId}/student-list/', [EvaluationController::class, 'scheduleClassStudents'])->name('trainer-schedule-details.students');
-Route::get('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'showStudentEvaluation'])->name('trainer-schedule-details.show-student-evaluation');
-Route::post('/evaluation/{classAttId}/student-info/', [EvaluationController::class, 'storeStudentEvaluation'])->name('trainer-schedule-details.store-student-evaluation');
-//evaluation end
 
 
 
@@ -404,3 +408,5 @@ Route::post('certificate-config', [CertificateController::class, 'certificateCon
 
 
 Route::get('trainees/export/{batch_id}', [TraineeEnrollmentController::class, 'export'])->name('trainees.export');
+
+Route::get('report/trainee-feedback-report', [EvaluationController::class, 'traineeFeedbackReport'])->name('report.feedback.trainee');

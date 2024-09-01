@@ -83,6 +83,7 @@ class EvaluationController extends Controller
             'evaluations' => $evaluations,
         ])
             ->json();
+
         if (isset($results['error'])) {
             $error = $results['error'];
             $errorMessage = $results['message'];
@@ -246,5 +247,10 @@ class EvaluationController extends Controller
                 return redirect()->back();
             }
         }
+    }
+
+    public function traineeFeedbackReport()
+    {
+        return view('report.evaluation.trainee');
     }
 }

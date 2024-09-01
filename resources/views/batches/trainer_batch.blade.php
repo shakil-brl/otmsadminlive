@@ -48,7 +48,15 @@
                                     {{ __('batch-list.create_schedule') }}</a>
                             @else
                                 <a href="{{ route('batch-schedule.index', [encrypt($schedule['id']), encrypt($batch['id'])]) }}"
-                                    class="btn btn-sm btn-info"> {{ __('batch-list.view_schedule') }}</a>
+                                    class="btn mb-1 btn-sm btn-info"> {{ __('batch-list.view_schedule') }}</a>
+                                @if (strtolower($role) == 'trainer')
+                                    @if (in_array('evaluate.trainee.trainee-list', $roleRoutePermissions))
+                                        <a href="{{ route('evaluate.trainee.trainee-list', $batch['id']) }}"
+                                            class="btn mb-1 btn-sm btn-success">
+                                            Evaluation
+                                        </a>
+                                    @endif
+                                @endif
                             @endif
                         </td>
                     </tr>

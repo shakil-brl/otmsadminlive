@@ -24,14 +24,13 @@
         <div id="login-page">
             <header id="navbar">
                 <nav class="navbar navbar-expand-md navbar-light ">
-                    <a class="navbar-brand" href="{{ URL('/')}}">
+                    <a class="navbar-brand" href="{{ URL('/') }}">
                         <div class="d-flex align-items-center">
                             <div class="logo">
                                 <img class="" src="{{ asset('img/login') }}/logo.svg" alt="">
                             </div>
                             <div class="govt-logo">
                                 <img class="" src="{{ asset('img/login') }}/govt-logo.png" alt="">
-
                             </div>
                         </div>
                     </a>
@@ -49,19 +48,18 @@
 
 
 
-                                @if (session()->get('locale') == 'en'|| empty(session()->get('locale')))
-
-
-                                <a class="nav-link " href="{{ route('changeLang', ['lang' => 'bn']) }}" role="button">
-                                    <img class="flag" src="{{ asset('img/login') }}/bd.svg" alt=""> <span
-                                        class="label">বাংলা</span>
-                                </a>
+                                @if (session()->get('locale') == 'en' || empty(session()->get('locale')))
+                                    <a class="nav-link " href="{{ route('changeLang', ['lang' => 'bn']) }}"
+                                        role="button">
+                                        <img class="flag" src="{{ asset('img/login') }}/bd.svg" alt=""> <span
+                                            class="label">বাংলা</span>
+                                    </a>
                                 @else
-
-                                <a class="nav-link " href="{{ route('changeLang', ['lang' => 'en']) }}" role="button">
-                                    <img class="flag" src="{{ asset('img/login') }}/us.svg" alt=""> <span
-                                        class="label">English</span>
-                                </a>
+                                    <a class="nav-link " href="{{ route('changeLang', ['lang' => 'en']) }}"
+                                        role="button">
+                                        <img class="flag" src="{{ asset('img/login') }}/us.svg" alt=""> <span
+                                            class="label">English</span>
+                                    </a>
                                 @endif
 
                             </li>
@@ -86,20 +84,20 @@
                 <div class="content">
                     <legend class=" fs-5 text-center font-weight-bold">@lang('login.sign_in')</legend>
 
-                    @if(session('error'))
-                    <div style="color: red;">
-                        {{ session('error') }}
-                    </div>
+                    @if (session('error'))
+                        <div style="color: red;">
+                            {{ session('error') }}
+                        </div>
                     @endif
 
-                    @if($errors->any())
-                    <div style="color: rgb(255, 255, 255); ">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @if ($errors->any())
+                        <div style="color: rgb(255, 255, 255); ">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
 
 
@@ -109,8 +107,8 @@
 
                         <div class="form-input">
                             <label for="emailid">@lang('login.email')</label>
-                            <input name="email" id="emailid" type="text" class="form-control" placeholder="Enter Email"
-                                autocomplete="email">
+                            <input name="email" id="emailid" type="text" class="form-control"
+                                placeholder="Enter Email" autocomplete="email">
                         </div>
                         <div class="form-input">
                             <div class="d-flex justify-content-between">
@@ -153,16 +151,17 @@
     </div>
     <!-- JavaScript for toggling password visibility -->
     <script defer>
-        document.addEventListener('DOMContentLoaded', function () {
-        document.addEventListener('click', function (event) {
-            const togglePassword = event.target.closest('.material-icons-outlined');
-            if (togglePassword) {
-                const passwordInput = togglePassword.closest('.password').querySelector('input');
-                passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
-                togglePassword.textContent = passwordInput.type === 'password' ? 'visibility' : 'visibility_off';
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(event) {
+                const togglePassword = event.target.closest('.material-icons-outlined');
+                if (togglePassword) {
+                    const passwordInput = togglePassword.closest('.password').querySelector('input');
+                    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+                    togglePassword.textContent = passwordInput.type === 'password' ? 'visibility' :
+                        'visibility_off';
+                }
+            });
         });
-    });
     </script>
 </body>
 

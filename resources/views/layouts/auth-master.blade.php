@@ -114,11 +114,10 @@
 
 
     @if (Session::get('access_token.access_token'))
-    <script>
-        var accessToken = 'Bearer {{ Session::get("access_token.access_token") }}';
-        var authToken = accessToken;
-    </script>
-
+        <script>
+            var accessToken = 'Bearer {{ Session::get('access_token.access_token') }}';
+            var authToken = accessToken;
+        </script>
     @endif
 
     {{-- <script defer src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script> --}}

@@ -32,8 +32,9 @@
                     </button>
                 </div>
             </div>
-            <div class="row row-cols-5 mt-5">
+            <div class="row row-cols-5 gx-2 gy-1 row-cols-xxl-6 mt-5">
                 <div>
+                    <label for="">Batch Status</label>
                     <select name="" class="form-select" wire:model='batch_status'>
                         <option value="">Batch Status</option>
                         <option value="1">Running Batch</option>
@@ -41,6 +42,7 @@
                     </select>
                 </div>
                 <div>
+                    <label for="">Schedule Status</label>
                     <select name="" class="form-select" wire:model='schedule_status'>
                         <option value="">Schedule Status</option>
                         <option value="1">Schedule Not Created</option>
@@ -49,6 +51,7 @@
                     </select>
                 </div>
                 <div>
+                    <label for="">Trainer Status</label>
                     <select name="" class="form-select" wire:model='trainer_count'>
                         <option value="">Trainer Status</option>
                         <option value="1">No Trainer</option>
@@ -58,6 +61,7 @@
                     </select>
                 </div>
                 <div>
+                    <label for="">Phase Status</label>
                     <select name="" class="form-select" wire:model='phase_status' id="phase_status">
                         <option value="">Phase Status</option>
                         <option value="1">Have Phase</option>
@@ -65,18 +69,24 @@
                     </select>
                 </div>
                 <div>
-                    @if ($phase_status != 2)
-                        <select wire:model='phase_id' name="" class="form-select" id="">
-                            <option value="">Select Phase</option>
-                            @foreach ($phases as $phase)
-                                <option value="{{ $phase['id'] }}">{{ $phase['name_en'] }}</option>
-                            @endforeach
-                        </select>
-                    @endif
+                    <label for="">Evaluation Status</label>
+                    <select name="" class="form-select" wire:model='has_evaluation' id="phase_status">
+                        <option value="">Evaluation Status</option>
+                        <option value="1">Have Trainee Evaluation</option>
+                        <option value="2">Doesn't Trainee Evaluation</option>
+                    </select>
                 </div>
 
-            </div>
-            <div class="row row-cols-4 mt-2 row-cols-xxl-5 g-2 mb-2">
+                <div @if ($phase_status != 2) class="d-block" @else class="d-none" @endif>
+                    <label for="">Select Phase</label>
+                    <select wire:model='phase_id' name="" class="form-select" id="">
+                        <option value="">Select Phase</option>
+                        @foreach ($phases as $phase)
+                            <option value="{{ $phase['id'] }}">{{ $phase['name_en'] }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div>
                     <label for="">{{ __('batch-list.division') }}</label>
                     <select wire:model='division_code' name="" class="form-select" id="">
@@ -262,6 +272,17 @@
                                                 <a href="{{ route('training-batch.inspections', $batch['id']) }}"
                                                     class="dropdown-item">
                                                     Inspection Report
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endif
+
+                                    @if ($batch['has_evaluation'] ?? null)
+                                        @if (in_array('evaluate.trainee.trainee-list', $roleRoutePermissions))
+                                            <li>
+                                                <a href="{{ route('evaluate.trainee.trainee-list', $batch['id']) }}"
+                                                    class="dropdown-item">
+                                                    Trainee Evaluation
                                                 </a>
                                             </li>
                                         @endif

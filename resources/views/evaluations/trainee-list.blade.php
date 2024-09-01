@@ -10,6 +10,7 @@
                 @php
                     $batch = collect($students)->first()['training_batch'] ?? [];
                 @endphp
+
                 <div id="batch-header">
                     <div>
                         <div class="icon">
@@ -55,7 +56,7 @@
 
             <h3 class="mt-5 mb-3">Trainee List</h3>
 
-            <table class="table table-bordered bg-white">
+            <table class="table  table-bordered bg-white" id="dataTable">
                 <thead>
                     <th>{{ __('batch-list.sl') }}</th>
                     <th>Student Name</th>
@@ -88,9 +89,14 @@
                                 @if ($student['evaluation'])
                                     <span class="badge badge-success">Evaluated</span>
                                 @else
-                                    <a href="{{ route('evaluate.trainee.form', $student['id']) }}" class="btn btn-sm btn-info">
-                                        Evaluate
-                                    </a>
+                                    @if (strtolower($role) == 'trainer')
+                                        @if (in_array('evaluate.trainee.form', $roleRoutePermissions))
+                                            <a href="{{ route('evaluate.trainee.form', $student['id']) }}"
+                                                class="btn btn-sm btn-info">
+                                                Evaluate
+                                            </a>
+                                        @endif
+                                    @endif
                                 @endif
                             </td>
                         </tr>
@@ -98,5 +104,16 @@
                 </tbody>
             </table>
         @endisset
+    </div>
+    <div>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#dataTable').DataTable({
+                    "pageLength": 100,
+                    "searching": true
+                });
+            });
+        </script>
     </div>
 @endsection

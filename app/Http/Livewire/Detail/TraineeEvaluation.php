@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Livewire\WithPagination;
 use Excel;
 
-class TotalBatch extends Component
+class TraineeEvaluation extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -35,9 +35,8 @@ class TotalBatch extends Component
     public $phases = [];
     public $phase_id;
     public $phase_status;
-    public $has_evaluation;
-    public $total_batches = [];
-    public $total_batches_get = [];
+    public $total_evaluations = [];
+    public $total_evaluations_get = [];
     public $from;
     public $total_count = 0;
     public function updated($attr)
@@ -93,7 +92,6 @@ class TotalBatch extends Component
                 'phase_id' => $this->phase_id,
                 'schedule_status' => $this->schedule_status,
                 'trainer_count' => $this->trainer_count,
-                'has_evaluation' => $this->has_evaluation,
                 'data_type' => 'get',
             ]
         )->json();
@@ -152,11 +150,12 @@ class TotalBatch extends Component
     private function searchData($page)
     {
 
-        $this->total_batches_get = ApiHttpClient::request(
+        $this->total_evaluations_get = ApiHttpClient::request(
             'get',
-            'detail/total-batch',
+            'detail/evaluation',
             [
                 'page' => $page ?? $this->page,
+                'type' => 1,
                 'per_page' => $this->per_page,
                 'search' => $this->search,
                 'provider_id' => $this->provider_id,
@@ -169,20 +168,20 @@ class TotalBatch extends Component
                 'phase_id' => $this->phase_id,
                 'schedule_status' => $this->schedule_status,
                 'trainer_count' => $this->trainer_count,
-                'has_evaluation' => $this->has_evaluation,
             ]
         )->json();
 
 
-        $this->total_batches = $this->total_batches_get['data']['data'];
-        $this->from = $this->total_batches_get['data']['from'];
-        $this->total_count = $this->total_batches_get['data']['total'];
+
+        $this->total_evaluations = $this->total_evaluations_get['data']['data'];
+        $this->from = $this->total_evaluations_get['data']['from'];
+        $this->total_count = $this->total_evaluations_get['data']['total'];
     }
 
     public function render()
     {
-        return view('livewire.detail.total-batch', [
-            'paginator' => Controller::livewirePaginate($this->total_batches_get, $this->page ?? 1, route('dashboard_details.total_batches')),
+        return view('livewire.detail.trainee-evaluation', [
+            'paginator' => Controller::livewirePaginate($this->total_evaluations_get, $this->page ?? 1, route('dashboard_details.total_batches')),
         ]);
     }
 }
