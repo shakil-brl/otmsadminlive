@@ -108,7 +108,7 @@
         <table class="table table-bordered bg-white">
             <thead>
                 <th>{{ __('batch-list.sl') }}</th>
-                <th>Student Name</th>
+                <th>Trainer Name</th>
                 <th>{{ __('batch-list.batch_code') }}</th>
                 <th>Training Info</th>
                 <th>Provider</th>
@@ -124,10 +124,10 @@
                             {{ digitLocale($from + $loop->index) }}
                         </td>
                         <td>
-                            {{ $evaluation['trainee']['profile']['KnownAsBangla'] ?? '' }}
+                            {{ $evaluation['trainer']['KnownAsBangla'] ?? '' }}
                             <div>
                                 <a
-                                    href="callto:{{ $evaluation['trainee']['profile']['Phone'] ?? '' }}">{{ $evaluation['trainee']['profile']['Phone'] ?? '' }}</a>
+                                    href="callto:{{ $evaluation['trainer']['Phone'] ?? '' }}">{{ $evaluation['trainer']['Phone'] ?? '' }}</a>
                             </div>
                         </td>
                         <td>
