@@ -82,7 +82,7 @@
                             </td>
                             <td>
                                 @if ($student['evaluation'])
-                                    {{ $student['evaluation']['total_mark'] }} / {{ $student['evaluation']['obtained_mark'] }}
+                                    {{ $student['evaluation']['obtained_mark'] }}/{{ $student['evaluation']['total_mark'] }}
                                 @endif
                             </td>
                             <td>

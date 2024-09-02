@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Livewire\WithPagination;
 use Excel;
 
-class TraineeEvaluation extends Component
+class TrainerEvaluation extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -121,7 +121,7 @@ class TraineeEvaluation extends Component
             'detail/evaluation',
             [
                 'page' => $page ?? $this->page,
-                'type' => 1,
+                'type' => 2,
                 'per_page' => $this->per_page,
                 'search' => $this->search,
                 'provider_id' => $this->provider_id,
@@ -144,7 +144,7 @@ class TraineeEvaluation extends Component
 
     public function render()
     {
-        return view('livewire.detail.trainee-evaluation', [
+        return view('livewire.detail.trainer-evaluation', [
             'paginator' => Controller::livewirePaginate($this->total_evaluations_get, $this->page ?? 1, route('dashboard_details.total_batches')),
         ]);
     }

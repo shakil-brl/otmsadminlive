@@ -253,4 +253,9 @@ class EvaluationController extends Controller
     {
         return view('report.evaluation.trainee');
     }
+    public function trainerFeedbackReport()
+    {
+        return view('report.evaluation.trainer');
+    }
+
 }

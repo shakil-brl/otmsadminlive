@@ -410,3 +410,4 @@ Route::post('certificate-config', [CertificateController::class, 'certificateCon
 Route::get('trainees/export/{batch_id}', [TraineeEnrollmentController::class, 'export'])->name('trainees.export');
 
 Route::get('report/trainee-feedback-report', [EvaluationController::class, 'traineeFeedbackReport'])->name('report.feedback.trainee');
+Route::get('report/trainer-feedback-report', [EvaluationController::class, 'trainerFeedbackReport'])->name('report.feedback.trainer');

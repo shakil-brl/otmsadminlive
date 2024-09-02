@@ -1,6 +1,6 @@
 <div>
     <h3 class="mb-2">
-        Trainee Evaluation Report
+        Trainer Evaluation Report
     </h3>
     @isset($total_evaluations)
         <div id="preloader" wire:loading.class="d-flex">
