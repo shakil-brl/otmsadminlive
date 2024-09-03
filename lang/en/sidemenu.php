@@ -70,6 +70,7 @@ return [
     'trainee_allowance' => "Trainee Allowance",
     'all_payment' => "All Payment",
     'make_payment' => "Make Payment",
-
+    'trainee_feedback_report' => 'Trainee Feedback Report',
+    'trainer_feedback_report' => 'Trainer Feedback Report',
 
 ];

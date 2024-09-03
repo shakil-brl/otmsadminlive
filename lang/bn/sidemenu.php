@@ -81,6 +81,8 @@ return [
     'trainee_allowance' => "প্রশিক্ষণার্থী ভাতা",
     'all_payment' => "সকল পেমেন্ট",
     'make_payment' => "পেমেন্ট করুন",
+    'trainee_feedback_report' => 'প্রশিক্ষণার্থীর ফিডব্যাক রিপোর্ট',
+    'trainer_feedback_report' => 'প্রশিক্ষকের ফিডব্যাক রিপোর্ট',
 
 
 

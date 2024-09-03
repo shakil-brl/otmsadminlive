@@ -342,6 +342,14 @@
                                 class="nav-link{{ Route::is('inspaction.index') || Route::is('tms-inspections.show') ? ' active' : '' }}">
                                 - {{ __('sidemenu.inspection_report') }}
                             </a>
+                            <a href="{{ route('inspaction.index') }}"
+                                class="nav-link{{ Route::is('inspaction.index') || Route::is('tms-inspections.show') ? ' active' : '' }}">
+                                - {{ __('sidemenu.trainee_feedback_report') }}
+                            </a>
+                            <a href="{{ route('inspaction.index') }}"
+                                class="nav-link{{ Route::is('inspaction.index') || Route::is('tms-inspections.show') ? ' active' : '' }}">
+                                - {{ __('sidemenu.trainer_feedback_report') }}
+                            </a>
                         </div>
                     </div>
                 </li>
