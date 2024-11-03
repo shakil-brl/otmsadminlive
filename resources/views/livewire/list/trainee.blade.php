@@ -14,6 +14,15 @@
                         @foreach (range(15, 100, 15) as $j)
                             <option>{{ digitLocale($j) }}</option>
                         @endforeach
+                        <option>100</option>
+                        <option>200</option>
+                        <option>300</option>
+                        <option>400</option>
+                        <option>500</option>
+                        <option>1000</option>
+                        <option>1500</option>
+                        <option>2000</option>
+                        <option>2500</option>
                     </select>
                 </div>
                 <div class="d-flex align-items-center">

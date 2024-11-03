@@ -90,7 +90,9 @@ class Trainee extends Component
                 'data_type' => 'get',
             ]
         )->json();
-
+        if (!isset($data['data'])) {
+            dd($data);
+        }
         $data['total_trainee'] = $data['data'];
         $data['providers'] = $this->providers;
 
