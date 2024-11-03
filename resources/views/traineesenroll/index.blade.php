@@ -1,6 +1,9 @@
 @extends('layouts.auth-master')
 @section('content')
-    <div class="mx-5 mb-2">
+    <div class="m-5">
+        @livewire('list.trainee')
+    </div>
+    {{-- <div class="mx-5 mb-2">
         <h1 class="page-heading d-flex mb-4 text-dark fw-bold fs-3 flex-column justify-content-center my-0">
             {{ __('trainee-enrollment-list.trainee_enrollment') }}
         </h1>
@@ -51,5 +54,5 @@
                 {{ $paginator->links() }}
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
