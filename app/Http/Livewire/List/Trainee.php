@@ -77,6 +77,7 @@ class Trainee extends Component
             'detail/trainee-total',
             [
                 'page' => $page ?? $this->page,
+                'take' => $this->per_page,
                 'per_page' => $this->per_page,
                 'search' => $this->search,
                 'provider_id' => $this->provider_id,
