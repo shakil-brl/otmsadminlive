@@ -242,6 +242,19 @@
                                             </li>
                                         @endif
                                     @endif
+
+                                    @if ($batch['schedule'] != null)
+                                        @if (in_array('report.attendance.create', $roleRoutePermissions))
+                                            <li>
+                                                <a target="_blank"
+                                                    href="{{ route('report.attendance.create', $batch['id']) }}"
+                                                    class="dropdown-item">
+                                                    Attendance Report
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endif
+
                                     @isset($batch['trainees'])
                                         <li>
                                             <a href="{{ route('dashboard_details.trainees', $batch['id']) }}"

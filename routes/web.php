@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\TmsBatchPhaseController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceRepoController;
+use App\Http\Controllers\AttendanceReportController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\BatchExamController;
@@ -108,6 +109,9 @@ Route::post('/store-auth-user', [AuthUserController::class, 'storeAuthUser'])->n
 Route::get('/auth-error', [AuthUserController::class, 'authError'])->name('auth.error');
 
 Route::group(['middleware' => ['access.token', 'permission']], function () {
+
+    Route::get('/report/{batch_id}/attendance', [AttendanceReportController::class, 'create'])->name('report.attendance.create');
+
 
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
@@ -248,8 +252,6 @@ Route::group(['middleware' => ['access.token', 'permission']], function () {
         Route::delete('/schedule_detail/{schedule_detail_id}/destory', [BatchScheduleController::class, 'scheduleDetailDestroy'])->name('batch-schedule-detail.destroy');
         Route::get('/create_schedule_detail/{training_batch_id}/add-new', [BatchScheduleController::class, 'scheduleDetailCreate'])->name('batch-schedule-detail.create');
         Route::post('/schedule_detail_srore/{training_batch_id}', [BatchScheduleController::class, 'scheduleDetailStore'])->name('batch-schedule-detail.store');
-
-
     });
 
     //Route::resource('tms-inspections', TmsInspectionController::class);
