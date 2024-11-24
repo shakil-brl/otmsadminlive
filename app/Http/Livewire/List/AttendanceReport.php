@@ -54,7 +54,7 @@ class AttendanceReport extends Component
     {
         $this->batch = $batch;
         $this->batch_code = $batch['batch_code'] ?? null;
-        $this->search();
+        // $this->search();
     }
 
     public function render()

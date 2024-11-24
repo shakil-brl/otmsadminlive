@@ -42,7 +42,7 @@
         </div>
     </form>
 
-    <div class="">
+    {{-- <div class="">
         <div class="">
             @php
                 $class_dates =
@@ -111,7 +111,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> --}}
 
 
 </div>
