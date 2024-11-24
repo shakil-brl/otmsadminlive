@@ -47,7 +47,7 @@ class AttendanceReport extends Component
         $data['batch'] = $this->batch;
         $data['with_date'] = $this->with_date;
 
-        return Excel::download(new CommonExcelExport('livewire.list.att-report-excel', $data), 'Attendance Report (' . Carbon::now()->format('d-m-Y h.i.s A') . ').xlsx');
+        return Excel::download(new CommonExcelExport('livewire.list.att-report-excel', $data),  $this->batch['batchCode'] . ' Attendance (' . Carbon::now()->format('d-m-Y h.i.s A') . ').xlsx');
     }
 
     public function mount($batch)
