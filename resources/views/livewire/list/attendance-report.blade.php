@@ -45,8 +45,9 @@
     <div class="">
         <div class="">
             @php
-                $class_dates = $class_attendances?->pluck('class_date')?->unique();
-                $total_class = $class_dates?->count();
+                $class_dates =
+                    $class_attendances?->whereNotNull('class_date')?->pluck('class_date')?->unique()?->toArray() ?? [];
+                $total_class = count($class_dates);
             @endphp
             <table class="table table-bordered table-sm mt-3 bg-white">
                 <thead>
@@ -55,7 +56,7 @@
                         <th style="white-space: nowrap;">Student Name</th>
                         <th style="white-space: nowrap;">Student Name Bangla</th>
                         @if ($with_date)
-                            @foreach ($class_dates as $class_date)
+                            @foreach ($class_dates ?? [] as $class_date)
                                 <th style="white-space: nowrap;">{{ $class_date }}</th>
                             @endforeach
                         @endif
@@ -74,21 +75,27 @@
                             <td style="white-space: nowrap;">{{ $loop->iteration }}</td>
                             <td style="white-space: nowrap;">{{ $profile['student_name'] }}</td>
                             <td style="white-space: nowrap;">{{ $profile['student_name_bn'] }}</td>
-                            @foreach ($class_dates as $class_date)
+                            @foreach ($class_dates ?? [] as $class_date)
                                 @php
-                                    $class = $class_attendances
-                                        ->where('profile_id', $profile_id)
-                                        ->where('class_date', $class_date)
-                                        ->first();
-                                    if ($class['is_present']) {
+                                    $class =
+                                        $class_attendances
+                                            ?->where('profile_id', $profile_id)
+                                            ?->where('class_date', $class_date)
+                                            ?->first() ?? null;
+
+                                    if ($class['is_present'] ?? 0) {
                                         $total_student_present++;
                                     }
                                 @endphp
                                 @if ($with_date)
-                                    @if ($class['is_present'] == 1)
+                                    @if (($class['is_present'] ?? 0) == 1)
                                         <td style="white-space: nowrap;">P</td>
                                     @else
-                                        <td style="white-space: nowrap; color: red;">A</td>
+                                        <td style="white-space: nowrap; color: red;">
+                                            @if ($class != null)
+                                                A
+                                            @endif
+                                        </td>
                                     @endif
                                 @endif
                             @endforeach

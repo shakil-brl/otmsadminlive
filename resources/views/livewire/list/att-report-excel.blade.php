@@ -99,21 +99,24 @@
                     <td style="white-space: nowrap; border: 1px solid black;">{{ $profile['student_name_bn'] }}</td>
                     @foreach ($class_dates as $class_date)
                         @php
-                            $class = $class_attendances
-                                ->where('profile_id', $profile_id)
-                                ->where('class_date', $class_date)
-                                ->first();
-                            if ($class['is_present']) {
+                            $class =
+                                $class_attendances
+                                    ->where('profile_id', $profile_id)
+                                    ->where('class_date', $class_date)
+                                    ->first() ?? null;
+                            if ($class['is_present'] ?? 0) {
                                 $total_student_present++;
                             }
                         @endphp
                         @if ($with_date)
-                            @if ($class['is_present'] == 1)
+                            @if (($class['is_present'] ?? 0) == 1)
                                 <td style="white-space: nowrap;  text-align: right; border: 1px solid black;">P</td>
                             @else
                                 <td
                                     style="white-space: nowrap; text-align: right; color: red; border: 1px solid black;">
-                                    A
+                                    @if ($class != null)
+                                        A
+                                    @endif
                                 </td>
                             @endif
                         @endif
